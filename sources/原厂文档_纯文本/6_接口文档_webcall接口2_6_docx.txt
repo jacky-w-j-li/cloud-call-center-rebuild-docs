@@ -1,0 +1,92 @@
+ Webcall接口文档
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	   
+
+
+
+
+
+
+
+
+
+
+
+呼叫中心系统，提供一个http接口，来发起外呼将被叫呼通后送入指定的服务号中。
+接口参数如下：(红色为必传参数)(6,7,8为异步接口所传参数，同步可不考虑)
+Action:  Webcall  (固定不变)
+PBX: 填写您账号所在的pbx的ID，请向云呼技术人员查询。
+Account: 您账户的ID，请向云呼技术人员查询。
+ServiceNo：服务号，想要被叫进入的服务号码。
+Exten: 被叫电话号码。
+WebCallType：调用WebCall的接口类型（同步异步）当传此值时采用异步的接口，例：WebCallType=asynchronous（不填为同步接口）
+CallBackUrl：调用异步时需要传参，回调的地址，例：CallBackUrl=http://www.baidu.com/（仅支持http接口）
+CallBackType：回调的方式get或者post，例：CallBackType=post（不填默认为get）
+Variable：var1:value1,var2:value2……(可以传多个变量，如无需特殊定制可以不传)
+Variable中可以携带一个CdrVar变量，这个变量会在通话事件对接中推送给第三方系统。
+例如： Variable=myID:123456
+ActionID: 本次调用接口的唯一标示，response中会返回此字段。
+Timeout：接口呼叫被叫的时长单位为秒。值的范围为20至60，此时长包含接口调用后被叫开始振铃的这段时间。如果被叫有响应，则接口立即返回。如被叫一直不接，直到超时时间接口才返回。(本字段可不传，默认超时时长为20秒)
+MaxCallTime：(此字段只针对双向回呼场景)把webcall用来实现双向回呼时，设置最大通话时长。从双方接通开始计时，到时间自动掐断。单位为秒。（本字段可不传，需要控制通话时长时才传。例如：MaxCallTime：60）
+ChatingIvrPrompt：(此字段只针对双向回呼场景)对双向回呼通话过程中，给双方播放提示IVR。一般配合MaxCallTime字段来用，提示通话双方还剩余多久的通话时长。
+字段值实例：秒-服务号-变量;秒-服务号-变量,;秒-服务号-变量…..
+注意事项：
+可以配置多次提醒，每次之间用英文分号分隔。
+每次提醒变量可以传多个,多个变量用英文逗号分隔，变量举例var1:value1,var2:value2……。IVR流程中无需播报变量则变量可不传。
+在七陌系统中,一个IVR流程的起点为服务号，播放IVR流程之前请提前在通话配置中添加好服务号流程，最好请电信开发人员协助配置
+
+真实场景举例：要求双方通话为60秒，并且在通话开始后30秒和50秒时播放提醒语音。
+MaxCallTime=60&ChatingIvrPrompt=30-01056332288-notice:30;50-01056332288
+调用实例：
+http://127.0.0.1/command?Action=Webcall&PBX=bpx.ali.0&Account=Q00000000****&ServiceNo=01053500303&Exten=1581101****&Timeout=40&Variable=var1:value1,var2:value2
+
+同步接口response详解：
+若接口是同步接口，所以response是在被叫号码做出响应后才会返回。超时时间为20秒。
+接口返回的response是一个json格式字符串，包含如下字段：
+Command: 值固定不变，值为Response。
+Response: 值固定不变，值为WebCall。
+ActionID: 与调用接口时传的ActionID相同。如果调用接口时没传ActionID，则值是Webcall+随机数。
+Succeed: 本次接口调用是否成功。true/false。
+Message: 被叫号码的状态。
+Message:4 被叫已接听
+Message:0 被叫号码无效，不是一个正确的电话号码
+Message:3 被叫拒接/振铃未接/占线/关机/空号
+Message:8 线路繁忙/异常（某些情况下，也可能为被叫拒接/振铃未接/占线/关机/空号）
+
+Response例子：
+{"Command":"Response","Succeed":true,"Message":"4","ActionID":"Webcall1382293010856915711","Response":"Webcall"}
+异步接口response详解：
+若接口是异步接口，response立即返回后，在被叫号码做出响应后会对相应接口推送（详见异步情况调用）。
+接口返回的response是一个json格式字符串，包含如下字段：
+Command: 值固定不变，值为Response。
+Response: 值固定不变，值为WebCall。
+ActionID: 与调用接口时传的ActionID相同。如果调用接口时没传ActionID，则值是Webcall+随机数。
+Succeed: 本次接口调用是否成功。true/false。
+
+Response例子：
+{"Command":"Response","Succeed":true,"ActionID":"Webcall6638399754896242357","Response":"Webcall"}
+
+异步情况调用：
+	接口url：http://www.baidu.com/callback
+	接口示例：http://www.baidu.com/callback？actionid=Webcall1382293010856915711&Message=4
+Message: 被叫号码的状态。
+Message:4 被叫已接听
+Message:0 被叫号码无效，不是一个正确的电话号码
+Message:3 被叫拒接/振铃未接/占线/关机/空号
+Message:8 线路繁忙/异常（某些情况下，也可能为被叫拒接/振铃未接/占线/关机/空号）
+异步情况调用返回：
+	返回值为String较为特殊的唯一性值，方便记录日志。

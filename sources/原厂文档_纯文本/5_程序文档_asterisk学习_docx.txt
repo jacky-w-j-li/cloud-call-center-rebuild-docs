@@ -1,0 +1,295 @@
+最近一直在研究asterisk，也算小小的入门一下，现在就学习的过程整理总结一下。
+  
+Asterisk学习进阶
+介绍篇
+抛 开所有概念，首先从单词学起。估计很多人和我一样没有明白这个词是什么意思，或许猜测他还可能是一个组合词。其实它就是“*”，作为搞程序的我们看到这个 东东想到的也许会是乘号，当然有另外一大帮人想到的是通配符，在这儿恭喜想到通配符的兄弟，你们答对啦，这儿我们认定它的含义就是如此。
+  
+通过我上面牵强附会的关联，Asterisk的含义就浮出水面了，它就是一个通配的电话，这样组合的话看起来应该有点难受，我们重新润色它就变成了无所不能的电话系统。有了上面的这段废话，我其实只想传达asterisk的两个特点：
+1.       功能巨强大
+2.       是一个支持语音的系统
+追本溯源，下面还是看看官方是怎么定义它的：www.asterisk.org
+Asterisk is the most popular and extensible open source telephone system in the world, offering flexibility, functionality and features not available in advanced, high cost proprietary business systems. Asterisk is a complete IP telephony platform for business, and can be downloaded for free.
+通过这段话我琢磨出下面一些意思，不晓得各位的想法。首先就是它功能很强大，成本低廉，另外就是它是免费的。
+展 开一下，因为它是开源代码，就容许你在已有的基础上进行修改定制，削弱了开发成本，另外就是asterisk可以跑在多个通过操作系统上，而且基本x86 这个通用平台，降低了专用系统昂贵的成本。但是功能强大这个我们先悬着这个疑问，下面在慢慢的进行剖析。我们现在只要从概念上晓得asterisk是一个 功能强大的IP  PBX就够了。
+  
+安装篇
+       使用之前请购买这个陋习可以更改一下啦，因为我们已经进入GNU主义，get what you want。
+  
+下载通道为http://downloads.digium.com/pub/asterisk/releases/，选择一个稳定版本下载就是了。对于一个程序员而言，获得了代码还有什么不能做的。难道你给士兵一把枪还怕他打不死腿上的蚊子？解压倒合适的目录，按照他的指导手册操作就是了，不过看文档提示里面建议释放在/usr/src下面。
+而 且看到手册上面要下载一堆的东西，例如zaptel*,libpri*等等，这些对于我们目前都是不需要的，因为我们想构建的是一个纯粹的IP TEL，其他和老式电话的接口暂时都由我们的网关路由器完成，例如E1/T1，ISDN BRI/PRI，FXO，FXS等等，我们通过asterisk想完成的只是IP TEL，例如sip，h323等等。
+我们需要下载的只是asterisk，后续操作步骤如下：
+cd /usr/src
+tar zxvf asterisk-*.tar.gz
+通过上述命令，文件就被解压出来，接下来肯定就是编译了，略过不表，步骤如下：
+#cd /usr/src
+#cd asterisk-*
+# ./configure
+#make 
+#make install
+#make samples   安装默认的配置文件
+#make webvmail 安装语音信箱图形界面
+#make config
+如果对于上面的命令以及作用有疑惑的话，建议多花时间看看linux的基本操作维护命令，然后再回头继续往下。这儿需要提及的最后一点，增加了一个make samples，正如其名，他的作用就是生成默认的配置文件。众多的编译选项我也不介绍了，详细参见手册。
+ 
+常见问题解决方案：
+1．如出现找不到 PTLIB 库，则找到在LOG输出上找到有 ...ptlib.h----YES 的那一条，找到对应目录把文件改名，就不会再出错了，一般目录为：/usr/lib/ptlib.h。
+2．如果出现 func_rurl.c: 106 常量无定义 之类的错误，则直接在MAKEFILE中取消此文件的编译，因为Makefile中是定义 func_*.c 参与编译，所以修改此文件为其它名字即可，如 __func_rurl.c 。
+ 
+这儿我们就假设编译很成功，没有遇到任何编译问题，当然不可能100％都不遇到的，一部分问题在手册里面给了指点，另外的问题则需要你个人多动手，多动脑，而且baidu，google也不会拒绝你使用他的。
+  
+使用篇
+       经过前面的步骤，代码已经编译完了，可执行文件安装完毕同时默认的配置文件也安装了，那么我们就从使用上首先简单的做个介绍，给大家带来一个直观的认识。下文所举例子都会以sip为例，其他h323，iax，mgcp等等类似，不再赘述。
+       使用之前大致说明一下安装后的asterisk文件分布情况以及作用。
+/etc/asterisk　　Asterisk主目录,包含其它关于Asterisk的配置文件;　*zaptel.conf这个配置文件放在/etc,因为其它软件也可以使用Zaptel这个硬件及其驱动,所以不是放在/etc/asterisk里.
+ 
+/usr/lib/asterisk/modules　　这个目录包含所有可以加载Asterisk模块(应用程序\编辑器\格式和有用通道),在Asterisk启运时会加载这些模块(可以编辑modules.conf).
+ 
+/var/lib/asterisk　　       比较重要的是astdb文件与agi-bin目录;　　astdb包含Asterisk
+当地数据库信息.　
+ 
+sounds/　　              所有声音提示的文件在里面,包括Asterisk原代码中的sounds.txt文件
+ 
+mohmp3/　　            如果配置了音乐保持,应用程序会在这个目录下查找mp3(用CBR
+从文件中去除身份标签).
+ 
+keys/　　               使用公钥和私钥系统认证与一个由RSA数字签名形成的一对等连接.公钥和私钥的扩展名分别为.pub和.key
+ 
+firmware/　　            这个目录含了很多Asterisk相兼容的设备固件,它只有iax/这个子目录,其中有Digium的IAXy的二进制固件镜像.
+ 
+images/　　             只有在较多的支持并且利用图解式的图像设备被发布,这个目录将会与相应的目录有更大的关联.
+ 
+/var/lib/asterisk/agi-bin　　 agi-bin包含所有脚本,可以通过许多已经建立的AGI应用程序与Asterisk连接.
+/var/spool/asterisk
+outgoing/               现在打电话的通道——呼叫信息目录普遍使用。
+ 
+gcall/                  撤销了——包含了特殊呼叫方法的呼叫信息文件——不是打电话的好方法，因为这种方式太硬性了——不再使用。使用outgoing替代
+ 
+tmp/                   中间/临时数据
+ 
+voicemail/              语音和问候语。
+运行调试asterisk
+1. 运行调试常用命令
+./asterisk & 在后台启动asterisk
+./asterisk –vvvc 启动asterisk并尽量多的在控制台显示调试信息
+./asterisk –r 连接asterisk控制台
+set verbose 9999 设置打印详细信息
+ 
+2.asterisk控制台下常用命令
+ 
+sip reload 重新加载sip配置信息
+sip set debug   设置显示更多的sip信息
+sip set debug off关闭显示更多的sip信息
+sip show channels 显示所有活动的SIP通道
+sip show peers 显示所有已定义的SIP peer
+ 
+ 
+dialplan show 显示拨号方案
+dialplan reload重新加载拨打方案
+ 
+stop gracefully 优雅地停止asterisk
+stop now 立即停止运行asterisk
+ 
+module show 显示所有已加载模块
+module load cdr_radius.so     加载模块cdr_radius.so
+module reload cdr_radius.so 重新加载模块cdr_radius.so
+module unload cdr_radius.so 卸载模块cdr_radius.so
+ 
+core show applications 显示所有的应用，比如Dial, Radius, Hangup, Answer等
+core show channels 显示所有的通话频道
+core show codecs 显示所有支持的编解码器
+core show functions 显示所有的功能函数 
+ 在asterisk源码目录下运行make menuselect可以进入模块选择页面，在里面可以选择和去除一些模块。
+ 看完这些目录之后，对其大体的功能也可能会有点认识，还是从启动服务器还是聊起。启动服务器方法很多，我们按照手册中的描述选取一种
+Asterisk –cvvvv   具体参数含义请参考手册
+  
+也可以通过运行 /usr/sbin/safe_asterisk 来运行。
+我们下文的描述就会基于这个简单的拓扑展开讨论，这儿的tel都是sip电话，我们假定tel1号码为808，tel2号码为830，现在的简单需求就是我808能够打通830，实现双向通话。开始配置前，先了解主要配置文件的作用。
+/etc/asterisk/asterisk.conf　　主要配置文件，
+/etc/zaptel.conf　　硬件接口的基本层.　　　　修改这个配置文件要用modprobe装载Linux Kernel使用模块.
+/etc/asterisk/zapata.conf　　为硬件配置Asterisk的接口.
+/etc/asterisk/extensions.conf　　拨号方案.
+/etc/asterisk/sip.conf　　SIP协议配置文件
+/etc/asterisk/iax.conf　　呼入和呼出IAX通道
+/etc/asterisk/extensions.conf　　拨号方案配置文件
+/etc/asterisk/moduprobe.conf　　加载模块配置文件
+ 
+后续的工作主要就在这两份文件中开展，如果多了h323，则需要编辑h323.conf，其他通道协议类似。
+我们要做的就是定义两个用户，添加到sip.conf里面，目前只做基于文件的用户管理，后续可以扩充到数据库之类的。这儿拨号规则细节就不在赘述，欲知详情，参见手册。
+这儿只是把添加的用户配置列出来。
+[830]
+type=friend                   ; Friends place calls and receive calls
+context=830          ; Context for incoming calls from this user
+;secret=blahpoly
+host=dynamic               ; This peer register with us
+;dtmfmode=rfc2833             ; Choices are inband, rfc2833, or info
+username=830                     ; Username to use in INVITE until peer registers
+; Normally you do NOT need to set this parameter
+;disallow=all
+;allow=ulaw                     ; dtmfmode=inband only works with ulaw or alaw!
+;progressinband=no              ; Polycom phones don't work properly with "never"
+ 
+[808]
+type=friend                   ; Friends place calls and receive calls
+context=808          ; Context for incoming calls from this user
+;secret=blahpoly
+host=dynamic               ; This peer register with us
+;dtmfmode=rfc2833             ; Choices are inband, rfc2833, or info
+username=808                     ; Username to use in INVITE until peer registers
+; Normally you do NOT need to set this parameter
+;disallow=all
+;allow=ulaw                     ; dtmfmode=inband only works with ulaw or alaw!
+;progressinband=no              ; Polycom phones don't work properly with "never"
+ 
+主要是定义了一个用户，号码分别为808，830。他们所处的拨号规则段分别为808，830。接着添加拨号规则的段。如下：
+[830]
+exten => s,1,Wait(1)                    ; Wait a second, just for fun
+exten => s,n,Answer                   ; Answer the line
+exten => s,n,Set(TIMEOUT(digit)=5)   ; Set Digit Timeout to 5 seconds
+exten => s,n,Set(TIMEOUT(response)=10) ; Set Response Timeout to 10 seconds
+exten => s,n(restart),BackGround(demo-congrats)     ; Play a congratulatory message
+exten => s,n(instruct),BackGround(demo-instruct)     ; Play some instructions
+exten => s,n,WaitExten                ; Wait for an extension to be dialed.
+ 
+exten => 2,1,BackGround(demo-moreinfo)  ; Give some more information.
+exten => 2,n,Goto(s,instruct)
+ 
+exten => 3,1,Set(LANGUAGE()=fr)            ; Set language to french
+exten => 3,n,Goto(s,restart)         ; Start with the congratulations
+ 
+exten => 1000,1,Goto(default,s,1)
+ 
+exten => 808,1,Goto(default,s,1)
+ 
+exten => 500,1,VoicemailMain()
+ 
+[808]
+exten => s,1,Wait(1)                    ; Wait a second, just for fun
+exten => s,n,Answer                   ; Answer the line
+exten => s,n,Set(TIMEOUT(digit)=5)   ; Set Digit Timeout to 5 seconds
+exten => s,n,Set(TIMEOUT(response)=10) ; Set Response Timeout to 10 seconds
+exten => s,n(restart),BackGround(demo-congrats)     ; Play a congratulatory message
+exten => s,n(instruct),BackGround(demo-instruct)     ; Play some instructions
+exten => s,n,WaitExten                ; Wait for an extension to be dialed.
+ 
+exten => 2,1,BackGround(demo-moreinfo)  ; Give some more information.
+exten => 2,n,Goto(s,instruct)
+ 
+exten => 3,1,Set(LANGUAGE()=fr)            ; Set language to french
+exten => 3,n,Goto(s,restart)         ; Start with the congratulations
+ 
+exten => 1000,1,Goto(default,s,1)
+ 
+exten => 600,1,MeetMe(600,i,123456)
+ 
+ 
+exten => 830,1,Voicemail(830@default)
+;exten => 830,1,Dial(SIP/830,3)
+exten => _[58]30,2,SayDigits(${EXTERN})
+exten => 830,102,Playback(priv-recordintro)
+exten => 830,103,Playback(spy-h323)
+exten => 830,104,Hangup()
+ 
+为什么拨号规则段加了那么多东西，后面再慢慢解释。其实对于我们简单的通话而言，根本不需要那么多，向下面这样就足够了。
+[808]
+exten => s,1,Wait(1)                    ; Wait a second, just for fun
+exten => s,n,Answer                   ; Answer the line
+exten => 830,n,Dial(SIP/830,3)
+exten => 830,n,Hangup()
+只 看这些就简洁多了吧，而且基本工作正常，解释一下，客户端（例如800）在sip里面进行了配置，其属于808这个context，故他的所有拨号动作都 在808里面进行了定义。当用户呼叫830的时候，他就跳到830这个扩展段，进行拨号。看dial这个函数很清晰，但是他的功能确实强大无比，例如现在 我们拨的是sip用户，万一我们需要拨打h323用户怎么办？那就变成dial（h323/**,）,.依此类推，所有的通道都可以采用同样的格式进行定 义。
+       这儿当然也可以制定的复杂一些，例如遇忙时候转语音什么的，在我们的实现中，遇忙跳转到N+101扩展，我们则定义一个忙转的扩展，如下
+[808]
+exten => s,1,Wait(1)                    ; Wait a second, just for fun
+exten => s,2,Answer                   ; Answer the line
+exten => 830,3,Dial(SIP/830,3)
+exten => 830,4,Hangup()
+exten => 830,104,Voicemail(830@default)
+ 
+这样遇忙的时候，则会转移到语音邮件留言，有了上面的基础，你就可以随心所欲进行扩充了，还可以组建会议电话，呼叫等待，更多的功能就留给你进行挖掘了。
+下面简单介绍一下语音信箱的配置，语音信箱的配置关键两个文件voicemail.conf和拨号规则文件extensions.conf.
+Voicemail.conf 中要增加用于存放语音的邮箱，在asterisk中有专门的语法格式来申明：
+Mailbox => password, name, email.
+这只是一个最简单的格式，还有很多选项没有列出，如果感兴趣可以参阅相关文档，这里只是给出一个概念。Mailbox是邮箱的编号，通常符合关联设置的扩展号码。后面的password，name和email的意义就比较清晰了。
+例如我们在voicemail的default context申明一个 101 => 123456, jone, jone@asteriskdocs.org. 然后在相对应的extensions.conf中当用户忙时或者相应超时调用这个邮箱：
+Exten => 101,1,dial(${JONE},10,r)
+Exten => 101,2,voicemail(u101@default)
+Exten => 101,102,voicemail(b101@default)
+接下来就是接收语音邮件了，同样在extensions.conf中加入一条语句：
+Exten => 500,1,voicemailmain()，让用户通过拨打500来收听语音邮件。
+ 
+配 置就先说那么一些，其他也都是类似的配置，只是熟练程度问题了，原理相通，接下来就不在赘述功能配置，我们得花些精力来分析功能模块以及他们之间的相互配 合问题，因为自己这些东西看的时间也不久，同时纯粹靠蒙，肯定很多地方考虑不周到的或者直接理解就是错误的，恳请各位不吝指导。
+  
+都说他功能强大，那么我们就要看看他到底有哪些功能，为什么强大，体现在哪儿。我就按照功能大致进行功能分类先。Asterisk大致可以按照应用，编码，文件，接入等功能模块进行粗略的分解。
+首先是应用：目前我们支持语音邮件，个性铃声，电话会议，交互应答，电话座席，三方通话，呼叫ID，通话录音等等（后续补充）。
+http://www.voip-info.org/wiki/view/Asterisk+PBX+functions
+http://www.voip-info.org/wiki/view/PBX+features（列出有点多，请自行查看）
+ 
+asterisk 相关的权威网址有两个，www.asterisk.org 和 www.voip-info.org，需要资料请优先考虑这两个地方。
+编码格式：      
+G.711 ulaw (as used in US) 
+G.711 alaw (as used in Europe) 
+G.723.1 - pass-thru for people who need a license , free for other people 
+G.726 - 32kbps in Asterisk 1.0.3, 16/24/32/40kbps in CVS HEAD. 
+G.729 - may require a license unless using pass-thru, free version available for use in countries without patents or for educational use only 
+GSM 
+iLBC 
+LPC10 (not recommended!) 
+Speex - configurable 4-48kbps, VBR, ABR, etc. see bug
+adpcm   (ADPCM)
+slin     (16 bit Signed Linear PCM)
+g722    (G722)
+jpeg     (JPEG image)
+png     (PNG image)
+h261    (H.261 Video)
+h263    (H.263 Video)
+h263p   (H.263+ Video)
+h264    (H.264 Video)
+ 
+文件格式：
+adpcm      vox        vox                 
+slin       wav        wav                 
+slin       sln        sln|raw             
+g722       g722       g722                
+ulaw       au         au                  
+alaw       alaw       alaw|al             
+ulaw       pcm        pcm|ulaw|ul|mu      
+gsm        gsm        gsm                 
+h264       h264       h264                
+h263       h263       h263                
+ilbc       iLBC       ilbc                
+g729       g729       g729                
+g726       g726-16    g726-16             
+g726       g726-24    g726-24             
+g726       g726-32    g726-32             
+g726       g726-40    g726-40             
+g723       g723sf     g723|g723sf         
+gsm        wav49      WAV|wav49   
+另外还可以支持MP3的文件格式。
+ 
+语音通道：
+Agent: ACD Agent channel 
+Console: Linux console client driver for sound cards (using OSS or ALSA) 
+H.323: An older VOIP protocol 
+IAX and IAX2: Inter-Asterisk Exchange protocol, Asterisk's own VOIP protocol 
+Local: Loopback into another context 
+MGCP: Media Gateway Control Protocol, another VOIP protocol 
+mISDN: mISDN channel 
+Modem: Confusingly, this is for connecting ISDN lines, not for use with modems. Deprecated. 
+NBS: using Network Broadcast Sound 
+phone: Linux Telephony channel 
+SIP: Session Initiation Protocol, the most common VOIP protocol 
+Skinny: A driver for Cisco Skinny Client Control Protocol (a VOIP protocol) 
+Gtalk: Google Talk Channel driver. 
+VOFR: voice over frame relay Adtran style 
+VPB: For connecting ordinary telephone and telephone lines using Voicetronix cards 
+Zap: For connecting ordinary telephones and telephone lines using Digium cards. Also for TDMoE and for Asterisk zaphfc 
+Celliax： let Asterisk manage GSM and CDMA cellular phones, and Skype calls to/from cellphones 
+Bluetooth: Allows the use of bluetooth devices to change routing - see CVS "chan_btp" 
+CAPI: ISDN CAPI channel 
+vISDN: vISDN channel (native BRI channel for HFC chipsets) 
+SCCP: An alternate Skinny/SCCP channel 
+Sirrix: ISDN BRI for Sirrix cards (with optional ISDN encryption) 
+UNISTIM: Nortel Unistim channel 
+Unicall: Replacement for zaptel, with R2 support 
+SS7: SS7 (ISUP on MTP2/3) channel
+  
+asterisk 主体可以分为模块装载器，核心交换组件，编码转换，以及调度和IO管理。首先系统启动的时候，通过模块状态器把驱动模块进行加载和初始化，是他们能够完成 语音通道的初始化，文件格式以及应用等初始化。所有事情做完后，准备接受电话的呼叫。核心交换组件开始工作，他通过各种接口接受呼叫，例如 T1/E1，sip，h323等等，接着开始检索拨号配置文件，然后通知对端振铃，同时连接语音邮件，外出电话或者其他的应用程序。同时他还提供了一个调 度和io管理，让驱动和应用程序之间相互协作。编码转换的工作就很明确，主要完成不同编码之间的转化以及评估。这样整个系统就在这三个部分的有序协调下开 始了工作。

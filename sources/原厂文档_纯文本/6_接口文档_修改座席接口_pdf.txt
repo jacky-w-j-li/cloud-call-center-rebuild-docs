@@ -1,0 +1,71 @@
+--- page 1 ---
+!
+! !
+!
+!
+]Qm[/!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!! !! ! ! ! !! !
+!! !! ! ! ! 1.0!! ! !!!!! !
+	!!!!!! ! 2016  7 
+ 13 	!!!!!
+!
+!
+!
+!
+!
+!
+!
+--- page 2 ---
+!
+|a~. HTTP!Getr Postmgpk[/1<JVO~
+Io]QmS'e[/L IP\&Z@m.sd(8 IP
+:G!,:e[/0 |asd(z.)n8t[pe[/ !
+!
+•! m URL=>	http://112.124.23.131:3000/service!
+•! GETmjoE	!
+•! http://112.124.23.131:3000/service?action=openThirdPartyEditUser&json={"a ccount":"N00
+00000***","exten":"8000","displayName":" name","email":"123@7moor .com","mobile":"1
+860003****","password":"123456 "}!
+•! -_b	WcFl?+$AM#
+F{v UTFU8!
+-_! ! b!
+action! openThirdParty
+EditUser!
+64y[/;H4y openThirdPartyEditUser !
+json!  jsonjo
+sF{!
+ json*5HQm7]sS !
+•! jsonFlb!
+-_! ! b!
+account! V2! q[/\a.^7pC N0000000012!
+QmN27V23gH%]sQm !
+exten! QmN24
+_F!
+QmN27V23gH%]sQm !
+displayName! QmD4! ]sFl`!
+email! }! ]sFl`!
+password! rKv! ]sFl`!
+mobile! Xf2! ]sFl`!
+!
+~9!
+•! 9 JsonL!
+•! {   "success": true,   "message": "200 ok!" } 
+•! 9Flb !
+-_! ! b!
+success! T'iw!  trueiw]T' false]B",:h
+u messageFl!
+message! B",:! ]Bs",:!
+ 
+!

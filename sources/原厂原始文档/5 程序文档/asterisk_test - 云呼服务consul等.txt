@@ -1,0 +1,260 @@
+
+
+
+originate SIP/096015322070259 extension balance@096015322070259 
+
+windows抓自己网络的包的方法：
+route add 192.168.1.155 mask 255.255.255.255 192.168.1.1 metric 1
+route delete 192.168.1.155
+route add 192.168.1.155 mask 255.255.255.255 192.168.1.155 metric 1
+
+route add -net 192.168.1.156 netmask 255.255.255.255 gw 192.168.1.1
+route del -net 192.168.1.156 netmask 255.255.255.255 gw 192.168.1.1
+
+asterisk -g -C /etc/asterisk/gateway/asterisk.conf
+asterisk -g -C /etc/asterisk/gd.zj.1.0/asterisk.conf
+
+safe_asterisk restart -g -C /etc/asterisk/gateway/asterisk.conf
+safe_asterisk restart -g -C /etc/asterisk/gd.zj.1.0/asterisk.conf
+
+rasterisk -vvvv -C /etc/asterisk/gateway/asterisk.conf
+asterisk -vvvvr -C /etc/asterisk/gateway/asterisk.conf
+rasterisk -vvvv -C /etc/asterisk/gd.zj.1.0/asterisk.conf
+
+
+中继对接:
+注意：对方端口限制为 5070 - 30000
+
+
+asterisk :
+sip用户的配置文件：sip_trunk.conf
+
+tcpdump -i eth1 host 120.77.12.56 -s 0 -w ./target.pcap
+tcpdump -i ens33 -s 0 -w target.pcap
+
+core set verbose : 0 ~ 99999 设置显示信息级别
+sip reload 重新加载sip配置信息
+sip set debug   设置显示更多的sip信息 
+sip set debug off 关闭显示更多的sip信息 
+sip show channels 显示所有活动的SIP通道 
+core show channels verbose
+sip show peers 显示所有已定义的 SIP peer 和状态
+sip show users 显示sip 账户的配置信息，有密码
+sip show peer XXX，显示单个sip用户信息 
+
+队列
+queue show
+
+dialplan show  <context name> 显示拨号方案
+dialplan reload重新加载拨打方案
+ael reload 重新加载ael
+
+
+
+接口对接：
+report(42)数据库 里面的interApi, 在里面添加租户 密钥
+
+mangodb:
+ db.userInfo.find();
+ db.auth('dba','dba')
+ db.auth('superuser','pwd')
+ db.auth('root','7moorcom')
+ db.getMongo();//查看链接
+ db.system.users.find()
+ db.system.users.remove({user:"dba"})
+ 
+db.createUser(  {    user:"root",    pwd:"7moorcom",    roles:[      {role:"dbOwner",db:"report"}    ]  })
+db.createUser(  {    user:"root",    pwd:"7moorcom",    roles:[      {role:"root",db:"admin"}    ]  })
+db.createUser(  {    user:"root",    pwd:"7moorcom",    roles:[      {role:"dbAdmin",db:"cc"}    ]  })
+db.createUser(  {user:"root",pwd:"7moorcom",roles:[{role:"root",db:"admin"}]}) 
+
+db.dropUser("root")
+
+mongodump -h IP --port 端口 -u 用户名 -p 密码 -d 数据库 -o 文件存在路径
+mongodump -h 127.0.0.1 --port 7211 -u root -p 7moorcom -o /root/tmp/mongobill
+mongodump -h 127.0.0.1 --port 27017 -u root -p 7moorcom -o d:\lwj\cc-dbtemp
+mongorestore -h IP --port 端口 -u 用户名 -p 密码 -d 数据库 --drop 文件存在路径
+mongorestore -h 192.168.1.156 --port 27017 -u root -p 7moorcom -d cc D:\lwj\cc-dbtemp
+mongorestore -h 192.168.1.156:27017 -u root -p 7moorcom --authenticationDatabase admin -d fss-config /root/fss-config
+mongorestore -h 192.168.1.156 --port 27017 -u root -p 7moorcom --authenticationDatabase admin -d ip D:\lwj\cc-dbtemp\ip
+
+windows mongo: mongod --dbpath=..\data\db
+mongod.exe --dbpath "D:\Program Files\MongoDB\Server\3.4\data\db"
+
+连接：
+mongo -u root -p 7moorcom 192.168.1.156:27017/cc
+mongo -u root -p 7moorcom 192.168.1.155:27017/bill
+mongo -u root -p 7moorcom 192.168.1.156:27017/admin
+
+mongostat -h 192.168.1.156 -u root -p 7moorcom --authenticationDatabase admin
+ 
+windows:
+cd D:\Program Files\MongoDB\Server\3.4\bin
+mongod.exe --dbpath d:\data\db --auth
+
+linux: 启动
+/etc/init.d/mongod start | stop 
+配置文件：/etc/mongod.conf
+mongod -f 
+
+java
+yum install java
+
+Node.js:
+yum install nodejs
+
+Nginx:
+yum install nginx
+/usr/local/nginx /etc/nginx
+/etc/init.d/nginx start|stop
+/opt/nginx/sbin/nginx
+
+编译:
+
+redis:
+/usr/local/bin/
+./redis-server /etc/redis.conf
+./redis-cli shutdown
+
+nagios:
+http://14.29.4.232/nagios/
+nagiosadmin gddxnagios
+
+consul:
+http://172.42.38.11:8500/ui/#/test/services
+
+
+consul agent -config-dir=/etc/consul.d -config-file=/opt/consul.conf -data-dir=/opt/consul/data
+/opt1/consul/bin/consul agent -server -bootstrap-expect 1 -config-dir=/etc/consul.d -config-file=/etc/consul.conf -data-dir=/opt1/consul/data
+
+156:/opt1/consul/bin/consul agent -config-dir=/etc/consul.d -config-file=/etc/consul.conf -data-dir=/opt1/consul/data
+157:/opt/consul/bin/consul agent -config-dir=/etc/consul.d -config-file=/etc/consul.conf -data-dir=/opt/consul/data
+
+机器10:/opt/consul/bin/consul agent -config-dir=/etc/consul.d -config-file=/etc/consul.conf -data-dir=/opt/consul/data
+机器11:/opt/consul/bin/consul agent -config-dir=/etc/consul.d -config-file=/etc/consul.conf -data-dir=/opt/consul/data
+机器22:/opt/consul/bin/consul agent -config-dir=/etc/consul.d -config-file=/etc/consul.conf -data-dir=/opt/consul/data
+
+dig @127.0.0.1 -p 8600 172.42.38.10.node.consul //显示是否有这个节点
+dig @127.0.0.1 -p 8600 commonDB.service.consul //查询服务信息
+
+curl -s http://localhost:8500/v1/kv/?recurse|python -m json.tool //显示kv里注册的内容，显示的值用base64编码，可在网上在线解码
+curl http://localhost:8500/v1/catalog/datacenters //显示数据中心
+curl http://localhost:8500/v1/catalog/nodes |python -m json.tool // 显示注册的节点
+curl http://localhost:8500/v1/catalog/nodes?dc=test|python -m json.tool //显示注册的节点
+curl http://localhost:8500/v1/catalog/services |python -m json.tool //显示所有服务
+curl http://localhost:8500/v1/catalog/service/commonDB|python -m json.tool //查询服务
+curl -s http://localhost:8500/v1/health/state/any | python -m json.tool //查看检测项
+/v1/agent/checks 
+curl -s 127.0.0.1:8500/v1/catalog/service/commonDB?passing | python -m json.tool
+curl -s http://localhost:8500/v1/health/state/critical | python -m json.tool //查看失败状态的服务
+
+curl -X PUT -d '{"id": "commonDB#192.168.1.156#27017","name": "commonDB","address": "192.168.1.156","port": 27017,"tags": ["service","v-release"],"checks": [{"tcp": "192.168.1.156:27017","interval": "10s","timeout": "1s"}]}' http://localhost:8500/v1/agent/service/register
+
+curl -X PUT -d '{"id": "reportDB#192.168.1.156#27017","name": "reportDB","address": "192.168.1.156","port": 27017,"tags": ["service","v-release"],"checks": [{"tcp": "192.168.1.156:27017","interval": "10s","timeout": "1s"}]}' http://localhost:8500/v1/agent/service/register
+
+curl -X PUT -d '{"id": "clogDB#192.168.1.156#27017","name": "clogDB","address": "192.168.1.156","port": 27017,"tags": ["service","v-release"],"checks": [{"tcp": "192.168.1.156:27017","interval": "10s","timeout": "1s"}]}' http://localhost:8500/v1/agent/service/register
+
+curl -X PUT -d '{"id": "ccRedis#10.0.0.156#6379","name": "ccRedis","address": "192.168.1.156","port": 6379,"tags": ["service","v-release"],"checks": [{"tcp": "192.168.1.156:6379","interval": "10s","timeout": "1s"}]}' http://localhost:8500/v1/agent/service/register
+
+curl http://localhost:8500/v1/agent/service/deregister/commonDB //删除一个服务，关闭consul后需要在/etc/consul.d/目录下把服务删掉， ./consul/data目录的内容也要删掉
+curl http://localhost:8500/v1/catalog/deregister/commonDB //不生效？
+curl http://localhost:8500/v1/agent/check/deregister/commonDB //不生效？
+curl -X PUT http://127.0.0.1:8500/v1/agent/force-leave/172.42.38.79 //删除一个节点
+
+curl http://localhost:8500/v1/health/service/commonDB |python -m json.tool
+curl http://localhost:8500/v1/agent/services |python -m json.tool
+curl http://localhost:8500/v1/catalog/node/192.168.1.156 |python -m json.tool
+
+consul界面：http://192.168.1.156:8500/ui/
+
+consul members
+consul info 
+
+//加kv
+/opt1/consul/bin/consul kv put commonDB/dbName/cc "cc"
+/opt1/consul/bin/consul kv put commonDB/username "root"
+/opt1/consul/bin/consul kv put commonDB/password "7moorcom"
+/opt1/consul/bin/consul kv put ccRedis/password "7moorcom"
+
+/opt1/consul/bin/consul kv put reportDB/dbName/report "report"
+/opt1/consul/bin/consul kv put reportDB/username "root"
+/opt1/consul/bin/consul kv put reportDB/password "7moorcom"
+
+/etc/consul.d/ : 这个目录存放服务配置文件，服务也可以通过接口注册上consul，都是用接口注册的
+/etc/consul.conf : 配置文件，存放主副服务器等信息
+
+
+
+
+cc-java-in-gddx : 9999
+cc-server-in-gddx : 3000
+yy-java-gddx : 8888
+yy-server-gddx : 3000
+
+156启动顺序：
+#/opt1/consul/bin/consul agent -server -bootstrap-expect 1 -config-dir=/etc/consul.d -config-file=/etc/consul.conf -data-dir=/opt1/consul/data
+/opt1/consul/bin/consul agent -config-dir=/etc/consul.d -config-file=/etc/consul.conf -data-dir=/opt1/consul/data
+
+/data/consul-nginx/nginx1.10/sbin/nginx -c /data/consul-nginx/nginx1.10/conf/nginx.conf -p /data/consul-nginx/nginx1.10
+/data/ansibles/consul-template/consul-template0.18.2/consul-template -config /data/ansibles/consul-template/config/consul-template.hcl
+
+/etc/init.d/mongod start
+/usr/local/bin/redis-server /etc/redis.conf
+/usr/local/nginx/sbin/nginx
+asterisk -g -C /etc/asterisk/gateway/asterisk.conf
+asterisk -g -C /etc/asterisk/gd.zj.1.0/asterisk.conf
+/opt/ass/ass.sh start
+/opt1/cc-java-in-gddx/cc-java.sh start
+/opt1/cc-server-in-gddx/startup.sh start
+/opt1/yy-java-gddx-20170420/bill.sh start
+/opt1/yy-server-gddx-20170420/startup.sh start
+/opt1/cc-server-out-gddx/startup.sh start
+/opt1/cc-java-out-gddx/cc-java.sh start
+
+/opt1/kefu-node-server-gddx/startup.sh start
+/opt1/webim-gddx/startup.sh start
+/opt1/im/server/im.sh start
+#/opt1/im-node/startup.sh start
+/opt1/new/im-node/trunk/startup.sh start
+/opt1/restApi/startup.sh start
+/opt1/uc-node-server/startup.sh start
+/opt1/cc-socket-push-gddx/startup.sh start
+#/opt1/cc-socket-push/startup.sh start
+/opt1/gateway-gddx/startup.sh start
+nohup /opt1/cccdr/cccdr.sh start&
+nohup /opt1/uba-server/startup.sh start&
+nohup /opt1/uba-socket/startup.sh start&
+
+sh:
+./start_cc.sh
+nohup /etc/init.d/mongod start&
+nohup /usr/local/bin/redis-server /etc/redis.conf&
+nohup /usr/local/nginx/sbin/nginx&
+nohup asterisk -g -C /etc/asterisk/gateway/asterisk.conf&
+nohup asterisk -g -C /etc/asterisk/gd.zj.1.0/asterisk.conf&
+nohup /opt/ass/ass.sh start&
+nohup /opt1/cc-java-in-gddx/cc-java.sh start&
+nohup /opt1/cc-server-in-gddx/startup.sh start&
+nohup /opt1/yy-java-gddx-20170420/bill.sh start&
+nohup /opt1/yy-server-gddx-20170420/startup.sh start&
+nohup /opt1/cc-socket-push-gddx/startup.sh start&
+nohup /opt1/cccdr/cccdr.sh start&
+nohup /opt1/new/im-node/trunk/startup.sh start&
+
+157启动顺序：
+/opt/consul/bin/consul agent -config-dir=/etc/consul.d -config-file=/etc/consul.conf -data-dir=/opt/consul/data
+
+/opt/elasticsearch-2.4.1/bin/elasticsearch   --这个是es ，注意内存
+/opt/apache-tomcat-8.0.53/bin/startup.sh     --这个是solr ，注意内存
+/opt/app/report-node-gddx/startup.sh start
+/opt/app/report-java-gddx/report-java.sh start
+
+159启动：
+/opt/consul/bin/consul agent -config-dir=/etc/consul.d -config-file=/etc/consul.conf -data-dir=/opt/consul/data
+
+yum list installed |grep java
+yum -y list java* 
+yum -y remove java-1.7.0-openjdk*
+yum -y remove tzdata-java.noarch
+yum -y install java-1.7.0-openjdk* 
+ 

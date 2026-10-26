@@ -1,0 +1,44 @@
+
+
+查询座席状态接口文档
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+第三方系统通过发送 HTTP Get 请求来调用查询坐席状态功能，通过此接口可以在客
+户自己系统中实现查询某个坐席状态的功能。
+		请求 URL 地址：对应节点的地址，具体值在开完账户之后由接口提供方发放给客户。
+		GET 请求格式：
+http://120.55.72.***/app?Action=QueryExtenState&ActionID=queryExtenState0.4174859599729
+1212&Account=N00000000421&Exten=8000&PBX=sh.ali.2.01
+		参数说明：所有字段均区分大小写；字符串编码 UTF-8
+
+参数 | 值 | 说明
+Action | QueryExtenState | 命 令 名 称 ， 查 询 坐 席 状 态 接 口 中 固 定 名 称 为 QueryExtenState
+ActionID | 唯一字符串 | 随 机码 ，用 户 用来 标识 请 求的 操作 ， 服务 器返 回 的 Response 中会带有对应 Action 的 ActionID；该字段最 大长度是 40 个字节
+Account | 账户编号 | 由接口提供方发放给使用者，如 N0000000012
+Exten | 座席号 | 当前账户下的坐席号一般为 8000、8001、8002
+PBX | xx.xx.xx.xx | 账户所在的 PBX，由接口提供方发放给使用者
+
+系统返回
+		返回 Json 对象
+{"Command":"Response","Succeed":true,"Flag":"signout","Message":" 小休 ","ActionID":"queryExtenState0.41748595997291212","Response":"Que
+ryExtenState"}
+		字段说明
+参数 | 值 | 说明
+Response | QueryExtenState | 对应 Action 的名称
+ActionID | 唯一字符串 | 对应操作的唯一标记
+Succeed | 处理结果 | 请求是否成功，当不成功时会在 Message 字段中给出原 因，成功时会返回坐席状态
+Message | 结果说明 | User not found!：坐席不存在
+Flag | 状态标记值 | signout：当前状态为签出 Reserve:当前状态为离线接听 0：当前状态为空闲 1：当前状态为忙碌 2：当前状态为小休 99：当前状态为正在通话 3-9：自定义状态
+

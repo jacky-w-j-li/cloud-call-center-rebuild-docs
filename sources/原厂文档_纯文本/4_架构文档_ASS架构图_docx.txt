@@ -1,0 +1,10 @@
+中间服务层应用服务层Asterisk gatewayAsterisk1Asterisk 10呼叫路由IVR坐席排队线路对接录音会议cc.agicc.agi.handler.implcc.smart.servercc.amicc.ass.callcc.ass.call.implass.recorderass.gatewayass.model.cdrass.model.coreass.configass.serverass.server.handler.implass.server.cdrass.server.dispatcherass.server.configass.server.monitorAss.server.config.handlerass.utilcc.httpserver上层服务HTTP调用拨号计划DialplanFastAGI调用辅助功能服务器配置......处理通话记录管理接口上层请求处理外呼、群呼、微信等服务器监控监视呼叫群呼流量控制对外接口
+
+
+	
+	
+	
+
+
+
+	

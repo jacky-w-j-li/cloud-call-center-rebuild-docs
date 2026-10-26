@@ -1,0 +1,23 @@
+签入与签出接口说明文档
+1.签入接口
+第三方系统通过发送HTTP Get请求来调用签入功能，通过此接口可以在客户自己系统中实现将坐席设置为离线接听状态的功能。
+请求URL地址：对应节点的地址，具体值在开完账户之后由接口提供方发放给客户。
+GET请求格式：
+HYPERLINK "http://119.254.**.**/app?Action=Hangup&ActionID=1234567890&Account=N0000000012&CallID=dh-pbx03-7-1437983226.1347058&PBX=ds.pbx.1.0" http://120.55.72.***/app?Action=SignIn&ActionID=SignIn0.41748595997299165&Account=N00000000143&Exten=7001&PBX=1.1.1.101&ExtenType=gateway
+参数说明：所有字段均区分大小写；字符串编码UTF-8
+参数 | 值 | 说明 | Action | SignIn | 命令名称，签入接口中固定名称为SignIn | ActionID | 唯一字符串 | 随机码，用户用来标识请求的操作，服务器返回的Response中会带有对应Action的ActionID；在通话事件中会带有该字段；该字段最大长度是40个字节 | Account | 账户编号 | 由接口提供方发放给使用者，如N0000000143 | Exten | 座席号 | 当前账户下的坐席号一般为8000、8001、8002 | PBX | xx.xx.xx.xx | 账户所在的PBX，由接口提供方发放给使用者 | ExtenType | gateway | ExtenType 非必传。不传签入手机，传的话值只能为gateway | 系统返回
+返回Json对象
+{"Command":"Response","Succeed":true,"ActionID":"SignIn0.41748595997299165","Response":"SignIn"}
+字段说明
+参数 | 值 | 说明 | Response | SignIn | 对应Action的名称 | ActionID | 唯一字符串 | 对应操作的唯一标记 | Succeed | 处理结果 | 请求是否成功，当不成功时会在Message字段中给出原因 | Message | 结果说明 | User has not bind gateway sip number or gateway sip number not register!：这个坐席未注册sip号或者未绑定sip号
+| | 签出接口
+第三方系统通过发送HTTP Get请求来调用签出功能，通过此接口可以在客户自己系统中实现将坐席从离线接听的状态设置为签出的功能。
+请求URL地址：对应节点的地址，具体值在开完账户之后由接口提供方发放给客户。
+GET请求格式：
+HYPERLINK "http://119.254.**.**/app?Action=Hangup&ActionID=1234567890&Account=N0000000012&CallID=dh-pbx03-7-1437983226.1347058&PBX=ds.pbx.1.0" http://120.55.72.***/app?Action=SignOut&ActionID=SignOut0.41748595997299165&Account=N00000000143&Exten=7001&PBX=1.1.1.101
+参数说明：所有字段均区分大小写；字符串编码UTF-8
+参数 | 值 | 说明 | Action | SignOut | 命令名称，签出接口中固定名称为SignOut | ActionID | 唯一字符串 | 随机码，用户用来标识请求的操作，服务器返回的Response中会带有对应Action的ActionID；在通话事件中会带有该字段；该字段最大长度是40个字节 | Account | 账户编号 | 由接口提供方发放给使用者，如N0000000143 | Exten | 座席号 | 当前账户下的坐席号一般为8000、8001、8002 | PBX | xx.xx.xx.xx | 账户所在的PBX，由接口提供方发放给使用者 | 系统返回
+返回Json对象
+{"Command":"Response","Succeed":true,"ActionID":"SignOut0.41748595997299165","Response":"SignOut"}
+字段说明
+参数 | 值 | 说明 | Response | SignOut | 对应Action的名称 | ActionID | 唯一字符串 | 对应操作的唯一标记 | Succeed | 处理结果 | 请求是否成功，当不成功时会在Message字段中给出原因 | Message | 结果说明 | User has not bind gateway sip number or gateway sip number not register!：这个坐席未注册sip号或者未绑定sip号 | Reason | 301 | 坐席不为离线接听状态，不能签出 | |

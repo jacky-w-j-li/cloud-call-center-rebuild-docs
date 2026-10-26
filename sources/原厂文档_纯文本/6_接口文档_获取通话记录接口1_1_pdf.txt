@@ -1,0 +1,127 @@
+--- page 1 ---
+维 护 人：
+版 本 号： 1.1
+日 期： 2016 年 4 月 12 日
+--- page 2 ---
+以下接口支持 http G T 和 POST 请求，必须提前报备 IP 才能正常调用。返
+回值为 json 格式字符串。 （
+名称和要报备哪个接口的调用 IP）
+GET 请求示例：
+http://115.29.14.183:3000/openService?action=getCCCdr&account=N0000000
+0***&beginTime=2015-09-15 00:00:00&endTime=2015-09-16 00:00:00
+POST 请求示例：
+url：http://115.29.14.183:3000/openService
+请求 body 体携带数据：
+action=getCCCdr&account=N00000000***&beginTime=2015-09-15
+00:00:00&endTime=2015-09-16 00:00:00
+返回值示例：
+{ "success": true, "data": [ {},{},{}……], "message": "200 ok!" }
+字段解释：
+success: true/false 处理标示
+message: 附加信息。处理成功为“200 ok! ”
+data：为数组结构，携带返回的数据列表。只有 success 为 true 时，才有 data
+字段。
+请求参数：
+action getCCCdr 固定不变（必填）
+account 需要获取通话记录的账户 ID。（必填）
+beginTime 获取时间段的开始时间，时间格式为 yyyy-MM-dd HH:mm:ss
+。（必填）
+endTime 获取时间段的结束时间，时间格式为 yyyy-MM-dd HH:mm:ss。
+（必填）
+callNo 主叫号码 （查询条件，可不传）
+calledNo 被叫号码（查询条件，可不传）
+connectType 呼叫类型（查询条件，可不传，值可以是 normal（普通来电）、
+dialout（外呼去电）、transfer（来电转接）、dialTransfer（外呼
+转接））
+status 处理状态（查询条件，可不传，值可以是 dealing（已接听）、
+notDeal（振铃未接听）、 queueLeak（排队放弃）、 voicemail
+（已留言）、leak（IVR 放弃） 、blackList （黑名单））
+cdrVar 如果外呼接口传了 CdrVar，那么这里可以传变量的名字，来获
+取值。（查询条件可不传）
+--- page 3 ---
+注意：2 次请求间隔需要大于 60 秒。每次请求获取的时间段最长为 7 天的通话
+记录。
+返回值：
+返回的 json 对象的 data 数组中每一个对象为一条通话记录。
+字段解释：
+_id 本条通话记录的唯一 ID
+CALL_SHEET_ID 本条通话记录的唯一 ID（与_id 值一致）
+CALL_NO 主叫号码
+CALLED_NO 被叫号码,
+END_TIME 结束时间
+CONNECT_TYPE 呼叫类型，值为 normal（普通来电）、dialout（外呼去
+电）、transfer（来电转接）、dialTransfer（外呼转接）
+STATUS 处理状态，值为 dealing（已接听）、notDeal（振铃未接
+听）、queueLeak（排队放弃）、voicemail（已留言）、
+leak（IVR 放弃） 、blackList（黑名单）
+DISPOSAL_AGENT 处理座席 ID
+BEGIN_TIME 通话开始时间（只有已接听状态的才有值）
+OFFERING_TIME 呼叫发起时间
+RECORD_FILE_NAME 录音文件名
+CUSTOMER_NAME 定位客户名称
+REF_CALL_SHEET_ID 转接类型通话，此字段记录之前一通通话记录的 ID
+PBX 通话产生所在 PBX 的 ID
+QUEUE_NAME 技能组名称
+FILE_SERVER 录音服务器地址
+PROVINCE 省
+DISTRICT 市
+DISTRICT_CODE 城市区号
+KEY_TAG 是否标记
+CALL_TIME_LENGTH 通话时长
+PREMEDIA_KEY 前媒体识别到的关键字，关键字列表见 附录 1
+PREMEDIA_MEMO 前媒体识别的内容
+特别提示：录音下载地址为 FILE_SERVER + RECORD_FILE_NAME
+场景举例：要获取 9 月 10 日到 9 月 12 日之间的所有通话记录
+http://115.29.14.183:3000/openService?action=getCCCdr&account=N0000000
+0***&beginTime=2015-09-10 00:00:00&endTime=2015-09-12 23:59:59
+时间条件为 [2015-09-10 00:00:00 , 2015-09-12 23:59:59] 全闭
+--- page 4 ---
+返回值错误代码解析：
+success false
+message 403 Forbidden! IP 未报备，禁止调用
+account not found! 账户编号有误
+account must need! account 字段必传
+beginTime and endTime must need! 开始和结束时间必传
+Request is too frequent, 60s once request! 同一账户 2 次请求间隔
+必须大于 60 秒
+beginTime or endTime format error! 开始时间或结束时间格式错
+误
+beginTime and endTime must within a week! 获取通话记录最长时
+间跨度为 7 天
+返回值图片示例：
+
+--- page 5 ---
+附录 1:
+前媒体识别关键词
+停机
+关机
+空号
+电话忙
+秘书台
+通话中
+用户忙
+加拨零
+网络忙
+号码正忙
+呼叫等待
+正在通话
+无法接通
+无人接听
+无法接听
+稍后再拨
+来电提醒
+无权接受
+不要挂机
+呼入限制
+暂停服务
+没有应答
+没有应答
+外地号码
+系统繁忙
+系统繁忙
+没有应答
+不方便接听
+不在服务区
+前转不成功
+无子业务号码
+无此业务号码

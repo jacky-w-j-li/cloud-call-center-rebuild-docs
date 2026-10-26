@@ -1,0 +1,105 @@
+--- page 1 ---
+平台数据对外接口	  
+以下接口支持	   http	   GET 和 POST 请求，必须提前报备 IP 才能正常调用。返
+回值为 json 格式字符串。	  
+	  
+GET 请求示例：	  
+http://115.29.14.183:3000/openService?action=getCCAgentsByAcc&account=N
+00000000***	  
+	  
+POST 请求示例：	  
+url：http://115.29.14.183:3000/openService	  
+请求 body 体携带数据：action=getCCAgentsByAcc&account=N00000000***	  
+	  
+返回值示例：	  
+{  "success": true,   "data": [ {},{},{}……],   "message": "200 ok!" } 
+字段解释：	  
+success:	  true/false	   处理标示	  
+message:	   附加信息。处理成功为“200 ok!”	  
+data：为数组结构，携带返回的数据列表。只有 success 为 true 时，才有 data
+字段。	  
+	  
+	  
+1. 获取代理账号下拥有呼叫中心产品的账号信息	  
+http://115.29.14.183:3000/openService?action=getCCAccountsByProxy&proxyNam
+e=cgProxy 
+ 
+请求参数： 
+action：getCCAccountsByProxy  固定不变 
+proxyName：代理登陆计费平台的登陆名。 
+	  
+返回值：	  
+返回的 json 对象的 data 数组中每一个对象为一个账号。	  
+字段解释：	  
+_id:	   账号 ID	  
+balance:账号余额（注意，这里不是外呼余额），这个数字是元的 10000 倍。例如，余额为
+1120000，那么换算后为 112 元。 
+companyName:账号公司名称 
+linkManEmail: 联系人邮箱 
+linkManName: 联系人姓名 
+linkManPhone: 联系人电话 
+managerPassword: 账号登陆用户中心密码 
+name:账号登陆用户中心用户名 
+--- page 2 ---
+callBalance: 外呼余额，同样是放大 10000 倍的。 
+pbx:是个数组，一般情况下，一个账号 只拥有一个 pbx。特殊账号存在多个 pbx 情况。 
+Pbx 中字段 PBX：pbx 的 id	  
+Pbx 中字段 NickName：pbx 的昵称	  
+Pbx 中字段 IsDialoutIntegration：是否开启外呼接口，值为：0/1	  
+Pbx 中字段 IsTransferIntegration：是否开启呼转接口，值为：0/1	  
+Pbx 中字段 DispatcherResend：是否启用事件推送失败重发机制， 值为：true/false	  
+返回值图片示例：	  
+	  
+2. 获取呼叫中心账号下所有服务号 	  
+http://115.29.14.183:3000/openService?action=getCCServiceNoByAcc&account=N
+00000000***	  
+ 
+请求参数： 
+action：getCCServiceNoByAcc 固定不变 
+account：要查询的账号 ID 
+	  
+返回值：	  
+返回的 json 对象的 data 数组中每一个对象为一个服务号。	  
+字段解释：	  
+_id:	   服务号的 ID	  
+DisplayName:服务号的别名	  
+Exten：服务号的号码	  
+PBX：服务号所属的 pbx	  
+	  
+
+--- page 3 ---
+返回值图片示例：	  
+	  
+	  
+3. 获取呼叫中心账号下所有座席（包含上下级关系） 	  
+http://115.29.14.183:3000/openService?action=getCCAgentsByAcc&account=N000
+00000*** 
+ 
+请求参数： 
+action：getCCAgentsByAcc 固定不变 
+account：要查询的账号 ID 
+	  
+返回值：	  
+返回的 json 对象的 data 数组中每一个对象为一个座席。	  
+字段解释：	  
+_id:	   座席的 ID	  
+displayName:	   座席姓名	  
+exten：座席工号	  
+loginName:	   座席登陆呼叫中心用户名，都与工号一直	  
+password:	   座席登陆呼叫中心密码	  
+pbx：座席所属的 pbx	  
+mobile:	   座席绑定的手机	  
+email：座席绑定的邮箱	  
+status:	   座席状态，启用或者停用（enable/disable）	  
+uversion:	   座席版本，标准版/外呼版/监控版（enterprise/outcall/monitor）	  
+callerIDNum:	   座席外呼透传号，如果此字段没有，此座席外呼时使用，账号总
+透传号。可以用此字段关联座席与服务号关系。	  
+role:此座席拥有的角色	  
+parentId:	   座席的上级座席 ID	  
+AutoBusyTime:	   后处理时长	  
+
+--- page 4 ---
+type:	   是否为监控座席（agent/manager）	  
+	  
+返回值图片示例：	  
+	  

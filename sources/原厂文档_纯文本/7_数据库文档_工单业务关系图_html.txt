@@ -1,0 +1,943 @@
+工单模块相关表字段注释
+1
+工单模块相关表字段注释
+Read table & column comments as mouse-over tooltips.
+Fk JSon
+actionFields ref actions ( )
+Fk JSon
+stepFields ref account_business_flow_step ( )
+Fk JSon
+inflowInterface ref account_business_flow_step ( )
+Fk JSon
+cols ref stepFields ( )
+Fk JSon
+outflowInterface ref account_business_flow_step ( )
+Fk JSon
+fields ref cols ( )
+Fk JSon
+cols ref actionFields ( )
+Fk JSon
+fields ref cols ( )
+Fk JSon
+actions ref account_business_flow_step ( )
+Fk Fk_account_business_flow_account_business_flow_field
+account_business_flow ref account_business_flow_field ( _id -> flow_id )
+_id
+Fk Fk_account_business_flow_工单表;N00000000535_business
+account_business_flow ref 工单表;N00000000535_business ( _id -> flow )
+_id
+Fk Fk_account_business_flow_account_business_flow_step
+account_business_flow ref account_business_flow_step ( _id -> flow_id )
+_id
+Fk Fk_工单表;N00000000535_business_工单历史表: N00000000535_business_history
+工单表;N00000000535_business ref 工单历史表: N00000000535_business_history ( _id -> businessId )
+_id
+Fk Fk_客户表: N00000000531_customer_工单表;N00000000535_business
+客户表: N00000000531_customer ref 工单表;N00000000535_business ( _id -> customer )
+_id
+actionFieldsSub-document actionFields
+动作字段
+colslistcols
+list
+动作界面的行
+stepFieldsSub-document stepFields
+步骤界面
+colslistcols
+list
+步骤界面的行
+inflowInterfaceSub-document inflowInterface
+流入接口
+urlstringurl
+string
+工单对接流入url
+t fieldsarrayfields
+array
+工单对接流入参数
+[]
+colsSub-document cols
+步骤界面的行
+fieldslistfields
+list
+步骤界面当前行的列
+outflowInterfaceSub-document outflowInterface
+流出接口
+urlstringurl
+string
+工单流出对接
+t
+fieldsSub-document fields
+步骤界面当前行的列
+typestringtype
+string
+步骤界面当前行的列的字段类型
+t _idstring_id
+string
+步骤界面当前行的列的字段ID
+t
+colsSub-document cols
+动作界面的行
+fieldslistfields
+list
+动作界面的列
+fieldsSub-document fields
+动作界面的列
+typestringtype
+string
+动作界面当前行当前列的字段类型
+t _idstring_id
+string
+动作界面当前行当前列的字段ID
+t
+actionsSub-document actions
+步骤动作
+namestringname
+string
+步骤动作的名称
+t jumpTostringjumpTo
+string
+执行该动作后跳入的下一个动作ID
+t actionRolestringactionRole
+string
+可以执行该动作的角色
+t _idstring_id
+string
+动作ID
+t actionFieldslistactionFields
+list
+动作字段
+account_business_flowCollection cc.account_business_flow
+业务流程表
+Pk _id_ ( _id )
+_idstring_id
+* string
+工单类型ID
+References account_business_flow_field ( _id -> flow_id )
+References 工单表;N00000000535_business ( _id -> flow )
+References account_business_flow_step ( _id -> flow_id )
+namestringname
+* string
+工单类型名称
+t accountstringaccount
+* string
+账户ID
+t createTimestringcreateTime
+* string
+工单创建时间
+t createUserstringcreateUser
+* string
+创建流程的坐席ID
+t statusstringstatus
+* string
+是否启用
+t tipsstringtips
+string
+流程提醒
+t versionstringversion
+* string
+工单类型版本号
+t ctypestringctype
+string
+工单时限类型
+t ctimestringctime
+string
+工单时限时长
+t
+account_business_flow_fieldCollection cc.account_business_flow_field
+业务流程字段表
+Pk _id_ ( _id )
+_idstring_id
+* string
+字段ID
+t requiredstringrequired
+* string
+是否为必填
+t namestringname
+* string
+字段名称
+t enablestringenable
+* string
+是否启用
+t typestringtype
+* string
+字段类型
+t isReportstringisReport
+* string
+是否统计报表
+t dicstringdic
+string
+关联字典
+t defaultstringdefault
+* string
+默认值ID
+t flow_idstringflow_id
+* string
+字段所在工单类型ID
+Referred by account_business_flow ( _id -> flow_id )
+工单表;N00000000535_businessCollection cc_data_20140728.工单表;N00000000535_business
+工单表
+Pk _id_ ( _id )
+_idstring_id
+* string
+工单ID
+References 工单历史表: N00000000535_business_history ( _id -> businessId )
+Unq customer_1 ( customer )
+customerstringcustomer
+* string
+工单对应客户ID
+Referred by 客户表: N00000000531_customer ( _id -> customer )
+callIdstringcallId
+string
+通话记录ID
+t Unq flow_1_step_1 ( flow, step )
+flowstringflow
+* string
+工单流程
+Referred by account_business_flow ( _id -> flow )
+29124090-95da-11e6-8f58-096f50ab45f0string29124090-95da-11e6-8f58-096f50ab45f0
+string
+自定义字段
+t accountstringaccount
+* string
+账号信息
+t Unq flow_1_step_1 ( flow, step )
+stepstringstep
+* string
+工单步骤
+t statusstringstatus
+* string
+状态（处理中、处理完成）
+t Unq lastUpdateTime_-1 ( lastUpdateTime )
+lastUpdateTimestringlastUpdateTime
+* string
+最后更新时间
+t updateTimestapdoubleupdateTimestap
+* double
+最后更新时间戳
+# lastUpdateUserstringlastUpdateUser
+* string
+最后更新座席ID
+t Unq master_-1 ( master )
+masterstringmaster
+* string
+当前处理人ID
+t saveFlagstringsaveFlag
+string
+保存标志
+t createUserstringcreateUser
+* string
+创建座席ID
+t createTimestringcreateTime
+* string
+创建时间
+t Unq number_1 ( number )
+numberstringnumber
+* string
+工单编号
+t createDatestringcreateDate
+* string
+创建日期
+t roleslistroles
+* list
+坐席的角色数组
+actionIdstringactionId
+* string
+动作ID
+t 319d2450-95da-11e6-8746-5bd537abecbdstring319d2450-95da-11e6-8746-5bd537abecbd
+string
+自定义字段
+t processTimeintegerprocessTime
+integer
+工单进行的时间
+# processEndTimestringprocessEndTime
+string
+工单完成的时间
+t isReadbooleanisRead
+* boolean
+是否已读
+b fb2724e0-9677-11e6-b250-d9f2e876cc81stringfb2724e0-9677-11e6-b250-d9f2e876cc81
+string
+自定义字段
+t 0002bc40-9678-11e6-8631-eb8af0387401string0002bc40-9678-11e6-8631-eb8af0387401
+string
+自定义字段
+t 1030da30-9a5a-11e6-b09c-6b3aa890387fstring1030da30-9a5a-11e6-b09c-6b3aa890387f
+string
+自定义字段
+t
+客户表: N00000000531_customerCollection cc_data_20140728.客户表: N00000000531_customer
+客户表
+Pk _id_ ( _id )
+_idstring_id
+* string
+客户ID
+References 工单表;N00000000535_business ( _id -> customer )
+References app_email_channel_session ( _id -> customerId )
+Unq name_1_createTime_-1 ( name, createTime )
+namestringname
+* string
+t phonelistphone
+* list
+Unq email.email_1 ( email )
+emaillistemail
+list
+addressstringaddress
+string
+t importSidstringimportSid
+string
+t Unq phone.tel_1_createTime_-1 ( createTime ) Unq batchNo_1_createTime_-1 ( batchNo, createTime ) Unq name_1_createTime_-1 ( name, createTime ) Unq owner_1_createTime_-1 ( owner, createTime ) Unq categoryId_1_createTime_-1 ( categoryId, createTime ) Unq lastContactTime_1_takeTime_1_createTime_-1 ( createTime )
+createTimestringcreateTime
+string
+t lastUpdateTimestringlastUpdateTime
+string
+t accountIdstringaccountId
+string
+t dbTypestringdbType
+string
+t Unq batchNo_1_createTime_-1 ( batchNo, createTime )
+batchNostringbatchNo
+string
+t sysStatusstringsysStatus
+string
+t Unq status_1 ( status )
+statusstringstatus
+string
+t custsource1stringcustsource1
+string
+t Unq categoryId_1_createTime_-1 ( categoryId, createTime )
+categoryIdstringcategoryId
+string
+t Unq actionType_1_owner_1_notifyTime_1 ( actionType, owner ) Unq owner_1_createTime_-1 ( owner, createTime )
+ownerstringowner
+string
+t Unq actionType_1_owner_1_notifyTime_1 ( actionType, owner ) Unq actionType_1_actionUser_1 ( actionType )
+actionTypestringactionType
+string
+t
+工单历史表: N00000000535_business_historyCollection cc_data_20140728.工单历史表: N00000000535_business_history
+工单历史表
+Pk _id_ ( _id )
+_idstring_id
+* string
+工单历史ID
+t Unq businessId_1 ( businessId )
+businessIdstringbusinessId
+* string
+工单ID
+Referred by 工单表;N00000000535_business ( _id -> businessId )
+stepstringstep
+string
+当前步骤ID
+t actionstringaction
+* string
+动作
+t excuteActionstringexcuteAction
+string
+下一个动作ID
+t excuteUserstringexcuteUser
+string
+上一个动作的处理人
+t excuteDatamapexcuteData
+map
+下一个动作的信息
+timestringtime
+string
+执行动作的时间
+t datestringdate
+string
+执行动作的日期
+t sortTimedoublesortTime
+double
+执行动作的时间戳
+# masterstringmaster
+string
+当前动作处理人
+t reportFlagstringreportFlag
+string
+是否统计报表
+t fromStepstringfromStep
+string
+上一步骤ID
+t stepProcessTimeintegerstepProcessTime
+integer
+步骤处理时长
+# processTimeintegerprocessTime
+integer
+工单进行的时间
+# ctimestringctime
+string
+时限时长
+t ctypestringctype
+string
+时限类型
+t excuteFlagbooleanexcuteFlag
+boolean
+b
+account_business_flow_stepCollection cc.account_business_flow_step
+业务步骤表
+Pk _id_ ( _id )
+_idstring_id
+* string
+步骤ID
+t flow_idstringflow_id
+* string
+步骤所属流程ID
+Referred by account_business_flow ( _id -> flow_id )
+namestringname
+* string
+步骤名称
+t isBeginbooleanisBegin
+* boolean
+是否为开始步骤
+b masterstringmaster
+* string
+当前处理人
+t custom_fieldslistcustom_fields
+list
+自定义字段
+actionslistactions
+* list
+步骤动作
+typestringtype
+* string
+步骤类型
+t systemFnstringsystemFn
+string
+业务取消步骤或完成步骤
+t createUserstringcreateUser
+* string
+步骤创建人
+t createTimestringcreateTime
+* string
+步骤创建时间
+t lastUpdateTimestringlastUpdateTime
+* string
+最后更新时间
+t stepFieldsliststepFields
+list
+步骤界面
+ctimestringctime
+string
+时限时长
+t ctypestringctype
+string
+时限类型
+t ownernotifyUsersstringownernotifyUsers
+string
+提醒成员
+t notifyUserstringnotifyUser
+string
+通知坐席
+t inflowInterfacemapinflowInterface
+map
+流入接口
+outflowInterfacemapoutflowInterface
+map
+流出接口
+Collection account_business_flow
+业务流程表
+Indexes | Field Name | Data Type | Description |
+* |
+&#95;id |
+string |
+工单类型ID |
+* |
+name |
+string |
+工单类型名称 |
+* |
+account |
+string |
+账户ID |
+* |
+createTime |
+string |
+工单创建时间 |
+* |
+createUser |
+string |
+创建流程的坐席ID |
+* |
+status |
+string |
+是否启用 |
+|
+tips |
+string |
+流程提醒 |
+* |
+version |
+string |
+工单类型版本号 |
+|
+ctype |
+string |
+工单时限类型 |
+|
+ctime |
+string |
+工单时限时长 |
+Indexes |
+| &#95;id&#95; |
+ON &#95;id |
+|
+Virtual Relations |
+| Fk_account_business_flow_account_business_flow_field |
+( &#95;id ) ref account&#95;business&#95;flow&#95;field (flow&#95;id) |
+|
+| Fk_account_business_flow_工单表;N00000000535_business |
+( &#95;id ) ref 工单表&#59;N00000000535&#95;business (flow) |
+|
+| Fk_account_business_flow_account_business_flow_step |
+( &#95;id ) ref account&#95;business&#95;flow&#95;step (flow&#95;id) |
+|
+Collection account_business_flow_field
+业务流程字段表
+Indexes | Field Name | Data Type | Description |
+* |
+&#95;id |
+string |
+字段ID |
+* |
+required |
+string |
+是否为必填 |
+* |
+name |
+string |
+字段名称 |
+* |
+enable |
+string |
+是否启用 |
+* |
+type |
+string |
+字段类型 |
+* |
+isReport |
+string |
+是否统计报表 |
+|
+dic |
+string |
+关联字典 |
+* |
+default |
+string |
+默认值ID |
+* |
+flow&#95;id |
+string |
+字段所在工单类型ID |
+Indexes |
+| &#95;id&#95; |
+ON &#95;id |
+|
+Collection account_business_flow_step
+业务步骤表
+Indexes | Field Name | Data Type | Description |
+* |
+&#95;id |
+string |
+步骤ID |
+* |
+flow&#95;id |
+string |
+步骤所属流程ID |
+* |
+name |
+string |
+步骤名称 |
+* |
+isBegin |
+boolean |
+是否为开始步骤 |
+* |
+master |
+string |
+当前处理人 |
+|
+custom&#95;fields |
+list |
+自定义字段 |
+* |
+actions |
+list |
+步骤动作 |
+* |
+type |
+string |
+步骤类型 |
+|
+systemFn |
+string |
+业务取消步骤或完成步骤 |
+* |
+createUser |
+string |
+步骤创建人 |
+* |
+createTime |
+string |
+步骤创建时间 |
+* |
+lastUpdateTime |
+string |
+最后更新时间 |
+|
+stepFields |
+list |
+步骤界面 |
+|
+ctime |
+string |
+时限时长 |
+|
+ctype |
+string |
+时限类型 |
+|
+ownernotifyUsers |
+string |
+提醒成员 |
+|
+notifyUser |
+string |
+通知坐席 |
+|
+inflowInterface |
+map |
+流入接口 |
+|
+outflowInterface |
+map |
+流出接口 |
+Indexes |
+| &#95;id&#95; |
+ON &#95;id |
+|
+Collection 客户表: N00000000531_customer
+客户表
+Indexes | Field Name | Data Type | Description |
+* |
+&#95;id |
+string |
+客户ID |
+* |
+name |
+string |
+|
+* |
+phone |
+list |
+|
+|
+email |
+list |
+|
+|
+address |
+string |
+|
+|
+importSid |
+string |
+|
+|
+createTime |
+string |
+|
+|
+lastUpdateTime |
+string |
+|
+|
+accountId |
+string |
+|
+|
+dbType |
+string |
+|
+|
+batchNo |
+string |
+|
+|
+sysStatus |
+string |
+|
+|
+status |
+string |
+|
+|
+custsource1 |
+string |
+|
+|
+categoryId |
+string |
+|
+|
+owner |
+string |
+|
+|
+actionType |
+string |
+|
+Indexes |
+| &#95;id&#95; |
+ON &#95;id |
+|
+| actionType&#95;1&#95;owner&#95;1&#95;notifyTime&#95;1 |
+ON actionType&#44; owner |
+|
+| phone&#46;tel&#95;1&#95;createTime&#95;&#45;1 |
+ON createTime |
+|
+| batchNo&#95;1&#95;createTime&#95;&#45;1 |
+ON batchNo&#44; createTime |
+|
+| name&#95;1&#95;createTime&#95;&#45;1 |
+ON name&#44; createTime |
+|
+| email&#46;email&#95;1 |
+ON email |
+|
+| actionType&#95;1&#95;actionUser&#95;1 |
+ON actionType |
+|
+| owner&#95;1&#95;createTime&#95;&#45;1 |
+ON owner&#44; createTime |
+|
+| status&#95;1 |
+ON status |
+|
+| categoryId&#95;1&#95;createTime&#95;&#45;1 |
+ON categoryId&#44; createTime |
+|
+| lastContactTime&#95;1&#95;takeTime&#95;1&#95;createTime&#95;&#45;1 |
+ON createTime |
+|
+Virtual Relations |
+| Fk_客户表: N00000000531_customer_工单表;N00000000535_business |
+( &#95;id ) ref 工单表&#59;N00000000535&#95;business (customer) |
+|
+| Fk_客户表: N00000000531_customer_app_email_channel_session |
+( &#95;id ) ref app&#95;email&#95;channel&#95;session (customerId) |
+|
+Collection 工单历史表: N00000000535_business_history
+工单历史表
+Indexes | Field Name | Data Type | Description |
+* |
+&#95;id |
+string |
+工单历史ID |
+* |
+businessId |
+string |
+工单ID |
+|
+step |
+string |
+当前步骤ID |
+* |
+action |
+string |
+动作 |
+|
+excuteAction |
+string |
+下一个动作ID |
+|
+excuteUser |
+string |
+上一个动作的处理人 |
+|
+excuteData |
+map |
+下一个动作的信息 |
+|
+time |
+string |
+执行动作的时间 |
+|
+date |
+string |
+执行动作的日期 |
+|
+sortTime |
+double |
+执行动作的时间戳 |
+|
+master |
+string |
+当前动作处理人 |
+|
+reportFlag |
+string |
+是否统计报表 |
+|
+fromStep |
+string |
+上一步骤ID |
+|
+stepProcessTime |
+integer |
+步骤处理时长 |
+|
+processTime |
+integer |
+工单进行的时间 |
+|
+ctime |
+string |
+时限时长 |
+|
+ctype |
+string |
+时限类型 |
+|
+excuteFlag |
+boolean |
+|
+Indexes |
+| &#95;id&#95; |
+ON &#95;id |
+|
+| businessId&#95;1 |
+ON businessId |
+|
+Collection 工单表;N00000000535_business
+工单表
+Indexes | Field Name | Data Type | Description |
+* |
+&#95;id |
+string |
+工单ID |
+* |
+customer |
+string |
+工单对应客户ID |
+|
+callId |
+string |
+通话记录ID |
+* |
+flow |
+string |
+工单流程 |
+|
+29124090&#45;95da&#45;11e6&#45;8f58&#45;096f50ab45f0 |
+string |
+自定义字段 |
+* |
+account |
+string |
+账号信息 |
+* |
+step |
+string |
+工单步骤 |
+* |
+status |
+string |
+状态（处理中、处理完成） |
+* |
+lastUpdateTime |
+string |
+最后更新时间 |
+* |
+updateTimestap |
+double |
+最后更新时间戳 |
+* |
+lastUpdateUser |
+string |
+最后更新座席ID |
+* |
+master |
+string |
+当前处理人ID |
+|
+saveFlag |
+string |
+保存标志 |
+* |
+createUser |
+string |
+创建座席ID |
+* |
+createTime |
+string |
+创建时间 |
+* |
+number |
+string |
+工单编号 |
+* |
+createDate |
+string |
+创建日期 |
+* |
+roles |
+list |
+坐席的角色数组 |
+* |
+actionId |
+string |
+动作ID |
+|
+319d2450&#45;95da&#45;11e6&#45;8746&#45;5bd537abecbd |
+string |
+自定义字段 |
+|
+processTime |
+integer |
+工单进行的时间 |
+|
+processEndTime |
+string |
+工单完成的时间 |
+* |
+isRead |
+boolean |
+是否已读 |
+|
+fb2724e0&#45;9677&#45;11e6&#45;b250&#45;d9f2e876cc81 |
+string |
+自定义字段 |
+|
+0002bc40&#45;9678&#45;11e6&#45;8631&#45;eb8af0387401 |
+string |
+自定义字段 |
+|
+1030da30&#45;9a5a&#45;11e6&#45;b09c&#45;6b3aa890387f |
+string |
+自定义字段 |
+Indexes |
+| &#95;id&#95; |
+ON &#95;id |
+|
+| flow&#95;1&#95;step&#95;1 |
+ON flow&#44; step |
+|
+| customer&#95;1 |
+ON customer |
+|
+| master&#95;&#45;1 |
+ON master |
+|
+| number&#95;1 |
+ON number |
+|
+| lastUpdateTime&#95;&#45;1 |
+ON lastUpdateTime |
+|
+Virtual Relations |
+| Fk_工单表;N00000000535_business_工单历史表: N00000000535_business_history |
+( &#95;id ) ref 工单历史表&#58; N00000000535&#95;business&#95;history (businessId) |
+|
+Powered by DbSchema

@@ -1,0 +1,40 @@
+目录
+TOC \o "1-3" \h \z \u HYPERLINK \l "_Toc476036802" 一、新增租户（电信操作） PAGEREF _Toc476036802 \h 2
+HYPERLINK \l "_Toc476036803" 二、接口地址配置（电信操作） PAGEREF _Toc476036803 \h 2
+HYPERLINK \l "_Toc476036804" 三、客户操作 PAGEREF _Toc476036804 \h 6
+一、新增租户（电信操作）
+计费系统地址： HYPERLINK "http://14.29.4.228:8000/" http://14.29.4.228:8000/
+点击“添加账户”添加租户
+添加新的服务号（外显号码）分配给新的租户。
+点击“跳转到云客服”，添加技能组、坐席、角色；分配相应的权限
+二、接口地址配置（电信操作）
+使用管理员账号登录云客服： HYPERLINK "http://14.29.4.196" http://14.29.4.196 ；点击高级功能(通话配置—>节点管理：
+INCLUDEPICTURE "C:\\Users\\yonkui\\Documents\\Tencent Files\\461874989\\Image\\Group\\M0198MD7[9MSTW6~ZQ6${@P.png" \* MERGEFORMATINET
+callurl节点使用的接口是 INCLUDEPICTURE "C:\\Users\\yonkui\\AppData\\Local\\Temp\\%W@GJ$ACOF(TYDYECOKVDYB.png" \* MERGEFORMATINET HYPERLINK "http://172.42.38.30/didi/phone/didiPbxGetBind/FROM_CID/FROM_DID" http://172.42.38.30/didi/phone/didiPbxGetBind/FROM_CID/FROM_DID
+HYPERLINK "http://172.42.38.30/didi/phone/didiPbxGetBind" http://172.42.38.30/didi/phone/didiPbxGetBind 调用客户接口
+FROM_CID:主叫号码（虚拟小号）
+FROM_DID：服务号（分配租户的固话号码，即外显号码）
+INCLUDEPICTURE "C:\\Users\\yonkui\\Documents\\Tencent Files\\461874989\\Image\\Group\\PN(LX@U$@(D2(41PP)0B10Z.png" \* MERGEFORMATINET
+INCLUDEPICTURE "C:\\Users\\yonkui\\Documents\\Tencent Files\\461874989\\Image\\Group\\{}WSQRFZNB]$6D2S)D24A@R.png" \* MERGEFORMATINET
+INCLUDEPICTURE "C:\\Users\\yonkui\\Documents\\Tencent Files\\461874989\\Image\\Group\\Z6M68}%PONY$D26SSB@)0{Q.png" \* MERGEFORMATINET
+注：在dialplan中要截取字符串可用如下几种方式：
+1.转到agi中由php进行处理，这种方法比较简单，在这里不再缀述
+2.在dialplan中利用内置的方法进行截取
+如
+[test]
+exten => 123456,1,answer()
+exten => 123456,n,noop(${CALLID:2}) //这里是指将主叫截取成 3456
+exten => 123456,n,noop(${LEN(abcd)}) //这里是指查看abcd字符串的长度
+exten => 123456,n,noop(${LEN(${CALLER})}) //这里是指查看主叫号码中的长度
+exten => 123456,n,noop(${CALLERID:0:2}) //这里是指将主叫号码从0开始，截取两个，这里的结果是12
+exten => 123456,n,noop(${CALLERID:2:4}) //结果是 3456
+exten => 123456,n,noop(${CALLERID:-3}) //结果是456
+客户调用外呼接口将虚拟号码传过来，电话转入云呼；系统通过callURL调用客户的接口，获取真实号码进行外呼；平台无需做二次开发。
+三、客户操作
+如果虚拟号与被叫号的号码绑定关系保存在客户系统，则需要客户提供接口地址，由云呼平台调用该地址获取每通电话的被叫号码。参加《事件推送接口》。
+如果号码绑定关系保存在云呼平台，则由客户调用平台接口，将号码绑定关系保存到平台。参加《隐私通话绑定接口1.1》。
+
+
+
+
+PAGE \* MERGEFORMAT6

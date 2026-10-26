@@ -1,0 +1,87 @@
+一.按顺序执行下面语句安装asterisk
+//把 tools.tar.gz 解压到 /tools/目录 ，或者把测试环境的10.168.4.65下的 /tools 目录拷到新机器的 /tools 目录
+tar xzvf tools.tar.gz
+yum -y install dos2unix
+cd /tools/
+dos2unix install_base.sh
+sh install_base.sh pbx
+yum -y install kernel kernel-devel
+reboot
+mkdir -p /data/asterisk/spool/asterisk
+mkdir -p /data/asterisk/log/ass
+mkdir -p /data/asterisk/log/asterisk
+mkdir -p /data/asterisk/log/asteriskGuard
+ln -s /data/asterisk/spool/asterisk /var/spool/asterisk
+ln -s /data/asterisk/log/ass /var/log/ass
+ln -s /data/asterisk/log/asterisk /var/log/asterisk
+ln -s /data/asterisk/log/asteriskGuard /var/log/asteriskGuard
+cd /tools/
+//下面这个语句需要 ssh的窗口最大化，不然有可能会出错，有提示选择的选A回车
+sh asterisk_install7-11.sh pbx 
+//编辑下面文件，把最前面的 ip="172.42.38.88" ，n_ip="172.42.38.88" 改成本机地址
+vim config_mrcp.sh
+//下面执行的命令，最后的名字是每台机器唯一的，最好不要改最前面的 gz，代表广州020区号 
+sh  config_mrcp.sh -s 0 -e 9 -n "gz.yhw.65"
+*注意：
+1)安装脚本会写指令到这几个文件的最后: /etc/rc.local，/etc/profile，/root/.bashrc。重新执行安装会重复加入指令，最好看看这几个文件内容有没有重复；
+2)重新执行安装后，查看crontab的脚本是否有重复，有就删除，crontab的脚本，是监控进程的，可根据实际情况修改。
+
+
+二.复制ass程序并配置
+/opt/ass/ 需要从正常运行的PBX里复制一份过去
+修改 server.conf 的 [server] 部分
+ -dialout.line=10.168.4.66     //这个填本机内网地址
+ -fileServer=http://10.66.220.84    // 这个是录音地址，网页访问的，一般是公网地址
+ass重启需要使用全路径，例如 nohup /opt/ass/ass.sh restart &
+
+
+三.计费运营系统添加pbx
+1)pbx需要在计费运营系统添加到呼叫中心的pbx管理
+  其中ass地址和sip地址是pbx的公网地址，座席端网页会连接这个地址；
+  config地址(用17789端口)和路由 ip 是pbx内网地址，内网其它服务会使用这个地址连接；
+2)计费运营系统添加到呼叫中心的机柜管理
+  先在机器管理里添加 pbx (参考其它pbx的配置)，然后在外呼中继和外呼路由里生效
+
+注意：pbx 的 nginx 需配置本机端口 17789 转发到 7789，参考正常的pbx的nginx，然后第一步的config地址要填成 17789端口，不然rest接口服务会出错。
+      nginx版本也要用安装包安装的版本，最新的版本可能会有问题。
+
+四. asterisk 配置修改
+1)实例的定义：一个asterisk进程就叫一个实例，每个座席的实例有各自的配置文件，例如 /etc/asterisk/gz.yhw.65.0，每台PBX的实例名字都配置成不一样；
+						  账号可以开在某个实例上，一般一台PBX会有10个用于坐席的实例 ，从 gz.yhw.65.0 到 gz.yhw.65.9；
+              而/etc/asterisk/gateway 用于路由，用户路由呼叫，一般不需修改配置。
+2)用于坐席的实例(配置文件是/etc/asterisk/gz.yhw.65.0这种)的 sip.conf 的 externip 需修改成坐席侧的服务器公网地址，参考测试环境的配置，具体原理可百度；
+3)根据广丰的坐席侧的网络情况，他们会开电信、联通、移动三种公网网络，4S店可以从其中一种网络连过来，所以平台会有三种公网地址；
+  由于 asterisk 的一个实例只能绑定一个公网地址，所以建议一个PBX绑定一种网络的公网地址(也就是 sip.conf 的 externip 填对应的公网地址)；
+  每个PBX需绑定一个公网地址，跟内网地址一一对应，由于座席可在公网的任意地址，这个公网地址需能用UDP外访any公网地址，和被any公网地址用UDP访问PBX；
+  (端口范围在 rtp.conf 里配置，具体原理可百度)
+  4S用哪种网络连过来，账号就建在绑定哪种公网地址的PBX上；
+  三种公网网络就需要三个PBX，以后扩容需根据实际情况对不同公网网络增加PBX。
+ 
+
+五. clpms 安装配置(其实就是freeswitch，可以用网上下载的freeswitch代替)
+1)直接从其它 PBX 复制过去就行，默认目录是 /data/clpms；
+2)开启启动和命令行参数，参考其它PBX的配置(看/etc/rc.local，/etc/profile，/root/.bashrc)；
+3)配置跟freeswitch一样，用处就是转发联通云中继的sip通话到PBX，逻辑比较简单，主要的作用是内外网RTP转发(根据被叫前缀判断是呼入还是呼出)，要是都是内网，不用也可以。
+  大致的逻辑是呼入： 云中继->clpms(freeswitch)->asterisk(gateway)->asterisk(实例)；
+              呼出： asterisk(实例)->asterisk(gateway,会在被叫加上前缀096)->clpms(freeswitch,识别到096会转发到云中继)->云中继。
+4)注意 /data/clpms/conf/sip_profiles 目录下的 external.xml 和 internal.xml 里的 ext-rtp-ip 和 ext-sip-ip 参数，跟 NAT 有关，可参考测试环境的配置，具体原理可百度。
+5)一般与联通对接修改/data/clpms/conf/sip_profiles/external/gateway.xml，和/data/clpms/conf/autoload_configs/acl.conf.xml，详细可百度freeswitch SIP中继对接。
+
+六.网络压力测试
+PBX服务器的网络性能是瓶颈，用iperf对PBX进行udp压力测试，
+测试命令：
+服务端：iperf3 -s
+客户端：iperf3 -c 10.168.4.65 -u -b 30M -l 160 -P 10
+数据如下：
+上限约为 300M ，每路通话占用100K，也就是一台PBX约可以支持3000路通话，再高就会丢包。
+
+七.进程日志说明
+1)asterisk:
+asterisk安装好后会设置开机启动；
+asterisk有1个gateway进程，十个实例进程，可用 ps 观察；
+asterisk 的控制台 ，执行 rasteriskg (路由实例)，rasterisk0(座席0实例，1~9实例类推)，指令可百度，或参考文档；
+每个实例的日志在：/var/log/asterisk 下的子目录下；
+2)ass的日志在 ： /var/log/ass 目录下。
+ass 安装好后会设置开机启动；
+3)clpms的日志在 ： /data/clpms/log 目录下。
+ass 安装好后会设置开机启动；

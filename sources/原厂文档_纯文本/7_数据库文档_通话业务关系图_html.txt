@@ -1,0 +1,2076 @@
+call&#95;db&#95;struct
+1
+call_db_struct
+Read table & column comments as mouse-over tooltips.
+通话业务
+Fk JSon
+AssignMembers ref manager_ivr_skillgroup ( )
+Fk Fk_manager_call_label_N00000000143_c5_call_sheet
+manager_call_label ref N00000000143_c5_call_sheet ( _id -> LABELS )
+_id
+Fk Fk_manager_call_label_N00000000143_c5_call_label_history
+manager_call_label ref N00000000143_c5_call_label_history ( _id -> label )
+_id
+Fk Fk_N00000000143_c5_call_label_history_N00000000143_c5_call_sheet
+N00000000143_c5_call_label_history ref N00000000143_c5_call_sheet ( callSheetId -> CALL_SHEET_ID )
+callSheetId
+Fk Fk_N00000000143_c5_call_label_history_platform_user
+N00000000143_c5_call_label_history ref platform_user ( opertaion -> _id )
+opertaion
+Fk Fk_N00000000143_c5_call_sheet_leak_N00000000143_c5_call_sheet
+N00000000143_c5_call_sheet_leak ref N00000000143_c5_call_sheet ( NEW_CALL_SHEET_ID -> CALL_SHEET_ID )
+NEW_CALL_SHEET_ID
+Fk Fk_N00000000143_c5_call_sheet_leak_N00000000143_customer
+N00000000143_c5_call_sheet_leak ref N00000000143_customer ( NEW_CUSTOMER_ID -> _id )
+NEW_CUSTOMER_ID
+Fk Fk_N00000000143_c5_call_sheet_leak_manager_ivr_skillgroup
+N00000000143_c5_call_sheet_leak ref manager_ivr_skillgroup ( NEW_ERROR_MEMO -> _id )
+NEW_ERROR_MEMO
+Fk Fk_N00000000143_c5_call_sheet_leak_platform_user
+N00000000143_c5_call_sheet_leak ref platform_user ( NEW_DISPOSAL_AGENT -> _id )
+NEW_DISPOSAL_AGENT
+Fk Fk_N00000000143_c5_call_sheet_N00000000143_customer
+N00000000143_c5_call_sheet ref N00000000143_customer ( CUSTOMER_ID -> _id )
+CUSTOMER_ID
+Fk Fk_N00000000143_c5_call_sheet_platform_user
+N00000000143_c5_call_sheet ref platform_user ( DISPOSAL_AGENT -> _id )
+DISPOSAL_AGENT
+Fk Fk_N00000000143_c5_call_sheet_manager_ivr_skillgroup
+N00000000143_c5_call_sheet ref manager_ivr_skillgroup ( LOCATION_ID -> _id )
+LOCATION_ID
+Fk Fk_N00000000143_cdr_peer_platform_user
+N00000000143_cdr_peer ref platform_user ( AGENT -> _id )
+AGENT
+Fk Fk_N00000000143_cdr_channel_N00000000143_c5_call_sheet
+N00000000143_cdr_channel ref N00000000143_c5_call_sheet ( _id -> LOCATION )
+_id
+Fk Fk_manager_ivr_skillgroup_platform_user
+manager_ivr_skillgroup ref platform_user ( AssignMembers.agentID -> _id )
+agentID
+Fk Fk_app_call_sheet_quality_check_listen_log_N00000000143_c5_call_sheet
+app_call_sheet_quality_check_listen_log ref N00000000143_c5_call_sheet ( CALL_SHEET_ID )
+CALL_SHEET_ID
+Fk Fk_app_call_sheet_quality_check_platform_user
+app_call_sheet_quality_check ref platform_user ( DISPOSAL_AGENT -> _id )
+DISPOSAL_AGENT
+AssignMembersSub-document AssignMembers
+agentIDstringagentID
+* string
+References platform_user ( AssignMembers.agentID -> _id )
+penaltystringpenalty
+* string
+t
+manager_call_labelCollection cc.manager_call_label
+通话标签表
+Pk _id_ ( _id )
+_idstring_id
+* string
+主键id
+References N00000000143_c5_call_sheet ( _id -> LABELS )
+References N00000000143_c5_call_label_history ( _id -> label )
+enablebooleanenable
+* boolean
+是否启用 true:false
+b accountIdstringaccountId
+* string
+账户编号
+t lastUpdatedoublelastUpdate
+* double
+最近更新时间
+# typestringtype
+* string
+标签类型 single：单级标签，multi：多级标签
+t statusstringstatus
+string
+t namestringname
+* string
+标签名称
+t
+N00000000143_c5_call_label_historyCollection cc_data_20140728.N00000000143_c5_call_label_history
+通话标签操作历史
+Pk _id_ ( _id )
+_idstring_id
+* string
+t callSheetIdstringcallSheetId
+* string
+通话id
+References N00000000143_c5_call_sheet ( callSheetId -> CALL_SHEET_ID )
+opertaionstringopertaion
+* string
+操作类型
+References platform_user ( opertaion -> _id )
+labelarraylabel
+* array
+label id数组
+Referred by manager_call_label ( _id -> label )
+operatorstringoperator
+* string
+操作人 坐席id
+t operateTimestringoperateTime
+* string
+操作时间
+t
+N00000000143_c5_call_sheet_leakCollection cc_data_20140728.N00000000143_c5_call_sheet_leak
+未接来电表(分配给坐席后状态改变会移除)
+Pk _id_ ( _id )
+_idstring_id
+* string
+主键编号
+t Unq CALL_NO_1 ( CALL_NO )
+CALL_NOstringCALL_NO
+* string
+主叫号码
+t Unq NEW_DISPOSAL_AGENT_1_CALLBACK_AGENT_1 ( NEW_DISPOSAL_AGENT, CALLBACK_AGENT )
+NEW_DISPOSAL_AGENTstringNEW_DISPOSAL_AGENT
+* string
+处理坐席
+References platform_user ( NEW_DISPOSAL_AGENT -> _id )
+Unq NEW_OFFERING_TIME_-1 ( NEW_OFFERING_TIME )
+NEW_OFFERING_TIMEstringNEW_OFFERING_TIME
+* string
+进入话务系统时间
+t NEW_CUSTOMER_IDstringNEW_CUSTOMER_ID
+* string
+客户id
+References N00000000143_customer ( NEW_CUSTOMER_ID -> _id )
+NEW_CUSTOMER_NAMEstringNEW_CUSTOMER_NAME
+* string
+客户名称
+t NEW_CALL_SHEET_IDstringNEW_CALL_SHEET_ID
+* string
+通话纪录id
+References N00000000143_c5_call_sheet ( NEW_CALL_SHEET_ID -> CALL_SHEET_ID )
+NEW_CALLED_NOstringNEW_CALLED_NO
+* string
+被叫号码
+t Unq NEW_ERROR_MEMO_1 ( NEW_ERROR_MEMO )
+NEW_ERROR_MEMOstringNEW_ERROR_MEMO
+* string
+技能组id
+References manager_ivr_skillgroup ( NEW_ERROR_MEMO -> _id )
+Unq IS_CALL_BACK_1 ( IS_CALL_BACK )
+IS_CALL_BACKbooleanIS_CALL_BACK
+* boolean
+是否回拨
+b LEAK_HISTORYlistLEAK_HISTORY
+* list
+未接来电历史(基本字段含义和通话表一致)
+Unq NEW_DISPOSAL_AGENT_1_CALLBACK_AGENT_1 ( NEW_DISPOSAL_AGENT, CALLBACK_AGENT ) Unq CALLBACK_AGENT_1 ( CALLBACK_AGENT )
+CALLBACK_AGENTstringCALLBACK_AGENT
+* string
+分配的坐席回拨号码(同 DISPOSAL_AGENT 一样，关联到坐席表)
+t
+N00000000143_customerCollection cc_data_20140728.N00000000143_customer
+客户表
+Pk _id_ ( _id )
+_idstring_id
+* string
+Referred by N00000000143_c5_call_sheet ( CUSTOMER_ID -> _id )
+Referred by N00000000143_c5_call_sheet_leak ( NEW_CUSTOMER_ID -> _id )
+Referred by N00000000143_history ( customer -> _id )
+Unq name_1 ( name ) Unq name_1_createTime_-1 ( name, createTime )
+namestringname
+* string
+t titlestringtitle
+* string
+t Unq phone.tel_1_createTime_-1 ( phone, createTime )
+phonelistphone
+* list
+Unq email.email_1 ( email )
+emaillistemail
+* list
+Unq weixin.num_1 ( weixin )
+weixinlistweixin
+* list
+provincestringprovince
+* string
+t citystringcity
+* string
+t addressstringaddress
+* string
+t notestringnote
+* string
+t sexstringsex
+* string
+t birthstringbirth
+* string
+t agestringage
+* string
+t webstringweb
+* string
+t Unq status_1 ( status )
+statusstringstatus
+* string
+t custsource1stringcustsource1
+* string
+t 8da72380-7886-11e5-b633-a94d714fc829string8da72380-7886-11e5-b633-a94d714fc829
+* string
+t 9b093e80-34fe-11e5-9a0a-31db02c3d92astring9b093e80-34fe-11e5-9a0a-31db02c3d92a
+* string
+t ac57b860-788d-11e5-84fe-c3c1c42e38a3stringac57b860-788d-11e5-84fe-c3c1c42e38a3
+* string
+t 239957b0-daa1-11e5-849d-2ba0a8284bbdstring239957b0-daa1-11e5-849d-2ba0a8284bbd
+* string
+t 7cd86c10-7a1c-11e6-b2a7-bbb89dcd9a2dstring7cd86c10-7a1c-11e6-b2a7-bbb89dcd9a2d
+* string
+t d8045c90-7a47-11e6-bfed-bd91b828b759stringd8045c90-7a47-11e6-bfed-bd91b828b759
+* string
+t 2d86eee0-7d67-11e6-bfed-bd91b828b759string2d86eee0-7d67-11e6-bfed-bd91b828b759
+* string
+t 158ae2e0-7edb-11e6-bb11-c73e0b17d4a7string158ae2e0-7edb-11e6-bb11-c73e0b17d4a7
+* string
+t Unq batchNo_1_createTime_-1 ( batchNo, createTime ) Unq phone.tel_1_createTime_-1 ( phone, createTime ) Unq owner_1_notifyTime_1_createTime_-1 ( owner, createTime ) Unq name_1_createTime_-1 ( name, createTime ) Unq owner_1_createTime_-1_categoryId_1_sysStatus_1 ( owner, createTime, categoryId, sysStatus ) Unq categoryId_1_createTime_-1 ( categoryId, createTime ) Unq lastContactTime_1_takeTime_1_createTime_-1 ( createTime )
+createTimestringcreateTime
+* string
+t lastUpdateTimestringlastUpdateTime
+* string
+t accountIdstringaccountId
+* string
+t dbTypestringdbType
+* string
+t Unq batchNo_1_createTime_-1 ( batchNo, createTime )
+batchNostringbatchNo
+* string
+t Unq owner_1_createTime_-1_categoryId_1_sysStatus_1 ( owner, createTime, categoryId, sysStatus )
+sysStatusstringsysStatus
+* string
+t Unq owner_1_createTime_-1_categoryId_1_sysStatus_1 ( owner, createTime, categoryId, sysStatus ) Unq categoryId_1_createTime_-1 ( categoryId, createTime )
+categoryIdstringcategoryId
+* string
+t Unq actionType_1_owner_1_notifyTime_1 ( actionType, owner ) Unq owner_1_notifyTime_1_createTime_-1 ( owner, createTime ) Unq owner_1_createTime_-1_categoryId_1_sysStatus_1 ( owner, createTime, categoryId, sysStatus )
+ownerstringowner
+* string
+t Unq actionType_1_owner_1_notifyTime_1 ( actionType, owner ) Unq actionType_1_actionUser_1 ( actionType )
+actionTypestringactionType
+* string
+t
+N00000000143_c5_call_sheetCollection cc_data_20140728.N00000000143_c5_call_sheet
+通话记录表
+Pk _id_ ( _id )
+_idstring_id
+* string
+uuid 与callSheet 一致
+t Unq CALL_SHEET_ID_1 ( CALL_SHEET_ID )
+CALL_SHEET_IDstringCALL_SHEET_ID
+* string
+通话记录Id,CallSheetID 是通话记录的唯一Id
+Referred by app_call_sheet_quality_check_listen_log ( CALL_SHEET_ID )
+Referred by N00000000143_c5_call_label_history ( callSheetId -> CALL_SHEET_ID )
+Referred by N00000000143_c5_call_sheet_leak ( NEW_CALL_SHEET_ID -> CALL_SHEET_ID )
+ACCOUNT_IDstringACCOUNT_ID
+* string
+账户编号
+References platform_account ( ACCOUNT_ID -> _id )
+Unq CUSTOMER_ID_1 ( CUSTOMER_ID )
+CUSTOMER_IDstringCUSTOMER_ID
+* string
+客户id，关联 _customer
+References N00000000143_customer ( CUSTOMER_ID -> _id )
+Unq CALL_NO_1 ( CALL_NO )
+CALL_NOstringCALL_NO
+* string
+主叫号码
+t Unq STATUS_1 ( STATUS ) Unq STATUS_1_DISPOSAL_AGENT_1 ( STATUS, DISPOSAL_AGENT )
+STATUSstringSTATUS
+* string
+接听状态: dealing（已接），notDeal（振铃未接听），leak（ivr放弃）,queueLeak（排队放弃），blackList（黑名单），voicemail（留言
+t Unq DISPOSAL_AGENT_1_OFFERING_TIME_-1 ( DISPOSAL_AGENT, OFFERING_TIME ) Unq STATUS_1_DISPOSAL_AGENT_1 ( STATUS, DISPOSAL_AGENT )
+DISPOSAL_AGENTstringDISPOSAL_AGENT
+* string
+处理坐席
+References platform_user ( DISPOSAL_AGENT -> _id )
+BEGIN_TIMEstringBEGIN_TIME
+* string
+通话接通时间（呼入是按座席接起的时间，外呼按客户接起的时间，如果没接听的话为空
+t Unq END_TIME_-1 ( END_TIME )
+END_TIMEstringEND_TIME
+* string
+通话结束时间
+t Unq CALLED_NO_1 ( CALLED_NO )
+CALLED_NOstringCALLED_NO
+* string
+被叫号码
+t Unq DISPOSAL_AGENT_1_OFFERING_TIME_-1 ( DISPOSAL_AGENT, OFFERING_TIME ) Unq CALLBACK_AGENT_1_OFFERING_TIME_-1 ( OFFERING_TIME )
+OFFERING_TIMEstringOFFERING_TIME
+* string
+话务进入呼叫中心时间
+t Unq CONNECT_TYPE_1 ( CONNECT_TYPE )
+CONNECT_TYPEstringCONNECT_TYPE
+* string
+通话类型 dialout 外呼通话，normal 普通来电，transfer 转接电话，dialTransfer 外呼转接
+t RECORD_FILE_NAMEstringRECORD_FILE_NAME
+* string
+通话文件录音地址
+t CUSTOMER_NAMEstringCUSTOMER_NAME
+* string
+客户名称
+t ORIGIN_IDstringORIGIN_ID
+* string
+通话id，用于通话服务器
+t REF_CALL_SHEET_IDstringREF_CALL_SHEET_ID
+* string
+转接通话id
+t DIRECTIONstringDIRECTION
+* string
+t Unq ERROR_MEMO_1 ( ERROR_MEMO )
+ERROR_MEMOstringERROR_MEMO
+* string
+技能组编号
+t CALL_IDstringCALL_ID
+* string
+通话ID,通话连接的在系统中的唯一标识。CallID 是在通话进行中channel的id，可以用这个id来挂断通话之类的操作。一个call有一个CallID，但一个call可能会出现在多个通话中，比如转接。
+t LOCATIONstringLOCATION
+* string
+通话最后经过的ivr节点
+Referred by N00000000143_cdr_channel ( _id -> LOCATION )
+ACTION_IDstringACTION_ID
+* string
+过外呼接口调用时,该字段会保存请求的actionID,其它情况下该字段为空
+t PBXstringPBX
+* string
+pbx信息
+t LOGIN_TYPEstringLOGIN_TYPE
+* string
+坐席登陆方式
+t LOCATION_NAMEstringLOCATION_NAME
+* string
+技能组名称
+t LOCATION_IDstringLOCATION_ID
+* string
+技能组id
+References manager_ivr_skillgroup ( LOCATION_ID -> _id )
+QUEUE_NAMEstringQUEUE_NAME
+* string
+进入技能组名称
+t Unq QUEUE_TIME_LENGTH_1 ( QUEUE_TIME )
+QUEUE_TIMEstringQUEUE_TIME
+* string
+进入技能组队列等待时间
+t FILE_SERVERstringFILE_SERVER
+* string
+文件服务器 ip:port
+t STATISTICstringSTATISTIC
+* string
+t PROVINCEstringPROVINCE
+* string
+主叫省份名称
+t PROVINCE_CODEstringPROVINCE_CODE
+* string
+主叫省份代号
+t DISTRICTstringDISTRICT
+* string
+主叫地区名称
+t DISTRICT_CODEstringDISTRICT_CODE
+* string
+主叫地区编码
+t Unq QUICK_QUERY_NUM_1 ( QUICK_QUERY_NUM )
+QUICK_QUERY_NUMstringQUICK_QUERY_NUM
+* string
+快捷查询字段，外呼为被叫，呼入为主叫
+t IS_AUTO_CALLbooleanIS_AUTO_CALL
+* boolean
+是否是接口调用 true:false
+b Unq PROCESS_STATUS_1 ( PROCESS_STATUS )
+PROCESS_STATUSstringPROCESS_STATUS
+* string
+t Unq CALL_TIME_LENGTH_1 ( CALL_TIME_LENGTH )
+CALL_TIME_LENGTHintegerCALL_TIME_LENGTH
+* integer
+通话时长（以秒为单位）
+# QUEUE_TIME_LENGTHintegerQUEUE_TIME_LENGTH
+integer
+排队时长
+# IVR_TIME_LENGTHintegerIVR_TIME_LENGTH
+integer
+IVR流转时长
+# rewardstringreward
+* string
+t QA_SPECIALISTarrayQA_SPECIALIST
+array
+[] TASK_IDarrayTASK_ID
+array
+质检任务id
+[] randomTmplistrandomTmp
+list
+质检随机抽取模版编号
+Unq LABELS_1 ( LABELS )
+LABELSarrayLABELS
+array
+通话标签
+Referred by manager_call_label ( _id -> LABELS )
+TRANSFER_MODEstringTRANSFER_MODE
+string
+t TRANSFER_NUMstringTRANSFER_NUM
+string
+t TRANSFER_AGENTstringTRANSFER_AGENT
+string
+t COMMENTSstringCOMMENTS
+string
+通话备注
+t IS_READbooleanIS_READ
+boolean
+b
+N00000000143_cdr_peerCollection cc_data_20140728.N00000000143_cdr_peer
+坐席状态日志
+Pk _id_ ( _id )
+_idstring_id
+* string
+t ACCOUNT_IDstringACCOUNT_ID
+* string
+账户编号
+t ASTERISKstringASTERISK
+* string
+pbx
+t EXTENstringEXTEN
+* string
+坐席编号
+t EXTEN_TYPEstringEXTEN_TYPE
+* string
+坐席类型
+t ACTION_TYPEstringACTION_TYPE
+* string
+坐席状态 login busy 等
+t Unq BEGIN_TIME_1 ( BEGIN_TIME ) Unq AGENT_1_BEGIN_TIME_-1 ( AGENT, BEGIN_TIME )
+BEGIN_TIMEstringBEGIN_TIME
+* string
+开始时间
+t Unq END_TIME1 ( END_TIME )
+END_TIMEstringEND_TIME
+* string
+状态结束时间
+t COMMENTSstringCOMMENTS
+* string
+"Timeout","ukick","reserve", "ekick", "akick"
+t Unq AGENT_1 ( AGENT ) Unq AGENT_1_BEGIN_TIME_-1 ( AGENT, BEGIN_TIME )
+AGENTstringAGENT
+* string
+坐席id
+References platform_user ( AGENT -> _id )
+BUSY_TYPEstringBUSY_TYPE
+* string
+t TIME_LENGTHintegerTIME_LENGTH
+* integer
+登陆时长
+#
+N00000000143_cdr_channelCollection cc_data_20140728.N00000000143_cdr_channel
+通话 ivr 轨迹表
+Pk _id_ ( _id )
+_idoid_id
+* oid
+References N00000000143_c5_call_sheet ( _id -> LOCATION )
+ACCOUNTstringACCOUNT
+* string
+t PBXstringPBX
+* string
+t CHANNELstringCHANNEL
+* string
+t Unq UNIQUEID_1 ( UNIQUEID )
+UNIQUEIDstringUNIQUEID
+* string
+callid
+t TIMESTAMPstringTIMESTAMP
+* string
+t CHANNELTYPEstringCHANNELTYPE
+* string
+通话类型：呼入
+t LOCATIONstringLOCATION
+* string
+节点类型
+t LOCATION_IDstringLOCATION_ID
+* string
+节点编号
+t LOCATION_NAMEstringLOCATION_NAME
+* string
+节点名称
+t LINKintegerLINK
+* integer
+# SEQUENCENUMintegerSEQUENCENUM
+* integer
+# FROMDIDstringFROMDID
+* string
+主叫号码
+t FROMCIDstringFROMCID
+* string
+被叫号码
+t
+platform_userCollection bill.platform_user
+坐席表
+Pk _id_ ( _id )
+_idstring_id
+* string
+Referred by app_call_sheet_quality_check ( DISPOSAL_AGENT -> _id )
+Referred by manager_ivr_skillgroup ( AssignMembers.agentID -> _id )
+Referred by N00000000143_c5_call_label_history ( opertaion -> _id )
+Referred by N00000000143_c5_call_sheet ( DISPOSAL_AGENT -> _id )
+Referred by N00000000143_c5_call_sheet_leak ( NEW_DISPOSAL_AGENT -> _id )
+Referred by N00000000143_cdr_peer ( AGENT -> _id )
+Referred by N00000000143_history ( agent -> _id )
+accountstringaccount
+* string
+t didNumstringdidNum
+string
+t displayNamestringdisplayName
+string
+t emailstringemail
+* string
+t extenstringexten
+* string
+t immapim
+map
+isAdminbooleanisAdmin
+boolean
+b lastUpdatelonglastUpdate
+long
+t mobilestringmobile
+string
+t mobileExtenstringmobileExten
+string
+t passwordstringpassword
+string
+t pbxstringpbx
+string
+t productstringproduct
+string
+t sipExtenstringsipExten
+string
+t pinyinstringpinyin
+string
+t typestringtype
+string
+t statusstringstatus
+string
+t uversionstringuversion
+string
+t rolearrayrole
+array
+[] callerIDNumstringcallerIDNum
+string
+t loginNamestringloginName
+string
+t AutoBusyTimestringAutoBusyTime
+string
+t accountIdstringaccountId
+string
+t lastLoginTimestringlastLoginTime
+string
+t updateTimestringupdateTime
+string
+t namestringname
+string
+t maxImDealCountstringmaxImDealCount
+string
+t minImDealCountstringminImDealCount
+string
+t maxEmailDealCountstringmaxEmailDealCount
+string
+t imClaimStatusstringimClaimStatus
+string
+t parentIdstringparentId
+string
+t gatewayExtenstringgatewayExten
+string
+t lastCodeKeystringlastCodeKey
+string
+t createTimestringcreateTime
+string
+t dayCustintegerdayCust
+integer
+# weekCustintegerweekCust
+integer
+# scoreintegerscore
+integer
+# totalCustintegertotalCust
+integer
+#
+manager_ivr_skillgroupCollection cc.manager_ivr_skillgroup
+通话技能组配置表
+Unq _id_ ( _id )
+_idstring_id
+string
+Referred by N00000000143_c5_call_sheet ( LOCATION_ID -> _id )
+Referred by N00000000143_c5_call_sheet_leak ( NEW_ERROR_MEMO -> _id )
+AccountstringAccount
+* string
+t AgentExtenPointbooleanAgentExtenPoint
+boolean
+b AssignMemberslistAssignMembers
+* list
+BussinessTypeIdstringBussinessTypeId
+string
+t DisplayNamestringDisplayName
+string
+t ExtenstringExten
+string
+t JoinEmptystringJoinEmpty
+string
+t MembersstringMembers
+string
+t MusicstringMusic
+string
+t MusicClassstringMusicClass
+string
+t PBXstringPBX
+string
+t PeerstringPeer
+string
+t SayExtenbooleanSayExten
+boolean
+b StatestringState
+string
+t StrategystringStrategy
+string
+t TimeoutstringTimeout
+string
+t ToPeerTypeWhenHangupedstringToPeerTypeWhenHanguped
+string
+t ToPeerTypeWhenQueueEmptystringToPeerTypeWhenQueueEmpty
+string
+t ToPeerTypeWhenWaitstringToPeerTypeWhenWait
+string
+t ToPeerTypeWhenWaitTimeoutstringToPeerTypeWhenWaitTimeout
+string
+t ToPeerWhenHangupedstringToPeerWhenHanguped
+string
+t ToPeerWhenQueueEmptystringToPeerWhenQueueEmpty
+string
+t ToPeerWhenWaitstringToPeerWhenWait
+string
+t ToPeerWhenWaitTimeoutstringToPeerWhenWaitTimeout
+string
+t TypestringType
+string
+t UpdateTimestringUpdateTime
+string
+t WaitTimestringWaitTime
+string
+t SayQueuePositionstringSayQueuePosition
+string
+t AfterExtenPointMusicstringAfterExtenPointMusic
+string
+t BeforeExtenPointMusicstringBeforeExtenPointMusic
+string
+t isdelbooleanisdel
+boolean
+b UpdateAgentstringUpdateAgent
+string
+t DialoutTypeIdstringDialoutTypeId
+string
+t
+app_call_sheet_quality_check_listen_logCollection cc.app_call_sheet_quality_check_listen_log
+通话录音试听纪录表
+Pk _id_ ( _id )
+_idoid_id
+* oid
+CALL_SHEET_IDstringCALL_SHEET_ID
+* string
+通话id
+References N00000000143_c5_call_sheet ( CALL_SHEET_ID )
+accountstringaccount
+* string
+账户编号
+t userIdstringuserId
+* string
+听取人
+t timestringtime
+* string
+听取时间
+t
+app_call_sheet_quality_checkCollection cc.app_call_sheet_quality_check
+通话质检表
+Pk _id_ ( _id )
+_idstring_id
+* string
+t OFFERING_TIMEstringOFFERING_TIME
+string
+通话进入话务系统时间
+t DISPOSAL_AGENTstringDISPOSAL_AGENT
+string
+处理坐席 关联到坐席表
+References platform_user ( DISPOSAL_AGENT -> _id )
+CALL_NOstringCALL_NO
+string
+主叫号码
+t CALLED_NOstringCALLED_NO
+string
+被叫号码
+t CONNECT_TYPEstringCONNECT_TYPE
+string
+通话类型 dialout 外呼通话，normal 普通来电，transfer 转接电话，dialTransfer 外呼转接
+t ERROR_MEMOstringERROR_MEMO
+string
+技能组id
+t CALL_TIME_LENGTHintegerCALL_TIME_LENGTH
+integer
+通话时长
+# FILE_SERVERstringFILE_SERVER
+string
+文件服务器
+t RECORD_FILE_NAMEstringRECORD_FILE_NAME
+string
+录音文件名称
+t INVESTIGATEstringINVESTIGATE
+string
+t GRADE_AMOUNTmapGRADE_AMOUNT
+* map
+质检各项评测内容
+TEMPLATEstringTEMPLATE
+string
+质检模版 关联到质检模版表
+t ACCOUNTstringACCOUNT
+string
+账户编号
+t GRADE_USERstringGRADE_USER
+string
+质检坐席 关联到坐席表
+t GRADE_TIMEdoubleGRADE_TIME
+double
+质检时间
+# COMMENTSstringCOMMENTS
+string
+通话备注
+t monitorTypestringmonitorType
+string
+监控类型 关联到质检监控类型表
+t beginTimestringbeginTime
+string
+t sidstringsid
+string
+t userstringuser
+string
+t toPeerstringtoPeer
+string
+t sNamestringsName
+string
+t acountstringacount
+string
+t TASK_IDstringTASK_ID
+string
+t 1double1
+double
+质检1
+# 2double2
+double
+质检2
+# 3double3
+double
+质检3
+# 4double4
+double
+质检4
+# 5double5
+double
+质检5
+# 6double6
+double
+质检6
+# 7double7
+double
+质检7
+# 8double8
+double
+质检8
+# 9double9
+double
+质检9
+# 10double10
+double
+质检10
+# 11double11
+double
+质检11
+# 12double12
+double
+质检12
+# 13double13
+double
+质检13
+# 14double14
+double
+质检14
+# 15double15
+double
+质检15
+# 16double16
+double
+质检16
+# 17double17
+double
+质检17
+# 18double18
+double
+质检18
+#
+Collection N00000000143_c5_call_label_history
+通话标签操作历史
+Indexes | Field Name | Data Type | Description |
+* |
+&#95;id |
+string AUTOINCREMENT |
+|
+* |
+callSheetId |
+string |
+通话id |
+* |
+opertaion |
+string |
+操作类型 |
+* |
+label |
+array |
+label id数组 |
+* |
+operator |
+string |
+操作人 坐席id |
+* |
+operateTime |
+string |
+操作时间 |
+Indexes |
+| &#95;id&#95; |
+ON &#95;id |
+|
+Virtual Relations |
+| Fk_N00000000143_c5_call_label_history_N00000000143_c5_call_sheet |
+( callSheetId ) ref N00000000143&#95;c5&#95;call&#95;sheet (CALL&#95;SHEET&#95;ID) |
+通话表操作标签历史 |
+| Fk_N00000000143_c5_call_label_history_platform_user |
+( opertaion ) ref platform&#95;user (&#95;id) |
+通话标签操作坐席 |
+Collection N00000000143_c5_call_sheet
+通话记录表
+Indexes | Field Name | Data Type | Description |
+* |
+&#95;id |
+string AUTOINCREMENT |
+uuid 与callSheet 一致 |
+* |
+CALL&#95;SHEET&#95;ID |
+string |
+通话记录Id&#44;CallSheetID 是通话记录的唯一Id |
+* |
+ACCOUNT&#95;ID |
+string |
+账户编号 |
+* |
+CUSTOMER&#95;ID |
+string |
+客户id，关联 &#95;customer |
+* |
+CALL&#95;NO |
+string |
+主叫号码 |
+* |
+STATUS |
+string |
+接听状态&#58; dealing（已接），notDeal（振铃未接听），leak（ivr放弃）&#44;queueLeak（排队放弃），blackList（黑名单），voicemail（留言 |
+* |
+DISPOSAL&#95;AGENT |
+string |
+处理坐席 |
+* |
+BEGIN&#95;TIME |
+string |
+通话接通时间（呼入是按座席接起的时间，外呼按客户接起的时间，如果没接听的话为空 |
+* |
+END&#95;TIME |
+string |
+通话结束时间 |
+* |
+CALLED&#95;NO |
+string |
+被叫号码 |
+* |
+OFFERING&#95;TIME |
+string |
+话务进入呼叫中心时间 |
+* |
+CONNECT&#95;TYPE |
+string |
+通话类型 dialout 外呼通话，normal 普通来电，transfer 转接电话，dialTransfer 外呼转接 |
+* |
+RECORD&#95;FILE&#95;NAME |
+string |
+通话文件录音地址 |
+* |
+CUSTOMER&#95;NAME |
+string |
+客户名称 |
+* |
+ORIGIN&#95;ID |
+string |
+通话id，用于通话服务器 |
+* |
+REF&#95;CALL&#95;SHEET&#95;ID |
+string |
+转接通话id |
+* |
+DIRECTION |
+string |
+|
+* |
+ERROR&#95;MEMO |
+string |
+技能组编号 |
+* |
+CALL&#95;ID |
+string |
+通话ID&#44;通话连接的在系统中的唯一标识。CallID 是在通话进行中channel的id，可以用这个id来挂断通话之类的操作。一个call有一个CallID，但一个call可能会出现在多个通话中，比如转接。 |
+* |
+LOCATION |
+string |
+通话最后经过的ivr节点 |
+* |
+ACTION&#95;ID |
+string |
+过外呼接口调用时&#44;该字段会保存请求的actionID&#44;其它情况下该字段为空 |
+* |
+PBX |
+string |
+pbx信息 |
+* |
+LOGIN&#95;TYPE |
+string |
+坐席登陆方式 |
+* |
+LOCATION&#95;NAME |
+string |
+技能组名称 |
+* |
+LOCATION&#95;ID |
+string |
+技能组id |
+* |
+QUEUE&#95;NAME |
+string |
+进入技能组名称 |
+* |
+QUEUE&#95;TIME |
+string |
+进入技能组队列等待时间 |
+* |
+FILE&#95;SERVER |
+string |
+文件服务器 ip&#58;port |
+* |
+STATISTIC |
+string |
+|
+* |
+PROVINCE |
+string |
+主叫省份名称 |
+* |
+PROVINCE&#95;CODE |
+string |
+主叫省份代号 |
+* |
+DISTRICT |
+string |
+主叫地区名称 |
+* |
+DISTRICT&#95;CODE |
+string |
+主叫地区编码 |
+* |
+QUICK&#95;QUERY&#95;NUM |
+string |
+快捷查询字段，外呼为被叫，呼入为主叫 |
+* |
+IS&#95;AUTO&#95;CALL |
+boolean |
+是否是接口调用 true&#58;false |
+* |
+PROCESS&#95;STATUS |
+string |
+|
+* |
+CALL&#95;TIME&#95;LENGTH |
+integer |
+通话时长（以秒为单位） |
+|
+QUEUE&#95;TIME&#95;LENGTH |
+integer |
+排队时长 |
+|
+IVR&#95;TIME&#95;LENGTH |
+integer |
+IVR流转时长 |
+* |
+reward |
+string |
+|
+|
+QA&#95;SPECIALIST |
+array |
+|
+|
+TASK&#95;ID |
+array |
+质检任务id |
+|
+randomTmp |
+list |
+质检随机抽取模版编号 |
+|
+LABELS |
+array |
+通话标签 |
+|
+TRANSFER&#95;MODE |
+string |
+|
+|
+TRANSFER&#95;NUM |
+string |
+|
+|
+TRANSFER&#95;AGENT |
+string |
+|
+|
+COMMENTS |
+string |
+通话备注 |
+|
+IS&#95;READ |
+boolean |
+|
+Indexes |
+| &#95;id&#95; |
+ON &#95;id |
+|
+| LABELS&#95;1 |
+ON LABELS |
+|
+| END&#95;TIME&#95;&#45;1 |
+ON END&#95;TIME |
+|
+| CONNECT&#95;TYPE&#95;1 |
+ON CONNECT&#95;TYPE |
+|
+| STATUS&#95;1 |
+ON STATUS |
+|
+| CALL&#95;SHEET&#95;ID&#95;1 |
+ON CALL&#95;SHEET&#95;ID |
+|
+| DISPOSAL&#95;AGENT&#95;1&#95;OFFERING&#95;TIME&#95;&#45;1 |
+ON DISPOSAL&#95;AGENT&#44; OFFERING&#95;TIME |
+|
+| CALL&#95;TIME&#95;LENGTH&#95;1 |
+ON CALL&#95;TIME&#95;LENGTH |
+|
+| CUSTOMER&#95;ID&#95;1 |
+ON CUSTOMER&#95;ID |
+|
+| CALL&#95;NO&#95;1 |
+ON CALL&#95;NO |
+|
+| CALLED&#95;NO&#95;1 |
+ON CALLED&#95;NO |
+|
+| ERROR&#95;MEMO&#95;1 |
+ON ERROR&#95;MEMO |
+|
+| QUICK&#95;QUERY&#95;NUM&#95;1 |
+ON QUICK&#95;QUERY&#95;NUM |
+|
+| QUEUE&#95;TIME&#95;LENGTH&#95;1 |
+ON QUEUE&#95;TIME |
+|
+| PROCESS&#95;STATUS&#95;1 |
+ON PROCESS&#95;STATUS |
+|
+| CALLBACK&#95;AGENT&#95;1&#95;OFFERING&#95;TIME&#95;&#45;1 |
+ON OFFERING&#95;TIME |
+|
+| STATUS&#95;1&#95;DISPOSAL&#95;AGENT&#95;1 |
+ON STATUS&#44; DISPOSAL&#95;AGENT |
+|
+Virtual Relations |
+| Fk_N00000000143_c5_call_sheet_N00000000143_customer |
+( CUSTOMER&#95;ID ) ref N00000000143&#95;customer (&#95;id) |
+通话关联客户 |
+| Fk_N00000000143_c5_call_sheet_platform_account |
+( ACCOUNT&#95;ID ) ref platform&#95;account (&#95;id) |
+帐号通话记录 |
+| Fk_N00000000143_c5_call_sheet_platform_user |
+( DISPOSAL&#95;AGENT ) ref platform&#95;user (&#95;id) |
+通话坐席信息 |
+| Fk_N00000000143_c5_call_sheet_manager_ivr_skillgroup |
+( LOCATION&#95;ID ) ref manager&#95;ivr&#95;skillgroup (&#95;id) |
+通话技能组id |
+Collection N00000000143_c5_call_sheet_leak
+未接来电表(分配给坐席后状态改变会移除)
+Indexes | Field Name | Data Type | Description |
+* |
+&#95;id |
+string |
+主键编号 |
+* |
+CALL&#95;NO |
+string |
+主叫号码 |
+* |
+NEW&#95;DISPOSAL&#95;AGENT |
+string |
+处理坐席 |
+* |
+NEW&#95;OFFERING&#95;TIME |
+string |
+进入话务系统时间 |
+* |
+NEW&#95;CUSTOMER&#95;ID |
+string |
+客户id |
+* |
+NEW&#95;CUSTOMER&#95;NAME |
+string |
+客户名称 |
+* |
+NEW&#95;CALL&#95;SHEET&#95;ID |
+string |
+通话纪录id |
+* |
+NEW&#95;CALLED&#95;NO |
+string |
+被叫号码 |
+* |
+NEW&#95;ERROR&#95;MEMO |
+string |
+技能组id |
+* |
+IS&#95;CALL&#95;BACK |
+boolean |
+是否回拨 |
+* |
+LEAK&#95;HISTORY |
+list |
+未接来电历史&#40;基本字段含义和通话表一致&#41; |
+* |
+CALLBACK&#95;AGENT |
+string |
+分配的坐席回拨号码&#40;同 DISPOSAL&#95;AGENT 一样，关联到坐席表&#41; |
+Indexes |
+| &#95;id&#95; |
+ON &#95;id |
+|
+| IS&#95;CALL&#95;BACK&#95;1 |
+ON IS&#95;CALL&#95;BACK |
+|
+| CALL&#95;NO&#95;1 |
+ON CALL&#95;NO |
+|
+| NEW&#95;DISPOSAL&#95;AGENT&#95;1&#95;CALLBACK&#95;AGENT&#95;1 |
+ON NEW&#95;DISPOSAL&#95;AGENT&#44; CALLBACK&#95;AGENT |
+|
+| CALLBACK&#95;AGENT&#95;1 |
+ON CALLBACK&#95;AGENT |
+|
+| NEW&#95;OFFERING&#95;TIME&#95;&#45;1 |
+ON NEW&#95;OFFERING&#95;TIME |
+|
+| NEW&#95;ERROR&#95;MEMO&#95;1 |
+ON NEW&#95;ERROR&#95;MEMO |
+|
+Virtual Relations |
+| Fk_N00000000143_c5_call_sheet_leak_N00000000143_c5_call_sheet |
+( NEW&#95;CALL&#95;SHEET&#95;ID ) ref N00000000143&#95;c5&#95;call&#95;sheet (CALL&#95;SHEET&#95;ID) |
+未接来电关系到通话表 |
+| Fk_N00000000143_c5_call_sheet_leak_N00000000143_customer |
+( NEW&#95;CUSTOMER&#95;ID ) ref N00000000143&#95;customer (&#95;id) |
+未接来电关系到客户表 |
+| Fk_N00000000143_c5_call_sheet_leak_manager_ivr_skillgroup |
+( NEW&#95;ERROR&#95;MEMO ) ref manager&#95;ivr&#95;skillgroup (&#95;id) |
+未接来电挂关联到技能组 |
+| Fk_N00000000143_c5_call_sheet_leak_platform_user |
+( NEW&#95;DISPOSAL&#95;AGENT ) ref platform&#95;user (&#95;id) |
+未接来电关联到坐席 |
+Collection N00000000143_cdr_channel
+通话 ivr 轨迹表
+Indexes | Field Name | Data Type | Description |
+* |
+&#95;id |
+oid AUTOINCREMENT |
+|
+* |
+ACCOUNT |
+string |
+|
+* |
+PBX |
+string |
+|
+* |
+CHANNEL |
+string |
+|
+* |
+UNIQUEID |
+string |
+callid |
+* |
+TIMESTAMP |
+string |
+|
+* |
+CHANNELTYPE |
+string |
+通话类型：呼入 |
+* |
+LOCATION |
+string |
+节点类型 |
+* |
+LOCATION&#95;ID |
+string |
+节点编号 |
+* |
+LOCATION&#95;NAME |
+string |
+节点名称 |
+* |
+LINK |
+integer |
+|
+* |
+SEQUENCENUM |
+integer |
+|
+* |
+FROMDID |
+string |
+主叫号码 |
+* |
+FROMCID |
+string |
+被叫号码 |
+Indexes |
+| &#95;id&#95; |
+ON &#95;id |
+|
+| UNIQUEID&#95;1 |
+ON UNIQUEID |
+|
+Virtual Relations |
+| Fk_N00000000143_cdr_channel_N00000000143_c5_call_sheet |
+( &#95;id ) ref N00000000143&#95;c5&#95;call&#95;sheet (LOCATION) |
+通话ivr轨迹关联到通话纪录 |
+Collection N00000000143_cdr_peer
+坐席状态日志
+Indexes | Field Name | Data Type | Description |
+* |
+&#95;id |
+string AUTOINCREMENT |
+|
+* |
+ACCOUNT&#95;ID |
+string |
+账户编号 |
+* |
+ASTERISK |
+string |
+pbx |
+* |
+EXTEN |
+string |
+坐席编号 |
+* |
+EXTEN&#95;TYPE |
+string |
+坐席类型 |
+* |
+ACTION&#95;TYPE |
+string |
+坐席状态 login busy 等 |
+* |
+BEGIN&#95;TIME |
+string |
+开始时间 |
+* |
+END&#95;TIME |
+string |
+状态结束时间 |
+* |
+COMMENTS |
+string |
+&quot;Timeout&quot;&#44;&quot;ukick&quot;&#44;&quot;reserve&quot;&#44; &quot;ekick&quot;&#44; &quot;akick&quot; |
+* |
+AGENT |
+string |
+坐席id |
+* |
+BUSY&#95;TYPE |
+string |
+|
+* |
+TIME&#95;LENGTH |
+integer |
+登陆时长 |
+Indexes |
+| &#95;id&#95; |
+ON &#95;id |
+|
+| AGENT&#95;1 |
+ON AGENT |
+|
+| END&#95;TIME1 |
+ON END&#95;TIME |
+|
+| BEGIN&#95;TIME&#95;1 |
+ON BEGIN&#95;TIME |
+|
+| AGENT&#95;1&#95;BEGIN&#95;TIME&#95;&#45;1 |
+ON AGENT&#44; BEGIN&#95;TIME |
+|
+Virtual Relations |
+| Fk_N00000000143_cdr_peer_platform_user |
+( AGENT ) ref platform&#95;user (&#95;id) |
+坐席状态日志关联到坐席 |
+Collection N00000000143_customer
+客户表
+Indexes | Field Name | Data Type | Description |
+* |
+&#95;id |
+string AUTOINCREMENT |
+|
+* |
+name |
+string |
+|
+* |
+title |
+string |
+|
+* |
+phone |
+list |
+|
+* |
+email |
+list |
+|
+* |
+weixin |
+list |
+|
+* |
+province |
+string |
+|
+* |
+city |
+string |
+|
+* |
+address |
+string |
+|
+* |
+note |
+string |
+|
+* |
+sex |
+string |
+|
+* |
+birth |
+string |
+|
+* |
+age |
+string |
+|
+* |
+web |
+string |
+|
+* |
+status |
+string |
+|
+* |
+custsource1 |
+string |
+|
+* |
+8da72380&#45;7886&#45;11e5&#45;b633&#45;a94d714fc829 |
+string |
+|
+* |
+9b093e80&#45;34fe&#45;11e5&#45;9a0a&#45;31db02c3d92a |
+string |
+|
+* |
+ac57b860&#45;788d&#45;11e5&#45;84fe&#45;c3c1c42e38a3 |
+string |
+|
+* |
+239957b0&#45;daa1&#45;11e5&#45;849d&#45;2ba0a8284bbd |
+string |
+|
+* |
+7cd86c10&#45;7a1c&#45;11e6&#45;b2a7&#45;bbb89dcd9a2d |
+string |
+|
+* |
+d8045c90&#45;7a47&#45;11e6&#45;bfed&#45;bd91b828b759 |
+string |
+|
+* |
+2d86eee0&#45;7d67&#45;11e6&#45;bfed&#45;bd91b828b759 |
+string |
+|
+* |
+158ae2e0&#45;7edb&#45;11e6&#45;bb11&#45;c73e0b17d4a7 |
+string |
+|
+* |
+createTime |
+string |
+|
+* |
+lastUpdateTime |
+string |
+|
+* |
+accountId |
+string |
+|
+* |
+dbType |
+string |
+|
+* |
+batchNo |
+string |
+|
+* |
+sysStatus |
+string |
+|
+* |
+categoryId |
+string |
+|
+* |
+owner |
+string |
+|
+* |
+actionType |
+string |
+|
+Indexes |
+| &#95;id&#95; |
+ON &#95;id |
+|
+| batchNo&#95;1&#95;createTime&#95;&#45;1 |
+ON batchNo&#44; createTime |
+|
+| phone&#46;tel&#95;1&#95;createTime&#95;&#45;1 |
+ON phone&#44; createTime |
+|
+| name&#95;1 |
+ON name |
+|
+| email&#46;email&#95;1 |
+ON email |
+|
+| status&#95;1 |
+ON status |
+|
+| actionType&#95;1&#95;owner&#95;1&#95;notifyTime&#95;1 |
+ON actionType&#44; owner |
+|
+| owner&#95;1&#95;notifyTime&#95;1&#95;createTime&#95;&#45;1 |
+ON owner&#44; createTime |
+|
+| weixin&#46;num&#95;1 |
+ON weixin |
+|
+| name&#95;1&#95;createTime&#95;&#45;1 |
+ON name&#44; createTime |
+|
+| actionType&#95;1&#95;actionUser&#95;1 |
+ON actionType |
+|
+| owner&#95;1&#95;createTime&#95;&#45;1&#95;categoryId&#95;1&#95;sysStatus&#95;1 |
+ON owner&#44; createTime&#44; categoryId&#44; sysStatus |
+|
+| categoryId&#95;1&#95;createTime&#95;&#45;1 |
+ON categoryId&#44; createTime |
+|
+| lastContactTime&#95;1&#95;takeTime&#95;1&#95;createTime&#95;&#45;1 |
+ON createTime |
+|
+Collection app_call_sheet_quality_check
+通话质检表
+Indexes | Field Name | Data Type | Description |
+* |
+&#95;id |
+string AUTOINCREMENT |
+|
+|
+OFFERING&#95;TIME |
+string |
+通话进入话务系统时间 |
+|
+DISPOSAL&#95;AGENT |
+string |
+处理坐席 关联到坐席表 |
+|
+CALL&#95;NO |
+string |
+主叫号码 |
+|
+CALLED&#95;NO |
+string |
+被叫号码 |
+|
+CONNECT&#95;TYPE |
+string |
+通话类型 dialout 外呼通话，normal 普通来电，transfer 转接电话，dialTransfer 外呼转接 |
+|
+ERROR&#95;MEMO |
+string |
+技能组id |
+|
+CALL&#95;TIME&#95;LENGTH |
+integer |
+通话时长 |
+|
+FILE&#95;SERVER |
+string |
+文件服务器 |
+|
+RECORD&#95;FILE&#95;NAME |
+string |
+录音文件名称 |
+|
+INVESTIGATE |
+string |
+|
+* |
+GRADE&#95;AMOUNT |
+map |
+质检各项评测内容 |
+|
+TEMPLATE |
+string |
+质检模版 关联到质检模版表 |
+|
+ACCOUNT |
+string |
+账户编号 |
+|
+GRADE&#95;USER |
+string |
+质检坐席 关联到坐席表 |
+|
+GRADE&#95;TIME |
+double |
+质检时间 |
+|
+COMMENTS |
+string |
+通话备注 |
+|
+monitorType |
+string |
+监控类型 关联到质检监控类型表 |
+|
+beginTime |
+string |
+|
+|
+sid |
+string |
+|
+|
+user |
+string |
+|
+|
+toPeer |
+string |
+|
+|
+sName |
+string |
+|
+|
+acount |
+string |
+|
+|
+TASK&#95;ID |
+string |
+|
+|
+1 |
+double |
+质检1 |
+|
+2 |
+double |
+质检2 |
+|
+3 |
+double |
+质检3 |
+|
+4 |
+double |
+质检4 |
+|
+5 |
+double |
+质检5 |
+|
+6 |
+double |
+质检6 |
+|
+7 |
+double |
+质检7 |
+|
+8 |
+double |
+质检8 |
+|
+9 |
+double |
+质检9 |
+|
+10 |
+double |
+质检10 |
+|
+11 |
+double |
+质检11 |
+|
+12 |
+double |
+质检12 |
+|
+13 |
+double |
+质检13 |
+|
+14 |
+double |
+质检14 |
+|
+15 |
+double |
+质检15 |
+|
+16 |
+double |
+质检16 |
+|
+17 |
+double |
+质检17 |
+|
+18 |
+double |
+质检18 |
+Indexes |
+| &#95;id&#95; |
+ON &#95;id |
+|
+Virtual Relations |
+| Fk_app_call_sheet_quality_check_platform_user |
+( DISPOSAL&#95;AGENT ) ref platform&#95;user (&#95;id) |
+关联到坐席 |
+Collection app_call_sheet_quality_check_listen_log
+通话录音试听纪录表
+Indexes | Field Name | Data Type | Description |
+* |
+&#95;id |
+oid AUTOINCREMENT |
+|
+* |
+CALL&#95;SHEET&#95;ID |
+string |
+通话id |
+* |
+account |
+string |
+账户编号 |
+* |
+userId |
+string |
+听取人 |
+* |
+time |
+string |
+听取时间 |
+Indexes |
+| &#95;id&#95; |
+ON &#95;id |
+|
+Virtual Relations |
+| Fk_app_call_sheet_quality_check_listen_log_N00000000143_c5_call_sheet |
+( CALL&#95;SHEET&#95;ID ) ref N00000000143&#95;c5&#95;call&#95;sheet (CALL&#95;SHEET&#95;ID) |
+试听日志关联到通话表 |
+Collection manager_call_label
+通话标签表
+Indexes | Field Name | Data Type | Description |
+* |
+&#95;id |
+string |
+主键id |
+* |
+enable |
+boolean |
+是否启用 true&#58;false |
+* |
+accountId |
+string |
+账户编号 |
+* |
+lastUpdate |
+double |
+最近更新时间 |
+* |
+type |
+string |
+标签类型 single：单级标签，multi：多级标签 |
+|
+status |
+string |
+|
+* |
+name |
+string |
+标签名称 |
+Indexes |
+| &#95;id&#95; |
+ON &#95;id |
+|
+Virtual Relations |
+| Fk_manager_call_label_N00000000143_c5_call_sheet |
+( &#95;id ) ref N00000000143&#95;c5&#95;call&#95;sheet (LABELS) |
+通话标签 |
+| Fk_manager_call_label_N00000000143_c5_call_label_history |
+( &#95;id ) ref N00000000143&#95;c5&#95;call&#95;label&#95;history (label) |
+通话标签操作历史 标签信息 |
+Collection manager_ivr_skillgroup
+通话技能组配置表
+Indexes | Field Name | Data Type | Description |
+|
+&#95;id |
+string AUTOINCREMENT |
+|
+* |
+Account |
+string |
+|
+|
+AgentExtenPoint |
+boolean |
+|
+* |
+AssignMembers |
+list |
+|
+|
+BussinessTypeId |
+string |
+|
+|
+DisplayName |
+string |
+|
+|
+Exten |
+string |
+|
+|
+JoinEmpty |
+string |
+|
+|
+Members |
+string |
+|
+|
+Music |
+string |
+|
+|
+MusicClass |
+string |
+|
+|
+PBX |
+string |
+|
+|
+Peer |
+string |
+|
+|
+SayExten |
+boolean |
+|
+|
+State |
+string |
+|
+|
+Strategy |
+string |
+|
+|
+Timeout |
+string |
+|
+|
+ToPeerTypeWhenHanguped |
+string |
+|
+|
+ToPeerTypeWhenQueueEmpty |
+string |
+|
+|
+ToPeerTypeWhenWait |
+string |
+|
+|
+ToPeerTypeWhenWaitTimeout |
+string |
+|
+|
+ToPeerWhenHanguped |
+string |
+|
+|
+ToPeerWhenQueueEmpty |
+string |
+|
+|
+ToPeerWhenWait |
+string |
+|
+|
+ToPeerWhenWaitTimeout |
+string |
+|
+|
+Type |
+string |
+|
+|
+UpdateTime |
+string |
+|
+|
+WaitTime |
+string |
+|
+|
+SayQueuePosition |
+string |
+|
+|
+AfterExtenPointMusic |
+string |
+|
+|
+BeforeExtenPointMusic |
+string |
+|
+|
+isdel |
+boolean |
+|
+|
+UpdateAgent |
+string |
+|
+|
+DialoutTypeId |
+string |
+|
+Indexes |
+| &#95;id&#95; |
+ON &#95;id |
+|
+Virtual Relations |
+| Fk_manager_ivr_skillgroup_platform_user |
+( AssignMembers&#46;agentID ) ref platform&#95;user (&#95;id) |
+技能组中的坐席关联到坐席表 |
+Collection platform_user
+坐席表
+Indexes | Field Name | Data Type | Description |
+* |
+&#95;id |
+string AUTOINCREMENT |
+|
+* |
+account |
+string |
+|
+|
+didNum |
+string |
+|
+|
+displayName |
+string |
+|
+* |
+email |
+string |
+|
+* |
+exten |
+string |
+|
+|
+im |
+map |
+|
+|
+isAdmin |
+boolean |
+|
+|
+lastUpdate |
+long |
+|
+|
+mobile |
+string |
+|
+|
+mobileExten |
+string |
+|
+|
+password |
+string |
+|
+|
+pbx |
+string |
+|
+|
+product |
+string |
+|
+|
+sipExten |
+string |
+|
+|
+pinyin |
+string |
+|
+|
+type |
+string |
+|
+|
+status |
+string |
+|
+|
+uversion |
+string |
+|
+|
+role |
+array |
+|
+|
+callerIDNum |
+string |
+|
+|
+loginName |
+string |
+|
+|
+AutoBusyTime |
+string |
+|
+|
+accountId |
+string |
+|
+|
+lastLoginTime |
+string |
+|
+|
+updateTime |
+string |
+|
+|
+name |
+string |
+|
+|
+maxImDealCount |
+string |
+|
+|
+minImDealCount |
+string |
+|
+|
+maxEmailDealCount |
+string |
+|
+|
+imClaimStatus |
+string |
+|
+|
+parentId |
+string |
+|
+|
+gatewayExten |
+string |
+|
+|
+lastCodeKey |
+string |
+|
+|
+createTime |
+string |
+|
+|
+dayCust |
+integer |
+|
+|
+weekCust |
+integer |
+|
+|
+score |
+integer |
+|
+|
+totalCust |
+integer |
+|
+Indexes |
+| &#95;id&#95; |
+ON &#95;id |
+|
+Powered by DbSchema

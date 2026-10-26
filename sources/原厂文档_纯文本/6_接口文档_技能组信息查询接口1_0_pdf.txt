@@ -1,0 +1,129 @@
+--- page 1 ---
+技能组信息查询接口
+维护人：李永驹
+版本号： 1.0
+日 期： 2016 年 04 月 11 日
+--- page 2 ---
+第三方系统通过发送 HTTP Get 或 Post 请求来调用本接口，通过次接口用户可以实时获取
+该用户账户中包含的技能组的详细信息。本接口会对访问的 IP 进行验证，请提前报备请求
+发起的服务器的公网 IP。由于安全原因本接口只允许从第三方的服务器发起调用请求，请
+勿直接从浏览器中直接调用本接口。
+● 请求 URL地址：http://112.124.23.131:3000/service
+● GET 请求格式例子：
+http://112.124.23.131:3000/service?action=getSkillGroupInfo&json={"AccountId":"*******
+***","AccountPass":"******"}
+● 参数说明：所有字段均区分大小写；字符编码： UTF-8
+参数名 值 说明
+action getSkillGroupInfo 接口名称，固定为 getSkillGroupInfo
+json 一个 json 格式字符串 其中包含了一些账户的认证信息
+●
+json 参数中字段说明
+字段名 值 说明
+AccountId 以 N 开头的一串用户
+唯一标识符
+此字段用户需向中国电信 咨 询或者自行到
+http://www.tycc100. com/interface 的对接数据查询
+中获取
+AccountPass 此字段为该账户管理员登录用户中心所使用的密
+码
+● 系统返回
+返回值格式为 json 格式
+返回值示例：
+{
+"success": true,
+"message": "200 ok! ",
+"data": [
+{
+"State": "enable",
+"Type": "normal",
+"DisplayName": "售前",
+"Strategy": "rrmemory",
+"SayExten": false,
+"JoinEmpty": "0",
+"BussinessTypeId": "callUrls_50255e30-fba5-11e5-ba9b-b99b04c9c064",
+"WaitTime": "120",
+"Timeout": "30",
+"ToPeerTypeWhenQueueEmpty": "ivr_node_queue",
+"ToPeerWhenQueueEmpty": "10000366",
+"ToPeerTypeWhenWait": "system",
+"ToPeerWhenWait": "0",
+"ToPeerTypeWhenWaitTimeout": "system",
+--- page 3 ---
+"ToPeerWhenWaitTimeout": "0",
+"ToPeerTypeWhenHanguped": "system",
+"ToPeerWhenHanguped": "0",
+"Account": "N00000000449",
+"PBX": "1.1.1.101",
+"Exten": "10000365",
+"AssignMembers": [
+{
+"agentID": "4ad43800-fafd-11e5-ade7-0bac7cecd3fa",
+"penalty": "0",
+"agentExten": "8000"
+}
+],
+"Members": "",
+"UpdateTime": "2016-04-06",
+"Peer": "Queue",
+"Music": "",
+"MusicClass": "",
+"AgentExtenPoint": false,
+"SayQueuePosition": "0"
+}
+]
+}
+返回值字段说明
+字段名 说明
+success 接口调用是否成功，true-成功；false-不成功，不成功的
+具体错误信息体现在 message字段中
+message 接口调用失败的具体原因，成功则为 200 ok!
+data DisplayName 技能组的名称
+Strategy 技能组的接听策略 rrmemory-轮流， random-随机，
+fewestcalls-接听最少
+SayExten 是否启用报工号
+JoinEmpty 无空闲座席立即流转 1 是 0 否
+BussinessTypeId 来电弹屏对接 id，为空则弹系统默认屏
+WaitTime 等待时长
+Timeout 振铃时长
+--- page 4 ---
+ToPeerTypeWhenQueueEmpty 技能组为空时转向：
+system-系统节点，
+ivr_node_queue 技能组，
+account_user 坐席，
+ivr_node_announcement 播放语音节点，
+ivr_node_text_announcement 播放文本语音节点，
+ivr_node_ivr 按键菜单节点，
+ivr_node_encrypt_md5 MD5 加密节点，
+ivr_node_validation 采集输入节点
+ivr_node_assignment 赋值节点
+ivr_node_route 按变量路由节点
+ivr_node_ivr_menu 转 ivr菜单节点
+ivr_node_call_url calurl 节点
+ivr_node_voice_mail 留言节点
+ivr_node_room 会议室节点
+ivr_node_satisfaction 自定义满意度节点
+ivr_node_superDialJobNum 采样工号并拨打节点
+ivr_node_extension_peer 自定义节点
+ToPeerWhenQueueEmpty 具体的节点操作 ID 例如 system中 0-挂机，1 满意度调
+查，2-拨工号
+ToPeerTypeWhenWait 正在等待时转向：取值同 ToPeerTypeWhenQueueEmpty
+ToPeerWhenWait 具体的节点操作 ID 例如 system中 0-挂机，1 满意度调
+查，2-拨工号
+ToPeerTypeWhenWaitTimeout 等待超时转向：取值同 ToPeerTypeWhenQueueEmpty
+ToPeerWhenWaitTimeout 具体的节点操作 ID 例如 system中 0-挂机，1 满意度调
+查，2-拨工号
+ToPeerTypeWhenHanguped 通话结束后转向：取值同 ToPeerTypeWhenQueueEmpty
+ToPeerWhenHanguped 具体的节点操作 ID 例如 system中 0-挂机，1 满意度调
+查，2-拨工号
+Account 账户 ID和调用接口所传 AccountId一致
+PBX PBX
+Exten 技能组号
+AssignMembers agentID 已经分配的坐席 Id
+penalty 坐席优先级
+agentName 坐席名称
+agentExten 坐席工号
+Members 分配的坐席的 ID字串 (不用返回)
+UpdateTime 技能组信息更新时间
+--- page 5 ---
+AgentExtenPoint 是否启用报工号后的提示音
+SayQueuePosition 播报排队位置时间间隔

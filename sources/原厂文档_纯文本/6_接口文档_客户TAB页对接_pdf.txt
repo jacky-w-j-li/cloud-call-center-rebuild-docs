@@ -1,0 +1,108 @@
+--- page 1 ---
+ 
+客户TAB 页对接文档 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+维  护  人：      
+版  本  号：   1.0         
+日      期： 2016 年 5 月 16 日    
+ 
+--- page 2 ---
+客户 TAB 页对接： 
+    .. 系统提供 客户TAB 页对接。系统以http get方式调用第三方B/S 系统的url 。
+如果是来电弹屏会将相关来电数据送给第三方系统。 
+ 注意：客户 TAB 页可以配置多个，最多限制 5 个 
+1， 配置：在平台系统设置高级功能弹屏对接客户 TAB 页对接 
+配置 URL 格式(以百度为例)：http://www.baidu.com 
+ 
+2， 配置完成后需要重新登录系统，完成配置 
+3， 系统会在来电、通话记录、在线客服、客户、工单中以 TAB 页的形式展现配置的 url 
+ 
+4，当来电时平台会推送以下数据： 
+参数名 描述 
+originCallNo 主叫号码 
+originCalledNo 被叫号码 
+queue 来单进入技能组编号 
+--- page 3 ---
+offeringTime 来电进入系统的时间 
+callerProvince 主叫号码省份 
+callerCity 主叫号码城市 
+callSheetId 通话记录的 ID 
+Agent 接听座席工号 
+RingTime 座席响铃时间，是时间戳格式 
+queueName 来电进入技能组名称 
+ivrkey 来电，在系统流转 ivr 时，按过的按键，每个按键以-分割 
+loginName 接听座席工号 
+name 客户名称 
+title 职位 
+phone 电话(如果配置多个电话会以”,”分割) 
+email 邮箱(如果配置多个邮箱会以”,”分割) 
+weixin 微信(如果配置多个微信会以”,”分割) 
+province 省 
+city 市 
+note 备注 
+web 公司网址 
+displayName 处理坐席姓名 
+exten 处理坐席工号 
+ 
+调用实例： 
+http://www.baidu.com/?originCallNo=0107000&originCalledNo=01056332222&queue=1000034
+5&offeringTime=2016-05-27 17:51&callerProvince= 北 京 市 &callerCity= 北 京 市
+&callSheetId=8167f0e0-04c4-4ec8-80c5-5748bc8a22aa&Agent=8000&RingTime=1464342709.58
+9960&queueName=技能组 2&ivrkey=&shortTime=17:51&name=未知客户 &status=普通客户
+&title=&phone=0107000&email=&weixin=&province= 北京市&city= 北京市
+&address=&note=&sex=&age=&birth=&displayName=周杰伦&exten=8000 
+4， 当客户为我系统保存的客户，云呼会推送客户的基本信息 
+参数名 描述 
+name 客户名称 
+title 职位 
+phone 电话(如果配置多个电话会以”,”分割) 
+email 邮箱(如果配置多个邮箱会以”,”分割) 
+weixin 微信(如果配置多个微信会以”,”分割) 
+province 省 
+city 市 
+--- page 4 ---
+note 备注 
+web 公司网址 
+displayName 处理坐席姓名 
+exten 处理坐席工号 
+调用实例： 
+http://www.baidu.com?name= 测 试 客 户 &title= 项 目 经 理
+&phone=0107000,15010457345&email=scctarena@163.com&weixin=123456&province=北京市
+&city= 北京市 &address=北 京 奥 林 佳 泰 大 厦&note= 无备注 &web=&displayName= 周杰伦
+&exten=8000 
+ 
+5，在线客服(非我系统已保存的客户)会推送 
+参数名 描述 
+qimoClientId 客户自定义 ID(如不自定义我们会生成一个 32 位的 uuid) 
+displayName 处理坐席姓名 
+exten 处理坐席工号 
+ 
+调用实例： 
+1， 客户没有自定义： 
+http://www.baidu.com?qimoClientId=19d42c10-078c-11e6-9e2f-152f10edbf70&displayNam
+e=周杰伦&exten=8000 
+2， 客户自定义： 
+http://www.baidu.com?qimoClientId=123abc&displayName=周杰伦&exten=8000 
+ 
+ 
+6，微信咨询(非我系统已保存的客户)会推送 
+参数名 描述 
+qimoClientId 微信 openId 
+displayName 处理坐席姓名 
+exten 处理坐席工号 
+ 
+调用实例： 
+http://www.baidu.com?qimoClientId=oMpomtzVAlzbKs85_lb2MNwED0VM&displayName=
+周杰伦&exten=8000 
+ 
