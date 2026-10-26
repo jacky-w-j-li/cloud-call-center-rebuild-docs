@@ -48,6 +48,16 @@
 > 打开 `docs/原厂界面截图图集.html` 时有 1288 张图，图片通过相对路径 `../_doc/docs/img/` 引用，
 > **必须整个仓库一起 clone**，单独下载 HTML 会看不到图。
 
+**怎么看这两个 HTML**（GitHub 网页上直接点开只会显示源码，不会渲染）：
+```bash
+git clone https://github.com/jacky-w-j-li/cloud-call-center-rebuild-docs.git
+cd cloud-call-center-rebuild-docs
+# 直接用浏览器打开（Windows 可用 start，macOS 用 open）
+start docs/原厂界面截图图集.html
+start docs/14_UI线框原型.html
+```
+.md 文件在 GitHub 网页上可直接阅读；本地阅读推荐 VS Code（可预览 Mermaid，图集里的流程图能正常显示）。
+
 ---
 
 ## 按角色选择阅读路线
