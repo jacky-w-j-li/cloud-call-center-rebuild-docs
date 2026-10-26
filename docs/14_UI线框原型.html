@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>云呼系统 · UI 线框原型（重建参考）</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+    margin: 0; padding: 0 24px 60px; background: #fff; color: #1a1a1a; line-height: 1.6;
+  }
+  h1 { font-size: 22px; margin: 28px 0 6px; padding-bottom: 10px; border-bottom: 2px solid #333; }
+  .lead { color: #555; font-size: 13px; margin-bottom: 24px; }
+  h2 { font-size: 17px; margin: 40px 0 12px; padding-left: 10px; border-left: 4px solid #2563eb; }
+  h3 { font-size: 14px; margin: 22px 0 8px; color: #444; }
+  .note { background: #fff8e1; border-left: 3px solid #f59e0b; padding: 8px 12px; font-size: 12.5px; margin: 10px 0 16px; color: #664d03; }
+  .note b { color: #92400e; }
+  /* 线框通用 */
+  .wf { border: 1px solid #666; background: #fafafa; }
+  .box { border: 1px solid #999; background: #f0f0f0; padding: 6px 8px; font-size: 12px; color: #333; }
+  .box.lbl { background: #e8eefc; border-color: #7d9ae8; }
+  .box.btn { background: #dbeafe; border-color: #60a5fa; text-align: center; border-radius: 3px; }
+  .box.hdr { background: #e5e7eb; border-color: #6b7280; font-weight: 600; }
+  .empty { border: 1px dashed #bbb; background: #fbfbfb; color: #999; font-size: 12px; display: flex; align-items: center; justify-content: center; }
+  .row { display: flex; gap: 8px; }
+  .col { display: flex; flex-direction: column; gap: 6px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .cap { font-size: 11.5px; color: #777; margin: 6px 0 0; }
+  table.wf { border-collapse: collapse; width: 100%; font-size: 11.5px; }
+  table.wf td, table.wf th { border: 1px solid #999; padding: 5px 7px; background: #f0f0f0; }
+  table.wf th { background: #e5e7eb; font-weight: 600; text-align: left; }
+  .tag { display:inline-block; background:#fee2e2; border:1px solid #f87171; border-radius:10px; padding:0 7px; font-size:11px; color:#991b1b; }
+  .tag.g { background:#dcfce7; border-color:#4ade80; color:#166534; }
+  .tag.b { background:#dbeafe; border-color:#60a5fa; color:#1e40af; }
+</style>
+</head>
+<body>
+
+<h1>云呼系统 · UI 线框原型</h1>
+<p class="lead">
+  依据 <code>11_用户使用手册.md</code> 与 <code>12_功能需求规格FRD.md</code> 绘制的<b>布局线框</b>（非视觉稿）。
+  用途：让开发一眼看清「页面上有什么、摆在哪、字段叫什么」。灰色块 = 区域，浅蓝块 = 字段/标签，深蓝块 = 按钮/表头。
+  尺寸与配色仅为示意，实际按设计系统走。
+</p>
+
+<div class="note">
+  <b>全局铁律（画错就返工）：</b>
+  ① 坐席端左侧是<b>竖排图标菜单</b>（不是顶部横向导航）；
+  ② <b>软电话条固定在顶部</b>，所有通话控制都在这一条上；
+  ③ 软电话条上<b>没有「接听」按钮</b>（SIP 侧自动接通），也<b>没有签入/签出按钮</b>；
+  ④ 状态显示用<b>数字枚举 0~15+99</b>，界面转中文文案。
+</div>
+
+<!-- ============ 1. 坐席主界面 ============ -->
+<h2>1. 坐席主界面（登录后）</h2>
+
+<div class="wf" style="padding:10px;">
+  <!-- 软电话条 -->
+  <div class="wf" style="padding:8px; background:#eff6ff; border-color:#3b82f6;">
+    <div class="row" style="align-items:center;">
+      <div class="box lbl" style="min-width:110px;">状态：<b>空闲</b></div>
+      <div class="box lbl" style="min-width:70px;">00:00</div>
+      <div style="flex:1"></div>
+      <div class="box btn">外呼</div>
+      <div class="box btn">挂机</div>
+      <div class="box btn">保持</div>
+      <div class="box btn">恢复</div>
+      <div class="box btn">转接</div>
+      <div class="box btn">咨询</div>
+      <div class="box btn">三方</div>
+      <div class="box btn">转IVR</div>
+      <div class="box btn">满意度</div>
+      <div class="box btn">短信</div>
+      <div class="box btn">标签</div>
+    </div>
+    <p class="cap">软电话条（固定顶部）— 14 个按钮，按状态显示/隐藏，见 FRD M2-1 可见性矩阵</p>
+  </div>
+
+  <!-- 顶部条 -->
+  <div class="wf" style="padding:8px; margin-top:8px;">
+    <div class="row" style="align-items:center;">
+      <div class="box" style="min-width:80px;">Logo</div>
+      <div style="flex:1"></div>
+      <div class="box lbl">未完成通话 3</div>
+      <div class="box lbl">我的队列 0</div>
+      <div class="box lbl">邮件 2</div>
+      <div class="box lbl">会话 5</div>
+      <div class="box lbl">静音</div>
+      <div class="box lbl">延迟 12ms</div>
+      <div class="box" style="min-width:64px;">头像 ▾</div>
+      <div class="box btn">退出</div>
+    </div>
+    <p class="cap">顶部条 — 头像下拉含「接听方式切换为：话机 / 在线客服 / 手机」</p>
+  </div>
+
+  <!-- 主体 -->
+  <div class="row" style="margin-top:8px; align-items:stretch;">
+    <!-- 左侧菜单 -->
+    <div class="col" style="width:96px;">
+      <div class="box btn">工作台</div>
+      <div class="box btn">通话</div>
+      <div class="box btn">在线</div>
+      <div class="box btn">邮件</div>
+      <div class="box btn">客户</div>
+      <div class="box btn">工单</div>
+      <div class="box btn">知识库</div>
+      <div class="box btn">监控</div>
+      <div class="box btn">报表</div>
+      <div class="box btn">问卷</div>
+      <div class="box btn">质检</div>
+      <div class="box btn">短信</div>
+      <div class="box btn">漏话</div>
+      <div style="flex:1"></div>
+      <div class="box btn">首页对接</div>
+      <div class="box btn">设置</div>
+      <p class="cap" style="text-align:center;">左侧菜单<br>按角色裁剪</p>
+    </div>
+
+    <!-- 工作区：工作台 -->
+    <div class="wf" style="flex:1; padding:10px;">
+      <div class="row" style="align-items:flex-start;">
+        <div class="wf" style="width:200px; padding:8px;">
+          <div class="box hdr">个人信息卡</div>
+          <div class="box lbl">姓名：张三</div>
+          <div class="box lbl">工号：8030</div>
+          <div class="box lbl">邮箱 / 手机</div>
+        </div>
+        <div style="flex:1" class="col">
+          <div class="grid2">
+            <div class="wf" style="padding:8px;">
+              <div class="box hdr">呼入（今日）</div>
+              <div class="grid2">
+                <div class="box lbl">接听数 42</div><div class="box lbl">总数 45</div>
+                <div class="box lbl">接听率 93%</div><div class="box lbl">总时长 1h20m</div>
+                <div class="box lbl">平均 1m54s</div><div class="box lbl"></div>
+              </div>
+            </div>
+            <div class="wf" style="padding:8px;">
+              <div class="box hdr">外呼（今日）</div>
+              <div class="grid2">
+                <div class="box lbl">接通数 30</div><div class="box lbl">总数 38</div>
+                <div class="box lbl">接通率 79%</div><div class="box lbl">总时长 48m</div>
+                <div class="box lbl">平均 1m36s</div><div class="box lbl"></div>
+              </div>
+            </div>
+          </div>
+          <div class="wf" style="padding:8px;">
+            <div class="box hdr">联系计划 <span class="tag">1h 内橙色</span> <span class="tag b">3h 内浅橙</span></div>
+            <div class="box lbl">10:30 · 回访 李先生 · 138****</div>
+            <div class="box lbl">14:00 · 跟进 王女士 · 139****</div>
+          </div>
+          <div class="grid2">
+            <div class="wf" style="padding:8px;">
+              <div class="box hdr">客户统计</div>
+              <div class="box lbl">VIP 12 / 金牌 30 / 银牌 55 / 普通 210</div>
+            </div>
+            <div class="wf" style="padding:8px;">
+              <div class="box hdr">工单处理</div>
+              <div class="box lbl">待领取 5　待处理 8</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wf" style="padding:8px; margin-top:8px;">
+        <div class="box hdr">在线咨询占比</div>
+        <div class="box lbl">微信 45% / 网站 30% / APP 15% / 微博 10%</div>
+      </div>
+      <p class="cap">工作区 = 工作台。注：商机统计、商机券两块在现网已被注释，可不实现。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 2. 来电弹屏 ============ -->
+<h2>2. 来电弹屏卡片</h2>
+
+<div class="row" style="align-items:stretch;">
+  <div class="wf" style="width:260px; padding:8px;">
+    <div class="box hdr">来电卡片（最多 20 个，超限挤掉最旧）</div>
+    <div class="wf" style="padding:8px; margin:6px 0;">
+      <div class="row"><div class="box lbl" style="flex:1">10:23:15</div><div class="tag">振铃</div></div>
+      <div class="box lbl" style="margin-top:4px;">号码：020-2222****</div>
+      <div class="box lbl">归属地：广东 广州</div>
+      <div class="box lbl">客户：<b>定位中…</b></div>
+      <div class="box lbl">呼入服务号：02022221112</div>
+      <div class="box lbl">技能组：售后一组</div>
+      <div class="box lbl">IVR 路径：100063@1-100062@2</div>
+      <div class="row" style="margin-top:6px;">
+        <div class="box btn" style="flex:1">回呼</div>
+        <div class="box btn" style="flex:1">加客户</div>
+        <div class="box btn" style="flex:1">详情</div>
+      </div>
+    </div>
+    <div class="empty" style="height:60px;">第二张卡片…</div>
+  </div>
+  <div class="wf" style="flex:1; padding:8px;">
+    <div class="box hdr">客户详情（右栏）</div>
+    <div class="empty" style="height:120px;">匹配 1 个 → 直接展示；匹配多个 → 弹选；0 个 → 「未知客户」</div>
+    <div class="row" style="margin-top:6px;">
+      <div class="box btn">联系历史</div><div class="box btn">工单</div><div class="box btn">打开业务弹屏</div>
+    </div>
+  </div>
+</div>
+<div class="note">
+  <b>注意：</b>卡片上<b>没有</b>「接听 / 拒接 / 创建工单」按钮。接听在 SIP 侧自动完成；工单要去「工单」模块建。
+</div>
+
+<!-- ============ 3. 通话记录 ============ -->
+<h2>3. 通话记录列表（所有通话）</h2>
+
+<div class="wf" style="padding:10px;">
+  <div class="box hdr">筛选区</div>
+  <div class="grid4" style="margin-top:6px;">
+    <div class="box lbl">呼叫时间 起 — 止</div>
+    <div class="box lbl">主叫号码</div>
+    <div class="box lbl">被叫号码</div>
+    <div class="box lbl">呼叫类型 ▾</div>
+    <div class="box lbl">处理状态 ▾</div>
+    <div class="box lbl">接听座席</div>
+    <div class="box lbl">技能组 ▾</div>
+    <div class="box lbl">满意度 ▾</div>
+    <div class="box lbl">时长区间</div>
+    <div class="box lbl">标记 ▾</div>
+    <div class="box lbl">定位客户 ▾</div>
+    <div class="row"><div class="box btn" style="flex:1">查询</div><div class="box btn" style="flex:1">重置</div></div>
+  </div>
+
+  <div class="row" style="margin-top:10px;">
+    <div class="box btn">导出清单 Excel</div>
+    <div class="box btn">提交批量导出录音任务</div>
+    <div style="flex:1"></div>
+    <div class="cap" style="margin:0;">≤1000 条/任务，次日 03:00 压缩</div>
+  </div>
+
+  <table class="wf" style="margin-top:10px;">
+    <tr>
+      <th>定位客户</th><th>主叫</th><th>被叫</th><th>类型</th><th>状态</th><th>座席</th>
+      <th>技能组</th><th>满意度</th><th>省</th><th>市</th><th>标记</th><th>呼叫时间</th><th>时长</th><th>操作</th>
+    </tr>
+    <tr>
+      <td>李先生</td><td>138****</td><td>02022221112</td><td>呼入</td><td>已处理</td><td>张三(8030)</td>
+      <td>售后一组</td><td>满意</td><td>广东</td><td>广州</td><td>★</td><td>10:23:15</td><td>02:14</td><td>详情 / 备注</td>
+    </tr>
+    <tr><td colspan="14" class="empty" style="height:26px;">…（14 列，见 FRD M3-1）</td></tr>
+  </table>
+</div>
+
+<h3>通话详情弹窗</h3>
+<div class="wf" style="padding:10px; width:560px;">
+  <div class="grid2">
+    <div class="box lbl">定位客户</div><div class="box lbl">主叫 / 被叫</div>
+    <div class="box lbl">呼叫时间</div><div class="box lbl">摘机时间</div>
+    <div class="box lbl">通话时长</div><div class="box lbl">呼叫类型</div>
+    <div class="box lbl">处理状态</div><div class="box lbl">处理座席</div>
+    <div class="box lbl">省 / 市</div><div class="box lbl">标记</div>
+  </div>
+  <div class="wf" style="padding:8px; margin-top:8px;">
+    <div class="box hdr">通话录音</div>
+    <div class="row"><div class="box" style="flex:1; text-align:center;">▶ ————●——— 02:14</div><div class="box btn">下载录音</div></div>
+  </div>
+  <div class="box lbl" style="margin-top:6px;">备注：……</div>
+  <div class="row" style="margin-top:8px;">
+    <div class="box btn">加黑名单</div><div class="box btn">取消标记</div><div class="box btn">提交质检</div><div class="box btn">关闭</div>
+  </div>
+</div>
+
+<!-- ============ 4. IVR 流程编辑 ============ -->
+<h2>4. IVR 流程编辑（最容易被画错的一页）</h2>
+
+<div class="note">
+  <b>关键：</b>这一页<b>不是拖拽连线画布</b>。真实交互是「表单填流程名 + 开始节点 → 右侧面板逐个添加节点 → 每个节点自己配转向目标 → 下方用 mermaid 只读渲染出图」。
+  按钮只有：<b>放大 / 返回 / 保存 / 生效 / 删除</b>。
+</div>
+
+<div class="row" style="align-items:stretch;">
+  <!-- 左侧流程信息 -->
+  <div class="wf" style="width:230px; padding:8px;">
+    <div class="box hdr">流程信息</div>
+    <div class="box lbl">流程名称：[________]</div>
+    <div class="box lbl">开始节点类型 ▾</div>
+    <div class="box lbl">开始节点 ▾</div>
+    <div class="box hdr" style="margin-top:8px;">已添加节点</div>
+    <div class="box lbl">1. 放音（欢迎语）</div>
+    <div class="box lbl">2. 按键菜单</div>
+    <div class="box lbl">3. 转技能组</div>
+    <div class="box lbl">4. 时间节点</div>
+    <div class="box hdr" style="margin-top:8px;">新增节点 ▾（17 类）</div>
+    <div class="cap">播放语音/播放文本/按键菜单/采集输入/赋值/MD5/按变量路由/CallUrl/时间/留言/会议室/满意度/自定义/双向回呼/ASR/采集工号/系统节点</div>
+  </div>
+
+  <!-- 中间图 -->
+  <div class="wf" style="flex:1; padding:8px;">
+    <div class="box hdr">流程图（mermaid.js 自动渲染 · 只读）</div>
+    <div class="col" style="align-items:center; padding:14px 0;">
+      <div class="box" style="width:150px; text-align:center;">开始<br>放音·欢迎语</div>
+      <div class="cap">↓</div>
+      <div class="box" style="width:150px; text-align:center;">按键菜单<br>超时 10s</div>
+      <div class="row" style="gap:10px; justify-content:center;">
+        <div class="col" style="align-items:center;"><div class="cap">按 1</div><div class="box" style="width:110px; text-align:center;">转技能组<br>售后一组</div></div>
+        <div class="col" style="align-items:center;"><div class="cap">按 2</div><div class="box" style="width:110px; text-align:center;">时间节点<br>9:00-18:00</div></div>
+        <div class="col" style="align-items:center;"><div class="cap">超时</div><div class="box" style="width:110px; text-align:center;">系统节点<br>挂机</div></div>
+      </div>
+    </div>
+    <div class="row" style="margin-top:10px;">
+      <div class="box btn">放大</div><div class="box btn">返回</div><div class="box btn">保存</div>
+      <div class="box btn" style="background:#fee2e2; border-color:#ef4444; color:#991b1b; font-weight:600;">生效</div>
+      <div class="box btn">删除</div>
+    </div>
+    <p class="cap"><b>红色「生效」是重点</b>：只保存不生效，电话流程不变（现网红坑）。生效 = 下发 PeerEffect + Reload。</p>
+  </div>
+
+  <!-- 右侧属性 -->
+  <div class="wf" style="width:250px; padding:8px;">
+    <div class="box hdr">节点属性（选中「按键菜单」）</div>
+    <div class="box lbl">节点名称：[______]</div>
+    <div class="box lbl">按键超时：10 秒（1-9999）</div>
+    <div class="box lbl">语音文件 ▾（语音库）</div>
+    <div class="box hdr" style="margin-top:8px;">各按键转向</div>
+    <div class="box lbl">按 1 → 技能组 / 售后一组</div>
+    <div class="box lbl">按 2 → 时间节点 / 上班时间</div>
+    <div class="box lbl">超时 → 系统节点 / 挂机</div>
+    <p class="cap">转向目标共 20 种：系统节点、技能组、座席、各类节点…</p>
+  </div>
+</div>
+
+<!-- ============ 5. 技能组配置 ============ -->
+<h2>5. 技能组配置（4 个分栏）</h2>
+<div class="wf" style="padding:10px;">
+  <div class="row"><div class="box btn">基本信息</div><div class="box btn">时长</div><div class="box btn">座席分配</div><div class="box btn">流转</div></div>
+  <div class="grid2" style="margin-top:10px;">
+    <div class="wf" style="padding:8px;">
+      <div class="box hdr">基本信息</div>
+      <div class="box lbl">技能组名称（≤16 字）</div>
+      <div class="box lbl">技能组号（建后不可改）</div>
+      <div class="box lbl">分配策略 ▾ rrmemory轮流 / random随机 / fewestcalls接听最少 / leastrecent最久未接</div>
+      <div class="box lbl">报工号 是/否</div>
+      <div class="box lbl">无空闲座席立刻流转</div>
+      <div class="box lbl">播报排队位置间隔（0=不播，≥15s）</div>
+      <div class="box lbl">等待音乐 ▾</div>
+    </div>
+    <div class="wf" style="padding:8px;">
+      <div class="box hdr">时长 / 流转</div>
+      <div class="box lbl">等待时长 120s</div>
+      <div class="box lbl">座席振铃时长 30s</div>
+      <div class="box hdr" style="margin-top:8px;">流转</div>
+      <div class="box lbl">技能组为空时转向 ▾</div>
+      <div class="box lbl">正在等待时转向 ▾</div>
+      <div class="box lbl">等待超时转向 ▾</div>
+      <div class="box lbl">通话结束后转向 ▾ → 系统节点·满意度调查</div>
+    </div>
+  </div>
+  <div class="wf" style="padding:8px; margin-top:8px;">
+    <div class="box hdr">座席分配（左右双栏 + 优先级）</div>
+    <div class="row">
+      <div class="wf" style="flex:1; padding:6px;"><div class="cap">可选座席</div><div class="box lbl">李四 8031</div><div class="box lbl">王五 8033</div></div>
+      <div class="col" style="justify-content:center;"><div class="box btn">→</div><div class="box btn">←</div></div>
+      <div class="wf" style="flex:1; padding:6px;"><div class="cap">已选（优先级，数字小先接）</div><div class="box lbl">张三 8030 · 优先级 1</div></div>
+    </div>
+  </div>
+  <div class="note" style="margin-top:10px;">
+    满意度调查<b>不是</b>技能组上的开关 —— 要配成「通话结束后转向 → 系统节点-满意度调查」。
+  </div>
+</div>
+
+<!-- ============ 6. 工单详情 ============ -->
+<h2>6. 工单详情</h2>
+<div class="row" style="align-items:stretch;">
+  <div class="wf" style="flex:1; padding:8px;">
+    <div class="box hdr">工单 #20261024001　状态：<span class="tag b">处理中</span></div>
+    <div class="grid2" style="margin-top:6px;">
+      <div class="box lbl">工单类型（流程）</div><div class="box lbl">创建人</div>
+      <div class="box lbl">当前处理人</div><div class="box lbl">关联客户</div>
+      <div class="box lbl">关联通话 ▷ 可听录音</div><div class="box lbl">附件</div>
+    </div>
+    <div class="box hdr" style="margin-top:8px;">自定义业务字段区</div>
+    <div class="empty" style="height:56px;">按流程配置的字段动态渲染（单行/多行/数字/日期/级联/树形/复选/单选/附件）</div>
+    <div class="wf" style="padding:8px; margin-top:8px;">
+      <div class="box hdr">时限倒计时</div>
+      <div class="row"><div class="box lbl" style="flex:1">工单总时长剩余 2h15m</div><div class="box lbl" style="flex:1">本步骤剩余 45m</div></div>
+    </div>
+  </div>
+  <div class="wf" style="width:260px; padding:8px;">
+    <div class="box hdr">操作</div>
+    <div class="col">
+      <div class="box btn">执行动作（流转）</div>
+      <div class="box btn">退回</div>
+      <div class="box btn">改派处理人</div>
+      <div class="box btn">添加备注</div>
+      <div class="box btn">打印</div>
+    </div>
+    <div class="box hdr" style="margin-top:8px;">流转记录</div>
+    <div class="box lbl">张三 创建工单！</div>
+    <div class="box lbl">执行动作【受理】状态变更为【处理中】</div>
+    <div class="box lbl">变更工单处理人为【李四】</div>
+    <p class="cap">状态 = 流程步骤（自定义），不是固定枚举</p>
+  </div>
+</div>
+
+<!-- ============ 7. 监控（班长） ============ -->
+<h2>7. 平台监控（班长视角）</h2>
+<div class="wf" style="padding:10px;">
+  <div class="row"><div class="box btn">平台监控</div><div class="box btn">图表监控</div><div class="box btn">座席状态日志</div></div>
+  <div class="grid2" style="margin-top:10px;">
+    <div class="wf" style="padding:8px;">
+      <div class="box hdr">技能组监控</div>
+      <table class="wf"><tr><th>技能组</th><th>空闲</th><th>签入</th><th>排队</th><th>今日接通</th></tr>
+      <tr><td>售后一组</td><td>2</td><td>5</td><td><span class="tag">3</span></td><td>128</td></tr></table>
+      <p class="cap">排队数 &gt; 0 标红</p>
+    </div>
+    <div class="wf" style="padding:8px;">
+      <div class="box hdr">电话接入号监控</div>
+      <table class="wf"><tr><th>服务号</th><th>今日来电</th><th>未接</th><th>已接</th></tr>
+      <tr><td>02022221112</td><td>210</td><td>8</td><td>202</td></tr></table>
+    </div>
+  </div>
+  <div class="wf" style="padding:8px; margin-top:8px;">
+    <div class="box hdr">座席实时状态（17 列）</div>
+    <table class="wf">
+      <tr><th>座席</th><th>工号</th><th>接听方式</th><th>状态</th><th>状态时长</th><th>技能组</th><th>客户号码</th><th>操作</th></tr>
+      <tr>
+        <td>张三</td><td>8030</td><td>话机</td><td>通话中</td><td>02:14</td><td>售后一组</td><td>138****</td>
+        <td><span class="tag g">监听</span> <span class="tag">强拆</span> <span class="tag b">抢接</span> <span class="tag">签出</span></td>
+      </tr>
+    </table>
+    <p class="cap">班长只有：监听 / 结束监听 / 强拆 / 抢接 / 签出 / 签入。<b>没有强插与耳语</b>。</p>
+  </div>
+</div>
+
+<!-- ============ 8. 运营后台 ============ -->
+<h2>8. 平台运营后台（ExtJS 风格布局）</h2>
+<div class="wf" style="padding:10px;">
+  <div class="wf" style="padding:8px;">
+    <div class="row" style="align-items:center;">
+      <div class="box">Logo</div>
+      <div class="box lbl">欢迎，admin</div>
+      <div class="box lbl">上次登录 10-23 22:10</div>
+      <div style="flex:1"></div>
+      <div class="box lbl">余额 ¥128,450.00 <span class="cap">（5 秒轮询刷新）</span></div>
+      <div class="box lbl">今日外呼收入 ¥1,230</div>
+      <div class="box lbl">今日 400 收入 ¥860</div>
+      <div class="box btn">立即充值</div>
+      <div class="box">个人设置 ▾</div>
+      <div class="box btn">退出</div>
+    </div>
+  </div>
+  <div class="row" style="margin-top:8px; align-items:stretch;">
+    <div class="col" style="width:180px;">
+      <div class="box hdr">菜单（7 大类）</div>
+      <div class="box btn">账户</div><div class="box btn">资源</div><div class="box btn">报表</div>
+      <div class="box btn">系统</div><div class="box btn">我的财务</div><div class="box btn">话单</div>
+      <div class="box btn">客户经理财务</div>
+    </div>
+    <div class="wf" style="flex:1; padding:8px;">
+      <div class="box hdr">Tab 面板</div>
+      <div class="empty" style="height:150px;">账户管理 / 服务号管理 / 充值查询 / 话务量报表 …</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 9. 登录页 ============ -->
+<h2>9. 登录页</h2>
+<div class="row" style="align-items:flex-start;">
+  <div class="wf" style="width:320px; padding:14px;">
+    <div class="box hdr" style="text-align:center; padding:10px;">云呼叫中心</div>
+    <div class="col" style="margin-top:12px;">
+      <div class="box lbl">账号　<span class="cap">工号@账号名，例 8030@test</span></div>
+      <div class="box lbl">密码</div>
+      <div class="box hdr">登录方式</div>
+      <div class="row">
+        <div class="box btn" style="flex:1">手机</div>
+        <div class="box btn" style="flex:1">话机(推荐)</div>
+        <div class="box btn" style="flex:1">在线客服</div>
+      </div>
+      <div class="row"><div class="box lbl" style="flex:1">☑ 记住密码</div><div class="box lbl" style="flex:1">☑ 登录状态(示闲)</div></div>
+      <div class="box btn" style="padding:8px; font-weight:600;">登　录</div>
+      <div class="row"><div class="cap" style="flex:1">忘记密码？</div><div class="cap">滑块验证（异常时）</div></div>
+    </div>
+  </div>
+  <div style="flex:1; padding-left:16px;">
+    <div class="note" style="margin-top:0;">
+      <b>三个易错点：</b><br>
+      ① 账号<b>必须带 @账号名</b>，`@` 后即租户 —— 没有独立的企业ID输入框；<br>
+      ② 没有「登录后再选租户」的弹窗；<br>
+      ③ 三种登录方式里<b>没有 WebRTC</b> —— "在线客服"仍需外部软终端注册 SIP。
+    </div>
+    <div class="note">
+      <b>现网没有的能力（重建时别以为本来就有）：</b><br>
+      WebRTC 网页通话 · 强插/耳语 · 坐席外呼/录音/监听权限开关 · 电话并发上限 ·
+      问卷填空/评分题型 · 批量外呼失败重呼 · 独立节假日表 · 接口 AK-SK 鉴权
+    </div>
+  </div>
+</div>
+
+<p style="margin-top:40px; padding-top:12px; border-top:1px solid #ddd; font-size:12px; color:#888;">
+  本文件是布局线框，非视觉稿。字段与按钮以 <code>12_功能需求规格FRD.md</code> 为准，操作步骤以 <code>11_用户使用手册.md</code> 为准。
+</p>
+
+</body>
+</html>
