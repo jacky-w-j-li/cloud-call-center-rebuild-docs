@@ -1,0 +1,61 @@
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<body>
+<div>
+    <h1>hi,IM图片粘贴测试</h1>
+    <div>
+<div contenteditable="true" id="aaaaa">粘贴内容在这里</div>
+    </div>
+</div>
+<script type="text/javascript">
+    document.getElementById('aaaaa').onpaste =function(e){
+
+        if(e.clipboardData.items){
+           var ele = e.clipboardData.items;
+
+            for (var i = 0; i < ele.length; ++i) {
+                if ( ele[i].kind == 'file' && ele[i].type.indexOf('image/') !== -1 ) {
+                    var blob = ele[i].getAsFile();
+                    var xhr = {};
+                    if (window.XMLHttpRequest) {
+                        xhr = new XMLHttpRequest();
+                    } else {
+                        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+
+                    var fd = new FormData();
+                    fd.append("picToUpload", blob);
+                    /* event listeners */
+                    xhr.upload.addEventListener("progress", function () {
+                    }, false);
+                    xhr.addEventListener("load", function (evt) {
+                        if (evt.target.status == 200) {
+
+                        } else {
+
+
+                        }
+
+                    }, false);
+                    xhr.addEventListener("error", function (evt) {
+                    }, false);
+                    xhr.addEventListener("abort", function () {
+                    }, false);
+                    xhr.open("POST", "http://localhost:8011/chat");
+                    xhr.send(fd);
+                }
+
+            }
+
+        }
+
+    }
+
+
+
+</script>
+</body>
+</html>

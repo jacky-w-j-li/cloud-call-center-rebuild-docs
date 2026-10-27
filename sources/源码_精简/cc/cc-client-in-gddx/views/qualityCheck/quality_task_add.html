@@ -1,0 +1,366 @@
+<!--qulity_check_random-->
+<style type="text/css">
+span.cc_value{
+    float: left;
+}
+</style>
+<div class="modal-header">
+    <h3>抽取任务模板</h3>
+</div>
+<div class="modal-body" style="height:98%;">
+    <div class="row-fluid">
+    <form id="qualityTaskFrm_random" class="form-horizontal form-inline">
+        <div>
+            <label>
+                任务名称
+            </label>
+            <span style="margin-right: 5px;">
+                <input type="text" style="width: 130px" placeholder="最多输入10个字符" name="TASK_NAME" class="input-small" maxlength="10">
+            </span>
+            <br>
+            <label>
+                质检模板
+            </label>
+            <span style="margin-left: 2px;" id="task_Template">
+
+            </span>
+        </div>
+        <div class="clear10"></div>
+        <div>
+                <label>
+                    抽取规则
+                </label>
+                <span style="margin-right: 5px;">
+                    <input type="radio" name="extraction_rule" class="qualityCheckRadio qualityTaskRadio" checked>
+                    <select name="COUNT_TYPE_NUM" style="width: 100px;">
+                        <option value="per_num">人均条数</option>
+                        <option value="entirety_num">整体条数</option>
+                    </select>
+                    <input type="text" style="width: 50px" maxlength="4" value="10" dataType="Number" msg="只能输入正整数" name="RANDOMNUM" class="input-small">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="extraction_rule" class="qualityCheckRadio qualityTaskRadio extraction_rule_percent">
+                    <select name="COUNT_TYPE_PERCENT" style="width: 100px;" disabled="disabled">
+                        <option value="per_percent">人均百分比</option>
+                        <option value="entirety_percent">整体百分比</option>
+                    </select>
+                    <div class="input-append"><input type="text" style="width: 30px" maxlength="3" value="10" dataType="Number" msg="只能输入正整数" name="PERCENT" class="input-small" disabled="disabled">
+                        <span class="add-on" style="height: 14px;line-height: 15px">%</span></div>
+                </span>
+        </div>
+        <div class="clear10"></div>
+        <div>
+            <label>
+                呼叫时间
+            </label>
+            <div class="input-append date form_datetime">
+                <input id="quality_task_picker_start" size="16" class="input-medium" name="BEGIN_TIME" type="text" value="" readonly style="z-index:1060;">
+                <span class="add-on datetimepicker-remove" style="height: 14px;line-height: 15px"><i class="icon-remove"></i></span>
+                <span class="add-on datetimepicker-open" style="height: 14px;line-height: 15px"><i class="icon-th"></i></span>
+            </div>
+            <div style="padding-top: 5px;display: inline">
+                至
+            </div>
+            <div class="input-append date form_datetime">
+                <input id="quality_task_picker_end" size="16" class="input-medium" name="END_TIME" type="text" value="" readonly style="z-index:1060;">
+                <span class="add-on datetimepicker-remove" style="height: 14px;line-height: 15px"><i class="icon-remove"></i></span>
+                <span class="add-on datetimepicker-open" style="height: 14px;line-height: 15px"><i class="icon-th"></i></span>
+            </div>
+        </div>
+        <div class="clear10"></div>
+
+        <div>
+            <div class="pull-left">
+                <label class="pull-left">呼叫类型</label>
+                <div class="pull-left" style="margin:2px 0 15px 5px">
+                <span>
+                    <input type="hidden" id="connectTypeArr" name="connectTypeArr"/>
+                </span>
+                </div>
+                <div class="pull-left" style="margin-right: 9px">
+                    <span id="quality_task_connect_type" class="combobox_agent"></span>
+                </div>
+            </div>
+
+            <!--<select name="CONNECT_TYPE" class="call_type_selector"></select>-->
+            <div class="pull-left">
+                <label class="pull-left">技能组</label>
+                <div class="pull-left" style="margin:2px 0 15px 5px">
+                <span>
+                    <input type="hidden" id="queueTypeArr" name="queueTypeArr"/>
+                </span>
+                </div>
+                <div class="pull-left">
+                    <span id="quality_task_queues" class="combobox_agent"></span>
+                </div>
+            </div>
+
+            <!--<select name="MYQUEUE" class="queue_selector"></select>-->
+        </div>
+        <div class="clear10"></div>
+        <div>
+            <label class="pull-left">质检专员</label>
+            <span style="margin-left: 5px;float:left">
+                <input name="QA_SPECIALIST" type="hidden" class="ds_search_item select_input" id="quality_task_agent_input" style="float:none;"/>
+                <span id="quality_task_commissioner_user" class="combobox_agent"></span>
+            </span>
+        </div>
+        <div class="clear10"></div>
+        <div>
+            <label class="pull-left">通话座席</label>
+            <div class="pull-left" style="margin:2px 0 15px 5px">
+                <span id="agent_task_select_agents">
+                    <input type="hidden" class="ds_search_item select_input" id="quality_task_input" style="float:none;"/>
+                    <input type="hidden" id="task_selectedAgentList" name="selectedAgentList"/>
+                </span>
+            </div>
+            <div class="pull-left">
+                <span id="quality_task_agent_user" class="combobox_agent"></span>&nbsp;<input type="checkbox" id="agent_task_checkbox" name="includeSubordinate">&nbsp;包含已选座席下级
+            </div>
+        </div>
+        <div class="clear10"></div>
+        <div>
+            <label for="CALL_TIME_LENGTH">通话时长</label>
+            <div class="input-append"><input type="text" style="width: 55px" name="CALL_TIME_LENGTH_BEGIN" dataType="Number" msg="时长条件只能为0和正整数" class="input-small"><span class="add-on" style="height: 14px;line-height: 15px">秒</span></div> 至
+            <div class="input-append"><input type="text" style="width: 55px" name="CALL_TIME_LENGTH_END"  dataType="Number" msg="时长条件只能为0和正整数" class="input-small"><span class="add-on" style="height: 14px;line-height: 15px">秒</span></div>
+            <label>&nbsp;&nbsp;&nbsp;满意度</label>
+            <select name="INVESTIGATE" class="investigate_selector"></select>
+        </div>
+        <div class="clear10"></div>
+        <div>
+            <a href="#" class="button ds_form_action" id="callSheetQualityCheckQueryRandomSaveAndSelectBtn" ds_action="qualityCheck.addAndSelect_task_template"  style="margin:2px 5px;">创建任务并抽取</a>
+            <a href="#" class="button ds_do_action quality_resetForm" ds_action="resetForm" ds_data="resetSpan" style="margin:2px 5px;" >重置</a>
+            <a href="#" class="button ds_do_action quality_task_close_btn"  style="margin:2px 5px;" >关闭</a>
+        </div>
+        <br/>
+    </form>
+    </div>
+</div>
+<style>
+</style>
+<script type="text/javascript">
+    $(function(){
+        //初始化加载质检模板
+        $('#task_Template').html(handler.qualityCheck.initQualityCheckRadio());
+        $('#task_Template').find('input').attr('name','TASK_TEMPLATE');
+        $('#qualityTaskFrm_random .quality_task_close_btn').click(function(){
+            $('#quality_task_add_pane').modal('hide');
+        });
+        $('#quality_task_picker_start').datetimepicker({
+//            controlType: utils.jqueryUITimepickerControl,
+            timeFormat: "HH:mm:ss",
+            dateFormat: "yy-mm-dd",
+            showSecond: true
+        });
+        $('#quality_task_picker_end').datetimepicker({
+//            controlType: utils.jqueryUITimepickerControl,
+            timeFormat: "HH:mm:ss",
+            dateFormat: "yy-mm-dd",
+            showSecond: true
+        });
+        utils.loadSearchInput({ id: "quality_task_agent_user",
+            width: "179",
+            height: "14",
+            tip: "按姓名,拼音,工号搜索",
+            data: getCache("agents"),
+            listField: ["displayName", "exten"],
+            userIdField: "_id",
+            searchField: ["displayName", "exten", "pinyin"],
+            pinyinField: ["displayName"],
+            showField: "displayName",
+            showAllList: true,
+            callbackFuc: function (object) {
+                if($.isArray(object)){
+                    return;
+                }
+                var currentVals = $("input[name='selectedAgents']");
+
+                var ishas = false;
+                for (var i = 0; i < currentVals.length; i++) {
+                    if (currentVals[i].value === object._id) {
+                        ishas = true;
+                    }
+                }
+                if (!ishas) {
+                    $('#agent_task_select_agents').before("<span id=" + object._id + "_task class='cc_value'><input type='hidden' name='selectedAgents' value=" + object._id + ">" +
+                            "<span class='label label-info'>" + object.displayName +
+                            "</span><a href='#' onclick=remove_agent_task('" + object._id + "_task')><i class='icon-remove'></i></a>&nbsp;</span>");
+                }
+                countSelectAgentTask();
+            }
+            /*onKeyChanged: function () {
+                if ($("#quality_task_agent_user_input").val() != "") {
+                    $("#selectedAgentList").val("serachInputNoresult");
+                } else {
+                    $("selectedAgentList").val("");
+                }
+            }*/
+
+        });
+        utils.loadSearchInput({ id: "quality_task_commissioner_user",
+            width: "179",
+            height: "14",
+            tip: "按姓名,拼音,工号搜索",
+            data: getCache("agents"),
+            searchField: ["displayName", "exten", "pinyin"],
+            pinyinField: ["displayName"],
+            listField: ["displayName", "exten"],
+            userIdField: "_id",
+            showField: "displayName",
+            showAllList: true,
+            callbackFuc: function (object) {
+                $("#quality_task_agent_input").val(object._id);
+                //alert(object._id);
+            },
+            onKeyChanged: function () {
+                if ($("#quality_task_commissioner_user_input").val() != "") {
+                    $("#quality_task_agent_input").val("serachInputNoresult");
+                } else {
+                    $("#quality_task_agent_input").val("");
+                }
+            }
+        });
+        $('#qualityTaskFrm_random .quality_resetForm').click(function () {
+            $(" #qualityTaskFrm_random select[name='COUNT_TYPE_NUM']").attr("disabled",false);
+            $(" #qualityTaskFrm_random input[name='RANDOMNUM']").attr("disabled",false);
+            $("#qualityTaskFrm_random select[name='COUNT_TYPE_PERCENT']").attr("disabled",true);
+            $("#qualityTaskFrm_random input[name='PERCENT']").attr("disabled",true);
+            if ($('#task_selectedAgentList').val()) {
+                $('#task_selectedAgentList').val("");
+            }
+            if ($('#connectTypeArr').val()) {
+                $('#connectTypeArr').val("");
+            }
+            if ($('#queueTypeArr').val()) {
+                $('#queueTypeArr').val("");
+            }
+        });
+
+        $('#qualityTaskFrm_random .qualityTaskRadio').click(function () {
+            $(" #qualityTaskFrm_random select[name='COUNT_TYPE_NUM']").attr("disabled",false);
+            $(" #qualityTaskFrm_random input[name='RANDOMNUM']").attr("disabled",false);
+
+            $("#qualityTaskFrm_random select[name='COUNT_TYPE_PERCENT']").attr("disabled",true);
+            $("#qualityTaskFrm_random input[name='PERCENT']").attr("disabled",true);
+        })
+        $('#qualityTaskFrm_random .extraction_rule_percent').click(function () {
+            $("#qualityTaskFrm_random select[name='COUNT_TYPE_PERCENT']").attr("disabled",false);
+            $("#qualityTaskFrm_random input[name='PERCENT']").attr("disabled",false);
+
+            $("#qualityTaskFrm_random select[name='COUNT_TYPE_NUM']").attr("disabled",true);
+            $("#qualityTaskFrm_random input[name='RANDOMNUM']").attr("disabled",true);
+
+        })
+        var allQueues = getCache("queues");//callType
+        utils.loadSearchInput({ id: "quality_task_queues",
+            width: "149",
+            height: "14",
+            tip: "按技能组名搜索",
+            data: allQueues,
+            listField: ["DisplayName"],
+            userIdField: "_id",
+            searchField: ["DisplayName"],
+            pinyinField: ["DisplayName"],
+            showAllList: true,
+            cacheData: "queues",
+            callbackFuc: function (object) {
+                if($.isArray(object)){
+                    return;
+                }
+                var currentVals = $("input[name='selectedQueue_task']");
+
+                var ishas = false;
+                for (var i = 0; i < currentVals.length; i++) {
+                    if (currentVals[i].value === object.Exten) {
+                        ishas = true;
+                    }
+                }
+                if (!ishas) {
+                    $('#queueTypeArr').before("<span id=" + object._id + "_queueTask class='cc_value'><input type='hidden' name='selectedQueue_task' value=" + object.Exten + "><span class='label label-info'>"
+                            + object.DisplayName +
+                            "</span><a href='#' onclick=removeQueue('" + object._id + "_queueTask')><i class='icon-remove'></i></a>&nbsp;</span>");
+                }
+                countSelectQueue();
+            }
+        });
+        var allQueues = getCache("callType");//
+        utils.loadSearchInput({ id: "quality_task_connect_type",
+            width: "149",
+            height: "14",
+            tip: "按呼叫类型名搜索",
+            data: allQueues,
+            listField: ["code_name"],
+            userIdField: "_id",
+            searchField: ["code_name"],
+            pinyinField: ["code_name"],
+            showAllList: true,
+            cacheData: "callType",
+            callbackFuc: function (object) {
+                if($.isArray(object)){
+                    return;
+                }
+                var currentVals = $("input[name='selectedConnectType_task']");
+
+                var ishas = false;
+                for (var i = 0; i < currentVals.length; i++) {
+                    if (currentVals[i].value === object.code_value) {
+                        ishas = true;
+                    }
+                }
+                if (!ishas) {
+                    $('#connectTypeArr').before("<span id=" + object._id + "_connectTask class='cc_value'><input type='hidden' name='selectedConnectType_task' value=" + object.code_value + "><span class='label label-info'>"
+                            + object.code_name +
+                            "</span><a href='#' onclick=removeConnectType('" + object._id + "_connectTask')><i class='icon-remove'></i></a>&nbsp;</span>");
+                }
+                countSelectConnectType();
+            }
+        });
+
+    });
+
+    function remove_agent_task(id) {
+        $('#' + id).remove();
+        countSelectAgentTask();
+    }
+    function countSelectAgentTask() {
+        $("#quality_task_agent_user_input").val('');
+        var currentVals = $("input[name='selectedAgents']");
+        var ExtenStr = '';
+        for (var i = 0; i < currentVals.length; i++) {
+            ExtenStr += currentVals[i].value;
+            if (i != currentVals.length - 1) {
+                ExtenStr += ',';
+            }
+        }
+        $('#task_selectedAgentList').val(ExtenStr);
+    }
+    function removeQueue(id) {
+        $('#' + id).remove();
+        countSelectQueue();
+    }
+    function countSelectQueue() {
+        var currentVals = $("input[name='selectedQueue_task']");
+        var ExtenStr = '';
+        for (var i = 0; i < currentVals.length; i++) {
+            ExtenStr += currentVals[i].value;
+            if (i != currentVals.length - 1) {
+                ExtenStr += ',';
+            }
+        }
+        $('#queueTypeArr').val(ExtenStr);
+    }
+    function removeConnectType(id) {
+        $('#' + id).remove();
+        countSelectConnectType();
+    }
+    function countSelectConnectType() {
+        var currentVals = $("input[name='selectedConnectType_task']");
+        var ExtenStr = '';
+        for (var i = 0; i < currentVals.length; i++) {
+            ExtenStr += currentVals[i].value;
+            if (i != currentVals.length - 1) {
+                ExtenStr += ',';
+            }
+        }
+        $('#connectTypeArr').val(ExtenStr);
+    }
+</script>

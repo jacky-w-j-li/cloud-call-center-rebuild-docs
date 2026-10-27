@@ -1,0 +1,85 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form id="frm_accFee_search" class="form-horizontal">
+            <input type="hidden" name="name" value="_#name#_">
+            <table class="table_row_search">
+                <tbody>
+                <tr>
+                    <td >日期 </td>
+                    <td>
+                        <select name="year" class="form-control input-sm " style="display:inline-block;width: auto;">
+                            <option value="">--请选择--</option>
+                            <option value="2013">2013</option>
+                            <option value="2014" >2014</option>
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                        </select>年
+                    </td>
+                    <td >
+                        <select name="month" class="form-control input-sm " style="display:inline-block;width: auto;">
+                            <option value="">--请选择--</option>
+                            <option value="01">1</option>
+                            <option value="02">2</option>
+                            <option value="03">3</option>
+                            <option value="04">4</option>
+                            <option value="05">5</option>
+                            <option value="06">6</option>
+                            <option value="07">7</option>
+                            <option value="08">8</option>
+                            <option value="09">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>月
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm agent_search ds_form_action" ds_action="accFee.getAccountMonthList">查询</button>
+
+                        <button type="button" class="btn btn-default btn-sm ds_do_action" ds_action="accFee.reset" >重置</button>
+                        <button type="button" class="btn btn-primary btn-sm  ds_form_action" ds_action="accFee.exportyyMonthList">导出</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+
+<div class="panel panel-info">
+    <div class="panel-heading">月汇总语音验证码</div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>月份</th>
+            <th class="companyNameRow" style="display: none">账户名</th>
+            <th>实际消费(元)</th>
+            <th>语音验证码总量(个)</th>
+            <th>总时长(分钟)</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody class="month_list">
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <div class="col-md-5">查询结果：<span class="result_count" style="margin-top:3px;display: inline-block;">0</span></div>
+    <div class=" col-md-7">
+        <ul class="pagination pagination-sm pull-right" style="margin: 0;"
+            for="frm_accFee_search" ds_pagination_action="accFee.getAccountMonthList">
+            <li><a href="#"  value="0">&laquo;</a></li>
+            <li><a href="#"  value="1">1</a></li>
+            <li><a href="#"  value="2">2</a></li>
+            <li><a href="#"  value="3">3</a></li>
+            <li><a href="#"  value="4">4</a></li>
+            <li><a href="#"  value="5">5</a></li>
+            <li><a href="#"  value="6">&raquo;</a></li>
+        </ul>
+    </div>
+</div>
+<style type="text/css">
+    /*.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{*/
+    /*z-index: 1;*/
+    /*}*/
+</style>

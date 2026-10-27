@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script type="text/javascript" src="./javascripts/jquery.js"></script>
+    <script type="text/javascript" src="./javascripts/config/business/jquery-ui.js"></script>
+    <script type="text/javascript" src="./javascripts/combox.js"></script>
+    <!--<script type="text/javascript" src="./jqueryui/ui/minified/jquery.ui.core.min.js"></script>-->
+    <!--<script type="text/javascript" src="./jqueryui/ui/minified/i18n/jquery.ui.datepicker-zh-CN.min.js"></script>-->
+    <!--<script type="text/javascript" src="./jqueryui/ui/minified/jquery.ui.datepicker.min.js"></script>-->
+
+    <!--<script type="text/javascript" src="./javascripts/highcharts.js"></script>-->
+    <script type="text/javascript" src="./javascripts/bootstrap.js"></script>
+    <script type="text/javascript" src="./javascripts/ds_framework/dishui.js"></script>
+
+    <script type="text/javascript" src="javascripts/render.js"></script>
+    <script type="text/javascript" src="javascripts/utils.js"></script>
+    <!--<script type="text/javascript" src="javascripts/softphonebar.js"></script>-->
+    <!--<script type="text/javascript" src="javascripts/phone.js"></script>-->
+    <!--<script type="text/javascript" src="javascripts/app.js"></script>-->
+    <script type="text/javascript" src="./javascripts/jquery.json.min.js"></script>
+    <script type="text/javascript" src="javascripts/handler.js"></script>
+    <script type="text/javascript" src="./javascripts/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="./javascripts/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script type="text/javascript" src="./javascripts/jquery.tmpl.min.js"></script>
+    <!--<script type="text/javascript" src="javascripts/customer.js"></script>-->
+    <!--<script type="text/javascript" src="javascripts/task.js"></script>-->
+    <!--<script type="text/javascript" src="javascripts/callReport.js"></script>-->
+    <!--<script type="text/javascript" src="javascripts/cdr.js"></script>-->
+    <!--<link rel=stylesheet type=text/css href="./stylesheets/bootstrap.css">-->
+    <!--<link rel=stylesheet type=text/css href="./stylesheets/bootstrap1.css">-->
+    <!--<link rel=stylesheet type=text/css href="stylesheets/app.css">-->
+    <!--<link rel=stylesheet type=text/css href="./stylesheets/datetimepicker.css">-->
+    <link rel=stylesheet type=text/css href="./jqueryui/base/jquery-ui.css">
+    <style type="text/css">
+        /*body a{outline:none;blr:expression(this.onFocus=this.blur());}*/
+        .ui-autocomplete {
+            max-height: 150px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+            font-size: 14px;
+        }
+            /* IE 6 doesn't support max-height
+             * we use height instead, but this forces the menu to always be this tall
+             */
+        * html .ui-autocomplete {
+            height: 150px;
+        }
+        input{
+            outline:none;
+        }
+        body{
+
+        }
+    </style>
+    <script>
+//        $(function() {
+//            var agents=[
+//                {
+//                    value: "fac22d40-1bce-11e4-bf27-3b5e626dff7b",
+//                    account: "N00000000154",
+//                    label: "8010",
+//                    exten: "8010",
+//                    loginName: "8010",
+//                    pinyin: "8010"
+//                }
+//            ]
+//            $( "#tags" ).autocomplete({
+//                source: agents
+//            });
+
+//            agents.push({_id:"empty",displayName:"无所属人",pinyin:"wusuoshuren"});
+//    agents.push({_id:"empty",displayName:"无所属人",pinyin:"wusuoshuren"});
+//    var _agents=emptyAgents.concat(agents);
+//    console.dir(_agents);
+
+/*            agents=[
+                {
+                    _id: "fac22d40-1bce-11e4-bf27-3b5e626dff7b",
+                    account: "N00000000154",
+                    displayName: "王五",
+                    exten: "8010",
+                    loginName: "8010",
+                    pinyin: "8010"
+                },
+                {
+                    _id: "fac22d40-1bce-11e4-bf27-3b5e626dff7c",
+                    account: "N00000000154",
+                    displayName: "王六",
+                    exten: "8011",
+                    loginName: "8011",
+                    pinyin: "8011"
+                }
+            ]
+            var emptyAgents=[{_id:"empty",displayName:"无所属人",pinyin:"wusuoshuren"}];
+            emptyAgents=emptyAgents.concat(agents);
+            utils.loadSearchInput({ id: "owner_select_user",
+                width: "150",
+//                height: "18",
+                tip: "按姓名、工号、拼音搜索",
+                data: emptyAgents,
+                searchField: ["displayName","exten"],
+                pinyinField: ["displayName"],
+                listField: ["displayName","exten"],
+                userIdField: "_id",
+                showField: "displayName",
+                showAllList: true,
+                callbackFuc: function (object) {
+                    $("owner_select_input").val(object._id);
+                },
+                onKeyChanged: function () {
+                    if ($("select_user_input").val() != "") {
+                        $("owner_select_input").val("serachInputNoresult");
+                    } else {
+                        $("owner_select_input").val("");
+                    }
+                }
+            });
+        });*/
+        var getCurrentWeek=function(date){
+            var oToday = new Date(date);
+            var currentDay = oToday.getDay();
+            if (currentDay == 0) { currentDay = 7 }
+            var mondayTime = oToday.getTime() - (currentDay - 1) * 24 * 60 * 60 * 1000;
+            var sundayTime = oToday.getTime() + (7 - currentDay) * 24 * 60 * 60 * 1000;
+
+            var monday=new Date(mondayTime).getDate();
+            var sunday=new Date(sundayTime).getDate();
+        }
+        var getLastWeek=function(date){
+            var oToday = new Date(date);
+            var currentDay = oToday.getDay();
+            if (currentDay == 0) { currentDay = 7 }
+            var mondayTime = oToday.getTime() - (currentDay - 1) * 24 * 60 * 60 * 1000;
+            var lastMondayTime=mondayTime-7* 24 * 60 * 60 * 1000;
+            var lastSundayTime=mondayTime-1* 24 * 60 * 60 * 1000;
+            var lastMonday=new Date(lastMondayTime).getDate();
+            var lastSunday=new Date(lastSundayTime).getDate();
+        }
+
+        var d=new Date()
+        var day=d.getDay();
+        var time="2014-08-28";
+        var oToday = new Date(time);
+        var currentDay = oToday.getDay();
+        if (currentDay == 0) { currentDay = 7 }
+        var mondayTime = oToday.getTime() - (currentDay - 1) * 24 * 60 * 60 * 1000;
+        var sundayTime = oToday.getTime() + (7 - currentDay) * 24 * 60 * 60 * 1000;
+
+        var lastMondayTime=mondayTime-7* 24 * 60 * 60 * 1000;
+        var lastSundayTime=mondayTime-1* 24 * 60 * 60 * 1000;
+        var lastMonday=new Date(lastMondayTime).getDate();
+        var lastSunday=new Date(lastSundayTime).getDate();
+
+
+//        alert("今天是" + oToday.getDate() + "号，星期" + currentDay + "\r");
+//        alert("周一是" + new Date(mondayTime).getDate() + "号，周日是" + new Date(sundayTime).getDate() + "号")
+//        alert("周一是" + lastMonday + "号，周日是" + lastSunday + "号")
+//        alert("周一 " + new Date(mondayTime).toLocaleDateString() + "\n周末 " + new Date(sundayTime).toLocaleDateString() + " " + new Date(mondayTime).toLocaleTimeString())
+
+
+//var str="36.7.111.84:50529";
+//console.info(str.substring(0,str.indexOf(":")));
+
+        var statuses={
+            status0 : "普通客户",
+            status3 : "VIP客户"
+        }
+            console.dir(statuses);
+        for(var i in statuses){
+
+            console.info(i)
+            console.info(statuses[i])
+        }
+    </script>
+</head>
+<body style="margin: 15px;">
+<!--<div class="input-append">-->
+    <!--<input type="text" id="tags">-->
+    <!--<button class="btn" tabindex="-1">-->
+    <!--<span class="caret"></span>-->
+<!--</button>-->
+<!--</div>-->
+<!--<form class="form-horizontal">-->
+    <!--<div class="control-group">-->
+        <!--<label class="control-label" for="">所属人</label>-->
+        <!--<div class="controls">-->
+            <!--<input name="owner" type="hidden" class="ds_search_item select_input" id="owner_select_input" />-->
+            <!--<div id="owner_select_user input-append" style="" >-->
+
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</form>-->
+
+<div class="ds_owner">
+    <label>所属人</label>
+    <input name="owner" type="hidden" class="ds_search_item select_input" id="owner_select_input" />
+    <div id="owner_select_user" class="input-append" style="float:left;position: relative;" >
+
+    </div>
+</div>
+<div class="div_1" style="padding: 10px;margin: 20px;border: solid 1px #cccccc;width: 100px;height: 50px;">
+    士大夫
+    士大夫
+</div>
+<div style="width: 100%;height: 100%;">
+    <div style="width: 38%;float: left;">aa</div>
+    <div style="width: 62%;float:left;">bb</div>
+</div>
+<!--<div id="owner_select_user_div" style="/* display: none; */ position: absolute; left: 16px; top: 62px; width: 206px;" class="phone_search_input" index="-1" total="2"><ul id="owner_select_user_ul"><li userid="fac22d40-1bce-11e4-bf27-3b5e626dff7b" class="search_input_li" onmouseover="this.style.background='#ccc'" onmouseout="this.style.background='';"><div style="/* float:left */">王五</div></li><li userid="fac22d40-1bce-11e4-bf27-3b5e626dff7c" class="phone_search_odd search_input_li" onmouseover="this.style.background='#ccc'" onmouseout="this.style.background='';"><div style="float:left">王六</div></li></ul></div>-->
+
+<!--<div class="input-append">
+    <input type="text" id="tags">
+    <div class="btn-group">
+        &lt;!&ndash;<button class="btn dropdown-toggle" data-toggle="dropdown" tabindex="-1">&ndash;&gt;
+        <button class="btn" tabindex="-1">
+            <span class="caret"></span>
+        </button>
+        &lt;!&ndash;<ul class="dropdown-menu">&ndash;&gt;
+            &lt;!&ndash;<li><a href="#">Action</a></li>&ndash;&gt;
+            &lt;!&ndash;<li><a href="#">Another action</a></li>&ndash;&gt;
+            &lt;!&ndash;<li><a href="#">Something else here</a></li>&ndash;&gt;
+            &lt;!&ndash;<li class="divider"></li>&ndash;&gt;
+            &lt;!&ndash;<li><a href="#">Separated link</a></li>&ndash;&gt;
+        &lt;!&ndash;</ul>&ndash;&gt;
+    </div>
+</div>-->
+
+
+
+<!--<ul class="nav nav-tabs" >
+    <li class="active"><a href="#" onFocus="this.blur()" style="outline: none" hidefocus>首页</a></li>
+    <li><a href="#">资料</a></li>
+    <li class="disabled"><a href="#">信息</a></li>
+    <li class="dropdown pull-right"><a class="dropdown-toggle" data-toggle="dropdown" href="#">下拉 </a>
+        <ul class="dropdown-menu">
+            <li><a href="#" onFocus="this.blur()">操作</a></li>
+            <li><a href="#">设置栏目</a></li>
+            <li><a href="#">更多设置</a></li>
+            <li class="divider">&nbsp;</li>
+            <li><a href="#">分割线</a></li>
+        </ul>
+    </li>
+</ul>
+<br/>
+<ul class="nav nav-tabs">
+    <li class="active">
+        <a href="#">Home</a>
+    </li>
+    <li><a href="#">...</a></li>
+    <li><a href="#">...</a></li>
+</ul>-->
+<!--<table border="1" cellspacing="0" bordercolor="#000000" width = "80%" style="border-collapse:collapse;">
+    <th><td>sss</td></th>
+    <tr>
+        <td>1.1</td>
+        <td>1.2</td>
+    </tr>
+    <tr>
+        <td>2.1</td>
+        <td>2.2</td>
+    </tr>
+</table>-->
+
+<br/>
+
+<label for="autocomplete">Select a programming language: </label>
+<input id="autocomplete" >
+<input id="autocomplete3" >
+<!--onfocus="(document.bgColor='blue')" onblur="(document.bgColor='green')"-->
+<br>
+
+<div>
+    <span id="cust_owner" uid="fac22d40-1bce-11e4-bf27-3b5e626dff7d">王海</span>
+    <input id="autocomplete2_hidden" name="owner" type="hidden">
+    <input id="autocomplete2" type="text" class="input-mini" style="display: none;" placeholder="按姓名,拼音,工号搜索">
+    <!--<ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-id-2" tabindex="0" style="display: block; width: 119px; top: 275px; left: 15px;">-->
+        <!--<li class="ui-menu-item" role="presentation">-->
+            <!--<a id="ui-id-3" class="ui-corner-all" tabindex="-1">java</a>-->
+        <!--</li>-->
+        <!--<li class="ui-menu-item" role="presentation">-->
+            <!--<a id="ui-id-32" class="ui-corner-all" tabindex="-1">java</a>-->
+        <!--</li>-->
+    <!--</ul>-->
+</div>
+</body>
+</html>
+
+<script>
+    /*var content = $(".div_1").width();
+    var contentWithPadding = $(".div_1").innerWidth();
+    var withoutMargin =$(".div_1").outerWidth();
+    var full = $(".div_1").outerWidth(true);
+    console.debug(content+" "+contentWithPadding+" "+withoutMargin+" "+full);
+    var content1 = $(".div_1").height();
+    var contentWithPadding1 = $(".div_1").innerHeight();
+    var withoutMargin1 =$(".div_1").outerHeight();
+    var full1 = $(".div_1").outerHeight(true);
+    console.debug(content1+" "+contentWithPadding1+" "+withoutMargin1+" "+full1);*/
+
+//    var str="1234_abc_def";
+//    document.writeln(str.indexOf("_"))
+//
+//    var obj={a:[{b:1,c:1}]}
+//    document.writeln(JSON.stringify(obj));
+
+    var tags = [ "c++", "java", "php", "coldfusion", "javascript", "asp", "ruby" ];
+    var autocomplete=$( "#autocomplete" ).autocomplete({
+//        autoFocus: true,
+//        source: function( request, response ) {
+//            console.dir(request);
+//            var matcher = new RegExp( "^"+ $.ui.autocomplete.escapeRegex( request.term ), "i" );
+//            response( $.grep( tags, function( item ){
+//                return matcher.test( item );
+//            }) );
+//        }
+        minLength:0,
+//        focus: function(event,ui) {
+//            console.dir(event)
+//            if(!this._value()){
+//                console.dir(event)
+//                this.search( null, event )
+//            }
+//            return false;
+//        },
+
+        source: function( request, response ) {
+            var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
+//            console.dir(request);
+//            console.dir(response);
+            if(request.term){
+                response( $.grep( tags, function( item ){
+                    return matcher.test( item );
+                }) );
+            }else{
+                response(tags);
+            }
+
+        }
+//        open: function( event, ui ) {
+//            console.info("openopenopenopenopenopenopenopen")
+//            console.dir(event);
+//            console.dir(ui)
+////            $( "#autocomplete2" ).val(ui.item.displayName);
+//        }
+    });
+    //////////////////////////////////////////////////////////////////
+    var agents=[
+        {
+            _id: "",
+            account: "N00000000154",
+            displayName: "无所属人",
+            exten: "",
+            loginName: "",
+            pinyin: "wusuoshuren"
+        },
+        {
+            _id: "fac22d40-1bce-11e4-bf27-3b5e626dff7b",
+            account: "N00000000154",
+            displayName: "王五",
+            exten: "8010",
+            loginName: "8010",
+            pinyin: "wangwu"
+        },
+        {
+            _id: "fac22d40-1bce-11e4-bf27-3b5e626dff7c",
+            account: "N00000000154",
+            displayName: "张三",
+            exten: "8011",
+            loginName: "8011",
+            pinyin: "zhangsan"
+        },
+        {
+            _id: "fac22d40-1bce-11e4-bf27-3b5e626dff7c",
+            account: "N00000000154",
+            displayName: "张三1",
+            exten: "8011",
+            loginName: "8011",
+            pinyin: "zhangsan"
+        },
+        {
+            _id: "fac22d40-1bce-112e4-bf27-3b5e626dff7c",
+            account: "N00000000154",
+            displayName: "张三2",
+            exten: "8011",
+            loginName: "8011",
+            pinyin: "zhangsan"
+        },
+        {
+            _id: "fac22d40-1bce-11e4-bf27-3b5e626dff7d",
+            account: "N00000000154",
+            displayName: "kaka",
+            exten: "8011",
+            loginName: "8011",
+            pinyin: "zhangsan"
+        },
+        {
+            _id: "fac22d40-1bce-131e4-bf27-3b5e626dff7c",
+            account: "N00000000154",
+            displayName: "张三3",
+            exten: "8011",
+            loginName: "8011",
+            pinyin: "zhangsan"
+        },
+        {
+            _id: "fac22d40-1bce-11e4-bf27-3b5e626dff7c",
+            account: "N00000000154",
+            displayName: "张三",
+            exten: "8011",
+            loginName: "8011",
+            pinyin: "zhangsan"
+        },
+        {
+            _id: "fac22d40-1bce-11e44-bf27-3b5e626dff7c",
+            account: "N00000000154",
+            displayName: "张三4",
+            exten: "8011",
+            loginName: "8011",
+            pinyin: "zhangsan"
+        }
+    ];
+
+    $("#cust_owner").click(function(){
+        $(this).hide();
+        $("#autocomplete2").show();
+        $("#autocomplete2").focus();
+    });
+
+ /*   var combox=$( "#autocomplete2" ).combox({
+        minLength:0,
+        displayField:'cust_owner',
+        source: function( request, response ) {
+            var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
+//            console.dir(request);
+//            console.dir(response);
+            if(request.term){
+                response( $.grep(agents, function( item ){
+                    return matcher.test(item.displayName)||matcher.test(item.exten)||matcher.test(item.pinyin);
+                }) );
+            }else{
+                response(agents);
+            }
+        },
+        select: function( event, ui ) {
+            $("#cust_owner").attr("uid",ui.item._id);
+            $("#autocomplete2_hidden").val(ui.item._id);
+            $( "#autocomplete2" ).val(ui.item.displayName);
+            $( "#autocomplete2").blur();
+//            $( "#project" ).val( ui.item.label );
+//            $( "#project-id" ).val( ui.item.value );
+//            $( "#project-description" ).html( ui.item.desc );
+//            $( "#project-icon" ).attr( "src", "images/" + ui.item.icon );
+            return false;
+        },
+        focus: function( event, ui ) {
+            console.info("focus=====")
+            console.dir(ui);
+            console.dir(event);
+        },
+        open: function( e, ui ) {
+            console.info("openopenopenopenopenopenopenopen")
+//            console.dir(event);
+//            console.dir(ui);
+            var instance=$("#autocomplete2").data("custom-combox");
+//            console.dir(instance)
+            var _owner=$("#cust_owner").attr("uid");
+            if(instance && !$("#autocomplete2").val()){
+                var container=instance.menu.element;
+
+                container.find("li").each(function(i){
+                    var _uid=$(this).attr("uid");
+                    if(_uid==_owner){
+                        console.info("_owner=="+_owner);
+
+                        var _scrollTop=$(this).offset().top-container.offset().top+container.scrollTop();
+//                        console.info("container top==="+container.offset().top);
+//                        console.info("top==="+$(this).offset().top);
+//                        console.info("scrollTop2==="+$(this).scrollTop());
+//                        console.info("position top==="+$(this).position().top);
+//                        console.info("scrollTop2==="+$(this).scrollTop());
+                        container.animate({scrollTop:_scrollTop-60});
+//                        $(this).focus();
+                        var target = $(this);
+
+                        $(this).mouseenter(function(event){
+                            console.dir(event);
+                            container.data("ui-menu").focus( event, target );
+                        });
+                        $(this).mouseenter();
+                        $(this).find("a").css({'background-color':'#08c','color':'#fff'});
+//                        $(this).find("a").addClass("ui-state-active");
+//                        $(this).find("a").addClass("ui-state-focus");
+//                        $(this).find("a").focus();
+                    }
+                })
+//                console.dir(instance.menu.element)
+//                console.dir(instance.menu.element.find("li").length);
+//                instance.menu.element.scrollTop(100);
+//                instance.menu.element.animate({scrollTop:60});
+            }
+//            var dId=this.options.displayField;
+//            if(dId){
+//                var txt=$("#"+dId).text();
+//                console.info("current==="+txt);
+//                console.dir(this.menu.element.find("li").length);
+//                console.dir(this.menu.element.scrollTop());
+//                this.menu.element.scrollTop(100);
+////                        this.menu.element.animate({scrollTop:100},'fast');
+//                console.dir(this.menu.element.scrollTop());
+//            }
+//            $( "#autocomplete2" ).val(ui.item.displayName);
+        }
+
+    }).data("custom-combox")._renderItem = function( ul, item ) {
+        var obj=null;
+        if(!item._id){
+            obj=$( "<li uid='"+item._id+"'>" )
+                    .append( "<a>" + item.displayName + "</a>" )
+                    .appendTo( ul );
+        }else{
+            obj=$( "<li uid='"+item._id+"'>" )
+                    .append( "<a>" + item.displayName+"["+item.exten+"]" + "</a>" )
+                    .appendTo( ul );
+        }
+        return obj;
+    };*/
+//    console.dir($("#autocomplete2").combox("widget"))
+//    var combox2=$( "#autocomplete2" ).combox();
+//    console.dir($( "#autocomplete3" ).autocomplete("destroy"));
+//    console.dir(combox.data("custom-combox")); //返还是该ui实例对象
+//    console.dir(autocomplete.data("ui-autocomplete"));
+//    console.dir(autocomplete);//返回的是一个jquery对象
+//    console.dir($( "#autocomplete" ));
+
+
+
+/*    var bar = $( "<div></div>" )
+            .appendTo( "body" )
+            .progressbar({
+                complete: function( event, data ) {
+                    alert( "Callbacks are great!" );
+                }
+            })
+            .bind( "progressbarcomplete", function( event, data ) {
+                alert( "Events bubble and support many handlers for extreme flexibility." );
+                alert( "The progress bar value is " + data.value );
+            });
+
+    bar.progressbar( "option", "value", 100 );*/
+
+/*    var bar = $( "<div></div>" )
+            .appendTo( "body" )
+            .progressbar()
+            .data( "custom-progressbar" );
+    console.dir(bar);
+    // Call a method directly on the plugin instance.
+    bar.option( "value", 50 );
+
+    // Access properties on the plugin instance.
+    alert( bar.options.value );*/
+
+</script>

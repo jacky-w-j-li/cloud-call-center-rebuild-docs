@@ -1,0 +1,12 @@
+<form id="frm_close_task">
+    <input type="hidden" name="taskId" value="_#taskId#_">
+    <input type="hidden" name="agentId" value="_#agentId#_">
+    <input type="hidden" name="menu" value="_#menu#_">
+    <div style="font-size:18px;text-align:center">
+        <h5>座席_#displayName#_下未标记的客户将会全部释放，确认移除吗？</h5>
+    </div>
+    <div class="form_buttons" style="text-align: center; margin:10px 5px;">
+        <button type="button" class="btn-blue btn-small ds_form_action" ds_action="customer.task.removeTaskAgent" >确定</button>
+        <button type="button" class="do_action_cancel ds_do_action" ds_action="customer.task.cancelCustAssign">取消</button>
+    </div>
+</form>

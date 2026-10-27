@@ -1,0 +1,137 @@
+<script>
+    function changeCheckAllProvinceRelayCity(sel){
+        var proArr = $(".Relay_City_Province_check");
+        if(sel.checked==true){
+            $.each(proArr,function(i,item){
+                item.checked=true;
+            })
+        }else{
+            $.each(proArr,function(i,item){
+                item.checked=false;
+            })
+        }
+    }
+</script>
+<div class="">
+    <div style="">
+        <div class="row-fluid">
+            <h5><i class="icon-user"></i>中继呼入城市分布查询</h5>
+            <br/>
+            <form class="form-horizontal">
+                <div>
+                    <label style="display: inline">时间类型</label>
+                    <select name="TimeType" class="span2" id="relay_area_city_time_type" onchange="handler.report.callReport.resetDate('report_relay_area_city_dateTd',this.value)">
+                        <option value="year" id="optionYear">年报</option>
+                        <option value="month" id="optionMonth">月报</option>
+                        <option value="day" id="optionDay">日报</option>
+                        <!--<option value="other" id="optionOther">自定义</option>-->
+                    </select>
+                    <div id="report_relay_area_city_dateTd" style="display: inline">
+                    </div>
+                    <div id="report_relay_area_city_dateTd_other" style="display: none">
+                        <div class="input-append date form_datetime">
+                            <input  id="report_relay_area_city_datetime_picker_start" size="6" class="input-large report_start_time" name="StartTime" type="text" value="" readonly>
+                            <span class="add-on datetimepicker-remove" style="height: 14px;line-height: 15px"><i class="icon-remove"></i></span>
+                            <span class="add-on datetimepicker-open" style="height: 14px;line-height: 15px"><i class="icon-th"></i></span>
+                        </div>
+                        <div style="padding-top: 5px;display: inline">
+                            &nbsp;&nbsp;至&nbsp;&nbsp;
+                        </div>
+                        <div class="input-append date form_datetime">
+                            <input id="report_relay_area_city_datetime_picker_end" size="6" class="input-large report_end_time" name="EndTime" type="text" value="" readonly>
+                            <span class="add-on datetimepicker-remove" style="height: 14px;line-height: 15px"><i class="icon-remove"></i></span>
+                            <span class="add-on datetimepicker-open" style="height: 14px;line-height: 15px"><i class="icon-th"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear10"></div>
+                <div>
+                    <label style="display: inline">服务号</label>
+                    <div style="display: inline" id="report_relay_area_city_service_no_div">
+                    </div>
+                </div>
+                <div class="clear10"></div>
+                <div>
+                    <label style="display: inline">省份&nbsp;<input type="checkbox" id="checkAllProvince" onchange="changeCheckAllProvinceRelayCity(this)" checked>全选</label>
+                    <table>
+                        <tr class="search-table-tr">
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_未知号段" id="Province_未知号段" value="未知号段" >未知号段</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_北京市" id="Province_北京市" value="北京市" >北京市</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_天津市" id="Province_天津市" value="天津市" >天津市</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_上海市" id="Province_上海市" value="上海市" >上海市</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_重庆市" id="Province_重庆市" value="重庆市" >重庆市</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_安徽省" id="Province_安徽省" value="安徽省" >安徽省</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_澳门" id="Province_澳门" value="澳门" >澳门</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_福建省" id="Province_福建省" value="福建省" >福建省</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_广东省" id="Province_广东省" value="广东省" >广东省</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_广西省" id="Province_广西省" value="广西省" >广西省</td>
+                        </tr>
+                        <tr class="search-table-tr">
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_甘肃省" id="Province_甘肃省" value="甘肃省" >甘肃省</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_贵州省" id="Province_贵州省" value="贵州省" >贵州省</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_河北省" id="Province_河北省" value="河北省" >河北省</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_河南省" id="Province_河南省" value="河南省" >河南省</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_湖北省" id="Province_湖北省" value="湖北省" >湖北省</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_湖南省" id="Province_湖南省" value="湖南省" >湖南省</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_海南省" id="Province_海南省" value="海南省" >海南省</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_黑龙江省" id="Province_黑龙江省" value="黑龙江省" >黑龙江省</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_浙江省" id="Province_浙江省" value="浙江省" >浙江省</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_江苏省" id="Province_江苏省" value="江苏省" >江苏省</td>
+                        </tr>
+                        <tr class="search-table-tr">
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_江西省" id="Province_江西省" value="江西省" >江西省</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_吉林省" id="Province_吉林省" value="吉林省" >吉林省</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_辽宁省" id="Province_辽宁省" value="辽宁省" >辽宁省</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_内蒙古" id="Province_内蒙古" value="内蒙古" >内蒙古</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_宁夏" id="Province_宁夏" value="宁夏" >宁夏</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_青海省" id="Province_青海省" value="青海省" >青海省</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_山东省" id="Province_山东省" value="山东省" >山东省</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_山西省" id="Province_山西省" value="山西省" >山西省</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_陕西省" id="Province_陕西省" value="陕西省" >陕西省</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_四川省" id="Province_四川省" value="四川省" >四川省</td>
+                        </tr>
+                        <tr>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_台湾省" id="Province_台湾省" value="台湾省" >台湾省</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_新疆" id="Province_新疆" value="新疆" >新疆</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_西藏" id="Province_西藏" value="西藏" >西藏</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_香港" id="Province_香港" value="香港" >香港</td>
+                            <td style="padding-right: 30px"><input type="checkbox" class="Relay_City_Province_check" name="Province_云南省" id="Province_云南省" value="云南省" >云南省</td>
+                        </tr>
+                    </table>
+                </div>
+                <div span12>
+                    <input type="hidden" name="reportType" value="call_report_relay_area_city">
+                    <a class="button ds_form_action" id="call_report_relay_area_city_btn" ds_action="report.callReport.call_report_relay_area_city">查询</a>
+                    <a class="button ds_form_action call_report_export_btn" ds_action="report.callReport.confirmExportReportPdf">导出PDF</a>
+                    <a class="button ds_form_action" ds_action="report.callReport.exportRelayAreaCityExcel">导出Excel</a>
+                    <a class="button ds_form_action" ds_action="report.callReport.returnDrillToRelayAreaFromCity">返回上页</a>
+                </div>
+                <!--<input type="hidden" name="reportType" value="call_report_relay_area_city">-->
+                <!--<button class="btn do_action" id="call_report_relay_area_city_btn" appaction="report.callReport.call_report_relay_area_city">查询</button>-->
+                <!--<button class="btn do_action" appaction="report.confirmExportReportPdf">导出PDF</button>-->
+                <!--<button class="btn do_action" appaction="report.callReport.exportRelayAreaCityExcel">导出Excel</button>-->
+                <!--<button class="btn do_action" appaction="report.callReport.returnDrillToRelayAreaFromCity">返回上页</button>-->
+                <div class='row-fluid account_line'></div>
+                <br>
+            </form>
+        </div>
+
+        <div class="agent_report_data_part" span12>
+            <div class="data_titile_part">
+                <a href="#" class="ds_do_action" ds_action="report.callReport.openConfigTableHeader" ds_data="call_report_relay_area_city">配置显示表头</a>
+            </div>
+            <div class="data_content_part" id="report_relay_area_city_table">
+                <table id="call_report_relay_area_city_table_id" class="table table-bordered table-condensed table-hover">
+                    <thead id="relayAreaCityTableHeader">
+
+                    </thead>
+                    <tbody id="relayAreaCityTableTbody">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="call_report_relay_area_city_config_table_header_pane"></div>

@@ -1,0 +1,90 @@
+<div class="left_column" id="contact_list_webchat">
+    <div class="model_submenu" style="padding: 5px;">
+        <div class="btn-group" style="width:100%">
+            <!--<button class="btn ds_do_action btn_webchat_open" style="width: 101px" ds_action="webchat.quick_subMenu_search" ds_data="webchat_open">待领取 <span class="badge badge-important"></span></button>-->
+            <button class="btn ds_do_action btn_webchat_todo active" style="width: 50%" ds_action="webchat.quick_subMenu_search" ds_data="webchat_todo">待处理 <span class="badge badge-important"></span></button>
+            <button class="btn ds_do_action btn_webchat_all" style="width: 50%" ds_action="webchat.quick_subMenu_search" ds_data="webchat_all">全部</button>
+        </div>
+    </div>
+    <div class="list_card">
+        <div id="view_webchat_todo" class="card_pane"></div>
+        <div id="view_webchat_all" class="card_pane"></div>
+    </div>
+</div>
+
+<div class="right_column">
+    <div class="contact_detail" style="padding: 0;">
+        <div class="content" style="overflow: hidden;">
+            <div id="view_webchat_todo_content" class="content_pane"></div>
+            <div id="view_webchat_all_content" class="content_pane"></div>
+            <div id="show_end_session"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<script id="tmpl_webchat_item" type="text/html">
+    <div class="list_item list_item_check">
+        <div class="ds_do_action item_row item{{=_id}} item_check webchat_item" ds_action="{{=dealAction}}" ds_data="{{=_id}}" ds_attr="{{=sid}}" cust_id="{{=custId}}">
+            <div class="card_row">
+                <input type="hidden" name="pk" value="{{=_id}}" >
+                <div class="card_right">
+                    <div class="muted" title="{{=createTime}}">{{=shortTime}}</div>
+                    <div style="margin-top:6px;"><span class="label label_status {{=statusClass}}" status="{{=status}}">{{=statusDesc}}</span></div>
+                </div>
+                <div class="card_left">
+                    <b class="ico_select_checkbox ico ico_wrap ico_item_checkbox webchat_item"></b>
+                    <span class="badge badge-important">{{=leakNum}}</span>
+                </div>
+                <div class="card_middle">
+                    <div class="card_row_title" style="display:inline">{{=sName}}</div><div style="display:inline">({{=fromSource}})&nbsp;<span class="user_status {{=userStatusClass}}">{{=userStatusDesc}}</span></div>
+                    <div class="muted" style="clear:left">
+                        <span style="overflow: hidden; text-overflow: ellipsis; width:226px;white-space: nowrap; float:left;color:#343434">来源:{{=fromUrl}}</span>
+                        <span class="chat_get"  style="display: none">
+                            <button type="button" class="small_btn btn btn-info ds_do_action noPropagation" ds_action='webchat.claimWebchatSession' ds_data="{{=_id}}" ds_attr="{{=sid}}">领取</button>
+                        </span>
+                        <span title="处理座席">{{=agentDisplayName}}&nbsp;</span><span title="技能组">【{{=peerName}}】&nbsp;</span>
+                    </div>
+                    <!--<div class="customer customer_mini ellipsis">{{=custName}}</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_popup_notFound_customer" type="text/html">
+    <div class="contact_summary">
+        <div class="baseinfo cust_base">
+            <div class="base_summary">
+                <div style="font-size: 14px;line-height: 30px;">
+                    {{ if(isDel){ }}
+                    <span class="text-error">{{=desc}}<span style="font-weight:bold;">{{=id}}</span>定位的客户已经删除！</span>
+                    {{ }else{ }}
+                    {{=desc}}<span style="color:#009900;font-weight:bold;">{{=id}}</span>未定位到客户。
+                    {{ } }}
+                    <div>
+                        您可以<a href="#" class="ds_do_action show_add" ds_action="customer.showPopAdd" ds_data="{{=flag}}">新增一个客户</a>
+                        或者 <a href="#" class="ds_do_action " ds_action="customer.showSelectOldCust" ds_data="{{=paneId}}">选择已存在客户</a>。
+                    </div>
+                    <div class="cust_base_fields" style="display: none;">
+                        <span>名称：<input type="text" name="custName" placeholder="获取消息中的名称，自动填充到客户中" ></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span>电话：<input type="text" name="custPhone" placeholder="获取消息中的电话，自动填充到客户中"></span>
+                        <span>联系人：<input type="text" name="custContact" placeholder="录入联系人，自动填充到客户中"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="func_tab_container clearfix">
+                <div class="pull-left">
+                    <a href="#" class="ds_do_action func_tab active" ds_action="customer.swapFunTab" ds_data="webchat" ds_attr="">在线咨询</a>
+                    <a href="#" class="func_tab disabled_new"  ds_data="business" style="cursor: default;">工单</a>
+                    <a href="#" class="func_tab disabled_new"  ds_data="action" style="cursor: default;">联系计划</a>
+                    <a href="#" class="func_tab disabled_new"  ds_data="history" style="cursor: default;">联系历史</a>
+                    <a href="#" class="func_tab disabled_new"  ds_data="history" style="cursor: default;">操作日志</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+

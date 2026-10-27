@@ -1,0 +1,233 @@
+<div class="left_column  list_check_pane"  id="contact_list_approval_business" ds_menu="_#menu#_" >
+<div class='contacts_caption'>
+<div class="cancel_edit" style="">
+    <div class="list_check_all" style="cursor: pointer;" >
+        <b class="ico_select_checkbox ico ico_wrap" style="top:10px;left:5px;"></b>
+    </div>
+    <div style="display: inline-block;margin-left: 30px;font-weight: bold;">
+        已选
+                <span class="bottom_toolbar_selsize_num">
+                    0
+                </span>
+        项
+    </div>
+    <span class="pull-right">
+        <a href="#" class="ds_do_action" ds_action="cancelDealToolbar" ds_data="business">取消</a>
+    </span>
+</div>
+<div class="caption-top clearfix">
+    <div class="search_condition" style="display:none;"></div>
+    <div class="model_submenu" style="padding-bottom: 5px;">
+        <div class="btn-group">
+            <button class="btn ds_do_action btn_appr_my_role active" style="width: 101px" ds_action="customer.approvalBusiness.quick_subMenu_search" ds_data="not_receive_business">待领取 <span class="badge badge-important"></span></button>
+            <button class="btn ds_do_action btn_appr_my_todo" style="width: 101px" ds_action="customer.approvalBusiness.quick_subMenu_search" ds_data="my_business">我的待审 <span class="badge badge-important"></span></button>
+            <button class="btn ds_do_action btn_appr_all" style="width: 100px" ds_action="customer.approvalBusiness.quick_subMenu_search" ds_data="all_business">全部</button>
+        </div>
+        <span style="margin-left:10px;cursor: pointer;" class="ds_do_action refresh_num approval_refresh" ds_action="customer.approvalBusiness.refreshUndealNum" title="刷新待处理工单数量">
+            <i class="icon-refresh"></i>
+        </span>
+    </div>
+    <div class="header_wrap clearfix">
+        <form id="approval_business_list_query_form" class="business_list_query_form" >
+            <input type="hidden" id="currentTab" value="not_receive_business"/>
+            <span class="refresh ds_form_action" style="display: none;" ds_action="customer.approvalBusiness.queryApprovalBusinessList"></span>
+            <div class="header_search_wrap pull-left quick_search" style="">
+                <div class="header_search_button ds_form_action bus_normal_search normal_search appr_search" ds_action="customer.approvalBusiness.queryApprovalBusinessList">
+                    <i class="icon-search"></i>
+                </div>
+                <div class="header_search_input">
+                    <div class="header_search_input_textbox">
+                        <div class="dropdown quick_wrap_bus">
+                            <ul class="dropdown-menu quick_menu right" style="min-width: 90px;">
+                            </ul>
+                            <div class="textbox_wrap textbox_wrap_sty">
+                                <div class="textbox_inner">
+                                    <input type="text"  name="cname" class="textbox_input inpt_sty" maxlength="254" placeholder="输入客户名称查询">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="text_link header_search_advanced apprval_task_list_search_dorpdown">
+                    高级搜索
+                </div>
+            </div>
+        </form>
+        <!--<div class="header_func_plus pull-right"><i class="icon-plus"></i></div>-->
+    </div>
+
+    <div class="ds_search_filter" style="display: none;">
+    </div>
+</div>
+
+</div>
+<div tabindex="-1" id="approvale_business_list_advanced_search" class="advanced_search_pane hidden" >
+
+</div>
+<div class="list_container">
+    <div class="list-inside" id="talk_list_item_pane_#menu#_">
+    </div>
+    <div class="list-footer">
+        <div class="pagination pagination-small" for="approval_business_list_query_form" ds_pagination_action="customer.approvalBusiness.approvalAdvancedSearch">
+            <span style="float:left;">查询结果：<span class="result_count">0</span></span>
+            <ul class="" style="float:right;padding-right: 6px;">
+                <li>
+                    <a href="#"  value="0">«</a>
+                </li>
+                <li>
+                    <a href="#"  value="1">1</a>
+                </li>
+                <li>
+                    <a href="#"  value="2">2</a>
+                </li>
+                <li>
+                    <a href="#"  value="3">3</a>
+                </li>
+                <li>
+                    <a href="#"  value="4">4</a>
+                </li>
+                <li>
+                    <a href="#"  value="5">5</a>
+                </li>
+                <li>
+                    <a href="#"  value="6">»</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="right_column">
+    <div style="padding: 0;">
+        <div  class="content">
+            <div class='call_detail business_detail_div__#menu#_' id="_#menu#__approval_business">
+                <div class="customer_container clearfix">
+                </div>
+                <div class="cust_tab_content" style="padding: 18px;overflow: auto;">
+                    <div class="cust_tab_content_other"></div>
+                    <div class="cust_tab_content_bus"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="tmpl_approval_business_item" type="text/html">
+    <div class="list_item">
+        <div class="ds_do_action item_row item${_id}" ds_action="customer.approvalBusiness.showTodoTaskDetail" ds_data="${cid},${_id}">
+            <div class="card_row_new">
+                <div class="card_right">
+                    <span class="muted">${createTime}</span>
+                </div>
+                <div class="card_middle">
+                    <span class="card_row_title">
+                         {{if cname != "" }}
+                            ${cname}
+                         {{else}}
+                            <span style="text-decoration:line-through;color:red;">已删除客户</span>
+                         {{/if}}
+                    </span>
+                </div>
+                <div class="card_right">
+                    <div style="position: absolute;bottom: 4px;right:0;">
+                        {{if owner == "DELETE"}}
+                        <span class="label label-important step ellipsis" style="max-width: 100px;" title="客户已被删除">客户已被删除</span>
+                        {{else apprType == "2" && status == "0"}}
+                        <span class="label label-info" style="max-width: 100px;" title="无效待审">无效待审</span>
+                        {{else apprType == "2" && status == "1"}}
+                        <span class="label label-warning ellipsis" style="max-width: 100px;" title="无效">无效</span>
+                        <span class="label label-success step ellipsis" style="max-width: 70px;" title="通过">通过</span>
+                        {{else apprType == "2" && status == "2"}}
+                        <span class="label label-warning ellipsis" style="max-width: 100px;" title="无效">无效</span>
+                        <span class="label label-success step ellipsis" style="max-width: 70px;" title="不通过">不通过</span>
+
+                        {{else apprType == "4" && status == "0"}}
+                        <span class="label label-info step ellipsis" style="max-width: 100px;" title="丢单待审">丢单待审</span>
+                        {{else apprType == "4" && status == "1"}}
+                        <span class="label label-important step ellipsis" style="max-width: 100px;" title="丢单">丢单</span>
+                        <span class="label label-success step ellipsis" style="max-width: 70px;" title="通过">通过</span>
+                        {{else apprType == "4" && status == "2"}}
+                        <span class="label label-important step ellipsis" style="max-width: 100px;" title="丢单">丢单</span>
+                        <span class="label label-success step ellipsis" style="max-width: 70px;" title="不通过">不通过</span>
+
+                        {{else apprType == "8" && status == "0"}}
+                        <span class="label label-info step ellipsis" style="max-width: 100px;" title="成交待审">续费待审</span>
+                        {{else apprType == "8" && status == "1"}}
+                        <span class="label label-success step ellipsis" style="max-width: 100px;" title="成交">续费</span>
+                        <span class="label label-success step ellipsis" style="max-width: 70px;" title="通过">通过</span>
+                        {{else apprType == "8" && status == "2"}}
+                        <span class="label label-success step ellipsis" style="max-width: 100px;" title="成交">续费</span>
+                        <span class="label label-success step ellipsis" style="max-width: 70px;" title="不通过">不通过</span>
+
+                        {{else apprType == "3" && status == "0"}}
+                        <span class="label label-info step ellipsis" style="max-width: 100px;" title="成交待审">成交待审</span>
+                        {{else apprType == "3" && status == "1"}}
+                        <span class="label label-success step ellipsis" style="max-width: 100px;" title="成交">成交</span>
+                        <span class="label label-success step ellipsis" style="max-width: 70px;" title="通过">通过</span>
+                        {{else apprType == "3" && status == "2"}}
+                        <span class="label label-success step ellipsis" style="max-width: 100px;" title="成交">成交</span>
+                        <span class="label label-success step ellipsis" style="max-width: 70px;" title="不通过">不通过</span>
+                        {{/if}}
+
+                    </div>
+                </div>
+                <div class="card_middle">
+                    <div class="muted margin_patch">
+                        <span title="创建人">${createUser}</span>
+                        <img src="/img/client/bus_arrow.png" style="">
+                        <span class="master" title="当前处理人">${master}</span>
+                        <span class="role_get" >
+                            {{if owner == "NA" && setToMe!= 0}}
+                            <button type="button" class="btn btn-info ds_do_action setToMe" id="${_id}_getTaskButton" ds_action="customer.approvalBusiness.setApprovalBusinessToMe" ds_data="${_id},${cid}">领取</button>
+                            {{/if}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<style type="text/css">
+    .task_query_close {
+        display: none;
+    }
+
+    .task_high_query_form .formQue label {
+        width: 75px;
+        text-align: right;
+    }
+
+    .task_high_query_form input[type='text'], select {
+        width: 120px;
+    }
+
+    div.formQue {
+        margin-top: 5px;
+        width: 220px;
+        float: none;
+    }
+
+    .formQue label {
+        display: inline-block;
+
+    }
+
+    .task_list_search_query {
+        margin-top: -1px;
+        border: 1px rgb(189, 188, 188) solid;
+        position: absolute;
+        width: 700px;
+        top: 75px;
+        left: 190px;
+        background-color: #ffffff;
+        padding: 0px;
+        z-index: 100;
+    }
+
+    ul.inline > li a.active{
+        color: #f89406;
+    }
+</style>
+

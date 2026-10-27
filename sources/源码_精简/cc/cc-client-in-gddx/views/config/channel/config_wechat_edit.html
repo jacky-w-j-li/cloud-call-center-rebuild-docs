@@ -1,0 +1,96 @@
+<div class="right_content_pane pd0">
+    <div class="row-fluid">
+        <form id="frm_wechat_add_#_index#_" class="weixin-config" index="_#_index#_">
+            <div class="config-byself" style="display:none;">
+                <h4>可以直接在平台完成微信公众号配置</h4><br />
+                <div class="ds_form_action btn-green" ds_action="config.channel.getMenu">
+                    <span>自定义菜单</span>
+                </div>
+            </div>
+            <input type="hidden" name="_id" value="_#_id#_"/>
+            <div class="row-fluid" id="weixin_config_details_box">
+                <div class="row_item">
+                    <label class="control-label" for="wechat_headimg">微信头像</label>
+                    <span class="control-field" id="wechat_headimg"><img width="32px" height="32px" src="_#head_img#_"></span>
+                </div>
+                <div class="row_item">
+                    <label class="control-label" for="wechat_id">微信号</label>
+                    <span class="control-field" id="wechat_id">_#alias#_</span>
+                </div>
+                <div class="row_item">
+                    <label class="control-label" for="wechat_nickName">微信名称</label>
+                    <span class="control-field" id="wechat_nickName">_#nick_name#_</span>
+                </div>
+                <div class="row_item">
+                    <label class="control-label" for="wechat_topeer">消息分发技能组</label>
+                    <select id="wechat_topeer" class="pull-left" name="to_peer" required style="margin-left:20px;">
+                    </select>
+                    <span class="peer-tips" style="color: #fa5f5f;float:left; margin:3px 0px 3px 106px;"></span>
+                </div>
+                <div class="row_item">
+                    <label class="control-label" for="wechat_robot">启用智能机器人</label>
+                    <select id="wechat_robot" class="pull-left" name="robot" value="true" ds_data="" style="margin-left:20px;" >
+                    </select>
+                </div>
+                <div class="row_item">
+                    <label class="control-label" for="convert_words" style="width: 72px;position: absolute;z-index: 2;">转人工触发词</label>
+                    <div style="float: left;position: absolute;width: 165px;height: 16px;">
+                        <div id="popover_convert_words" class="detail" data-toggle="popover" data-placement="bottom" data-trigger="hover focus"
+                             data-content="当启用了智能机器人后,引导用户输入设置的关键词,可触发转人工.效果等同菜单中的转人工菜单" data-original-title="">
+                        </div>
+                    </div>
+
+                    <input id="convert_words" type="text" class="pull-right" name="convert_words" ds_data="" style="width:112px;z-index: 2;position: absolute;right: 25px;"/>
+                </div>
+                <div class="row_item">
+                    <label class="control-label">欢迎语推送时机</label>
+                    <div style="float: left;margin-left:20px;">
+                        <label for="config_welcome_system" style="width:64px;padding-right:10px;line-height:22px;font-weight:normal;">
+                            <input type="radio" name="welcomePushTime" id="config_welcome_system" checked="true" value="access"/>接入系统
+                        </label>
+                        <label for="config_welcome_seat" style="width:64px;padding-right:0;line-height:22px;font-weight:normal;">
+                            <input type="radio" name="welcomePushTime" id="config_welcome_seat" value="claim"/>座席领取
+                        </label>
+                    </div>
+                </div>
+                <div class="row_item">
+                    <label class="control-label" for="wechat_welcome">欢迎语</label>
+                    <textarea id="wechat_welcome" style="width:112px;overflow:auto;text-overflow:ellipsis;float: left;resize:none;margin-left:20px;"name="welcome_msg"></textarea>
+                </div>
+               
+                <!--<div class="row_item">-->
+                    <!--<label class="control-label" for="wechat_finishMsg">结束语</label>-->
+                    <!--<textarea id="wechat_finishMsg" style="width:110px;overflow:auto;text-overflow:ellipsis;float: right;resize:none;"name="finish_msg"></textarea>-->
+                <!--</div>-->
+                <div class="row_item">
+                    <label class="control-label" for="webchat_csr">启用满意度评价</label>
+                    <input id="webchat_csr" style="width:20px;height:20px;margin-left:20px;" name="webchat_csr" type="checkbox">
+                    </input>
+                </div>
+                <!--<div class="row_item">-->
+                    <!--<label class="control-label" for="wechat_finishMsg">结束语</label>-->
+                    <!--<textarea id="wechat_finishMsg" style="width:110px;overflow:auto;text-overflow:ellipsis;float: right;resize:none;"name="finish_msg"></textarea>-->
+                <!--</div>-->
+            </div>
+            <div class="form-btn-center clearfix">
+                    <!--<a href="#confirm_dialog_wechat" data-toggle="modal" class="btn btn-small ds_form_action">删除</a>-->
+                    <button type="button" class="ds_form_action btn-blue"
+                            ds_action="config.channel.updateWechat">保存
+                    </button>
+                    <button type="button" class="ds_form_action btn-gray"
+                            ds_action="config.channel.showDeleteWechatConfirmDialog">删除
+                    </button>
+            </div>
+
+        </form>
+        <div class="weixin-form sub-right">
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+//        $("#weixin_config_details_box").on("mouseover", function(){
+            $("#popover_convert_words").popover();
+//        });
+    });
+</script>

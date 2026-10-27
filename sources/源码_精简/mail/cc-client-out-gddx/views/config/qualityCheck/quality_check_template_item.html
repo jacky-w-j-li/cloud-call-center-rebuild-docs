@@ -1,0 +1,17 @@
+<tr>
+    <td>
+        <span class="template_name">_#name#_</span>
+    </td>
+    <td>
+        <span class="template_name">_@cdr.getAgentName('_#updateUser#_')@_</span>
+    </td>
+    <td>
+        _@config.qualityCheck.showTemplateStatus('_#enable#_')@_
+    </td>
+    <td>
+        <a href="#" class="ds_do_action" ds_action='config.qualityCheck.showEditQualityCheckTemplate' ds_data='_#_id#_'>修改</a>
+        <a href="#" class="ds_do_action" ds_action='config.qualityCheck.changeQualityCheckTemplateStatus' ds_data='_#_id#_,_#enable#_'>
+            _@config.qualityCheck.showTemplateStatus('_#enable#_',true)@_
+        </a>
+    </td>
+</tr>

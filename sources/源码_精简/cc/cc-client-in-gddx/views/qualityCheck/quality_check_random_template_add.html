@@ -1,0 +1,359 @@
+<!--qulity_check_random-->
+<div class="modal-header">
+    <h3>抽取条件模板</h3>
+</div>
+<div class="modal-body" style="height:98%;">
+    <div class="row-fluid">
+    <form id="qualityCheckQueryFrm_random" class="form-horizontal form-inline" style="max-width:607px">
+        <div>
+            <label>
+                模板名称
+            </label>
+            <span style="margin-right: 5px;">
+                <input type="text" style="width: 130px" placeholder="最多输入10个字符" name="TEMPLATE_NAME" class="input-small" maxlength="10">
+            </span>
+            <!--<span style="margin-right: 25px;">-->
+                <!--<label>-->
+                    <!--随机抽取数-->
+                <!--</label>-->
+                <!--<span style="margin-right: 5px;">-->
+                    <!--<input type="text" style="width: 50px" maxlength="4" value="10" dataType="Number" msg="随机抽取的条数只能填正整数" name="RANDOMNUM" class="input-small">-->
+                <!--</span>-->
+            <!--</span>-->
+        </div>
+        <div class="clear10"></div>
+        <div>
+            <label>
+                抽取规则
+            </label>
+                <span style="margin-right: 5px;">
+                    <input name="EXT_RULE" type="hidden" value="COUNT_TYPE_NUM" class="ds_search_item select_input" id="extraction_rule_hidden_input" style="float:none;"/>
+                    <input type="radio" name="extraction_rule" class="qualityCheckRadio qualityTaskRadio extraction_rule_num" checked>
+                    <select name="COUNT_TYPE_NUM" style="width: 100px;">
+                        <option value="per_num">人均条数</option>
+                        <option value="entirety_num">整体条数</option>
+                    </select>
+                    <input type="text" style="width: 50px" maxlength="4" value="10" dataType="Number" msg="只能输入正整数" name="RANDOMNUM" class="input-small">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="extraction_rule" class="qualityCheckRadio qualityTaskRadio extraction_rule_percent">
+                    <select name="COUNT_TYPE_PERCENT" style="width: 100px;" disabled>
+                        <option value="per_percent">人均百分比</option>
+                        <option value="entirety_percent">整体百分比</option>
+                    </select>
+                    <div class="input-append"><input type="text" style="width: 30px" maxlength="3" value="10" dataType="Number" msg="只能输入正整数" name="PERCENT" class="input-small" disabled>
+                        <span class="add-on" style="height: 14px;line-height: 15px">%</span></div>
+                </span>
+        </div>
+        <div class="clear10"></div>
+        <div>
+            <label>
+                呼叫时间
+            </label>
+            <div class="input-append date form_datetime">
+                <input id="quality_check_random_datetime_picker_start" size="16" class="input-medium" name="BEGIN_TIME" type="text" value="" readonly style="z-index:1060;">
+                <span class="add-on datetimepicker-remove" style="height: 14px;line-height: 15px"><i class="icon-remove"></i></span>
+                <span class="add-on datetimepicker-open" style="height: 14px;line-height: 15px"><i class="icon-th"></i></span>
+            </div>
+            <div style="padding-top: 5px;display: inline">
+                至
+            </div>
+            <div class="input-append date form_datetime">
+                <input id="quality_check_random_datetime_picker_end" size="16" class="input-medium" name="END_TIME" type="text" value="" readonly style="z-index:1060;">
+                <span class="add-on datetimepicker-remove" style="height: 14px;line-height: 15px"><i class="icon-remove"></i></span>
+                <span class="add-on datetimepicker-open" style="height: 14px;line-height: 15px"><i class="icon-th"></i></span>
+            </div>
+        </div>
+        <div class="clear10"></div>
+        <div>
+            <label class="pull-left">呼叫类型</label>
+            <span style="margin: 2px 5px 5px 5px;float:left">
+                <span class="call_types"></span>
+                <input type="hidden" name="CONNECT_TYPE_SELECTED" id="call_type_quality_check_random_selected">
+                <!--<input type="hidden" class="ds_search_item select_input" id="call_type_quality_check_random_input" style="float:none;"/>-->
+            </span>
+            <div class="pull-left">
+                <span id="call_type_quality_check_random" class="combobox_agent"></span>
+            </div>
+            <!--<select name="CONNECT_TYPE" class="call_type_selector"></select>-->
+        </div>
+        <div class="clear10"></div>
+        <div>
+            <label class="pull-left">技&nbsp;&nbsp;能&nbsp;&nbsp;组</label>
+            <span style="margin: 2px 5px 5px 5px;float:left">
+                <span class="queues"></span>
+                <input type="hidden" name="ERROR_MEMO_SELECTED" id="queue_quality_check_random_selected">
+                <!--<input type="hidden" class="ds_search_item select_input" id="queue_quality_check_random_input" style="float:none;"/>-->
+            </span>
+            <div class="pull-left">
+                <span id="queue_quality_check_random" class="combobox_agent"></span>
+            </div>
+            <!--<select name="ERROR_MEMO" class="queue_selector"></select>-->
+        </div>
+        <div class="clear10"></div>
+
+        <div>
+            <label class="pull-left">通话座席</label>
+            <span style="margin: 2px 5px 5px 5px;float:left">
+                <span id="quality_check_random_agent_agents"></span>
+                <input type="hidden" name="selectedAgentList" id="selectedAgentList_random">
+                <input name="DISPOSAL_AGENT" type="hidden" class="ds_search_item select_input" id="quality_check_random_disposal_agent_input" style="float:none;"/>
+            </span>
+            <div class="pull-left">
+                <span id="quality_check_random_disposal_agent_user" class="combobox_agent"></span>
+                <input type="checkbox" id="agent_task_checkbox" name="includeSubordinate">&nbsp;包含已选座席下级
+            </div>
+        </div>
+        <div class="clear10"></div>
+        <div>
+            <label for="CALL_TIME_LENGTH">通话时长</label>
+            <div class="input-append"><input type="text" style="width: 55px" name="CALL_TIME_LENGTH_BEGIN" dataType="Number" msg="时长条件只能为0和正整数" class="input-small"><span class="add-on" style="height: 14px;line-height: 15px">秒</span></div> 至
+            <div class="input-append"><input type="text" style="width: 55px" name="CALL_TIME_LENGTH_END"  dataType="Number" msg="时长条件只能为0和正整数" class="input-small"><span class="add-on" style="height: 14px;line-height: 15px">秒</span></div>
+            <label>&nbsp;&nbsp;&nbsp;满意度</label>
+            <select name="INVESTIGATE" class="investigate_selector"></select>
+        </div>
+        <div class="clear10"></div>
+        <div>
+            <a href="#" class="button ds_form_action" id="callSheetQualityCheckQueryRandomSaveBtn" ds_action="qualityCheck.add_random_template"  style="margin:2px 5px;">仅保存</a>
+            <a href="#" class="button ds_form_action" id="callSheetQualityCheckQueryRandomSaveAndSelectBtn" ds_action="qualityCheck.addAndSelect_random_template"  style="margin:2px 5px;">保存并抽取</a>
+            <a href="#" class="button ds_do_action quality_resetForm" ds_action="resetForm" ds_data="resetSpan" style="margin:2px 5px;" >重置</a>
+            <a href="#" class="button ds_do_action quality_close_btn" style="margin:2px 5px;" >关闭</a>
+        </div>
+        <br/>
+    </form>
+    </div>
+</div>
+<script type="text/javascript">
+//    $(function(){
+//        $('#qualityCheckQueryFrm_random .quality_close_btn').click(function(){
+//            $('#qualityCheckMainPanel .quality_check_random_template_add_pane_show').click();
+//        });
+
+        $(".quality_resetForm").click(function(){
+            $('.extraction_rule_num').click();
+            var selectedAgentList = $("#selectedAgentList_random").val();
+            if(selectedAgentList && selectedAgentList != ""){
+                var selectedAgentArr = selectedAgentList.split(",");
+                for(var i=0;i<selectedAgentArr.length;i++){
+                    random_removeAgent(selectedAgentArr[i]);
+                }
+            }
+            //清空呼叫类型
+            var selectedCallType = $("#call_type_quality_check_random_selected").val();
+            if(selectedCallType && selectedCallType != ""){
+                var selectedCallTypeArr = selectedCallType.split(",");
+                for(var i=0;i<selectedCallTypeArr.length;i++){
+                    random_removeCallType(selectedCallTypeArr[i]);
+                }
+            }
+            //清空技能组
+            var selectedQueue = $("#queue_quality_check_random_selected").val();
+            if(selectedQueue && selectedQueue != ""){
+                var selectedQueueArr = selectedQueue.split(",");
+                for(var i=0;i<selectedQueueArr.length;i++){
+                    random_removeQueue(selectedQueueArr[i]);
+                }
+            }
+        })
+        $('.extraction_rule_num').click(function () {
+            $('#extraction_rule_hidden_input').val('COUNT_TYPE_NUM');
+
+
+            $("#qualityCheckQueryFrm_random select[name='COUNT_TYPE_NUM']").attr("disabled",false);
+            $("#qualityCheckQueryFrm_random input[name='RANDOMNUM']").attr("disabled",false);
+
+            $("#qualityCheckQueryFrm_random select[name='COUNT_TYPE_PERCENT']").attr("disabled",true);
+            $("#qualityCheckQueryFrm_random input[name='PERCENT']").attr("disabled",true);
+            $("#qualityCheckQueryFrm_random input[name='PERCENT']").css('border-color','rgb(204, 204, 204)');
+            $("#qualityCheckQueryFrm_random input[name='PERCENT']").val('10');;
+        })
+        $('.extraction_rule_percent').click(function () {
+            $('#extraction_rule_hidden_input').val('COUNT_TYPE_PERCENT');
+
+            $("#qualityCheckQueryFrm_random select[name='COUNT_TYPE_PERCENT']").attr("disabled",false);
+            $("#qualityCheckQueryFrm_random input[name='PERCENT']").attr("disabled",false);
+
+            $("#qualityCheckQueryFrm_random select[name='COUNT_TYPE_NUM']").attr("disabled",true);
+            $("#qualityCheckQueryFrm_random input[name='RANDOMNUM']").attr("disabled",true);
+            $("#qualityCheckQueryFrm_random input[name='RANDOMNUM']").css("border-color","rgb(204, 204, 204)");
+            $("#qualityCheckQueryFrm_random input[name='RANDOMNUM']").val('10');
+
+        })
+
+
+        $('#qualityCheckQueryFrm_random .quality_close_btn').click(function () {
+            $('#quality_check_random_template_add_pane').modal('hide');
+        })
+        $('#quality_check_random_datetime_picker_start').datetimepicker({
+//            controlType: utils.jqueryUITimepickerControl,
+            timeFormat: "HH:mm:ss",
+            dateFormat: "yy-mm-dd",
+            showSecond: true
+        });
+        $('#quality_check_random_datetime_picker_end').datetimepicker({
+//            controlType: utils.jqueryUITimepickerControl,
+            timeFormat: "HH:mm:ss",
+            dateFormat: "yy-mm-dd",
+            showSecond: true
+        });
+
+        utils.loadSearchInput({ id: "quality_check_random_disposal_agent_user",
+            width: "179",
+            height: "14",
+            tip: "按姓名,拼音,工号搜索",
+            data: getCache("agents"),
+            searchField: ["displayName", "exten", "pinyin"],
+            pinyinField: ["displayName"],
+            listField: ["displayName", "exten"],
+            userIdField: "_id",
+            showField: "displayName",
+            showAllList: true,
+            callbackFuc: function (object) {
+//                $("#quality_check_random_disposal_agent_input").val(object._id);
+                if($.isArray(object)){
+                    return;
+                }
+                var currentVals = $("#qualityCheckQueryFrm_random input[name='selectedAgent']");
+
+                var ishas = false;
+                for (var i = 0; i < currentVals.length; i++) {
+                    if (currentVals[i].value === object._id) {
+                        ishas = true;
+                    }
+                }
+                if (!ishas) {
+                    $('#quality_check_random_agent_agents').before("<span id=" + object._id +"_random"+ "><input type='hidden' name='selectedAgent' value=" + object._id + ">" +
+                            "<span class='label label-info'>" + object.displayName +
+                            "</span><a href='#' onclick=random_removeAgent('" + object._id + "')><i class='icon-remove'></i></a>&nbsp;</span>");
+                }
+                random_countSelectAgent();
+            }
+//            ,
+//            onKeyChanged: function () {
+//                if ($("#quality_check_random_disposal_agent_user_input").val() != "") {
+//                    $("#quality_check_random_disposal_agent_input").val("serachInputNoresult");
+//                } else {
+//                    $("#quality_check_random_disposal_agent_input").val("");
+//                }
+//            }
+        });
+        function random_removeAgent(id) {
+            $('#' + id+"_random").remove();
+//            var selectedAgentList = $('#selectedAgentList_random').val();
+//            selectedAgentList.replace(id+",","");
+//            selectedAgentList.replace(id,"");
+//            $('#selectedAgentList_random').val(selectedAgentList);
+            random_countSelectAgent();
+        }
+        function random_countSelectAgent() {
+            $("#quality_check_random_disposal_agent_user_input").val('');
+            var currentVals = $("#qualityCheckQueryFrm_random input[name='selectedAgent']");
+            var ExtenStr = '';
+            for (var i = 0; i < currentVals.length; i++) {
+                ExtenStr += currentVals[i].value;
+                if (i != currentVals.length - 1) {
+                    ExtenStr += ',';
+                }
+            }
+            $('#selectedAgentList_random').val(ExtenStr);
+        }
+        utils.loadSearchInput({ id: "call_type_quality_check_random",
+            width: "179",
+            height: "15",
+            tip: "按呼叫类型名搜索",
+            data: getCache("callType"),
+            listField: ["code_name"],
+            userIdField: "_id",
+            searchField: ["code_name"],
+            pinyinField: ["code_name"],
+            showAllList: true,
+            cacheData: "callType",
+            callbackFuc: function (object) {
+        //                $("#quality_check_random_disposal_agent_input").val(object._id);
+                if($.isArray(object)){
+                    return;
+                }
+                var currentVals = $("#qualityCheckQueryFrm_random input[name='selectedCallType']");
+
+                var ishas = false;
+                for (var i = 0; i < currentVals.length; i++) {
+                    if (currentVals[i].value === object.code_value) {
+                        ishas = true;
+                    }
+                }
+                if (!ishas) {
+                    $('#qualityCheckQueryFrm_random .call_types').before("<span id=" + object.code_value +"_calltype_random"+ "><input type='hidden' name='selectedCallType' value=" + object.code_value + ">" +
+                            "<span class='label label-info'>" + object.code_name +
+                            "</span><a href='#' onclick=random_removeCallType('" + object.code_value + "')><i class='icon-remove'></i></a>&nbsp;</span>");
+                }
+                random_countSelectCallType();
+            }
+        });
+        function random_removeCallType(id) {
+            $('#' + id+"_calltype_random").remove();
+//            $('#call_type_quality_check_random_selected').val(selected.replace(id+",","").replace(","+id,""));
+            random_countSelectCallType();
+        }
+        function random_countSelectCallType() {
+//            $("#call_type_quality_check_random_input").val('');
+            var currentVals = $("#qualityCheckQueryFrm_random input[name='selectedCallType']");
+            var ExtenStr = '';
+            for (var i = 0; i < currentVals.length; i++) {
+                ExtenStr += currentVals[i].value;
+                if (i != currentVals.length - 1) {
+                    ExtenStr += ',';
+                }
+            }
+            $('#call_type_quality_check_random_selected').val(ExtenStr);
+        }
+        utils.loadSearchInput({ id: "queue_quality_check_random",
+            width: "179",
+            height: "15",
+            tip: "按技能组名搜索",
+            data: getCache("queues"),
+            listField: ["DisplayName"],
+            userIdField: "_id",
+            searchField: ["DisplayName"],
+            pinyinField: ["DisplayName"],
+            showAllList: true,
+            cacheData: "queues",
+            callbackFuc: function (object) {
+                //                $("#quality_check_random_disposal_agent_input").val(object._id);
+                if($.isArray(object)){
+                    return;
+                }
+                var currentVals = $("#qualityCheckQueryFrm_random input[name='selectedQueue']");
+
+                var ishas = false;
+                for (var i = 0; i < currentVals.length; i++) {
+                    if (currentVals[i].value === object.Exten) {
+                        ishas = true;
+                    }
+                }
+                if (!ishas) {
+                    $('#qualityCheckQueryFrm_random .queues').before("<span id=" + object.Exten +"_queue_random"+ "><input type='hidden' name='selectedQueue' value=" + object.Exten + ">" +
+                            "<span class='label label-info'>" + object.DisplayName +
+                            "</span><a href='#' onclick=random_removeQueue('" + object.Exten + "')><i class='icon-remove'></i></a>&nbsp;</span>");
+                }
+                random_countSelectQueue();
+            }
+        });
+
+        function random_removeQueue(id) {
+            $('#' + id+"_queue_random").remove();
+//            $('#queue_quality_check_random_selected').val(selected.replace(id+",","").replace(","+id,""));
+            random_countSelectQueue();
+        }
+        function random_countSelectQueue() {
+            $("#quality_check_random_disposal_agent_user_input").val('');
+            var currentVals = $("#qualityCheckQueryFrm_random input[name='selectedQueue']");
+            var ExtenStr = '';
+            for (var i = 0; i < currentVals.length; i++) {
+                ExtenStr += currentVals[i].value;
+                if (i != currentVals.length - 1) {
+                    ExtenStr += ',';
+                }
+            }
+            $('#queue_quality_check_random_selected').val(ExtenStr);
+        }
+//    });
+</script>

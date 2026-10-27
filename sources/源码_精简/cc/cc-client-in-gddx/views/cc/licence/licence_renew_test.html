@@ -1,0 +1,36 @@
+<div class="well" style="padding: 0 19px;">
+    <h2 class="licence_renew_test_h1">延期试用_@licence.showFieldDesc("licenceType","_#licenceType#_")@_<small>
+        licence单价:<span class="text-primary monthRent">_#licencePrice#_</span>元
+    </small></h2>
+    <h2 style="display: none" class="licence_renew_test_h2">延期试用_@licence.showFieldDesc("licenceType","_#licenceType#_")@_<small>
+    </small></h2>
+    <p class="text-muted">当前licence数<span class="text-primary">_#num#_</span>,到期日期为<strong class="text-danger">_#endDate#_</strong></p>
+</div>
+<form class="form-horizontal" id="frm_licence_test_update">
+    <input type="hidden" name="_id" value="_#_id#_">
+    <input type="hidden" name="oldNum" value="_#num#_">
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            延期时长
+        </label>
+        <div class="col-md-5"  style="line-height: 35px;">
+            <input type="text" onkeyup="value=value.replace(/[^\d]/g,'')" name="day" value='1' class="form-control input-sm ds_spinner2 service_month" msgName="延期时长" datatype="Integer,Range" min="1" required>天
+            <label for="day" class="error" style="display: none;"></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            licence数量
+        </label>
+        <div class="col-md-5"  style="line-height: 35px;">
+            <input type="text" onkeyup="value=value.replace(/[^\d]/g,'')" name="num" value='_#num#_' class="form-control input-sm ds_spinner2 licence_num"  msgName="当前licence数" msg="当前licence数不能为0" datatype="Integer,Range" min="1" required>
+            <label for="num" class="error" style="display: none;"></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="button" class="btn btn-primary btn-small ds_form_action" ds_action="licence.updateTestDate" >确认</button>
+            <button type="button" class="btn btn-default btn-small" data-dismiss="modal">关闭</button>
+        </div>
+    </div>
+</form>

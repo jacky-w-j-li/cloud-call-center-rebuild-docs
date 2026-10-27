@@ -1,0 +1,157 @@
+<div class="left_column" id="weixin_list__#menu#_">
+    <div class="list-inside" style="margin-top: 3px;">
+        <div class="no_call">到目前为止没有微信</div>
+    </div>
+</div>
+<div class="right_column" id="weixin_detail__#menu#_">
+    <div class="contact_detail">
+        <div class="content">
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        dsevent.bind('#weixin_list__#menu#_', 'customerAdd callRefreshCustomer', function(event, params){
+            eval("handler.callWeixin."+event.type+"(params)");
+        });
+    });
+</script>
+
+<style type="text/css">
+    .chat_msg {
+        border: 1px solid #cccccc;
+        padding: 10px 20px;
+        line-height: 15px;
+        margin-bottom: 10px;
+        max-height: 260px;
+        overflow-y:auto;
+        /*background: rgb(217, 238, 252);*/
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        border-radius: 6px;
+        transform:rotate(0deg);
+        -webkit-transform:rotate(0deg);
+        -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+    .chat_time{
+        text-align: center;
+        color:#999;
+        margin-bottom: 10px;
+    }
+    .chat_section{
+        margin-bottom: 15px;
+    }
+    .chat_popover {
+        position: relative;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        display: block;
+        max-width: 276px;
+        padding: 1px;
+        text-align: left;
+        white-space: normal;
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        border-radius: 6px;
+        -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        -webkit-background-clip: padding-box;
+        -moz-background-clip: padding;
+        background-clip: padding-box;
+    }
+
+
+    .chat_popover.right {
+        margin-left: 10px;
+    }
+
+    .chat_popover.bottom {
+        margin-top: 10px;
+    }
+
+    .chat_popover.left {
+        margin-left: -10px;
+        background-color: #62c462;;
+    }
+
+    .chat_popover-content {
+        padding: 9px 14px;
+    }
+
+    .chat_popover .arrow,
+    .chat_popover .arrow:after {
+        position: absolute;
+        display: block;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+    }
+
+    .chat_popover .arrow {
+        border-width: 6px;
+    }
+
+    .chat_popover .arrow:after {
+        border-width: 5px;
+        content: "";
+    }
+
+    .chat_popover.right .arrow {
+        top: 15px;
+        left: -6px;
+        margin-top: -6px;
+        border-right-color: #999;
+        border-right-color: rgba(0, 0, 0, 0.25);
+        border-left-width: 0;
+    }
+
+    .chat_popover.right .arrow:after {
+        bottom: -5px;
+        left: 1px;
+        border-right-color: #ffffff;
+        border-left-width: 0;
+    }
+
+    .chat_popover.left .arrow {
+        top: 15px;
+        right: -6px;
+        margin-top: -6px;
+        border-left-color: #999;
+        border-left-color: rgba(0, 0, 0, 0.25);
+        border-right-width: 0;
+    }
+
+    .chat_popover.left .arrow:after {
+        right: 1px;
+        bottom: -5px;
+        border-left-color: #62c462;;
+        border-right-width: 0;
+    }
+    .wxloading{
+        /*background:#f4f4f4;*/
+        /*border:1px solid #ccc;*/
+        /*left:40%;*/
+        text-align:center;
+        padding:5px;
+        display:none;
+        z-index:10000;
+    }
+    .wxend{
+        text-align:center;
+        padding:5px;
+        display:block;
+        z-index:10000;
+        color:#999;
+    }
+</style>
+
+

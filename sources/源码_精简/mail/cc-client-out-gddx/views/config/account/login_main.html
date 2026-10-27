@@ -1,0 +1,41 @@
+<div class="login_check">
+    <form>
+        <fieldset style="">
+            <legend>认证方式</legend>
+            <div class="login_check_ip">
+                <label class="checkbox"  style="width: 100px;">
+                    <input type="checkbox" name="ipCheck"> <strong>IP认证</strong>
+                </label>
+                <span class="help-block">只有从如下指定的ip才能登录系统</span>
+                <div class="ip_item">
+                    <input type="text" name="ips[]" placeholder="输入ip" class="input-small input_text ip_first" msgName='ip地址'  dataType='IP' msg='非法的ip地址' >
+                    <a href="#" class="loginIp-plus">
+                        <i class="icon-plus"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <label class="checkbox" style="width: 100px;">
+                    <input type="checkbox" name="emailCheck"> <strong>邮箱认证</strong>
+                </label>
+                <span class="help-block">启用后会向座席邮箱发送验证码，输入验证码方可登录</span>
+            </div>
+            <button type="button" class="btn btn-small btn-primary ds_form_action" ds_action="config.account.saveLoginCheck">保存</button>
+        </fieldset>
+    </form>
+    <div class="alert alert-block" style="line-height: 18px;margin-top: 30px;">
+        说明：<br/>
+        1.如果同时配置了ip和邮件的认证，优先ip认证，如果ip认证失败，才发送邮件；ip认证成功，则直接登陆。<br/>
+    </div>
+</div>
+<style type="text/css">
+    .login_check {
+        width: 75%;
+    }
+    .login_check .ip_item{
+        margin-bottom: 10px;
+    }
+    .login_check .ip_item .input_text{
+        width: 120px;
+    }
+</style>

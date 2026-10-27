@@ -1,0 +1,222 @@
+
+<div id="_#menu#__task_select_user" class="">
+    <form id="frm_task_select_user" class="form-horizontal" style="margin-left: 30px">
+        <input type="hidden" name="menu" value="_#menu#_"/>
+        <input type="hidden" name="taskId" value='_#taskId#_'/>
+        <div class="">
+            <!--<div class="span12">-->
+            <!--<div style="border-bottom: 1px solid #f0f0f0;line-height:30px;">-->
+            <!--<h4 style="float:left;line-height: inherit;">分配客户 &nbsp;&nbsp;</h4>-->
+            <!--<div class="form_buttons">-->
+            <!--<button type="button" class="btn btn-small btn-primary ds_form_action pull-right " ds_action="customer.saveCustAssign" >保存</button>-->
+            <!--<button type="button" class="btn btn-small pull-right btn_pad btn_cancel_edit">取消</button>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <div class="">
+                <!--<div id="task_selected_agent" style="height: 25px;line-height: 25px;">-->
+                <div id="task_selected_agent">
+                <!--<span>李四</span>&nbsp;&nbsp;<span>王五</span>-->
+                </div>
+                <!--<div style="height: 25px;line-height: 25px;">未选择座席：</div>-->
+                <div style="margin-bottom: 20px;margin-top: 5px">过滤座席：
+                    <span style="display: inline-block;" id="customer_assign_select_agents"></span>
+                    <div id="customer_assign_search_div" class="combobox_agent"></div>
+                </div>
+            </div>
+            <div class="cust_assgin_container">
+                <label class="checkbox" style="width:85px;">
+                    <input type="checkbox"  name="selectAllAgent" onchange="selectTaskAllAgent(this)">全选
+                </label>
+                <div class="task_select_agent_container">
+
+                </div>
+            </div>
+            <div class="">
+                <div class="form_buttons" style="padding-top:10px;">
+                    <button type="button" class="btn btn-small btn-primary ds_form_action pull-left btn_pad" ds_action="customer.task.saveAgentsAssign" >保存</button>
+                    <button type="button" class="btn btn-small pull-left btn_pad btn_cancel_edit ds_do_action" ds_action="customer.task.cancelCustAssign">取消</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script id="tmpl_cust_assgin" type="text/x-jquery-tmpl">
+    <div class="span4">
+        <div class="control-group" >
+            <label class="control-label" style="width:85px;text-align: left;">
+                <input type="checkbox"  fieldgroup="1"  name="agents[]" value="${_id}">${displayName}[${exten}]
+            </label>
+        </div>
+    </div>
+</script>
+<script type="application/javascript">
+    function selectTaskAllAgent(sel){
+        var pane = $("#frm_task_select_user").find('.task_select_agent_container');
+        var all = pane.find("input[type=checkbox]");
+        if(sel.checked==true){
+            $.each(all,function(key, item){
+                $(item).attr("checked",true);
+            })
+        }else{
+            $.each(all,function(key, item){
+                $(item).attr("checked",false);
+            })
+        }
+    }
+    function _initAgents(_users,agents){
+        if(agents==""){
+            var html=['<lable width="80px">已选择座席：无</lable>'];
+            $('#task_selected_agent').html(html.join(""));
+            return;
+        }
+        var arr = agents.split(",");
+        var html=['<lable width="80px">已选择座席：</lable>'];
+        var h1 = '<span>_#displayName#_</span>&nbsp;&nbsp;';
+        var h2 =  '<br><span style="margin-left: 72px;">_#displayName#_</span>&nbsp;&nbsp;';
+        var _agents = [];
+        for(var i=0;i<arr.length;i++){
+            for(var o in _users){
+                if(arr[i] == _users[o]._id){
+                    _agents.push(_users[o]);
+                }
+            }
+        }
+        _agents = handler.customer._bubbleSort(_agents);
+        for(var i=0;i<_agents.length;i++){
+            if(i!=0 && i%12==0){
+                html.push(h2.replace(/_#displayName#_/g, _agents[i].displayName));
+            }else{
+                html.push(h1.replace(/_#displayName#_/g, _agents[i].displayName));
+            }
+        }
+        $('#task_selected_agent').html(html.join(""));
+    }
+    function customer_removeAgent(src) {
+        $(src).closest("span").remove();
+        var users=filterUserByScope('custTask');
+        var _users=[];
+        for(var i=0;i<users.length;i++){
+            var u=users[i];
+            if(u.status=='enable'){
+                _users.push(u);
+            }
+        }
+        filterCustAssignAgent(_users);
+    }
+
+    function filterCustAssignAgent2(_users,arr) {
+        var pane = $("#frm_task_select_user");
+        var filterUsers = [];
+        for (var i = 0; i < _users.length; i++) {
+            var u = _users[i];
+            if (($.inArray(u._id, arr) == -1)) {
+                filterUsers.push(u);
+            }
+        }
+        filterUsers=handler.customer._bubbleSort(filterUsers);
+
+        var html=[];
+        for(var i=0;i<filterUsers.length;i++){
+            var u=filterUsers[i];
+            var tmpl=$("#tmpl_cust_assgin").tmpl(u).get(0).outerHTML;
+            if((i+1)%3==1){
+                html.push('<div class="row-fluid">'+tmpl);
+            }else if((i+1)%3==0){
+                html.push(tmpl+'</div>');
+            }else{
+                html.push(tmpl);
+            }
+        }
+        $(".task_select_agent_container",pane).html(html.join(""));
+    }
+    function filterCustAssignAgent(_users) {
+        var pane = $("#frm_task_select_user");
+        var _agents = pane.find("input[name='filterAgent']");
+        var _filterUsers = [];//过滤座席
+        _agents.each(function () {
+            _filterUsers.push($(this).val());
+        });
+        var filterUsers = [];
+        for (var i = 0; i < _users.length; i++) {
+            var u = _users[i];
+            if ($.inArray(u._id, _filterUsers) != -1){
+                filterUsers.push(u);
+            }
+        }
+        filterUsers=handler.customer._bubbleSort(filterUsers);
+
+        var html=[];
+        for(var i=0;i<filterUsers.length;i++){
+            var u=filterUsers[i];
+            var tmpl=$("#tmpl_cust_assgin").tmpl(u).get(0).outerHTML;
+            if((i+1)%3==1){
+                html.push('<div class="row-fluid">'+tmpl);
+            }else if((i+1)%3==0){
+                html.push(tmpl+'</div>');
+            }else{
+                html.push(tmpl);
+            }
+        }
+        $(".task_select_agent_container",pane).html(html.join(""));
+    }
+
+    $(function () {
+        var pane=$("#frm_task_select_user");
+//        var users = getCache("agents");
+        var users=filterUserByScope('custTask');
+        var _users=[];
+        for(var i=0;i<users.length;i++){
+            var u=users[i];
+            if(u.status=='enable'){
+                _users.push(u);
+            }
+        }
+        var agents = "_#agents#_";//已选择座席
+        //初始化已选择座席
+        _initAgents(_users,agents);
+        //初始化过滤座席
+        var arr = agents.split(",");
+        //初始化未参与座席选项
+        filterCustAssignAgent2(_users,arr);
+        var noSelect = [];
+        for(var i in _users){
+            if(arr.indexOf(_users[i]._id)==-1){
+                noSelect.push(_users[i]);
+            }
+        }
+        noSelect = handler.customer._bubbleSort(noSelect);
+        utils.loadSearchInput({ id: "customer_assign_search_div",
+            width: "120",
+            height: "14",
+            tip: "按姓名、拼音、工号搜索",
+            data: noSelect,
+            listField: ["displayName", "exten"],
+            userIdField: "_id",
+            searchField: ["displayName", "exten", "pinyin"],
+            pinyinField: ["displayName"],
+            showAllList: true,
+            callbackFuc: function (object) {
+                if($.isArray(object)){
+                    return;
+                }
+                var currentVals = pane.find("input[name='filterAgent']");
+                var ishas = false;
+                for (var i = 0; i < currentVals.length; i++) {
+                    if (currentVals[i].value == object._id) {
+                        ishas = true;
+                        break;
+                    }
+                }
+                if(!ishas) {
+                    $('#customer_assign_select_agents').before("<span><input type='hidden' name='filterAgent' value=" + object._id + ">" +
+                            "<span class='label label-info'>" + object.displayName +
+                            "</span><a href='#' onclick=customer_removeAgent(this)><i class='icon-remove'></i></a>&nbsp;</span>");
+                    filterCustAssignAgent(_users);
+                }
+            }
+        });
+    })
+
+</script>

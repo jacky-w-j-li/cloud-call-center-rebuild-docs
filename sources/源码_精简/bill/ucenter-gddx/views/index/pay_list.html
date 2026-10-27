@@ -1,0 +1,71 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form id="frm_fee_search" class="form-horizontal">
+            <input type="hidden" name="flag" value="1">
+            <table class="table_row_search">
+                <tbody>
+                <tr>
+                    <td >流水号 </td>
+                    <td >
+                        <input type="text" name="_id" class="form-control input-sm" />
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm ds_form_action ds_pay_search" ds_action="fee.getPayList">查询</button>
+                        <button type="button" class="btn btn-default btn-sm ds_do_action" ds_action="fee.reset" >重置</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+<div class="panel panel-info">
+    <div class="panel-heading">充值记录</div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>流水号</th>
+            <th>金额(元)</th>
+            <th>支付方式</th>
+            <th>日期</th>
+            <th>类型</th>
+            <th>备注</th>
+            <th class="proxy_hide">操作</th>
+        </tr>
+        </thead>
+        <tbody class="fee_list">
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <div class="col-md-5">查询结果：<span class="result_count" style="margin-top:3px;display: inline-block;">0</span></div>
+    <div class=" col-md-7">
+        <ul class="pagination pagination-sm pull-right" style="margin: 0;"
+            for="frm_fee_search" ds_pagination_action="fee.getPayList">
+            <li><a href="#"  value="0">&laquo;</a></li>
+            <li><a href="#"  value="1">1</a></li>
+            <li><a href="#"  value="2">2</a></li>
+            <li><a href="#"  value="3">3</a></li>
+            <li><a href="#"  value="4">4</a></li>
+            <li><a href="#"  value="5">5</a></li>
+            <li><a href="#"  value="6">&raquo;</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="modal fade" id="fee_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" ></h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary ds_form_action" ds_action=""  ds_form="">确认</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

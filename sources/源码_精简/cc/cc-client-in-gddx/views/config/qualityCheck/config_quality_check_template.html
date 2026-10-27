@@ -1,0 +1,80 @@
+<div class="row-fluid">
+    <div class="span5 ds_search_pane" >
+        <div class="caption-wrap">
+            <div class="caption-top clearfix panel-heading">
+                <div class="pull-left">
+                    <span>质检模板列表</span>
+                </div>
+                <div class="pull-right">
+                    <button class="btn btn-small ds_do_action" ds_action="config.qualityCheck.showAddQualityCheckTemplate" ds_data="">添加打分模板</button>
+                    <button class="btn btn-small ds_do_action" ds_action="config.qualityCheck.showAddQualityCheckTemplateTwo" ds_data="">添加pass模板</button>
+                </div>
+            </div>
+        </div>
+        <div class="list-container" >
+            <div class="contact_list">
+                <div class="list-template">
+                    <table class="table table-bordered table-striped table-hover qualityCheckTwoTable">
+                        <thead>
+                        <tr>
+                            <th style="width:30%;">
+                                模板名称
+                            </th>
+                            <th style="width:5em;">
+                                模板类型
+                            </th>
+                            <th style="width:20%;">
+                                维护人
+                            </th>
+                            <th style="width:3em;">
+                                状态
+                            </th>
+                            <th style="width:6em;">
+                                操作
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="config_quality_check_template_pane">
+
+                        </tbody>
+                        <script id="quality_check_template_item" type="text/html">
+                            <tr>
+                                <td title="{{=name}}" style="cursor:pointer">{{=name}}</td>
+                                <td>{{=typeName}}</td>
+                                <td title="{{=qualityUser}}" style="cursor:pointer">{{=qualityUser}}</td>
+                                <td>{{=qualityState}}</td>
+                                <td>
+                                <a href="#" class="ds_do_action" ds_action='config.qualityCheck.changeQualityCheckTemplateStatus' ds_data='{{=_id}},{{=enable}}'>{{=enableTrue}}</a>
+                                <a href="#" class="ds_do_action" ds_action='config.qualityCheck.showEditQualityCheckTemplate' ds_data='{{=_id}}'>{{=state}}</a>
+                                </td>
+                            </tr>
+                        </script>
+
+                    </table>
+                    <div class="pagination pagination-small config_user_count" style="width:100%;margin:0 3px;" for="config_quality_template_update_form_two" ds_pagination_action="config.qualityCheck.config_quality_check_template">
+                        <span style="float:left;margin-top:8px;font-size:12px;">查询结果: <span class="result_count">10</span></span>
+                        <ul class="user_list_page pull-right" style="padding-right: 2px;">
+                            <li><a href="#" value="0" app="disabled">«</a></li>
+                            <li><a href="#" value="1" app="disabled">1</a></li>
+                            <li><a href="#" value="2" app="enable">2</a></li>
+                            <li><a href="#" value="3" app="enable">3</a></li>
+                            <li><a href="#" value="4" app="enable">4</a></li>
+                            <li><a href="#" value="5" app="enable">5</a></li>
+                            <li><a href="#" value="6" app="enable">»</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="span7 sub-right" >
+        <div>
+            <div class="content">
+                <div id="config_quality_check_template_container">
+                </div>
+                <div id="config_quality_check_template_container_Two">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<tr>
+    <td>
+        _#day#_
+    </td>
+    <td>
+        _#total#_
+    </td>
+    <td>
+        _#deal#_
+    </td>
+    <td>
+        _#invalid#_
+    </td>
+    <td>
+        _#lost#_
+    </td>
+    <td>
+        _@report.customer.calculateNum('dealRate','_#total#_','_#deal#_',"_#lost#_","_#invalid#_")@_
+    </td>
+    <td>
+        _@report.customer.calculateNum('invalidRate','_#total#_','_#invalid#_',"_#lost#_","_#invalid#_")@_
+    </td>
+    <td>
+        _@report.customer.calculateNum('lostRate','_#total#_','_#lost#_',"_#lost#_","_#invalid#_")@_
+    </td>
+    <td>
+        _@report.customer.calculateNum('aveRate','_#money#_','_#deal#_',"_#lost#_","_#invalid#_")@_
+    </td>
+    <td>
+        _@report.customer.calculateNum('moneyRate','_#money#_')@_
+    </td>
+</tr>

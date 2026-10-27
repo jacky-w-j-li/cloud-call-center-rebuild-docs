@@ -1,0 +1,88 @@
+<style>
+    .cdrDetailLabel {width: 90px;}
+    .cdrDetailText {width: 140px; text-align: left}
+</style>
+<div id="show_cdr_detail_Modal" class="modal hide fade">
+    <div class="modal-header">
+        <h3>通话质检详细信息</h3>
+    </div>
+    <div class="modal-body" style="overflow: auto">
+        <div id="cdr_detail_wrapper">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <td class="cdrDetailLabel">定位客户：</td>
+                    <td class="cdrDetailText">_#CUSTOMER_NAME#_</td>
+                    <td class="cdrDetailLabel">主叫：</td>
+                    <td class="cdrDetailText">_#bgCallNo#_</td>
+                    <td class="cdrDetailLabel">被叫：</td>
+                    <td class="cdrDetailText">_#bgCalledNo#_</td>
+                </tr>
+                <tr>
+                    <td class="cdrDetailLabel">呼叫时间：</td>
+                    <td class="cdrDetailText">_#OFFERING_TIME#_</td>
+                    <td class="cdrDetailLabel">摘机时间：</td>
+                    <td class="cdrDetailText">_#BEGIN_TIME#_</td>
+                    <td class="cdrDetailLabel">通话时长：</td>
+                    <td class="cdrDetailText">_@cdr.getCallTimeLength('_#CALL_TIME_LENGTH#_')@_</td>
+                </tr>
+                <tr>
+                    <td class="cdrDetailLabel">呼叫类型：</td>
+                    <td class="cdrDetailText">_@cdr.getCallTypeName('_#CONNECT_TYPE#_')@_</td>
+                    <td class="cdrDetailLabel">处理状态：</td>
+                    <td class="cdrDetailText">_@cdr.getCallStatusName('_#STATUS#_')@_</td>
+                    <td class="cdrDetailLabel">处理座席：</td>
+                    <td class="cdrDetailText">_@cdr.getAgentName('_#DISPOSAL_AGENT#_')@_</td>
+                </tr>
+                <tr>
+                    <td class="cdrDetailLabel">省份：</td>
+                    <td class="cdrDetailText">_#PROVINCE#_</td>
+                    <td class="cdrDetailLabel">城市：</td>
+                    <td class="cdrDetailText">_#DISTRICT#_</td>
+                    <td class="cdrDetailLabel">标记：</td>
+                    <td class="cdrDetailText">_@cdr.getKeyTag('_#KEY_TAG#_')@_</td>
+                </tr>
+                <tr>
+                    <td class="cdrDetailLabel">满意度：</td>
+                    <!--<td class="cdrDetailText"  colspan="5">_#INVESTIGATE#_</td>-->
+                    <td class="cdrDetailText"  colspan="5">_#INVESTIGATENAME#_</td>
+                </tr>
+                <!--
+                <tr>
+                    <td>备注内容：</td>
+                    <td>_#MEMO#_</td>
+                </tr>
+                -->
+                <tr>
+                    <td>通话录音：</td>
+                    <td colspan="100" id="recordPlay">
+                        <audio id="cdrListener" controls="" src="_#FILE_SERVER#_/_#RECORD_FILE_NAME#_" __AUDIO_AUTO_PLAY/><br/>
+                        <a href="_#FILE_SERVER#_/_#RECORD_FILE_NAME#_" target="_blank" download>下载录音</a>
+                    </td>
+                </tr>
+            </table>
+            <hr style="margin:5px 0">
+            <h5>工单信息</h5>
+            <div id="callSheetQualityCheckBusinessInfo">
+            </div>
+            <div id="callSheetOtherInfoPanel" class="callSheetOtherInfoPanel" style="display: none">
+                <hr style="margin:5px 0">
+                __callSheetOtherInfo
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn ds_do_action" ds_action="cdr.closeDetail" id="cdrDetailCloseBtn">关闭</a>
+    </div>
+</div>
+<script>
+    $(function(){
+        $('#show_cdr_detail_Modal').css({
+            'width': function () {
+                return ($(document).width() *.43) + 'px';
+            },
+            'margin-left': function () {
+                return -($(this).width() / 2);
+            }
+        });
+    });
+</script>

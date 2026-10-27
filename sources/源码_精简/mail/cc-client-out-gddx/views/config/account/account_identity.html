@@ -1,0 +1,290 @@
+<link rel="stylesheet" type="text/css" href="./stylesheets/app_ucenter.css?1101">
+<div class="row-fluid">
+    <div class="account_base clearfix">
+    </div>
+</div>
+
+<script id="tmpl_identity_content" type="text/html">
+    <div class="span4">
+        <div class="base_info_box">
+            <h5>基本信息</h5>
+            <div class="custom_wallet">
+                <div class="item_col custom_alance">
+                    <div class="pull-right">
+                        <span class="ds_do_action text_action_blue" ds_action="account.showNotifySet" title="设置余额提醒">设置余额提醒</span>
+                    </div>
+                    <div class="field {{=balanceCls}}">余额：</div>
+                    <div class="info uc_balance {{=balanceCls}}">{{=balanceDesc}}</div>
+                </div>
+                <div class="item_col">
+                    <div class="field">
+                        <button type="button" class="btn btn-success ds_do_action btn_bank_pay" ds_action="account.showOnlinePay">充值</button>
+                    </div>
+                    <div class="info">
+                        <span class="ds_do_action text_action_blue" ds_action="config.account.redirectUcenter" ds_data="pay" title="充值记录">充值记录</span>
+                        <span class="ds_do_action text_action_blue" ds_action="config.account.redirectUcenter" ds_data="cost" title="消费记录">消费记录</span>
+                        <span class="ds_do_action text_action_blue" ds_action="config.account.redirectUcenter" ds_data="invoice" title="申请发票">申请发票</span>
+                    </div>
+                </div>
+            </div>
+            <div class="base_info_inner">
+                <div class="item_col">
+                    <div class="pull-right">
+                        {{if(identityStatus=='deal'){ }}
+                            <span class="dentity_else">认证中</span>
+                        {{ }else if(identityStatus=='failure'){ }}
+                            <span class="dentity_failure">认证失败,原因：{{=auditMemo}}</span>
+                            <a href="#" class="ds_do_action" ds_action="config.account.redirectUcenter">认证</a>
+                        {{ }else if(identityStatus=='success'){ }}
+                            <span class="dentity_success">已认证</span>
+                        {{ }else{ }}
+                            <span class="dentity_else">未认证</span>&nbsp;&nbsp;
+                            <a href="#" class="ds_do_action" ds_action="config.account.redirectUcenter">认证</a>
+                        {{ } }}
+                    </div>
+                    <div class="field field_right">公司名称：</div>
+                    <div class="info">{{=companyName}}</div>
+                </div>
+                <div class="item_col">
+                    <div class="field field_right">账号：</div>
+                    <div class="info">{{=name}}</div>
+                </div>
+                <div class="item_col">
+                    <div class="pull-right">
+                        <span class="img_action_edit ds_do_action" ds_action="config.account.showAccountBaseInfo" title="修改账户信息"></span>
+                    </div>
+                    <div class="field field_right">联系人：</div>
+                    <div class="info linkManName">{{=linkManName}}</div>
+                </div>
+                <div class="item_col">
+                    <!--<div class="pull-right">-->
+                    <!--<span class="img_action_edit ds_do_action" ds_action="showEditInfo" title="修改个人信息"></span>-->
+                    <!--</div>-->
+                    <div class="field field_right">电话：</div>
+                    <div class="info linkManPhone">{{=linkManPhone}}</div>
+                </div>
+                <div class="item_col">
+                    <div class="field field_right">邮箱：</div>
+                    <div class="info linkManEmail">{{=linkManEmail}}</div>
+                </div>
+
+                <div class="sales_info text-info" >
+                    {{if(salesUser){ }}
+                        <span style="display:inline-block;margin-top: 15px;">您的销售经理是：{{=salesUser.name}}</span>
+                        {{if(salesUser.linkManPhone){ }}
+                            ，联系电话：{{=salesUser.linkManPhone}}
+                        {{ } }}
+                        {{if(salesUser.linkManEmail){ }}
+                            ，联系邮箱：{{=salesUser.linkManEmail}}
+                        {{ } }}
+                    {{ } }}
+                </div>
+            </div>
+            <div class="alert alert-block oem_7moor">
+                温馨提示：<br/>
+                如需增加座席或使用企业版本，请联系七陌客服，邮箱：<strong>service@7moor.com</strong>，电话：<strong>4008-113-114</strong><br/>
+            </div>
+        </div>
+    </div>
+    <div class="span8 sub-right">
+        <div class="panel panel-info">
+            <div class="panel-heading">座席授权（Licence)
+                <a href="#" id="popover_account_license" class="btn" data-toggle="popover" data-placement="bottom" data-trigger="hover focus"
+                   data-content="Licence用于控制座席的最大登录数量，不同版本的Licence功能会有差别" data-original-title="">
+                    <span class="glyphicon-question-sign"></span>
+                </a>
+                <button type="button" class="btn-add ds_do_action" ds_action="licence.showAdd"> 新增licence</button>
+                <!--<button type="button" class="btn-add ds_do_action" ds_action="licence.getLicenceList"> 刷新</button>-->
+            </div>
+            <!-- Table -->
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th width="20%">类型</th>
+                    <th width="15%">价格(月/座席)</th>
+                    <th width="15%">座席数</th>
+                    <th width="10%">状态</th>
+                    <th width="20%">到期时间</th>
+                    <th style="min-width:13em">操作</th>
+                </tr>
+                </thead>
+                <tbody class="licence_list">
+                <!--<tr>-->
+                <!--<td>免费版</td>-->
+                <!--<td>0元/月/座席</td>-->
+                <!--<td>2座</td>-->
+                <!--<td>永久</td>-->
+                <!--<td></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                <!--<td>标准版</td>-->
+                <!--<td>99元/月/座席</td>-->
+                <!--<td>10座</td>-->
+                <!--<td>2015/11/12</td>-->
+                <!--<td><a href="#" class="text_action_blue">续费</a><a href="#" class="text_action_blue">增席</a></td>-->
+                <!--</tr>-->
+                </tbody>
+            </table>
+            <div class="panel-heading">号码
+                <a href="#" id="popover_account_pnum" class="btn" data-toggle="popover" data-placement="bottom" data-trigger="hover focus"
+                   data-content="呼叫中心对外服务的中继号码，用于呼入拨打或外呼显示" data-original-title="">
+                    <span class="glyphicon-question-sign"></span>
+                </a>
+
+                <button type="button" class="btn-add ds_do_action oem_7moor" ds_action="account.select400ServiceNo"> 添加400</button>
+            </div>
+            <div class="clearfix" style="margin-bottom: 15px;">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th width="30%">类型</th>
+                        <th width="20%">价格</th>
+                        <th width="30%">状态</th>
+                        <th width="20%">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="sn_normal_list">
+                    </tbody>
+                </table>
+                <div class="pagination pagination-small" style="width:100%;margin:0 3px;"
+                     for="cc_num_frm" ds_pagination_action="account.queryNumPage">
+                    <span style="float:left;margin-top:8px;font-size:12px;">查询结果：<span class="result_count">0</span></span>
+                    <ul class="" style="float:right;padding-right: 6px;">
+                        <li><a href="#"  value="0">&laquo;</a></li>
+                        <li><a href="#"  value="1">1</a></li>
+                        <li><a href="#"  value="2">2</a></li>
+                        <li><a href="#"  value="3">3</a></li>
+                        <li><a href="#"  value="4">4</a></li>
+                        <li><a href="#"  value="5">5</a></li>
+                        <li><a href="#"  value="6">&raquo;</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+</script>
+<script>
+    $(function () {
+        $("#view_company_identity").on("mouseover", ".panel-info", function(){
+            $(".panel-heading a.btn").popover();
+        });
+    });
+</script>
+<!--     <div class="item_col">
+        <div class="field">公司名称</div>
+        <div class="info">{{=companyName}}</div>
+    </div>
+    <div class="item_col">
+        <div class="field">邮箱</div>
+        <div class="info">{{=linkManEmail}}</div>
+    </div>
+    <div class="item_col">
+        <div class="field">联系人</div>
+        <div class="info">{{=linkManName}}</div>
+    </div>
+    <div class="item_col">
+        <div class="field">联系人电话</div>
+        <div class="info">{{=linkManPhone}}</div>
+    </div>
+
+    <div class="item_col">
+        <div class="field">认证状态</div>
+        <div class="info">
+            {{if(identityStatus=='deal'){ }}
+            <div class="text-info">
+                认证中
+                <span style="margin-left:10px;cursor: pointer;" class="ds_do_action" ds_action="config.account.account_identity">
+                    <i class="icon-refresh"></i>
+                </span>
+            </div>
+            {{ }else if(identityStatus=='failure'){ }}
+            <div class="text-error">
+                认证失败，原因：{{=auditMemo}}
+            </div>
+            {{ }else if(identityStatus=='success'){ }}
+            <div class="text-success">
+                认证成功
+            </div>
+            {{ }else{ }}
+            <div class="text-error">
+                您的账户还未进行认证，从注册日起15天后将不能使用，请及时提交认证！
+                <span style="margin-left:10px;cursor: pointer;" class="ds_do_action" ds_action="config.account.account_identity">
+                    <i class="icon-refresh"></i>
+                </span>
+            </div>
+            {{ } }}
+            <button type="button" class="btn btn-small btn-primary ds_do_action" ds_action="config.account.redirectUcenter">跳转到用户中心</button>
+        </div>
+    </div> -->
+<div id="modal_enable_robot_view" class="modal hide fade " tabindex="-1" style="">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">开通信息</h4>
+    </div>
+    <div class="modal-body" style="">
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn  btn-small" class="close" data-dismiss="modal" aria-hidden="true">关闭</a>
+    </div>
+</div>
+<div id="modal_enable_robot" class="modal hide fade " tabindex="-1" style="">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">开通智齿机器人</h4>
+    </div>
+    <div class="modal-body" style="">
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary ds_form_action btn-small" ds_action="config.channel.saveRobot" ds_form="#frm_account_enable_robot">保存</button>
+        <a href="#" class="btn  btn-small" class="close" data-dismiss="modal" aria-hidden="true">取消</a>
+    </div>
+</div>
+<div id="modal_account_base_update" class="modal hide fade " tabindex="-1" style="">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">修改账户信息</h4>
+    </div>
+    <div class="modal-body" style="">
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary ds_form_action btn-small" ds_action="config.account.updateAccBase" ds_form="#frm_account_base_update">保存</button>
+        <a href="#" class="btn  btn-small" class="close" data-dismiss="modal" aria-hidden="true">取消</a>
+    </div>
+</div>
+<div class="modal hide fade" id="common_modal">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"></h4>
+    </div>
+    <div class="modal-body" >
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary ds_form_action btn-small" ds_action=""  ds_form="">保存</button>
+        <button type="button" class="btn btn-small" data-dismiss="modal" aria-hidden="true">取消</button>
+    </div>
+</div>
+<div class="modal hide fade " id="service_modal" tabindex="-1"  style="width: 800px;margin-left:-400px; ">
+    <div class="modal-header">
+        <button type="button" class="close " data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" ></h4>
+    </div>
+    <div class="modal-body" style="max-height: 500px;">
+    </div>
+</div><!-- /.modal -->
+
+<div class="modal fade" id="licence_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" ></h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary ds_form_action" ds_action=""  ds_form="#frm_licence_update">保存</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>

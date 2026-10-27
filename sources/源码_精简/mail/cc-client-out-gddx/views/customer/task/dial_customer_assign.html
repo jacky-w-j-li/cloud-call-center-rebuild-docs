@@ -1,0 +1,53 @@
+<style type="text/css">
+.task_cust_assgin_containe .span4{
+    margin-left: 0;
+}
+</style>
+<div class="">
+    <form class="form-horizontal">
+        <input type="hidden" name="menu" value="_#menu#_"/>
+        <input type="hidden" name="taskId" value="_#taskId#_"/>
+        <input type="hidden" name="agents" value="_#agents#_"/>
+        <div class="row-fluid">
+            <!--<div class="span12">-->
+                <!--<div style="border-bottom: 1px solid #f0f0f0;line-height:30px;">-->
+                    <!--<h4 style="float:left;line-height: inherit;">分配客户 &nbsp;&nbsp;</h4>-->
+                    <!--<div class="form_buttons">-->
+                        <!--<button type="button" class="btn btn-small btn-primary ds_form_action pull-right " ds_action="customer.saveCustAssign" >保存</button>-->
+                        <!--<button type="button" class="btn btn-small pull-right btn_pad btn_cancel_edit">取消</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="span12">
+                <div style="line-height: 35px;margin-bottom: 10px;">描述 <textarea name="memo" rows="3">_#memo#_</textarea></div>
+                <div style="line-height: 35px;margin-bottom: 10px;">有效通话时长 <input type="num" name="effective" msgname="有效通话时长只能为大于0的整数" value="30" disabled="">秒以上
+                <div style="line-height: 35px;margin-bottom: 10px;">基础任务量
+                    <input type="num" name="dailyTaskAllAgent" datatype="Number,Range" min="0" msgname="日均任务只能为大于0的整数" value="" onkeyup="this.value=this.value.replace(/\D/g,'')"> <span class="unit">通</span>/天<span id="dttotal"> </span> 
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input class="ds_checked_radio" style="margin:0 5px 0 0" ds_action="customer.task.changeUnit" ds_data="count" type="radio" name="unit" value="1" checked="checked">有效通话数（通）
+                    <input class="ds_checked_radio" style="margin:0 5px 0 0" ds_action="customer.task.changeUnit" ds_data="duration" type="radio" name="unit" value="2">有效通话时长（分钟）
+                    &nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn-blue btn-small ds_form_action" ds_action="customer.task.autoAssgin">自动分配</button>
+                    <button type="button" class="do_action_cancel ds_do_action" ds_action="customer.task.resetAssgin">重置</button>
+                </div>
+            <div class="row-fluid task_cust_assgin_container">
+            </div>
+            <div>
+                <!--<span>[注]： 必须全部分配完当前查询到的所有客户</span>-->
+                <div class="form_buttons" style="padding-top:10px;">
+                    <button type="button" class="btn-blue btn-small ds_form_action" ds_action="customer.task.saveDailyTask" >保存</button>
+                    <button type="button" class="do_action_cancel ds_do_action" ds_action="customer.task.cancelCustAssign">取消</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script id="tmpl_task_cust_assign" type="text/x-jquery-tmpl">
+    <div class="span4">
+    <label class="control-label" style="text-align: left;white-space:nowrap">
+        <input type="hidden" name="owner[]" value="${_id}"/>${displayName}[${exten}]：<input datatype="Number,Range" min="0" msgname="日均任务只能为大于0的整数" msg="日均任务只能为大于0的整数" class="user_cust" name="assign[]" value="${dailyTask}" onkeyup="this.value=this.value.replace(/\D/g,'')"/> <span class="unit">通</span>/天
+    </label>
+            
+    </div>
+</script>
+<script type="application/javascript">
+</script>

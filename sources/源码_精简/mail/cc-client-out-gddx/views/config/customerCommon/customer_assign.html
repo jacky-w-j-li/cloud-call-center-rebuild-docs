@@ -1,0 +1,150 @@
+<!--<div class="contact_summary">-->
+    <form class="form-horizontal">
+        <input type="hidden" name="menu" value="_#menu#_"/>
+        <input type="hidden" name="commonId" value="_#commonId#_" />
+        <div class="row-fluid">
+            <!--<div class="span12">-->
+                <!--<div style="border-bottom: 1px solid #f0f0f0;line-height:30px;">-->
+                    <!--&lt;!&ndash;<h4 style="float:left;line-height: inherit;">分配客户 &nbsp;&nbsp;</h4>&ndash;&gt;-->
+                    <!--<div class="form_buttons">-->
+                        <!--<button type="button" class="btn btn-small btn-primary ds_form_action pull-right " ds_action="customer.saveCustAssign" >保存</button>-->
+                        <!--&lt;!&ndash;<button type="button" class="btn btn-small pull-right btn_pad btn_cancel_edit">取消</button>&ndash;&gt;-->
+                        <!--<button type="button" class="btn btn-small pull-right btn_pad" data-dismiss="modal" aria-hidden="true">取消</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="span12">
+                <div style="height: 25px;line-height: 25px;">您选择的客户共计<span class="cust_count">0</span>个</div>
+                <div style="height: 25px;line-height: 25px;margin-bottom: 0px;">分配规则：<a href="#" class="ds_do_action" ds_action="customer.autoAssgin">自动分配</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="#" class="ds_do_action" ds_action="customer.resetAssgin">重置</a>
+                    当前未分配客户数<span class="cust_more_count" style="color:red">0</span>个 </div>
+                <div class="alert">提示:一次最多分配1万个客户，若分配数超过最大值,截取前1万个进行分配！</div>
+                <div style="margin-bottom: 20px;">过滤座席：
+                    <span style="display: inline-block;" id="customer_assign_select_agents"></span>
+                    <div id="customer_assign_search_div" class="combobox_agent"></div>
+                </div>
+            </div>
+            <div class="span12 cust_assgin_container">
+            </div>
+            <div class="span12">
+                <!--<span>[注]： 必须全部分配完当前查询到的所有客户</span>-->
+                <div class="form_buttons" style="padding-top:10px;">
+                    <button type="button" class="btn btn-small btn-primary ds_form_action pull-left btn_pad" ds_action="config.customerCommon.saveCustAssign" >保存</button>
+                    <button type="button" class="btn btn-small pull-left" data-dismiss="modal" aria-hidden="true">取消</button>
+                    <!--<button type="button" class="btn btn-small pull-left  btn_cancel_edit">取消</button>-->
+                </div>
+            </div>
+        </div>
+    </form>
+<!--</div>-->
+
+<script id="tmpl_cust_assgin" type="text/x-jquery-tmpl">
+    <div class="span4">
+        <input type="hidden" name="owner[]" value="${_id}"/>
+        <div class="control-group" >
+            <label class="control-label" style="width:85px;">${displayName}[${exten}]：</label>
+            <input size="5" style="width:35px;float:left" type="text"  class="user_cust" name="assign[]" value="0"
+                                          dataType='Number' msg='必须为数字' onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+                                         <span style="padding-top:8px;float:left;">个客户</span>
+        </div>
+    </div>
+</script>
+<script type="application/javascript">
+    $(function () {
+//        var pane=$("#_#menu#__customer");
+        var pane=$('#batch_modal');
+//        var users = getCache("agents");
+        var users=filterUserByScope('customer');
+        var _users=[];
+        for(var i=0;i<users.length;i++){
+            var u=users[i];
+            if(u.status=='enable'){
+                _users.push(u);
+            }
+        }
+        utils.loadSearchInput({ id: "customer_assign_search_div",
+            width: "120",
+            height: "14",
+            tip: "按姓名、拼音、工号搜索",
+            data: _users,
+            listField: ["displayName", "exten"],
+            userIdField: "_id",
+            searchField: ["displayName", "exten", "pinyin"],
+            pinyinField: ["displayName"],
+            showAllList: true,
+            callbackFuc: function (object) {
+                if($.isArray(object)){
+                    return;
+                }
+                var currentVals = pane.find("input[name='filterAgent']");
+                var ishas = false;
+                for (var i = 0; i < currentVals.length; i++) {
+                    if (currentVals[i].value == object._id) {
+                        ishas = true;
+                        break;
+                    }
+                }
+                if(!ishas) {
+                    $('#customer_assign_select_agents').before("<span><input type='hidden' name='filterAgent' value=" + object._id + ">" +
+                            "<span class='label label-info'>" + object.displayName +
+                            "</span><a href='#' onclick=customer_removeAgent(this)><i class='icon-remove'></i></a>&nbsp;</span>");
+                    filterCustAssign();
+                }
+            }
+        });
+    })
+    function customer_removeAgent(src) {
+        $(src).closest("span").remove();
+        filterCustAssign();
+    }
+    function filterCustAssign(){
+//        var pane=$("#_#menu#__customer");
+        var pane=$('#batch_modal');
+        var _agents = pane.find("input[name='filterAgent']");
+        var _filterUsers=[];
+        _agents.each(function(){
+            _filterUsers.push($(this).val());
+        });
+//        var users = getCache("agents");
+        var users=filterUserByScope('customer');
+        var filterUsers = [];
+        if(_filterUsers.length>0){
+            for(var i=0;i<users.length;i++){
+                var u=users[i];
+                if($.inArray(u._id,_filterUsers)!=-1){
+                    filterUsers.push(u);
+                }
+            }
+        }else{
+            for(var i=0;i<users.length;i++){
+                var u=users[i];
+                if(u.status=='enable'){
+                    filterUsers.push(u);
+                }
+            }
+        }
+
+        filterUsers=handler.customer._bubbleSort(filterUsers);
+        var html=[];
+        for(var i=0;i<filterUsers.length;i++){
+            var u=filterUsers[i];
+            if(u.status=='enable'){
+                var tmpl=pane.find("#tmpl_cust_assgin").tmpl(u).get(0).outerHTML;
+                if((i+1)%3==1){
+                    html.push('<div class="row-fluid">'+tmpl);
+                }else if((i+1)%3==0){
+                    html.push(tmpl+'</div>');
+                }else{
+                    html.push(tmpl);
+                }
+            }
+        }
+        if(filterUsers.length%3==1){
+            html.push('<div class="span8"></div></div>');
+        }else if(filterUsers.length%3==2){
+            html.push('<div class="span4"></div></div>');
+        }
+        $(".cust_assgin_container",pane).html(html.join(""));
+    }
+
+</script>

@@ -1,0 +1,228 @@
+<h5>请您评分</h5>
+<form id="call_shell_grade">
+<input type="hidden" name="callSheetID" value="__CALL_SHEET_ID"/>
+<input type="hidden" name="offeringTime" value="__OFFERING_TIME"/>
+<input type="hidden" name="disposalAgent" value="__DISPOSAL_AGENT"/>
+<table class="table table-bordered" id='callSheetGradeTable' style="margin-bottom: 0">
+    <tr>
+        <td>质检项</td>
+        <td>质检结果</td>
+    </tr>
+    __CALL_SHEET_GRADE_CONFIG
+    <tr class="total_points">
+        <td>
+            总分
+        </td>
+        <td>
+            <h4 id="gradeAmount" style="color:green;">0</h4>
+        </td>
+    </tr>
+</table>
+    <div style="border: 1px solid #ddd;border-top:none;padding:20px;margin-bottom: 20px" class="clearfix">
+        <label style="float: left;height:85px;line-height: 85px;margin-right: 14px">备注</label>
+        <div style="float: left;">
+            <textarea name="COMMENTS" style="width:500px;height:85px;resize:none;"></textarea>
+            <input type="hidden" id="hide_pass_template"/>
+        </div>
+    </div>
+<a id="isre" href="#" class="btn btn-primary ds_form_action" ds_action="qualityCheck.saveCallSheetGrade">保存并评分下一个</a>
+<a id="isagain" style="display: none" href="#" class="btn btn-primary ds_form_action save" ds_action="qualityCheck.updateCallGrade">保存</a>
+</form>
+        <script>
+            $(function () {
+                if ($('#callSheetGradeTable').find('tr[class="task_table config_name_1 task_level_1"]').length != 0){
+                    $('#callSheetGradeTable').find('tr[class="info"]').find('td').first().attr('style', 'width:240px;');
+                    //$('#callSheetGradeTable').find('tr[class="total_points"]').hide();//隐藏掉总分
+                    $('#gradeAmount').closest("tr").find('td').first().html('<h4  style="color:green;">总结果</h4>');
+                    $('#gradeAmount').html('');
+                    $('#callSheetGradeTable').find('tr[class^="task_table config_name_1-"]').show();
+                    $('#callSheetGradeTable .task_table_td').change(function () {
+                        var val = $(this).find('input[type="radio"]:checked').val();
+                        if (val) {
+                            $(this).find('input[type="hidden"]').val(val);
+                        }
+                        var cfName = $(this).find('input').attr('name')
+                        changed(cfName);
+                        inspect();
+                    });
+
+                    $('#call_shell_grade').find('a[class="btn btn-primary ds_form_action"]').attr("ds_action","qualityCheck.saveCallShellGrade");
+                }
+                $('#callSheetGradeTable .task_table').click(function () {
+                    var label = $(this).attr('class').split(' ')[1].substr(12);
+                    for (var i = 0; i < 21; i++) {
+                        var count = label+"-"+i;
+                        if ($(this).siblings('tr.config_name_'+count).attr('style') != "display: table-row;") {
+                            if($(this).siblings('tr.config_name_'+count).length > 0){
+                                $(this).siblings('tr.config_name_'+count).show();
+                                $(this).siblings('tr.config_name_'+count).find('b').attr('class','caret-right')
+                                $(this).find('b').attr('class','caret-bottom');
+                            }
+                        } else{
+                            if($(this).siblings('tr[class^="task_table config_name_'+count+'"]').length > 0){
+                                $(this).siblings('tr[class^="task_table config_name_'+label+'-"]').hide();
+                                $(this).siblings('tr[class^="task_table config_name_'+count+'"]').find('b').removeClass('caret-bottom').addClass('caret-right');
+                                $(this).find('b').removeClass('caret-bottom').addClass('caret-right');
+                                break;
+                            }
+                        }
+                    }
+                });
+
+                $('#callSheetGradeTable .task_table_td').on('click', function(event){
+                    event.stopPropagation();
+                });
+
+                function changed(cfName) {
+                    if (cfName == 'config_name' || cfName == '') {
+                        return false;
+                    }
+                    if (cfName.lastIndexOf("-") != -1) {
+                        cfName = cfName.substr(0,cfName.lastIndexOf("-")+1);
+                    } else {
+                        cfName = cfName.substr(0,cfName.length-1);
+                    }
+
+                    var list = $('#callSheetGradeTable').find('input[class^="hidden_'+cfName+'"]');
+                    var flog = true;
+                    for (var i =0; i < list.length; i++) {
+                        if (!list[i].value) {
+                            flog = false;
+                        }
+                    }
+                    if (flog) {
+                        var valList = [];
+                        for (var i =0; i < list.length; i++) {
+                            valList.push(list[i].value);
+                        }
+                        cfName = cfName.substr(0,cfName.length-1);
+                        var radio = $('#callSheetGradeTable').find('tr[class="task_table '+cfName+'"]');
+                        var radio1 = $('#callSheetGradeTable').find('tr[class^="task_table '+cfName+'-"]');
+                        //var radio2 = $('#callSheetGradeTable').find('tr[id^="'+cfName+'-"]');
+                        var num = 0;
+                        var noList = [];
+                        var yesList = [];
+                        var flog = false;
+                        if (radio1.find('a[data-toggle="tooltip"]').length > 0){
+                            num = radio1.find('a[data-toggle="tooltip"]').attr("name");
+                            var trs = radio1.find('a[data-toggle="tooltip"]').closest('tr');
+                            trs.each(
+                                    function() {
+                                        var ischecked = $(this).find('input[type="radio"]:checked').val();
+                                        if (ischecked) {
+                                            noList.push(ischecked);
+                                        }
+                                    }
+                            );
+                            /*radio2.each(
+                                    function() {
+                                        var ischecked = $(this).find('input[type="radio"]:checked').val();
+                                        if (ischecked) {
+                                            yesList.push(ischecked);
+                                        }
+                                    }
+                            );*/
+                            radio1.each(
+                                    function() {
+                                        if ($(this).find('td[style^="padding-left: 25px"]').length >0 && $(this).find('a[data-toggle="tooltip"]').length < 1) {
+                                            var ischecked = $(this).find('input[type="radio"]:checked').val();
+                                            if (ischecked) {
+                                                yesList.push(ischecked);
+                                            }
+                                        }
+                                    }
+                            );
+                            var xjName = trs.attr('class').split(' ')[1].substr(0,13);
+                            if (xjName == cfName) {
+                                flog = true;
+                            }
+                        }
+                        if (!radio.find('input[type="radio"]').val()) {
+                            radio = $('#callSheetGradeTable').find('tr[class="task_table '+cfName+' task_level_1"]');
+                        }
+                        if (valList.indexOf('no') != -1 && isDeadly(noList, num,flog,yesList)) {
+                            radio.find('input[value="no"]').attr('checked','checked');
+                            radio.find('input[value="yes"]').removeAttr("checked");
+                            radio.find('input[value="dont"]').removeAttr("checked");
+                            radio.find('input[type="hidden"]').val("no");
+                            if (radio.find('input[type="hidden"]').length == 0) {
+                                var i  = cfName.substr(0,cfName.length-1)+(cfName.substr(cfName.length-1,cfName.length)*1+1);
+                                radio.siblings('tr[class^="task_table '+i+'"]').show();
+                                if (radio.siblings('tr[class^="task_table '+i+'"]').find('b[class="caret-right"]').length > 0){
+                                    radio.siblings('tr[class^="task_table '+i+'"]').find('b[class="caret-right"]').attr('class','caret-bottom');
+                                }
+                            }
+                            changed(cfName);
+                        } else if (valList.indexOf('yes') != -1) {
+                            radio.find('input[value="yes"]').attr('checked','checked');
+                            radio.find('input[value="no"]').removeAttr("checked");
+                            radio.find('input[value="dont"]').removeAttr("checked");
+                            radio.find('input[type="hidden"]').val("yes");
+                            if (radio.find('input[type="hidden"]').length == 0) {
+                                var i  = cfName.substr(0,cfName.length-1)+(cfName.substr(cfName.length-1,cfName.length)*1+1);
+                                radio.siblings('tr[class^="task_table '+i+'"]').show();
+                                if (radio.siblings('tr[class^="task_table '+i+'"]').find('b[class="caret-right"]').length > 0){
+                                    radio.siblings('tr[class^="task_table '+i+'"]').find('b[class="caret-right"]').attr('class','caret-bottom');
+                                }
+                            }
+                            changed(cfName)
+                        } else if (valList.indexOf('dont') != -1){
+                            radio.find('input[value="dont"]').attr('checked','checked');
+                            radio.find('input[value="yes"]').removeAttr("checked");
+                            radio.find('input[value="no"]').removeAttr("checked");
+                            radio.find('input[type="hidden"]').val("dont");
+                            if (radio.find('input[type="hidden"]').length == 0) {
+                                var i  = cfName.substr(0,cfName.length-1)+(cfName.substr(cfName.length-1,cfName.length)*1+1);
+                                radio.siblings('tr[class^="task_table '+i+'"]').show();
+                                if (radio.siblings('tr[class^="task_table '+i+'"]').find('b[class="caret-right"]').length > 0){
+                                    radio.siblings('tr[class^="task_table '+i+'"]').find('b[class="caret-right"]').attr('class','caret-bottom');
+                                }
+                            }
+                            changed(cfName)
+                        }
+                    }
+                }
+            });
+            function inspect() {
+                var flog = true;
+                var result = '不涉及';
+                $('#callSheetGradeTable').find('tr[first_data="yes"]').each(function () {
+                    if ($(this).find('input[type="radio"]:checked').length <= 0){
+                        flog = false;
+                    }
+                });
+                if (flog) {
+                    $('#callSheetGradeTable').find('tr[first_data="yes"]').each(function () {
+                        if ($(this).find('input[type="radio"]:checked')[0].value == "no"){
+                            result = '不通过';
+                            return false;
+                        } else if ($(this).find('input[type="radio"]:checked')[0].value == "yes"){
+                            result = '通过';
+                        }
+                    });
+                    $('#gradeAmount').html(result);
+                } else {
+                    $('#gradeAmount').html('');
+                }
+            }
+            function isDeadly(noList, num, flog,yesList) {
+                var deadly = false;
+                if (yesList.indexOf("no") != -1) {
+                    deadly =true;
+                }
+                if (num == 0 || noList.length <= 0 || !flog || deadly) {
+                    return true;
+                }
+                var count = 0;
+                for (var i=0;i<noList.length;i++) {
+                    if (noList[i] == 'no') {
+                        count ++;
+                    }
+                }
+                if (count >= num) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        </script>

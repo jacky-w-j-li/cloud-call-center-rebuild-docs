@@ -1,0 +1,143 @@
+<div class="weixin-config-show">
+    <p class="weixin-config-showtop"></p>
+    <ol class="weixin-config-showbottom">
+        <li class="null">
+            <span style="background:none" class="weixin-main-menu ds_do_action" ds_action="config.channel.addWeixinMenuMain" media_id=""></span>
+        </li>
+    </ol>
+</div>
+<div class="weixin-config-set">
+    <form id="weixin-all-menu" ds_data="true">
+            <div class="form-btn-center clearfix">
+                <div class="null-menu">
+                    您还没有定义任何菜单，请点击左下方的加号图标开始自定义菜单
+                </div>
+                <button type="button" class="ds_form_action btn-blue save_btn" tabindex="-1" ds_action="config.channel.createMenu">保存并发布
+                </button>
+                <button id="delete_menu" type="button" class="ds_do_action btn-gray" tabindex="-1" ds_action="config.channel.deleteWeixinMenuConfirmDialog" title="删除菜单">删除
+                </button>
+            </div>
+    	<input type="hidden" name='weixin_id' value="_#weixin_id#_">
+    </form>
+</div>
+
+<div class="modal fade" id="weixin_myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!--<div class="modal-header">-->
+            <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+            <!--<h4 class="modal-title" id="myModalLabel">Modal title</h4>-->
+            <!--</div>-->
+            <div class="modal-body">
+                <div class="km_edit_form_middle" style="min-width:500px;">
+                    <div id="km_edit_body_wx"  style="padding-top: 20px">
+                        <div class="normal_area">
+                            <div class="title_container">
+                                <label for="wx_title">标题  </label>
+                                <input class="pb-input-text ds_key_action" keyup_action="config.channel.showLastWords" type="text" id="wx_title" autocomplete="off" name="title" autofocus onkeypress="if(event.keyCode==13){return false;}" maxlength="64" required>
+                                <i><span class="wordsNum1">0</span><span>/64</span></i>
+                            </div>
+                            <div class="title_container">
+                                <label for="wx_writer">作者  </label>
+                                <input class="pb-input-text ds_key_action" keyup_action="config.channel.showLastWords" type="text" id="wx_writer" name="writer" autofocus onkeypress="if(event.keyCode==13){return false;}" maxlength="8" required>
+                                <i><span class="wordsNum2">0</span><span>/8</span></i>
+                            </div>
+                            <div class="title_container">
+                                <label>内容  </label>
+                                <textarea id="wx_editor_id" name="content" required></textarea>
+                                <div style="height:10px;"></div>
+                            </div>
+                            <div>
+                                <label for="source_checkbox" class="checkbox_label">
+                                    <span class="source_link">原文链接</span>
+                                </label>
+                                <input type="text" class="input_source" name="source_url" value="">
+                            </div>
+                        </div>
+                        <div class="high_light_area">
+                            <div class="msg_edit_title">发布样式编辑</div>
+                            <div class="cover_pic">
+                                <span><strong>封面</strong></span>
+                                <span class="cover_pic_tip">大图片建议尺寸：900像素 * 500像素；支持jpg和png格式的图片</span>
+                                <div class="upload_wrap">
+                                    <div class="upload_box">
+                                        <div class="row_item">
+                                            <label class="control-label" for="weiXin_icon-container-qiniu"></label>
+                                            <div class="userEdit_icon_preview_img" id="weiXin_icon-container-qiniu">
+                                                <div class="img_pane">
+                                                    <button type="button" class="btn-gray btn-small img-none" id="weiXin_icon-pickfiles" href="#" >
+                                                        <span>本地上传</span>
+                                                    </button>
+                                                </div>
+                                                <img class="S_line5 square fl">
+                                            </div>
+                                            <table class="table table-striped table-hover text-left weiXin_icon_container display_none" style="margin-top:15px;display: none">
+                                                <thead>
+                                                <tr>
+                                                    <th class="span4">图片</th>
+                                                    <th class="span2">大小</th>
+                                                    <th class="span6">&nbsp;</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="weiXin_icon-fsUploadProgress">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    <p class="delete_pic"><a class="ds_do_action" ds_action="config.channel.deleteWeiXinPics">删除</a></p>
+                                </div>
+                                <p class="pic_tips">
+                                    <label for="checkbox2" class="checkbox_label">
+                                        <input type="checkbox" name="checkbox" class="coverpic_intext" id="checkbox2">
+                                        <span>封面图片显示正文中</span>
+                                    </label>
+                                </p>
+                            </div>
+                            <div class="msg_description">
+                                <div>
+                                    <span><strong>摘要</strong></span>
+                                    <span class="cover_pic_tip">选填，如果不填写会默认抓取正文前54个字</span>
+                                </div>
+                                <textarea class="digest ds_key_action" keyup_action="config.channel.showLastWords" name="digset" id="digest"></textarea>
+                                <div class="limit_number">
+                                    <span class="wordsNum3">0</span><span>/120</span>
+                                </div>
+                                <div class="modal-bottom">
+                                    <button type="button" class="btn-blue ds_do_action" ds_action="config.channel.saveWeiXinImgTxt">保存</button>
+                                    <button type="button" class="btn-gray ds_do_action" data-dismiss="modal">退出</button>
+                                    <input type="hidden" id="imgMediaId">
+                                    <input type="hidden" id="menuMediaId"/>
+                                    <input  type="hidden" id="weiXinSaveIndex">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <script type="text/javascript">
+            $(function(){
+                var sid=session.id;
+                handler.config.channel.wechatKmEditor = null;
+                handler.config.channel.wechatKmEditor = KindEditor.create('#wx_editor_id', {
+                    width : '85%',
+                    height: '150px',
+                    wellFormatMode:false,
+                    basePath:"./third-lib/kindeditor/",
+                    resizeType : 1,
+                    allowPreviewEmoticons : false,
+                    allowImageUpload : true,
+                    uploadJson : './richUpload?action=uploadRichImage&sessionId='+sid,
+//                fileManagerJson : '../js/kindeditor/jsp/file_manager_json.jsp',
+//                allowFileManager : true,
+                    items : [
+                        'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                        '|', 'justifyleft', 'justifycenter', 'justifyright']
+                });
+            });
+        </script>
+    </div>
+</div>
+    </div>
+
+

@@ -1,0 +1,117 @@
+<div class="right_content_pane" >
+    <form id="frm_customer_task_add" class="form-horizontal ">
+        <input type="hidden" name="menu" value='_#menu#_'/>
+        <div class="right_head clearfix" style="">
+            <div class="pull-left">
+                <h4 style="">添加外呼任务</h4>
+            </div>
+            <div class=" pull-right">
+                <button type="button" class="do_action_cancel ds_do_action" ds_action="customer.task.cancelDeal" ds_data="frm_customer_task_add" style="margin-left: 0px;">取消</button>
+                <button type="button" class="btn-blue btn-small ds_form_action"  ds_action="customer.task.saveDialTask" style="margin-left: 10px;">保存</button>
+            </div>
+        </div>
+
+        <div>
+            <div class="control-group">
+                <label class="control-label required">任务名称</label>
+                <div class="controls">
+                    <input name="taskName" type="text" maxlength="10" msgName='任务名称'>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">来源</label>
+                <div class="controls">
+                    <select class="" name="source" >
+                        </select>
+                    <span class="help-block muted">来源需要在客户配置中配置</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">描述</label>
+                <div class="controls" >
+                    <textarea name="memo" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label required">有效通话时长</label>
+                <div class="controls">
+                    <input type="num" name="effective" datatype="Number,Range" min="0" msgname="有效通话时长只能为大于0的整数" value="30" onkeyup="this.value=this.value.replace(/\D/g,'')"> 秒以上<span style="color:#f00">&nbsp;&nbsp;&nbsp;&nbsp;任务创建后不允许修改该值</span>
+                    <span class="help-block muted">每个号码通话时长最低达到此值，才能计入有效通话时长</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label required">选择座席</label>
+                <div class="controls">
+                    <div class="daily_task">
+                        基础任务量 <input type="num" name="dailyTaskAllAgent" datatype="Number,Range" min="0"
+                                     msgname="日均任务只能为大于0的整数" value="50"
+                                     onkeyup="this.value=this.value.replace(/\D/g,'')"> <span
+                            class="unit">通/天</span><span id="dttotal"></span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<input class="ds_checked_radio" ds_action="customer.task.changeUnit" ds_data="count"
+                               type="radio" name="unit" value="1" checked="checked">有效通话数（通）<input
+                            class="ds_checked_radio" ds_action="customer.task.changeUnit" ds_data="duration"
+                            type="radio" name="unit" value="2">有效通话时长（分钟）
+                    </div>
+                    <div class = "check_agent_dep_seas">
+                        <div class="span12 advanced_search_item ds_search_item ds_owner ">
+                                <label>过滤座席</label>
+                                <!--<div id="_#menu#__owner_select_user" class="combobox_agent"></div>-->
+                                <div id="_#menu#__owner_select_user" class="comtabbox_agent"></div>
+                        </div>
+                        <div class="tabbox_agent_result clearfix"></div>
+                        <div class="ch_agent">
+                            <label class="checkbox" style="white-space:nowrap;padding-left:0">
+                                <input type="checkbox" name="selectAllAgent" class="ds_task_change" ds_action="selectTaskAllAgent(this,'frm_customer_task_add',50)">全选
+                            </label>
+                            <div class="cust_assgin_agent_container" id="_#menu#__owner_select_user_container">
+                                <div class="row-fluid"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script id="tmpl_customer_task" type="text/x-jquery-tmpl">
+<div class="span4" ds_data="${deptOrSeasOrPersonId}">
+    <label class="control-label" style="text-align: left;white-space:nowrap">
+    <input type="checkbox" fieldgroup="1" name="agents[]" value="${_id}"  class="ds_task_change" ds_action="selectAgent(this,'frm_customer_task_add',50)"><span class="agnetName" title="${displayName}[${exten}]">${displayName}[${exten}]</span>
+        <input name="dailyTask[]" datatype="Number,Range" min="0" msgName='日均任务只能为大于0的整数' class='user_cust' value='${delfVal}'  onkeyup="this.value=this.value.replace(/\D/g,'')">  <span class="unit">${endString}</span>
+    </label>
+</div>
+</script>
+<script id="tmpl_customer_task_checked" type="text/x-jquery-tmpl">
+<div class="span4" ds_data="${deptOrSeasOrPersonId}">
+    <label class="control-label" style="text-align: left;white-space:nowrap">
+        <input type="checkbox" fieldgroup="1" checked name="agents[]" value="${_id}" class="ds_task_change" ds_action="selectAgent(this,'frm_customer_task_add',50)"><span class="agnetName" title="${displayName}[${exten}]">${displayName}[${exten}]</span>
+        <input name="dailyTask[]" datatype="Number,Range" min="0" msgName='日均任务只能为大于0的整数' class='user_cust' value='${delfVal}'  onkeyup="this.value=this.value.replace(/\D/g,'')">  <span class="unit">${endString}</span>
+    </label>
+</div>
+</script>
+<style type="text/css">
+.cust_assgin_agent_container .row-fluid [class*="span"]{
+    margin-left: 0;
+}
+</style>
+<script type="text/javascript">
+    $(function(){
+        //初始化座席
+        //  utils._initAgentCheckbox();
+        utils.loadAgentTabBoxByDial("_#menu#__owner_select_user_input","_#menu#__owner_select_user",{width:"126",height:"17",maxHeight:292,hideTab:5,isRadio:false,isChenckBox:false,commonTab:false,endString:'通/天',delfVal:50,tmplId:'tmpl_customer_task',formId:'frm_customer_task_add'},false,true,true);
+    });
+   
+    
+    $(document).on("keyup", "input[name='dailyTask[]']", function(event){
+        var src   = $(event.currentTarget),
+            pane  = $("#frm_customer_task_add").find('.cust_assgin_agent_container'),
+            all   = pane.find("input[type=checkbox]:checked"),  
+            total = 0,
+            unit  = pane.find(".unit").html();
+        src.val(src.val().replace(/[^\d]/g,''));
+        $.each(all,function(key, item){
+            total += parseInt($(item).siblings("input").val());
+        });
+        utils.setDttotalHtml(total,unit);
+    });
+</script>

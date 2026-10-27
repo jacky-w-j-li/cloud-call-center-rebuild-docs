@@ -1,0 +1,106 @@
+context serviceNo {
+	_. => {
+		__FROM_CID=${CALLERID(num)};
+		__FROM_DID=${EXTEN};
+		__FROM_CONTEXT="${CONTEXT}";
+		__ACCOUNT=_accountId;
+		SIPAddHeader(X-AccountId: _accountId);
+		SIPAddHeader(X-DialoutOrNot: -local);
+		Answer;
+		loop:
+		_welcomeMusic;
+		_nextPeer;
+	}
+}
+
+context _serviceNo-ivrlogin {
+	s => {
+		BackGround(sound/ivrlogin);
+		WaitExten(20);
+	}
+	
+	1 => {
+		goto _serviceNo-ivrlogined,s,1;
+	}
+	
+	2 => {
+		goto _serviceNo-ivrlogout,s,1;
+	}
+	
+	3 => {
+		goto _serviceNo,_serviceNo,loop;
+	}
+	
+	t => {
+    	Playback(sound/timeout);
+        Playback(sound/bye);
+        Hangup();
+    }
+    
+	i => {
+        BackGround(sound/incorrect);
+		goto s,1;
+    }
+}
+
+context _serviceNo-ivrlogined {
+	s => {
+		Playback(sound/ivrloginsuccess);
+		Hangup;
+	}
+}
+
+context _serviceNo-ivrlogout {
+	s => {
+		Playback(sound/ivrlogoutsuccess);
+		Hangup;
+	}
+}
+
+context playback {
+	_. => {
+		Playback(${EXTEN});
+	}
+}
+
+context playbak-end {
+	_. => {
+		Wait(10);
+	}
+}
+
+context ivr {
+	_X. => {
+		__FROM_CONTEXT="${CONTEXT}";
+		goto ivr-input,s,1;
+	}
+}
+
+context ivr-input {
+	s => {
+		INPUT_RETRY_TIMES=0;
+		loop:
+		_music;
+		WaitExten(_timeout);
+	}
+_ivrkey
+	i => {
+		INPUT_RETRY_TIMES=${INPUT_RETRY_TIMES} + 1;
+		if(${INPUT_RETRY_TIMES} >= _retry_time){
+			Playback(sound/bye);
+			Hangup();
+		}
+		Playback(sound/incorrect);
+		goto s,loop;
+	}
+	
+	t => {
+		INPUT_RETRY_TIMES=${INPUT_RETRY_TIMES} + 1;
+		if(${INPUT_RETRY_TIMES} >= _retry_time){
+			Playback(sound/bye);
+			Hangup();
+		}
+		Playback(sound/timeout);
+		goto s,loop;
+	}
+}

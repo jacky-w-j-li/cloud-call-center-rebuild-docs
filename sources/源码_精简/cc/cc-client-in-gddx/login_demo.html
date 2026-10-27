@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script type="text/javascript" src="./javascripts/jquery.js"></script>
+    <script type="text/javascript" src="./javascripts/bootstrap.js"></script>
+    <link rel=stylesheet type=text/css href="./stylesheets/bootstrap.css">
+    <style type="text/css">
+        body {
+            font-family: Microsoft YaHei,"Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 12px;
+            color: #333;
+        }
+        .login_rich_main{
+            border-top: 1px solid #ccc;
+            /*border-bottom: 1px solid #ccc;*/
+            padding: 40px 0;
+        }
+    </style>
+    <script type="text/javascript">
+        function loginCC(){
+            var loginName=$("#login_loginName").val();
+            var password=$("#login_password").val();
+            if(!$.trim(loginName)){
+                alert("请输入账户登录名");
+                return;
+            }
+            if(!$.trim(password)){
+                alert("请输入密码");
+                return;
+            }
+            var data={
+                loginName: loginName,
+                password: password,
+                extenType: $("#login_extentype").val(),
+                url:$("#login_url").val()
+            };
+            var action = {
+                action: 'proxyLogin',
+                data: JSON.stringify(data)
+            };
+//            console.dir(action)
+            $.ajax({
+                type: "GET",
+                url: "http://app.7moor.com/action",
+                data: action,
+                timeout: 30000,
+                dataType: "jsonp",
+                async: true,
+                jsonp: "callback",
+                success: function (data, status) {
+                    if (data && data.success) {
+                        window.location.href = data.returnUrl;
+                    }else{
+                        alert("登录名或密码错误");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    if (xhr.statusText != 'success') {
+                        alert('请求超时或网络问题,' + status || error);
+                    }
+                }
+            });
+        }
+
+//        $(function() {
+//
+//        });
+    </script>
+</head>
+<body style="">
+<div class="">
+    <div class="login_rich_main">
+        <div class="row-fluid">
+            <div class="offset4 span3 login-unit" id="login_panel" style="padding-left: 30px;">
+                <div class="row-fluid">
+                        <form id="login-form" >
+                        <input name="url" id="login_url" type="hidden" value="http://t1.com:8096/login_demo.html"/>
+                        <fieldset>
+                            <legend>
+                            登录demo页
+                            </legend>
+                            <input type="text" name="loginName" id="login_loginName" placeholder="请输入用户名" class="span12" autofocus required value="8002@test0801"/>
+                            <input type="password" name="password" id="login_password" placeholder="请输入密码" class="span12" required value="8002"/>
+                            <select id="login_extentype" name="extenType" style="width:110px;">
+                                <option value="gateway">语音网关</option>
+                                <option value="Local">直线</option>
+                                <option value="sip">软电话</option>
+                            </select>
+                            <!--<label class="checkbox">-->
+                                <!--<input type="checkbox" name="remember" id="login_remember"> 记住密码-->
+                            <!--</label>-->
+                        </fieldset>
+                        <button type="button" id="login" onclick="loginCC()" class="btn btn-success btn-block" style="padding: 4px 12px;">登入</button>
+                    </form>
+                    <div class="pull-left" style="font-size: 12px;"><a href="http://fs-im-package.7moor.com/im_win.rar" target="_blank"><i class="icon-download"></i> 下载软电话</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+    <form class="form-horizontal" id="frm_agent_batch_add">
+        <input type="hidden" name="_id" value="_#_id#_">
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                起始分机号
+            </label>
+            <div class="col-md-5">
+                <input type="text" name="startExten" value='' class="form-control input-sm digits"  required/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                增加数量
+            </label>
+            <div class="col-md-5">
+                <input type="text" name="num" value='' class="form-control input-sm digits" min="1" max="50" required/>
+                <!--<p class="help-block" style="color:#d9534f;">一次最多50个</p>-->
+            </div>
+        </div>
+    </form>

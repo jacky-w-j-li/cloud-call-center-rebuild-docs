@@ -1,0 +1,7 @@
+globals {
+	HOST="10.1.1.100";
+}
+
+context default {
+	
+}

@@ -1,0 +1,75 @@
+<input name="dbType" type="hidden" class="ds_search_item ds_no_reset" value="_#dbType#_" />
+<div class="row-fluid">
+    <div class="span12 search_item ds_owner">
+        <label>所属人</label>
+        <input name="owner" type="hidden" class="ds_search_item select_input" id="_#menu#__owner_select_input"  />
+        <div id="_#menu#__owner_select_user" class="combobox_agent"></div>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span12 search_item">
+        <label>导入批次</label>
+        <input name="batchNo" type="text" class="ds_search_item" />
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span6 search_item">
+        <label>客户状态</label>
+        <select name="status" id="status" class="ds_search_item" style="width: 90px;">
+            <option value="" selected>--请选择--</option>
+        </select>
+    </div>
+    <div class="span6 search_item ">
+        <label>数据来源</label>
+        <select name="custsource1" id="custsource1" class="ds_search_item" style="width: 90px;">
+            <option value="" selected>--请选择--</option>
+        </select>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span12 search_item">
+        <label >更新时间</label>
+        <input name="lastUpdateTime_begin_date" class="ds_search_item ds_date _#menu#_" type="text" placeholder="yyyy-mm-dd">
+        <input name="lastUpdateTime_begin_time" class="ds_search_item ds_time" type="text" placeholder="00:00" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]">
+        <label style="width: 16px">至</label>
+        <input name="lastUpdateTime_end_date" class="ds_search_item ds_date _#menu#_" type="text" placeholder="yyyy-mm-dd">
+        <input name="lastUpdateTime_end_time" class="ds_search_item ds_time" type="text" placeholder="00:00" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]">
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span12 search_item">
+        <label >创建时间</label>
+        <input name="createTime_begin_date" class="ds_search_item ds_date _#menu#_" type="text" placeholder="yyyy-mm-dd">
+        <input name="createTime_begin_time" class="ds_search_item ds_time" type="text" placeholder="00:00" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]">
+        <label style="width: 16px">至</label>
+        <input name="createTime_end_date" class="ds_search_item ds_date _#menu#_" type="text" placeholder="yyyy-mm-dd">
+        <input name="createTime_end_time" class="ds_search_item ds_time" type="text" placeholder="00:00" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]">
+    </div>
+</div>
+<script type="text/javascript">
+    var agents=getCache("agents");
+    var emptyAgents=[{_id:"empty",displayName:"无所属人",pinyin:"wusuoshuren",exten:''}];
+    emptyAgents=emptyAgents.concat(agents);
+    utils.loadSearchInput({ id: "_#menu#__owner_select_user",
+        width: "110",
+        height: "17",
+        tip: "按姓名、拼音搜索",
+        data: emptyAgents,
+        searchField: ["displayName","exten"],
+        pinyinField: ["displayName"],
+        listField: ["displayName"],
+        userIdField: "_id",
+        showField: "displayName",
+        showAllList: true,
+        callbackFuc: function (object) {
+            $("#_#menu#__owner_select_input").val(object._id);
+        },
+        onKeyChanged: function () {
+            if ($("#_#menu#__owner_select_user_input").val() != "") {
+                $("#_#menu#__owner_select_input").val("serachInputNoresult");
+            } else {
+                $("#_#menu#__owner_select_input").val("");
+            }
+        }
+    });
+</script>

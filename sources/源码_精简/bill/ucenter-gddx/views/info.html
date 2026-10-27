@@ -1,0 +1,41 @@
+<div>
+    <div class="alert alert-danger" style="display: none;"></div>
+    <div>
+        <h4 id="acc_companyName"></h4>
+    </div>
+    <div>
+        <label>账户登录名:</label><span style="margin-left: 10px;" id="acc_name"></span>
+
+    </div>
+    <div>
+        <label>联系人邮箱:</label><span style="margin-left: 10px;" id="acc_mail"></span><!--<a class="btn btn-link" style="color: #aaaaaa;">修改</a>-->
+    </div>
+    <div>
+        <label>联系人电话:</label><span style="margin-left: 10px;" id="acc_tel"></span>
+        <!--<a class="btn btn-link ds_do_action" ds_action="" ds_data="" style="color: #aaaaaa;">修改</a>-->
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">已购买的服务
+            &nbsp;&nbsp;<button type="button" class="btn btn-success btn-xs ds_do_action pay_hide" ds_action="account.showDidNumView">购买直拨号码</button>
+            <a href="#" id="popover_didNum" style="padding: 0;" class="btn pay_hide" data-toggle="popover" data-placement="auto" data-trigger="hover focus"
+               data-content="员工的专属号码，呼叫直拨号码直接转到该人,购买后可在&quot;员工信息&quot;菜单进行绑定" data-original-title="什么是直拨号码?">
+                <span style="font-size: 18px;" class="glyphicon glyphicon-question-sign"></span>
+            </a>
+
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>类型</th>
+                <th>名称</th>
+                <th>单价</th>
+                <th>并发数</th>
+                <th>余额/到期时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="account_server">
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+{
+    "version":"1.0.0",
+    "serverPort": 6000,
+    "dbIp": "172.42.38.43",
+    "dbPort": "7221",
+    "dbName": "cc",
+    "dbUserName": "root",
+    "dbPassword": "7moorcom",
+    "logAccessConsole":true,
+    "mailUrl":"http://127.0.0.1:8888/send",
+    "weixinUrl":"http://127.0.0.1:7778/send",
+    "md5" : "81f0e1f0-32df-11e3-a2e6-1d21429e5f46",
+    "pushServiceUrl": "http://172.42.38.10:3000/service",
+    "imPushUrl": "http://172.42.38.16:4999/sendMsg",
+    "weixinPushUrl":"http://172.42.38.14/command",
+    "mailPushUrl":"http://172.42.38.22:8888/mail"
+}

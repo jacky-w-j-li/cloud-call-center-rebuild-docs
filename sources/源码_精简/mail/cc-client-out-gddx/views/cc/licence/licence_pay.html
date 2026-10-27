@@ -1,0 +1,202 @@
+<div class="well" style="padding: 0 19px;">
+    <h2>_#nameDesc#__@licence.showFieldDesc("licenceType","_#licenceType#_")@_<small>
+        licence单价:<span class="text-primary monthRent">_#licencePrice#_</span>元
+        <span class="small_tip"></span>
+    </small></h2>
+    <h3>应付:<strong class="payamount">_#totalFee#_</strong>元</h3>
+</div>
+
+
+<form id="frm_licence_pay" action="./public2cc" class="pay_form" target="_blank">
+    <input type="hidden" name="_id" value="_#_id#_">
+    <input type="hidden" name="status" value="_#status#_">
+    <input type="hidden" name="money" value="_#totalFee#_">
+    <input type="hidden" name="action" value="pay.licenceBankPay">
+    <input type="hidden" name="data" value="">
+    <input type="hidden" name="balance" value="_#balance#_">
+    <input type="hidden" name="month" value="_#month#_">
+    <input type="hidden" name="num" value="_#num#_">
+    <input type="hidden" name="flag" value="_#flag#_">
+    <input type="hidden" name="pbx" value="_#pbx#_">
+    <input type="hidden" name="serviceFlag" value="">
+    <input type="hidden" name="licenceType" value="_#licenceType#_">
+    <input type="hidden" name="licencePrice" value="_#licencePrice#_">
+    <input type="hidden" name="beginDate" value="_#beginDate#_">
+
+    <div class="clearfix">
+        <p>您当前可支付余额为:<span>_#balance#_</span>元,其中实际余额为:_#actualBalance#_,透支额度为_#overdraw#_</p>
+        <p class="pull-left">
+            <label style="cursor: pointer;" ><input type="checkbox" name="accbalance" onclick="handler.licence.showPayBalance();" >账户余额<span>_#balance#_</span>元</label>
+        </p>
+        <p class="continuePay pull-right " style="display: none;">
+            还需要支付<strong class="payamount" style="font-size: 15px;"></strong>元</p>
+        <p class="readyPay pull-right" style="display: none;">
+            支付<strong class="payamount" style="font-size: 15px;"></strong>元</p>
+    </div>
+    <div class="pay_section">
+        <div style="">
+            <div class="bank" style="">
+                <label class="left_label">支付方式:</label>
+                <ul>
+                    <li style="float:left;"><a href="javascript:void(0)" onclick="handler.account.switchPay('bank',this);" class="current">银行卡</a></li>
+                    <li style="float:left;border-right: 1px solid #ccc;">
+                        <a href="javascript:void(0)" onclick="handler.account.switchPay('platform',this);">支付平台</a></li>
+                </ul>
+            </div>
+            <div class="pay_platform" style="display:none;">
+                <ul class="list-bank">
+                    <li class=""><input id="bank_alipay" type="radio"
+                                        class="jdradio"
+                                        value="alipay"
+                                        name="bank" require="true" msgName="支付方式" msg="必须选择一种支付方式">
+                        <label for="bank_alipay"> <img width="125" height="28"
+                                                       alt="支付宝"
+                                                       src="./img/bank/alipay.gif">
+                        </label></li>
+                </ul>
+            </div>
+            <div class="pay_bank" >
+                <ul class="list-bank">
+                    <li class=""><input id="bank_ICBC" type="radio"
+                                        class="jdradio"
+                                        value="ICBCB2C"
+                                        name="bank" > <label for="bank_ICBC"> <img width="125" height="28"
+                                                                                   alt="工商银行"
+                                                                                   src="./img/bank/icbc_1301.png">
+                    </label></li>
+                    <li class=""><input id="bank_CCB" type="radio" class="jdradio"
+                                        value="CCB"
+                                        name="bank" > <label for="bank_CCB"> <img width="125" height="28"
+                                                                                  alt="建设银行"
+                                                                                  src="./img/bank/ccb_1301.png">
+                    </label></li>
+                    <li class=""><input id="bank_CMB" type="radio" class="jdradio"
+                                        value="CMB"
+                                        name="bank" > <label for="bank_CMB"> <img width="125" height="28"
+                                                                                  alt="招商银行"
+                                                                                  src="./img/bank/cmb_1301.png">
+                    </label></li>
+                    <li class=""><input id="bank_ABC" type="radio" class="jdradio"
+                                        value="ABC"
+                                        name="bank" > <label for="bank_ABC"> <img width="125" height="28"
+                                                                                  alt="农业银行"
+                                                                                  src="./img/bank/abc_1301.png">
+                    </label></li>
+                    <li class=""><input id="bank_BCOM" type="radio" class="jdradio"
+                                        value="COMM-DEBIT"
+                                        name="bank" > <label for="bank_BCOM"> <img width="125" height="28"
+                                                                                   alt="中国交通银行"
+                                                                                   src="./img/bank/bcom_1301.png">
+                    </label></li>
+                    <li class=""><input id="bank_GDB" type="radio" class="jdradio"
+                                        value="GDB"
+                                        name="bank" > <label for="bank_GDB"> <img width="125" height="28"
+                                                                                  alt="广东发展银行"
+                                                                                  src="./img/bank/gdb_1301.png">
+                    </label></li>
+                    <li class=""><input id="bank_BOC" type="radio" class="jdradio"
+                                        value="BOCB2C"
+                                        name="bank" > <label for="bank_BOC"> <img width="125" height="28"
+                                                                                  alt="中国银行"
+                                                                                  src="./img/bank/boc_1301.png">
+                    </label></li>
+                    <li class=""><input id="bank_CMBC" type="radio" class="jdradio"
+                                        value="CMBC"
+                                        name="bank" > <label for="bank_CMBC"> <img width="125" height="28"
+                                                                                   alt="中国民生银行"
+                                                                                   src="./img/bank/cmbc_1301.png">
+                    </label></li>
+                    <li class="" ><input id="bank_CITIC"
+                                         type="radio" class="jdradio"
+                                         value="CITIC-DEBIT"
+                                         name="bank" > <label for="bank_CITIC"> <img width="125" height="28"
+                                                                                     alt="中信银行"
+                                                                                     src="../img/bank/citic_1301.png">
+                    </label></li>
+                    <li class=""><input id="bank_CIB" type="radio" class="jdradio"
+                                        value="CIB"
+                                        name="bank" > <label for="bank_CIB"> <img width="125" height="28"
+                                                                                  alt="兴业银行"
+                                                                                  src="./img/bank/cib_1301.png">
+                    </label></li>
+                    <li class=""><input id="bank_CEB" type="radio" class="jdradio"
+                                        value="CEB-DEBIT"
+                                        name="bank" > <label for="bank_CEB"> <img width="125" height="28"
+                                                                                  alt="中国光大银行"
+                                                                                  src="./img/bank/ceb_1301.png">
+                    </label></li>
+                    <li class=""><input id="bank_POSTGC" type="radio" class="jdradio"
+                                        value="POSTGC"
+                                        name="bank" > <label for="bank_POSTGC"> <img width="125" height="28"
+                                                                                     alt="邮政储蓄"
+                                                                                     src="./img/bank/post_1301.png">
+                    </label></li>
+
+
+                    <li class="pmore" style="display: none;"><input id="bank_SPDB"
+                                                                    type="radio" class="jdradio"
+                                                                    value="SPDB"
+                                                                    name="bank" > <label for="bank_SPDB"> <img width="125" height="28"
+                                                                                                               alt="上海浦东发展银行"
+                                                                                                               src="./img/bank/spdb_1301.png">
+                    </label></li>
+                    <li class="pmore" style="display: none;"><input id="bank_SPABANK"
+                                                                    type="radio" class="jdradio"
+                                                                    value="SPABANK"
+                                                                    name="bank" > <label for="bank_SPABANK"> <img width="125" height="28"
+                                                                                                                  alt="平安银行"
+                                                                                                                  src="./img/bank/pab_1301.png">
+                    </label></li>
+                    <li class="pmore" style="display: none;"><input id="bank_HZCBB2C"
+                                                                    type="radio" class="jdradio"
+                                                                    value="HZCBB2C"
+                                                                    name="bank" > <label for="bank_HZCBB2C"> <img width="125" height="28"
+                                                                                                                  alt="杭州银行"
+                                                                                                                  src="./img/bank/hzb_1301.png">
+                    </label></li>
+                    <li class="pmore" style="display: none;"><input id="bank_SHB"
+                                                                    type="radio" class="jdradio"
+                                                                    value="SHBANK"
+                                                                    name="bank" > <label for="bank_SHB"> <img width="125" height="28"
+                                                                                                              alt="上海银行"
+                                                                                                              src="./img/bank/shb_1301.png">
+                    </label></li>
+                    <li class="pmore" style="display: none;"><input id="bank_NBBANK"
+                                                                    type="radio" class="jdradio"
+                                                                    value="NBBANK"
+                                                                    name="bank" > <label for="bank_NBBANK"> <img width="125" height="28"
+                                                                                                                 alt="宁波银行"
+                                                                                                                 src="./img/bank/nbcb_1301.png">
+                    </label></li>
+                </ul>
+                <div class="pay-more" style="overflow:visible;">
+                    <a class="link-more" href="#none" onclick="handler.account.toggleMore('more');"><strong>更多银行</strong><b class="icon-down01"></b></a>
+                    <a class="link-more" href="#none" onclick="handler.account.toggleMore('less');" style="display:none;"><strong>收起</strong><b class="icon-up01"></b></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p class="add_operate pay_section" style="margin-left:70px;">
+        <button type="button" class="btn btn-primary btn-small ds_form_action" ds_action="licence.confirmPay" >确认支付</button>
+        <button type="button" class="btn btn-default btn-small" data-dismiss="modal">关闭</button>
+    </p>
+</form>
+<script type="text/javascript">
+    $(function(){
+        $(".list-bank li").click(function(i){
+            $(".list-bank li").each(function(){
+                $(this).removeClass("select");
+            });
+            $(this).addClass("select");
+            var radio=$(this).find("input[type='radio']");
+            if(radio && !radio.prop("checked")){
+                radio.prop("checked",true);
+            }
+        });
+    })
+
+</script>
+<style type="text/css">
+
+</style>

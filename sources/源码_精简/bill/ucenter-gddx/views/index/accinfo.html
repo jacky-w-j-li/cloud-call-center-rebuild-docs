@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col-md-8" style="border-right: 1px solid #ccc;">
+        <div>
+            <h4>已购买产品<small>（点击产品进入管理页面）</small></h4>
+            <p class="buy_product">
+                <!--<button type="button" class="btn btn-lg btn-success ds_do_action" ds_action="loadMainView"  ds_product="zj" ds_data="zj/zj_main">企业总机</button>-->
+                <!--<button type="button" class="btn btn-lg btn-success ds_do_action" ds_action="loadMainView"  ds_product="cc" ds_data="callcenter/callcenter_main" >呼叫中心</button>-->
+            </p>
+        </div>
+        <div style="margin-top: 30px;" >
+            <h4>未购买产品</h4>
+            <p class="nobuy_product">
+                <!--<button type="button" class="btn btn-lg" >电话会议</button>-->
+            </p>
+        </div>
+    </div>
+    <div class="col-md-4">
+            <div>
+            <h4 id="acc_companyName" style="display: inline-block;"></h4>
+            &nbsp;&nbsp;<button type="button" class="btn btn-xs btn-primary ds_do_action submit_identity" ds_action="account.showIdentify"  ds_data="" style="display: none;">认证</button>
+            &nbsp;&nbsp;<button type="button" class="btn btn-xs btn-primary ds_do_action view_identity" ds_action="account.showIdentifyInfo"  ds_data="" style="display: none;">查看认证</button>
+            &nbsp;&nbsp;<button type="button" class="btn btn-xs btn-primary ds_do_action bill_hide audit_identity" ds_action="account.showAuditIdentify"  ds_data="" >审核认证</button>
+        </div>
+        <div>
+            <label>账户登录名:</label><span style="margin-left: 10px;" id="acc_name"></span>
+
+        </div>
+        <div>
+            <label>联系人邮箱:</label><span style="margin-left: 10px;" id="acc_mail"></span><!--<a class="btn btn-link" style="color: #aaaaaa;">修改</a>-->
+        </div>
+        <div>
+            <label>联系人电话:</label><span style="margin-left: 10px;" id="acc_tel"></span>
+            <!--<a class="btn btn-link ds_do_action" ds_action="" ds_data="" style="color: #aaaaaa;">修改</a>-->
+        </div>
+        <div id="right-row-info-finance" style="display: none">
+            <label>财务账户:</label><span style="margin-left: 10px;" id="acc_finance"></span>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="identity_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary ds_form_action" ds_action=""  ds_form="" ds_attr="1" style="display: none;">审核通过</button>
+                <button type="button" class="btn btn-danger ds_form_action" ds_action=""  ds_form="" ds_attr="0" style="display: none;">审核失败</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="identity_modal_view">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

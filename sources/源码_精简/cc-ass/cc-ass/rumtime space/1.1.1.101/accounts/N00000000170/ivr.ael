@@ -1,0 +1,61 @@
+context N00000000170-10004-ivr {
+	_X. => {
+		FROM_CONTEXT="${CONTEXT}";
+		if("${FROM_IVR}a" == "a")
+            FROM_IVR="";
+		goto N00000000170-10004-ivr-input,s,1;
+	}
+}
+
+context N00000000170-10004-ivr-input {
+	s => {
+		INPUT_RETRY_TIMES=0;
+		loop:
+		BackGround(/etc/asterisk/1.1.1);
+		WaitExten(10);
+	}
+
+	1 => {
+		KEY_OF_IVR=${EXTEN};
+		if("${FROM_IVR}foo" == "foo")
+			FROM_IVR=10004@${EXTEN};
+		else 
+			FROM_IVR="${FROM_IVR}-10004@1";	
+		Set(__IVRKEY=${FROM_IVR});
+		goto N00000000170-10000208-queue,10000208,1;
+	}
+
+	2 => {
+		KEY_OF_IVR=${EXTEN};
+		if("${FROM_IVR}foo" == "foo")
+			FROM_IVR=10004@${EXTEN};
+		else 
+			FROM_IVR="${FROM_IVR}-10004@2";	
+		Set(__IVRKEY=${FROM_IVR});
+		goto N00000000170-10000208-queue,10000208,1;
+	}
+
+
+
+	i => {
+		INPUT_RETRY_TIMES=${INPUT_RETRY_TIMES} + 1;
+		if(${INPUT_RETRY_TIMES} >= 3){
+			Playback(sound/bye);
+			Hangup();
+		}
+		Playback(sound/incorrect);
+		goto s,loop;
+	}
+	
+	t => {
+		INPUT_RETRY_TIMES=${INPUT_RETRY_TIMES} + 1;
+		if(${INPUT_RETRY_TIMES} >= 3){
+			Playback(sound/bye);
+			Hangup();
+		}
+		Playback(sound/timeout);
+		goto s,loop;
+	}
+}
+
+

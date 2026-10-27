@@ -1,0 +1,121 @@
+<div class="row-fluid">
+    <div class="span5 config_left">
+        <div class="contacts_caption" style="position:static;box-shadow: none;">
+            <div class="caption-top clearfix">
+                <div class="search_condition" style="display: none;"></div>
+                <div class="" style="float: right">
+                    <button type="button" class="btn btn-small ds_do_action" ds_action="config.user.showBatchUpdate" ds_data="">批量修改</button>
+                </div>
+                <form id="frm_userConfig_search" class="">
+                    <span class="pull-right refresh ds_form_action" ds_action="config.user.searchUser">
+                    <a href="#" class="ajaxed">刷新</a>
+                    </span>
+                    <div class="input-append ds_search_item" style="margin-left: 5px;">
+                        <input class="quick_search" name="combox" style="width: 110px;" type="text" placeholder="输入姓名...">
+                        <button type="button" class="btn ds_form_action userConfig_normal_search " ds_action="config.user.searchUser"  title="查询">
+                            <i class="icon-search"></i>
+                        </button>
+                        <button type="button" class="btn userConfig_advanced_search" style="height: 24px;" title="高级查询">
+                            <span class="caret"></span>
+                        </button>
+                    </div>
+                </form>
+
+                <div class="ds_search_filter">
+                </div>
+            </div>
+        </div>
+        <div id="uerConfig_advanced_search_pane" class="advanced_search_pane hidden">
+            <!--<div style="height: 35px;border-bottom: 1px solid #f0f0f0;">-->
+            <!--<h5 style="float:left;padding: 5px 10px 0;color:black;">高级查询</h5>-->
+            <!--<a href="#" class="cancel_button close" onclick="$('#uerConfig_advanced_search_pane').hide();" style="float: right;margin-top: 5px;margin-right: 10px;">x</a>-->
+            <!--</div>-->
+            <div class="advanced_body">
+                <form id="frm_config_user_advanced_search" class="ds_search_form">
+                    <input type="hidden" name="isAdvanceSearch" value="1">
+                    <fieldset>
+                        <div class="row-fluid">
+                            <div class="span4 advanced_search_item ds_search_item">
+                                <label>角色</label>
+                                <select name="role"  class="">
+                                    <option value="" selected>--请选择--</option>
+                                </select>
+                            </div>
+                            <div class="span8 advanced_search_item ds_search_item">
+                                <label>工号</label>
+                                <input  name="beginExten" type="text" class="" style="display: inline-block;width: 50px;"/>
+                                <div style="float: left;padding: 5px;">至</div>
+                                <input  name="endExten" type="text" class="" style="display: inline-block;width: 50px;"/>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span4 advanced_search_item ds_owner ds_search_item">
+                                <label>上级</label>
+                                <input name="parentId" type="hidden" class="select_input" id="config_user_search_owner_select_input"  />
+                                <div id="config_user_search_owner_select_user" class="combobox_agent"></div>
+                            </div>
+                            <div class="span8 advanced_search_item">
+                            </div>
+                        </div>
+
+                        <div style="padding: 10px;">
+                            <button type="button" class="btn btn-small btn-primary ds_form_action  pull-right" ds_action="config.user.searchUser" >搜索</button>
+                            <button type="button" class="btn btn-small  ds_do_action  pull-right" ds_action="config.user.resetForm" ds_data="" style="margin-right: 10px;">重置</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="list_container">
+            <div class="contact_list">
+                <div class="list-inside">
+                    <table class="table table-bordered table-striped table-hover">
+                        <colgroup>
+                            <col width="25%"/>
+                            <col width="20%"/>
+                            <col width="35%"/>
+                            <col width="20%"/>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>
+                                座席姓名
+                            </th>
+                            <th>
+                                上级
+                            </th>
+                            <th>
+                                角色
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="user_list_pane">
+                        </tbody>
+                    </table>
+                    <div class="pagination pagination-small config_user_count" style="width:100%;margin:0 3px;"
+                         for="frm_userConfig_search" ds_pagination_action="config.user.searchUser">
+                        <span style="float:left;margin-top:8px;font-size:12px;">查询结果：<span class="result_count">0</span></span>
+                        <ul class="user_list_page" style="float:right;padding-right: 6px;">
+                            <li><a href="#"  value="0">&laquo;</a></li>
+                            <li><a href="#"  value="1">1</a></li>
+                            <li><a href="#"  value="2">2</a></li>
+                            <li><a href="#"  value="3">3</a></li>
+                            <li><a href="#"  value="4">4</a></li>
+                            <li><a href="#"  value="5">5</a></li>
+                            <li><a href="#"  value="6">&raquo;</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="span7 sub-right">
+        <div id="user_detail_pane">
+        </div>
+    </div>
+</div>
+
+

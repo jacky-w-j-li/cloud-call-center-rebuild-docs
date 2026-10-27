@@ -1,0 +1,6 @@
+1. eclpise 使用 java 1.7 ，打开程序后用 java 1.6的库编译 ass，编译好的jar放到linux下即可,linux下使用java 1.6；
+2. node 的工程注意config-vars.sh里配置好node的目录，一般使用 startup.sh start|stop|restart 启停程序，配置文件serverConfig.json；
+3. java 的工程注意config-vars.sh里配置好node的目录，一般使用 cc-java.sh start|stop|restar 启停程序，配置文件server.conf；
+4. ass启动注意带全路径，例如 /opt/ass/ass.sh start&；
+5. node 工程可在win用vscode打开调试开发，可使用 node11；
+6. 前端工程直接用vscode 和 chrome调试

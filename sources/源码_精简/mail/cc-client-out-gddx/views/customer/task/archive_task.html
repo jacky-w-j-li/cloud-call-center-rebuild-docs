@@ -1,0 +1,11 @@
+
+<form id="frm_close_task">
+    <input type="hidden" name="taskId" value="_#taskId#_">
+    <div style="font-size:18px;text-align:center">
+        <h5>任务【_#taskName#_】归档后，该任务下导入的号码将不再参与筛重，确认归档吗？</h5>
+    </div>
+    <div class="form_buttons" style="text-align: center; margin:10px 5px;">
+        <button type="button" class="btn-blue btn-small ds_form_action" ds_action="customer.task.archiveTask" >确定</button>
+        <button type="button" class="do_action_cancel ds_do_action" ds_action="customer.task.cancelCustAssign">取消</button>
+    </div>
+</form>

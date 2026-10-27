@@ -1,0 +1,120 @@
+context N00000000143-10206-announcement {
+	_X. => {
+		
+		Hangup;
+	}
+}
+
+
+context N00000000143-10051-announcement {
+	_X. => {
+		
+		goto N00000000143-10063-ivr,${FROM_DID},1;
+	}
+}
+
+
+context N00000000143-10204-announcement {
+	_X. => {
+		
+		Hangup;
+	}
+}
+
+
+context N00000000143-10202-announcement {
+	_X. => {
+		
+		Hangup;
+	}
+}
+
+
+context N00000000143-10231-announcement {
+	_X. => {
+		Playback(/etc/asterisk/1.1.1.101/accounts/N00000000143/sound/1dc8038369108bc523616a29993225b9);
+		Hangup;
+	}
+}
+
+
+context N00000000143-10230-announcement {
+	_X. => {
+		Playback(/etc/asterisk/1.1.1.101/accounts/N00000000143/sound/76794ea62e84644ee4a6b903b56d5b13);
+		Hangup;
+	}
+}
+
+
+context N00000000143-10200-announcement {
+	_X. => {
+		
+		Hangup;
+	}
+}
+
+
+context N00000000143-10222-announcement {
+	_X. => {
+		
+		goto N00000000143-10000197-queue,10000197,1;
+	}
+}
+
+
+context N00000000143-10095-announcement {
+	_X. => {
+		
+		Hangup;
+	}
+}
+
+
+context N00000000143-10219-announcement {
+	_X. => {
+		
+		goto N00000000143-10000151-queue,10000151,1;
+	}
+}
+
+
+context N00000000143-10094-announcement {
+	_X. => {
+		Playback(/etc/asterisk/1.1.1.101/accounts/N00000000143/sound/1d9dd9fc83415ea0798de0b272eb3bd6);
+		Hangup;
+	}
+}
+
+
+context N00000000143-10198-announcement {
+	_X. => {
+		
+		goto N00000000143-10236-textannouncement,s,1;
+	}
+}
+
+
+context N00000000143-10141-announcement {
+	_X. => {
+		Playback(/etc/asterisk/1.1.1.101/accounts/N00000000143/sound/1d9dd9fc83415ea0798de0b272eb3bd6);
+		goto N00000000143-10094-announcement,${FROM_DID},1;
+	}
+}
+
+
+context N00000000143-10194-announcement {
+	_X. => {
+		
+		goto N00000000143-10195-dynamic-route,s,1;
+	}
+}
+
+
+context N00000000143-10158-announcement {
+	_X. => {
+		
+		Hangup;
+	}
+}
+
+

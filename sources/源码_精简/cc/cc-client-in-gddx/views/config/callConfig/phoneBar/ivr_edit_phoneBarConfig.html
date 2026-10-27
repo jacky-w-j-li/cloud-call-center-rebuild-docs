@@ -1,0 +1,47 @@
+<div class="row-fluid">
+	<div class="span12">		
+		<form class="form-horizontal">
+			<div class="row-fluid">
+	                <div class="span6 offset1">
+	                    <i class="icon-cog"></i>修改电话条
+	                </div>
+	                <div class="span5 text-right pull-right">
+	                    <!--<a class="btn btn-info ds_form_action" appaction="config.callConfig.savePhoneBarConfig">保存</a>-->
+                        <a class="btn btn-info btn-blue ds_action_flow">
+                            <ds-form-action action="config.ivr.phoneBarConfig.savePhoneBarConfig" extra-data="config.callConfig.currentConfigData"
+                                            update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"ivrPhoneBarConfig"}}'
+                                            />
+                            <ds-get-view view="config/callConfig/phoneBar/ivr_phonebar_config" panel="ivrPhoneBarPanel"/>
+                            保存
+                        </a>
+	                </div>
+	        </div>
+			<br />
+			<br />
+			<div class="control-group">
+				<label class="control-label">名称</label>
+				<div class="controls">
+					<input type="text" name="PhoneBarItemName" value="__PhoneBarItemName" msgName="名称" maxlength="3" required/>
+                    <input type="hidden" name="_id" value="___id"/>
+                    <input type="hidden" name="IsSystemConfig" value="__IsSystemConfig"/>
+				</div>
+			</div>
+            <div class="control-group">
+                <label class="control-label">是否启用</label>
+                <div class="controls">
+                    <select id="phonebar_isEnable" name="IsEnable">
+                        <option value="1">启用</option>
+                        <option value="0">停用</option>
+                    </select>
+
+                </div>
+            </div>
+			<div class="control-group">
+				<label class="control-label">编号</label>
+				<div class="controls">
+					<input type="text" name="PhoneBarItemId" value="__PhoneBarItemId" readonly/>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

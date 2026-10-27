@@ -1,0 +1,304 @@
+/* created by liujing on 04/07/16
+style for config 
+linked by config/config_main.html
+all classnames must begin with letter '.cfg_' or their own ID */
+
+/* move from app.css start */
+.ztree li a span+span{
+    display: inline-block;
+    max-width: 10em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#view_customer_titket_titketManager td, #view_customer_titket_titketManager th {
+    text-align: center;
+}
+.table td:last-child a{
+    display: inline-block;
+}
+#frm_dept_user_update .multiselect-container input[type=radio],#frm_user_batch_dept .multiselect-container input[type=radio]{
+	display: none;
+}
+/* move from app.css end */
+
+
+#view_customer_list .list_item+.alert{
+    display: none;
+}
+.search_and_add{
+    height: 44px;
+}
+.top_search_box {
+    position: relative;
+    float: left;
+}
+.search_and_add .btn-blue{
+    width: 78px;
+    border-radius: 4px;
+    height: 26px;
+}
+#role_query_frm .search_btn{
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    left: 5px;
+    top: 6px;
+    cursor: pointer;
+    z-index: 10;
+}
+#role_query_frm .search_btn i{
+    margin-top: 0;
+    opacity: 0.45;
+}
+#role_query_frm input{
+    border-radius: 4px;
+    padding: 5px 6px 4px 20px;
+}
+.search_and_add .top_search_box{
+    margin: 5px 0 0 20px;
+}
+.search_and_add .add_role,.search_and_add .refresh{
+    margin-top: 4px;
+}
+#view_role_config .refresh a.ajaxed{
+    height: 26px;
+    line-height: 26px;
+    padding: 0 6px 0 23px;
+    background-position: -1px -53px;
+    border-radius: 4px;
+    margin-left: 12px;
+}
+.search_and_add .refresh{
+    margin-left: 10px;
+}
+.search_and_add{
+    margin-bottom: 10px;
+}
+.search_and_add .caption-top{
+    height: 44px;
+    box-sizing: border-box;
+}
+#view_nav_url_interface .new-nav-tabs > li{
+    position: relative;
+}
+
+#view_role_config .controls .span12 label {
+    display: inline-block;
+    width: 70px;
+    float: left;
+    line-height: 23px;
+    text-align: left;
+    padding-right: 5px;
+}
+#view_role_config .controls .span12 select{
+	width:145px;
+}
+#view_role_config .controls .alert{
+	margin-top:15px;
+}
+#frm_customer_normal_search .dropdown-menu li>a{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 290px;
+}
+/*add new css*/
+.cfg_label_left{
+    overflow:scroll;
+}
+.cfg_call_caption{
+    margin-bottom:30px;
+}
+.cfg_call_stopUse_top{
+    padding:50px 0 22px;
+    border-bottom: 1px solid #E6E6E6;
+}
+.cfg_call_stopUse_top .pull-left span{
+    font-weight:bold;
+}
+#config_call_label_stopUse{
+    padding-top:16px;
+}
+.cfg_clear_con_float:after{
+    content:"";
+    clear:both;
+    display:block;
+}
+.cfg_write_label{
+    width:160px;
+    margin-right:20px;
+}
+#cfg_add_lable_wrap{
+    display:none;
+}
+.cfg_add_lable{
+    font-size:14px;
+    font-weight:bold;
+    margin-top:4px;
+}
+.cfg_label_use,.cfg_label_stop{
+    display:none;
+}
+.cfg_caption_top{
+    padding-bottom: 22px;
+    border-bottom: 1px solid #E6E6E6;
+    margin-bottom: 18px;
+}
+.cleanFloat input{
+    float: none;
+    margin-right: 3px
+}
+#view_call_config .nav-tabs{
+    float:left;
+}
+#view_call_config .tabbable .nav.nav-tabs{
+    border-bottom:0;
+}
+#view_call_config .nav-tabs li{
+    float:none;
+}
+#view_call_config .nav-tabs > .active > a, .nav-tabs > .active > a:hover{
+    border:0;
+    color:#37b5ed;
+    background:#fff;
+}
+#view_call_config .nav-tabs>li>a{
+    color:#555555;
+    background: #F6F6F6;
+    border-radius:0;
+    -webkit-border-radius:0;
+}
+.form-horizontal.ds_item_edit .btn.btn-warning.btn-blackishGreen:hover{
+    background:#84BC25;
+}
+#ivrAssignmentListBody select{
+    width:100%;
+}
+#view_call_config .nav.nav-tabs+.tab-content{
+    padding:20px 0 0 20px;
+}
+#pbx_btn_group .btn.dropdown-toggle{
+    background-image:none;
+    background-color:#fff;
+    box-shadow:none;
+}
+#queueInfoPanel.queue_toggle_panel{
+    border:0;
+}
+#view_call_config .dropdown>.dropdown-menu{
+    position: absolute;
+    left: 110px;
+    border: none;
+    top: -136px;
+}
+#view_call_config .dropdown>.dropdown-menu:before{
+    content:"";
+    width:16px;
+    height:16px;
+    border-left: 1px solid transparent;
+    border-top: 1px solid transparent;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    transform:rotate(-45deg);
+    -webkit-transform:rotate(-45deg);
+    background-color:#fff;
+    position:absolute;
+    top: 144px;
+    left: 50%;
+    margin-left: -87px;
+    box-shadow: -1px -1px rgba(0,0,0,.1);
+}
+/*remove callConfig btnStyle begin*/
+#view_call_config .add-contact-link.add_button{
+    padding: 0 6px;
+    margin-right: 5px;
+    border: 0;
+    border-radius: 2px;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: -.5px -.5px .5px rgba(0,0,0,0.15) inset;
+    text-decoration: none;
+    cursor: pointer;
+    vertical-align: middle;
+    line-height: 22px;
+}
+#view_call_config .btn.disabled, .btn[disabled]{
+    opacity:1;
+}
+#view_call_config .btn-info,#view_call_config .btn-danger{
+    background-image:none;
+}
+#view_call_config .add_button, #view_call_config a.add_button{
+    background:#37b5ed;
+    margin:0;
+    float:none;
+    height:22px;
+    font-weight:normal;
+}
+#view_call_config .btn-gray.btn-danger:hover, #view_call_config .btn-gray.btn-danger:focus, #view_call_config .btn-gray.btn-danger:active, #view_call_config .btn-gray.btn-danger.active, #view_call_config .btn-gray.btn-danger.disabled,#view_call_config .btn-gray.btn-danger[disabled]{
+    background-color:#e6e6e6;
+}
+#view_call_config .btn-blue.btn-danger:hover, #view_call_config .btn-blue.btn-danger:focus, #view_call_config .btn-blue.btn-danger:active, #view_call_config .btn-blue.btn-danger.active, #view_call_config .btn-blue.btn-danger.disabled,#view_call_config .btn-blue.btn-danger[disabled]{
+    background-color:#37b5ed;
+}
+#view_call_config .btn-success:hover,#view_call_config .btn-success:focus, #view_call_config .btn-success:active,#view_call_config .btn-success.active,#view_call_config .btn-success.disabled,#view_call_config .btn-success[disabled]{
+    background-color:#84BC25;
+}
+#view_call_config .btn{
+    background-image:none;
+}
+#view_call_config .add_button:before, #view_call_config a.add_button:before{
+    background:none;
+     width: auto;
+     height: auto;
+     display: inline-block;
+     position: static;
+     content: "\2b";
+     left: 0px;
+     top: 0px;
+}
+/*remove callConfig btnStyle end*/
+#accountPbxInfoPanel h3{
+    margin-top:9px;
+}
+#view_call_config .dropdown-menu > li > a:hover,#view_call_config .dropdown-menu > li > a:focus,#view_call_config .dropdown-menu > li.active>a{
+    background:#fff;
+    color:#56CDB4;
+}
+#view_call_config .nav .dropdown-toggle .caret{
+    border-top-color: #7B7B7B;
+    border-bottom-color: #7B7B7B;
+}
+#view_call_config .span4.text-right a.ds_action_flow:last-child,#view_call_config .span5.text-right a.ds_action_flow:last-child,#view_call_config .span6.text-right a.ds_action_flow:last-child{
+    margin-right:16px;
+}
+#view_call_config .btn-blackishGreen.ds_action_flow.disabled{
+    background:#8EC38E
+}
+#view_call_config .ds_action_flow.disabled.btn-blackishGreen:hover{
+    -webkit-filter: none;
+}
+#agentAssignTableLeft td:nth-child(1),#agentAssignTableRight td:nth-child(1){
+    max-width: 6em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+#isBeginInput{
+    margin:4px 0 0;
+}
+#ctime{
+    width:80px;
+    height: 14px;
+}
+#stepCtype{
+    width:92px;
+}
+select[name="ctype"]{
+    width:92px;
+}
+#name{
+    width:209px;
+}
+

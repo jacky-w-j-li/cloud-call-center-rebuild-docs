@@ -1,0 +1,77 @@
+context N00000000246-10005-textannouncement {
+	s => {
+		Agi(agi://127.0.0.1:7891/agittszh?pbx=${HOST}&servicepeer=10005);
+		if("${TTSENGINE}" == "1"){
+			Playback(${FILENAME});	
+		}
+		goto N00000000246-10022-textannouncement,s,1;
+	}
+}
+
+
+context N00000000246-10026-textannouncement {
+	s => {
+		Agi(agi://127.0.0.1:7891/agittszh?pbx=${HOST}&servicepeer=10026);
+		if("${TTSENGINE}" == "1"){
+			Playback(${FILENAME});	
+		}
+		Hangup;
+	}
+}
+
+
+context N00000000246-10024-textannouncement {
+	s => {
+		Agi(agi://127.0.0.1:7891/agittszh?pbx=${HOST}&servicepeer=10024);
+		if("${TTSENGINE}" == "1"){
+			Playback(${FILENAME});	
+		}
+		goto N00000000246-10026-textannouncement,s,1;
+	}
+}
+
+
+context N00000000246-10023-textannouncement {
+	s => {
+		Agi(agi://127.0.0.1:7891/agittszh?pbx=${HOST}&servicepeer=10023);
+		if("${TTSENGINE}" == "1"){
+			Playback(${FILENAME});	
+		}
+		goto N00000000246-10009-voicemail,s,1;
+	}
+}
+
+
+context N00000000246-10011-textannouncement {
+	s => {
+		Agi(agi://127.0.0.1:7891/agittszh?pbx=${HOST}&servicepeer=10011);
+		if("${TTSENGINE}" == "1"){
+			Playback(${FILENAME});	
+		}
+		goto N00000000246-10012-ivr,${FROM_DID},1;
+	}
+}
+
+
+context N00000000246-10022-textannouncement {
+	s => {
+		Agi(agi://127.0.0.1:7891/agittszh?pbx=${HOST}&servicepeer=10022);
+		if("${TTSENGINE}" == "1"){
+			Playback(${FILENAME});	
+		}
+		goto N00000000246-10012-ivr,${FROM_DID},1;
+	}
+}
+
+
+context N00000000246-10033-textannouncement {
+	s => {
+		Agi(agi://127.0.0.1:7891/agittszh?pbx=${HOST}&servicepeer=10033);
+		if("${TTSENGINE}" == "1"){
+			Playback(${FILENAME});	
+		}
+		Hangup;
+	}
+}
+
+

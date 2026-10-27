@@ -1,0 +1,74 @@
+<div class="chanel_global_set" style="margin: 0 auto;">
+    <form>
+        <input name="_id" value="" type="hidden">
+        <fieldset style="">
+            <!--<legend>全局设置</legend>-->
+            <div class="">
+                <div class="chanel_item_row">
+                    <span class="chanel_item_left">访客无响应断开对话时长</span>
+                    <input type="text" name="break_len" value="" placeholder="" class="input-small chanel_input_text" msgName='访客无响应断开对话时长'  dataType='Number3' msg='[访客无响应断开对话时长]必须是大于0的整数' required>分钟
+                    <span class="help_tip">默认值为10分钟</span>
+                </div>
+                <div class="chanel_item_row">
+                    <span class="chanel_item_left">断开前提示时长</span>
+                    <input type="text" name="break_tips_len" value="" placeholder="" class="input-small chanel_input_text" msgName='断开前提示时长'  dataType='Number3' msg='[断开前提示时长]必须是大于0的整数' required >分钟
+                    <span class="help_tip">默认值为3分钟</span>
+                </div>
+                <div class="chanel_item_row">
+                    <span class="chanel_item_left">断开前提示内容</span>
+                    <textarea name="break_tips" rows="3" required msgName='断开前提示内容'></textarea>
+                    <span class="help_tip">默认值为“您已经很长时间没有发送消息了，再过3分钟，系统将会自动断开对话”</span>
+                </div>
+            </div>
+            <div>
+                <div class="chanel_item_row">
+                    <span class="chanel_item_left">启用留言</span>
+                    <input type="radio" name="isLeaveMsg" id="isLeaveMsg_y" value="1" checked class="weixin_radio" ds_action="config.channel.changeIsLeaveMsg" ds_data="1"> <label for="isLeaveMsg_y">是</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="isLeaveMsg" id="isLeaveMsg_n" value="0" class="weixin_radio" ds_action="config.channel.changeIsLeaveMsg" ds_data="0"> <label for="isLeaveMsg_n">否</label>&nbsp;&nbsp;
+                </div>
+                <div class="chanel_item_row msg_div" style="display: none;">
+                    <span class="chanel_item_left">推送内容</span>
+                    <textarea name="msg" rows="3" placeholder="若不留言的话，可以设置一段内容推送到用户端"></textarea>
+                    <span class="help_tip">默认值“客服不在线，系统将自动断开会话”</span>
+                    <!--<span class="help-block">若不留言的话，可以设置一段内容推送到用户端</span>-->
+                </div>
+            </div>
+            <div>
+                <div class="chanel_item_row">
+                    <span class="chanel_item_left">启用排队人数的展示</span>
+                    <input type="checkbox" name="queueNumSwitch">
+                </div>
+            </div>
+            <div style="margin-top: 15px;">
+                <button type="button" class="btn btn-small btn-primary ds_form_action" ds_action="config.channel.saveGlobalSet">保存</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<style type="text/css">
+    .chanel_global_set {
+        width: 75%;
+    }
+    .chanel_global_set .chanel_item_row{
+        margin-bottom: 10px;
+    }
+    .chanel_global_set label{
+        display: inline-block;
+    }
+    .chanel_global_set .chanel_item_left{
+        display: inline-block;
+        text-align: left;
+        width: 180px;
+    }
+    .chanel_global_set .chanel_item_right{
+        text-align: left;
+    }
+    .chanel_global_set .chanel_input_text{
+        width: 50px;
+    }
+    .chanel_global_set .help_tip{
+        margin-left:183px;
+        color:#999999!important;
+        display: block;
+    }
+</style>

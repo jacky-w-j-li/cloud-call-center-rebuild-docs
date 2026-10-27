@@ -1,0 +1,51 @@
+<div class="right_content_pane pd0">
+    <div class="row-fluid">
+        <form id="frm_wechat_add_#_index#_" class="weixin-config" index="_#_index#_">
+        <div class="config-byself" style="display:none;">
+            <h4>可以直接在平台完成微信公众号配置</h4><br />
+            <div class="ds_form_action btn-green" ds_action="config.channel.getMenu">
+                <span>自定义菜单</span>
+            </div>
+        </div>
+            <input type="hidden" name="_id" value="_#_id#_"/>
+            <div class="row-fluid">
+                <div class="row_item">
+                    <label class="control-label" for="wechat_headimg">微信头像</label>
+                    <span class="control-field" id="wechat_headimg"><img width="32px" height="32px" src="_#head_img#_"></span>
+                </div>
+                <div class="row_item">
+                    <label class="control-label" for="wechat_id">微信号</label>
+                    <span class="control-field" id="wechat_id">_#alias#_</span>
+                </div>
+                <div class="row_item">
+                    <label class="control-label" for="wechat_nickName">微信名称</label>
+                    <span class="control-field" id="wechat_nickName">_#nick_name#_</span>
+                </div>
+                <div class="row_item">
+                    <label class="control-label" for="wechat_topeer">消息分发技能组</label>
+                    <select id="wechat_topeer" class="pull-right" name="to_peer" required>
+                    </select>
+                    <span class="peer-tips" style="color: #fa5f5f;float:right; margin:3px 0px;"></span>
+                </div>
+                <div class="row_item">
+                    <label class="control-label" for="wechat_robot">启用智能机器人</label>
+                    <select id="wechat_robot" class="pull-right" name="robot" value="true" title="微信暂不开放" disabled >
+                    <option value="true">是</option>
+                    <option value="false">否</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-btn-center clearfix">
+                    <!--<a href="#confirm_dialog_wechat" data-toggle="modal" class="btn btn-small ds_form_action">删除</a>-->
+                    <button type="button" class="ds_form_action btn-blue"
+                            ds_action="config.channel.updateWechat">保存
+                    </button>
+                    <button type="button" class="ds_form_action btn-gray"
+                            ds_action="config.channel.showDeleteWechatConfirmDialog">删除
+                    </button>
+            </div>
+        </form>
+        <div class="weixin-form sub-right">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,116 @@
+<div id="business_list">
+    <div class="clear10">&nbsp;</div>
+    <div class='row-fluid'>
+        <form class="form-inline" id="query_business_form">
+            <input type='text' name='query' placeholder="输入查询条件进行查询">
+            <a href="#" ds_action="business.getAccountBusiness" class="btn btn-info ds_form_action">查询</a>
+        </form>
+    </div>
+    <div class="clear10">&nbsp;</div>
+    <div>
+        <table class="table table-bordered table-striped table-hover table-condensed">
+            <thead>
+            <tr>
+                <th style="width: 50px;height:13px;">
+                    帐户编号
+                </th>
+                <th style="width: 50px;">
+                    帐户名称
+                </th>
+                <th style="width: 60px;">
+                    公司名称
+                </th>
+                <th style="width: 100px;">
+                    操作
+                </th>
+            </tr>
+            </thead>
+            <tbody id="business_list_pane">
+            </tbody>
+        </table>
+    </div>
+    <div class='row-fluid'>
+        <div class="pagination pagination-small" for="query_business_form" ds_pagination_action="business.getAccountBusiness" style="display:table; margin:0;width:100%;">
+            <span style="float:left;font-size:12px;">查询结果：<span class="result_count">0</span></span>
+            <ul id="agent_list_index" style="float:right;">
+                <li>
+                    <a href="#" value="0">&laquo;</a>
+                </li>
+                <li>
+                    <a href="#"  value="1">1</a>
+                </li>
+                <li>
+                    <a href="#" value="2">2</a>
+                </li>
+                <li>
+                    <a href="#" value="3">3</a>
+                </li>
+                <li>
+                    <a href="#"  value="4">4</a>
+                </li>
+                <li>
+                    <a href="#"  value="5">5</a>
+                </li>
+                <li>
+                    <a href="#"  value="6">&raquo;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="account_line">&nbsp;</div>
+<div class="clear5">&nbsp;</div>
+<!--<div id="account_business_config" class="container-fluid" style="display: none">-->
+    <!--<div class="account_name">帐户名称:<span id="account_business_accountName"></span></div>-->
+    <!--<div class="clear5">&nbsp;</div>-->
+    <!--<div class="row-fluid">-->
+         <!--<label>业务类型:</label>-->
+    <!--</div>-->
+    <!--<div class="row-fluid">-->
+        <!--<div id="account_business_tags" style="float: left;padding-right: 10px;"></div>-->
+        <!--<a id="account_business_add" href="#showEditTagsModal" data-toggle="modal" class="ds_do_action account_business_tag"-->
+           <!--ds_action="business.showBusinessTag" ds_data="" style="margin-left:15px;">添加业务类型</a>-->
+        <!--<a id="account_business_edit" href="#showEditTagsModal" data-toggle="modal" class="ds_do_action account_business_tag"-->
+           <!--ds_action="business.showBusinessTag" ds_data="" style="margin-left:15px;">修改业务类型</a>-->
+        <!--<div id="showEditTagsModal" class="modal hide fade" tabindex="-1" role="dialog"-->
+             <!--aria-labelledby="myModalLabel" aria-hidden="true">-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<div class="container-fluid" id="account_business_config" style="padding: 0;margin: 10px 5px 0px 5px;display: none;">
+    <div class="row-fluid">
+        <div class="account_name">帐户名称:<span id="account_business_accountName"></span></div>
+    </div>
+    <div class="row-fluid">
+        <div class="span2">
+            <div>
+                <ul class="nav nav-list bs-docs-sidenav" id="config_business_nav_pane">
+                </ul>
+            <span href="#addBusinessFlowModal" data-toggle="modal" class="add-custom-field enabled ds_do_action"
+                  ds_action="business.showAddBusinessFlow">添加业务流程</span>
+
+                <div id="addBusinessFlowModal" class="modal hide fade" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel" aria-hidden="true">
+
+                </div>
+            </div>
+        </div>
+        <div class="span10" id="config_business_flow_pane">
+
+        </div>
+    </div>
+</div>
+
+<style type="text/css">
+    div .list-item {
+        cursor : pointer;
+    }
+    div .list-item :hover {
+        background-color:#ECF6FD;
+    }
+    div .list-item :active {
+        background-color:#ECF6FD;
+    }
+</style>

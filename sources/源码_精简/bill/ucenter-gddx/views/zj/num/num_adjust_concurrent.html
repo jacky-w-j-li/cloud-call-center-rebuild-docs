@@ -1,0 +1,91 @@
+<div class="pay_start" style="margin:10px;">
+    <div class="sn_detail" style="">
+        <div class="well" style="padding: 0 19px;">
+            <h2>_#_id#_<small>并发单价:<span class="text-primary monthRent">_@formatTrueFee(_#concurrentPrice#_)@_</span>元
+            </small></h2>
+            <!--<p class="text-muted">当前呼入并发数:<span class="text-primary concurrent">_#concurrent#_</span></p>-->
+        </div>
+        <div class="add_concurrent">
+            <form class="form-horizontal" id="frm_add_concurrent">
+                <input type="hidden" name="serviceno" value="_#_id#_">
+                <input type="hidden" name="flag" value="buyConcurrent">
+                <input type="hidden" name="oldConcurrent" value="_#concurrent#_">
+                <input type="hidden" name="serviceFlag" value="">
+                <input type="hidden" name="concurrentPrice" value="_#concurrentPrice#_">
+                <input type="hidden" name="monthDay" value="_#monthDay#_">
+                <input type="hidden" name="leaveDay" value="_#leaveDay#_">
+                <input type="hidden" name="money" value="_#totalFee#_">
+                <input type="hidden" name="balance" value="_#balance#_">
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">
+                        当前呼入并发数
+                    </label>
+                    <div class="col-md-10">
+                        <input type="text" onkeyup="value=value.replace(/[^\d]/g,'')" name="concurrent" value='_#concurrent#_' class="form-control input-sm ds_spinner" required>
+                        <label for="concurrent" class="error" style="display: none;"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">
+                        增减数量
+                    </label>
+                    <div class="col-md-10"  style="line-height: 35px;">
+                        <span class="concurrent_num">_#num#_</span>个
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">
+                        本月还剩天数
+                    </label>
+                    <div class="col-md-10" style="line-height: 35px;">
+                        <span class="leaveDay">_#leaveDay#_</span>天
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">
+                        应付金额
+                    </label>
+                    <div class="col-md-10" style="line-height: 35px;">
+                        <span class="fee total_fee">_#totalFee#_</span>元
+                        <span class="text-muted">&nbsp;[单价*增减数量/本月总天数*本月剩余天数=应付金额]</span>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <p>您当前可支付余额为<strong>_#balance#_</strong>元,其中实际余额为<strong>_#actualBalance#_</strong>元,透支额度为<strong>_#overdraw#_</strong>元</p>
+                    <p class="balance_not_enough" style="display: none;color: red;">
+                        您的账户余额不足，请立即充值
+                    </p>
+                </div>
+                <div class="alert alert-info">
+                    <ul>
+                        <li>新增并发立即生效，当月按实际天数计费，以后按月扣除</li>
+                        <li>减少并发，本月申请，下月生效</li>
+                        <li>每月一号自动扣除费用，并发的价格会附加到号码月租上</li>
+                        <li>调整并发数以最后一次操作为准，比如您本月多次减少并发数，以最后一次为准生效</li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="button" class="btn btn-primary ds_form_action ds_pay" ds_action="zjNum.confirmPayConcurrent">立刻购买</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <div class="sn_pay" style="display: none;">
+
+    </div>
+</div>
+<div class="pay_end" style="display: none;">
+    <p class="text-center">请您在新打开的网上银行页面进行支付，支付完成前请不要关闭该窗口</p>
+    <p class="text-center"><button type="button" class="btn btn-primary ds_do_action" ds_action="account.finishPay" >支付完成</button></p>
+</div>
+
+<script type="text/javascript">
+    $('#popover_concurrent').popover({
+//        container: '.modal-body'
+    });
+</script>

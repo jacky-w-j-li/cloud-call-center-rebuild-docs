@@ -1,0 +1,71 @@
+<form>
+    <div class="row-fluid">
+        <div class="row-fluid" style="margin-top: 8px;">
+            <div style="float: left;margin-top: 20px; margin-bottom: 10px;">
+                <h4>添加问卷问题</h4>
+            </div>
+            <div style="float: right;margin-top:15px;margin-bottom: 5px;">
+                <a href="#" class="btn btn-primary ds_form_action"
+                   ds_action="config.questionnaire.saveQuestionnaireQues">保存</a>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div style="border:1px solid;"></div>
+        </div>
+        <div class="row-fluid">
+            <div class="row_item">
+                <label for="flow_field_name">问题标识</label>
+                <input id="flow_field_name" name="name" type="text" required>
+            </div>
+            <div class="row_item">
+                <label>问题内容</label>
+                <textarea name="context"></textarea>
+                <span>点击下方字段可直接插入变量</span>
+            </div>
+<div class="row_item" style="margin-top:-3px;">
+    <label></label>
+    <span>
+            {{
+            for(var i=0; i<fields.length; i++){
+            }}
+            <a href="javascripts:void(0);" class="ds_do_action" ds_action="config.questionnaire.insertFieldVariable" ds_data="{{=fields[i].name}}">{{=fields[i].name}}</a>&nbsp;&nbsp;
+            {{
+            }
+            }}
+        </span>
+</div>
+            {{ type = type || 'dynamic'; }}
+            {{ if(type != 'static'){ }}
+            <div class="row_item">
+                <label>开始问题</label>
+                <input name="isBegin" type="checkbox" value="false"/>
+            </div>
+            {{ }else{ }}
+            <div class="row_item">
+                <label>是否是多选</label>
+                <input name="isMultiselect" type="checkbox" value="false"/>
+            </div>
+            {{ } }}
+
+
+            <div id="add_ques_ans_pane">
+            </div>
+
+            <div>
+                <span style="margin-left: -110px;" class="add-custom-field enabled ds_do_action"
+                      ds_action="config.questionnaire.showAddQuesAns" ds_data="{{=type}}">添加问题答案</span>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+<style type="text/css">
+    .delete_icon {
+        display: inline-block;
+        position: relative;
+        width: 15px;
+        height: 15px;
+        background: url(/img/icons-old1.png) no-repeat scroll -23px -352px #fff;
+    }
+

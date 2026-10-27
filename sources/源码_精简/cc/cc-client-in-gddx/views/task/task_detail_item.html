@@ -1,0 +1,104 @@
+<div class="task_detail_item" id="task_detail_item__#menu#___#_id#_">
+    <div class="task-bar task_title_bar">
+        <span class="task_check ds_do_action tooltip-icon" ds_action="task.completeTask" ds_data="_#_id#_" ds_complete="0">
+            <span class="tip-container" style="opacity: 1; display: none;">
+                <span class="arrow"></span>
+                <span class="tip-content">点击完成</span>
+            </span>
+        </span>
+        <span class="task_title">_#title#_</span>
+            <span class="task_detail_tag" style="margin-left: 10px;">
+                <div class="dropdown" style="display: inline;">
+                    <a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#" title="选取业务类型">
+                        <i class="icon-tag"/></a>
+                    <ul class="dropdown-menu task_add_tag_menu" role="menu" aria-labelledby="drop4">
+
+                    </ul>
+                </div>
+            </span>
+        <div style="float: right;">
+
+            <span class="btn-group" style="line-height: 20px">
+                <input name="master" type="hidden" id="_#menu#__select_input__#_id#_" />
+                <div id="_#menu#__select_user__#_id#_" style="float:left;" class="combobox_agent"></div>
+            </span>
+            <span style="color: gray;margin-right: 5px">_#lastUpdateTime#_</span>
+            <a class="btn btn-mini ds_do_action show_comments" ds_action="task.showTaskComments" ds_menu="_#menu#_" ds_data="_#_id#_"
+               ds_todo="1" data-toggle="collapse"
+               data-target="#task_comments__#menu#___#_id#_" href="#" timestamp="0"><span class="caret"></span></a>
+        </div>
+    </div>
+    <div class="task_detail">
+        <span>_#detail#_</span>
+    </div>
+    <div class="task_comments collapse" id="task_comments__#menu#___#_id#_" style="height: 0px;">
+        <div class="feed_story" style="max-height: 300px;overflow-y: auto;border: 1px solid #cccccc;">
+
+        </div>
+        <div class="feed_back">
+            <form>
+                <input class="hidden" name="task" value="_#_id#_">
+                <label class="hidden" for="comment_input__#menu#___#_id#_">备注内容</label>
+                <textarea id="comment_input__#menu#___#_id#_" name="comment" rows="2" cols=""
+                          style="resize: vertical; width: 70%; margin-bottom: 0px;" placeholder="备注内容..." required></textarea>
+
+                <div>
+                    <a class="btn btn-small btn-primary ds_form_action" ds_action="task.addComments"
+                       style="color: #ffffff;margin-top: 2px;" href="#">提交</a>
+
+                    <span style="color: gray; margin-left: 5px"></span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var evt = dsevent.evt.taskComplete + " " + dsevent.evt.taskCompleteCancel + ' '+ dsevent.evt.taskAssignedUser;
+        dsevent.bind('#task_detail_item__#menu#___#_id#_', evt, function (event, params) {
+            var taskId = '_#_id#_';
+            if (taskId != params._id)
+                return;
+            var detailPane = $('#task_detail_item__#menu#___#_id#_');
+            if (event.type == dsevent.evt.taskComplete) {
+                handler.task.showTaskComplete(detailPane);
+            } else if (event.type == dsevent.evt.taskCompleteCancel) {
+                handler.task.showTaskCompleteCancel(detailPane);
+            } else if (event.type == dsevent.evt.taskAssignedUser) {
+                $('#_#menu#__select_input__#_id#_').val(params.master);
+                $("#_#menu#__select_user__#_id#__input").val(getCache('agents', params.master).name);
+            }
+        });
+        utils.loadSearchInput({ id: "_#menu#__select_user__#_id#_",
+            width: "60",
+            height: "14",
+            tip: "选取",
+            data: getCache("agents"),
+            searchField: ["displayName"],
+            pinyinField: ["displayName"],
+            listField: ["displayName"],
+            userIdField: "_id",
+            showField: "displayName",
+            showAllList: true,
+            callbackFuc: function (object) {
+                handler.task.assignToUser({_id: '_#_id#_', master: object._id}, function(result){
+                    if(result) {
+                        $("#_#menu#__select_input__#_id#_").val(object._id);
+                        dsevent.publish(dsevent.evt.taskAssignedUser, {_id: '_#_id#_', master: object._id});
+                    } else {
+
+                    }
+                });
+            },
+            onKeyChanged: function () {
+                if ($("#_#menu#__select_user__#_id#__input").val() != "") {
+                    $("#_#menu#__select_input__#_id#_").val("serachInputNoresult");
+                } else {
+                    $("#_#menu#__select_input__#_id#_").val("");
+                }
+            }
+        });
+        $('#_#menu#__select_input__#_id#_').val('_#master#_');
+        $("#_#menu#__select_user__#_id#__input").val('_#master_name#_');
+    });
+</script>

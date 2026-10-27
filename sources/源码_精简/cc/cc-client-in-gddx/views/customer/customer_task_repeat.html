@@ -1,0 +1,83 @@
+<form id='repeat_query_frm'>
+    <input  name="batchNo" type="hidden" >
+</form>
+<div class="">
+    <table class="table table-bordered table-striped table-hover" style="word-break: break-all;">
+        <colgroup>
+            <col width="20%"/>
+            <col width="40%"/>
+            <col width="20%"/>
+            <col width="20%"/>
+        </colgroup>
+        <thead>
+        <tr>
+            <th>
+                客户名称
+            </th>
+            <th>
+                电话
+            </th>
+            <th>
+                状态
+            </th>
+            <th>
+                来源
+            </th>
+
+        </tr>
+        </thead>
+        <tbody id="task_repeat_list_pane">
+        </tbody>
+    </table>
+    <div class="pagination pagination-small task_repeat_count" style="" for="repeat_query_frm" ds_pagination_action="customer.loadTaskRepeatList">
+        <span style="float:left;">查询结果：<span class="result_count">0</span></span>
+        <ul class="repeat_list_page" style="float:right;">
+            <li>
+                <a href="#"  value="0">«</a>
+            </li>
+            <li>
+                <a href="#"  value="1">1</a>
+            </li>
+            <li>
+                <a href="#"  value="2">2</a>
+            </li>
+            <li>
+                <a href="#"  value="3">3</a>
+            </li>
+            <li>
+                <a href="#"  value="4">4</a>
+            </li>
+            <li>
+                <a href="#"  value="5">5</a>
+            </li>
+            <li>
+                <a href="#"  value="6">»</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script id="tmpl_taskimport_item" type="text/x-jquery-tmpl">
+<tr>
+    <td>
+        {{if name}}
+        ${name}
+        {{/if}}
+    </td>
+    <td>
+        {{if phone}}
+        ${handler.customer.contactPhoe(phone)}
+        {{/if}}
+    </td>
+    <td>
+        {{if status}}
+        ${getCache('custTmpls',dbType).status[status]}
+        {{/if}}
+    </td>
+    <td>
+        {{if custsource1}}
+            ${handler.customer.getSourceName(dbType,custsource1)}
+        {{/if}}
+    </td>
+</tr>
+</script>

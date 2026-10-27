@@ -1,0 +1,8 @@
+context N00000000164-10004-announcement {
+	_X. => {
+		
+		Hangup;
+	}
+}
+
+

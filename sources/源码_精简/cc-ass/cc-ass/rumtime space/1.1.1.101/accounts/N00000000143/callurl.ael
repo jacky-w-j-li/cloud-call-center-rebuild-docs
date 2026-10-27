@@ -1,0 +1,33 @@
+context N00000000143-10239-callurl {
+	s => {
+		callurltimeout = 0;
+		Agi(agi://127.0.0.1:7891/agicallurl?pbx=${HOST}&servicepeer=10239);
+		if(${callurltimeout} == 1)
+			Hangup;
+		goto N00000000143-10240-ExtensionPeer, s, 1;
+	}
+}
+
+
+context N00000000143-10085-callurl {
+	s => {
+		callurltimeout = 0;
+		Agi(agi://127.0.0.1:7891/agicallurl?pbx=${HOST}&servicepeer=10085);
+		if(${callurltimeout} == 1)
+			Hangup;
+		Hangup;
+	}
+}
+
+
+context N00000000143-10165-callurl {
+	s => {
+		callurltimeout = 0;
+		Agi(agi://127.0.0.1:7891/agicallurl?pbx=${HOST}&servicepeer=10165);
+		if(${callurltimeout} == 1)
+			Hangup;
+		goto N00000000143-10190-dynamic-route,s,1;
+	}
+}
+
+

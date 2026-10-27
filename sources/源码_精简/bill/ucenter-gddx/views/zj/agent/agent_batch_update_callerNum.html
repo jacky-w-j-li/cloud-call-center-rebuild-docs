@@ -1,0 +1,23 @@
+    <form class="form-horizontal" id="frm_agent_batch_update_callerNum">
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                分机号
+            </label>
+            <div class="col-md-5">
+                <input type="text" name="startExten" value='' class="form-control input-sm digits"  required style="display: inline-block;width: 75px;" placeholder="8000"/>
+                至
+                <input type="text" name="endExten" value='' class="form-control input-sm digits"  required style="display: inline-block;width: 75px;" placeholder="8002"/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="startExten" class="error" style="display: none;"></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                外显号码
+            </label>
+            <div class="col-md-5">
+                <select name="callerIDNum" class="form-control input-sm callerIDNum" >
+                </select>
+                <p class="help-block" style="">去电时客户看到的号码</p>
+            </div>
+        </div>
+    </form>

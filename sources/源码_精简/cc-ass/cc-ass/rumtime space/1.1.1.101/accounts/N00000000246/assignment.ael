@@ -1,0 +1,20 @@
+context N00000000246-10015-assignment {
+	s => {
+		csNum=2;
+
+
+		goto N00000000246-10007-dynamic-route,s,1;		
+	}
+}
+
+
+context N00000000246-10014-assignment {
+	s => {
+		csNum=2;
+
+
+		goto N00000000246-10028-encryptmd5,s,1;		
+	}
+}
+
+

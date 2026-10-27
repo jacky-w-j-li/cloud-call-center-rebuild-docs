@@ -1,0 +1,324 @@
+<div id="contact_list__#menu#_"  ds_menu="_#menu#_" class="list_check_pane">
+    <div class="contacts_caption" style="">
+        <div class="cancel_edit" style="">
+            <div class="list_check_all" style="cursor: pointer;" >
+                <b class="ico_select_checkbox ico ico_wrap" style="top:10px;left:5px;"></b>
+            </div>
+            <div style="display: inline-block;margin-left: 30px;font-weight: bold;">
+                已选
+                <span class="bottom_toolbar_selsize_num">
+                    0
+                </span>
+                项
+            </div>
+            <span class="pull-right">
+                <a href="#" class="ds_do_action" ds_action="cancelDealToolbar" ds_data="customer" ds_attr="_#menu#_">取消</a>
+            </span>
+        </div>
+        <div class="caption-top clearfix">
+            <div class="search_condition" style="display:none;"></div>
+            <div class="quick_search_condition" style="display:none ;"></div>
+            <div class="header_wrap clearfix">
+                <form id="frm_customer_normal_search">
+                    <input name="dbType" type="hidden"  value="" />
+                    <input name="menu" type="hidden"  value="_#menu#_" />
+                    <input name="status" type="hidden"  value="" />
+                    <input name="quickSearch" type="hidden" value=""/>
+                    <input name="remindSearch" class="cust_remindSearch_hidden" type="hidden" value=""/>
+                    <span class="refresh ds_form_action" style="display: none;" ds_action="customer.searchCustomerPage"></span>
+                    <div class="header_search_wrap pull-left quick_search" style="">
+                        <div class="header_search_button ds_form_action customer_normal_search normal_search" ds_action="customer.searchCustomerPage">
+                            <i class="icon-search"></i>
+                        </div>
+                        <div class="header_search_input">
+                            <div class="header_search_input_textbox">
+                                <div class="dropdown">
+                                    <div class="dropdown-toggle quick_card quick_card_sty" data-toggle="dropdown">
+                                        <span class="quick_desc ellipsis" style="">全部</span>
+                                        <span class="caret"></span>
+                                    </div>
+                                    <ul class="dropdown-menu quick_menu">
+
+                                    </ul>
+                                    <div class="textbox_wrap textbox_wrap_sty">
+                                        <div class="textbox_inner">
+                                            <input type="text" name="combox" class="textbox_input inpt_sty" maxlength="254" placeholder="输入名称或号码查询">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="text_link header_search_advanced customer_advanced_search">
+                            高级搜索
+                        </div>
+                    </div>
+                </form>
+                <div class="header_func_plus pull-right">
+                    <ul class="nav nav-pills" style="margin-bottom:0;">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="padding: 5px 11px;">
+                            <span class="nav_title">
+                                <b class="ico ico_middle ico_func_plus">
+                                </b>
+                            </span>
+                            </a>
+                            <ul class="dropdown-menu menu_list pull-right">
+                                <li><a href="#" class="ds_do_action" ds_action="showDealToolbar" ds_data="customer" ds_attr="_#menu#_">编辑</a></li>
+                                <li><a href="#" class="ds_do_action" ds_action="customer.showCustAdd" ds_data="_#menu#_">增加</a></li>
+                                <li><a href="#" class="ds_do_action customer_merge" ds_action="customer.showCustomerMerge" ds_data="_#menu#_">合并</a></li>
+                                <!-- <li><a href="#" class="ds_do_action customer_titket" ds_action="customer.titket.titketManager" ds_data="_#menu#_">奖罚劵管理</a></li> -->
+                                <li><a href="#" class="ds_do_action" ds_action="customer.showQuickSearch" ds_data="_#menu#_">自定义快捷搜索</a></li>
+								<li><a href="#" class="ds_do_action customer_export_task" ds_action="customer.showExportTask" ds_data="_#menu#_">导出任务</a></li>
+                                <li><a href="#" class="ds_do_action" ds_action="customer.showHitsingleSearch" ds_data="_#menu#_">撞单查询</a></li>
+                                <!-- <li><a href="#" class="ds_do_action customer_common" ds_action="customer.showCustomerCommon" ds_data="_#menu#_">公海配置</a></li>
+                                <li><a href="#" class="ds_do_action customer_sale_chance" ds_action="customer.showSaleChance" ds_data="_#menu#_">商机池</a></li> -->
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!--<div class="header_func_plus pull-right"><i class="icon-plus"></i></div>-->
+            </div>
+
+           <!-- <div class="header_quick_search" style="width: 100%;">
+                <div class="more_search more_search_prev" style="">
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><<&nbsp;&nbsp;</a>
+                        <ul class="dropdown-menu pull-left" role="menu"  aria-labelledby="dLabel">
+                        </ul>
+                    </div>
+                </div>
+                <ul class="nav nav-pills quick_row">
+                </ul>
+                <div class="more_search more_search_next" style="">
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">&nbsp;&nbsp;>></a>
+                        <ul class="dropdown-menu pull-right" role="menu"  aria-labelledby="dLabel">
+                        </ul>
+                    </div>
+                </div>
+
+            </div>-->
+
+            <div class="ds_search_filter" style="display: none;">
+            </div>
+        </div>
+
+    </div>
+    <div tabindex="-1" id="customer_advanced_search_pane" class="advanced_search_pane hidden">
+    </div>
+    <div class="list_container">
+        <div class="list-inside">
+        </div>
+        <div class="list-footer">
+            <div class="pagination pagination-small" for="frm_customer_normal_search" ds_pagination_action="customer.searchCustomerPage">
+                <span style="float:left;">查询结果：<span class="result_count">0</span></span>
+                <ul class="" style="float:right;padding-right: 6px;">
+                    <li>
+                        <a href="#"  value="0">«</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="1">1</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="2">2</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="3">3</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="4">4</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="5">5</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="6">»</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script id="tmpl_customer_page_item" type="text/x-jquery-tmpl">
+    <div class="list_item list_item_check">
+        <div class="ds_do_action item_row item${_id} item_check customer_item" ds_action="customer.showCustInfo" ds_data="_#menu#_" style="">
+            <div class="card_row_new">
+                <input type="hidden" name="customerId" value="${_id}" >
+                <div class="card_right">
+                    <div class="muted">
+                        <span class="cust-owner " title="所属人" >{{html ownerDesc}}</span>
+                        {{if ownerMenu}}
+                            {{if ownerMenu=="customer_seas"}}
+                                <button type="button" class="btn-blue btn-small btn_cust_claim">领取</button>
+                            {{/if}}
+                        {{/if}}
+                    </div>
+                    <div style="position: absolute;bottom: 0;right:0;">
+                        <span class="status-name ${status} ellipsis" title="${getCache('custTmpls', dbType).status[status]}" style="max-width: 70px;">
+                            ${getCache('custTmpls',dbType).status[status]}
+                        </span>
+                    </div>
+                </div>
+                <div class="card_left">
+                    <b class="ico_select_checkbox ico ico_wrap ico_item_checkbox customer_item"></b>
+                    <div style="position: absolute;bottom: 6px;left:3px;" class="customer_isRead">
+                    {{if readImg}}
+                        <img src="${readImg}" style="width: 10px"/>
+                     {{/if}}
+                    </div>
+                </div>
+                <div class="card_middle" style="margin-right:80px;">
+                    <div class="customer cust-name ellipsis">${name}</div>
+                    <div class="ellipsis  muted margin_patch" >
+                            <span class="genjinicon ${contactDesc}" title=""></span>
+                            <span class='cust-title'>${title}</span>&nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_customer_plan_item" type="text/x-jquery-tmpl">
+    <div class="list_item list_item_check">
+        <div class="ds_do_action item_row item${_id} item_check customer_item" ds_action="customer.showCustInfo" ds_data="_#menu#_" style="">
+            <div class="card_row_new">
+                <input type="hidden" name="customerId" value="${_id}" >
+                <div class="card_right">
+                    {{if notifyTime}}
+                        <span style="" class="action_date_id action_date ${getNotifyDate(notifyTime).type}" title="${notifyTime}">${getNotifyDate(notifyTime).name}</span>
+                    {{else}}
+                        <span style="" class="action_date_id"></span>
+                    {{/if}}
+                        <!--<div class="muted">-->
+                            <!--<span class="cust-owner " title="所属人" >${ownerDesc}</span>-->
+                        <!--</div>-->
+                    <div style="position: absolute;bottom: 5px;right:0;">
+                        <span class="status-name ${status} ellipsis" title="${getCache('custTmpls', dbType).status[status]}" style="max-width: 70px;">
+                            ${getCache('custTmpls',dbType).status[status]}
+                        </span>
+                    </div>
+                </div>
+                <div class="card_left">
+                    <b class="ico_select_checkbox ico ico_wrap ico_item_checkbox customer_item"></b>
+                    <div style="position: absolute;bottom: 6px;left:3px;" class="">
+                    </div>
+                </div>
+                <div class="card_middle" style="margin-right:80px;">
+                    <div class="customer cust-name ellipsis">${name}</div>
+                    <div class="ellipsis cust-title muted margin_patch action_content" >
+                        ${action}
+                        {{if notifyTime}}
+                            (${getNotifyDate(notifyTime).displayName})
+                        {{/if}}
+                        &nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/javascript">
+    $(function(){
+        var menu = '_#menu#_';
+        console.info("list-page menu===="+menu);
+        if(menu=='customer_plan'){
+            var evt=dsevent.evt.customerAdd+" "+dsevent.evt.customerAddCancel+" "+dsevent.evt.customerNew+" "+
+                    dsevent.evt.customerUpdate+" "+dsevent.evt.action+" "+dsevent.evt.customerUpdateStatus+" "+dsevent.evt.customerUpdateOwner+" "
+                    +dsevent.evt.customerBatchDel+" "+dsevent.evt.customerDelete+" "+dsevent.evt.customerRefresh;
+            dsevent.bind('#contact_list__#menu#_', evt,function(event, params){
+                var parent=$("#contact_list_"+menu);
+                var data={};
+                if(params){
+                    data=params;
+                }
+                console.info("event.type====="+event.type)
+                var t=parent.find(".item"+data._id);
+                var rightPane=$("#"+menu+"_customer");
+                if(event.type==dsevent.evt.customerAdd){
+                    parent.find(".list-inside").prepend($("#tmpl_customer_page_item").tmpl(data));
+                    parent.find(".list-inside .item_row:first").click();
+                }else if(event.type==dsevent.evt.customerAddCancel){
+                    var t1=parent.find(".item_row.expanded");
+                    if(t1.length>0){
+                        t1.click();
+                    }
+                }else if(event.type==dsevent.evt.customerUpdate){
+                    handler.customer.syncCustPageItem(data,t,0);
+                }else if(event.type==dsevent.evt.action){
+                    handler.customer.syncCustItem(data,t,1);
+                }else if(event.type==dsevent.evt.customerUpdateStatus){
+                    handler.customer.syncCustPageItem(data,t,2);
+                }else if(event.type==dsevent.evt.customerUpdateOwner){
+
+                }else if(event.type==dsevent.evt.customerBatchDel){
+                    rightPane.html(template("tmpl_customer_content_container_inner",{}));
+                    handler.cancelDealToolbar("customer",menu);
+                    parent.find('.customer_normal_search').click();
+                }else if(event.type==dsevent.evt.customerDelete){
+                    rightPane.html(template("tmpl_customer_content_container_inner",{}));
+                    t.parent().remove();
+                }else if(event.type==dsevent.evt.customerRefresh){
+                    rightPane.html(template("tmpl_customer_content_container_inner",{}));
+                    handler.cancelDealToolbar("customer",menu);
+                    parent.find('.refresh').click();
+                }
+            });
+        }else{
+            var evt=dsevent.evt.customerAdd+" "+dsevent.evt.customerAddCancel+" "+dsevent.evt.customerNew+" "+
+                    dsevent.evt.customerUpdate+" "+dsevent.evt.customerUpdateStatus+" "+dsevent.evt.customerUpdateOwner+" "
+                    +dsevent.evt.customerBatchDel+" "+dsevent.evt.customerDelete+" "+dsevent.evt.customerRefresh+" "+dsevent.evt.customerRefreshIsRead;
+            dsevent.bind('#contact_list_'+menu, evt,function(event, params){
+                var parent=$("#contact_list_"+menu);
+                var data={};
+                if(params){
+                    data=params;
+                }
+                var t=parent.find(".item"+data._id);
+                var rightPane=$("#"+menu+"_customer");
+                if(event.type==dsevent.evt.customerAdd){
+//                    console.dir(rightPane)
+//                    console.dir(parent.find(".list-inside .item_row:first"))
+                    var items=parent.find(".list-inside").find(".list_item");
+                    if(items.length==0){
+                        parent.find(".list-inside").empty();
+                    }
+                    data.contactDesc=handler.customer.showContactDesc(data.sysStatus);
+                    parent.find(".list-inside").prepend($("#tmpl_customer_page_item").tmpl(data));
+                    parent.find(".list-inside .item_row:first").click();
+                }else if(event.type==dsevent.evt.customerAddCancel){
+                    var t1=parent.find(".item_row.expanded");
+                    if(t1.length>0){
+                        t1.click();
+                    }
+                }else if(event.type==dsevent.evt.customerUpdate){
+                    handler.customer.syncCustPageItem(data,t,0);
+//            }else if(event.type==dsevent.evt.action){
+//                handler.customer.syncCustItem(data,t,1);
+                }else if(event.type==dsevent.evt.customerUpdateStatus){
+                    handler.customer.syncCustPageItem(data,t,2);
+                }else if(event.type==dsevent.evt.customerUpdateOwner){
+                    handler.customer.syncCustItem(data,t,3);
+                }else if(event.type==dsevent.evt.customerBatchDel){
+                    rightPane.html(template("tmpl_customer_content_container_inner",{}));
+                    handler.cancelDealToolbar("customer",menu);
+                    parent.find('.customer_normal_search').click();
+                }else if(event.type==dsevent.evt.customerDelete){
+                    rightPane.html(template("tmpl_customer_content_container_inner",{}));
+                    t.parent().remove();
+                }else if(event.type==dsevent.evt.customerRefresh){
+//                    rightPane.empty();
+                    rightPane.html(template("tmpl_customer_content_container_inner",{}));
+                    handler.cancelDealToolbar("customer",menu);
+                    parent.find('.refresh').click();
+                }else if(event.type==dsevent.evt.customerRefreshIsRead){
+                    handler.customer.syncCustPageItem(data,t,3);
+                }
+            });
+        }
+
+    });
+</script>
+

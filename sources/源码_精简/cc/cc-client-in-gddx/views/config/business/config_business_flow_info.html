@@ -1,0 +1,49 @@
+<form>
+    <div class="row-fluid">
+        <div class="span8">
+            <h3>流程信息配置</h3>
+        </div>
+        <div class="span4">
+            <a href="#stopBusinessFlowModal" id="config_business_stopAndStart_operate" data-toggle="modal" class="btn btn-danger btn-small ds_do_action" style="float: right;margin-top: 10px;" ds_action="config.business.showStopBusinessFlow" ds_data="__id">_@config.business.getBusinessFlowStatus('__status')@_</a>
+            <a href="#" class="btn btn-small btn-primary ds_form_action" style="float: right;margin-top: 10px;margin-right: 10px;" ds_action="config.business.saveBusinessFlowInfo">保存</a>
+        </div>
+        <div id="stopBusinessFlowModal" class="modal hide fade" tabindex="-1" role="dialog"
+             aria-hidden="true">
+
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="row-fluid">
+            <div style="border:1px solid ;"></div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div style="margin-top: 15px;">
+            <input type='hidden' name='_id' value='__id'>
+            <input type='hidden' name='version' value='__version'>
+            <div class='row_item'>
+                <label>流程名称</label>
+                <input type='text' name='name' maxlength="10" value='_@getDefaultDisplayValue("__name")@_' style="width: 200px;">
+            </div>
+            <div class="row_item">
+                <label >工单总时限设置</label>
+                <input type="num" id="ctime" name="ctime" datatype="Number,Range" min="1" msg="输入的时间必须大于0" value=""  maxlength="5" onkeyup="this.value=this.value.replace(/\D/g,'')" >
+                &nbsp;&nbsp;单位
+                <select name="ctype" id="ctype">
+                    <option value="min" selected="selected">分钟</option>
+                    <option value="hours">小时</option>
+                    <option value="day">天</option>
+                </select>
+            </div>
+             <div class="row_item">
+                <label></label>
+                <span>工单总时长必须大于单步骤时长 __stepTimeHtml</span>
+            </div>
+            <div class="row_item">
+                <label>流程提示</label>
+                <textarea rows="3" name="tips" style="width: 200px;">_@getDefaultDisplayValue('__tips')@_</textarea>
+            </div>
+
+        </div>
+    </div>
+</form>

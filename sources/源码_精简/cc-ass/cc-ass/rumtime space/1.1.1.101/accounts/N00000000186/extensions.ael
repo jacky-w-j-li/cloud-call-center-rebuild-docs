@@ -1,0 +1,111 @@
+context N00000000186 {
+	_X. => {
+		FROM_CID=${CALLERID(num)};
+		FROM_DID=${EXTEN};
+		ACCOUNT=N00000000186;
+        	dialNum=${FROM_DID};
+		Agi(agi://127.0.0.1:7891/AgiFormatDialoutNumber?pbx=${HOST}&accountid=${ACCOUNT}&dialnum=${dialNum});
+		Answer;
+		goto N00000000186-route,${dialNum},1;
+	}
+	0000 => {
+		ACCOUNT=N00000000186;
+		goto sip-manage,s,1;
+	}
+ 	_*. => {
+                Agi(agi://127.0.0.1:7891/AgiLootCall?pbx=${HOST});
+                if("${lootFail}" == "1"){
+                        PlayBack("sound/lootFail");
+                }
+                if("${lootFail}" == "2"){
+                        PlayBack("sound/lootFailError");
+                }
+                Hangup();
+        }
+}
+
+context N00000000186-dial {
+	_X. => {
+		StopMonitor();
+		Set(RECFILENAME=${STRFTIME(${EPOCH},,%Y%m%d-%H%M%S)}_N00000000186_${CALLERID(num)}_${EXTEN}_${UNIQUEID});
+		Monitor(wav,${RECFILENAME},b);
+		Set(DYNAMIC_FEATURES=key_tag);
+		goto N00000000186-call,${EXTEN},1;
+	}
+}
+
+context N00000000186-call {
+	_X. => {
+		SPYGROUP="SIP/${EXTEN}";
+		Dial(SIP/${EXTEN},,t);
+	}
+	_9X. => {
+		MusicOnHold();
+	}
+}
+
+context N00000000186-balance {
+    _. => {
+		Playback(sound/balance);
+		Hangup();
+    }
+}
+
+context N00000000186-dialin {
+    _X. => {
+		CALLERID(name)=${EXTEN};
+		JOBNUM=${EXTEN};
+        Agi(agi://127.0.0.1:7891/AgiDialin?pbx=${HOST}&exten=${EXTEN});
+        Hangup();
+    }
+}
+
+context N00000000186-investigate {
+    s => {
+        RETRY_TIME = 0;
+    loop:
+        RETRY_TIME=${RETRY_TIME} + 1;
+        if(${RETRY_TIME} > 3){
+            Hangup();
+        }
+        BackGround(sound/investigate);
+	WaitExten(5);
+        goto s,loop;
+    }
+
+    _[0-9] => {
+    	goto N00000000186-investigate-result, ${EXTEN}, 1;
+    }
+    
+    i => {
+    	if(${RETRY_TIME} == 0){
+            goto s, loop;
+        }
+        RETRY_TIME=${RETRY_TIME} + 1;
+        if(${RETRY_TIME} > 3){
+            Playback(sound/bye);
+            Hangup();
+        }
+        Playback(sound/incorrect);
+        goto s, loop;
+    }
+
+    t => {
+        RETRY_TIME=${RETRY_TIME} + 1;
+        if(${RETRY_TIME} > 3){
+            Playback(sound/bye);
+            Hangup();
+        }
+        Playback(sound/timeout);
+        goto s, loop;
+    }
+
+}
+
+context N00000000186-investigate-result {
+    _X => {
+        Playback(sound/thx);
+        Wait(1);
+        Hangup();
+    }
+}

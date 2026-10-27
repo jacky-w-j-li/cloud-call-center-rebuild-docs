@@ -1,0 +1,44 @@
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span>短信模板详情</span>
+        <div style="float:right">
+            <button type="button" class="btn btn-success btn-xs ds_do_action" ds_action="showPage" ds_data="cc/sms/sms_template_to_check_query" action="sms.sms_template_to_check_query">返回</button>
+        </div>
+
+    </div>
+    <div class="panel-body">
+        <p>模板标题：_#name#_</p>
+        <p>模板内容：_#content#_</p>
+        <p>模板签名：_#signToDisplay#_</p>
+        <p>模板类型：_#templateTypeToDisplay#_</p>
+    </div>
+</div>
+<br/>
+<div>
+    <p>添加回复</p>
+    <form id="sms_template_to_check_message_form" class="form-horizontal">
+        <input type="hidden" name="_id" value="_idToReplace_"/>
+        <textarea style="width:100%"id="message_content" name="content"></textarea>
+        <br/><br/>
+        <div style="float:right">
+            <button type="button" class="btn btn-success ds_form_action" ds_action="sms.addSmsTemplateToCheckMessages">提交</button>
+        </div>
+        <!--<div class="form-group">
+            <div class="col-md-5">
+                <textarea style="width:100%"id="message_content" name="content"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-8">
+                <button type="button" class="btn btn-primary ds_form_action" ds_action="sms.addSmsTemplateToCheckMessages">提交</button>
+            </div>
+        </div>-->
+    </form>
+</div>
+<br/><br/><br/>
+<div id="sms_messages_wrapper">
+    <table class="table table-striped" id="sms_messages_table">
+        _messageToReplace_
+    </table>
+</div>

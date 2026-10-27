@@ -1,0 +1,31 @@
+<div class="row-fluid list-item action" appdata="__id" appaction="config.business.showBusinessFlowStepDetail">
+    <div class="span12">
+        <div class="row-fluid">
+            <div class="span4">
+                <h4 style="color:#0088CC;">__name</h4>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span3">
+                <span class="label label-info" id="__id_begin">起始</span>
+                <span class="label label-info" id="__id_unBegin">流转</span>
+            </div>
+            <div class="span6">
+                <span class="label">__lastUpdateTime</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="height:1px;background-color:#EAEAEA;width:100%;margin-bottom:8px;"></div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var isBegin = __isBegin;
+        if (isBegin) {
+            $('#__id_unBegin').hide();
+        } else {
+            $('#__id_begin').hide();
+        }
+
+    });
+</script>

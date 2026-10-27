@@ -1,0 +1,82 @@
+<div id="knowledge_content" >
+    <form id='km_item_query_frm'>
+        <input  name="cid" type="hidden" value="_#cid#_" >
+    </form>
+    <div class="zs_title2">
+        <div style="float: right;" class="km_btn_group km_manage">
+            <a href="#"  class="add_button button ds_do_action" ds_data="_#cid#_" ds_action="kmcontent.showAddPage" style="margin-top: 0">增加</a>
+        </div>
+        <div class="hf_title_font2">
+            当前位置：目录浏览><span class="km_nav"></span>
+        </div>
+    </div>
+    <div class="km_body">
+        <table class="table table-bordered table-striped table-hover" style="word-break: break-all;">
+            <colgroup>
+                <col width="45%"/>
+                <col width="15%"/>
+                <col width="16%"/>
+                <col width="9%"/>
+                <col width="15%"/>
+            </colgroup>
+            <thead>
+            <tr>
+                <th>
+                    知识点标题
+                </th>
+                <th>
+                    采编员
+                </th>
+                <th>
+                    更新时间
+                </th>
+                <th>
+                    点击量
+                </th>
+                <th class="km_manage">
+                    操作
+                </th>
+            </tr>
+            </thead>
+            <tbody id="km_item_list_pane">
+            </tbody>
+        </table>
+        <div class="pagination pagination-small config_role_count" style="display:table; margin:0;width:100%;"
+             for="km_item_query_frm" ds_pagination_action="catalog.queryListPage">
+            <span class="result_info">查询结果：<span class="result_count">0</span></span>
+            <ul class="km_item_list_page" style="float:right;">
+                <li><a href="#"  value="0">&laquo;</a></li>
+                <li><a href="#"  value="1">1</a></li>
+                <li><a href="#"  value="2">2</a></li>
+                <li><a href="#"  value="3">3</a></li>
+                <li><a href="#"  value="4">4</a></li>
+                <li><a href="#"  value="5">5</a></li>
+                <li><a href="#"  value="6">&raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script id="tmpl_km_item" type="text/x-jquery-tmpl">
+    <tr>
+        <td>
+            <a href="#" class="ds_do_action" ds_action="kmcontent.viewKmInfo" ds_data="${_id}" appflag="km">${title}</a>
+        </td>
+        <td>
+            ${handler.kmcontent.showFieldsDesc('agent',publisher)}
+        </td>
+        <td>
+            ${lastTime.substring(0,lastTime.length-3)}
+        </td>
+        <td>
+            ${hits}
+        </td>
+        <td class="km_manage">
+            <div>
+                <a class="ds_do_action" ds_action="kmcontent.showUpdatePage" ds_data="${_id}" appflag="km" href="#">修改</a>&nbsp;&nbsp;
+                <a class="ds_do_action" ds_action="kmcontent.removeKm" ds_data="${_id}" appflag="km"  href="#">删除</a>
+            </div>
+        </td>
+    </tr>
+</script>
+

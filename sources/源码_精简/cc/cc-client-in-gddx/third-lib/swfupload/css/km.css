@@ -1,0 +1,203 @@
+/*css digg style pagination*/
+
+div.digg {
+	padding-right: 3px; padding-left: 3px; padding-bottom: 3px; margin: 3px; padding-top: 3px; text-align: center
+}
+div.digg a {
+	border-right: #aaaadd 1px solid; padding-right: 5px; border-top: #aaaadd 1px solid; padding-left: 5px; padding-bottom: 2px; margin: 2px; border-left: #aaaadd 1px solid; color: #000099; padding-top: 2px; border-bottom: #aaaadd 1px solid; text-decoration: none
+}
+div.digg a:hover {
+	border-right: #000099 1px solid; border-top: #000099 1px solid; border-left: #000099 1px solid; color: #000; border-bottom: #000099 1px solid
+}
+div.digg a:active {
+	border-right: #000099 1px solid; border-top: #000099 1px solid; border-left: #000099 1px solid; color: #000; border-bottom: #000099 1px solid
+}
+div.digg span.current {
+	border-right: #000099 1px solid; padding-right: 5px; border-top: #000099 1px solid; padding-left: 5px; font-weight: bold; padding-bottom: 2px; margin: 2px; border-left: #000099 1px solid; color: #fff; padding-top: 2px; border-bottom: #000099 1px solid; background-color: #000099
+}
+div.digg span.disabled {
+	border-right: #eee 1px solid; padding-right: 5px; border-top: #eee 1px solid; padding-left: 5px; padding-bottom: 2px; margin: 2px; border-left: #eee 1px solid; color: #ddd; padding-top: 2px; border-bottom: #eee 1px solid
+}
+
+
+
+
+/*css yahoo style pagination*/
+
+div.yahoo {
+	padding-right: 3px; padding-left: 3px; padding-bottom: 3px; margin: 3px; padding-top: 3px; text-align: center
+}
+div.yahoo a {
+	border-right: #fff 1px solid; padding-right: 5px; border-top: #fff 1px solid; padding-left: 5px; padding-bottom: 2px; margin: 2px; border-left: #fff 1px solid; color: #000099; padding-top: 2px; border-bottom: #fff 1px solid; text-decoration: underline
+}
+div.yahoo a:hover {
+	border-right: #000099 1px solid; border-top: #000099 1px solid; border-left: #000099 1px solid; color: #000; border-bottom: #000099 1px solid
+}
+div.yahoo a:active {
+	border-right: #000099 1px solid; border-top: #000099 1px solid; border-left: #000099 1px solid; color: #f00; border-bottom: #000099 1px solid
+}
+div.yahoo span.current {
+	border-right: #fff 1px solid; padding-right: 5px; border-top: #fff 1px solid; padding-left: 5px; font-weight: bold; padding-bottom: 2px; margin: 2px; border-left: #fff 1px solid; color: #000; padding-top: 2px; border-bottom: #fff 1px solid; background-color: #fff
+}
+div.yahoo span.disabled {
+	border-right: #eee 1px solid; padding-right: 5px; border-top: #eee 1px solid; padding-left: 5px; padding-bottom: 2px; margin: 2px; border-left: #eee 1px solid; color: #ddd; padding-top: 2px; border-bottom: #eee 1px solid
+}
+
+/*css youtube style pagination*/
+
+div.youtube {
+	padding-right: 6px; border-top: #9c9a9c 1px dotted; padding-left: 0px; font-size: 13px; padding-bottom: 4px; color: #313031; padding-top: 4px; font-family: arial, helvetica, sans-serif; background-color: #cecfce; text-align: right
+}
+div.youtube a {
+	padding-right: 3px; padding-left: 3px; font-weight: bold; padding-bottom: 1px; margin: 0px 1px; color: #0030ce; padding-top: 1px; text-decoration: underline
+}
+div.youtube a:hover {
+	
+}
+div.youtube a:active {
+	
+}
+div.youtube span.current {
+	padding-right: 2px; padding-left: 2px; padding-bottom: 1px; color: #000; padding-top: 1px; background-color: #fff
+}
+div.youtube span.disabled {
+	display: none
+}
+
+
+
+
+/*css msdn style pagination*/
+
+div.msdn {
+	padding-right: 6px; padding-left: 0px; font-size: 13px; padding-bottom: 4px; color: #313031; padding-top: 4px; font-family: verdana,tahoma,arial,helvetica,sans-serif; background-color: #fff; text-align: right
+}
+div.msdn a {
+	border-right: #b7d8ee 1px solid; padding-right: 6px; border-top: #b7d8ee 1px solid; padding-left: 5px; padding-bottom: 4px; margin: 0px 3px; border-left: #b7d8ee 1px solid; color: #0030ce; padding-top: 5px; border-bottom: #b7d8ee 1px solid; text-decoration: none
+}
+div.msdn a:hover {
+	border-right: #b7d8ee 1px solid; border-top: #b7d8ee 1px solid; border-left: #b7d8ee 1px solid; color: #0066a7; border-bottom: #b7d8ee 1px solid; background-color: #d2eaf6
+}
+div.pagination a:active {
+	border-right: #b7d8ee 1px solid; border-top: #b7d8ee 1px solid; border-left: #b7d8ee 1px solid; color: #0066a7; border-bottom: #b7d8ee 1px solid; background-color: #d2eaf6
+}
+div.msdn span.current {
+	border-right: #b7d8ee 1px solid; padding-right: 6px; border-top: #b7d8ee 1px solid; padding-left: 5px; font-weight: bold; padding-bottom: 4px; margin: 0px 3px; border-left: #b7d8ee 1px solid; color: #444444; padding-top: 5px; border-bottom: #b7d8ee 1px solid; background-color: #d2eaf6
+}
+div.msdn span.disabled {
+	display: none
+}
+
+
+/*css manu style pagination*/
+
+.manu {
+	padding-right: 3px; padding-left: 3px; padding-bottom: 3px; margin: 3px; padding-top: 3px; text-align: center
+}
+.manu a {
+	border-right: #eee 1px solid; padding-right: 5px; border-top: #eee 1px solid; padding-left: 5px; padding-bottom: 2px; margin: 2px; border-left: #eee 1px solid; color: #036cb4; padding-top: 2px; border-bottom: #eee 1px solid; text-decoration: none
+}
+.manu a:hover {
+	border-right: #999 1px solid; border-top: #999 1px solid; border-left: #999 1px solid; color: #666; border-bottom: #999 1px solid
+}
+.manu a:active {
+	border-right: #999 1px solid; border-top: #999 1px solid; border-left: #999 1px solid; color: #666; border-bottom: #999 1px solid
+}
+.manu .current {
+	border-right: #036cb4 1px solid; padding-right: 5px; border-top: #036cb4 1px solid; padding-left: 5px; font-weight: bold; padding-bottom: 2px; margin: 2px; border-left: #036cb4 1px solid; color: #fff; padding-top: 2px; border-bottom: #036cb4 1px solid; background-color: #036cb4
+}
+.manu .disabled {
+	border-right: #eee 1px solid; padding-right: 5px; border-top: #eee 1px solid; padding-left: 5px; padding-bottom: 2px; margin: 2px; border-left: #eee 1px solid; color: #ddd; padding-top: 2px; border-bottom: #eee 1px solid
+}
+
+
+.loading{
+	background: url(../../ui/images/ajax-loader.gif) no-repeat center 50%;
+	z-index: 2;
+	width:100%;
+	height: 60px;
+}
+
+.load {
+	background:url(../images/loading.gif) no-repeat left center;
+	padding:20px;
+	z-index: 2;
+	color:#999;
+	font-size:12px;
+}
+.km_bg{background:url(../images/km_bg.jpg) repeat-x left;height:65px;}
+.km_bg2{background:url(../images/km_bg2.jpg) no-repeat right;height:65px;width:38%;line-height:65px; float:right}
+.km_bg .search{float:left;padding-top: 15px;}
+.km_bg img{border-right: 1px solid #BBB;border-top: 1px solid #BBB;border-bottom: 1px solid #BBB;vertical-align: middle;cursor: pointer;}
+.kmlogo{
+	background:url(../images/km_logo.jpg) no-repeat left 0;
+}
+
+.km_recently{
+	color:#333;
+	line-height: 25px;
+	font-size: 12px;
+	padding-top:5px;
+	padding-left:10px;
+}
+.km_recently a:visited,
+.km_recently a:link,
+.km_recently a:active {
+   color: #000; 
+	text-decoration: none;
+}
+.km_recently a:hover{
+color: #000;
+text-decoration: underline;  }
+.km_recently .new{
+    background:url('../images/new.png') no-repeat left 50%;
+}
+#fsUploadProgress{
+    margin-left: 83px;
+}
+#thumbnails li {list-style-type: none;  margin: 0; padding: 0;height: 20px;line-height: 20px;text-align: left;}
+.fujian {
+	padding:0px;font-weight: normal;}
+
+
+.fujian .ico-1{
+	margin-top:2px;
+	padding-right:2px;background-image:url(../images/fujian.gif);
+	background-repeat:no-repeat;width:15px;height:15px;
+}
+.fujian .ico-2{
+	margin-top:2px;background:url(../images/delete2.gif) no-repeat left top;
+	background-repeat:no-repeat;width:15px;height:15px;
+}
+.fujian .left{
+	float:left;
+}
+.zs_title2{ width:100%; height:35px; position:relative; line-height:35px;font-size:15px;}
+.hf_title_font2{ width:auto ; color:#31589D;  text-indent:10px; /*background:url(../images/img/icon/title_ico.jpg) no-repeat 6px 7px;*/}
+.km_title2{font-weight: bold;}
+.km_add{float: right;padding:5px 25px 0 0;}
+.km_add a:visited,
+.km_add a:link,
+.km_add a:active {
+   color: #000; 
+	text-decoration: none;
+}
+.km_add a:hover{
+color: #000;
+text-decoration: underline;  }
+.button_style {
+    border: 1px solid #bbb;
+    /*background-color: #F4F9FD;*/
+    height: 26px;
+    cursor: pointer;
+    font-size: 13px;font-weight: bold;
+}
+
+.km_logo{
+    /*font-family:黑体;*/
+    font-size: 20px;font-weight: bold;color: #666;
+    font-family: "Microsoft Yahei","微软雅黑";
+    line-height: 65px;margin-left: 20px;
+}
+
+

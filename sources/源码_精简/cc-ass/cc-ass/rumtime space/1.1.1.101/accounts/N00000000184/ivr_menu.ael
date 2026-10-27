@@ -1,0 +1,14 @@
+context N00000000184-10050-ivr-menu {
+	s => {
+		goto N00000000184-10057-encryptmd5,s,1;
+	}
+}
+
+
+context N00000000184-10048-ivr-menu {
+	s => {
+		goto N00000000184-10047-validate,s,1;
+	}
+}
+
+

@@ -1,0 +1,36 @@
+globals {
+        HOST="gateway";
+}
+
+context default {
+        _X. => {
+                if(${SIP_HEADER(X-DialoutOrNot)}"a" != "a"){
+                        ISREFER = ${SIP_HEADER(X-DialoutOrNot)};
+                        ACCOUNT = ${CALLERID(name)};
+                } else {
+                        ACCOUNT = ${SIP_HEADER(X-AccountId)};
+                        Noop("is not refer call");
+                }
+                FROM_CID = ${CALLERID(num)};
+                FROM_DID = ${EXTEN:3};
+                CalledNo = ${FROM_DID};
+                CallNo = ${FROM_CID};
+                PREFIX = ${EXTEN:0:3};
+                CONNECT_TYPE = 1;
+                goto ${PREFIX}-route,s,1;
+        }
+        _[A-Z]X. => {
+                FROM_CID = ${CALLERID(num)};
+                ACCOUNT = ${EXTEN:0:13};
+                FROM_DID = ${EXTEN:16};
+                CalledNo = ${FROM_DID};
+                CallNo = ${FROM_CID};
+                PREFIX = ${EXTEN:13:3};
+                CONNECT_TYPE = 0;
+                goto ${PREFIX}-route,s,1;
+        }
+}
+
+#include "route.ael"
+#include "line.ael"
+#include "extensionPeer.ael"

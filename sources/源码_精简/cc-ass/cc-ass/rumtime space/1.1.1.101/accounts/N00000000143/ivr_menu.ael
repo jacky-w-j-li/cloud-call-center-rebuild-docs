@@ -1,0 +1,35 @@
+context N00000000143-10156-ivr-menu {
+	s => {
+		goto N00000000143-10082-validate,s,1;
+	}
+}
+
+
+context N00000000143-10183-ivr-menu {
+	s => {
+		goto N00000000143-10212-ExtensionPeer, s, 1;
+	}
+}
+
+
+context N00000000143-10149-ivr-menu {
+	s => {
+		goto N00000000143-10157-ExtensionPeer, s, 1;
+	}
+}
+
+
+context N00000000143-10150-ivr-menu {
+	s => {
+		goto N00000000143-10084-assignment,s,1;
+	}
+}
+
+
+context N00000000143-10162-ivr-menu {
+	s => {
+		goto N00000000143-10157-ExtensionPeer, s, 1;
+	}
+}
+
+

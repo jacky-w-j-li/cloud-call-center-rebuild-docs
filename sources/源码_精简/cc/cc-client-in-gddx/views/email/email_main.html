@@ -1,0 +1,224 @@
+<link rel="stylesheet" type="text/css" href="./stylesheets/email.css?1101">
+<div class="left_column" id="contact_list_email">
+    <div class="model_submenu" style="padding: 5px;">
+        <div class="btn-group" style="width:100%">
+            <!--<button class="btn ds_do_action btn_webchat_open" style="width: 101px" ds_action="webchat.quick_subMenu_search" ds_data="webchat_open">待领取 <span class="badge badge-important"></span></button>-->
+            <button class="btn ds_do_action btn_email_todo active" style="width: 50%" ds_action="email.quick_subMenu_search" ds_data="email_todo">处理中 <span class="badge badge-important"></span></button>
+            <button class="btn ds_do_action btn_email_all" style="width: 50%" ds_action="email.quick_subMenu_search" ds_data="email_all">全部</button>
+        </div>
+    </div>
+    <div class="list_card">
+        <div id="view_email_todo" class="card_pane"></div>
+        <div id="view_email_all" class="card_pane"></div>
+    </div>
+</div>
+
+<div class="right_column">
+    <div class="contact_detail" style="padding: 0;">
+        <div class="content" style="overflow: hidden;">
+            <div id="view_email_todo_content" class="content_pane"></div>
+            <div id="view_email_all_content" class="content_pane"></div>
+            <div id="show_email_location_lists"></div>
+            <div id="show_email_end_session"></div>
+        </div>
+    </div>
+</div>
+
+<script id="tmpl_email_item" type="text/html">
+    <div class="list_item list_item_check">
+        <div class="item_row ds_do_action contact_item item_check email_item  item{{=_id}}" ds_action="email.showEmailDetail" ds_data="{{=_id}}" ds_attr="{{=from.addr}}" cust_id="{{=custId}}">
+            <div class="email_card_row_new">
+                <div class="card_middle">
+                    <div class="custom_name_field">
+                        {{
+                        if(from.name){
+                        }}
+                        <span class="name" title="{{=from.addr}}">
+                            <b class="custom_name_field_b" custName="{{=from.name}}">{{=custName}}</b>
+                            &lt{{=from.addr}}&gt
+                        </span>
+                        {{
+                        }else{
+                        }}
+                        <span class="name" title="{{=from.addr}}">
+                            <b class="custom_name_field_b" custName="">{{=custName}}</b>
+                            &lt{{=from.addr}}&gt
+                        </span>
+                        {{
+                        }
+                        }}
+
+                        <span class="pull-right shortTime">{{=shortTime}}</span>
+                    </div>
+                    <h5 class="email_title_detail" title="{{=subject}}">{{=subject}}</h5>
+                    <div class="custom_from_field">
+                        <span class="from">来自:{{=to.name}}&lt{{=to.addr}}&gt</span>
+                    </div>
+                    <div class="email_mark_content">
+                        {{
+                        var hide = 'hidden';
+                        var cat = '';
+                        if(category){
+                        hide = '';
+                        cat = categoryName;
+                        }
+                        }}
+                        <span class="email_sort_card {{=hide}}">{{=cat}}</span>
+                    </div>
+                    <div class="card_left">
+                        <b class="ico_select_checkbox ico ico_wrap ico_item_checkbox email_item"></b>
+                        <span class="badge badge-important">{{=leakNum}}</span>
+                        <div style="position: absolute;bottom: 6px;left:3px;" class="bus_read">
+                            <!--__readImg-->
+                        </div>
+                        {{
+                        var isShow = '';
+                        if(mailMarks.starMark == 'unmark'){
+                            isShow = 'hidden';
+                        }
+                        }}
+                        <span class="star_red {{=isShow}}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<script id="tmpl_email_item_all" type="text/html">
+    <div class="list_item list_item_check">
+        <div class="item_row ds_do_action contact_item item_check email_item item{{=_id}}" ds_action="email.showEmailDetail" ds_data="{{=_id}}" ds_attr="{{=from.addr}}"  cust_id="{{=custId}}">
+            <div class="email_card_row_new">
+                <div class="card_middle">
+                    <div class="custom_name_field">
+                        <span class="name"><b>{{=custName}}</b>&lt{{=from.addr}}&gt</span>
+                        <span class="label status {{=statusClass}}">{{=statusLabel}}</span> <!--   {{=statusLabel}}   -->
+                    </div>
+                    <div class="clearFloat email_card_detail">
+                        <h5 class="pull-left email_title_detail" title="{{=subject}}">{{=subject}}</h5>
+                        <span class="pull-right">{{=shortTime}}</span>
+                    </div>
+
+                    <div class="custom_from_field">
+                        <span class="from">来自:{{=to.name}}&lt{{=to.addr}}&gt</span>
+                    </div>
+                    <div class="email_mark_content">
+                        {{
+                        var hide = 'hidden';
+                        var cat = '';
+                        if(category){
+                        hide = '';
+                        cat = categoryName;
+                        }
+                        }}
+                        <span class="email_sort_card {{=hide}}">{{=cat}}</span>
+                    </div>
+                    <div class="card_expand">
+                        <div class="email_handler_people">处理人：{{=agentDisplayName}}</div>
+                        <!--<div class="email_handler_from">技能组：{{=peerName}}</div>-->
+                    </div>
+                    <div class="card_left">
+                        <!--<b class="ico_select_checkbox ico ico_wrap ico_item_checkbox email_item"></b>-->
+                        <span class="badge badge-important">{{=leakNum}}</span>
+                        <div style="position: absolute;bottom: 6px;left:3px;" class="bus_read">
+                            <!--__readImg-->
+                        </div>
+                        {{
+                        var isShow = '';
+                        if(mailMarks.starMark == 'unmark'){
+                        isShow = 'hidden';
+                        }
+                        }}
+                        <span class="star_red {{=isShow}}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_email_notFound_customer" type="text/html">
+    <div class="contact_summary">
+        <div class="baseinfo cust_base">
+            <div class="base_summary">
+                <div style="font-size: 14px;line-height: 30px;">
+                    {{ if(isDel){ }}
+                    <span class="text-error">{{=desc}}<span style="font-weight:bold;">{{=id}}</span>定位的客户已经删除！</span>
+                    {{ }else{ }}
+                    {{=desc}}<span style="color:#009900;font-weight:bold;">{{=id}}</span>未定位到客户。
+                    {{ } }}
+
+                    <div>
+                        您可以<a href="#" class="ds_do_action show_add" ds_action="customer.showPopAdd" ds_data="{{=flag}}">新增一个客户</a>
+                        或者 <a href="#" class="ds_do_action " ds_action="customer.showSelectOldCust" ds_data="{{=paneId}}">选择已存在客户</a>。
+                    </div>
+                    <!--<div class="cust_base_fields" style="display: none;">-->
+                        <!--<span>名称：<input type="text" name="custName" placeholder="获取消息中的名称，自动填充到客户中" ></span>&nbsp;&nbsp;&nbsp;&nbsp;-->
+                        <!--<span>电话：<input type="text" name="custPhone" placeholder="获取消息中的电话，自动填充到客户中"></span>-->
+                        <!--<span>联系人：<input type="text" name="custContact" placeholder="录入联系人，自动填充到客户中"></span>-->
+                    <!--</div>-->
+                </div>
+            </div>
+
+            <div class="func_tab_container clearfix">
+                <div class="pull-left">
+                    <a href="#" class="ds_do_action func_tab active" ds_action="customer.swapFunTab" ds_data="email" ds_attr="">邮件</a>
+                    <a href="#" class="func_tab disabled_new"  ds_data="business" style="cursor: default;">工单</a>
+                    <a href="#" class="func_tab disabled_new"  ds_data="action" style="cursor: default;">联系计划</a>
+                    <a href="#" class="func_tab disabled_new"  ds_data="history" style="cursor: default;">联系历史</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<script id="tmpl_email_popup_more_customer" type="text/html">
+    <div class="contact_summary">
+        <div class="baseinfo cust_base">
+            <div class="base_summary">
+                <div style="font-size: 14px;line-height: 25px;">
+                    {{=desc}}<span style="color:#009900;font-weight:bold;">{{=id}}</span>定位到多个客户。
+                    <div class="location_client">
+                        <div class="location_client_box">
+                            <div class="location_client_more">
+                                选择已定位到的客户
+                                {{
+                                for(var i=0; i<custs.length; i++){
+                                }}
+                                <span class="select_client"><a class="ds_do_action text-overflow" title="{{=custs[i].name}}">{{=custs[i].name}}</a><button class="ds_do_action btn-blue" ds_attr="select_old" ds_data="{{=custs[i]._id}},{{=custs[i].name}},{{=paneId}},{{=custs[i].dbType}},{{=sessionId}}" ds_action="call.popLocateCust">选定</button></span>
+                               {{
+                                if(i == 4)break;
+                                }
+                                }}
+
+                            {{
+                                if(custs.length > 5){
+                                   }}
+                            <div class="show_location_client ds_do_action" ds_action="customer.showEmailSelectMultiCust" ds_data="{{=paneId}}"></div>
+                            {{
+                                }
+                            }}
+                            </div>
+                        </div>
+                        <div class="showPopAdd_btn" >
+                            选择<a href="#" class="ds_do_action show_add" ds_action="customer.showPopAdd" ds_data="{{=flag}}">新增一个客户</a>
+                            或者 <a href="#" class="ds_do_action " ds_action="customer.showSelectOldCust" ds_data="{{=paneId}}">选择其它已存在客户</a>。
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="func_tab_container clearfix">
+                <div class="pull-left">
+                    <a href="#" class="ds_do_action func_tab active" ds_action="customer.swapFunTab" ds_data="email" ds_attr="">邮件</a>
+                    <a href="#" class="func_tab disabled_new"  ds_data="business" style="cursor: default;">工单</a>
+                    <a href="#" class="func_tab disabled_new"  ds_data="action" style="cursor: default;">联系计划</a>
+                    <a href="#" class="func_tab disabled_new"  ds_data="history" style="cursor: default;">联系历史</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+

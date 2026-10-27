@@ -1,0 +1,98 @@
+<script language="javascript">
+    $("#frm_serviceno_search").find(".sp_item").click(function () {
+        $("#frm_serviceno_search").find(".sp_item").removeClass("showField");
+        $(this).addClass("showField");
+    });
+    $("#frm_serviceno_search").find(".city_item").click(function () {
+        $("#frm_serviceno_search").find(".city_item").removeClass("showField");
+        $(this).addClass("showField");
+    });
+
+</script>
+<div style="margin: 10px" class="num_search_continer">
+    <form id="frm_serviceno_search" name="form1" class="form-horizontal">
+        <div class="clearFloat">
+            <span class="spanleftdw" >运营商</span>
+            <span class="spanleftd" >
+                <label class="sp_item showField pad"><input type="radio"  name="sp" value="" checked="true" style="display: none; " onclick="handler.account.triggerQueryNum(this)">全部</label>
+                <label class="sp_item pad" ><input type="radio" name="sp" value="tietong" style="display: none;" onclick="handler.account.triggerQueryNum(this)">中国铁通</label>
+                <label class="sp_item pad" ><input type="radio" name="sp" value="unicom" style="display: none;" onclick="handler.account.triggerQueryNum(this)">中国联通</label>
+                <label class="sp_item pad" ><input type="radio" name="sp" value="telecom" style="display: none;" onclick="handler.account.triggerQueryNum(this)">中国电信</label>
+            </span>
+        </div>
+        <div class="clearFloat">
+            <span class="spanleftdw" >地市</span>
+            <span class="spanleftd">
+                <label class="city_item showField pad"><input type="radio"  name="city" value="" checked="true" style="display: none;" onclick="handler.account.triggerQueryNum(this)">全部</label>
+				<label class="city_item pad"><input type="radio" value="010" name="city" style="display: none;" onclick="handler.account.triggerQueryNum(this)">北京</label>
+                <label class="city_item pad"><input type="radio" value="021" name="city" style="display: none;" onclick="handler.account.triggerQueryNum(this)">上海</label>
+                <label class="city_item pad"><input type="radio" value="020" name="city" style="display: none;" onclick="handler.account.triggerQueryNum(this)">广州</label>
+                <label class="city_item pad"><input type="radio" value="0755" name="city" style="display: none;" onclick="handler.account.triggerQueryNum(this)">深圳</label>
+			</span>
+        </div>
+        <div  class="clearFloat">
+            <span class="spanleftdw">号码</span>
+            <span class="spanleftd">
+                <input style="width:200px;" type="text" name="_id" class="form-control input-sm" placeholder="和地市组合查询时不要输入区号"/>
+			</span>
+        <!--</div>-->
+        <!--<div>-->
+            <span class="pad">价格区间</span>
+            <span>
+				<input type="text" name="startPrice" class="form-control input-sm" style="display: inline-block;width: 50px;"/>至
+                <input type="text" name="endPrice" class="form-control input-sm" style="display: inline-block;width: 50px;"/>元
+			</span>
+            </p>
+        </div>
+        <div style="position: relative;left: 73px;width: 645px">
+            <button type="button" class="btn btn-primary btn-small ds_form_action" ds_action="account.loadNormalServiceNoList">查询</button>
+            <button type="button" style="margin: 10px" class="btn btn-default btn-small ds_do_action" ds_action="account.resetSn">重置</button>
+        </div>
+    </form>
+    <form id="frm_serviceno_data">
+        <div style="margin-bottom: 10px;" id="service_normal_list">
+        </div>
+    </form>
+    <div class="row pagination">
+        <div class="col-md-5">查询结果：<span class="result_count" style="margin-top:3px;display: inline-block;">0</span></div>
+        <div class=" col-md-7">
+            <ul class="pagination pagination-sm pull-right" style="margin: 0;"
+                for="frm_serviceno_search" ds_pagination_action="account.loadNormalServiceNoList">
+                <li><a href="#"  value="0">&laquo;</a></li>
+                <li><a href="#"  value="1">1</a></li>
+                <li><a href="#"  value="2">2</a></li>
+                <li><a href="#"  value="3">3</a></li>
+                <li><a href="#"  value="4">4</a></li>
+                <li><a href="#"  value="5">5</a></li>
+                <li><a href="#"  value="6">&raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<style type="text/css">
+    .num_search_continer .showField{
+        color: #f0ad4e;
+    }
+    .num_search_continer .spanleftdw{
+        text-align:left;
+        display: inline-block;
+        width:70px;
+    }
+    .num_search_continer .spanleftd{
+        text-align:left;
+        display: inline-block;
+    }
+    .num_search_continer .pad{
+        padding: 0 10px;
+    }
+    .num_search_continer .sp_item{
+        cursor:pointer;
+        float: left;
+    }
+    .num_search_continer .city_item{
+        cursor:pointer;
+        float: left;
+    }
+</style>
+

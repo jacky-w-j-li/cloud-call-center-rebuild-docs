@@ -1,0 +1,122 @@
+<div class="row-fluid">
+    <div class="span12">
+        <form class="form-horizontal ds_item_edit" action="" client-data="session.ivrMap.ivr.ivr_node_call_url">
+            <div id="confirm_del_pane"></div>
+            <input type="hidden" name="_id" value="___id">
+            <input type="hidden" name="Exten" value="__Exten">
+            <div class="row-fluid">
+                <div class="span6 offset1">
+                    <i class="icon-plus"></i>修改CallUrl节点
+                </div>
+                <div class="span5 text-right pull-right">
+                    <a class="btn btn-info btn-blue ds_action_flow">
+                        <ds-form-action action="config.ivr.node.callUrl.updateCallUrl" extra-data="config.callConfig.currentConfigData"
+                                        update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"ivr_node_call_url"}}'/>
+                        <ds-get-view view="config/callConfig/node/callUrl/call_url_list" panel="ivrCallUrlNodePanel"/>
+                        <ds-effect-ivr/>
+                        保存
+                    </a>
+                    <a class="btn btn-danger btn-gray ds_action_flow">
+                        <ds-form-action action="config.ivr.node.callUrl.deleteCallUrl" extra-data="config.callConfig.currentConfigData"
+                                        update-client-data='{"method":"config.callConfig.updateClientData","arg":{"operation":"del","type":"ivr_node_call_url"}}'/>
+                        <ds-get-view view="config/callConfig/node/callUrl/call_url_list" panel="ivrCallUrlNodePanel"/>
+                        <ds-effect-ivr/>
+                        删除
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="row-fluid">
+                <div class="span5">
+                    <div class="ivr-report">
+                        <div class="control-group">
+                            <label class="control-label">
+                                节点名称
+                            </label>
+                            <div class="controls">
+                                <input type="text" name="DisplayName" msgName="节点名称" id="add_callurl_name" required/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">
+                                Url
+                            </label>
+                            <div class="controls">
+                                <input type="text" name="Url" msgName="Url地址" msg="请输入正确的url地址" required/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">
+                                MD5加密值
+                            </label>
+                            <div class="controls">
+                                <input type="text" name="MD5"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">
+                                提示语音
+                            </label>
+                            <div class="controls ds_ivr_sound_select" sound-select-name="Filename">
+                                <select name="Filename">
+                                    <option value="">--请选择--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">
+                                超时时间
+                            </label>
+                            <div class="controls">
+                                <div class="input-append">
+                                    <input class="input-medium" type="text" name="Timeout" msgName="超时时间" min="0"
+                                           msg="超时时间应为大于0的数字" dataType="Number,Range" required/>
+                                    <span class="add-on" style="height: 14px;line-height: 14px">秒</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">
+                                返回结果赋值变量
+                            </label>
+                            <div class="controls ds_ivr_var_select" var-select-name="Variable">
+                                <select name="Data">
+                                    <option value="">--请选择--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">
+                                成功转向
+                            </label>
+                            <div class="controls">
+                                <div id="nextPeerType" class="ds_ivr_to_peer_type" tag-name="NextPeerType" tag-value-key="NextPeerType">
+
+                                </div>
+                                <div id="nextPeer" class="ds_ivr_to_peer" tag-value-key="NextPeer">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">
+                                超时转向
+                            </label>
+                            <div class="controls">
+                                <div id="toPeerTypeWhenTimeout" class="ds_ivr_to_peer_type" tag-name="ToPeerTypeWhenTimeout" tag-value-key="ToPeerTypeWhenTimeout">
+
+                                </div>
+                                <div id="toPeerWhenTimeout" class="ds_ivr_to_peer" tag-value-key="ToPeerWhenTimeout">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ds_item_edit_param" NextPeerType="" NextPeer="" ToPeerTypeWhenTimeout="" ToPeerWhenTimeout="" Filename="" Variable=""
+                                   style="display:none"></div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="well" style="padding: 0 19px;">
+    <h2>_#_id#_<small>月最低消费:<span class="text-primary minConsume">_@formatTrueFee(_#minConsume#_)@_</span>元
+    </small></h2>
+    <p class="text-muted">请您在8小时内完成支付，避免被他人抢注，还剩<strong class="text-danger lock_timer"></strong></p>
+</div>
+
+<form class="form-horizontal" id="frm_serviceno_detail">
+    <input type="hidden" name="_id" value="_#_id#_">
+    <input type="hidden" name="minConsume" value="_#minConsume#_">
+    <input type="hidden" name="flag" value="buySn">
+    <input type="hidden" name="serviceFlag" value="400">
+
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            购买时长
+        </label>
+        <div class="col-md-5">
+            <input type="text" onkeyup="value=value.replace(/[^\d]/g,'')" name="month" value='1' class="form-control input-sm ds_spinner2 service_month" required/>个月
+            <label for="month" class="error" style="display: none;"></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            费用
+        </label>
+        <div class="col-md-5" style="line-height: 35px;">
+           <span class="fee">_#totalFee#_</span>元
+           <span class="text-muted">&nbsp;[月低销*购买时长=费用]</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="button" class="btn btn-primary ds_form_action" ds_action="account.showPay400">立刻购买</button>
+            <button style="" type="button" class="btn btn-default ds_do_action sn_reload"
+                    ds_action="account.reSelect400ServiceNo" ds_data="_#_id#_">重新选择</button>
+        </div>
+    </div>
+</form>
+<style type="text/css">
+</style>
+<script type="text/javascript">
+</script>

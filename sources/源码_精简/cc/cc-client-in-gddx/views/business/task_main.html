@@ -1,0 +1,421 @@
+<link rel="stylesheet" type="text/css" href="./stylesheets/erp.css?1101">
+<div class="left_column  list_check_pane"  id="contact_list_business" ds_menu="_#menu#_" >
+<div class='contacts_caption'>
+<div class="cancel_edit" style="">
+    <div class="list_check_all" style="cursor: pointer;" >
+        <b class="ico_select_checkbox ico ico_wrap" style="top:10px;left:5px;"></b>
+    </div>
+    <div style="display: inline-block;margin-left: 30px;font-weight: bold;">
+        已选
+                <span class="bottom_toolbar_selsize_num">
+                    0
+                </span>
+        项
+    </div>
+    <span class="pull-right">
+        <a href="#" class="ds_do_action" ds_action="cancelDealToolbar" ds_data="business">取消</a>
+    </span>
+</div>
+<div class="caption-top clearfix">
+    <div class="search_condition" style="display:none;"></div>
+    <div class="model_submenu" style="padding-bottom: 5px;">
+        <div class="btn-group">
+            <button class="btn ds_do_action btn_my_role active" style="width: 101px" ds_action="business.quick_subMenu_search" ds_data="my_role_task_uncomplete">待领取 <span class="badge badge-important"></span></button>
+            <button class="btn ds_do_action btn_my_todo" style="width: 101px" ds_action="business.quick_subMenu_search" ds_data="my_task_uncomplete">我的工单 <span class="badge badge-important"></span></button>
+            <button class="btn ds_do_action btn_all" style="width: 100px" ds_action="business.quick_subMenu_search" ds_data="business">全部工单</button>
+        </div>
+        <span style="display:none" id="reflush_business_button" class="ds_do_action refresh_num" ds_action="business.refreshUndealNum" title="刷新待处理工单数量">
+        </span>
+        <span style="margin-left:8px;cursor: pointer;" class="ds_do_action" ds_data="business_list_advanced_form" ds_action="clickOtherBtn" title="刷新">
+            <i class="icon-refresh"></i>
+        </span>
+    </div>
+    <div class="header_wrap clearfix">
+        <form id="business_list_query_form" class="business_list_query_form" >
+            <input name="submenu" type="hidden"  value="my_role_task_uncomplete" />
+            <input name="flow" type="hidden"  value="" />
+            <input name="submenu2" type="hidden"  value="" />
+            <!--<input name="step" type="hidden"  value="" />-->
+            <span class="refresh ds_form_action" style="display: none;" ds_action="business.queryBusinessList"></span>
+            <div class="header_search_wrap pull-left quick_search" style="">
+                <div class="header_search_button ds_form_action bus_normal_search normal_search" ds_action="business.queryBusinessList" ds_data="_#menu#_">
+                    <i class="icon-search"></i>
+                </div>
+                <div class="header_search_input">
+                    <div class="header_search_input_textbox">
+                       <!-- <div class="dropdown quick_wrap_menu" >
+                            <div class="dropdown-toggle quick_card left" data-toggle="dropdown">
+                                <span class="quick_desc ellipsis" style="">全部</span>
+                                <span class="caret"></span>
+                            </div>
+                            <ul class="dropdown-menu quick_menu left" style="min-width: 90px;">
+                                <li><a href="#" class="ds_do_action quick_card_active" ds_action="business.quick_subMenu_search" ds_data="business">全部</a></li>
+                                <li><a href="#" class="ds_do_action" ds_action="business.quick_subMenu_search" ds_data="my_task_uncomplete">我的待办</a></li>
+                                <li><a href="#" class="ds_do_action" ds_action="business.quick_subMenu_search" ds_data="my_role_task_uncomplete">待领取</a></li>
+                                <li><a href="#" class="ds_do_action" ds_action="business.quick_subMenu_search" ds_data="my_task_created">我创建</a></li>
+                            </ul>
+                        </div>-->
+                        <div class="dropdown quick_wrap_bus">
+                            <div class="dropdown-toggle quick_card quick_card_sty" data-toggle="dropdown">
+                                <span class="quick_desc ellipsis task_main_resetText" style="">全部</span>
+                                <span class="caret"></span>
+                            </div>
+                            <ul class="dropdown-menu quick_menu right" style="min-width: 90px;">
+                            </ul>
+                            <div class="textbox_wrap textbox_wrap_sty">
+                                <div class="textbox_inner">
+                                    <input type="text" name="query" class="textbox_input inpt_sty" maxlength="254" placeholder="输入客户名称查询">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="text_link header_search_advanced task_list_search_dorpdown">
+                    高级搜索
+                </div>
+            </div>
+        </form>
+        <div class="header_func_plus pull-right">
+            <ul class="nav nav-pills" style="margin-bottom:0;">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="padding: 5px 11px;">
+                            <span class="nav_title">
+                                <b class="ico ico_middle ico_func_plus">
+                                </b>
+                            </span>
+                    </a>
+
+                    <ul class="dropdown-menu menu_list pull-right">
+                        <li><a href="#" class="ds_do_action" ds_action="showDealToolbar" ds_data="business">编辑</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!--<div class="header_func_plus pull-right"><i class="icon-plus"></i></div>-->
+    </div>
+
+<!--    <div class="header_quick_search" style="width: 100%;">
+        <div class="bus_submenu">
+            <ul class="nav nav-pills quick_row">
+                <li class="active"><a href="#" class="ds_do_action " ds_action="business.quick_subMenu_search" ds_data="business">全部</a></li>
+                <li><a href="#" class="ds_do_action" ds_action="business.quick_subMenu_search" ds_data="my_task_uncomplete">我的待办</a></li>
+                <li><a href="#" class="ds_do_action" ds_action="business.quick_subMenu_search" ds_data="my_role_task_uncomplete">待领取</a></li>
+                <li><a href="#" class="ds_do_action" ds_action="business.quick_subMenu_search" ds_data="my_task_created">我创建</a></li>
+            </ul>
+        </div>
+        <div class="bus_flows">
+            <div class="more_search more_search_prev" style="">
+                <div class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><<&nbsp;&nbsp;</a>
+                    <ul class="dropdown-menu pull-left" role="menu"  aria-labelledby="dLabel">
+                    </ul>
+                </div>
+            </div>
+            <ul class="nav nav-pills quick_row">
+            </ul>
+            <div class="more_search more_search_next" style="">
+                <div class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">&nbsp;&nbsp;>></a>
+                    <ul class="dropdown-menu pull-right" role="menu"  aria-labelledby="dLabel">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="bus_steps" style="display: none;">
+            <div class="more_search more_search_prev" style="">
+                <div class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><<&nbsp;&nbsp;</a>
+                    <ul class="dropdown-menu pull-left" role="menu"  aria-labelledby="dLabel">
+                    </ul>
+                </div>
+            </div>
+            <ul class="inline quick_row">
+            </ul>
+            <div class="more_search more_search_next" style="">
+                <div class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">&nbsp;&nbsp;>></a>
+                    <ul class="dropdown-menu pull-right" role="menu"  aria-labelledby="dLabel">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>-->
+
+    <div class="ds_search_filter" style="display: none;">
+    </div>
+</div>
+
+</div>
+<div tabindex="-1" id="task_list_search_query_#menu#_" class="advanced_search_pane hidden" >
+    <div class="advanced_body">
+        <form id="business_list_advanced_form" class="ds_search_form">
+            <input type="hidden" name="isAdvanceSearch" value="1">
+            <input type="hidden" name="submenu" value="my_role_task_uncomplete">
+            <fieldset>
+                <div class="row-fluid first_row">
+                    <!--<div class="span4 advanced_search_item ds_search_item ds_submenu2" style="display: none;">-->
+                        <!--<label>快捷条件</label>-->
+                        <!--<select class="business_submenu2" name="submenu2">-->
+                            <!--<option value="" selected>&#45;&#45;请选择&#45;&#45;</option>-->
+                        <!--</select>-->
+                    <!--</div>-->
+                    <div class="span4 advanced_search_item ds_search_item ds_owner condition_hide ds_owner_create" > <!--ds_owner_create用来隐藏创建人-->
+                        <label>创建人</label>
+                        <input name="ownercomCreateUser" type="hidden" class="select_input" id="_#menu#__createUser_owner_select_input_com" />
+                        <input name="createUser" type="hidden" class="select_input" id="_#menu#__createUser_owner_select_input" />
+                        <input name="ownerdepCreateUser" type="hidden" class="select_input" id="_#menu#__createUser_owner_select_input_dep" />
+                        <!--<div id="_#menu#__owner_select_user" class="combobox_agent"></div>-->
+                        <div id="_#menu#__createUser_owner_select_user" class="comtabbox_agent"></div>
+                    </div>
+                    <div class="span4 advanced_search_item ds_search_item">
+                        <label>客户名称</label>
+                        <input type="text" name="query" class="query_field"/>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4 advanced_search_item ds_search_item">
+                        <label>工单类型</label>
+                        <select class="business_type" name="flow">
+                            <option value="" selected>--请选择--</option>
+                        </select>
+                    </div>
+                     <div class="span4 advanced_search_item ds_search_item ds_owner condition_hide ds_owner_master">
+                        <label>当前处理人</label>
+                        <input name="ownercom" type="hidden" class="select_input" id="_#menu#__master_owner_select_input_com" />
+                        <input name="master" type="hidden" class="select_input" id="_#menu#__master_owner_select_input" />
+                        <input name="ownerdep" type="hidden" class="select_input" id="_#menu#__master_owner_select_input_dep" />
+                        <!--<div id="_#menu#__owner_select_user" class="combobox_agent"></div>-->
+                        <div id="_#menu#__master_owner_select_user" class="comtabbox_agent"></div>
+                    </div>
+                    <div class="span4 advanced_search_item ds_search_item">
+                        <label>工单步骤</label>
+                        <select class="business_status" name="step">
+                            <option value="" selected>--请选择--</option>
+                        </select>
+                    </div>
+                    
+                </div>
+                <div class="row-fluid">
+                    <div class="span4 advanced_search_item ds_search_item">
+                        <label>工单编号</label>
+                        <input type="text" name="number" class="query_field"/>
+                    </div>
+                    <div class="span8 advanced_search_item ds_search_item">
+                        <label>创建时间</label>
+                        <input type="text" name="createTime$begin" class="query_field ds_datetime"/>
+                        <label style="width: 16px">至</label>
+                        <input type="text" name="createTime$end" class="query_field ds_datetime"/>
+                    </div>
+                </div>
+                <div class="business_fields">
+                </div>
+                <div style="padding: 10px;">
+                    <button type="button" class="btn btn-small btn-primary ds_form_action pull-right btn_advanced" ds_action="business.queryHighBusiness" >搜索</button>
+                    <button type="button" class="btn btn-small  ds_do_action  pull-right" ds_action="business.resetQueryHighBusiness" ds_data="resetQueryHighBusiness" style="margin-right: 10px;">重置</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<div class="list_container">
+    <div class="list-inside" id="talk_list_item_pane_#menu#_">
+    </div>
+    <div class="list-footer">
+        <div class="pagination pagination-small">
+            <span style="float:left;">查询结果：<span class="result_count">0</span></span>
+            <ul class="" style="float:right;padding-right: 6px;">
+                <li>
+                    <a href="#" ds_action="business.queryBusinessListByPage"
+                       value="0">&laquo;</a>
+                </li>
+                <li>
+                    <a href="#" ds_action="business.queryBusinessListByPage" value="1">1</a>
+                </li>
+                <li>
+                    <a href="#" ds_action="business.queryBusinessListByPage" value="2">2</a>
+                </li>
+                <li>
+                    <a href="#" ds_action="business.queryBusinessListByPage" value="3">3</a>
+                </li>
+                <li>
+                    <a href="#" ds_action="business.queryBusinessListByPage" value="4">4</a>
+                </li>
+                <li>
+                    <a href="#" ds_action="business.queryBusinessListByPage" value="5">5</a>
+                </li>
+                <li>
+                    <a href="#" ds_action="business.queryBusinessListByPage"
+                       value="6">&raquo;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="right_column">
+    <div class="contact_detail" style="padding: 0;">
+        <div  class="content">
+            <div class='call_detail business_detail_div__#menu#_' id="_#menu#__business">
+                <div class="customer_container clearfix">
+                </div>
+                <div class="cust_tab_content" style="padding: 18px;overflow: auto;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="tmpl_business_item" type="text/html">
+
+</script>
+
+<script type="text/javascript">
+    
+    $(function () {
+        $('#business_list_advanced_form').on('change', "select[name='flow'], select[name='submenu2']", function(event){
+            event.preventDefault();
+            var src = $(event.currentTarget);
+            var countSelect = 0; 
+            $('#contact_list_business').find("select[name='flow']").length?countSelect++:countSelect;
+            $('#contact_list_business').find("select[name='submenu2']").length?countSelect++:countSelect;
+            if(countSelect>1)src=$("#contact_list_business select[name='submenu2']");
+
+            var optionSelected = src.find("option:selected");
+            var statusDisplay = optionSelected.text();
+            var pane = src.closest('.list_check_pane').find(".task_main_resetText");
+            optionSelected.val()?pane.html(statusDisplay):pane.html("全部");
+        });
+        var flows = getCache("businessFlow");
+        handler.business.flows=[{n:"全部",v:""}];
+        for (var i = 0; i < flows.length; i++) {
+            handler.business.flows.push({n:flows[i].name,v:flows[i]._id});
+        }
+        var searchPane=$("#contact_list_business");
+        initQuickMenu(searchPane, handler.business.flows,"business",".quick_wrap_bus");
+//        initQuickSearch(searchPane, handler.business.flows,"business",".bus_flows");
+        resizeLeftColumn(searchPane);
+        var menu = "_#menu#_";
+        var container = $("#task_list_search_query"+menu);
+
+        searchPane.find(".task_list_search_dorpdown").bind("click", function (e) {
+            e.stopPropagation();
+            var offset=$(this).closest(".quick_search").offset();
+            container.css({top:offset.top+28+"px",left:offset.left+"px"});
+            container.toggleClass("hidden");
+        });
+
+        var temp = "<option value='_id'>_name</option>";
+        var html = "";
+        for (var i = 0; i < flows.length; i++) {
+            var flowsItem = flows[i];
+            // if (handler.business.hasAccessForFlow(flowsItem)) {
+            html += temp.replace(/_id/g, flows[i]._id).replace(/_name/g, flows[i].name);
+            // }
+        }
+        var typeSelect = container.find(".business_type");
+        var statusSelect = container.find(".business_status");
+        var fieldsPane = container.find(".business_fields");
+        var masterSelect = container.find(".business_master");
+        var waitformessage = container.find(".business_is_waitingfor");
+        var createUserSelect = container.find(".business_createUser");
+        typeSelect.append(html);
+
+        var agents = getCache("agents") || [];
+        for (var i = 0; i < agents.length; i++) {
+            var agentsItem = agents[i];
+            masterSelect.append(temp.replace(/_id/g, agentsItem._id).replace(/_name/g, agentsItem.displayName));
+            createUserSelect.append(temp.replace(/_id/g, agentsItem._id).replace(/_name/g, agentsItem.displayName));
+        }
+        if(container.find(".ds_owner").length>0){
+                    var inputIdCreateUser=menu+"_createUser_owner_select_input";
+                    var containerIdCreateUser=menu+"_createUser_owner_select_user";
+                     utils.loadAgentTabBox(inputIdCreateUser,containerIdCreateUser,{width:"126",height:"17",maxHeight:292,hideTab:0,isRadio:true,commonTab:true},false,false,false);
+                     var inputIdMaster=menu+"_master_owner_select_input";
+                    var containerIdMaster=menu+"_master_owner_select_user";
+                     utils.loadAgentTabBox(inputIdMaster,containerIdMaster,{width:"126",height:"17",maxHeight:292,hideTab:0,isRadio:true,commonTab:true},false,false,false);
+                }
+//        var menu = session.currentPage.pageId;
+
+
+/*        $(".business_list_query_form").keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                handler.business.queryBusinessList("", $(this));
+            }
+        });*/
+        
+
+        $(typeSelect).bind('change', function () {
+            waitformessage.val("");
+            fieldsPane.empty();
+            var flowId = $(this).val();
+            var flow = getCache("businessFlow", flowId);
+            var steps = flow.steps || [];
+            statusSelect.empty();
+            statusSelect.append("<option value=''>--请选择--</option>");
+            for (var i = 0; i < steps.length; i++) {
+                var stepsItem = steps[i];
+                statusSelect.append(temp.replace(/_id/g, stepsItem._id).replace(/_name/g, stepsItem.name));
+            }
+            if (flowId) {
+                var startStep = handler.business.getStartStep(flow);
+                handler.business.createFlowStepCustomFields(flowId, startStep._id, fieldsPane, {});
+                handler.business.addBusienssSelectCascade();
+                fieldsPane.find(":input").removeAttr("required");
+                fieldsPane.find(":text").val("");
+                fieldsPane.find("select").val("");
+                fieldsPane.find("textarea").val("");
+                fieldsPane.find(":input").removeAttr("checked");
+                fieldsPane.find(".bus_attach").remove();
+            }
+        });
+
+    });
+</script>
+
+
+<style type="text/css">
+    .task_query_close {
+        display: none;
+    }
+
+    .task_high_query_form .formQue label {
+        width: 75px;
+        text-align: right;
+    }
+
+    .task_high_query_form input[type='text'], select {
+        width: 120px;
+    }
+
+    div.formQue {
+        margin-top: 5px;
+        width: 220px;
+        float: none;
+    }
+
+    .formQue label {
+        display: inline-block;
+
+    }
+
+    .task_list_search_query {
+        margin-top: -1px;
+        border: 1px rgb(189, 188, 188) solid;
+        position: absolute;
+        width: 700px;
+        top: 75px;
+        left: 190px;
+        background-color: #ffffff;
+        padding: 0px;
+        z-index: 100;
+    }
+
+    ul.inline > li a.active{
+        color: #f89406;
+    }
+</style>
+

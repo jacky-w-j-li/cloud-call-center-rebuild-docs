@@ -1,0 +1,35 @@
+<link rel="stylesheet" type="text/css" href="./stylesheets/customer.css?1101">
+<div class="left_column">
+    <!--<div class="list_nav" >-->
+        <!--<ul class="nav nav-pills">-->
+            <!--<li class="dropdown">-->
+                <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">-->
+                    <!--<span class="nav_title">我的客户</span>-->
+                    <!--<span class="caret"></span>-->
+                <!--</a>-->
+                <!--<ul class="dropdown-menu menu_list">-->
+                <!--</ul>-->
+            <!--</li>-->
+        <!--</ul>-->
+    <!--</div>-->
+    <div class="model_submenu" style="padding: 5px;">
+        <div class="btn-group">
+            <button class="btn ds_do_action btn_customer_my active" style="width: 114px" ds_action="customer.quick_subMenu_search" ds_data="customer_my">我的客户</button>
+            <!--<button class="btn ds_do_action btn_customer_plan " style="width: 101px" ds_action="customer.quick_subMenu_search" ds_data="customer_plan">联系计划</button>-->
+            <button class="btn ds_do_action btn_customer_seas" style="width: 114px" ds_action="customer.quick_subMenu_search" ds_data="customer_seas">公海</button>
+            <button class="btn ds_do_action btn_customer_all" style="width: 114px" ds_action="customer.quick_subMenu_search" ds_data="customer_all">全部</button>
+        </div>
+    </div>
+    <div class="list_card">
+        <div id="view_customer_list" class="card_pane"></div>
+        <!--<div id="view_customer_import" class="card_pane"></div>-->
+    </div>
+</div>
+<div class="right_column">
+    <div class="contact_detail merge_preview" style="padding: 0;">
+        <div  class="content">
+            <div id="view_customer_list_content" class="content_pane"></div>
+            <!--<div id="view_customer_import_content" class="content_pane"></div>-->
+        </div>
+    </div>
+</div>

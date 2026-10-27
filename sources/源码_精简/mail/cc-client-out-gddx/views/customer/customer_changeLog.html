@@ -1,0 +1,89 @@
+<div class="">
+    <div class="row-fluid">
+        <div class="span12">
+            <div name="option_header" id="import_list_customer_changeLog"  ds_menu="customer_import" ds_index="1" class="row-fluid cus_history_option_header">
+                <div class="span4">
+                    <div class="caption-top clearfix">
+                        <span class="pull-left refresh ds_do_action" ds_action="customer.queryChangeLog" ds_data="_#custId#_" ds_attr="1">
+                            <a href="#" class="ajaxed">刷新</a>
+                        </span>
+                    </div>
+                </div>
+                <div class="span8" >
+                    <form id="frm_cust_log_quick_search">
+                        <input type="hidden" name="cid" value="_#custId#_"/>
+                        <input type="hidden" name="user" value=""/>
+                        <input type="hidden" name="type" value=""/>
+                        <div class="row-fluid" >
+                            <div style="float:right;">
+                                <div style="float:left;margin-top: 5px;margin-right: 3px;color: #9d9a93;">筛选: </div>
+                                <div class="btn-group">
+                                    <button class="btn btn-mini btn-user" onclick="return false;"><span style="color: #9D9A93">--操作人--</span></button>
+                                    <button class="btn dropdown-toggle" data-toggle="dropdown" >
+                                        <span class="caret" ></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right dropdown-user" style="max-height:400px;overflow-y:auto;">
+                                    </ul>
+                                </div>
+                                <div class="btn-group">
+                                    <button class="btn btn-mini btn-type" onclick="return false;"><span style="color: #9D9A93">--类型--</span></button>
+                                    <button class="btn dropdown-toggle" data-toggle="dropdown" >
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonChangeLog" ds_data="type" ds_attr="add">增加客户</a></li>
+                                        <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonChangeLog" ds_data="type" ds_attr="import">导入客户</a></li>
+                                        <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonChangeLog" ds_data="type" ds_attr="update">更改客户</a></li>
+                                        <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonChangeLog" ds_data="type" ds_attr="updateStatus">修改状态</a></li>
+                                        <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonChangeLog" ds_data="type" ds_attr="updateOwner">修改归属</a></li>
+                                        <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonChangeLog" ds_data="type" ds_attr="updateSource">修改来源</a></li>
+                                        <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonChangeLog" ds_data="type" ds_attr="assign">分配客户</a></li>
+                                        <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonChangeLog" ds_data="type" ds_attr="batchUpdateStatus">批量修改状态</a></li>
+                                        <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonChangeLog" ds_data="type" ds_attr="claim">领取</a></li>
+                                        <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonChangeLog" ds_data="type" ds_attr="autoAssignPool">自动分配</a></li>
+                                        <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonChangeLog" ds_data="type" ds_attr="recyclePool">自动回收</a></li>
+                                        <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonChangeLog" ds_data="type" ds_attr="changePool">转移客户</a></li>
+                                        <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonChangeLog" ds_data="type" ds_attr="updateSysStatus">变更跟进状态</a></li>
+                                        <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonChangeLog" ds_data="type" ds_attr="mergeCust">合并客户</a></li>
+                                        <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonChangeLog" ds_data="type" ds_attr="">全部</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="history_list">
+            </div>
+        </div>
+        <div style="margin-right: 8px;text-align:center" class="cust_operater_more">
+            <button class="img_action_more ds_do_action ds_more" ds_action="customer.queryChangeLog" ds_data="_#custId#_" href="#" ds_attr="2" style="display: none;">点击查看更多</button>
+        </div>
+    </div>
+
+</div>
+
+<!--<dd><span class="ch_state">客户状态</span>由<span class="ch_before">客户意向</span> 改为<span class="ch_after">正式客户</span></dd>-->
+
+<script id="tmpl_cust_changeLog_item" type="text/html">
+    <dl class="history_item">
+        <dt>
+            <span>{{=agentName}}</span>于{{=timeDesc}} {{=operaterType}}
+        </dt>
+        {{ if(content){ }}
+        {{
+            var i = content.indexOf('|');
+            if(i>0){
+            var contentList = content.split("|");
+                for(var i=0;i<contentList.length-1;i++){
+        }}
+        <dd><span class="ch_state">{{=contentList[i]}}</span></dd>
+        {{
+         }
+         }else{
+        }}
+        <dd><span class="ch_state">{{=content}}</span></dd>
+        {{ } }}
+        {{ } }}
+    </dl>
+</script>

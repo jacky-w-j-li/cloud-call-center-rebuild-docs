@@ -1,0 +1,282 @@
+<h3 id="accountNameLabel">
+</h3>
+<!-- <div class='account_line' ></div><br/> -->
+<div class="row-fluid">
+    <div class="span12">
+        <div class="tabbable">
+            <ul class="nav nav-tabs">
+                <li class="active" style="display: none" id="ivr_tab_pbxInfo">
+                    <a id="pbxInfoLink" href="#pbxInfoPanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                        <ds-get-view view="config/callConfig/pbx/account_pbx_edit" panel="pbxInfoPanel"
+                                     on-complete="config.callConfig.pbx.accountPbxEdit"/>
+                        PBX信息
+                    </a>
+                </li>
+                <li>
+                    <a id="ivrServiceNoLink" href="#ivrServiceNoPanel" data-toggle="tab" class="ds_action_flow">
+                        <!--<ds-do-action action="config.ivr.serviceNo.queryServiceNo" extra-data="config.callConfig.currentConfigData"
+                                        update-client-data='{"method":"config.callConfig.updateClientDataList","arg":{"type":"ivr_service_no"}}'/>-->
+                        <ds-get-view view="config/callConfig/serviceNO/service_no_list" panel="ivrServiceNoPanel"/>
+                        服务号管理
+                    </a>
+                </li>
+                <li class="">
+                    <a id="ivrScheduleLink" href="#ivrSchedulePanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                        <ds-get-view view="config/callConfig/schedule/schedule_list" panel="ivrSchedulePanel"
+                                on-complete="config.callConfig.schedule.renderDetail"/>
+                        日程管理
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#ivrProcessListPanel" data-toggle="tab"
+                       class="ds_do_action" ds_action="config.ivrProcess.queryIvrProcessList">流程管理</a>
+                </li>
+                <li class="" style="display: none" id="ivr_tab_agent">
+                    <a id="ivrAgentLink" href="#ivrAgentPanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                        <ds-get-view view="config/callConfig/agent/agent_list" panel="ivrAgentPanel"/>
+                        座席管理
+                    </a>
+                </li>
+                <li class="">
+                    <a id="ivrQueueLink" href="#ivrQueuePanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                        <ds-get-view view="config/callConfig/queue/queue_list" panel="ivrQueuePanel"/>
+                        技能组管理
+                    </a>
+                </li>
+                <li class="dropdown" style="position:relative;">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">节点管理<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a id="ivrAnnouncementNodeLink" href="#ivrAnnouncementNodePanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                                <!--
+                                <ds-do-action action="config.ivr.node.announcement.queryAnnouncement" extra-data="config.callConfig.currentConfigData"
+                                              update-client-data='{"method":"config.callConfig.updateClientDataList","arg":{"type":"ivr_node_announcement"}}'/>-->
+                                <ds-get-view view="config/callConfig/node/announcement/announcement_list" panel="ivrAnnouncementNodePanel"/>
+                                播放语音节点
+                            </a>
+                        </li>
+                        <li>
+                            <a id="ivrTextAnnouncementNodeLink" href="#ivrTextAnnouncementNodePanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                                <ds-get-view view="config/callConfig/node/textAnnouncement/text_announcement_list" panel="ivrTextAnnouncementNodePanel"/>
+                                播放文本节点
+                            </a>
+                        </li>
+                        <li>
+                            <a id="ivrIvrNodeLink" href="#ivrIvrNodePanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                                <ds-get-view view="config/callConfig/node/ivr/ivr_list" panel="ivrIvrNodePanel"
+                                    on-complete="config.callConfig.node.ivr.listLoaded"/>
+                                按键菜单节点
+                            </a>
+                        </li>
+                        <li>
+                            <a id="ivrValidationNodeLink" href="#ivrValidationNodePanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                                <ds-get-view view="config/callConfig/node/validation/validation_list" panel="ivrValidationNodePanel"
+                                             on-complete="config.callConfig.node.ivr.listLoaded"/>
+                                采集输入节点
+                            </a>
+                        </li>
+                        <li>
+                            <a id="ivrAssignmentNodeLink" href="#ivrAssignmentNodePanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                                <ds-get-view view="config/callConfig/node/assignment/assignment_list" panel="ivrAssignmentNodePanel"
+                                             on-complete="config.callConfig.node.ivr.listLoaded"/>
+                                赋值节点
+                            </a>
+                        </li>
+                        <li>
+                            <a id="encryptMd5NodeLink" href="#encryptMd5NodePanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                                <ds-get-view view="config/callConfig/node/encryptMd5/encrypt_md5_list" panel="encryptMd5NodePanel"
+                                             on-complete="config.callConfig.node.ivr.listLoaded"/>
+                                MD5加密节点
+                            </a>
+                        </li>
+                        <li>
+                            <a id="ivrRouteNodeLink" href="#ivrRouteNodePanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                                <ds-get-view view="config/callConfig/node/route/route_list" panel="ivrRouteNodePanel"
+                                             on-complete="config.callConfig.node.ivr.listLoaded"/>
+                                按变量路由节点
+                            </a>
+                        </li>
+                        <li>
+                            <a id="ivrCallUrlNodeLink" href="#ivrCallUrlNodePanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                                <ds-get-view view="config/callConfig/node/callUrl/call_url_list" panel="ivrCallUrlNodePanel"
+                                             on-complete="config.callConfig.node.ivr.listLoaded"/>
+                                CallUrl节点
+                            </a>
+                        </li>
+                        <li>
+                            <a id="ivrVoiceMailNodeLink" href="#ivrVoiceMailNodePanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                                <ds-get-view view="config/callConfig/node/voiceMail/voice_mail_list" panel="ivrVoiceMailNodePanel"
+                                             on-complete="config.callConfig.node.ivr.listLoaded"/>
+                                留言节点
+                            </a>
+                        </li>
+                        <li>
+                            <a id="ivrRoomNodeLink" href="#ivrRoomNodePanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                                <ds-get-view view="config/callConfig/node/room/room_list" panel="ivrRoomNodePanel"
+                                             on-complete="config.callConfig.node.ivr.listLoaded"/>
+                                会议室节点
+                            </a>
+                        </li>
+                        <li>
+                            <a id="ivrSatisfactionNodeLink" href="#ivrSatisfactionNodePanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                                <ds-get-view view="config/callConfig/node/satisfaction/satisfaction_list" panel="ivrSatisfactionNodePanel"
+                                             on-complete="config.callConfig.node.ivr.listLoaded"/>
+                                自定义满意度节点
+                            </a>
+                        </li>
+                        <li>
+                            <a id="ivrExtensionPeerNodeLink" href="#ivrExtensionPeerNodePanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                                <ds-get-view view="config/callConfig/node/extensionPeer/extension_peer_list" panel="ivrExtensionPeerNodePanel"
+                                             on-complete="config.callConfig.node.ivr.listLoaded"/>
+                                自定义节点
+                            </a>
+                        </li>
+                        <li>
+                            <a id="ivrSuperDialJobNumNodeLink" href="#ivrSuperDialJobNumNodePanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                                <ds-get-view view="config/callConfig/node/superDialJobNum/superDialJobNum_list" panel="ivrSuperDialJobNumNodePanel"
+                                             on-complete="config.callConfig.node.ivr.listLoaded"/>
+                                采集工号并拨打节点
+                            </a>
+                        </li>
+                        <li>
+                            <a id="ivrMenuNodeLink" href="#ivrMenuNodePanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                                <ds-get-view view="config/callConfig/node/ivrMenu/ivr_menu_list" panel="ivrMenuNodePanel"
+                                             on-complete="config.callConfig.node.ivr.listLoaded"/>
+                                转IVR菜单节点
+                            </a>
+                        </li>
+                        <li>
+                            <a id="ivrSystemNodeLink" href="#ivrSystemNodePanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                                <ds-get-view view="config/callConfig/node/system/system_list" panel="ivrSystemNodePanel"
+                                             on-complete="config.callConfig.node.ivr.listLoaded"/>
+                                系统节点
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="">
+                    <a id="ivrSoundLink" href="#ivrSoundPanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                        <ds-get-view view="config/callConfig/sound/sound_list" panel="ivrSoundPanel"/>
+                        语音库
+                    </a>
+                </li>
+                <li style="display: none" id="ivr_tab_var">
+                    <a id="ivrVarLink" href="#ivrVarPanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                        <ds-get-view view="config/callConfig/var/var_list" panel="ivrVarPanel"/>
+                        变量管理
+                    </a>
+                </li>
+                <li style="display: none" id="ivr_tab_sip">
+                    <a id="ivrSipLink" href="#ivrSipPanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                        <ds-get-view view="config/callConfig/sip/sip_list" panel="ivrSipPanel"/>
+                        SIP号管理
+                    </a>
+                </li>
+                <li class="">
+                    <a id="ivrBlackListLink" href="#ivrBlackListPanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                        <ds-get-view view="config/callConfig/blackList/ivr_list_black" panel="ivrBlackListPanel"/>
+                        黑红名单
+                    </a>
+                </li>
+                <li style="display: none" id="ivr_tab_phonebar">
+                    <a id="ivrPhoneBarLink" href="#ivrPhoneBarPanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                        <ds-get-view view="config/callConfig/phoneBar/ivr_phonebar_config" panel="ivrPhoneBarPanel"
+                                on-complete="config.callConfig.phoneBar.showPhoneBarConfig"/>
+                        电话条配置
+                    </a>
+                    <!--<a href="#" class="do_action" appaction="ivr.showPhoneBarConfig" data-toggle="tab"></a>-->
+                </li>
+                <li style="display: none" id="ivr_tab_dialLine">
+                    <a id="ivrLineLink" href="#ivrLinePanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                        <ds-get-view view="config/callConfig/line/line_list" panel="ivrLinePanel"/>
+                        外呼线路配置
+                    </a>
+                </li>
+                <li style="display: none" id="ivr_tab_tools">
+                    <a id="ivrTools" href="#ivrToolsPanel" data-toggle="tab" class="ds_action_flow" refresh-data="true">
+                        <ds-get-view view="config/callConfig/ivr_tools" panel="ivrToolsPanel" on-complete="config.callConfig.openIvrTools"/>
+                        IVR工具
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="pbxInfoPanel">
+                </div>
+                <div class="tab-pane" id="ivrServiceNoPanel">
+                </div>
+                <div class="tab-pane" id="ivrSchedulePanel">
+                </div>
+                <div class="tab-pane" id="ivrAgentPanel">
+                </div>
+                <div class="tab-pane" id="ivrQueuePanel">
+                </div>
+                <div class="tab-pane" id="ivrSoundPanel">
+                </div>
+                <div class="tab-pane" id="ivrVarPanel">
+                </div>
+                <div class="tab-pane" id="ivrLinePanel">
+                </div>
+                <div class="tab-pane" id="ivrNodePanel">
+                </div>
+                <div class="tab-pane" id="ivrAnnouncementNodePanel">
+                </div>
+                <div class="tab-pane" id="ivrSipPanel">
+                </div>
+                <div class="tab-pane" id="ivrIvrNodePanel">
+                </div>
+                <div class="tab-pane" id="ivrValidationNodePanel">
+                </div>
+                <div class="tab-pane" id="ivrAssignmentNodePanel">
+                </div>
+                <div class="tab-pane" id="ivrExtensionPeerNodePanel">
+                </div>
+                <div class="tab-pane" id="ivrSystemNodePanel">
+                </div>
+                <div class="tab-pane" id="ivrCallUrlNodePanel">
+                </div>
+                <div class="tab-pane" id="ivrTextAnnouncementNodePanel">
+                </div>
+                <div class="tab-pane" id="ivrMenuNodePanel">
+                </div>
+                <div class="tab-pane" id="encryptMd5NodePanel">
+                </div>
+                <div class="tab-pane" id="ivrRouteNodePanel">
+                </div>
+                <div class="tab-pane" id="ivrRoomNodePanel">
+                </div>
+                <div class="tab-pane" id="ivrVoiceMailNodePanel">
+                </div>
+                <div class="tab-pane" id="ivrSatisfactionNodePanel">
+                </div>
+                <div class="tab-pane" id="ivrBlackListPanel">
+                </div>
+                <div class="tab-pane" id="ivrPhoneBarPanel">
+                </div>
+                <div class="tab-pane" id="ivrSuperDialJobNumNodePanel">
+                </div>
+                <div class="tab-pane" id="ivrToolsPanel">
+                </div>
+                <div class="tab-pane" id="ivrProcessListPanel">
+                </div>
+                <div class="tab-pane" id="ivrProcessPanel">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ivrModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+<script type="text/javascript">
+    $(function(){
+        if(session.user.isAdmin){
+            $("#ivr_tab_pbxInfo").show();
+            $("#ivr_tab_agent").show();
+            $("#ivr_tab_var").show();
+            $("#ivr_tab_sip").show();
+            $("#ivr_tab_phonebar").show();
+            $("#ivr_tab_dialLine").show();
+        }else{
+            $("#ivr_tab_tools").remove();
+        }
+    })
+</script>

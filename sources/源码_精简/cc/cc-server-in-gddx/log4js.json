@@ -1,0 +1,29 @@
+{
+    "appenders": [
+        {
+            "type": "console"
+        },
+        {
+            "type": "file",
+            "filename": "/data/logs/cc-server-in/app_log.log",
+            "maxLogSize": 20480000,
+            "backups": 20,
+            "category": "app"
+        },
+        {
+            "type": "file",
+            "filename": "/data/logs/cc-server-in/request_log.log",
+            "maxLogSize": 20480000,
+            "backups": 20,
+            "category": "request"
+        },
+        {
+            "type": "file",
+            "filename": "/data/logs/cc-server-in/access_log.log",
+            "maxLogSize": 20480000,
+            "backups": 20,
+            "category": "access"
+        }
+    ],
+    "replaceConsole": true
+}

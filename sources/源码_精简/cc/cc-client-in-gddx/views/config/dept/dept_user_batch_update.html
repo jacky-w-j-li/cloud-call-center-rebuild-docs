@@ -1,0 +1,168 @@
+<div class="contact_summary">
+    <div class="row-fluid">
+        <div>
+            <div style="height: 25px;line-height: 25px;">您搜索到的座席共计<span class="cust_count">0</span>个</div>
+        </div>
+        <div>
+            <div class="user_batch_section">
+                <h5>批量修改所属部门：</h5>
+                <form class="form-horizontal" id="frm_user_batch_dept">
+                    <input name="flag" type="hidden" value="dept"/>
+                    <div class="control-group ds_owner">
+                        <label class="control-label">部门</label>
+                        <div class="controls">
+                            <select name="deptId" id="dept_batch_Select">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label"></label>
+                        <div class="controls" style="">
+                            <button type="button" class="btn btn-small btn-primary ds_form_action pull-left btn_pad" ds_action="config.dept.batchUpdateUser">保存</button>
+                            <button type="button" class="btn btn-small" data-dismiss="modal" aria-hidden="true">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="user_batch_section">
+                <h5>批量修改上级：</h5>
+                <form class="form-horizontal" id="frm_user_batch_parentId">
+                    <input name="flag" type="hidden" value="parentId"/>
+                    <div class="control-group ds_owner">
+                        <label class="control-label">上级</label>
+                        <div class="controls">
+                            <input name="parentId" type="hidden" class="select_input" id="config_dept_user_owner_batch_select_input"  />
+                            <div id="config_dept_user_owner_batch_select_user" class="combobox_agent"></div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label"></label>
+                        <div class="controls" style="">
+                            <button type="button" class="btn btn-small btn-primary ds_form_action pull-left btn_pad" ds_action="config.dept.batchUpdateUser">保存</button>
+                            <button type="button" class="btn btn-small" data-dismiss="modal" aria-hidden="true">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="user_batch_section">
+                <h5>批量修改角色：</h5>
+                <form class="form-horizontal" id="frm_dept_user_batch_role">
+                    <input name="flag" type="hidden" value="role"/>
+                    <div class="control-group">
+                        <label class="control-label">
+                            角色
+                        </label>
+                        <div class="controls">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <select name="roles" class="left_role" size="8"  multiple style="min-width: 100px;width: auto;">
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <div style="margin:0 10px;">
+                                            <p style="margin-bottom: 10px;">
+                                                <button type="button"  class="btn btn-default btn-sm left_middle">&gt;</button>
+                                            </p>
+                                            <p>
+                                                <button type="button"  class="btn btn-default btn-sm right_middle">&lt;</button>
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <select name="selectRoles" class="right_role" size="8" multiple style="min-width: 100px;width: auto;">
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label"></label>
+                        <div class="controls" style="">
+                            <button type="button" class="btn btn-small btn-primary ds_form_action pull-left btn_pad" ds_action="config.dept.batchUpdateUser">保存</button>
+                            <button type="button" class="btn btn-small" data-dismiss="modal" aria-hidden="true">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="user_batch_section">
+                <h5>批量修改接入会话数：</h5>
+                <form class="form-horizontal" id="frm_dept_user_batch_im">
+                    <input name="flag" type="hidden" value="imDealCount"/>
+                    <div class="control-group">
+                         <div class="control-group" id="agent_im_autoclaim">
+                            <label class="control-label">在线咨询自动领取</label>
+                            <div class="controls">
+                                <input type="radio" value="open" name="imClaimStatus" id="imClaimStatus_y" checked="checked" />
+                                <label for="imClaimStatus_y" style="margin-right: 20px">开启</label>
+
+                                <input type="radio" value="close" name="imClaimStatus" id="imClaimStatus_n" />
+                                <label for="imClaimStatus_n">关闭</label>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">座席最小能同时接待会话数</label>
+                            <div class="controls">
+                                <select name="minImDealCount" class="span2" id="minImDealCount"></select>
+                            </div>
+                        </div>
+                        <div class="control-group" id="agent_max_call">
+                            <label class="control-label">座席最大能同时接待会话数</label>
+                            <div class="controls">
+                                <select name="maxImDealCount" class="span2" id="maxImDealCount"></select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="maxEmailDealCount">座席最大能同时处理邮件数</label>
+                            <div class="controls">
+                                <input name="maxEmailDealCount" type="text" id="maxEmailDealCount" datatype="Number3" msg="请输入正整数" placeholder="默认值为10"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label"></label>
+                        <div class="controls" style="">
+                            <button type="button" class="btn btn-small btn-primary ds_form_action pull-left btn_pad" ds_action="config.dept.batchUpdateUser">保存</button>
+                            <button type="button" class="btn btn-small" data-dismiss="modal" aria-hidden="true">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+                    <div class="user_batch_section">
+                        <h5>批量修改座席登录方式：</h5>
+                        <form class="form-horizontal" id="frm_user_batch_loginWay">
+                            <input name="flag" type="hidden" value="loginWay"/>
+                            <div class="control-group ds_owner">
+                                <label class="control-label">允许座席登录方式</label>
+                                <div class="controls pt10" >
+                                    <div class="controls">
+                                      手机&nbsp<input type="checkbox" name="localLoginWay"  checked>&nbsp&nbsp&nbsp
+                                      sip话机&nbsp<input type="checkbox" name="gatewayLoginWay" style="margin-lift:60px" checked>&nbsp&nbsp&nbsp&nbsp
+                                     软电话&nbsp<input type="checkbox" name="sipLoginWay" checked>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label"></label>
+                                <div class="controls" >
+                                    <button type="button" class="btn btn-small btn-primary ds_form_action pull-left btn_pad" ds_action="config.dept.batchUpdateUser">保存</button>
+                                    <button type="button" class="btn btn-small" data-dismiss="modal" aria-hidden="true">取消</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    #dept_user_modal .form-horizontal .controls{
+        width: 400px;
+        margin-left: 50px;
+    }
+    #dept_user_modal .form-horizontal .control-label{
+        padding-right: 10px;
+    }
+</style>
+<link rel="stylesheet" href="../../../../stylesheets/bootstrap-multiselect.css" type="text/css">
+<script type="text/javascript" src="../../../../javascripts/bootstrap-multiselect.js"></script>

@@ -1,0 +1,169 @@
+<div class="row-fluid">
+    <div class="span12">
+        <form class="form-horizontal" action="">
+            <input type="hidden" name="_id">
+            <div class="row-fluid">
+                <div class="span7 offset1">
+                    <i class="icon-plus"></i>添加文本语音播放节点
+                </div>
+                <div class="span4 text-right pull-right">
+                    <a class="btn btn-info btn-blue ds_action_flow">
+                        <ds-form-action action="config.ivr.node.textAnnouncement.updateTextAnnouncement" extra-data="config.callConfig.currentConfigData"
+                            update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"ivr_node_text_announcement"}}'/>
+                        <ds-get-view view="config/callConfig/node/textAnnouncement/text_announcement_list" panel="ivrTextAnnouncementNodePanel"/>
+                        <ds-effect-ivr/>
+                        保存
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="row-fluid">
+                <div class="span5">
+                    <div class="ivr-report">
+                        <div class="control-group">
+                            <label class="control-label">
+                                节点名称
+                            </label>
+                            <div class="controls">
+                                <input type="text" name="DisplayName" required msgName="节点名称" id="add_text_announcement_name"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">
+                                TTS引擎
+                            </label>
+                            <div class="controls" style="width:130px;">
+                                <input type="radio" name="Engine" value="kdxf" checked
+                                       onchange="handler.config.callConfig.node.textAnnouncement.changeTtsEngine(this.value)">科大讯飞</radio>
+                                <input type="radio" name="Engine" value="default"
+                                       onchange="handler.config.callConfig.node.textAnnouncement.changeTtsEngine(this.value)">默认</radio>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">
+                                播报的文本
+                            </label>
+                            <div class="controls">
+                                <!--<input type="text" name="AnnouncementText" maxlength="50" required msgName="播报的文本" id="add_AnnouncementText"/>-->
+                                <textarea name="AnnouncementText" required msgName="播报的文本" style=";height: 60px;width: 300px" id="add_AnnouncementText"></textarea>
+                                <p class="text-info tts_default" style="width:300px;display: none">可播报变量的值。如果需要播报变量的值，请在变量前面加两个下划线，如__FROM_CID。播变量时请不要填写其他文字。</p>
+                                <p class="text-info tts_kdxf" style="width:300px;">可播报变量的值，并支持多个变量。需要替换的变量，请填写到【被替换的变量】字段中用逗号分隔。</p>
+                            </div>
+                        </div>
+                        <div class="control-group tts_default" style="display: none">
+                            <label class="control-label">
+                                文字时间间隔
+                            </label>
+                            <div class="controls">
+                                <nobr><input type="text" name="WordInterval" required msgName="文字时间间隔" maxlength="5" dataType="Number"
+                                             msg="文字时间间隔必须是大于等于0的整数" value="120"/>毫秒</nobr>
+                            </div>
+                        </div>
+                        <div class="control-group tts_default" style="display: none">
+                            <label class="control-label">
+                                标点符号时间间隔
+                            </label>
+                            <div class="controls">
+                                <nobr><input type="text" name="SignInterval" required msgName="标点符号时间间隔" maxlength="5" dataType="Number"
+                                             msg="标点符号时间间隔必须大于等于0的整数" value="500"/>毫秒</nobr>
+                            </div>
+                        </div>
+                        <div class="control-group tts_default" style="display: none">
+                            <label class="control-label">
+                                播报数字
+                            </label>
+                            <div class="controls">
+                                <input type="checkbox" name="IsMoney" value="1"/>
+                            </div>
+                        </div>
+                        <!-- 科大讯飞选项开始 -->
+                        <div class="control-group tts_kdxf">
+                            <label class="control-label">
+                                被替换的变量
+                            </label>
+                            <div class="controls">
+                                <input type="text" name="ReplaceVar" msgName="被替换的变量"/>
+                                <p class="text-info" style="width:300px;">文本中含有多个变量，用逗号分隔。例如：FROM_CID,FROM_DID,JOBNUM</p>
+                            </div>
+                        </div>
+                        <div class="control-group tts_kdxf">
+                            <label class="control-label">
+                                发音人
+                            </label>
+                            <div class="controls">
+                                <select name="VoiceName">
+                                    <option value="xiaoyan" selected>小燕(青年女声-中英文[普通话])</option>
+                                    <option value="xiaoyu">小宇(青年男声-中英文[普通话])</option>
+                                    <option value="Catherine">凯瑟琳(青年女声-[英文])</option>
+                                    <option value="henry">亨利(青年男声-[英文])</option>
+                                    <option value="vimary">玛丽(青年女声-[英文])</option>
+                                    <option value="vixy">小研(青年女声-中英文[普通话])</option>
+                                    <option value="vixq">小琪(青年女声-中英文[普通话])</option>
+                                    <option value="vixf">小峰(青年男声-中英文[普通话])</option>
+                                    <option value="vixm">小梅(青年女声-中英文[粤语])</option>
+                                    <option value="vixl">小莉(青年女声-中英文[台湾普通话])</option>
+                                    <option value="vixr">小蓉(青年女声-汉语[四川话])</option>
+                                    <option value="vixyun">小芸(青年女声-汉语[东北话])</option>
+                                    <option value="vixk">小坤(青年男声-汉语[河南话])</option>
+                                    <option value="vixqa">小强(青年男声-汉语[湖南话])</option>
+                                    <option value="vixying">小莹(青年女声-汉语[陕西话])</option>
+                                    <option value="vixx">小新(童年男声-汉语[普通话])</option>
+                                    <option value="vinn">楠楠(童年女声-汉语[普通话])</option>
+                                    <option value="vils">老孙(老年男声-汉语[普通话])</option>
+                                    <option value="Mariane">Mariane(法语)</option>
+                                    <option value="Guli">Guli(维语)</option>
+                                    <option value="Allabent">Allabent(俄语)</option>
+                                    <option value="Gabriela">Gabriela(西班牙语)</option>
+                                    <option value="Abha">Abha(印地语)</option>
+                                    <option value="XiaoYun">XiaoYun(越南语)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group tts_kdxf">
+                            <label class="control-label">
+                                语速
+                            </label>
+                            <div class="controls">
+                                <input type="number" name="Speed" min="0" max="100" step="1" value="50" msgName="语速" required>
+                                <p class="text-info" style="width:300px;">范围0~100</p>
+                            </div>
+                        </div>
+                        <div class="control-group tts_kdxf">
+                            <label class="control-label">
+                                语调
+                            </label>
+                            <div class="controls">
+                                <input type="number" name="Pitch" min="0" msgName="语调" max="100" step="1" value="50" required>
+                                <p class="text-info" style="width:300px;">范围0~100</p>
+                            </div>
+                        </div>
+                        <div class="control-group tts_kdxf">
+                            <label class="control-label">
+                                音量
+                            </label>
+                            <div class="controls">
+                                <input type="number" name="Volume" min="0" msgName="音量" max="100" step="1" value="70" required>
+                                <p class="text-info" style="width:300px;">范围0~100</p>
+                            </div>
+                        </div>
+                        <!-- 科大讯飞选项结束 -->
+                        <div class="control-group">
+                            <label class="control-label">
+                                播放结束后转向
+                            </label>
+                            <div class="controls">
+                                <div id="toPeerType" class="ds_ivr_to_peer_type" tag-name="ToPeerType" tag-value-key="ToPeerType">
+
+                                </div>
+                                <div id="toPeer" class="ds_ivr_to_peer" tag-value-key="ToPeer">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

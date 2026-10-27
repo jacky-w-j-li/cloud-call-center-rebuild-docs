@@ -1,0 +1,253 @@
+<div class="account_invoice_container">
+    <div>
+        <ul class="nav nav-tabs">
+            <li  class="invoice_get">
+                <a href="#" class="ds_do_action" ds_action="invoice.showGetMain" ds_data="" data-toggle="tab">索取发票</a>
+            </li>
+            <li  class="invoice_list">
+                <a href="#" class="ds_do_action" ds_action="invoice.showInvoiceMain" ds_data="" data-toggle="tab">发票查询</a>
+            </li>
+            <li class="invoice_info">
+                <a href="#" class="ds_do_action" ds_action="invoice.showInfoMain" ds_data="" data-toggle="tab">发票信息管理</a>
+            </li>
+            <li  class="invoice_addr">
+                <a href="#" class="ds_do_action" ds_action="invoice.showAddrMain" ds_data="" data-toggle="tab">寄送地址管理</a>
+            </li>
+        </ul>
+        <div id="account_invoice_tab_content" style="margin-top: 15px;">
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="invoice_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary ds_form_action" ds_action=""  ds_form="">保存</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="invoice_modal_view">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="invoice_confirm_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary ds_do_action" ds_action=""  ds_data="">确认</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+<script id="tmpl_invoice_info_person" type="text/html">
+    <div class="form-group">
+        <label class="control-label col-md-4">
+            发票抬头
+        </label>
+        <div class="col-md-5">
+            <span class="form-control clearBoder">个人</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-4">
+            发票类型
+        </label>
+        <div class="col-md-5">
+            <span class="form-control clearBoder">增值税普通发票</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-4">
+            发票内容
+        </label>
+        <div class="col-md-5">
+            <span class="form-control clearBoder">技术服务费</span>
+        </div>
+    </div>
+</script>
+<script id="tmpl_invoice_info_company" type="text/html">
+    <div class="form-group">
+        <label class="control-label col-md-4" >
+            发票抬头
+        </label>
+        <div class="col-md-5">
+            <input type="text" class="form-control input-sm" name="invoiceTitle" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-4">
+            发票类型
+        </label>
+        <div class="col-md-5">
+            <label class="radio-inline" style="margin-left: 5px;"><input type="radio" class="ds_do_action2"  ds_action="invoice._showInfoProfessional" ds_data="normal" name="invoiceType" value="normal" checked="checked">增值税普通发票</label>
+            <label class="radio-inline" style="margin-left: 5px;"><input type="radio" class="ds_do_action2"  ds_action="invoice._showInfoProfessional" ds_data="professional" name="invoiceType" value="professional" >
+                增值税专用发票
+                <!--<a href="#"  style="padding: 0;" class="btn" data-toggle="popover" data-placement="auto" data-trigger="hover focus"-->
+                <!--data-content="增值税专用发票开给一般纳税人，申请时需要提供公司名称、税号、地址电话、开户行名称及账号，一般纳税人批复，购买人取得后可以进行进项税额抵扣。若您还有疑问，建议联系贵司财务确认后再提交开票需求。提交后不能修改，请慎重填写。" data-original-title="">-->
+                <!--<span style="font-size: 14px;" class="glyphicon glyphicon-question-sign"></span>-->
+                <!--</a>-->
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-4">
+            发票内容
+        </label>
+        <div class="col-md-5">
+            <span class="form-control clearBoder">技术服务费</span>
+        </div>
+    </div>
+</script>
+
+
+<script id="tmpl_invoice_info_professional" type="text/html">
+    <div class="form-group">
+        <label class="control-label col-md-4">
+            税务登记证号
+        </label>
+        <div class="col-md-5">
+            <input type="text" class="form-control input-sm" name="registerNo" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-4">
+            基本开户银行名称
+        </label>
+        <div class="col-md-5">
+            <input type="text" class="form-control input-sm" name="bank" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-4">
+            基本开户账号
+        </label>
+        <div class="col-md-5">
+            <input type="text" class="form-control input-sm" name="bankNo" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-4">
+            注册场所地址
+        </label>
+        <div class="col-md-5">
+            <input type="text" class="form-control input-sm" name="registerAddr" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-4" >
+            注册固定电话
+        </label>
+        <div class="col-md-5">
+            <input type="text" class="form-control input-sm" name="registerTel" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-4">
+            营业执照复印件
+        </label>
+        <div class="col-md-5 busLicense-upload-container" >
+            <div id="busLicense-container-qiniu" class="">
+                <a class="btn btn-default btn-sm" id="busLicense-pickfiles" href="#" >
+                    <sapn>上传图片</sapn>
+                </a>
+            </div>
+            <div class="row">
+                <table class="table img_container" style="display:none;margin-top: 10px;">
+                    <tbody id="busLicense-fsUploadProgress">
+                    </tbody>
+                </table>
+            </div>
+            <div class="thumbnails" style='margin-top:5px;'>
+            </div>
+            <p class="help-block" >仅支持JPG，GIF，PNG图片文件，且需小于2M</p>
+            <!--<input type="file" class="file form-control input-sm" name="busLicense" required>-->
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-4">
+            税务登记复印件
+        </label>
+        <div class="col-md-5 taxCard-upload-container" >
+            <div id="taxCard-container-qiniu" class="">
+                <a class="btn btn-default btn-sm" id="taxCard-pickfiles" href="#" >
+                    <sapn>上传图片</sapn>
+                </a>
+            </div>
+            <div class="row">
+                <table class="table img_container" style="display:none;margin-top: 10px;">
+                    <tbody id="taxCard-fsUploadProgress">
+                    </tbody>
+                </table>
+            </div>
+            <div class="thumbnails" style='margin-top:5px;'>
+            </div>
+            <p class="help-block" >仅支持JPG，GIF，PNG图片文件，且需小于2M</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-4">
+            一般纳税人资格认证复印件
+        </label>
+        <div class="col-md-5 taxpayerIdentify-upload-container" >
+            <div id="taxpayerIdentify-container-qiniu" class="">
+                <a class="btn btn-default btn-sm" id="taxpayerIdentify-pickfiles" href="#" >
+                    <sapn>上传图片</sapn>
+                </a>
+            </div>
+            <div class="row">
+                <table class="table img_container" style="display:none;margin-top: 10px;">
+                    <tbody id="taxpayerIdentify-fsUploadProgress">
+                    </tbody>
+                </table>
+            </div>
+            <div class="thumbnails" style='margin-top:5px;'>
+            </div>
+            <p class="help-block" >仅支持JPG，GIF，PNG图片文件，且需小于2M</p>
+        </div>
+    </div>
+
+</script>
+
+
+
+
+<script id="tmpl_invoice_img" type="text/html">
+    <input type="hidden" name="{{field}}" value="{{key}}">
+    <a href="{{url}}" target="_blank">
+        <img src="{{url}}?imageView2/1/w/50" class="img-rounded" style="width:50px;max-height: 50px;">
+    </a>
+</script>

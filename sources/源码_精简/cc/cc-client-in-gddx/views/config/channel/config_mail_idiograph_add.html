@@ -1,0 +1,50 @@
+<div class="right_content_pane" >
+    <form id="frm_mail_idiograph_add" class="form-horizontal ">
+        <div class="right_head clearfix" style="">
+            <div class="pull-left" style="font-weight: bold">
+                添加邮件签名
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="control-head width-500">
+                邮件签名设置
+            </div>
+        </div>
+        <div id="control-email-idiograpg" class="width-500">
+            <div class="row_item">
+                <label class="control-label" for="idiograph_name">签名名称</label>
+                <input id="idiograph_name" type="text" name="name" placeholder=""  required/>
+            </div>
+            <div class="row_item">
+                <label class="control-label" for="idiograph_con">签名内容</label>
+                <textarea name="content" id="idiograph_con" cols="30" rows="5"></textarea>
+            </div>
+            <div class="row_item">
+                <button type="button" class="btn btn-primary btn-small ds_form_action img-none btn-blue"  ds_action="config.channel.saveIdiograph" style="margin-left: 10px;">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        var sid=session.id;
+        handler.config.channel.emailIdiograph = null;
+        handler.config.channel.emailIdiograph = KindEditor.create('#idiograph_con', {
+            width : '72%',
+            height: '120px',
+            wellFormatMode:false,
+            basePath:"./third-lib/kindeditor/",
+            resizeType : 1,
+            allowPreviewEmoticons : false,
+            allowImageUpload : true,
+            uploadJson : './richUpload?action=uploadRichImage&sessionId='+sid+"&type=email_qiniu",
+//                fileManagerJson : '../js/kindeditor/jsp/file_manager_json.jsp',
+//                allowFileManager : true,
+            items : [
+                'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                '|', 'justifyleft', 'justifycenter', 'justifyright', '|','link', 'unlink','table','image','|', 'undo', 'redo','|', 'source','preview', 'fullscreen'],
+            afterBlur: function(){this.sync()}
+        });
+    });
+</script>

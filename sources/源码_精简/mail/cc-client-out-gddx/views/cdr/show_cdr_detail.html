@@ -1,0 +1,122 @@
+<style>
+    .cdrDetailLabel {width: 75px;}
+    .cdrDetailText {width: 145px; text-align: left}
+</style>
+<div id="show_cdr_detail_Modal" class="modal hide fade">
+    <div class="modal-header">
+        <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+        <h3>通话详细信息</h3>
+    </div>
+    <div class="modal-body">
+        <div id="cdr_detail_wrapper">
+            <table>
+                <tr>
+                    <td class="cdrDetailLabel">定位客户：</td>
+                    <td class="cdrDetailText">_#CUSTOMER_NAME#_</td>
+                    <td class="cdrDetailLabel">主叫：</td>
+                    <td class="cdrDetailText">_#bgCallNo#_
+                        <a class="add_BlackNum ds_do_action" ds_action="cdr.addCdrBlackList" ds_data="_#CALL_NO#_">
+                            <i class="icon-ban-circle" style="margin-top: 0px"></i></a>
+                    </td>
+                    <td class="cdrDetailLabel">被叫：</td>
+                    <td class="cdrDetailText">_#bgCalledNo#_
+                        <a class="add_BlackNum ds_do_action" ds_action="cdr.addCdrBlackList" ds_data="_#CALLED_NO#_">
+                            <i class="icon-ban-circle" style="margin-top: 0px"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cdrDetailLabel">呼叫时间：</td>
+                    <td class="cdrDetailText">_#OFFERING_TIME#_</td>
+                    <td class="cdrDetailLabel">摘机时间：</td>
+                    <td class="cdrDetailText">_#BEGIN_TIME#_</td>
+                    <td class="cdrDetailLabel">通话时长：</td>
+                    <td class="cdrDetailText">_@cdr.getCallTimeLength('_#CALL_TIME_LENGTH#_')@_</td>
+                </tr>
+                <tr>
+                    <td class="cdrDetailLabel">呼叫类型：</td>
+                    <td class="cdrDetailText">_@cdr.getCallTypeName('_#CONNECT_TYPE#_')@_</td>
+                    <td class="cdrDetailLabel">处理状态：</td>
+                    <td class="cdrDetailText">_@cdr.getCallStatusName('_#STATUS#_')@_</td>
+                    <td class="cdrDetailLabel">处理座席：</td>
+                    <td class="cdrDetailText">_@cdr.getAgentName('_#DISPOSAL_AGENT#_')@_</td>
+                </tr>
+                <tr>
+                    <td class="cdrDetailLabel">省份：</td>
+                    <td class="cdrDetailText">_#PROVINCE#_</td>
+                    <td class="cdrDetailLabel">城市：</td>
+                    <td class="cdrDetailText">_#DISTRICT#_</td>
+                    <td class="cdrDetailLabel">标记：</td>
+                    <td class="cdrDetailText">_@cdr.getKeyTag('_#KEY_TAG#_')@_
+                        <a class="remove_key_tag ds_do_action" ds_action="cdr.removeKeyTag" ds_data="_#CALL_SHEET_ID#_" style="display: none">
+                            <i class="icon-remove" style="margin-top: 0px"></i></a>
+                    </td>
+                </tr>
+                <!--
+                <tr>
+                    <td>备注内容：</td>
+                    <td>_#MEMO#_</td>
+                </tr>
+                -->
+                <tr class="search-table-tr">
+                    <td>通话录音：</td>
+                    <td colspan="100">
+                        <audio id="cdrListener" controls="" src="_#FILE_SERVER#_/_#RECORD_FILE_NAME#_" __AUDIO_AUTO_PLAY/><br/>
+                        <a href="_#FILE_SERVER#_/_#RECORD_FILE_NAME#_" target="_blank" download>下载录音</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cdrDetailLabel">备注内容：</td>
+                    <td class="cdrDetailText" colspan="5">
+                        <textarea id="cdr_comments" name="memo" rows="2" style="width: 500px" disabled></textarea>
+                    </td>
+                </tr>
+            </table>
+            <div id="callSheetOtherInfoPanel" class="callSheetOtherInfoPanel" style="display: none">
+                <hr>
+                __callSheetOtherInfo
+            </div>
+            <!--<h5>通话轨迹</h5>-->
+            <!--<table class="table table-bordered table-hover table-condensed">-->
+                <!--<tr class="info" >-->
+                    <!--<td>日期</td>-->
+                    <!--<td>节点类型</td>-->
+                    <!--<td>节点</td>-->
+                <!--</tr>-->
+                <!--__CHANNEL_DETAIL-->
+            <!--</table>-->
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn ds_do_action" ds_action="cdr.closeDetail" id="cdrDetailCloseBtn">关闭</a>
+    </div>
+</div>
+<script>
+    $(function(){
+        $('#show_cdr_detail_Modal').css({
+            'width': function () {
+                var width = document.body.clientWidth;
+                if(width <= 1280){
+                    return ($(document).width() *.59) + 'px';
+                }else{
+                    return ($(document).width() *.50) + 'px';
+                }
+            },
+            'max-height': function () {
+                return ($(document).height() *.72) + 'px';
+            },
+            'margin-left': function () {
+                return -($(this).width() / 2);
+            }
+        });
+        $(".add_BlackNum").tooltip({title:'将该号码加入黑名单.',placement:'left',html:true});
+        var isTag = '_#KEY_TAG#_';
+        if(isTag == 'true'){
+           $(".remove_key_tag").show();
+           $(".remove_key_tag").tooltip({title:'取消对该通话的标记.',placement:'left',html:true});
+        }
+        var comments = '_#COMMENTS#_';
+        if(!utils.startWith(comments,'_#')){
+            $('#cdr_comments').text(comments);
+        }
+    });
+</script>

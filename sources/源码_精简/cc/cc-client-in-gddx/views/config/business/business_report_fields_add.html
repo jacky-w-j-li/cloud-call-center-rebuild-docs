@@ -1,0 +1,103 @@
+<div class="right-side" style="background-color: #fdfbd8;margin-bottom: 15px;border-radius: 6px;padding-left: 5px;padding-right: 5px;">
+    <form>
+        <input name="reportId" type="hidden" value="{{=_id}}">
+        <fieldset>
+            <legend>添加报表统计字段</legend>
+            <div class="row_item">
+                <label for="field-name">字段名称</label>
+                <input id="field-name" class="field-name" name="name" type="text" maxlength="35" required>
+            </div>
+            <div class="row_item">
+                <label>统计字段</label>
+                <select name="field" id="business_report_config_fields_select">
+                    <option value="">--请选择--</option>
+                    {{
+                        var flowFields = $getCache('businessFlowField');
+                        for(var i=0;i < flowFields.length; i++){
+                            if( flowFields[i].flow_id ==  flow){
+                    }}
+                    <option value="{{=flowFields[i]._id}}">{{=flowFields[i].name}}</option>
+                    {{
+                            }
+                        }
+                    }}
+                </select>
+            </div>
+            <div class="row_item">
+                <label>统计条件</label>
+                <select name="condition" id="business_report_config_fields_condition_select" style="float: left;">
+                    <option value="">无</option>
+                    <option value="gt">大于</option>
+                    <option value="lt">小于</option>
+                    <option value="eq">等于</option>
+                    <option value="ne">不等于</option>
+                    <option value="gte">大于等于</option>
+                    <option value="lte">小于等于</option>
+                </select>
+                <div id="business_report_config_fields_condition_value" style="float: left;">
+                </div>
+            </div>
+            <div class="row_item">
+                <label >统计规则</label>
+                <select name="rule">
+                    <option value="count">次数</option>
+                    <option value="sum">求和</option>
+                    <option value="avg">平均值</option>
+                    <option value="per">百分比</option>
+                </select>
+            </div>
+            <div class="form_buttons" style="padding-left:113px;padding-top:5px;">
+                <a class="submit_button button ds_form_action" ds_action="config.business.addBusinessReportField">保存</a>
+                <a class="cancel_button ds_do_action" ds_action="config.business.cancelBusinessReportField" ds_data="__id">取消</a>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+        <script type="text/javascript">
+            $(function(){
+                $("#business_report_config_fields_select").change(function(event){
+                    var src = $(event.currentTarget);
+                    var value = src.val();
+                    var fieldsObj = getCache("businessFlowField",value);
+                    var fieldType = fieldsObj.type;
+                    var html = "";
+                    if( fieldType == 'single' || fieldType == 'number' || fieldType == 'date' || fieldType == 'multi'){
+                        html = "<input name='conditionValue' type='text' style='width: 70%;display: none;'/>";
+                    } else if(fieldType == 'dropdown' || fieldType == 'radio' ){
+                        var dic = fieldsObj.dic;
+                        var options = getCache("options",dic) ||{};
+                        options = options.options || [];
+                        var html = "<select name='conditionValue' style='display: none;' >";
+                        for(var i=0;i<options.length;i++){
+                            html += "<option id='"+options[i].key+"'>"+options[i].name+"</option>";
+                        }
+                        html += "</select>";
+                    } else if(fieldType == 'checkbox'){
+                        var temp = "<div class='inline-checkbox'><label class='inline' style='text-align: left;width: auto;'><input type='checkbox' name='conditionValue' value='_value'/>_name</label></div>";
+                        var dic = fieldsObj.dic;
+                        var options = getCache("options",dic) ||{};
+                        options = options.options || [];
+                        for(var i=0;i<options.length;i++){
+                           html += temp.replace("_value",options[i].key).replace("_name",options[i].name);
+                        }
+
+                    }
+                    var pane = $("#business_report_config_fields_condition_value");
+                    pane.empty();
+                    pane.html(html);
+                    $("#business_report_config_fields_condition_select").change();
+                });
+
+                $("#business_report_config_fields_condition_select").change(function(event){
+                    var src = $(event.currentTarget);
+                    var value = src.val();
+                    if(value){
+                        $("#business_report_config_fields_condition_value").find(":input").show();
+                    } else {
+                        $("#business_report_config_fields_condition_value").find(":input").hide();
+                    }
+
+                });
+            });
+        </script>

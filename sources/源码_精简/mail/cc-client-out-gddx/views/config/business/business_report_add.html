@@ -1,0 +1,53 @@
+{{
+        var opFlag = opFlag || "add";
+        var _displayTitle = '添加报表';
+        if(opFlag == 'update'){
+            _displayTitle = '更新报表';
+        }
+
+}}
+<div class="right_content_pane">
+    <form  class="form-horizontal">
+        <div class="right_head clearfix" style="">
+            <div class="pull-left">
+                <h4 style="">{{=_displayTitle}}</h4>
+            </div>
+            <div class=" pull-right">
+                <button type="button" class="btn btn-small ds_do_action " ds_action="config.business.cancelReportAdd" style="margin-left: 0px;">取消</button>
+                <button type="button" class="btn btn-primary btn-small ds_form_action "  ds_action="config.business.saveReportInfo" style="margin-left: 10px;">保存</button>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="row_item">
+                <input type="hidden" name="_id" value="{{=_id}}" />
+                <label for="business_report_name">报表名称</label>
+                <input id="business_report_name" name="name" type="text" value="{{=name}}" required>
+            </div>
+            <div class="row_item">
+                <label for="business_report_flow">业务流程</label>
+                <select name="flow" id="business_report_flow" required>
+                    {{
+                        var flows = $getCache("businessFlow");
+                        flows = flows || [];
+                        var _checked = "";
+                        for(var i=0;i<flows.length;i++){
+                            var obj = flows[i];
+                            if(flow == obj._id){
+                                _checked = "selected";
+                            }else {
+                                _checked = "";
+                            }
+                    }}
+                    <option value="{{=obj._id}}" {{=_checked}}>{{=obj.name}}</option>
+                    {{ } }}
+                </select>
+            </div>
+            <div class="row_item">
+                <label>描述</label>
+                <textarea name="desc">{{=desc}}</textarea>
+            </div>
+        </div>
+
+    </form>
+</div>
+

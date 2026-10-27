@@ -1,0 +1,86 @@
+<div class="right_container" style="margin: 20px 0;padding: 5px;">
+    <div class="">
+        <h4 >客户状态统计</h4>
+    </div>
+
+    <div class="" style="margin-top: 10px;padding: 5px;">
+        <form class="form-inline clearfix" role="form" id="">
+            <div class="pull-left" style="margin-bottom: 15px;">
+                <table class="table_row_search">
+                    <tbody>
+                    <tr>
+                        <td >座席</td>
+                        <td >
+                            <input type="text" name="name" class="input-small"/>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-small ds_form_action" ds_action="batch2.getBdTaskHistory">查询</button>
+                            <button type="button" class="btn btn-default btn-small ds_do_action" ds_action="batch2.reset" >重置</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+
+        <table class="table table-bordered table-striped table-hover table-condensed"
+               style=" margin-bottom: 5px;">
+            <thead>
+            <tr>
+                <th>
+                    座席
+                </th>
+                <th>
+                    VIP客户
+                </th>
+                <th>
+                    金牌客户
+                </th>
+                <th>
+                    银牌客户
+                </th>
+                <th>
+                    普通客户
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    张三
+                </td>
+                <td>
+                    10
+                </td>
+                <td>
+                    0
+                </td>
+                <td>
+                    1
+                </td>
+                <td>
+                    0
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+        <div class="">
+            <div for="frm_batch_task_search" ds_pagination_action="batch2.getBdTaskHistory"
+                 class="pagination pagination-small pagination-right" style="display:table; margin:0;width:100%;">
+                <span class="result_info">查询结果：<span class="result_count">0</span></span>
+                <ul style="float:right;margin-top:5px;">
+                    <li><a href="#"  value="0">&laquo;</a></li>
+                    <li><a href="#"  value="1">1</a></li>
+                    <li><a href="#"  value="2">2</a></li>
+                    <li><a href="#"  value="3">3</a></li>
+                    <li><a href="#"  value="4">4</a></li>
+                    <li><a href="#"  value="5">5</a></li>
+                    <li><a href="#"  value="6">&raquo;</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+

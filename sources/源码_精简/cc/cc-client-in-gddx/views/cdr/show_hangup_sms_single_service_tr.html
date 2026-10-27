@@ -1,0 +1,35 @@
+
+    <tr>
+        <td style="width:15%;">__serviceno</td>
+        <td style="width:25%;">__selecthtml</td>
+        <td style="width:15%;">__callrange</td>
+        <td><div class="input-append date form_datetime">
+            <input class="hangup_sms_date_input" size="16" name="begin_time_SINGLESERVICE" id="hangup_smsBeginTime_SINGLESERVICE" type="text" value="00:00:00" readonly>
+            <span class="add-on start-datetimepicker-remove" style="height: 14px;line-height: 15px"><i class="icon-repeat"></i></span>
+            <span class="add-on datetimepicker-open" style="height: 14px;line-height: 15px"><i class="icon-th"></i></span>
+        </div>至 <div class="input-append date form_datetime">
+            <input class="hangup_sms_date_input" size="16" name="end_time_SINGLESERVICE" id="hangup_smsEndTime_SINGLESERVICE" type="text" value="23:59:59" readonly>
+            <span class="add-on end-datetimepicker-remove" style="height: 14px;line-height: 15px"><i class="icon-repeat"></i></span>
+            <span class="add-on datetimepicker-open" style="height: 14px;line-height: 15px"><i class="icon-th"></i></span>
+        </div>
+        </td>
+        <td style="width:5%;"> <a href="#" class="ds-sms-delete-service-num"><i class="icon-minus"></i></a> </td>
+    </tr>
+    <script type="text/javascript">
+        $(function(){
+            $(document).on("click", ".start-datetimepicker-remove", function (event) {
+                var src = $(event.currentTarget);
+                src.siblings("input").val('00:00:00');
+            });
+            $(document).on("click", ".end-datetimepicker-remove", function (event) {
+                var src = $(event.currentTarget);
+                src.siblings("input").val('23:59:59');
+            });
+            $('#hangup_smsBeginTime_SINGLESERVICE').timepicker({
+                timeFormat: "HH:mm:ss",
+            });
+            $('#hangup_smsEndTime_SINGLESERVICE').timepicker({
+                timeFormat: "HH:mm:ss",
+            });
+        });
+    </script>

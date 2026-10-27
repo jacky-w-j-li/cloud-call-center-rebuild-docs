@@ -1,0 +1,77 @@
+<div class="row-fluid">
+    <div class="span12">
+        <form class="form-horizontal ds_item_edit" action="" client-data="session.ivrMap.ivr.ivr_sound"
+              on-complete="config.callConfig.sound.onrenderEdit">
+            <input type="hidden" name="_id" value="___id"/>
+            <input type="hidden" name="SoundFilePath" id="ivrSoundFilePath"/>
+            <input type="hidden" name="OldSoundFilePath" id="oldIvrSoundFilePath"/>
+            <div class="row-fluid">
+                <div class="span5 offset1">
+                    <i class="icon-edit"></i>修改语音
+                </div>
+                <div class="span6 text-right pull-right">
+                    <a class="btn btn-info btn-blue ds_action_flow">
+                        <ds-form-action action="config.ivr.sound.updateSound" extra-data="config.callConfig.currentConfigData"
+                                        update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"ivr_sound"}}'/>
+                        <ds-get-view view="config/callConfig/sound/sound_list" panel="ivrSoundPanel"/>
+                        保存
+                    </a>
+                    <a class="btn btn-success  btn-blackishGreen  ds_do_action" ds_action="config.callConfig.sound.listenSound">试听</a>
+                    <a class="btn btn-danger btn-gray ds_action_flow" id="deleteSoundLink">
+                        <ds-do-action action="config.ivr.sound.deleteSound" extra-data="config.callConfig.currentConfigData"
+                                        update-client-data='{"method":"config.callConfig.updateClientData","arg":{"operation":"del","type":"ivr_sound"}}'/>
+                        <ds-get-view view="config/callConfig/sound/sound_list" panel="ivrSoundPanel"/>
+                        删除
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+
+            <div class="control-group" style="display:none;">
+                <label class="control-label">语音文件类型</label>
+
+                <div class="controls">
+                    <select name="SoundType">
+                        <option value="normal">普通</option>
+                        <option value="hold">队列等待语音</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    语音文件名称
+                </label>
+
+                <div class="controls">
+                    <input type="text" name="DisplayName" msgName="语音文件名称" required/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    语音文件
+                </label>
+
+                <div class="controls">
+                    <!--<input type="file" id="fileToUpload" class="ds_upload" accept="audio/wav" storageType="storage"-->
+                           <!--onloaded="config.callConfig.sound.uploaded" onerror="config.callConfig.sound.uploadError"-->
+                           <!--onprogress="config.callConfig.sound.uploadProgressing"/>-->
+                    <br/>
+                    <a href="#" id="downloadSoundLink" target="_blank">下载语音</a>
+                    <audio id="ivrSoundListen" style="display:none;" controls="controls" src="">
+                    </audio>
+                    <p class="text-success" id="uploadMess" style="display:none;">文件已上传</p>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    语音文件说明
+                </label>
+
+                <div class="controls">
+                    <input type="text" name="Memo" maxlength="50"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

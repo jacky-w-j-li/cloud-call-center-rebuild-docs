@@ -1,0 +1,22 @@
+<script id="tmpl_cust_changeLog_item" type="text/html">
+<dl class="history_item">
+        <dt>
+            <span>{{=agentName}}</span>于{{=timeDesc}} {{=operaterType}}
+        </dt>
+        {{ if(content){ }}
+        {{
+            var i = content.indexOf('|');
+            if(i>0){
+            var contentList = content.split("|");
+                for(var i=0;i<contentList.length-1;i++){
+        }}
+        <dd><span class="ch_state">{{=contentList[i]}}</span></dd>
+        {{
+         }
+         }else{
+        }}
+        <dd><span class="ch_state">{{=content}}</span></dd>
+        {{ } }}
+        {{ } }}
+    </dl>
+    </script>

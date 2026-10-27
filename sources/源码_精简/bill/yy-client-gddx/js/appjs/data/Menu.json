@@ -1,0 +1,121 @@
+{
+	"menu" : [{
+				"name" : "账户管理",
+				"id" : "account_manage",
+				"type" : "node",
+				"children" : [{
+							"name" : "账户列表",
+							"id" : "my_task_uncomplete",
+							"type" : "leaf",
+							"page" : "task_list"
+						}, {
+							"name" : "账户查询",
+							"id" : "task_i_assigned",
+							"type" : "leaf",
+							"page" : "task_list"
+						}, {
+							"name" : "账户计费",
+							"id" : "task_i_followed",
+							"type" : "leaf",
+							"page" : "task_list"
+						}, {
+							"name" : "账户配置",
+							"id" : "task_i_followed",
+							"type" : "leaf",
+							"page" : "task_list"
+						}]
+			}, {
+				"name" : "报表",
+				"id" : "account_manage",
+				"type" : "node",
+				"children" : [{
+							"name" : "在线坐席报表",
+							"id" : "my_task_uncomplete",
+							"type" : "leaf",
+							"page" : "task_list"
+						}, {
+							"name" : "坐席变动报表",
+							"id" : "task_i_assigned",
+							"type" : "leaf",
+							"page" : "task_list"
+						}, {
+							"name" : "平台通话量报表",
+							"id" : "task_i_followed",
+							"type" : "leaf",
+							"page" : "task_list"
+						}, {
+							"name" : "license费用报表",
+							"id" : "task_i_followed",
+							"type" : "leaf",
+							"page" : "task_list"
+						}, {
+							"name" : "账户缴费报表",
+							"id" : "task_i_followed",
+							"type" : "leaf",
+							"page" : "task_list"
+						}]
+			}, {
+				"name" : "资源管理",
+				"id" : "account_manage",
+				"type" : "node",
+				"children" : [{
+							"name" : " pbx管理",
+							"id" : "my_task_uncomplete",
+							"type" : "leaf",
+							"page" : "task_list"
+						}, {
+							"name" : "服务号管理",
+							"id" : "task_i_assigned",
+							"type" : "leaf",
+							"page" : "task_list"
+						}, {
+							"name" : "sip号管理",
+							"id" : "task_i_followed",
+							"type" : "leaf",
+							"page" : "task_list"
+						}, {
+							"name" : "技能组号管理",
+							"id" : "task_i_followed",
+							"type" : "leaf",
+							"page" : "task_list"
+						}, {
+							"name" : "服务器管理",
+							"id" : "task_i_followed",
+							"type" : "leaf",
+							"page" : "task_list"
+						}]
+			}, {
+				"name" : "用户管理",
+				"id" : "account_manage",
+				"type" : "node",
+				"children" : [{
+							"name" : "用户列表",
+							"id" : "my_task_uncomplete",
+							"type" : "leaf",
+							"page" : "task_list"
+						}, {
+							"name" : "权限管理",
+							"id" : "task_i_assigned",
+							"type" : "leaf",
+							"page" : "task_list"
+						}]
+
+			}, {
+				"name" : "系统管理",
+				"id" : "account_manage",
+				"type" : "node",
+				"children" : [{
+							"name" : "系统参数设置",
+							"id" : "my_task_uncomplete",
+							"type" : "leaf",
+							"page" : "task_list"
+						}, {
+							"name" : "系统日志",
+							"id" : "task_i_assigned",
+							"type" : "leaf",
+							"page" : "task_list"
+						}]
+			}
+
+	]
+}

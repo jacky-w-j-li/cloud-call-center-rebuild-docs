@@ -1,0 +1,37 @@
+<div>
+    <div class="panel panel-info">
+        <div class="panel-heading">扣费列表</div>
+        <!-- Table -->
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>名称</th>
+                <th>状态</th>
+                <th>起始时间</th>
+                <th>到期时间</th>
+                <th>创建时间</th>
+                <th>是否自动续费</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody class="custFee_list">
+            </tbody>
+        </table>
+
+    </div>
+    <div class="row">
+        <div class="col-md-5">查询结果：<span class="result_count" style="margin-top:3px;display: inline-block;">0</span></div>
+        <div class=" col-md-7">
+            <ul class="pagination pagination-sm pull-right" style="margin: 0;"
+                for="frm_cust_fee_info" ds_pagination_action="custFee.getCustFeeList">
+                <li><a href="#"  value="0">&laquo;</a></li>
+                <li><a href="#"  value="1">1</a></li>
+                <li><a href="#"  value="2">2</a></li>
+                <li><a href="#"  value="3">3</a></li>
+                <li><a href="#"  value="4">4</a></li>
+                <li><a href="#"  value="5">5</a></li>
+                <li><a href="#"  value="6">&raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

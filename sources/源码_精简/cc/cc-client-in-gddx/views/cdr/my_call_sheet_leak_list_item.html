@@ -1,0 +1,196 @@
+<div class="list_check_pane" id="my_sheet_leak_list_item">
+    <div class='contacts_caption'>
+            <div class="cancel_edit" style="">
+                <div class="list_check_all" style="cursor: pointer;" >
+                    <b class="ico_select_checkbox ico ico_wrap" style="top:10px;left:5px;"></b>
+                </div>
+                <div style="display: inline-block;margin-left: 30px;font-weight: bold;">
+                    已选
+                    <span class="bottom_toolbar_selsize_num">
+                        0
+                    </span>
+                    项
+                </div>
+                <span class="pull-right">
+                    <a href="#" class="ds_do_action" ds_action="cancelDealToolbar" ds_data="cdr" ds_attr="">取消</a>
+                </span>
+            </div>
+            <div class="caption-top clearfix">
+                <div class="search_condition" style="display:none;"></div>
+                <div class="header_wrap clearfix">
+                    <form id="frm_sheet_leak_my_advanced_search">
+                        <span class="refresh ds_form_action" style="display: none;" ds_action="cdr.searchMyLeakCard"></span>
+                        <div class="header_search_wrap pull-left quick_search" style="width: 340px">
+                            <div class="header_search_button ds_form_action normal_search"  ds_action="cdr.searchMyLeakCard">
+                                <i class="icon-search"></i>
+                            </div>
+                            <div class="header_search_input">
+                                <div class="header_search_input_textbox">
+                                    <div class="textbox_wrap" style="margin-left:3px">
+                                        <div class="textbox_inner">
+                                            <input type="text" name="QUICK_QUERY_NUM" class="textbox_input" maxlength="254" placeholder="输入电话号码查询">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text_link header_search_advanced btn_advanced_search">
+                                高级搜索
+                            </div>
+                        </div>
+                    </form>
+                    <div class="header_func_plus pull-right">
+                    </div>
+                </div>
+
+                <div class="ds_search_filter my_cdr_search_filter" style="display: none;">
+                </div>
+            </div>
+    </div>
+  
+    <div class="list_container">
+        <div class="list-inside">
+        </div>
+        <div class="list-footer">
+            <div class="pagination pagination-small" for="frm_sheet_leak_my_search" ds_pagination_action="cdr.searchMyLeakCard">
+                <span style="float:left;">查询结果: <span class="result_count">0</span></span>
+                <ul class="pull-right" style="padding-right: 2px;">
+                    <li>
+                        <a href="#"  value="0">«</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="1">1</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="2">2</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="3">3</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="4">4</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="5">5</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="6">»</a>
+                    </li>
+                </ul>
+            </div>
+        </div>   
+    </div>
+    <div tabindex="-1" class="advanced_search_pane hidden">
+        <div class="advanced_body">
+            <form id="frm_sheet_leak_my_advanced_search" class="my_call_sheet_leak_high_query_form ds_search_form">
+            <input type="hidden" name="isAdvanceSearch" value="1">
+                        <div style="margin-left: auto;margin-right: auto;">
+                            <fieldset>
+                                <table style="margin-bottom: 5px;">
+                                    <tr>
+                                        <td>
+                                             <div class="name formQue ds_search_item span4 advanced_search_item  ds_owner ">
+                                                <label class="search_label">回访座席</label>
+                                                 <input name="ownercom" type="hidden" class="select_input" id="back_master_owner_select_input_com" />
+                                                <input name="CALLBACK_AGENT" type="hidden" class="select_input" id="back_owner_select_input" />
+                                                <input name="ownerdep" type="hidden" class="select_input" id="back_owner_select_input_dep" />
+                                                <!--<div id="_#menu#__owner_select_user" class="combobox_agent"></div>-->
+                                                <div id="back_owner_select_user" class="comtabbox_agent"></div>
+                                            </div>
+                                        </td>
+                                     </tr>
+                                    <tr>
+                                        <td>
+                                             <div class="name formQue ds_search_item span4 advanced_search_item  ds_owner ">
+                                                <label class="search_label">处理座席</label>
+                                                 <input name="ownercom" type="hidden" class="select_input" id="disposal_master_owner_select_input_com" />
+                                                <input name="NEW_DISPOSAL_AGENT" type="hidden" class="select_input" id="disposal_owner_select_input" />
+                                                <input name="ownerdep" type="hidden" class="select_input" id="disposal_owner_select_input_dep" />
+                                                <!--<div id="_#menu#__owner_select_user" class="combobox_agent"></div>-->
+                                                <div id="disposal_owner_select_user" class="comtabbox_agent"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <div class="name formQue ds_search_item " style="width: 100%;">
+                                                <label style="float: left;">最近未接时间&nbsp;</label>
+                                                <input type="text" id="sheet_leak_begin_time" name="BEGIN_TIME" class="query_field ds_datetime"/>
+                                                至
+                                                <input type="text" id="sheet_leak_end_time" name="END_TIME" class="query_field ds_datetime"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="business_fields"></div>
+                       
+                        <button type="button" class="btn btn-small btn-primary ds_form_action  pull-right cdr_adv_search" ds_action="cdr.queryMyCallSheetLeakHigh" >搜索</button>
+                        <button type="button" ds_action="resetForm" class="btn btn-small  ds_do_action  pull-right" style="margin-right: 10px;" ds_data="mySheetLeak">重置</button>
+                     </fieldset>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+     $(function () {
+        $(".btn_advanced_search").bind("click", function () {
+            $(".advanced_search_pane").toggleClass("show_search");
+        });
+            dsevent.bind('#view_call_sheet_leak_my', 'callRefreshCustomer customerUpdate', function(event, params){
+                eval("handler.cdr."+event.type+"(params)");
+            });
+      
+        $(".call_sheet_leak_list_query_form").keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                handler.cdr.my_call_sheet_leak("my_call_sheet_leak");
+            }
+        });
+    });
+</script>
+
+<style>
+    .my_call_sheet_leak_query_close {
+        display: none;
+    }
+
+    form.my_call_sheet_leak_high_query_form .formQue label {
+        width: 85px;
+        text-align: right;
+        display: inline-block;
+    }
+
+    form.my_call_sheet_leak_high_query_form input[type='text'] {
+        width: 120px;
+    }
+
+    form.my_call_sheet_leak_high_query_form select  {
+        width: 120px;
+    }
+
+    div.formQue {
+        margin-top: 5px;
+        width: 220px;
+        float: none;
+    }
+
+    .formQue label {
+        display: inline-block;
+
+    }
+
+    #my_call_sheet_leak_search_query {
+        border: 1px rgb(189, 188, 188) solid;
+        position: absolute;
+        width: 500px;
+        background-color: #ffffff;
+        padding: 0px;
+        z-index: 100;
+    }
+    #back_owner_select_user .search_warp,#disposal_owner_select_user .search_warp{
+        margin-top: 0;
+    }
+    
+</style>
+

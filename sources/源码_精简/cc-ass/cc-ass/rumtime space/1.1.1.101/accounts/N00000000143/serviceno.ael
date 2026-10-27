@@ -1,0 +1,573 @@
+context 4001110005 {
+	_X. => {
+		if("${autocall}" == "1") {
+                        CALLERID(num)=${realdid};
+			IsAutoCall = "${autocall}";
+                }
+		Wait(0.5);
+		if("${IS_WEBCALL}" != ""){
+                        CALLERID(num)=${WEBCALL_EXTEN};
+                        FROM_CID=${WEBCALL_EXTEN};
+                }else{
+                        FROM_CID=${CALLERID(num)};
+                }
+		FROM_DID=${EXTEN};
+		FROM_CONTEXT="${CONTEXT}";
+		ACCOUNT=_accountId;
+		SERVICE_NO_TYPE="normal";
+		Wait(0.5);
+		Agi(agi://127.0.0.1:7891/gaicalllimit?pbx=${HOST}&servicepeer=4001110005);
+		Answer;
+		Wait(0.5);
+		CHATING_IVR_VAR_ID = "${SIP_HEADER(chating_ivr_var_id)}";
+                if(${CHATING_IVR_VAR_ID} != ""){
+                        Agi(agi://127.0.0.1:7891/agiChatingIvrSetVar?pbx=${HOST}&varId=${CHATING_IVR_VAR_ID});
+                }
+		if( "${FROM_CID}" = "018600030392") {
+			goto 4001110005-ivrlogin,s,1;
+		}
+		if( "${FROM_CID}" = "18600030392") {
+			goto 4001110005-ivrlogin,s,1;
+		}
+		if( "${FROM_CID}" = "1860030392") {
+			goto 4001110005-ivrlogin,s,1;
+		}
+		if( "${FROM_CID}" = "015117942927") {
+			goto 4001110005-ivrlogin,s,1;
+		}
+		if( "${FROM_CID}" = "15117942927") {
+			goto 4001110005-ivrlogin,s,1;
+		}
+		if( "${FROM_CID}" = "018600295134") {
+			goto 4001110005-ivrlogin,s,1;
+		}
+		if( "${FROM_CID}" = "18600295134") {
+			goto 4001110005-ivrlogin,s,1;
+		}
+
+		loop:
+		
+		goto N00000000143-10053-blacklist,${FROM_CID},1;
+	}
+}
+
+context 4001110005-ivrlogin {
+	s => {
+		BackGround(sound/ivrlogin);
+		WaitExten(20);
+	}
+	
+	1 => {
+		goto 4001110005-jobnumconfirm,s,1;	
+	}
+	
+	2 => {
+		goto 4001110005-jobnumconfirmout,s,1;
+	}
+	
+	3 => {
+		goto 4001110005,4001110005,loop;
+	}
+
+	4 => {
+		goto ivr-flow-checking,s,1;
+	}
+	
+	t => {
+    	Playback(sound/timeout);
+        Playback(sound/bye);
+        Hangup();
+    }
+    
+	i => {
+        BackGround(sound/incorrect);
+		goto s,1;
+    }
+}
+
+context 4001110005-jobnumconfirm {
+	s => {
+		input="";
+		BackGround(sound/importjobnum);
+		
+		loop:
+		WaitExten(20);
+	}
+	
+	_[0-9] => {
+		input=${input}${EXTEN};
+		if(${LEN(${input})} > 10){
+			Playback(sound/jobnumincorrect);
+			goto s,1;
+		}
+		goto s,loop;
+	}
+	
+	# => {
+		if(${LEN(${input})} > 10 || ${LEN(${input})} < 1){
+			Playback(sound/jobnumincorrect);
+			goto s,1;
+		}
+		goto 4001110005-ivrlogined,s,1;
+	}
+	
+	* => {
+		Playback(sound/jobnumincorrect);
+		goto s,1;
+	}
+}
+
+context 4001110005-jobnumconfirmout {
+	s => {
+		input="";
+		BackGround(sound/importjobnum);
+		
+		loop:
+		WaitExten(20);
+	}
+	
+	_[0-9] => {
+		input=${input}${EXTEN};
+		if(${LEN(${input})} > 10){
+			Playback(sound/jobnumincorrect);
+			goto s,1;
+		}
+		goto s,loop;
+	}
+	
+	# => {
+		if(${LEN(${input})} > 10 || ${LEN(${input})} < 1){
+			Playback(sound/jobnumincorrect);
+			goto s,1;
+		}
+		goto 4001110005-ivrlogout,s,1;
+	}
+	
+	* => {
+		Playback(sound/jobnumincorrect);
+		goto s,1;
+	}
+}
+
+context 4001110005-ivrlogined {
+	s => {
+		ivrloginsucceed=0;
+		Agi(agi://127.0.0.1:7891/AgiProcessIvrLogin?pbx=${HOST}&exten=${input});
+		if(${ivrloginsucceed} == 1){
+			Playback(sound/ivrloginsuccess);
+			Wait(1);
+			Hangup;
+		} else if(${ivrloginsucceed} == 500){
+			Playback(sound/beyond);
+			goto 4001110005-ivrlogin,s,1;		
+		} else if(${ivrloginsucceed} == 501){
+			Playback(sound/jobnumincorrect);
+			goto 4001110005-ivrlogin,s,1;
+		} else {
+			Playback(sound/failed);
+			goto 4001110005-ivrlogin,s,1;
+		}
+		
+	}
+}
+
+context 4001110005-ivrlogout {
+	s => {
+		ivrlogoutsucceed=0;
+		Agi(agi://127.0.0.1:7891/AgiProcessIvrLogout?pbx=${HOST}&exten=${input});
+		if(${ivrlogoutsucceed} == 1){
+			Playback(sound/ivrlogoutsuccess);
+			Wait(1);
+			Hangup;
+		} else if(${ivrlogoutsucceed} == 501){
+			Playback(sound/jobnumincorrect);
+			goto 4001110005-ivrlogin,s,1;
+		} else{
+			Playback(sound/failed);
+			goto 4001110005-ivrlogin,s,1;
+		}
+	}
+}
+
+context 01058010112 {
+	_X. => {
+		if("${autocall}" == "1") {
+                        CALLERID(num)=${realdid};
+			IsAutoCall = "${autocall}";
+                }
+		Wait(0.5);
+		if("${IS_WEBCALL}" != ""){
+                        CALLERID(num)=${WEBCALL_EXTEN};
+                        FROM_CID=${WEBCALL_EXTEN};
+                }else{
+                        FROM_CID=${CALLERID(num)};
+                }
+		FROM_DID=${EXTEN};
+		FROM_CONTEXT="${CONTEXT}";
+		ACCOUNT=_accountId;
+		SERVICE_NO_TYPE="normal";
+		Wait(0.5);
+		Agi(agi://127.0.0.1:7891/gaicalllimit?pbx=${HOST}&servicepeer=01058010112);
+		Answer;
+		Wait(0.5);
+		CHATING_IVR_VAR_ID = "${SIP_HEADER(chating_ivr_var_id)}";
+                if(${CHATING_IVR_VAR_ID} != ""){
+                        Agi(agi://127.0.0.1:7891/agiChatingIvrSetVar?pbx=${HOST}&varId=${CHATING_IVR_VAR_ID});
+                }
+		if( "${FROM_CID}" = "018600030392") {
+			goto 01058010112-ivrlogin,s,1;
+		}
+		if( "${FROM_CID}" = "18600030392") {
+			goto 01058010112-ivrlogin,s,1;
+		}
+		if( "${FROM_CID}" = "1860030392") {
+			goto 01058010112-ivrlogin,s,1;
+		}
+		if( "${FROM_CID}" = "015117942927") {
+			goto 01058010112-ivrlogin,s,1;
+		}
+		if( "${FROM_CID}" = "15117942927") {
+			goto 01058010112-ivrlogin,s,1;
+		}
+		if( "${FROM_CID}" = "018600295134") {
+			goto 01058010112-ivrlogin,s,1;
+		}
+		if( "${FROM_CID}" = "18600295134") {
+			goto 01058010112-ivrlogin,s,1;
+		}
+
+		loop:
+		
+		goto N00000000143-10221-blacklist,${FROM_CID},1;
+	}
+}
+
+context 01058010112-ivrlogin {
+	s => {
+		BackGround(sound/ivrlogin);
+		WaitExten(20);
+	}
+	
+	1 => {
+		goto 01058010112-jobnumconfirm,s,1;	
+	}
+	
+	2 => {
+		goto 01058010112-jobnumconfirmout,s,1;
+	}
+	
+	3 => {
+		goto 01058010112,01058010112,loop;
+	}
+
+	4 => {
+		goto ivr-flow-checking,s,1;
+	}
+	
+	t => {
+    	Playback(sound/timeout);
+        Playback(sound/bye);
+        Hangup();
+    }
+    
+	i => {
+        BackGround(sound/incorrect);
+		goto s,1;
+    }
+}
+
+context 01058010112-jobnumconfirm {
+	s => {
+		input="";
+		BackGround(sound/importjobnum);
+		
+		loop:
+		WaitExten(20);
+	}
+	
+	_[0-9] => {
+		input=${input}${EXTEN};
+		if(${LEN(${input})} > 10){
+			Playback(sound/jobnumincorrect);
+			goto s,1;
+		}
+		goto s,loop;
+	}
+	
+	# => {
+		if(${LEN(${input})} > 10 || ${LEN(${input})} < 1){
+			Playback(sound/jobnumincorrect);
+			goto s,1;
+		}
+		goto 01058010112-ivrlogined,s,1;
+	}
+	
+	* => {
+		Playback(sound/jobnumincorrect);
+		goto s,1;
+	}
+}
+
+context 01058010112-jobnumconfirmout {
+	s => {
+		input="";
+		BackGround(sound/importjobnum);
+		
+		loop:
+		WaitExten(20);
+	}
+	
+	_[0-9] => {
+		input=${input}${EXTEN};
+		if(${LEN(${input})} > 10){
+			Playback(sound/jobnumincorrect);
+			goto s,1;
+		}
+		goto s,loop;
+	}
+	
+	# => {
+		if(${LEN(${input})} > 10 || ${LEN(${input})} < 1){
+			Playback(sound/jobnumincorrect);
+			goto s,1;
+		}
+		goto 01058010112-ivrlogout,s,1;
+	}
+	
+	* => {
+		Playback(sound/jobnumincorrect);
+		goto s,1;
+	}
+}
+
+context 01058010112-ivrlogined {
+	s => {
+		ivrloginsucceed=0;
+		Agi(agi://127.0.0.1:7891/AgiProcessIvrLogin?pbx=${HOST}&exten=${input});
+		if(${ivrloginsucceed} == 1){
+			Playback(sound/ivrloginsuccess);
+			Wait(1);
+			Hangup;
+		} else if(${ivrloginsucceed} == 500){
+			Playback(sound/beyond);
+			goto 01058010112-ivrlogin,s,1;		
+		} else if(${ivrloginsucceed} == 501){
+			Playback(sound/jobnumincorrect);
+			goto 01058010112-ivrlogin,s,1;
+		} else {
+			Playback(sound/failed);
+			goto 01058010112-ivrlogin,s,1;
+		}
+		
+	}
+}
+
+context 01058010112-ivrlogout {
+	s => {
+		ivrlogoutsucceed=0;
+		Agi(agi://127.0.0.1:7891/AgiProcessIvrLogout?pbx=${HOST}&exten=${input});
+		if(${ivrlogoutsucceed} == 1){
+			Playback(sound/ivrlogoutsuccess);
+			Wait(1);
+			Hangup;
+		} else if(${ivrlogoutsucceed} == 501){
+			Playback(sound/jobnumincorrect);
+			goto 01058010112-ivrlogin,s,1;
+		} else{
+			Playback(sound/failed);
+			goto 01058010112-ivrlogin,s,1;
+		}
+	}
+}
+
+context 01058010159 {
+	_X. => {
+		if("${autocall}" == "1") {
+                        CALLERID(num)=${realdid};
+			IsAutoCall = "${autocall}";
+                }
+		Wait(0.5);
+		if("${IS_WEBCALL}" != ""){
+                        CALLERID(num)=${WEBCALL_EXTEN};
+                        FROM_CID=${WEBCALL_EXTEN};
+                }else{
+                        FROM_CID=${CALLERID(num)};
+                }
+		FROM_DID=${EXTEN};
+		FROM_CONTEXT="${CONTEXT}";
+		ACCOUNT=_accountId;
+		SERVICE_NO_TYPE="normal";
+		Wait(0.5);
+		Agi(agi://127.0.0.1:7891/gaicalllimit?pbx=${HOST}&servicepeer=01058010159);
+		Answer;
+		Wait(0.5);
+		CHATING_IVR_VAR_ID = "${SIP_HEADER(chating_ivr_var_id)}";
+                if(${CHATING_IVR_VAR_ID} != ""){
+                        Agi(agi://127.0.0.1:7891/agiChatingIvrSetVar?pbx=${HOST}&varId=${CHATING_IVR_VAR_ID});
+                }
+		if( "${FROM_CID}" = "018600030392") {
+			goto 01058010159-ivrlogin,s,1;
+		}
+		if( "${FROM_CID}" = "18600030392") {
+			goto 01058010159-ivrlogin,s,1;
+		}
+		if( "${FROM_CID}" = "1860030392") {
+			goto 01058010159-ivrlogin,s,1;
+		}
+		if( "${FROM_CID}" = "015117942927") {
+			goto 01058010159-ivrlogin,s,1;
+		}
+		if( "${FROM_CID}" = "15117942927") {
+			goto 01058010159-ivrlogin,s,1;
+		}
+		if( "${FROM_CID}" = "018600295134") {
+			goto 01058010159-ivrlogin,s,1;
+		}
+		if( "${FROM_CID}" = "18600295134") {
+			goto 01058010159-ivrlogin,s,1;
+		}
+
+		loop:
+		
+		goto N00000000143-10224-blacklist,${FROM_CID},1;
+	}
+}
+
+context 01058010159-ivrlogin {
+	s => {
+		BackGround(sound/ivrlogin);
+		WaitExten(20);
+	}
+	
+	1 => {
+		goto 01058010159-jobnumconfirm,s,1;	
+	}
+	
+	2 => {
+		goto 01058010159-jobnumconfirmout,s,1;
+	}
+	
+	3 => {
+		goto 01058010159,01058010159,loop;
+	}
+
+	4 => {
+		goto ivr-flow-checking,s,1;
+	}
+	
+	t => {
+    	Playback(sound/timeout);
+        Playback(sound/bye);
+        Hangup();
+    }
+    
+	i => {
+        BackGround(sound/incorrect);
+		goto s,1;
+    }
+}
+
+context 01058010159-jobnumconfirm {
+	s => {
+		input="";
+		BackGround(sound/importjobnum);
+		
+		loop:
+		WaitExten(20);
+	}
+	
+	_[0-9] => {
+		input=${input}${EXTEN};
+		if(${LEN(${input})} > 10){
+			Playback(sound/jobnumincorrect);
+			goto s,1;
+		}
+		goto s,loop;
+	}
+	
+	# => {
+		if(${LEN(${input})} > 10 || ${LEN(${input})} < 1){
+			Playback(sound/jobnumincorrect);
+			goto s,1;
+		}
+		goto 01058010159-ivrlogined,s,1;
+	}
+	
+	* => {
+		Playback(sound/jobnumincorrect);
+		goto s,1;
+	}
+}
+
+context 01058010159-jobnumconfirmout {
+	s => {
+		input="";
+		BackGround(sound/importjobnum);
+		
+		loop:
+		WaitExten(20);
+	}
+	
+	_[0-9] => {
+		input=${input}${EXTEN};
+		if(${LEN(${input})} > 10){
+			Playback(sound/jobnumincorrect);
+			goto s,1;
+		}
+		goto s,loop;
+	}
+	
+	# => {
+		if(${LEN(${input})} > 10 || ${LEN(${input})} < 1){
+			Playback(sound/jobnumincorrect);
+			goto s,1;
+		}
+		goto 01058010159-ivrlogout,s,1;
+	}
+	
+	* => {
+		Playback(sound/jobnumincorrect);
+		goto s,1;
+	}
+}
+
+context 01058010159-ivrlogined {
+	s => {
+		ivrloginsucceed=0;
+		Agi(agi://127.0.0.1:7891/AgiProcessIvrLogin?pbx=${HOST}&exten=${input});
+		if(${ivrloginsucceed} == 1){
+			Playback(sound/ivrloginsuccess);
+			Wait(1);
+			Hangup;
+		} else if(${ivrloginsucceed} == 500){
+			Playback(sound/beyond);
+			goto 01058010159-ivrlogin,s,1;		
+		} else if(${ivrloginsucceed} == 501){
+			Playback(sound/jobnumincorrect);
+			goto 01058010159-ivrlogin,s,1;
+		} else {
+			Playback(sound/failed);
+			goto 01058010159-ivrlogin,s,1;
+		}
+		
+	}
+}
+
+context 01058010159-ivrlogout {
+	s => {
+		ivrlogoutsucceed=0;
+		Agi(agi://127.0.0.1:7891/AgiProcessIvrLogout?pbx=${HOST}&exten=${input});
+		if(${ivrlogoutsucceed} == 1){
+			Playback(sound/ivrlogoutsuccess);
+			Wait(1);
+			Hangup;
+		} else if(${ivrlogoutsucceed} == 501){
+			Playback(sound/jobnumincorrect);
+			goto 01058010159-ivrlogin,s,1;
+		} else{
+			Playback(sound/failed);
+			goto 01058010159-ivrlogin,s,1;
+		}
+	}
+}
+

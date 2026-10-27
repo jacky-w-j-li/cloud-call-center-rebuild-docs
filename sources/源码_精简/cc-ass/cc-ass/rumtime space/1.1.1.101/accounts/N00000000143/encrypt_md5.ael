@@ -1,0 +1,16 @@
+context N00000000143-10185-encryptmd5 {
+	s => {
+		Agi(agi://127.0.0.1:7891/agiencryptmd5?pbx=${HOST}&servicepeer=10185);
+		Hangup;
+	}
+}
+
+
+context N00000000143-10189-encryptmd5 {
+	s => {
+		Agi(agi://127.0.0.1:7891/agiencryptmd5?pbx=${HOST}&servicepeer=10189);
+		Hangup;
+	}
+}
+
+

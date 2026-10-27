@@ -1,0 +1,132 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+        ×
+    </button>
+    <h3>定制客户字段</h3>
+</div>
+<div class="customer_stable_fields">
+    <form>
+        <div class="modal-body">
+            <div style="float: left; padding-right: 5px;">
+                <div class="row_item">
+                    <label for="name">客户名称</label>
+                    <input id="name" maxlength="20" name="name" type="text" placeholder="请填写自定义名称..." value="__name" required>
+                    <input class="field_prop" id="name_required" disabled type="checkbox" name="name_required" style="margin-left: 5px;" checked><label for="name_required" style="width: 35px">必填</label>
+                    <input class="field_prop" id="name_search" disabled type="checkbox" name="name_search" style="margin-left: 5px;" checked><label for="name_search" style="width: 45px">可查询</label>
+                    <input class="field_prop" id="name_noupdate"  type="checkbox" name="name_noupdate" style="margin-left: 5px;" name_noupdate_checked><label for="name_noupdate" style="width: 50px">禁止修改</label>
+                </div>
+                <div class="row_item">
+                    <label for="title">描述(职位)</label>
+                    <input id="title" maxlength="20" name="title" type="text" placeholder="请填写自定义名称..." value="__title">
+                    <input class="field_prop" id="title_required" type="checkbox" name="title_required" style="margin-left: 5px;" title_required_checked><label for="title_required" style="width: 35px">必填</label>
+                    <input class="field_prop" id="title_search" type="checkbox" name="title_search" style="margin-left: 5px;" title_search_checked><label for="title_search" style="width: 45px">可查询</label>
+                    <input class="field_prop" id="title_noupdate"  type="checkbox" name="title_noupdate" style="margin-left: 5px;" title_noupdate_checked><label for="title_noupdate" style="width: 50px">禁止修改</label>
+                </div>
+                <div class="row_item">
+                    <label for="phone">电话(联系人)</label>
+                    <input id="phone" maxlength="20" name="phone" type="text" placeholder="请填写自定义名称..." value="__phone" required>
+                    <input class="field_prop" id="phone_required" type="checkbox" name="phone_required" style="margin-left: 5px;" phone_required_checked><label for="phone_required" style="width: 35px">必填</label>
+                    <input class="field_prop" id="phone_search" disabled type="checkbox" name="phone_search" style="margin-left: 5px;" phone_search_checked><label for="phone_search" style="width: 45px">可查询</label>
+                    <!--<input class="field_prop" id="phone_noupdate"  type="checkbox" name="phone_noupdate" style="margin-left: 5px;" phone_noupdate_checked><label for="phone_noupdate" style="width: 50px">禁止修改</label>-->
+                </div>
+                <div class="row_item">
+                    <label for="email">邮箱</label>
+                    <input id="email" maxlength="20" name="email" type="text" placeholder="请填写自定义名称..." value="__email">
+                    <input class="field_prop" id="email_required" type="checkbox" name="email_required" style="margin-left: 5px;" email_required_checked><label for="email_required" style="width: 35px">必填</label>
+                    <input class="field_prop" id="email_search" type="checkbox" name="email_search" style="margin-left: 5px;" email_search_checked><label for="email_search" style="width: 45px">可查询</label>
+                    <!--<input class="field_prop" id="email_noupdate"  type="checkbox" name="email_noupdate" style="margin-left: 5px;" email_noupdate_checked><label for="email_noupdate" style="width: 50px">禁止修改</label>-->
+                </div>
+                <div class="row_item">
+                    <label for="weixin">微信</label>
+                    <input id="weixin" maxlength="20" name="weixin" type="text" placeholder="请填写自定义名称..." value="__weixin">
+                    <input class="field_prop" id="weixin_required" type="checkbox" name="weixin_required" style="margin-left: 5px;" weixin_required_checked><label for="weixin_required" style="width: 35px">必填</label>
+                    <input class="field_prop" id="weixin_search" type="checkbox" name="weixin_search" style="margin-left: 5px;" weixin_search_checked><label for="weixin_search" style="width: 45px">可查询</label>
+                    <!--<input class="field_prop" id="weixin_noupdate"  type="checkbox" name="weixin_noupdate" style="margin-left: 5px;" weixin_noupdate_checked><label for="weixin_noupdate" style="width: 50px">禁止修改</label>-->
+                </div>
+                <div class="row_item">
+                    <label for="province">省</label>
+                    <input id="province" readonly maxlength="20" name="province" type="text" placeholder="请填写自定义名称..." value="__province">
+                    <!--<input id="province" readonly maxlength="20" name="province" type="text" placeholder="请填写自定义名称..." value="省">-->
+                    <input class="field_prop" id="province_required" type="checkbox" name="province_required" style="margin-left: 5px;" province_required_checked><label for="province_required" style="width: 35px">必填</label>
+                    <input class="field_prop" id="province_search" disabled type="checkbox" name="province_search" style="margin-left: 5px;" checked><label for="province_search" style="width: 45px">可查询</label>
+                    <input class="field_prop" id="province_noupdate"  type="checkbox" name="province_noupdate" style="margin-left: 5px;" province_noupdate_checked><label for="province_noupdate" style="width: 50px">禁止修改</label>
+                </div>
+                <div class="row_item">
+                    <label for="city">市</label>
+                    <input id="city" readonly maxlength="20" name="city" type="text" placeholder="请填写自定义名称..." value="__city">
+                    <!--<input id="city" readonly maxlength="20" name="city" type="text" placeholder="请填写自定义名称..." value="市">-->
+                    <input class="field_prop" id="city_required" type="checkbox" name="city_required" style="margin-left: 5px;" city_required_checked><label for="city_required" style="width: 35px">必填</label>
+                    <input class="field_prop" id="city_search" disabled type="checkbox" name="city_search" style="margin-left: 5px;" checked><label for="city_search" style="width: 45px">可查询</label>
+                    <!--<input class="field_prop" id="city_noupdate"  type="checkbox" name="city_noupdate" style="margin-left: 5px;" city_noupdate_checked><label for="city_noupdate" style="width: 50px">禁止修改</label>-->
+                </div>
+                <div class="row_item">
+                    <label for="address">地址</label>
+                    <input id="address" maxlength="20" name="address" type="text" placeholder="请填写自定义名称..." value="__address">
+                    <input class="field_prop" id="address_required" type="checkbox" name="address_required" style="margin-left: 5px;" address_required_checked><label for="address_required" style="width: 35px">必填</label>
+                    <input class="field_prop" id="address_search" type="checkbox" name="address_search" style="margin-left: 5px;" address_search_checked><label for="address_search" style="width: 45px">可查询</label>
+                    <input class="field_prop" id="address_noupdate"  type="checkbox" name="address_noupdate" style="margin-left: 5px;" address_noupdate_checked><label for="address_noupdate" style="width: 50px">禁止修改</label>
+                </div>
+                <div class="row_item">
+                    <label for="note">备注</label>
+                    <input id="note" maxlength="20" name="note" type="text" placeholder="请填写自定义名称..." value="__note">
+                    <input class="field_prop" id="note_required" type="checkbox" name="note_required" style="margin-left: 5px;" note_required_checked><label for="note_required" style="width: 35px">必填</label>
+                    <input class="field_prop" id="note_search" type="checkbox" name="note_search" style="margin-left: 5px;" note_search_checked><label for="note_search" style="width: 45px">可查询</label>
+                    <input class="field_prop" id="note_noupdate"  type="checkbox" name="note_noupdate" style="margin-left: 5px;" note_noupdate_checked><label for="note_noupdate" style="width: 50px">禁止修改</label>
+                </div>
+                <div class="row_item field_personal">
+                    <label for="sex">性别</label>
+                    <input id="sex" maxlength="20" name="sex" type="text" placeholder="请填写自定义名称..." value="__sex">
+                    <input class="field_prop" id="sex_required" type="checkbox" name="sex_required" style="margin-left: 5px;" sex_required_checked><label for="sex_required" style="width: 35px">必填</label>
+                    <input class="field_prop" id="sex_search" type="checkbox" name="sex_search" style="margin-left: 5px;" sex_search_checked><label for="sex_search" style="width: 45px">可查询</label>
+                    <input class="field_prop" id="sex_noupdate"  type="checkbox" name="sex_noupdate" style="margin-left: 5px;" sex_noupdate_checked><label for="sex_noupdate" style="width: 50px">禁止修改</label>
+                </div>
+                <div class="row_item field_personal">
+                    <label for="birth">生日</label>
+                    <input id="birth" maxlength="20" name="birth" placeholder="请填写自定义名称..." type="text" value="__birth">
+                    <input class="field_prop" id="birth_required" type="checkbox" name="birth_required" style="margin-left: 5px;" birth_required_checked><label for="birth_required" style="width: 35px">必填</label>
+                    <input class="field_prop" id="birth_search" type="checkbox" name="birth_search" style="margin-left: 5px;" birth_search_checked><label for="birth_search" style="width: 45px">可查询</label>
+                    <input class="field_prop" id="birth_noupdate"  type="checkbox" name="birth_noupdate" style="margin-left: 5px;" birth_noupdate_checked><label for="birth_noupdate" style="width: 50px">禁止修改</label>
+                </div>
+                <div class="row_item field_personal">
+                    <label for="age">年龄</label>
+                    <input id="age" maxlength="20" name="age" type="text" placeholder="请填写自定义名称..." value="__age">
+                    <input class="field_prop" id="age_required" type="checkbox" name="age_required" style="margin-left: 5px;" age_required_checked><label for="age_required" style="width: 35px">必填</label>
+                    <input class="field_prop" id="age_search" type="checkbox" name="age_search" style="margin-left: 5px;" age_search_checked><label for="age_search" style="width: 45px">可查询</label>
+                    <input class="field_prop" id="age_noupdate"  type="checkbox" name="age_noupdate" style="margin-left: 5px;" age_noupdate_checked><label for="age_noupdate" style="width: 50px">禁止修改</label>
+                </div>
+                <div class="row_item">
+                    <label for="web">网站(个人主页)</label>
+                    <input id="web" maxlength="20" name="web" type="text" placeholder="请填写自定义名称..." value="__web">
+                    <input class="field_prop" id="web_required" type="checkbox" name="web_required" style="margin-left: 5px;" web_required_checked><label for="web_required" style="width: 35px">必填</label>
+                    <input class="field_prop" id="web_search" type="checkbox" name="web_search" style="margin-left: 5px;" web_search_checked><label for="web_search" style="width: 45px">可查询</label>
+                    <input class="field_prop" id="web_noupdate"  type="checkbox" name="web_noupdate" style="margin-left: 5px;" web_noupdate_checked><label for="web_noupdate" style="width: 50px">禁止修改</label>
+                </div>
+
+                <div style="padding-top: 5px;margin-top: 15px;">
+                    <ul class="alert alert-info ">温馨提示：<br>
+                        <li>1.填写了自定义名称的字段就会自动启用；当您要停用某个字段，清除它的自定义名称即可。</li>
+                        <li>2.可以修改字段的描述，不能修改其用途，如“电话”可以改为手机、联系电话等等，但只能保存电话类型的信息。</li>
+                        <li>3.选择必填后添加和修改客户信息时该字段必须填写；选择可查询后搜索客户时会将该字段作为可查询条件；选择禁止修改，则根据用户权限控制该字段是否能修改。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button href="#" class="btn btn-small btn-primary ds_form_action" ds_action="config.customer.editFields" template-id="__id">
+                保存
+            </button>
+            <button class="btn btn-small " data-dismiss="modal" aria-hidden="true">
+                取消
+            </button>
+        </div>
+    </form>
+</div>
+<style type="text/css">
+    .field_personal{
+        display: none;
+    }
+    .customer_stable_fields .field_prop{
+        margin-top: 4px;;
+    }
+</style>

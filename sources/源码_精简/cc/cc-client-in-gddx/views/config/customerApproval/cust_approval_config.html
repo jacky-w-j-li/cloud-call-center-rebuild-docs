@@ -1,0 +1,53 @@
+<div class="row-fluid">
+    <div class="span5 config_left">
+        <br/>
+        <br/>
+        <div class="list_container">
+            <form id="frm_customer_approval_search" class="ds_search_form">
+
+            </form>
+            <div class="contact_list">
+                <div class="list-inside">
+                    <table class="table table-bordered table-striped table-hover">
+                        <colgroup>
+                            <col width="35%"/>
+                            <col width="25%"/>
+                            <col width="20%"/>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>
+                                审核模板名称
+                            </th>
+                            <th>
+                                角色
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="cust_approval_list_pane">
+                        </tbody>
+                    </table>
+                    <div for="frm_customer_approval_search" class="pagination pagination-small config_cust_approval_count" style="width:100%;margin:0 3px;" ds_pagination_action="config.user.searchUser">
+                        <span style="float:left;margin-top:8px;font-size:12px;">查询结果：<span class="result_count">0</span></span>
+                        <ul class="user_list_page" style="float:right;padding-right: 6px;">
+                            <li><a href="#"  value="0">&laquo;</a></li>
+                            <li><a href="#"  value="1">1</a></li>
+                            <li><a href="#"  value="2">2</a></li>
+                            <li><a href="#"  value="3">3</a></li>
+                            <li><a href="#"  value="4">4</a></li>
+                            <li><a href="#"  value="5">5</a></li>
+                            <li><a href="#"  value="6">&raquo;</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="span7 sub-right">
+        <div id="cust_approval_detail_pane">
+        </div>
+    </div>
+</div>

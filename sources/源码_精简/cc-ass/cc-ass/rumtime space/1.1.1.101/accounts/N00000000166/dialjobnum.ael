@@ -1,0 +1,22 @@
+context N00000000166-2-dialjobnum {
+	s => {
+		Playback(sound/dialinnoexist);
+		Hangup;
+	}
+}
+
+context N00000000166-2-dialjobnum-agentbusy {
+	s => {
+		Playback(sound/dialinbusy);
+		Hangup;
+	}
+}
+
+context N00000000166-2-dialjobnum-logoff {
+	s => {
+		Playback(sound/dialinnosignin);
+		Hangup;
+	}
+}
+
+

@@ -1,0 +1,217 @@
+<div class="list_check_pane" >
+    <div class='contacts_caption'>
+        <div class="cancel_edit" style="">
+            <div class="list_check_all" style="cursor: pointer;" >
+                <b class="ico_select_checkbox ico ico_wrap" style="top:10px;left:5px;"></b>
+            </div>
+            <div style="display: inline-block;margin-left: 30px;font-weight: bold;">
+                已选
+                <span class="bottom_toolbar_selsize_num">
+                    0
+                </span>
+                项
+            </div>
+            <span class="pull-right">
+                <a href="#" class="ds_do_action" ds_action="cancelDealToolbar" ds_data="cdr" ds_attr="">取消</a>
+            </span>
+        </div>
+        <div class="caption-top clearfix">
+            <div class="search_condition" style="display:none;"></div>
+            <div class="header_wrap clearfix">
+                <form id="frm_cdr_my_search">
+                    <span class="refresh ds_form_action" style="display: none;" ds_action="cdr.searchMyCallCard"></span>
+                    <div class="header_search_wrap pull-left quick_search" style="width: 340px">
+                        <div class="header_search_button ds_form_action normal_search" ds_action="cdr.searchMyCallCard">
+                            <i class="icon-search"></i>
+                        </div>
+                        <div class="header_search_input">
+                            <div class="header_search_input_textbox">
+                                <div class="dropdown">
+                                    <div class="dropdown-toggle quick_card " data-toggle="dropdown">
+                                        <span class="quick_desc ellipsis quickSearchCdrStauts_current">全部</span>
+                                        <span class="caret"></span>
+                                    </div>
+                                    <ul class="dropdown-menu quick_menu" style="min-width: 90px;">
+                                        <li><a href="#" class="ds_do_action" ds_action="cdr.quickSearchCdrStauts" ds_data="my_all">全部</a></li>
+                                        <li><a href="#" class="ds_do_action" ds_action="cdr.quickSearchCdrStauts" ds_data="my_dealing">已接听</a></li>
+                                        <li><a href="#" class="ds_do_action" ds_action="cdr.quickSearchCdrStauts" ds_data="my_notDeal">振铃未接</a></li>
+                                        <li><a href="#" class="ds_do_action" ds_action="cdr.quickSearchCdrStauts" ds_data="my_queueLeak">排队放弃</a></li>
+                                        <li><a href="#" class="ds_do_action" ds_action="cdr.quickSearchCdrStauts" ds_data="my_voicemail">已留言</a></li>
+                                        <li><a href="#" class="ds_do_action" ds_action="cdr.quickSearchCdrStauts" ds_data="my_leak">IVR</a></li>
+                                        <li><a href="#" class="ds_do_action" ds_action="cdr.quickSearchCdrStauts" ds_data="my_blackList">黑名单</a></li>
+                                    </ul>
+                                </div>
+                                <div class="textbox_wrap" style="margin-left: 63px">
+                                    <div class="textbox_inner">
+                                        <input type="text" name="QUICK_QUERY_NUM" class="textbox_input" maxlength="254" placeholder="输入主叫或被叫查询">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text_link header_search_advanced btn_advanced_search">
+                            高级搜索
+                        </div>
+                    </div>
+                </form>
+                <div class="header_func_plus pull-right">
+                    <!--<ul class="nav nav-pills" style="margin-bottom:0;">-->
+                        <!--<li class="dropdown">-->
+                            <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#" style="padding: 5px 11px;">-->
+                            <!--<span class="nav_title">-->
+                                <!--<b class="ico ico_middle ico_func_plus">-->
+                                <!--</b>-->
+                            <!--</span>-->
+                            <!--</a>-->
+
+                            <!--<ul class="dropdown-menu menu_list pull-right">-->
+                                <!--<li><a href="#" class="ds_do_action" ds_action="showDealToolbar" ds_data="webchat">编辑</a></li>-->
+                            <!--</ul>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                </div>
+            </div>
+
+            <div class="ds_search_filter my_cdr_search_filter" style="display: none;">
+            </div>
+        </div>
+    </div>
+    <div class="list_container">
+        <div class="list-inside">
+        </div>
+        <div class="list-footer">
+            <div class="pagination pagination-small" for="frm_cdr_my_search" ds_pagination_action="cdr.searchMyCallCard">
+                <span style="float:left;">查询结果: <span class="result_count">0</span></span>
+                <ul class="pull-right" style="padding-right: 2px;">
+                    <li>
+                        <a href="#"  value="0">«</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="1">1</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="2">2</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="3">3</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="4">4</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="5">5</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="6">»</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div tabindex="-1" class="advanced_search_pane hidden">
+        <div class="advanced_body">
+            <form id="frm_cdr_my_advanced_search" class="ds_search_form">
+                <input type="hidden" name="isAdvanceSearch" value="1">
+                <fieldset>
+                    <div class="row-fluid">
+                        <div class="span4 advanced_search_item ds_search_item">
+                            <label>主叫</label>
+                            <input  name="CALL_NO" type="text" class=""/>
+                        </div>
+                        <div class="span4 advanced_search_item ds_search_item">
+                            <label>被叫</label>
+                            <input  name="CALLED_NO" type="text" />
+                        </div>
+                        <div class="span4 advanced_search_item ds_search_item">
+                            <label>呼叫类型</label>
+                            <select name="CONNECT_TYPE" class="">
+                                <option value="" selected>--请选择--</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span4 advanced_search_item ds_search_item">
+                            <label>处理状态</label>
+                            <select name="STATUS">
+                                <option value="" selected>--请选择--</option>
+                            </select>
+                        </div>
+                        <div class="span4 advanced_search_item ds_search_item">
+                            <label>技能组</label>
+                            <select name="ERROR_MEMO">
+                                <option value="" selected>--请选择--</option>
+                            </select>
+                        </div>
+                        <div class="span4 advanced_search_item ds_search_item">
+                            <label>满意度</label>
+                            <select name="INVESTIGATE" class="">
+                                <option value="" selected>--请选择--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span4 advanced_search_item ds_search_item">
+                            <label>定位客户</label>
+                            <select name="CUSTOMER_NAME" class="">
+                                <option value="" selected>--全部--</option>
+                                <option value="true">已定位</option>
+                                <option value="未知客户">未知客户</option>
+                                <option value="多个匹配客户">多个匹配客户</option>
+                            </select>
+                        </div>
+                        <div class="span8 advanced_search_item ds_search_item">
+                            <label>呼叫时间</label>
+                            <input name="OFFERING_TIME-begin_date" class="ds_datetime" type="text" placeholder="">
+                            <label style="width: 16px">至</label>
+                            <input name="OFFERING_TIME-end_date" class="ds_datetime" type="text" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span4 advanced_search_item ds_search_item">
+                            <label>标记</label>
+                            <select name="KEY_TAG" class="key_tag_selector">
+                                <option value="">--全部--</option>
+                                <option value="true">是</option>
+                                <option value="false">否</option>
+                            </select>
+                        </div>
+                        <div class="span8 advanced_search_item ds_search_item">
+                            <label>通话时长</label>
+                            <div class="input-append" style="float: left;"><input type="text" style="width: 86px" name="CALL_TIME_LENGTH_BEGIN" dataType="Number" msg="时长条件只能为正整数" class="input-small">
+                                <span class="add-on" style="height: 15px;line-height: 15px">秒</span></div>
+                            <label style="width: 16px">至</label>
+                            <div class="input-append" style="float: left;"><input type="text" style="width: 86px" name="CALL_TIME_LENGTH_END"  dataType="Number" msg="时长条件只能为正整数" class="input-small">
+                                <span class="add-on" style="height: 15px;line-height: 15px">秒</span></div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span8 advanced_search_item ds_search_item">
+                            <label>排队时长</label>
+                            <div class="input-append" style="float: left;"><input type="text" style="width: 86px" name="QUEUE_TIME_LENGTH_BEGIN" dataType="Number" msg="时长条件只能为正整数" class="input-small">
+                                <span class="add-on" style="height: 15px;line-height: 15px">秒</span></div>
+                            <label style="width: 16px">至</label>
+                            <div class="input-append" style="float: left;"><input type="text" style="width: 86px" name="QUEUE_TIME_LENGTH_END"  dataType="Number" msg="时长条件只能为正整数" class="input-small">
+                                <span class="add-on" style="height: 15px;line-height: 15px">秒</span></div>
+                        </div>
+                    </div>
+                    <div style="padding: 10px;">
+                        <button type="button" class="btn btn-small btn-primary ds_form_action  pull-right cdr_adv_search" ds_action="cdr.searchMyCallCard" >搜索</button>
+                        <button type="button" class="btn btn-small  reset_adv_search ds_do_action pull-right" ds_action="resetForm" ds_data="cdrYkfListMy" style="margin-right: 10px;">重置</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function(){
+        dsevent.bind('#view_cdr_my', 'callRefreshCustomer customerUpdate', function(event, params){
+            eval("handler.cdr."+event.type+"(params)");
+        });
+    });
+</script>

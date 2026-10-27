@@ -1,0 +1,47 @@
+<div class="" style="width: 75%;margin: 0 auto;">
+    <form class="form-horizontal">
+        <input type="hidden" name="menu" value="_#menu#_"/>
+        <div class="">
+            <div>
+                <h5 style="margin-bottom: 10px;">张三的客户分布：</h5>
+                <label class="radio">
+                    <input type="radio" name="condition" value="" checked>
+                    <span style="/*color: #f0ad4e;*/width:50px;display: inline-block; ">全部</span>
+                    <input type="text" class="input-small" value="100" style="width: 60px;">
+                </label>
+                <label class="radio">
+                    <input type="radio" name="condition" value="" >
+                    <span style="width:50px;display: inline-block; ">未拨打</span>
+                    <input type="text" class="input-small" value="50" style="width: 60px;">
+                </label>
+                <label class="radio">
+                    <input type="radio" name="condition" value="" >
+                    <span style="width:50px;display: inline-block; ">已接听</span>
+                    <input type="text" class="input-small" value="30" style="width: 60px;">
+                </label>
+                <label class="radio">
+                    <input type="radio" name="condition" value="" >
+                    <span style="width:50px;display: inline-block; ">未接听</span>
+                    <input type="text" class="input-small" value="20" style="width: 60px;">
+                </label>
+
+                <!--<a class="" style="color: #f0ad4e;">全部</a>&nbsp;&nbsp;-->
+                <!--<a>未拨打</a>&nbsp;&nbsp;-->
+                <!--<a>已接听</a>&nbsp;&nbsp;-->
+                <!--<a>未接听</a>&nbsp;&nbsp;-->
+            </div>
+            <div >
+                <div style="height: 25px;line-height: 25px;">满足此条件的客户共计<span class="cust_count" style="font-size: 16px;color: red;">100</span>个,确认回收到“未分配”池子中吗？</div>
+
+            </div>
+
+            <div class="">
+                <!--<span>[注]： 必须全部分配完当前查询到的所有客户</span>-->
+                <div class="form_buttons" style="padding-top:10px;">
+                    <button type="button" class="btn btn-small btn-primary ds_form_action pull-left btn_pad" ds_action="customer.saveCustAssign" >保存</button>
+                    <button type="button" class="btn btn-small pull-left  btn_cancel_edit">取消</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

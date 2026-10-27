@@ -1,0 +1,24 @@
+<tr>
+    <td>
+        <span class="mail_nameID">__mailId</span>
+    </td>
+    <td>
+        <span class="outpeople_name">__mailDisplayName</span>
+    </td>
+
+    <td>
+        _@config.channel.showEmailTypeDesc("emailType","_#type#_")@_
+    </td>
+    <td>
+        _@config.channel.showFieldDesc("isDefault","_#isDefault#_")@_
+    </td>
+    <td>
+        <form>
+            <input name="_id" value="___id" type="hidden"/>
+            <div class="accordion-heading" >
+                <a class="ds_form_action" ds_action="config.channel.showUpdateEmailView" style="padding: 2px;" href="#">修改</a>
+                <a class="ds_form_action" ds_action="config.channel.showDelEmailView" style="padding: 2px;" href="#">删除</a>
+            </div>
+        </form>
+    </td>
+</tr>

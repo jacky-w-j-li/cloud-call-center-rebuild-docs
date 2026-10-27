@@ -1,0 +1,70 @@
+<div style="width: 90%;margin: 0 auto;padding: 15px;">
+    <div class="location_phone"></div>
+    <div style='margin-bottom: 10px;'>
+        <form class="form-inline" id="popup_query_customer_form__#_id#_">
+            <input type='hidden' name='callId' value="_#_id#_">
+            <input type='hidden' name='callTel' value="_#callTel#_">
+            <div class="input-append">
+                <input type='text' name='displayName' style="width: 120px;" placeholder="输入名称或号码搜索">
+                <button type="button" class="btn ds_form_action pop_cust_query" ds_action="call.querySelectCust"  title="查询">
+                    <i class="icon-search"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+    <div style='margin-bottom: 10px;'>
+        <table class="table table-bordered table-striped table-hover table-condensed">
+            <colgroup>
+                <col width="20%"/>
+                <col width="25%"/>
+                <col width="30%"/>
+                <col width="25%"/>
+            </colgroup>
+            <thead>
+            <tr>
+                <th>
+                </th>
+                <th>
+                    客户名称
+                </th>
+                <th>
+                    电话号码
+                </th>
+                <th>
+                    所属人
+                </th>
+            </tr>
+            </thead>
+            <tbody id="popup_customer_list_pane__#_id#_">
+                <tr><td colspan="4" style="text-align: center;" class="text-info">请输入名称进行搜索</td></tr>
+            </tbody>
+        </table>
+        <div class="pagination pagination-small" for="popup_query_customer_form__#_id#_" ds_pagination_action="call.querySelectCust" style="width:100%;margin:0 3px;">
+            <span style="float:left;font-size:12px;margin-top:8px;">查询结果：<span class="result_count">0</span></span>
+            <ul id="agent_list_index" style="float:right;">
+                <li>
+                    <a href="#" value="0">&laquo;</a>
+                </li>
+                <li>
+                    <a href="#"  value="1">1</a>
+                </li>
+                <li>
+                    <a href="#" value="2">2</a>
+                </li>
+                <li>
+                    <a href="#" value="3">3</a>
+                </li>
+                <li>
+                    <a href="#"  value="4">4</a>
+                </li>
+                <li>
+                    <a href="#"  value="5">5</a>
+                </li>
+                <li>
+                    <a href="#"  value="6">&raquo;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>

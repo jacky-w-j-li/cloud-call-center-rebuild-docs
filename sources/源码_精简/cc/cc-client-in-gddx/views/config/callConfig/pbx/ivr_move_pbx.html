@@ -1,0 +1,36 @@
+<div id="move_pbx_Modal" class="modal hide fade">
+    <form class="form-horizontal" action="">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>
+                迁移PBX
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div class="control-group">
+                <label class="control-label">
+                    当前PBX
+                </label>
+                <div class="controls">
+                    <input type="text" value="" name="sipConfigName" disabled/>
+                    <input type="hidden" value="" name="oldsipConfigId"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    目标PBX
+                </label>
+                <div class="controls">
+                    <select name="newsipConfigId" required="true" msgName="目标PBX">
+                        <option id='targetpbxselected' selected="selected" value="">--请选择--</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="btn btn-info btn-blue ds_form_action" ds_action="config.callConfig.pbx.saveMoveAccountPbx">保存</a>
+            <a href="#" class="btn btn-gray" onclick="$('#move_pbx_Modal').modal('hide');"> 取消</a>
+        </div>
+
+    </form>
+</div>

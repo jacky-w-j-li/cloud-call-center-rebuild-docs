@@ -1,0 +1,170 @@
+﻿<div class="km_edit_tmpl">
+        <form id="kmaddFrm">
+            <input type="hidden" name="_id" value="">
+            <input type="hidden" name="cid" value="">
+
+            <div class="hf_title_font2" style="border-bottom: 1px solid #f0f0f0;margin-right:5px;line-height: 35px;height:35px;">
+                <h5 style="float:left;">
+                    当前位置：目录浏览><span class="km_nav"></span>
+                </h5>
+                <div class="form_buttons">
+                    <a href="#" class="accept_button button ds_form_action" ds_action="kmcontent.insertKm" style="float:right;margin-top: 0;padding-left: 5px;">发布</a>
+                    <a href="#" class="cancel_button ds_form_action" ds_action="kmcontent.cancelUpdateKm" style="float:right;margin-top: -2px;">取消</a>
+                </div>
+            </div>
+
+            <div class="km_edit_form_middle" style="min-width:500px;">
+                <div id="km_edit_body"  style="padding-top: 20px">
+                    <div class="clearfix" style="display: none;">
+                        <label for="title">父目录：</label>
+                        <select name="catalogId"></select>
+                    </div>
+                    <div class="clearfix">
+                        <label for="title">标题：</label>
+                        <input class="pb-input-text" type="text" id="title" name="title" autofocus onkeypress="if(event.keyCode==13){return false;}" maxlength="100" >
+                    </div>
+                    <div class="km_add_doc">
+                        <label for="editor_id">内容：</label>
+                        <div class="">
+                            <div  style="float:left;padding-right:10px;line-height: 20px;">
+                                <div style="line-height: 35px;height: 35px;">
+                                    <input type="hidden" name="fileId" value="">
+                                    <input type="file"  class="upload" id="uploadDoc" fileType="doc|docx|xls|xlsx" fileSize="2048" onloaded="kmcontent.uploadSucess"
+                                           onerror="kmcontent.uploadError" onprogress="kmcontent.uploadProgress" onabort="" style="height: auto; line-height: normal;"/>
+                                </div>
+                            </div>
+                            <div class="pb-photo-upload-tip" style="float:left;">
+                                <p>
+                                    格式为doc、docx、xls、xlsx，大小不超过2MB
+                                </p>
+                                <p>导入的内容会显示在下边的文本里，覆盖旧的内容。</p>
+                            </div>
+                        </div>
+                        <div style="clear: both;"></div>
+                        <div class="progress doc progress-striped" style="margin-left:90px;width:200px;display: none;">
+                            <div class="bar" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <label>&nbsp;</label>
+                        <textarea id="editor_id" name="content"></textarea>
+                        <div style="height:10px;"></div>
+                    </div>
+                    <div class="km_attach_pane">
+                        <label>附件：</label>
+                        <div class="">
+                            <div id="_#qiniuId#_-km-qiniu" class="float:left;line-height: 20px;">
+                                <a class="btn btn-default btn-small btn-link" id="_#qiniuId#_-pickKmFiles" href="#" >
+                                    <i class="icon-plus"></i>
+                                    <sapn>上传附件</sapn>
+                                </a>
+                                <div class="muted" style="float:right;line-height:20px">
+                                    <p>（大小不超过10MB）</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-fluid" id="km_files" style="margin-left:50px">
+                            <table class="table table-hover text-left km_attach_container" style="margin-top:5px;display:none;width: 450px;background-color:#fff;">
+                                <tbody id="_#qiniuId#_-fsUploadProgress">
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div style="clear: both;"></div>
+                        <div class="progress attach progress-striped" style="margin-left:90px;width:200px;display: none;">
+                            <div class="bar" style="width: 0%;"></div>
+                        </div>
+                        <ul class="thumbnails_km" style='margin-left:90px;'>
+                        </ul>
+                        <div style="clear: both;"></div>
+                        <!--<div class="">-->
+                            <!--<div  style="float:left;padding-right:10px;line-height: 20px;">-->
+                                <!--<input storageType="storage" type="file" id="uploadAttach" class="ds_upload" fileSize="10240" onloaded="kmcontent.uploadAttachSucess"-->
+                                       <!--onerror="kmcontent.uploadError" onprogress="kmcontent.uploadProgress" onprogress="" onabort="" style="height: auto; line-height: normal;"/>-->
+                            <!--</div>-->
+                            <!--<div class="pb-photo-upload-tip" style="float:left;">-->
+                                <!--<p>-->
+                                    <!--（大小不超过10MB）-->
+                                <!--</p>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div style="clear: both;"></div>-->
+                        <!--<div class="progress attach progress-striped" style="margin-left:90px;width:200px;display: none;">-->
+                            <!--<div class="bar" style="width: 0%;"></div>-->
+                        <!--</div>-->
+                        <!--<div id="fsUploadProgress" >-->
+                            <!--<ul id=thumbnails>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                        <!--<div style="clear: both;"></div>-->
+                    </div>
+                </div>
+                <div class="form_buttons" style="padding-left:90px;padding-top:5px;">
+                    <a href="#" class="accept_button button ds_form_action" ds_action="kmcontent.insertKm" >发布</a>
+                    <a href="#" class="cancel_button ds_form_action" ds_action="kmcontent.cancelUpdateKm">取消</a>
+                </div>
+            </div>
+        </form>
+</div>
+
+<style type="text/css">
+    .km_edit_tmpl label {
+        display: inline-block;
+        float: left;
+        padding-right: 18px;
+        width: 75px;
+        line-height: 23px;
+        font-size: 13px;
+        font-weight: bold !important;
+        text-align: right;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 5px 0 0 0;
+    }
+
+    .edit_form input {
+        margin-bottom: 0px;
+    }
+
+    .edit_form select {
+        margin-bottom: 0px;
+    }
+
+</style>
+
+<script type="text/javascript">
+    $(function(){
+        var sid=session.id;
+        kmeditor = KindEditor.create('#editor_id', {
+            width : '85%',
+            height: '230px',
+            wellFormatMode:false,
+            basePath:"./third-lib/kindeditor/",
+            resizeType : 1,
+            allowPreviewEmoticons : false,
+                allowImageUpload : true,
+				uploadJson : './richUpload?action=uploadRichImage&sessionId='+sid+"&type=km_qiniu",
+//                fileManagerJson : '../js/kindeditor/jsp/file_manager_json.jsp',
+//                allowFileManager : true,
+            items : [
+                'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                '|', 'justifyleft', 'justifycenter', 'justifyright', '|','link', 'unlink','table','image','|', 'undo', 'redo','|', 'source','preview', 'fullscreen']
+        });
+    });
+</script>
+
+<script id="tmpl_km_attach" type="text/x-jquery-tmpl">
+<li>
+    <div class=fujian>
+        <div class="left ico-1"></div>
+        <div class="left">
+            <a href="#" class="ds_do_action attachitem" ds_action="kmcontent.download" ds_data="${fileId}">${trueName}</a>
+        </div>
+        <div class="left ico-2 ds_do_action" style="cursor: pointer" ds_action="kmcontent.delAttachFile" ds_data="${fileId}">
+        </div>
+    </DIV>
+</li>
+</script>
+

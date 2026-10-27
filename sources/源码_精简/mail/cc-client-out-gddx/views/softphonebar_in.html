@@ -1,0 +1,364 @@
+﻿﻿<div id="phone_bar" style="float: left;margin-top: 10px">
+    <span id="softphone_phonestate_dropdown_tip">
+        <div id="softphone_phonestate_dropdown" style="height: 33px;margin-left: 10px;" class="btn-group">
+            <a class="btn btn-danger dropdown-toggle" data-toggle="dropdown" style="height: 26px;line-height: 25px" href="#">
+                <div id="peer_state" style="float: left;margin-left: 10px;margin-right: 10px;" >
+                    <div class="" style="width: auto;">
+                        <div id="softphone_timer" class="fr state_time">00:00:00</div>
+                        <img class="fr state_line" style="margin-top: 5px" src="./img/client/line.png" />
+                        <!--<div id="softphone_dropdown" class="fr state_dropdown"><b id="softphone_dropdown_caret" class="caret" style="vertical-align: middle;"></b></div>-->
+                        <div id="softphone_phonestate" class="fr state" onclick="javascript:$('#softphone_dropdown_caret').click()">失效</div>
+                        <div id="dialout_input" class="fr dialout_input" style="margin-right: 3px;font-weight: bold;margin-top: 2px;line-height: 23px"></div>
+                        <!--<div class="fr dh_state_sx" style="display: none;cursor:pointer;"><img style="width: 20px;height: 20px" src="../img/phoneBar/dh_hb.png"></div>-->
+                        <!--<div class="fr dh_state_busy" style="display: none;cursor:pointer;" onclick="phone_setBusy(true, 0)" ><img style="width: 20px;height: 20px" src="../img/phoneBar/dh_busy.png"></div>-->
+                        <!--<div class="fr dh_state_idle" style="cursor:pointer;" onclick="phone_setBusy(true, 1)"><img style="width: 20px;height: 20px" src="../img/phoneBar/dh.png"></div>-->
+
+                        <!--<img class="fr" style="margin-top: 3px;margin-right: 4px;" src="./img/client/line.png" />-->
+
+                        <!--<div class="fr yj_state_enable ds_do_action" style="cursor:pointer;margin-left: 5px;margin-right: 5px" ds_action="setPhoneBarMailChannel" ds_data="false" style="margin-left: 5px;display: none" >-->
+                        <!--<img style="width: 20px;height: 20px" src="../img/phoneBar/yj.png">-->
+                        <!--</div>-->
+                        <!--<div class="fr yj_state_disable ds_do_action" style="cursor:pointer;margin-left: 5px;margin-right: 5px"   ds_action="setPhoneBarMailChannel" ds_data="true" style="margin-left: 5px" >-->
+                        <!--<img style="width: 20px;height: 20px" src="../img/phoneBar/yj_hb.png">-->
+                        <!--</div>-->
+                        <!--<div class="fr wx_state_enable ds_do_action" style="cursor:pointer;" ds_action="setPhoneBarWXChannel" ds_data="false" style="margin-left: 5px; display: none">-->
+                        <!--<img style="width: 20px;height: 20px" src="../img/phoneBar/wx.jpg">-->
+                        <!--</div>-->
+                        <!--<div class="fr wx_state_disable ds_do_action" style="cursor:pointer;" ds_action="setPhoneBarWXChannel" ds_data="true" style="margin-left: 5px">-->
+                        <!--<img style="width: 20px;height: 20px" src="../img/phoneBar/wx_hb.jpg">-->
+                        <!--</div>-->
+                    </div>
+                </div>
+                <span class="caret" style="margin-top: 12px"></span>
+            </a>
+            <ul id="softphone_otherstate" class="dropdown-menu state_dropdown">
+                <!-- dropdown menu links -->
+            </ul>
+        </div>
+    </span>
+    <div class="btn-group">
+        <a href="#" style="visibility:hidden"><img src="./img/client/line.png"></a>
+        <span id="dialoutEnable_tip_wrap"  class="phone_bar_btn_tip"><a href="#" id="dialoutEnable" class="phone_btn_action dialoutPopoverHtml"><img id="dialoutEnable_tip" src="/img/phoneBar/7mphold.png"></a></span></span>
+        <span id="hangupEnable_tip" class="phone_bar_btn_tip"><a href="#" id="hangupEnable" class="phone_btn_action" style="display: none" onclick="phone_hangup();"><img src="/img/phoneBar/hangup.png"></a></span>
+        <span id="holdEnable_tip" class="phone_bar_btn_tip"><a id="holdEnable" class="phone_btn_action" style="display: none;"  onclick="phone_hold();"><img src="/img/phoneBar/bc.png"></a></span>
+        <span id="recoverEnable_tip" class="phone_bar_btn_tip"><a id="recoverEnable" class="phone_btn_action" style="display: none"  onclick="phone_unhold();"><img src="/img/phoneBar/hf.png"></a></span>
+        <span id="transferEnable_tip" class="phone_bar_btn_tip"><a id="transferEnable" class="phone_btn_action" style="display: none"  data-toggle="modal" data-target="#softphone_transfer"><img src="/img/phoneBar/zj.png"></a></span>
+        <span id="consultEnable_tip" class="phone_bar_btn_tip"><a id="consultEnable" class="phone_btn_action" style="display: none"  data-toggle="modal" data-target="#softphone_consult"><img src="/img/phoneBar/zx.png"></a></span>
+
+        <span id="stopConsultEnable_tip" class="phone_bar_btn_tip"><a id="stopConsultEnable" class="phone_btn_action" style="display: none;" onclick="phone_stopConsult();"><img src="/img/phoneBar/jszx.png"></a></span>
+        <span id="ivrMenuEnable_tip" class="phone_bar_btn_tip"><a id="ivrMenuEnable" class="phone_btn_action" style="display:none" data-toggle="modal" data-target="#softphone_ivrMenu"><img src="/img/phoneBar/zcd.png"></a></span>
+        <span id="InvestigateEnable_tip" class="phone_bar_btn_tip"><a id="InvestigateEnable" class="phone_btn_action" style="display:none" onclick="phone_investigate();"><img src="/img/phoneBar/zmyd.png"></a></span>
+        <span id="consultThreeWayCallEnable_tip" class="phone_bar_btn_tip"><a id="consultThreeWayCallEnable" class="phone_btn_action" style="display: none" onclick="phone_threewaycall('912345');"><img src="/img/phoneBar/threeCall.png"></a></span>
+        <span id="consultTransferEnable_tip" class="phone_bar_btn_tip"><a id="consultTransferEnable" class="phone_btn_action" style="display:none" onclick="phone_transfer('912345', 'number');"><img src="/img/phoneBar/zj.png"></a></span>
+        <span id="threewayEnable_tip" class="phone_bar_btn_tip"><a id="threewayEnable" class="phone_btn_action" style="display: none" data-toggle="modal" data-target="#softphone_threewaycall"><img src="/img/phoneBar/threeCall.png"></a></span>
+        <span class="phone_bar_btn_tip"><a id="SmsEnable" class="ds_do_action phone_btn_action smsPopoverHtml" ds_action="sms.openSendSms" style="display: none"><img id="SmsEnable_tip" src="/img/phoneBar/sms.png"></a></span>
+        <span class="phone_bar_btn_tip"><a id="setCallLabel" class="phone_btn_action ds_do_action" ds_action="cdr.cdrShowCallLabelModal" call style="display:none;"><img id="setCallLabel_tip" src="/img/phoneBar/call-label.png"></a></span>
+    </div>
+</div>
+
+<div id="softphone_consult" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" style="color: #000;height: 400px; overflow-y: auto">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>咨询通话</h3>
+    </div>
+    <div class="modal-body" style="height:300px;" >
+        <div id="softphone_consult_div" style="float: left;position: relative;" class="combobox_agent"></div>
+        <button class="btn btn-small btn-blue" type="button" style="float: left;margin-left:5px;" onclick="softphonebar_consult($('#softphone_consult_div_input').val())">咨询</button>
+        <div class="clear10">&nbsp;</div>
+        <div style="font-size: 14px;font-weight: bold;">咨询技能组</div>
+        <div class="clear5">&nbsp;</div>
+        <div id="softphone_consult_skillgroup" style="width:510px;">
+        </div>
+    </div>
+</div>
+
+<div id="softphone_transfer" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" style="color: #000;height: 400px; overflow-y: auto">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>转接通话</h3>
+    </div>
+    <div class="modal-body" style="height:300px;" >
+        <div id="softphone_transfer_div" style="float: left;position: relative;" class="combobox_agent"></div>
+        <button class="btn btn-small btn-primary" type="button" style="float: left;margin-left:5px;" onclick="softphonebar_transfer($('#softphone_transfer_div_input').val())">转 接</button>
+        <div class="clear10">&nbsp;</div>
+        <div style="font-size: 14px;font-weight: bold;">转接到技能组</div>
+        <div class="clear5">&nbsp;</div>
+        <div id="softphone_transfer_skillgroup" style="width:510px;">
+        </div>
+    </div>
+</div>
+
+<div id="softphone_ivrMenu" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" style="color: #000;height: 400px; overflow-y: auto">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>转IVR菜单</h3>
+    </div>
+    <div class="modal-body" style=" overflow-y: visible ">
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr class="hearTd" style="background-color: #f5f5f5">
+                <th>IVR菜单名称</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="softphone_ivrMenu_table_body">
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="softphone_threewaycall" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" style="color: #000;height: 400px; overflow-y: auto">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>三方通话</h3>
+    </div>
+    <div class="modal-body" style="height:300px;" >
+        <div id="softphone_threewaycall_div" style="float: left;position: relative;" class="combobox_agent"></div>
+        <button class="btn btn-small btn-primary"  type="button" style="float: left;margin-left:5px;" onclick="softphonebar_threewaycall($('#softphone_threewaycall_div_input').val())">三 方</button>
+    </div>
+</div>
+<script id="auto_search_customer_history_item" type="text/html">
+    <li>
+        <div class="cdr_history-icon"><img src="{{=icon}}" alt=""/></div>
+        <div class="cdr_history-time">{{=time}}&nbsp;&nbsp;{{=day}}</div>
+        <div class="cdr_history-dialout" onclick="softphonebar_dialout_popup('{{=callNum}}');">
+            <div class="cdr_history-name">{{=CUSTOMER_NAME}}</div>
+            <div class="cdr-history-phone">({{=callNoDesc}}</div>)
+        </div>
+    </li>
+</script>
+
+<div id="cdr_label_modal_del" class="modal hide fade in"  aria-hidden="false" tableindex=-1 data-backdrop="static" style="width: 560px; display: none; left: 520px; margin: 0px auto;box-sizing:border-box;">
+    <div class="cdr_modal_top">
+        <h4 style="margin:16px 0 16px 20px;float:left;">通话标签</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" role="dialog" style="position: absolute;right: 20px;top: 20px;">×</button>
+    </div>
+    <div class="modal-body" style="min-height:400px;padding: 15px 30px;">
+        <div class="cdr-all-use-label-model"></div>
+    </div>
+    <!--<div class="modal-bottom" style="background: #F2F2F2;height: 38px;margin-top:30px;border-radius: 0 0 3px 3px;">-->
+    <!--<button type="button" class="btn-blue ds_do_action" ds_action="" style="margin-left: 200px;margin-top:10px;">保存</button>-->
+    <!--<button type="button" class="btn-gray ds_do_action" data-dismiss="modal" aria-hidden="true" style="margin-left: 20px;margin-top:10px;">退出</button>-->
+    <!--</div>-->
+</div>
+<script id="showModelUseLabelDetal" type="text/html">
+    <label class="cfg_call_label show-label-use cdr-model-label"><input type="checkbox" onclick="phone_mark()" use="on" ds_data="{{=_id}}"/><span class="">{{=name}}</span></label>
+</script>
+
+<script type="text/javascript" >
+    $(function(){
+        var phoneBarTipOption = {placement:'bottom',trigger:'hover',html:true};
+        phoneBarTipOption.title='外呼';
+        $('#dialoutEnable_tip').tooltip(phoneBarTipOption);
+        phoneBarTipOption.title='挂机';
+        $('#hangupEnable_tip').tooltip(phoneBarTipOption);
+        phoneBarTipOption.title='保持';
+        $('#holdEnable_tip').tooltip(phoneBarTipOption);
+        phoneBarTipOption.title='恢复';
+        $('#recoverEnable_tip').tooltip(phoneBarTipOption);
+        phoneBarTipOption.title='转接';
+        $('#transferEnable_tip').tooltip(phoneBarTipOption);
+        phoneBarTipOption.title='咨询';
+        $('#consultEnable_tip').tooltip(phoneBarTipOption);
+        phoneBarTipOption.title='结束咨询';
+        $('#stopConsultEnable_tip').tooltip(phoneBarTipOption);
+        phoneBarTipOption.title='转IVR菜单';
+        $('#ivrMenuEnable_tip').tooltip(phoneBarTipOption);
+        phoneBarTipOption.title='转满意度调查';
+        $('#InvestigateEnable_tip').tooltip(phoneBarTipOption);
+        phoneBarTipOption.title='转三方通话';
+        $('#consultThreeWayCallEnable_tip').tooltip(phoneBarTipOption);
+        phoneBarTipOption.title='咨询转接';
+        $('#consultTransferEnable_tip').tooltip(phoneBarTipOption);
+        phoneBarTipOption.title='三方通话';
+        $('#threewayEnable_tip').tooltip(phoneBarTipOption);
+        phoneBarTipOption.title='短信';
+        $('#SmsEnable_tip').tooltip(phoneBarTipOption);
+        phoneBarTipOption.title='通话标签';
+        $("#setCallLabel_tip").tooltip(phoneBarTipOption);
+        phoneBarTipOption.title='所在技能组排队总数';
+        $('.my_queue_stat').tooltip(phoneBarTipOption);
+        phoneBarTipOption.title='今日已接电话数';
+        $('.my_call_stat').tooltip(phoneBarTipOption);
+        phoneBarTipOption.title='多渠道im会话排队总数';
+        $('.my_queue_webchat').tooltip(phoneBarTipOption);
+        var options = {
+            trigger	:'click',
+            placement:"bottom",
+            html:"true",
+            content:'<div class="dialout_wrap"><input type="text" id="dialout_input_pop" placeholder="输入号码点击回车键发起呼叫" class="dialout_input ds_key_action" keyup_action="cdr.showMycallHistoryDetail" onkeydown="if(event.keyCode==13){softphonebar_dialout_popup($(\'#dialout_input_pop\').val());}"><div class="dialout_button_wrap"><div class="dialout_button" onclick="softphonebar_dialout_popup($(\'#dialout_input_pop\').val());"></div></div></div><div class="cdr_history-wrap"><ul id="cdr_history-item"></ul></div>'
+
+        }
+        $(".dialoutPopoverHtml").popover(options);
+        $(".dialoutPopoverHtml").on('click', function(e){
+            $(".smsPopoverHtml").popover('hide');
+            var phoneCookie = DS.getCookie("phoneNum");
+            _cti_ui_Autocomplete_new(phoneCookie);
+            handler.cdr.autoSearchCustomerHistory()
+            _cti_keyCodeDialoutConnect();
+            $('#dialout_input_pop').focus();
+        })
+        var _cti_keyCodeDialoutConnect=function(){
+            var num=-1;
+            document.onkeydown=function(event){
+                var pane=$("#phone-num-autoComplate li[state='on']")
+                var len=pane.length;
+                var e = event || window.event;
+                if($("#cdr_history-item").css("display")!="none"){
+                    num=-1
+                }
+                if($("#phone-num-autoComplate").css("display")!="none"){
+                    if(e && e.keyCode==38){//上
+                        $("#dialout_input_pop").attr("flag","on")
+                        num--;
+                        if(num<0){num=len-1}
+                        pane.eq(num).addClass("active");
+                        pane.eq(num).siblings().removeClass("active");
+                        var html=pane.eq(num).html()
+                        $('#dialout_input_pop').val(html);
+                    }else if( e && e.keyCode==40){//下
+                        $("#dialout_input_pop").attr("flag","on")
+                        num++
+                        if(num>=len){num=0}
+                        pane.eq(num).addClass("active");
+                        pane.eq(num).siblings().removeClass("active");
+                        var html=pane.eq(num).html()
+                        $('#dialout_input_pop').val(html);
+                    }
+                }
+            }
+        }
+
+        DS.getView("sms/sendSms", function (view) {
+            var options = {
+                trigger	:'click',
+                placement:"bottom",
+                html:"true",
+                title:'发短信  <i class="icon-question-sign" id="sms_tip"></i>',
+                content:view
+            }
+            $(".smsPopoverHtml").popover(options);
+        });
+        $(".smsPopoverHtml").on('click', function(e){
+            $(".dialoutPopoverHtml").popover('hide');
+        })
+        utils.loadSearchInput({ id:"softphone_consult_div",
+            width:"320",
+            height:"18",
+            tip:"请输入工号或者手机号(可以输入座席姓名进行下拉选择)",
+            data: phone_peers,
+            searchField: ["DisplayName", "exten"],
+            pinyinField: ["DisplayName"],
+            listField: ["DisplayName", "exten"],
+            userIdField: "userId",
+            showField: "exten",
+            showState: true,
+            notShowMySelf: true,
+            callbackFuc: function(object) {
+                //console.dir(object);
+            }
+        });
+        utils.loadSearchInput({ id:"softphone_transfer_div",
+            width:"320",
+            height:"18",
+            tip:"请输入工号或者手机号(可以输入座席姓名进行下拉选择)",
+            data: phone_peers,
+            searchField: ["DisplayName", "exten"],
+            pinyinField: ["DisplayName"],
+            listField: ["DisplayName", "exten"],
+            userIdField: "userId",
+            showField: "exten",
+            showState: true,
+            notShowMySelf: true,
+            callbackFuc: function(object) {
+                //console.dir(object);
+            }
+        });
+
+        $('#softphone_ivrMenu').on('shown', function(){
+            var ivrMenuHtml = '';
+            var menuList = getCache('ivrMenu');
+            for(var i=0; i<menuList.length; i++){
+                ivrMenuHtml += "<tr style=\"height: 3px;\"><td>"+ menuList[i].DisplayName +"</td><td><a href=\'javascript:phone_toMenu(\""+menuList[i].Exten+"\",\""+menuList[i].DisplayName+"\")\'>转菜单</a></td></tr>";
+                $('#softphone_ivrMenu_table_body').html(ivrMenuHtml);
+            }
+        });
+        $('#softphone_phonestate_dropdown').on('click', function(e){
+            if($("#softphone_phonestate_dropdown .caret").is(":hidden")){
+                e.stopPropagation();
+            }
+        });
+        utils.loadSearchInput({ id:"softphone_threewaycall_div",
+            width:"320",
+            height:"18",
+            tip:"请输入工号或者手机号(可以输入座席姓名进行下拉选择)",
+            data: phone_peers,
+            searchField: ["DisplayName", "exten"],
+            pinyinField: ["DisplayName"],
+            listField: ["DisplayName", "exten"],
+            userIdField: "userId",
+            showField: "exten",
+            showState: true,
+            notShowMySelf: true,
+            callbackFuc: function(object) {
+                //console.dir(object);
+            }
+        });
+
+        $('#softphone_transfer').on('shown', function () {
+            $("#softphone_transfer_skillgroup").html("");
+            var skillgroupHtml = "";
+            //TODO show idle peer count
+            for(var i in phone_queues) {
+                skillgroupHtml += "<div style=\"float: left\">"+phone_queues[i].queueName+"<span style=\"color: #009900\">［空闲座席数:"+phone_queues[i].idleAgentCount+"］</span></div>"+
+                        "<div style=\"float: right\"><a href=javascript:phone_transfer(\""+phone_queues[i].queueId+"\",\"skillgroup\"); ><i class=\"icon-arrow-right\"></i>转接</a></div>" +
+                        "<div style=\"height: 3px;clear: both;border-bottom: 1px dashed #ccc;width: 100%\">&nbsp;</div>" +
+                        "<div class=\"clear5\">&nbsp;</div>";
+            }
+            $("#softphone_transfer_skillgroup").html(skillgroupHtml);
+        })
+
+        $(".top_user_info").click(function(){
+            var sipTypes = ['gateway', 'sip', 'Local'];
+            var docs = new Array();
+            for(var i=0 ; i<sipTypes.length;i++){
+                if(sipTypes[i] != phone_data.extenType){
+                    docs.push(sipTypes[i]);
+                }
+            }
+            var allHtml = '';
+            for(var i=0 ; i<docs.length ; i++){
+                if(docs[i] == 'gateway')
+                    allHtml += '<li><a style="color:#083F5D;font-weight:100;text-decoration:none;" onclick="phone_switch_exten_type(\'gateway\')">接听方式切换为：SIP话机</a></li>';
+                else if(docs[i] == 'sip')
+                    allHtml += '<li><a style="color:#083F5D;font-weight:100;text-decoration:none;" onclick="phone_switch_exten_type(\'sip\')">接听方式切换为：软电话</a></li>';
+                else if(docs[i] == 'Local')
+                    allHtml += '<li><a style="color:#083F5D;font-weight:100;text-decoration:none;" onclick="phone_switch_exten_type(\'Local\')">接听方式切换为：手机</a></li>';
+            }
+            $("#softphone_exten_type").html(allHtml);
+            $("#softphone_exten_type").slideToggle('fast');
+        });
+
+        $('body').click(function(e) {
+            if($("#softphone_exten_type").css("display") == "block"
+                    && e.target.id != "user_exten_type"
+                    && e.target.id != "exten_type_dropdown_caret"
+                    && !$(e.target).hasClass('top_user_info')
+                    && e.target.id != "user_status"
+                    && e.target.id != "top_user_bg") {
+                $("#softphone_exten_type").slideUp('fast');
+            }
+        });
+
+    });
+</script>
+<style type="text/css">
+    .state_group .btn{
+        /*margin-right: 5px;*/
+        padding: 2px 8px;
+        line-height:14px;
+        font-size: 11px;
+        -webkit-transform: scale(0.9);
+    }
+</style>

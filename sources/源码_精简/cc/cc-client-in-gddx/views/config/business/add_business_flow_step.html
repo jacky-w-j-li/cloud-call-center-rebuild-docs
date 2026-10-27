@@ -1,0 +1,71 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+        ×
+    </button>
+    <h3>添加业务步骤</h3>
+</div>
+<div class="">
+    <form>
+        <input name="_id" value="__id" type="hidden"/>
+
+        <div class="modal-body" style = "height:200px;">
+            <div class="row_item">
+                <label for="name">业务步骤名称</label>
+                <input id="name" name="name" value="" maxlength="10" type="text" required>
+            </div>
+
+            <div class="row_item">
+                <label >工单时限设置</label>
+                <input placeholder="第1步不用设置" type="num" id="ctime" name="ctime" datatype="Number,Range" min="1" msg="输入的时间必须大于0" value=""   maxlength="5" onkeyup="this.value=this.value.replace(/\D/g,'')" >
+                &nbsp;&nbsp;单位
+                <select name="ctype">
+                    <option value="min" selected="selected">分钟</option>
+                    <option value="hours">小时</option>
+                    <option value="day">天</option>
+                </select>
+            </div>
+            <div class="row_item">
+                <label></label>
+                <span>单步骤不能超过工单总时长 __taskTime</span>
+            </div>
+            <div class="row_item cleanFloat">
+                <label >提醒成员</label>
+                <input name="ownernotifyUser" type="hidden" class="select_input" id="remind_add_owner_select_input_com" />
+                <input name="notifyUser" type="hidden" class="select_input" id="remind_add_owner_select_input" />
+                <div id="remind_add_owner_select_memberUser" class="comtabbox_agent"></div>
+                <div class="panel-heading"  id="popover_business_add_step">
+                    <a href="#" class="btn" id="popover_business_add_step_pop" data-toggle="popover" data-placement="bottom" data-trigger="hover focus"
+                       data-content="工单时限剩余5分钟时,额外提醒座席(不配置时,默认提醒当前处理人,如果是未领取状态则提醒所有有此工单权限的座席)" data-original-title="">
+                        <span class="glyphicon-question-sign" style="color:#fff"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button href="#" class="btn btn-primary ds_form_action" ds_action="config.business.addBusinessFlowStep">
+                保存
+            </button>
+            <button class="btn" data-dismiss="modal" aria-hidden="true">
+                取消
+            </button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function () {
+
+        $("#popover_business_add_step").on("mouseover", function(){
+            $("#popover_business_add_step_pop").popover();
+        });
+         var inputIdMe = "remind_add_owner_select_input";
+            var containerIdMe = "remind_add_owner_select_memberUser";
+                utils.loadAgentTabBox(inputIdMe,containerIdMe,{width:"220",height:"17",maxHeight:292,hideTab:2,isRadio:false,commonTab:false},false,false);
+                $(document).on('focus',"#remind_add_owner_select_memberUser_input",function(){
+                    $("#"+inputIdMe).closest(".modal-body").css("height","500px");
+                });
+               $(document).on('click','body',function(){
+                    $("#"+inputIdMe).closest(".modal-body").css("height","200px");
+                });
+
+    });
+</script>

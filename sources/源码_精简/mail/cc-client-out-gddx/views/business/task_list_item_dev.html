@@ -1,0 +1,138 @@
+<div class="list_item list_item_check">
+    <div class="item_row item_check bus_item contact_item ds_do_action" ds_action="business.showTaskDetail" ds_data="__id|__customer" ds_attr="__isRead" style="">
+        <input type="hidden" name="busId" value="__id" >
+        <div class="card_row_new">
+            <div class="card_right">
+                <div class="muted">
+                    <span style="display: none;"><img src="/img/client/bell.png" style=""/>&nbsp;</span>
+                    <span title="__lastUpdateTime" >__shortTime</span>
+                </div>
+                <div style="position: absolute;bottom: 4px;right:0;">
+                    <span class="label flow ellipsis" style="max-width: 70px;" title="_@business.getFlowNameByCache('__flow')@_">_@business.getFlowNameByCache('__flow')@_</span>
+                    <span class="label _@business.getBusinessLabelByStatus('__status')@_ step ellipsis" style="max-width: 70px;" title="_@business.getFlowStepNameByCache('__flow','__step')@_">
+                        _@business.getFlowStepNameByCache('__flow','__step')@_
+                    </span>
+                </div>
+            </div>
+            <div class="card_left">
+                <b class="ico_select_checkbox ico ico_wrap ico_item_checkbox bus_item"></b>
+                <div style="position: absolute;bottom: 6px;left:3px;" class="bus_read">
+                    __readImg
+                </div>
+            </div>
+            <div class="card_middle">
+                <div class="customer custom_name_field ellipsis">__name</div>
+                <div class="muted margin_patch">
+                    <span title="创建人">_@business.getUserNameById('__createUser')@_</span>
+                    <img src="/img/client/bus_arrow.png" style=""/>
+                    <span class="master" title="当前处理人">_@business.getUserNameById('__master')@_</span>
+                    <span class="role_get"  style="display: none">
+                        <button type="button" class="btn btn-info ds_do_action " id='__id_getTaskButton' ds_action='business.setTaskToMe' ds_data="__id">领取</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    $(function () {
+        var menu = session.currentPage.pageId;
+        if(menu == 'my_role_task_uncomplete'){
+            $("#talk_list_item_pane" + menu).find("#__id_getTaskButton").show();
+        }
+        if(menu == "my_task_uncomplete"){
+            if("__businessStat" == "wait"){
+                $("#__id_waitflag").show();
+            }
+        }
+        dsevent.bind(".contact_item[ds_data='__id|__customer']", "taskExcuteAction", function (event, params) {
+            if (params._id == '__id') {
+//                console.info("taskExcuteAction===================")
+//                console.dir(params)
+                if (params.status == "dealing") {
+                    var roles = params.roles || [];
+                    var canProcess = false;
+                    for (var i = 0; i < roles.length; i++) {
+                        var rolesItem = roles[i];
+                        if (arrayContainsStr(session.user.role, rolesItem.role)) {
+                            canProcess = true;
+                        }
+                    }
+                    var pane = $(".contact_item[ds_data='__id|__customer']");
+                    var _menu=handler.business.curSubMenu;
+                    if(_menu == 'my_task_uncomplete' || _menu == "my_role_task_uncomplete"){
+                        $("#" + session.currentPage.pageId + "_business").html(template("tmpl_customer_content_container_inner",{}));
+                        pane.remove();
+                    }else{
+                        if (canProcess) {
+                            pane.find("span.step").text(handler.business.getFlowStepNameByCache(params.flow, params.step));
+                            var user=handler.business.getUserNameById(params.master);
+                            pane.find("span.master").html(user);
+                            var busTab=$("#" + session.currentPage.pageId + "_business").find(".business_tab");
+                            if(busTab && busTab.length>0){
+                                busTab.click();
+                            }
+                            //handler.business.showTaskDetail('__id|__customer', pane);
+                        } else {
+//                        $("#" + session.currentPage.pageId + "_business").empty();
+                            $("#" + session.currentPage.pageId + "_business").html(template("tmpl_customer_content_container_inner",{}));
+                            pane.closest(".list_item").remove();
+//                        $("#reflush_business_button").click();
+                        }
+                    }
+                } else {
+                    var pane = $(".contact_item[ds_data='__id|__customer']");
+                    var _menu=handler.business.curSubMenu;
+                    if(_menu == 'my_task_uncomplete' || _menu == "my_role_task_uncomplete"){
+//                        $("#" + session.currentPage.pageId + "_business").empty();
+                        $("#" + session.currentPage.pageId + "_business").html(template("tmpl_customer_content_container_inner",{}));
+                        pane.remove();
+//                        $("#reflush_business_button").click();
+                    }else{
+                        pane.find("span.step").text(handler.business.getFlowStepNameByCache(params.flow, params.step));
+                        pane.find("span.step").removeClass("label-important").addClass("label-success");
+                    }
+                }
+
+            }
+        });
+        dsevent.bind(".contact_item[ds_data='__id|__customer']","taskChangeMaster",function(event,params){
+            if(params._id == '__id'){
+                var pane = $(".contact_item[ds_data='__id|__customer']");
+//             $("#" + session.currentPage.pageId + "_business").empty();
+                $("#" + session.currentPage.pageId + "_business").html(template("tmpl_customer_content_container_inner",{}));
+                pane.closest(".list_item").remove();
+//             $("#reflush_business_button").click();
+            }
+        });
+        dsevent.bind(".contact_item[ds_data='__id|__customer']","customerUpdate",function(event,params){
+            if(params._id == '__customer'){
+                $(".contact_item[ds_data='__id|__customer']").find(".custom_name_field").html(params.name);
+            }
+        });
+
+        dsevent.bind(".contact_item[ds_data='__id|__customer']","taskChangeToMaster",function(event,params){
+            if(params._id == '__id'){
+                var pane = $(".contact_item[ds_data='__id|__customer']");
+                var user=handler.business.getUserNameById(params.master);
+                pane.find("span.master").html(user);
+                var busTab=$("#" + session.currentPage.pageId + "_business").find(".business_tab");
+                if(busTab && busTab.length>0){
+                    busTab.click();
+                }
+            }
+        });
+//        dsevent.bind(".contact_item[appdata='__id|__customer']","taskChangeWaitFor",function(event,params){
+//            if(params._id == '__id'){
+//                var pane = $(".contact_item[appdata='__id|__customer']");
+//                if(params.businessStat && params.businessStat == "wait"){
+//                    $("#__id_waitflag").show();
+//                }
+//            }
+//        });
+    });
+</script>
+

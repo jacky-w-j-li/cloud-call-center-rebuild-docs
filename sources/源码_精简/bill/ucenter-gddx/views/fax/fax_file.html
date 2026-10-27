@@ -1,0 +1,16 @@
+<form id="upload_fax_file" accept-charset="UTF-8" action="form" enctype="multipart/form-data" method="post"
+      target="uploadIframe">
+    <div class="modal-body">
+        <input type="hidden" name="action" value="changeFaxFile"/>
+        <input type="hidden" name="sessionId" value=""/>
+
+        <div>
+            <span style="color: #ff5e3a">目前仅支持*.pdf文件</span>
+            <input class="file" name="file" type="file" onchange="handler.fax.uploadFaxFile('upload_fax_file')">
+        </div>
+    </div>
+</form>
+<iframe name="uploadIframe" id="uploadIframe"  style="display:none;"></iframe>
+<script type="text/javascript">
+    $("#upload_fax_file").find('input[name="sessionId"]').val(session.id);
+</script>

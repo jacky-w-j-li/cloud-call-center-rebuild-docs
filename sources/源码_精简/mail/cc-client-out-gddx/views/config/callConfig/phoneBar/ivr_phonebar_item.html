@@ -1,0 +1,25 @@
+<form>
+<div class="row-fluid list-item ds_form_action" ds_action="config.callConfig.phoneBar.editPhoneBarConfig"
+     id="phonebarconfig__id" titile="点击修改">
+    <!--<ds-get-view view="config/callConfig/phoneBar/ivr_edit_system_phoneBarConfig" panel="phoneBarConfig_detail"-->
+                 <!--view-data='{"_id":"___id"}' on-complete="config.callConfig.phoneBar.afterOpenEditPhoneBar"/>-->
+    <div class="span12">
+        <div class="row-fluid ivr_list_item">
+            <div class="span4">
+                <h4 style="color:#0088CC;">__PhoneBarItemName</h4>
+                <input type="hidden" name="IsSystemConfig" value="__IsSystemConfig"/>
+                <input type="hidden" name="_id" value="___id"/>
+            </div>
+            <div class="span4">
+                <span class="label">__ShowIsEnable</span>
+                <input type="hidden" name="IsEnable" value="__IsEnable"/>
+            </div>
+            <div class="span4 ivr_list_item_mini_font">
+                编号：__PhoneBarItemId
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+<div style="height:1px;background-color:#EAEAEA;width:100%;margin:2px 0px 2px;">
+</div>

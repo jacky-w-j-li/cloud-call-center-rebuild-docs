@@ -1,0 +1,98 @@
+<div class="list_item">
+    <div class="item_row contact_item_new item_#callSheetId#_">
+        <div class="contact_item ds_do_action popup_item" ds_action="call.showCallDetail" ds_data="_#callSheetId#_" style="">
+
+            <div class="card_item">
+                <div class="card_right">
+                    <div class="muted" title="_#offeringTime#_">_#shortTime#_</div>
+                    <div class="incomingIvrKeyItemPopoverTarget" style="position: absolute;bottom: 28px;right:5px;">
+                        <span class="status-name incomingIvrKeyItemPopover"></span>
+                    </div>
+                    <div style="position: absolute;bottom: 5px;right:0;">
+                        <img src="/img/client/pop_tel.png"/>
+                    </div>
+                </div>
+                <!--<div class="card_left">-->
+                    <!--<span class="label label-warning">电话</span>-->
+                <!--</div>-->
+                <div class="card_middle" style="margin-right: 90px;">
+                    <div>
+                        <span class="phone" phone="" style="/*font-weight: bold;*/font-size: 14px;">
+                           _@call.showCallNoDesc('_#originCallNo#_')@_
+                        </span>
+                        <span style="padding-left: 5px;padding-top: 1px;">_#callerProvince#_  _#callerCity#_</span>
+                    </div>
+                    <div class="customer ellipsis">定位中...</div>
+                    <div class="muted">
+                        <span class="status-name" title="呼入服务号">_#originCalledNo#_</span>
+                        <img src="/img/client/bus_arrow.png" style=""/>
+                        <!--<div class="incomingIvrKeyItemPopoverTarget" style="display: inline-block;" title="按键">-->
+                            <!--<span class="status-name incomingIvrKeyItemPopover"></span>-->
+                        <!--</div>-->
+                        <!--<img src="/img/client/bus_arrow.png" class="arrow_2"/>-->
+                        <span class="status-name" title="技能组">_#queueName#_</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        //init popover
+        var ivrInfo = '_#TANPING#_';
+        if('' != '_#ivrkey#_'){
+            //data eg: 100063@1-100062@2-100064@5
+            var keyMemoMap = getCache('ivrNodeKeyMemo');
+            var keyStr = '_#ivrkey#_';
+            var keyArr = keyStr.split('-');
+            var showHtml = '';
+            var littleHtml = '';
+            for(var i=0 ; i<keyArr.length ; i++){
+                if(keyArr[i].indexOf('@') > 0){
+                    var keyMemoArr = keyArr[i].split('@');
+                    if(keyMemoMap[keyMemoArr[0]] && keyMemoMap[keyMemoArr[0]][keyMemoArr[1]]){
+                        showHtml += "<span class='label label-success'>"
+                                + keyMemoMap[keyMemoArr[0]][keyMemoArr[1]] + "[" + keyMemoArr[1] + "]</span>-";
+                    }else{
+                        showHtml += "<span class='label label-success'>[" + keyMemoArr[1] + "]</span>-";
+                    }
+                    littleHtml += keyMemoArr[1]+'-';
+                }
+            }
+            if(littleHtml.substr(littleHtml.length-1,1) == '-'){
+                littleHtml = littleHtml.substr(0,littleHtml.length-1);
+            }
+            if(showHtml.substr(showHtml.length-1,1) == '-'){
+                showHtml = showHtml.substr(0,showHtml.length-1);
+            }
+            if(ivrInfo.substring(0,1) != '_'){
+                littleHtml += ';'+ivrInfo;
+                showHtml += "<br><span class='label label-warning'>IVR附加信息:"+ivrInfo+"</span>";
+            }
+            var pane = $(".item_#callSheetId#_");
+            var targetPane = pane.find("div.incomingIvrKeyItemPopoverTarget");
+            var head = "<h5>IVR按键详情</h5>";
+            var title = "<h5>"+showHtml+"</h5>";
+            var html = '<div style="font-weight:bold;display:inline-block;/*text-align: center;width: 50px;float: right;padding-top: 13px*/" class="label incomingIvrKeyItemPopoverHtml" data-toggle="popover" data-placement="bottom" data-html="true" ' +
+                    'data-content="'+title+'" data-original-title="'+head+'">'+littleHtml+'</div>';
+
+            pane.find('span.incomingIvrKeyItemPopover').html(html);
+            targetPane.hover(
+                function(){
+                    pane.find('div.incomingIvrKeyItemPopoverHtml').popover('show');
+                },
+                function(){
+                    pane.find('div.incomingIvrKeyItemPopoverHtml').popover('hide')
+                }
+            )
+        }else{
+            if(ivrInfo.substring(0,1) != '_'){
+                var pane = $(".item_#callSheetId#_");
+                var targetPane = pane.find("div.incomingIvrKeyItemPopoverTarget");
+                targetPane.empty();
+                targetPane.html(ivrInfo);
+            }
+        }
+    });
+</script>

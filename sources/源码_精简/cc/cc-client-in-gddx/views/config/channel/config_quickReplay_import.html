@@ -1,0 +1,32 @@
+
+<div class="row-fluid">
+    <div style="border-bottom: 1px solid #f0f0f0;height: 29px">
+        <h5 style="float:left;padding-top: 8px;">导入快捷回复 &nbsp;&nbsp;</h5>
+    </div>
+    <div style="margin-left:20%;margin-top: 15px;">
+        <a href="#" onclick="handler.customer.downloadReplayTmpl()">下载导入模板</a>
+    </div>
+    <form  action="" method="post" encType="multipart/form-data" target="" id="quick_replay_import_frm" name="excelUploadForm">
+        <input type="hidden" name="xlsHeads" value="">
+        <input type="hidden" name="fileName" value="">
+        <input type="hidden" name="trueName" value="">
+        <div style="line-height: 35px;height: 35px;">
+            <span style="text-align:right;width:20%;display: inline-block;">excel文件：</span>
+            <input type="hidden" name="type" value=""/>
+            <input type="file" fileType="xls|xlsx" id="fileToUpload" class="upload" onloaded="customer.uploadReplaySucess"
+                   onerror="customer.uploadReplayError" onprogress="" onabort="" style="height: auto; line-height: normal;"/>
+        </div>
+        <div class="row-fluid">
+            <div class="span12 alert alert-block" style="line-height: 18px;">
+                说明：<br/>
+                1.支持后缀为xls和xlsx的excle文件导入.<br/>
+                2.支持一个文件多个工作表,仅第一个工作表必需包括表头,且在第一行.<br/>
+                3.单个快捷回复有多个标签时,每个标签用指定的字符(支持,\、/4种符号)隔开.<br/>
+                4.请严格按照模板格式填充导入数据.<br/>
+            </div>
+        </div>
+        <div class="clearFloat" style="width: 100%;">
+            <input type="button" class="import_quick_replay btn-blue ds_do_action" ds_action="customer.saveImportQuickReplay" value="导入" style="height: 20px"/>
+        </div>
+    </form>
+</div>

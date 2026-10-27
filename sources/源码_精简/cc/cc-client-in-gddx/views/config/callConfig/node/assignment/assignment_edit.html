@@ -1,0 +1,80 @@
+<div class="row-fluid">
+    <div class="span12">
+        <form class="form-horizontal ds_item_edit" action="" client-data="session.ivrMap.ivr.ivr_node_assignment"
+            on-complete="config.callConfig.node.assignment.editPageShown">
+            <input type="hidden" name="_id" value="___id">
+            <input type="hidden" name="Exten" value="__Exten">
+            <div class="row-fluid">
+                <div class="span7 offset1">
+                    <i class="icon-plus"></i>修改赋值节点
+                </div>
+                <div class="span4 text-right pull-right">
+                    <a class="btn btn-info btn-blue ds_action_flow">
+                        <ds-form-action action="config.ivr.node.assignment.updateAssignment" extra-data="config.callConfig.currentConfigData"
+                            on-before="config.callConfig.node.assignment.preSaveAssignment"
+                            update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"ivr_node_assignment"}}'/>
+                        <ds-get-view view="config/callConfig/node/assignment/assignment_list" panel="ivrAssignmentNodePanel"/>
+                        <ds-effect-ivr/>
+                        保存
+                    </a>
+                    <a class="btn btn-danger btn-gray ds_action_flow">
+                        <ds-form-action action="config.ivr.node.assignment.deleteAssignment" extra-data="config.callConfig.currentConfigData"
+                                        update-client-data='{"method":"config.callConfig.updateClientData","arg":{"operation":"del","type":"ivr_node_assignment"}}'/>
+                        <ds-get-view view="config/callConfig/node/assignment/assignment_list" panel="ivrAssignmentNodePanel"/>
+                        <ds-effect-ivr/>
+                        删除
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="control-group">
+                        <label class="control-label">
+                            节点名称
+                        </label>
+                        <div class="controls">
+                            <input type="text" msgName="节点名称" name="DisplayName" required/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            转向
+                        </label>
+                        <div class="controls">
+                            <div id="toPeerType" class="ds_ivr_to_peer_type" tag-name="ToPeerType"
+                                 tag-value-key="ToPeerType">
+
+                            </div>
+                            <div id="toPeer" class="ds_ivr_to_peer" tag-value-key="ToPeer">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span11" style="margin-left:4%;">
+                            <table class="table table-bordered">
+                                <tbody>
+                                <tr>
+                                    <th class="span5">变量</th>
+                                    <th class="span1">=</th>
+                                    <th class="span5">值</th>
+                                    <th>
+                                        <a href="#" class="ds-ivr-add-assignment-cond"><i class="icon-plus"></i></a>
+                                    </th>
+                                </tr>
+                                </tbody>
+                                <tbody id="ivrAssignmentListBody">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="ds_item_edit_param" ToPeerType="" ToPeer=""
+                             style="display:none"></div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

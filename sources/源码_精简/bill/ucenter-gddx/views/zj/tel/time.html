@@ -1,0 +1,121 @@
+<form id="time_form" class="form-horizontal">
+    <div id="edit_week" class="form-group">
+        <label class="col-sm-3 control-label">星期：</label>
+        <span style="padding-top: 7px;display: inherit">
+            <label><input type="checkbox" class="2" name="2">一</label>
+            <label><input type="checkbox" class="3" name="3">二</label>
+            <label><input type="checkbox" class="4" name="4">三</label>
+            <label><input type="checkbox" class="5" name="5">四</label>
+            <label><input type="checkbox" class="6" name="6">五</label>
+            <label><input type="checkbox" class="7" name="7">六</label>
+            <label><input type="checkbox" class="1" name="1">日</label>
+        </span>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">上班时间：</label>
+        <div style="margin-top: 7px;">
+            <select type="text" id="startTimeHour" name="startTimeHour" style="width:45px;">
+                <option value="0">00</option>
+                <option value="1">01</option>
+                <option value="2">02</option>
+                <option value="3">03</option>
+                <option value="4">04</option>
+                <option value="5">05</option>
+                <option value="6">06</option>
+                <option value="7">07</option>
+                <option value="8">08</option>
+                <option value="9">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+            </select>
+            :
+            <select type="text" id="startTimeMinute" name="startTimeMinute" style="width:45px;">
+                <option value="0">00</option>
+                <option value="5">05</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+                <option value="35">35</option>
+                <option value="40">40</option>
+                <option value="45">45</option>
+                <option value="50">50</option>
+                <option value="55">55</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">下班时间：</label>
+        <div style="margin-top: 7px;">
+            <select type="text" id="endTimeHour" name="endTimeHour" style="width:45px;">
+                <option value="0">00</option>
+                <option value="1">01</option>
+                <option value="2">02</option>
+                <option value="3">03</option>
+                <option value="4">04</option>
+                <option value="5">05</option>
+                <option value="6">06</option>
+                <option value="7">07</option>
+                <option value="8">08</option>
+                <option value="9">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+            </select>
+            :
+            <select type="text" id="endTimeMinute" name="endTimeMinute" style="width:45px;">
+                <option value="0">00</option>
+                <option value="5">05</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+                <option value="35">35</option>
+                <option value="40">40</option>
+                <option value="45">45</option>
+                <option value="50">50</option>
+                <option value="55">55</option>
+            </select>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    $(function () {
+        for(var i in session.ivr.day){
+           var day = session.ivr.day[i];
+           $('#edit_week').find('.'+day).attr('checked', true);
+        }
+        $('#startTimeHour').val(session.ivr.startTimeHour);
+        $('#startTimeMinute').val(session.ivr.startTimeMinute);
+        $('#endTimeHour').val(session.ivr.endTimeHour);
+        $('#endTimeMinute').val(session.ivr.endTimeMinute);
+    });
+</script>

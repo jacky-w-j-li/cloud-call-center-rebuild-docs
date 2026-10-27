@@ -1,0 +1,27 @@
+<form id="config_quality_config_update_form">
+    <input type="hidden" name="_id"/>
+    <div class="row-fluid">
+        <div class="row-fluid" style="margin-top: 8px;">
+            <div style="float: left;margin-top: 20px; margin-bottom: 10px;">
+                <h4>添加质检项</h4>
+            </div>
+            <div style="float: right;margin-top:15px;margin-bottom: 5px;">
+                <a href="#" class="btn action" appaction="config.cdr.cancelQualityCheckConfig">取消</a>
+                <a href="#" class="btn btn-primary do_action" appaction="config.cdr.saveQualityCheckConfig">保存</a>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div style="border:1px solid;"></div>
+        </div>
+        <div class="row-fluid">
+            <div class="row_item">
+                <label for="field_name">质检项名称</label>
+                <input id="field_name" name="NAME" type="text" maxlength="20" required msgName="质检项名称">
+            </div>
+            <div class="row_item">
+                <label for="field_weight">权重</label>
+                <input id="field_weight" name="WEIGHT" type="text" maxlength="3" required msgName="权重">
+            </div>
+        </div>
+    </div>
+</form>

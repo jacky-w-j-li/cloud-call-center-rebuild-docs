@@ -1,0 +1,23 @@
+<div id="show_cdr_listen_record_Modal" class="modal hide fade">
+    <div id="show_cdr_listen_title" class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                onclick="$('#show_cdr_listen_record_Modal').modal('hide');$('#cdr_listen_record_pane').empty();">&times;</button>
+        <h3>听取录音</h3>
+    </div>
+    <form>
+        <div class="modal-body">
+            <audio id="listen_audio" src="__RECORD_FILE" preload="auto" autoplay controls="controls">您的浏览器不支持此播放器</audio>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" onclick="$('#show_cdr_listen_record_Modal').modal('hide');$('#cdr_listen_record_pane').empty();">关闭</a>
+        </div>
+    </form>
+</div>
+<!--<script type="text/javascript" src="./javascripts/jqueryui/jquery.ui.core.min.js"></script>-->
+<!--<script type="text/javascript" src="./javascripts/jqueryui/jquery.ui.widget.min.js"></script>-->
+<!--<script type="text/javascript" src="./javascripts/jqueryui/jquery.ui.mouse.min.js"></script>-->
+<!--<script type="text/javascript" src="./javascripts/jqueryui/jquery.ui.position.min.js"></script>-->
+<!--<script type="text/javascript" src="./javascripts/jqueryui/jquery.ui.draggable.min.js"></script>-->
+<script type="text/javascript">
+    $( "#show_cdr_listen_record_Modal" ).draggable({ handle: "#show_cdr_listen_title" });
+</script>

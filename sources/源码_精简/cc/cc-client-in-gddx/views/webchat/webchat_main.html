@@ -1,0 +1,262 @@
+<link rel="stylesheet" href="stylesheets/webchat.css?1101"/>
+<style type="text/css" id="setImStyleContainer">
+</style>
+<style>
+    .imFontCon li:hover,.imFontCon li.active{
+        background:rgba(0,0,0,.2);
+        cursor: pointer;
+    }
+    .chat_transfer{
+        padding-top: 10px;
+    }
+    .chat_item{
+        margin: 1em 5px;
+    }
+    .chat_time,.chat_section{
+        margin-bottom:.5em;
+    }
+    .service_name{
+        margin-bottom:.4em;
+    }
+</style>
+<div class="left_column" id="contact_list_webchat">
+    <div class="model_submenu" style="padding: 5px;">
+        <div class="btn-group" style="width:100%">
+            <!--<button class="btn ds_do_action btn_webchat_open" style="width: 101px" ds_action="webchat.quick_subMenu_search" ds_data="webchat_open">待领取 <span class="badge badge-important"></span></button>-->
+            <button class="btn ds_do_action btn_webchat_todo active" style="width: 50%" ds_action="webchat.quick_subMenu_search" ds_data="webchat_todo">待处理 <span class="badge badge-important"></span></button>
+            <button class="btn ds_do_action btn_webchat_all" style="width: 50%" ds_action="webchat.quick_subMenu_search" ds_data="webchat_all">全部</button>
+        </div>
+    </div>
+    <div class="list_card">
+        <div id="view_webchat_todo" class="card_pane"></div>
+        <div id="view_webchat_all" class="card_pane"></div>
+    </div>
+</div>
+
+<div class="right_column">
+    <div class="contact_detail" style="padding: 0;">
+        <div class="content" style="overflow: hidden;">
+            <div id="view_webchat_todo_content" class="content_pane">
+                <div id="webchat_kmpopover" class="ui-widget-content webchat_kmpopover" style="display:none;position: absolute;z-index: 9; width:736px;height: 540px;min-height:225px">
+                    <div class="panel panel-default">
+                        <div class="panel-heading ">
+                            <h4 class="panel-title fl">
+                                知识库搜索
+                            </h4>
+                            <button type="button" class="webchat_kmpopover_close close pull-right">×</button>
+                        </div>
+                        <div class="panel-body">
+                            <div style="padding: 0 18px;"><div class="clear20"></div>
+                                <div class="kmsearch" >
+                                    <button class="kmpopover_search_btn pull-left ds_do_action" ds_action="webchat.textSearch" ><i class="icon-search"></i></button>
+                                    <input id="kmpopover_key_word" type="text" class="kmpopover-input-text pull-left" placeholder="请输入要检索的内容" onkeyup="if(event.keyCode==13){handler.webchat.textSearch();}">
+                                    <ul class="webchat_kmhotword_box">
+                                        <div>热门问题</div>
+                                    </ul>
+                                </div>
+
+                                <div class="clear10"></div>
+                                <div class="search_tip pull-left">
+                                    找到相关结果<span class="search_tip_num" style="color:#e86b64;">0</span>条
+                                </div>
+                                <div class="pull-left" style="color: #e1b771;">温馨提示：鼠标点击下列内容可以直接粘贴到对话框</div>
+                                <div class="clear10"></div>
+                            </div>
+                            <div class="webchat_kmdic_box">
+                                    <div class="norecord" style="display: none;margin: 15px 18px;">
+                                        <div style="font-size:15px; color:blue;">抱歉，没有找到相关的知识点</div>
+                                        <div style="color:grey;line-height:20px; margin-top:5px;">
+                                            &nbsp;建议您:
+                                            <ul>
+                                                <li>1、中间使用空格的方式进行检索</li>
+                                                <li>2、检查输入的文字是否有误</li>
+                                                <li>3、去掉可能不必要的字词，如"的"、"什么"等</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                <div class="webchat_kmdic_content"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="view_webchat_all_content" class="content_pane"></div>
+            <div id="show_end_session"></div>
+        </div>
+    </div>
+</div>
+<div class="modal hide fade modal-dialog" id="existing_customers_box">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">定位客户</h4>
+    </div>
+    <div class="modal-body">
+    </div>
+</div>
+
+
+<script id="tmpl_webchat_item" type="text/html">
+    {{
+        if(!isInvitedUser){
+    }}
+    <div class="list_item list_item_check">
+    {{
+         }else{
+    }}
+    <div class="list_item">
+    {{
+        }
+    }}
+        {{
+        if(!isLocationUser){
+        }}
+        <div class="ds_do_action item_row item{{=_id}} item_check webchat_item" ds_action="{{=dealAction}}" ds_data="{{=_id}}" ds_attr="{{=sid}}" cust_id="{{=custId}}" ds_sname="{{=sName}}">
+            {{
+            }else{
+            }}
+            <div class="ds_do_action item_row item{{=_id}} item_check webchat_item" ds_action="{{=dealAction}}" ds_data="{{=_id}}" ds_attr="{{=sid}}" cust_id="{{=custId}}" ds_sname="{{=sourceName}}">
+                {{
+                }
+                }}
+
+            <div class="card_row">
+                <input type="hidden" name="pk" value="{{=_id}}" >
+                <div class="card_right">
+                    <div class="muted" title="{{=createTime}}">{{=shortTime}}</div>
+                    <div style="margin-top:6px;"><span class="label label_status {{=statusClass}}" status="{{=status}}">{{=statusDesc}}</span></div>
+                </div>
+                <div class="hidden webchat_watch chattime_item{{=_id}}">访客已等待 <span class="ts_minute">00</span>:<span class="ts_second">00</span></div>
+                <div class="card_left">
+                    {{
+                        if(!isInvitedUser){
+                    }}
+                    <b class="ico_select_checkbox ico ico_wrap ico_item_checkbox webchat_item"></b>
+                    {{
+                        }
+                    }}
+                    <span class="badge badge-important">{{=leakNum}}</span>
+                </div>
+                <div class="card_middle">
+                    {{
+                    if(sourceName){
+                    }}
+                    <div class="card_row_title" style="display:inline" sourcename="{{=sourceName}}">{{=sName}}</div>
+                    {{
+                    }else{
+                    }}
+                    <div class="card_row_title" style="display:inline" sourcename="{{=sName}}">{{=sName}}</div>
+                    {{
+                    }
+                    }}
+                    <div class="card_row_from" style="display:inline">
+                        <span class="card_row_from_title" platform="{{=platform || Platform}}">
+                            ({{=fromSource}})
+                        </span>
+                        {{
+                        if(flag_status){
+                        }}
+                            <span class="user_status {{=userStatusClass}}">{{=userStatusDesc}}</span>
+                        {{
+                        }
+                        }}
+                    </div>
+
+                    <div class="muted" style="clear:left">
+                        {{
+                        if(flag_source){
+                        var urlTitleShow = urlTitle || fromUrl
+                        }}
+                        <span style="overflow: hidden; text-overflow: ellipsis; width:226px;white-space: nowrap; float:left;color:#343434">
+                            来源:<span class="img_plate_from {{=imgClass}}"></span>{{=urlTitleShow}}</span>
+                        {{
+                        }
+                        }}
+
+                    </div>
+                    {{
+                    if(flag_skillGroup){
+                    }}
+                    <div class="text_ellipsis" style="color: #999">
+                        <span title="处理座席">{{=agentDisplayName}}&nbsp;</span><span title="技能组">【{{=peerName}}】&nbsp;</span>
+                    </div>
+                    {{
+                    }
+                    }}
+                    <!--<div class="customer customer_mini ellipsis">{{=custName}}</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+</script>
+
+<script id="tmpl_popup_notFound_customer" type="text/html">
+    <div class="contact_summary">
+        <div class="baseinfo cust_base">
+            <div class="base_summary">
+                <div style="font-size: 14px;line-height: 30px;">
+                    {{ if(isDel){ }}
+                    <span class="text-error">{{=desc}}<span style="font-weight:bold;">{{=id}}</span>定位的客户已经删除！</span>
+                    {{ }else{ }}
+                    {{=desc}}<span style="color:#009900;font-weight:bold;">{{=id}}</span>未定位到客户。
+                    {{ } }}
+                    <div>
+                        您可以<a href="#" class="ds_do_action show_add" ds_action="customer.showPopAdd" ds_data="{{=flag}}">新增一个客户</a>
+                        或者 <a href="#" class="ds_do_action " ds_action="customer.showSelectOldCust" ds_data="{{=paneId}}">选择已存在客户</a>。
+                    </div>
+                    <form class="cust_base_fields" style="display: none;">
+                        <span>名称：<input type="text" name="custName" placeholder="获取消息中的名称，自动填充到客户中" when=""></span>
+                        <span>电话：<input type="text" name="custPhone" placeholder="获取消息中的电话，自动填充到客户中" when=""></span>
+                        <span>联系人：<input type="text" name="custContact" placeholder="录入联系人，自动填充到客户中"></span>
+                        <span><input type="button" class="btn-blue query_cust_info ds_form_action" ds_action="webchat.queryMatchMsgCust" value="查询" style="height: 21px"/></span>
+                        <span class="exist_custom"></span>
+                    </form>
+                </div>
+            </div>
+
+            <div class="func_tab_container clearfix">
+                <div class="pull-left">
+                    <a href="#" class="ds_do_action func_tab active" ds_action="customer.swapFunTab" ds_data="webchat" ds_attr="">在线咨询</a>
+                    <a href="#" class="func_tab disabled_new"  ds_data="business" style="cursor: default;">工单</a>
+                    <a href="#" class="func_tab disabled_new"  ds_data="action" style="cursor: default;">联系计划</a>
+                    <a href="#" class="func_tab disabled_new"  ds_data="history" style="cursor: default;">联系历史</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_modal_existing_customers" type="text/html">
+    <div>
+        <table class="table table-bordered table-striped table-hover table-condensed">
+            <thead>
+            <tr>
+                <th>
+                </th>
+                <th>
+                    客户名称
+                </th>
+                <th>
+                    电话号码
+                </th>
+                <th>
+                    邮箱
+                </th>
+            </tr>
+            </thead>
+            <tbody id="existing_customers_list_pane_{{=callId}}" class="existing_customers">
+            </tbody>
+        </table>
+    </div>
+</script>
+<script id="tmpl_modal_existing_customers_td" type="text/html">
+    <tr>
+        <td >
+            <button type='button' class='btn btn-info btn-small ds_do_action' ds_attr='select_old' ds_data='{{=_id}},{{=name}},{{=callId}},{{=dbType}},{{=callTel}},{{=sid}}' ds_action='call.popLocateCust'>选定</button>
+        </td>
+        <td>{{=name}}</td>
+        <td>{{=phoneList}}</td>
+        <td>{{=emailList}}</td>
+    </tr>
+</script>

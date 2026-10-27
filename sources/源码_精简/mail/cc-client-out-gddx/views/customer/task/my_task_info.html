@@ -1,0 +1,389 @@
+
+<style type="text/css">
+    body{
+        /*font-family: Microsoft YaHei,"Helvetica Neue", Helvetica, Arial, sans-serif;*/
+        /*font-family: "Microsoft Yahei","微软雅黑",Tahoma,Arial,Helvetica,STHeiti;*/
+    }
+    .task_import_section{
+        padding: 5px 0;
+        margin-top: 5px;
+    }
+    .task_import_section .task_num{
+        font-size: 14px;font-weight:bold;color: #ea5404;display:inline-block;
+    }
+
+    .task_item{
+        border: 1px solid #e3e3e3;padding: 10px 8px;
+        /*background-color: #f5f5f5;*/
+        background-color: #FFFFFF;
+        border-radius:4px;margin-bottom: 10px;
+    }
+    .task_item .progress_desc{
+        display: inline-block;position: absolute;left: 40%;top:0;
+    }
+</style>
+
+<div class="contact_summary">
+<div class="task_import_section clearfix">
+    <div style="width: 100%;" class="clearfix">
+        <h3 class="pull-left">电子商务外呼任务&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-success">进行中</span></h3>
+        <a class="pull-right">结束任务</a>
+    </div>
+    <div class="text-mute">
+        从各个地方收集的客户资料
+    </div>
+    <!--<div>-->
+    <!--<button type="button" class="btn btn-small btn-primary ds_do_action pull-left btn_pad" ds_action="customer.task.showTaskImort" >导入客户</button>-->
+    <!--<button type="button" class="btn btn-small btn-info ds_do_action pull-left btn_pad" ds_action="customer.saveCustAssign" >导入进度</button>-->
+    <!--<button type="button" class="btn btn-small btn-info ds_do_action pull-left btn_pad" ds_action="customer.saveCustAssign" >放入公共客户</button>-->
+    <!--<button type="button" class="btn btn-small btn-danger ds_do_action pull-left btn_pad" ds_action="customer.saveCustAssign" >结束任务</button>-->
+    <!--</div>-->
+</div>
+
+<div class="task_import_section" >
+    客户总数:<span class="task_num">200</span> &nbsp;<a href="#" class="ds_do_action" ds_action="customer.task.showTaskImort">导入客户</a>&nbsp;<a href="#" class="ds_do_action" ds_action="customer.task.showTaskImort">导入明细</a> &nbsp;&nbsp;
+    已分配:<span class="task_num">100</span>  &nbsp;&nbsp;
+    未分配:<span class="task_num">100</span>&nbsp; <a href="#" class="ds_do_action" ds_action="customer.task.showTaskAssgin">分配</a> &nbsp;&nbsp;
+    <!--已拨打:10 &nbsp;&nbsp; 未拨打:90 &nbsp;&nbsp; 未接听: 10&nbsp;&nbsp;-->
+
+    <!--<button type="button" class="btn btn-small btn-primary ds_do_action pull-right " ds_action="customer.saveCustAssign" >拨打统计</button>-->
+    <!--<button type="button" class="btn btn-small btn-danger ds_do_action pull-right btn_pad" ds_action="customer.saveCustAssign" >结束任务</button>-->
+    <!--<button type="button" class="btn btn-small btn-info ds_do_action pull-right btn_pad" ds_action="customer.saveCustAssign" >放入公共客户</button>-->
+    <!--<button type="button" class="btn btn-small btn-info ds_do_action pull-right btn_pad" ds_action="customer.saveCustAssign" >继续分配</button>-->
+    <!--<button type="button" class="btn btn-small btn-info ds_do_action pull-right btn_pad" ds_action="customer.saveCustAssign" >分配客户</button>-->
+    <!--<button type="button" class="btn btn-small btn-primary ds_do_action pull-right btn_pad" ds_action="customer.task.showTaskImort" >导入客户</button>-->
+</div>
+<div class="task_import_section" >
+    <div class="row-fluid chart_pane">
+        <div class='span6'>
+            <div id="task_pie_chart_dial2" style="height:250px;">
+            </div>
+        </div>
+        <div class='span6'>
+            <div id="task_pie_chart_status2" style="height:250px;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="task_import_section">
+    <!--<p>-->
+    <!--可分配座席:张三、李四、王五   <button type="button" class="btn btn-small btn-primary ds_do_action " ds_action="customer.saveCustAssign" style="margin-left: 15px;">修改</button>-->
+    <!--</p>-->
+    <p style="margin-top: 10px;">
+        <span class="help-block">客户分配后未拨打状态达到<input type="text" style="width: 35px;">天时，系统自动回收到"未分配"池子中</span>
+    </p>
+</div>
+<div class="task_import_section">
+    <!--<ul class="nav nav-tabs">-->
+    <!--<li class="active">-->
+    <!--<a href="#" class="ds_do_action" ds_action="customer.task.showTab" ds_data="1" data-toggle="tab">拨打明细</a>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<a href="#" class="ds_do_action" ds_action="customer.task.showTab" ds_data="2" data-toggle="tab">成交明细</a>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<a href="#" class="ds_do_action" ds_action="customer.task.showTab" ds_data="3" data-toggle="tab">导入明细</a>-->
+    <!--</li>-->
+    <!--</ul>-->
+
+    <!--------------------------------------导入任务统计-------------------------------->
+    <div class="task_dial_task" style="display: block;">
+        <div class="row-fluid">
+            <div class="span12">
+                <button type="button" class="btn btn-info btn-small ds_form_action" ds_action="batch2.getBdTaskHistory">增加参与座席</button>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="task_item">
+                    <div class="row-fluid ">
+                        <div class="span12">
+                            <div style="" class="pull-left">
+                                <span style="font-weight: bold;">张三</span>&nbsp;&nbsp;
+                            </div>
+                            <div style="" class="pull-right">
+                                <!--<a href="#" class="ds_do_action" ds_action="batch2.showUpdateTask" ds_data="27d02b60-d9cb-11e4-b6d1-adf13775cb56" title="编辑">-->
+                                <!--<i class="icon-pencil"></i>-->
+                                <!--</a>-->
+                                <a href="#" class="ds_do_action" ds_action="batch2.removeBdTask" ds_data="27d02b60-d9cb-11e4-b6d1-adf13775cb56" title="删除">
+                                    <i class="icon-trash"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid ">
+                        <div class="task_item_detail span12">
+                            <div>
+                                <div style="" class="pull-left"><span>分配数量：</span><span>65546</span>&nbsp;&nbsp;<span>未拨打：</span>
+                                    <!--<span><input type="text" style="width: 35px;" value="100"></span>&nbsp;&nbsp;-->
+                                    <span>100&nbsp;&nbsp;</span>
+                                    <span>已接听：</span><span>100</span>
+                                    <span>未接听：</span><span>100</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div style="" class="span6">
+                            <span style="display: inline-block;float: left;">完成率：</span>
+                            <div class="progress progress-info" style="position: relative;margin-bottom:0px;" title="完成率">
+                                <div class="bar" style="width: 80%;"></div>
+                                <span class="progress_desc"> 80%</span>
+                            </div>
+                        </div>
+                        <div style="" class="span6">
+                            <span style="display: inline-block;float: left;">接听率：</span>
+                            <div class="progress" style="position: relative;margin-bottom:0px;" title="呼通率">
+                                <div class="bar" style="width: 0%;"></div>
+                                <span class="progress_desc"> 0%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid ">
+                        <div class="task_item_detail span12">
+                            <div>
+                                <div style="" class="pull-left"><span>商机：</span><span>65546</span>&nbsp;&nbsp;<span>兴趣：</span><span>1000</span>&nbsp;&nbsp;
+                                    <span>重点跟进：</span><span>0</span>
+                                    <span>正式客户：</span><span>0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="task_item">
+                    <div class="row-fluid ">
+                        <div class="span12">
+                            <div style="" class="pull-left">
+                                <span style="font-weight: bold;">李四</span>&nbsp;&nbsp;
+                            </div>
+                            <div style="" class="pull-right">
+                                <!--<a href="#" class="ds_do_action" ds_action="batch2.showUpdateTask" ds_data="27d02b60-d9cb-11e4-b6d1-adf13775cb56" title="编辑">-->
+                                <!--<i class="icon-pencil"></i>-->
+                                <!--</a>-->
+                                <a href="#" class="ds_do_action" ds_action="batch2.removeBdTask" ds_data="27d02b60-d9cb-11e4-b6d1-adf13775cb56" title="删除">
+                                    <i class="icon-trash"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid ">
+                        <div class="task_item_detail span12">
+                            <div>
+                                <div style="" class="pull-left"><span>分配数量：</span><span>65546</span>&nbsp;&nbsp;<span>未拨打：</span><span>1000</span>&nbsp;&nbsp;
+                                    <span>已接听：</span><span>0</span>
+                                    <span>未接听：</span><span>0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div style="" class="span6">
+                            <span style="display: inline-block;float: left;">完成率：</span>
+                            <div class="progress progress-info" style="position: relative;margin-bottom:0px;" title="完成率">
+                                <div class="bar" style="width: 80%;"></div>
+                                <span class="progress_desc"> 80%</span>
+                            </div>
+                        </div>
+                        <div style="" class="span6">
+                            <span style="display: inline-block;float: left;">接听率：</span>
+                            <div class="progress" style="position: relative;margin-bottom:0px;" title="呼通率">
+                                <div class="bar" style="width: 0%;"></div>
+                                <span class="progress_desc"> 0%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid ">
+                        <div class="task_item_detail span12">
+                            <div>
+                                <div style="" class="pull-left"><span>商机：</span><span>65546</span>&nbsp;&nbsp;<span>兴趣：</span><span>1000</span>&nbsp;&nbsp;
+                                    <span>重点跟进：</span><span>0</span>
+                                    <span>正式客户：</span><span>0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="task_status_stat" style="display: none;">
+        <form class="form-inline clearfix" role="form" >
+            <div class="pull-left" style="margin-bottom: 15px;">
+                <table class="table_row_search">
+                    <tbody>
+                    <tr>
+                        <td >座席</td>
+                        <td >
+                            <input type="text" name="name" class="input-small"/>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-small ds_form_action" ds_action="batch2.getBdTaskHistory">查询</button>
+                            <button type="button" class="btn btn-default btn-small ds_do_action" ds_action="batch2.reset" >重置</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+
+        <table class="table table-bordered table-striped table-hover table-condensed"
+               style=" margin-bottom: 5px;">
+            <thead>
+            <tr>
+                <th>
+                    座席
+                </th>
+                <th>
+                    VIP客户
+                </th>
+                <th>
+                    金牌客户
+                </th>
+                <th>
+                    银牌客户
+                </th>
+                <th>
+                    普通客户
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    张三
+                </td>
+                <td>
+                    10
+                </td>
+                <td>
+                    0
+                </td>
+                <td>
+                    1
+                </td>
+                <td>
+                    0
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+</div>
+
+
+<script type="text/javascript">
+    function task_status_stat2(data) {
+        var pane=$("#chart_pane");
+        var charData=[
+            {
+                name: '商机',
+                y: 45.8
+//                    sliced: true,
+//                    selected: true
+            },
+            {
+                name: '兴趣',
+                y: 20.0
+            },
+            {
+                name: '重点跟进',
+                y: 15.2
+            },
+            {
+                name: '正式客户',
+                y: 19.0
+            }
+        ];
+        $('#task_pie_chart_status2').empty();
+        $('#task_pie_chart_status2').highcharts({
+            chart: {
+                type: 'pie'
+            },
+            title: {
+                text: '成交统计图表'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [
+                {
+                    type: 'pie',
+                    name: '成交统计',
+                    data : charData
+                }
+            ]
+        });
+    }
+    function task_dialStatus_stat2(data) {
+        var charData=[
+            {
+                name: '未拨打',
+                color:"#d9534f",
+                y: 60.8
+            },
+            {
+                name: '已接听',
+                color:"#5bb75b",
+                y: 20.0
+            },
+            {
+                name: '未接听',
+                color:"#f0ad4e",
+                y: 15.2
+            }
+        ];
+        $('#task_pie_chart_dial2').empty();
+
+        $('#task_pie_chart_dial2').highcharts({
+            chart: {
+                type: 'pie'
+            },
+            title: {
+                text: '拨打统计图表'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [
+                {
+                    type: 'pie',
+                    name: '拨打统计图表',
+                    data : charData
+                }
+            ]
+        });
+    }
+    $(function(){
+        task_status_stat2();
+        task_dialStatus_stat2();
+    });
+</script>

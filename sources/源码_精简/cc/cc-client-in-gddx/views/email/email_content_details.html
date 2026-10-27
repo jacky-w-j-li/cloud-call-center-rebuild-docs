@@ -1,0 +1,45 @@
+<div class="modal hide fade" id="email_con_details" tabindex="-1" style="overflow: hidden" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-header" style="border:0px;padding: 20px;border-bottom: 1px solid #cdcdcd;">
+        <button type="button" class="close" style="margin-top: -5px;" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title hidden">邮件详情</h4>
+    </div>
+    <div class="modal-body margin_none">
+        <div class="tabbable">
+            <div class="email_detail_head">
+                <div class="email_detail_head_lis" style="position: relative">
+                    <h4 title="_#subject#_">_#subject#_</h4>
+                    <span class="email_detail_short_time pull-right">
+                        <span class="email_detail_forwarding ds_do_action hidden" ds_action="email.showEmailForwardingBox" title="转发"></span>
+                        _#shortTime#_
+                    </span>
+                    <div class="email_detail_forwarding_box">
+                        <div class="email_det_forwarding_content">
+                            <input type="text" name="label" class="ds_focus_action email_send_forwarding ui-autocomplete-input" maxlength="50" focus_action="email.editEmailForwarding" blur_action="email.saveEmailForwarding" onkeypress=" if(event.keyCode==13) {blur()}" placeholder="填写转发邮箱" autocomplete="off">
+                        </div>
+                        <div class="email_det_forwarding_button">
+                            <button class="btn-blue ds_do_action" ds_action="email.sendEmailForwarding">转发</button>
+                            <button class="btn-gray ds_do_action" ds_action="email.hideEmailForwardingBox">取消</button>
+                        </div>
+                    </div>
+                </div>
+                _#agentDisplay#_
+                <div class="email_detail_head_lis email_detail_head_lab">发件人： <span>__from.name&lt__from.addr&gt</span></div>
+                <div class="email_detail_head_lis email_detail_head_lab">收件人： <span>_#toString#_</span></div>
+                <div class="email_cc email_detail_head_lis email_detail_head_lab">抄送： <span>_#ccString#_</span></div>
+                <div class="email_attachment email_detail_head_lis">共_#attachSize#_个附件<span>（_#attach#_）</span></div>
+            </div>
+            <div class="email_detail_body" >
+                <div class="email_detail_sign">
+                    <form action="" class="email_detail_data"></form>
+                </div>
+                <div class="email_detail_body_content">_#content#_</div>
+            </div>
+        </div>
+    </div>
+    <div class="email_detail_foot">
+        <button type="button" class="btn-blue" data-dismiss="modal" aria-hidden="true">关闭</button>
+    </div>
+</div>
+<script>
+    $("[data-toggle='tooltip']").tooltip();
+</script>

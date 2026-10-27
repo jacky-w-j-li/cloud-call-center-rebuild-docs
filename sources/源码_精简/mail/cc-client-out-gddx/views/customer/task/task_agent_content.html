@@ -1,0 +1,159 @@
+<div id="agent_task_detail_pane"></div>
+<div id="agent_task_called_detail_pane"></div>
+<input id="agent_dial_popup_modal_callSheetID" type="hidden">
+<div id="agent_save_or_update_info" class="call_detail">
+    <div class="task_intrbg"></div>
+    <div class="customer_container clearfix">
+    </div>
+    <div class="cust_tab_content">
+        <div class="cust_tab_content_other"></div>
+        <div class="cust_tab_content_bus"></div>
+    </div>
+</div>
+<div id="agent_called_save_or_update_info_detail" class="call_detail">
+</div>
+<div id="agent_task_custinfo" class="call_detail">
+    <div class="customer_container clearfix">
+    </div>
+    <div class="cust_tab_content">
+        <div class="cust_tab_content_other"></div>
+        <div class="cust_tab_content_bus"></div>
+    </div>
+</div>
+<div id="agent_task_commit_info"></div>
+<div id="agent_called_task_info" class="call_detail">
+    <div class="customer_container clearfix">
+    </div>
+    <div class="cust_tab_content">
+        <div class="cust_tab_content_other"></div>
+        <div class="cust_tab_content_bus"></div>
+    </div>
+</div>
+<div id="agent_called_save_or_update_info" class="call_detail"></div>
+<script type="text/javascript">
+    $(function () {
+        var hAll = $(window).height();
+        $("#agent_save_or_update_info").css("height", hAll - 113 - 51);
+    })
+</script>
+
+
+
+<script id="agent_task_detail" type="text/x-jquery-tmpl">
+<div class="contact_summary">
+<div class="baseinfo cust_base">
+    <input type="hidden" id="callTaskId" value="${task._id}">
+    <div id="task_cing">
+        <div style="margin:30px 200px 0 0;line-height:20px;font-size:14px;color:#7b7b7b" class="clearfix">
+        您正在进行<span class="hlig">${task.taskName}</span>外呼任务，每日任务量<span class="hlig">${taskUser.dailyTask}</span>${task.uword}，已完成<span class="hlig">${taskUserDaily.called}</span>${task.uword},请点击右侧开始按钮
+        </div>
+    </div>
+    <div class="daily_chart" id="daily_chart">
+    <button class="ds_do_action call_start" ds_action="customer.task.showAgentTaskInfo" ds_data="${task._id}">开始</button>
+    <button class="ds_do_action call_next" ds_action="customer.task.showAgentTaskInfo" ds_data="${task._id}">下一条</button>
+    <button class="ds_do_action call_mark" ds_action="customer.task.showMarkList" ds_data="${task._id}">结束</button>
+        <div>
+            <canvas width="100" height="100"></canvas>
+            <span>${taskUser.total}</span>
+        </div>
+    </div>
+</div>
+</script>
+<script id="agent_sample_detail" type="text/x-jquery-tmpl">
+<div class="contact_summary">
+<div class="baseinfo cust_base">
+    <input type="hidden" id="saveTaskId" value="${taskId}" />
+    <input type="hidden" id="saveSampleId" value="${_id}" />
+    <div id="task_cing">
+    <div style="margin-right:200px;" class="clearfix">
+        <h3 class="brdb pull-left">
+        <span class="major">
+            ${checkHideTel(sample.phone)} </span>
+        <span id="tips_m" class="mark-un">未标记</span></h3>
+    </div>
+ <div class="text-mute" style="height:3em;margin-right:200px;overflow:hidden">
+   客户名称： ${sample.name} 描述： ${sample.title}
+</div>
+    <div class="daily_chart" id="daily_chart">
+    <button style="display:none" class="ds_do_action call_start" ds_action="customer.task.showAgentTaskInfo" ds_data="${task._id}">开始</button>
+    <button class="ds_do_action call_next" ds_action="customer.task.showAgentTaskInfo" ds_data="${task._id}">下一条</button>
+    <button style="display:block" class="ds_do_action call_mark" ds_action="customer.task.showMarkList" ds_data="${task._id}">结束</button>
+        <div>
+            <canvas width="100" height="100"></canvas>
+            <span></span>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+</script>
+<script id="agent_task_called_detail" type="text/x-jquery-tmpl">
+<div class="baseinfo cust_base">
+    <div style="width: 100%;" class="clearfix">
+        <h3 class="brdb pull-left"><span class="major">任务:${taskName}</span> <span class="obtask_info">创建人:${createUser} </span><span class="obtask_info">创建日期:${createTime}</span></h3>
+    </div>
+</div>
+</script>
+
+<script id="tmpl_task_agent_popup_one_customer" type="text/html">
+    // 根据这个号码<span style="color:#37b5ed">${phone}</span>没有定位到客户资料
+    <div class="contact_summary">
+        <div class="baseinfo cust_base">
+            <div class="base_summary">
+                <div style="font-size: 14px;line-height: 30px;">
+                    <span style="color:#009900;font-weight:bold;">${phone}</span>未定位到客户。
+                    <div>
+                        您可以<a href="#" class="ds_do_action show_add" ds_action="customer.showPopAdd" ds_data="taskAgentAdd">新增一个客户</a>
+                        或者 <a href="#" class="ds_do_action " ds_action="customer.showSelectOldCust" ds_data="taskAgentOldCust">选择已存在客户</a>。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_task_agent_popup_more_customer" type="text/html">
+    <div class="contact_summary">
+        <div class="baseinfo cust_base">
+            <div class="base_summary">
+                <div style="font-size: 14px;line-height: 30px;">
+                    号码<span style="color:#009900;font-weight:bold;">${checkHideTel(phone)}</span>定位到多个客户。
+                    <div>
+                        点击<a href="#" class="ds_do_action " ds_action="customer.showSelectMultiCust" ds_data="${paneId}">选择一个客户</a>。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_task_agent_popup_one_customer_called" type="text/html">
+    <div class="contact_summary">
+        <div class="baseinfo cust_base">
+            <div class="base_summary">
+                <div style="font-size: 14px;line-height: 30px;">
+                    <span style="color:#009900;font-weight:bold;">${checkHideTel(phone)}</span>未定位到客户。
+                    <div>
+                        您可以<a href="#" class="ds_do_action show_add" ds_action="customer.showPopAdd" ds_data="taskAgentCalledAdd">新增一个客户</a>
+                        或者 <a href="#" class="ds_do_action " ds_action="customer.showSelectOldCust" ds_data="taskAgentCalledOldCust">选择已存在客户</a>。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_task_agent_popup_more_customer_called" type="text/html">
+    <div class="contact_summary">
+        <div class="baseinfo cust_base">
+            <div class="base_summary">
+                <div style="font-size: 14px;line-height: 30px;">
+                    号码<span style="color:#009900;font-weight:bold;">${checkHideTel(phone)}</span>定位到多个客户。
+                    <div>
+                        点击<a href="#" class="ds_do_action " ds_action="customer.showSelectMultiCust" ds_data="${paneId}">选择一个客户</a>。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

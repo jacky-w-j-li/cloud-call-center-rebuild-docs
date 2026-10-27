@@ -1,0 +1,93 @@
+
+
+<div class="left_column" id="contact_list_sheet_leak">
+    <div class="model_submenu" style="padding: 5px;">
+        <div class="btn-group">
+            <button class="btn ds_do_action btn_call_sheet_leak_my" style="width: 171px" ds_action="cdr.quick_subMenu_search" ds_data="call_sheet_leak_my">我的未接来电<span class="badge badge-important"></span></button>
+            <button class="btn ds_do_action btn_call_sheet_leak_all" style="width: 171px" ds_action="cdr.quick_subMenu_search" ds_data="call_sheet_leak_all">全部 <span class="badge badge-important"></span></button>
+        </div>
+    </div>
+
+   <div class="list_card">
+        <div id="view_call_sheet_leak_all" class="card_pane"></div>
+        <div id="view_call_sheet_leak_my" class="card_pane"></div>
+    </div>
+</div>
+<div class="right_column" id="call_sheet_detail__#menu#_">
+    <div class="contact_detail" style="padding: 0;">
+        <div class="content">
+             <div id="view_call_sheet_leak_all_content" class="content_pane full_height"></div>
+            <div id="view_call_sheet_leak_my_content" class="content_pane full_height"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    utils.loadSearchInput({ id: "call_back_agent_select_user",
+        width: "179",
+        height: "14",
+        tip: "按姓名,拼音,工号搜索",
+        data: getCache("agents"),
+        searchField: ["displayName", "exten", "pinyin"],
+        pinyinField: ["displayName"],
+        listField: ["displayName", "exten"],
+        userIdField: "_id",
+        showField: "displayName",
+        showAllList: true,
+        callbackFuc: function (object) {
+            $("#call_sheet_leak_callback_agent_select_input").val(object._id);
+        },
+        onKeyChanged: function () {
+            if ($("#call_back_agent_select_user_input").val() != "") {
+                $("#call_sheet_leak_callback_agent_select_input").val("serachInputNoresult");
+            } else {
+                $("#call_sheet_leak_callback_agent_select_input").val("");
+            }
+        }
+    });
+    utils.loadSearchInput({ id: "my_call_leak_disposal_agent_select_user",
+        width: "179",
+        height: "14",
+        tip: "按姓名,拼音,工号搜索",
+        data: getCache("agents"),
+        searchField: ["displayName", "exten", "pinyin"],
+        pinyinField: ["displayName"],
+        listField: ["displayName", "exten"],
+        userIdField: "_id",
+        showField: "displayName",
+        showAllList: true,
+        callbackFuc: function (object) {
+            $("#call_sheet_leak_disposal_agent_select_input").val(object._id);
+        },
+        onKeyChanged: function () {
+            if ($("#my_call_leak_disposal_agent_select_user_input").val() != "") {
+                $("#call_sheet_leak_disposal_agent_select_input").val("serachInputNoresult");
+            } else {
+                $("#call_sheet_leak_disposal_agent_select_input").val("");
+            }
+        }
+    });    
+    $('#call_sheet_list__#menu#_').on('change', "select[name='STATUS']", function(event){
+        event.preventDefault();
+        var src = $(event.currentTarget);
+        handler.cdr.changeQuickSearchCdrStauts(src);
+    });
+    $('#call_sheet_list__#menu#_').on('click', ".reset_adv_search", function(event){
+        event.preventDefault();
+        var src = $(event.currentTarget);
+        src.closest('.list_check_pane').find(".quickSearchCdrStauts_current").html("全部");
+    });
+    $(function () {
+        //$('.btn_call_sheet_leak_my').click();
+        $(".my_call_sheet_leak_search_dorpdown").bind("click", function () {
+            $("#my_call_sheet_leak_search_query").toggleClass("my_call_sheet_leak_query_close");
+        });
+        $(".call_sheet_leak_list_query_form").keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                handler.cdr.my_call_sheet_leak("my_call_sheet_leak");
+            }
+        });
+    })
+</script>

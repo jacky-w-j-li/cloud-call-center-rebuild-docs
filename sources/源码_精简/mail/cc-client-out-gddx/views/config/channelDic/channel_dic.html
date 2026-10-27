@@ -1,0 +1,77 @@
+<div class="sub-nav">
+
+</div>
+<div class="tab-content">
+    <div class="menu_background"></div>
+    <div class="tab-pane active account_base" id="end_conversation">
+        <div class="">
+            <div class="row-fluid">
+                <div class="">
+                    <ul class="nav nav-list">
+                        <li class="active">
+                            <a href="#" class="ds_do_action" ds_action="config.channelDic.showWebchatDic" ds_data="" style="background: none"></a>
+                        </li>
+                        <!--<li class="nav-header">List header</li>-->
+                        <!--<li class="divider"></li>-->
+                    </ul>
+                </div>
+                <div class="span12" id="config_channel_dic_pane">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane account_base" id="satisfied_config">
+        <div class="">
+            <div class="row-fluid">
+                <div class="">
+                    <ul class="nav nav-list">
+                        <li class="">
+                            <a href="#" class="ds_do_action" ds_action="config.channelDic.showWebchatDic" ds_data="" style="background: none"></a>
+                        </li>
+                        <!--<li class="nav-header">List header</li>-->
+                        <!--<li class="divider"></li>-->
+                    </ul>
+                </div>
+                <div  id="config_channel_src_pane">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div id="tmpl_channel_dic_set" style="display: none;">
+    <div class="dic_item row-fluid">
+        <input type="hidden" name="key" value="_#key#_">
+        <input type="hidden" name="lastLevel" value="_#lastLevel#_">
+        <input type="hidden" name="level" value="_#level#_"><!--当前级-->
+        <input type="text" name="name" maxlength=10 placeholder="输入字数请限制在十个字之内" class="input-small channel_dic_input_text span12 channel_focus_action"
+               blur_action="config.channelDic.blurDicItem" value="_#name#_" >
+    </div>
+</div>
+
+<div id="tmpl_channel_dic_set_2" style="display: none;">
+    <input type="hidden" name="key" value="_#key#_">
+    <input type="hidden" name="lastLevel" value="_#lastLevel#_">
+    <input type="hidden" name="level" value="_#level#_"><!--当前级-->
+    <input type="text" name="name" placeholder="输入字数请限制在十个字之内" maxlength=10 class="input-small channel_dic_input_text span12 channel_focus_action"
+           blur_action="config.channelDic.blurDicItem" value="_#name#_" >
+</div>
+
+<div id="tmpl_channel_dic_show" style="display: none;">
+    <div class="dic_item">
+        <input type="hidden" name="key" value="_#key#_">
+        <div style="position: relative;">
+            <div  class="dic_item_desc" title="_#name#_" level="_#lastLevel#_">_#name#_</div><!--上一级-->
+            <div class="dic_item_deal" >
+                <a href="#" class="channelDic-edit ds_do_action" ds_action="config.channelDic.showEditDicItem" ds_data="_#key#_" level="_#lastLevel#_" ds_name="_#name#_">编辑</a>
+                <a href="#" class="channelDic-reduce ds_do_action" ds_action="config.channelDic.delDicItem" ds_data="_#key#_" level="_#lastLevel#_">删除</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+

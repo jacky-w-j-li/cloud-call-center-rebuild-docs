@@ -1,0 +1,29 @@
+{
+    "appenders": [
+        {
+            "type": "console"
+        },
+        {
+            "type": "file",
+            "filename": "/data/var/log/yy-server/app_log.log",
+            "maxLogSize": 20480000,
+            "backups": 20,
+            "category": "app"
+        },
+        {
+            "type": "file",
+            "filename": "/data/var/log/yy-server/request_log.log",
+            "maxLogSize": 20480000,
+            "backups": 20,
+            "category": "request"
+        },
+        {
+            "type": "file",
+            "filename": "/data/var/log/yy-server/access_log.log",
+            "maxLogSize": 20480000,
+            "backups": 20,
+            "category": "access"
+        }
+    ],
+    "replaceConsole": true
+}

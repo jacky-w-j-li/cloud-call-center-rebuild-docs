@@ -1,0 +1,143 @@
+<div tabindex="-1" class="advanced_search_pane hidden">
+    <div class="advanced_body">
+        <form id="frm_channel_call_advanced_search" class="ds_search_form">
+            <input type="hidden" name="isAdvanceSearch" value="1">
+            <fieldset>
+                <div class="row-fluid">
+                    <div class="span4 advanced_search_item ds_search_item">
+                        <label>主叫</label>
+                        <input  name="CALL_NO" type="text" class=""/>
+                    </div>
+                    <div class="span4 advanced_search_item ds_search_item">
+                        <label>被叫</label>
+                        <input  name="CALLED_NO" type="text" />
+                    </div>
+                    <div class="span4 advanced_search_item ds_search_item">
+                        <label>呼叫类型</label>
+                        <select name="CONNECT_TYPE" class="">
+                            <option value="" selected>--请选择--</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span4 advanced_search_item ds_search_item ds_owner">
+                        <label>接听座席</label>
+                        <input name="DISPOSAL_AGENT" type="hidden" class="select_input" id="_#menu#__owner_select_input"  />
+                        <div id="_#menu#__owner_select_user" class="combobox_agent"></div>
+                    </div>
+
+                    <div class="span4 advanced_search_item ds_search_item">
+                        <label>处理状态</label>
+                        <select name="STATUS">
+                            <option value="" selected>--请选择--</option>
+                        </select>
+                    </div>
+                    <div class="span4 advanced_search_item ds_search_item">
+                        <label>技能组</label>
+                        <select name="ERROR_MEMO">
+                            <option value="" selected>--请选择--</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4 advanced_search_item ds_search_item">
+                        <label>满意度</label>
+                        <select name="INVESTIGATE" class="">
+                            <option value="" selected>--请选择--</option>
+                        </select>
+                    </div>
+                    <div class="span4 advanced_search_item ds_search_item">
+                        <label>定位客户</label>
+                        <select name="CUSTOMER_NAME" class="">
+                            <option value="" selected>--全部--</option>
+                            <option value="true">已定位</option>
+                            <option value="未知客户">未知客户</option>
+                            <option value="多个匹配客户">多个匹配客户</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span8 advanced_search_item ds_search_item">
+                        <label>呼叫时间</label>
+                        <input name="OFFERING_TIME-begin_date" class="ds_datetime" type="text" placeholder="">
+                        <label style="width: 16px">至</label>
+                        <input name="OFFERING_TIME-end_date" class="ds_datetime" type="text" placeholder="">
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span8 advanced_search_item ds_search_item">
+                        <label>通话时长</label>
+                        <div class="input-append" style="float: left;"><input type="text" style="width: 86px" name="CALL_TIME_LENGTH_BEGIN" dataType="Number" msg="时长条件只能为正整数" class="input-small">
+                            <span class="add-on" style="height: 15px;line-height: 15px">秒</span></div>
+                        <label style="width: 16px">至</label>
+                        <div class="input-append" style="float: left;"><input type="text" style="width: 86px" name="CALL_TIME_LENGTH_END"  dataType="Number" msg="时长条件只能为正整数" class="input-small">
+                            <span class="add-on" style="height: 15px;line-height: 15px">秒</span></div>
+                    </div>
+                </div>
+                <div style="padding: 10px;">
+                    <button type="button" class="btn btn-small btn-primary ds_form_action  pull-right" ds_action="channelHistory.searchCallCard" >搜索</button>
+                    <button type="button" class="btn btn-small  reset_adv_search ds_form_action pull-right" ds_action="resetForm" ds_data="callList" style="margin-right: 10px;">重置</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<div class="list_container">
+    <div class="list-inside">
+    </div>
+    <div class="list-footer">
+        <div class="pagination pagination-small" for="frm_channel_call_normal_search" ds_pagination_action="channelHistory.searchCallCard">
+            <span style="float:left;">查询结果：<span class="result_count">0</span></span>
+            <ul class="" style="float:right;padding-right: 6px;">
+                <li>
+                    <a href="#"  value="0">«</a>
+                </li>
+                <li>
+                    <a href="#"  value="1">1</a>
+                </li>
+                <li>
+                    <a href="#"  value="2">2</a>
+                </li>
+                <li>
+                    <a href="#"  value="3">3</a>
+                </li>
+                <li>
+                    <a href="#"  value="4">4</a>
+                </li>
+                <li>
+                    <a href="#"  value="5">5</a>
+                </li>
+                <li>
+                    <a href="#"  value="6">»</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<!--<a href="#" data-toggle="tooltip" data-placement="right" data-original-title="{{=OFFERING_TIME}}">{{=shortTime}}</a>-->
+<!--<script id="tmpl_callsheet_item" type="text/html">-->
+    <!--<div class="list_item list_item_check">-->
+        <!--<div class="ds_do_action item_row item{{=_id}} item_check" ds_action="channelHistory.showCallDetail" ds_data="{{=_id}}" style="">-->
+            <!--<div class="card_row">-->
+                <!--<input type="hidden" name="pk" value="{{=_id}}" >-->
+                <!--<div class="card_right">-->
+                    <!--<div class="muted" title="{{=OFFERING_TIME}}">{{=shortTime}}</div>-->
+                    <!--<div style="position: absolute;bottom: 5px;right:0;"><span class="label {{=statusClass}}">{{=statusDesc}}</span></div>-->
+                <!--</div>-->
+                <!--<div class="card_left">-->
+                    <!--<div style="">-->
+                        <!--<b class="ico_select_checkbox ico ico_wrap ico_item_checkbox call_item"></b>-->
+                    <!--</div>-->
+                    <!--<div style="position: absolute;bottom: 5px;left:0;">{{=#dialTypeDesc}}</div>-->
+                <!--</div>-->
+                <!--<div class="card_middle">-->
+                    <!--<div class="card_row_title">{{=callNoDesc}} </div>-->
+                    <!--<div class="customer customer_mini ellipsis">{{=CUSTOMER_NAME}}</div>-->
+                    <!--<div class="ellipsis muted"><span title="处理座席">{{=agentDesc}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span title="呼入技能组">{{=queueDesc}}</span></div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</script>-->

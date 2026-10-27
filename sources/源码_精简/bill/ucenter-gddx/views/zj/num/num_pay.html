@@ -1,0 +1,34 @@
+<div class="well" style="padding: 0 19px;">
+    <h2>_#_id#_<small>月租:<span class="text-primary monthRent">_@formatTrueFee(_#monthRent#_)@_</span>元
+    </small></h2>
+    <h3>应付:<strong class="payamount">_#totalFee#_</strong>元</h3>
+</div>
+
+
+<form id="frm_serviceno_pay" class="pay_form" target="_blank">
+    <input type="hidden" name="money" value="_#totalFee#_">
+    <input type="hidden" name="serviceno" value="_#_id#_">
+    <input type="hidden" name="balance" value="_#balance#_">
+    <input type="hidden" name="concurrent" value="_#concurrent#_">
+    <input type="hidden" name="flag" value="_#flag#_">
+    <input type="hidden" name="serviceFlag" value="_#serviceFlag#_">
+
+
+    <div class="clearfix">
+        <p>您当前可支付余额为<strong>_#balance#_</strong>元,其中实际余额为<strong>_#actualBalance#_</strong>元,透支额度为<strong>_#overdraw#_</strong>元</p>
+
+        <div class="alert alert-warning balance_not_enough" style="display: none;">
+            您的账户余额不足，请立即&nbsp;<a href="#" class="ds_do_action" ds_action="zjNum.redirectOnlinePay" ds_data="_#totalFee#_">充值</a>
+        </div>
+    </div>
+
+    <p class="add_operate pay_section" style="margin-left:70px;">
+        <button type="button" class="btn btn-primary ds_form_action " ds_action="zjNum.confirmPayNew"  ds_form="#frm_serviceno_pay">确认支付</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+    </p>
+</form>
+<script type="text/javascript">
+</script>
+<style type="text/css">
+
+</style>

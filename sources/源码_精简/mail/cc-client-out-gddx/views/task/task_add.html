@@ -1,0 +1,74 @@
+<div class="task_add">
+    <form>
+        <input class="hidden" name="customer" value="_#cid#_">
+        <div class="action-bar"><h2>添加业务:</h2>
+            <div class="form_buttons" style="padding-left:210px;">
+                <a href="#" class="accept_button button ds_form_action"
+                   style="float:right;margin-top: 4px;" ds_action="task.addTask">
+                    保存</a>
+                <a href="#" class="cancel_button ds_do_action" ds_action="task.cancelAddTask" ds_data="" style="float:right;margin-top: 3px;">取消</a>
+            </div>
+        </div>
+        <div class="row_item">
+            <label for="task_title">内容</label>
+            <input id="task_title" name="title" type="text" style="width: 60%;" placeholder="业务的内容..." required/>
+        </div>
+        <div class="row_item">
+            <label for="task_detail" style="margin-top: 0;">备注</label>
+            <textarea id="task_detail" name="detail" rows="2" cols=""
+                      style="resize: vertical; width: 60%; margin-bottom: 0px;" placeholder="业务的详细信息和备注信息..."></textarea>
+        </div>
+        <div class="row_item">
+            <label>业务类型</label>
+            <div class="task_detail_tag" style="float: left;display: inline;padding-top: 6px;">
+
+            </div>
+            <div class="dropdown" style="float: left;display: inline;padding-top: 6px;">
+                <a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#" title="选取业务类型">
+                    <i class="icon-tag"/></a>
+                <ul class="dropdown-menu task_add_tag_menu" role="menu" aria-labelledby="drop4">
+                    _#menuview#_
+                </ul>
+            </div>
+
+        </div>
+        <div class="row_item">
+            <label>分配给</label>
+            <input name="master" type="hidden" id="_#menu#__select_input" />
+            <div id="_#menu#__select_user" style="float:left;" class="combobox_agent"></div>
+        </div>
+        <div class="form_buttons" style="padding-left:113px;padding-top:5px;">
+            <a href="#" class="accept_button button ds_form_action"
+               ds_action="task.addTask">保存</a>
+            <a href="#" class="cancel_button ds_do_action" ds_action="task.cancelAddTask" ds_data="">取消</a>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+
+    utils.loadSearchInput({ id: "_#menu#__select_user",
+        width: "100",
+        height: "18",
+        tip: "按姓名,拼音搜索",
+        data: getCache("agents"),
+        searchField: ["displayName"],
+        pinyinField: ["displayName"],
+        listField: ["displayName"],
+        userIdField: "_id",
+        showField: "displayName",
+        showAllList: true,
+        callbackFuc: function (object) {
+            $("#_#menu#__select_input").val(object._id);
+        },
+        onKeyChanged: function () {
+            if ($("#_#menu#__select_user_input").val() != "") {
+                $("#_#menu#__select_input").val("serachInputNoresult");
+            } else {
+                $("#_#menu#__select_input").val("");
+            }
+        }
+    });
+    $('#_#menu#__select_input').val(session.user._id);
+    $("#_#menu#__select_user_input").val(session.user.displayName);
+</script>

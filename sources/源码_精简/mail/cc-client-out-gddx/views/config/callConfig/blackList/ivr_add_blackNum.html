@@ -1,0 +1,46 @@
+<div class="row-fluid">
+	<div class="span12">		
+		<form class="form-horizontal">
+			<div class="row-fluid">
+	                <div class="span7 offset1">
+	                    <i class="icon-plus"></i>添加黑红名单
+	                </div>
+	                <div class="span4 text-right pull-right">
+	                    <a class="btn btn-info btn-blue ds_action_flow">
+                            <ds-form-action action="config.ivr.blacklist.saveBlackList" extra-data="config.callConfig.currentConfigData"
+                                    on-before="config.callConfig.blackList.beforeSaveBlackList"
+                                    update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"ivrBlackList"}}'/>
+                            <ds-get-view view="config/callConfig/blackList/ivr_list_black" panel="ivrBlackListPanel"/>
+                            <ds-effect-ivr/>
+                            保存
+                        </a>
+	                </div>
+	        </div>
+			<br />
+			<br />
+			<div class="control-group">
+				<label class="control-label">电话号码</label>
+				<div class="controls">
+					<input type="text" maxlength="25" id="add_black_num" name="BlackNum"/>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">名单类型</label>
+				<div class="controls">
+					<select name="Type">
+						<option value="" selected="selected">--请选择--</option>
+						<option value="1">呼入黑名单</option>
+						<option value="2">外呼黑名单</option>
+						<option value="0">红名单</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">备注</label>
+				<div class="controls">
+					<textarea name="Memo" rows="3"></textarea>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

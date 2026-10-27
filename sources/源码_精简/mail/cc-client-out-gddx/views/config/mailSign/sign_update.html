@@ -1,0 +1,48 @@
+<div class="clearfix" style="">
+    <form action="" class="form-horizontal mail_form">
+        <input type="hidden" name="_id" value="_#_id#_">
+        <div class="head">
+            <div class="clearfix">
+                <div class="control-group">
+                    <label class="control-label control-label2">名称：</label>
+                    <div class="controls controls2">
+                        <input type="text" name="name" value="_#name#_" placeholder="" class="input-block-level receiver" autofocus >
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label control-label2">内容：</label>
+                    <div class="controls controls2">
+                        <div class="">
+                            <textarea id="editor_container_2mail_sign" name="content" >_#content#_</textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="pull-right">
+            <button type="button" class="btn btn-primary btn-small ds_form_action" ds_action="config.mailSign.updateSign" style="margin-left: 10px;">保存</button>
+            <button type="button" class="btn btn-small"  data-dismiss="modal" style="margin-left: 10px;" aria-hidden="true">关闭</button>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        handler.config.mailSign.richEditor = KindEditor.create('#editor_container_2mail_sign', {
+            width : '100%',
+            height: '210px',
+            wellFormatMode:false,
+            basePath:"./javascripts/km/kindeditor/",
+            resizeType : 0,
+            formatUploadUrl:false,
+            allowPreviewEmoticons : false,
+            allowImageUpload : true,
+            uploadJson : './richUpload?action=uploadRichImage&sessionId='+session.id,
+            items : [
+                'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                '|', 'justifyleft', 'justifycenter', 'justifyright', '|','link', 'unlink','table', 'image', '|', 'undo', 'redo','|', 'source','preview', 'fullscreen']
+        });
+
+    });
+</script>

@@ -1,0 +1,57 @@
+<div class="contact_summary">
+    <div class="user-details contact_data">
+        <div class="contact-info">
+            <h2 class="contact_name" style="float:left;">
+                <span class="major">
+                    __NEW_CUSTOMER_NAME
+                </span>
+            </h2>
+            <div class=" " style="float:left;margin-left:28px;" >
+            </div>
+
+            <div class="clear"></div>
+
+            <div class="phone item">
+                <div class="phone-number">
+                    __CALL_NO
+                </div>
+            </div><!-- /.phone -->
+
+            <div class="item">
+                <div>
+                    未接数量：__count
+                </div>
+            </div><!-- /.phone -->
+
+            <div class="item">
+                <div>
+                    最近一条未接的处理座席：_@cdr.getAgentName('__NEW_DISPOSAL_AGENT')@_
+                </div>
+            </div>
+            <div class="item">
+                <div>
+                    分配的回访座席：_@cdr.getAgentName('__CALLBACK_AGENT')@_
+                </div>
+            </div>
+
+            <div class="pull-right callBack item">
+                <a class="btn btn-success ds_do_action" ds_action="cdr.callBackAndDeal" ds_data="__CALL_NO|__NEW_CUSTOMER_ID|__NEW_CUSTOMER_NAME|__NEW_CALL_SHEET_ID">回电并处理</a>
+            </div>
+
+            <div class="address expandable item" style="display: none;">
+            </div>
+
+        </div><!-- /.contact-info -->
+        <p class="border"></p>
+    </div><!-- /.user-details -->
+
+    <div class="active-history-content timeline-area">
+        <div class="activity-bar">
+            <ul class="item-filter clearfix">
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <div class="timeLine_list">
+        </div>
+    </div>
+</div>

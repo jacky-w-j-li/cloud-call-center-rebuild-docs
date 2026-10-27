@@ -1,0 +1,431 @@
+<link rel="stylesheet" type="text/css" href="./stylesheets/workbench.css?1101">
+<div class="row-fluid media-width" id="contact_workbench">
+    <div class="account_base">
+        <div class="span12 workbench-title">
+            <h3 class="pull-left">欢迎使用!</h3>
+            <span class="pull-right refresh ds_do_action" ds_action="workbench.workbench_main" ds_data="">
+                <a href="#" class="ajaxed" style="margin:5px 0 0 0">刷新</a>
+            </span>
+        </div>
+        <div class="span6 mr0">
+            <ul class="my-info pull-left">
+                <li class="my-info-photo ds_do_action" ds_action="showEditInfo">
+                    <img class="S_line5" src="./img/user.png" alt="" />
+                </li>
+                <li class="my-info-my-name"></li>
+                <li class="my-info-my-num"></li>
+            </ul>
+            <ul class="my-contact pull-right">
+                <li class="my-contact-email"><span></span></li>
+                <li class="my-contact-pnum"><span></span></li>
+            </ul>
+        </div>
+        <div class="today-details">
+            <div class="span6 mr0">
+                <div class="workbench-title">
+                    <h3>当天通话处理</h3>
+                </div>
+                <div class="workbench-outbound pull-left">
+                    <div class="bound-card-top">
+                        <span class="pull-left bound-icon"></span>
+                        <dl class="pull-right bound-num">
+                            <dt id="workbench-outbound-count" data-original-title="外呼接通数">0</dt>
+                            <dd id="workbench-outbound-total" data-original-title="外呼总数">0</dd>
+                            <dd id="workbench-outbound-rate" data-original-title="外呼接通率"></dd>
+                        </dl>
+                    </div>
+                    <div class="bound-card-bottom">
+                        总通话时长<span id="workbench-outbound-dialoutTime">0</span>平均通话时长<span id="workbench-outbound-averageDialoutTime">0</span>
+                    </div>
+                </div>
+                <div class="workbench-inbound pull-right">
+                    <div class="bound-card-top">
+                        <span class="pull-left bound-icon"></span>
+                        <dl class="pull-right bound-num">
+                            <dt id="workbench-inbound-count" data-original-title="呼入接听数">0</dt>
+                            <dd id="workbench-inbound-total" data-original-title="呼入总数">0</dd>
+                            <dd id="workbench-inbound-rate" data-original-title="呼入接听率"></dd>
+                        </dl>
+                    </div>
+                    <div class="bound-card-bottom">
+                        总通话时长<span id="workbench-inbound-dialinTime">0</span>平均通话时长<span id="workbench-inbound-averageDialinTime">0</span>
+                    </div>
+                </div>
+                <!-- chanceTicket-->
+                <div class="workbench-title">
+                    <span>商机券</span>
+                    <span class="chanceTicket-all ds_form_action" ds_action="workbench.chanceTicket">查看所有商机券</span>
+                </div>
+                <div class="chanceTicket-set">
+                <span class="chanceTicket-info">
+                    <i class="chanceTicket-icon"></i>
+                    <p class="chanceTicket-sum">5</p>
+                </span>
+                    <span class="chanceTicket-give">转赠</span>
+                <span class="chanceTicket-toggle">
+                    <label>
+                        座席
+                    </label>
+                    <input name="toUserSelect" type="hidden" class="select_input" id="cust_titket_to_user_select_input"  />
+                    <div id="cust_titket_to_user_select_user" class="combobox_agent"></div>
+                     <span>
+                        <label class="chanceTicket-Num donationNum">
+                            数量
+                            <input type="text"  id="donationNum" name="donationNum" datatype="Number,Range" min="1" msg="转赠数量必须为大于0的整数" onkeyup="this.value=this.value.replace(/\D/g,'')" />
+                        </label>
+                        <button class="btn-add" id="donationCustTitket" >确定</button>
+                         <button class="btn-add btn-hide">取消</button>
+                    </span>
+                </span>
+                </div>
+                <span class="chanceTicket-not">没有奖罚券可用</span>
+            <span class="pull-right">
+                    <input id="chanceTicket_switch" name="chanceTicket_switch" type="checkbox" checked="checked">
+            </span>
+                <div class="workbench-title pt15">
+                    <h3>联系计划</h3>
+                </div>
+                <ul class="today-communication">
+                    <span class="communicat-remarks" style="color: darkgray">目前没有联系计划</span>
+                    <!--<li class="emergency-top"><span class="communicat-time"><i></i>12:20</span><span class="communicat-name">神州通讯</span><span class="communicat-remarks">多讲解概念</span></li>-->
+                    <!--<li class="emergency-less"><span class="communicat-time"><i></i>12:50</span><span class="communicat-name">神州通讯</span><span class="communicat-remarks">多讲解概念</span></li>-->
+                    <!--<li><span class="communicat-time"><i></i>14:50</span><span class="communicat-name">神州通讯</span><span class="communicat-remarks">多讲解概念</span></li>-->
+                </ul>
+            </div>
+            <div class="pull-right today-analysis">
+                <div class="workbench-title">
+                    <h3>客户统计</h3>
+                </div>
+                <ul class="today-customer-analysis">
+                    <span style="color: darkgray">目前您的名下无客户资料</span>
+                </ul>
+                <div class="workbench-business-analysis">
+                    <div class="workbench-title">
+                        <h3 style="display: inline-block">商机统计</h3>
+                        <form class="form-horizontal" style="width: 85%;float: right;">
+                            <div id="time_type" style="margin-bottom: 6px;">
+                                <!--<label style="float:left;margin-right:3px;">时间类型</label>-->
+                                <select name="timeType" id="workbench_customer_report_sale_agent_time_type"
+                                        onchange="handler.report.callReport.resetDate('workbench_customer_report_sale_agent_dateTd',this.value)">
+                                    <option value="all" id="all">所有</option>
+                                    <option value="year" id="optionYear">年报</option>
+                                    <option value="month" id="optionMonth">月报</option>
+                                    <option value="day" id="optionDay">日报</option>
+                                    <option value="other" id="optionOther">自定义</option>
+                                </select>
+
+                                <div id="workbench_customer_report_sale_agent_dateTd" style="display: inline">
+                                </div>
+                                <div id="workbench_customer_report_sale_agent_dateTd_other" style="display: none">
+                                    <div class="input-append date form_datetime"style="width: 31%;">
+                                        <input id="workbench_report_sale_agent_datetime_picker_start" size="6" class="input-medium report_start_time" name="StartTime" type="text" value="" readonly style="width: 61%;">
+                                        <span class="add-on datetimepicker-remove" style="height: 14px;line-height: 15px;min-width: 3%;"><i class="icon-remove"></i></span>
+                                        <span class="add-on datetimepicker-open" style="height: 14px;line-height: 15px;min-width: 3%;"><i class="icon-th"></i></span>
+                                    </div>
+                                    <div style="padding: 5px;display: inline">
+                                        至
+                                    </div>
+                                    <div class="input-append date form_datetime" style="width: 31%;">
+                                        <input id="workbench_report_sale_agent_datetime_picker_end" size="6" class="input-medium report_end_time" name="EndTime" type="text" value="" readonly style="width: 61%;">
+                                        <span class="add-on datetimepicker-remove" style="height: 14px;line-height: 15px;min-width: 3%;"><i class="icon-remove"></i></span>
+                                        <span class="add-on datetimepicker-open" style="height: 14px;line-height: 15px;min-width: 3%;"><i class="icon-th"></i></span>
+                                    </div>
+                                </div>
+                                <div style="padding: 5px;display: inline;" >
+                            <span><a class="ds_form_action"
+                                     ds_action="workbench.querySalesStatistics">查询</a></span>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                    <ul>
+                        <li class="status0 ds_do_action" ds_action="workbench.clickCustomerSysStatus" ds_data="">商机<span class="total">0</span></li>
+                        <li class="status3 ds_do_action" ds_action="workbench.clickCustomerSysStatus" ds_data="3">成单<span class="deal">0</span></li>
+                        <li class="status7">丢单<span class="lost">0</span></li>
+                        <li class="status9">无效<span class="invalid">0</span></li>
+                        <li class="status8">回收<span class="recCount">0</span></li>
+                    </ul>
+                    <div style="clear: both"></div>
+                    <ul>
+                        <li>成单率<span class="red dealRatio">0%</span></li>
+                        <li>成单金额<span class="orange money">0</span></li>
+                    </ul>
+                </div>
+                <!--<div class="workbench-succeed-analysis">-->
+                <!--<div class="workbench-title"><h3>成单统计</h3></div>-->
+                <!--<ul>-->
+                <!--<li>成单率<span class="red">50%</span></li>-->
+                <!--<li>成单金额<span class="orange">100000</span></li>-->
+                <!--</ul>-->
+                <!--</div>-->
+                <div class="workbench-title">
+                    <h3>工单处理</h3>
+                </div>
+                <ul class="today-erp-analysis">
+                    <li style="cursor: pointer;" class="ds_do_action" ds_action="workbench.clickBusiness" ds_data="btn_my_role">
+                        待领取的工单<span class="orange" id="workbench-business-toClaim">12</span>
+                    </li>
+                    <li style="cursor: pointer;" class="ds_do_action" ds_action="workbench.clickBusiness" ds_data="btn_my_todo">
+                        待处理的工单<span class="red" id="workbench-business-toDeal">5</span>
+                    </li>
+                </ul>
+                <div class="workbench-title">
+                    <h3>外呼任务</h3>
+                </div>
+                <ul class="today-agent-task-analysis">
+                    <span style="color: darkgray">目前您还没有参与的外呼任务</span>
+                </ul>
+                <!--  <ul class="today-webchat-analysis">
+                     <li>
+                        <dl class="weixin-analysis null">
+                            <dt></dt>
+                            <dd>
+                                <span class="analysis-pieces">0</span><br/>
+                                <span class="analysis-title">微信占比</span>
+                                <span class="analysis-percent">0%</span>
+                            </dd>
+                        </dl>
+                     </li>
+                     <li>
+                        <dl class="web-analysis null">
+                            <dt></dt>
+                            <dd>
+                                <span class="analysis-pieces">0</span><br />
+                                <span class="analysis-title">网站占比</span>
+                                <span class="analysis-percent">0%</span>
+                            </dd>
+                        </dl>
+                     </li>
+                     <li>
+                        <dl class="app-analysis null">
+                            <dt></dt>
+                            <dd>
+                                <span class="analysis-pieces">0</span><br />
+                                <span class="analysis-title">APP占比</span>
+                                <span class="analysis-percent">0%</span>
+                            </dd>
+                        </dl>
+                     </li>
+                     <li>
+                        <dl class="email-analysis null">
+                            <dt></dt>
+                            <dd>
+                                <span class="analysis-pieces">0</span><br />
+                                <span class="analysis-title">邮件占比</span>
+                                <span class="analysis-percent">0%</span>
+                            </dd>
+                        </dl>
+                     </li>
+                 </ul> -->
+            </div>
+        </div>
+        <div class="modal hide fade modal-dialog  in" id="chanceTicket-status" tabindex="-1" style="width: 600px; display: none; left: 383px; margin: 0px auto;" aria-hidden="false">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body" id="chanceTicket-modal"><div class="right_container" style="padding: 5px;">
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function(){
+            var rHeight = $("#contact_workbench").height() > ($(window).height() - 71) ? $("#contact_workbench").height() : ($(window).height() - 71);
+            var cHeight = rHeight - 377;
+            var cards = $(".bound-card-bottom");
+            for (var i = 0; i < cards.length; i++) {
+                var sWidth = 0;
+                $(cards[i]).find("b,span").each(function (m) {
+                    sWidth += $(this).width();
+                });
+                if ((sWidth+44)>$(cards[i]).parent().width()) {
+                    $(cards[i]).find("b").hide();
+                };
+            };
+            $(".today-communication").css("max-height",cHeight);
+            $("[data-original-title]").tooltip({placement: 'right',html:true});
+        });
+    </script>
+    <!----工单附件模板---->
+    <script id="tmpl_bus_add_attach" type="text/html">
+        <div class="bus_attach_upload_container">
+            <div class="">
+                <input type="hidden" name="attachFieldId" value="{{=_id}}">
+                <div id="{{=qiniuId}}-business-qiniu" class="float:left;line-height: 20px;">
+                    <a class="btn btn-default btn-small btn-link" id="{{=qiniuId}}-pickCustomerFiles" href="#" >
+                        <i class="icon-plus"></i>
+                        <sapn>上传附件</sapn>
+                    </a>
+                    <div class="muted" style="float:right;line-height:20px">
+                        <p>（大小不超过10MB）</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-fluid" id="business_files" style="margin-left:50px">
+                <table class="table table-hover text-left business_attach_progress" style="margin-top:5px;display:none;width: 450px;background-color:#fff;">
+                    <tbody id="{{=qiniuId}}-fsUploadProgress">
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="clear: both;"></div>
+            <ul class="thumbnails_customer">
+            </ul>
+            <div style="clear: both;"></div>
+        </div>
+    </script>
+
+    <script id="tmpl_bus_attach" type="text/html">
+        <li>
+            <div class=fujian>
+                <div class="left ico-1"></div>
+                <div class="left">
+                    <a href="#" class="ds_do_action attachitem" ds_action="customer.downloadAttach" ds_data="{{=fileId}}" suffix="{{=suffix}}">{{=trueName}}</a>
+                </div>
+                <div class="left ico-2 ds_do_action" style="cursor: pointer" ds_action="business.delBusAttach" ds_data="{{=fileId}}">
+                </div>
+            </DIV>
+        </li>
+    </script>
+    <script id="tmpl_bus_attach_show" type="text/html">
+        <li style='margin-top: 3px;'>
+            <div class=fujian>
+                <div class="left ico-1"></div>
+                <div class="left">
+                    <a href="#" class="ds_do_action attachitem" ds_action="customer.downloadAttach" ds_data="{{=id}}" suffix="{{=type}}" ds_attr="{{=fid}}">{{=name}}</a>
+                </div>
+            </DIV>
+        </li>
+    </script>
+    <script id="tmpl_bus_attach_show_edit" type="text/html">
+        <li style='margin-top: 3px;'>
+            <div class=fujian>
+                <div class="left ico-1"></div>
+                <div class="left">
+                    <a href="#" class="ds_do_action attachitem" ds_action="customer.downloadAttach" ds_data="{{=id}}" suffix="{{=type}}" ds_attr="{{=fid}}">{{=name}}</a>
+                </div>
+                <div class="left ico-2 ds_do_action" style="cursor: pointer" ds_action="business.delBusAttach" ds_data="{{=id}}">
+                </div>
+            </DIV>
+        </li>
+    </script>
+    <script type="text/javascript">
+        $(function(){
+            //商机券开关显示
+            if(session.user.getCustFlag==0){//关
+                $("#chanceTicket_switch").bootstrapSwitch({size:'small',onColor:'success',offColor:'warning',onText:'开',offText:'关',state:false});
+            }else{//开
+                $("#chanceTicket_switch").bootstrapSwitch({size:'small',onColor:'success',offColor:'warning',onText:'开',offText:'关',state:true});
+            }
+
+            $('#chanceTicket_switch').on('switchChange.bootstrapSwitch', function(event, state) {
+                if(state){//开
+                    handler.customer.titket.settingCustTitketFlag("1");
+                }else{//关
+                    handler.customer.titket.settingCustTitketFlag("0");
+                }
+            });
+            $('.btn-hide').on('click',function(){
+                $(".chanceTicket-toggle").hide();
+                $('#cust_titket_to_user_select_user_input').val("");
+                $('#donationNum').val("");
+            })
+            $('#donationCustTitket').on('click', function(event, state) {
+                var target = $(this);
+                if (target.hasClass("disabled")) return false;
+                target.addClass("disabled");
+                var toUser = $("#cust_titket_to_user_select_input").val();
+                var donationNum = $("#donationNum").val();
+                if(toUser == ''){
+                    alert("赠送座席不能为空");
+                    target.removeClass('disabled');
+                    return;
+                }else if(donationNum == ''){
+                    alert("赠送数量不能为空");
+                    target.removeClass('disabled');
+                    return;
+                }else if(donationNum == '0'){
+                    alert("赠送数量不能为0");
+                    target.removeClass('disabled');
+                    return;
+                }
+                if(toUser && donationNum ){
+                    var sum = parseInt($(".chanceTicket-sum").text())
+                    if($("#donationNum").val() <= sum){
+                        handler.customer.titket.donationCustTitket(toUser,donationNum,function(flag){
+                            target.removeClass('disabled');
+                            if(flag){
+                                $(".chanceTicket-sum").text(sum - donationNum);
+                                if(sum - donationNum == 0){
+                                    $(".chanceTicket-set").hide();
+                                    $(".chanceTicket-not").show();
+                                }
+                            }
+                        });
+                    }else{
+                        target.removeClass('disabled');
+                        alert("数量超出已用上限");
+                    }
+                    $("#cust_titket_to_user_select_user_input").val("");
+                    $("#cust_titket_to_user_select_input").val("");
+                    $("#donationNum").val("");
+                }
+            });
+
+            //初始化赠送奖券人员列表
+            var agents=getCache("agents");
+            var _agents=[];
+            for(var i=0;i<agents.length;i++){
+                var u=agents[i];
+                if(u.status=='enable'){
+                    _agents.push(u);
+                }
+            }
+            utils.loadSearchInput({ id: "cust_titket_to_user_select_user",
+                width: "110",
+                height: "17",
+                tip: "按姓名、拼音搜索",
+                data: _agents,
+                searchField: ["displayName","exten"],
+                pinyinField: ["displayName"],
+                listField: ["displayName"],
+                userIdField: "_id",
+                showField: "displayName",
+                showAllList: true,
+                callbackFuc: function (object) {
+                    $("#cust_titket_to_user_select_input").val(object._id);
+                },
+                onKeyChanged: function () {
+                    if ($("#cust_titket_to_user_select_user_input").val() != "") {
+                        $("#cust_titket_to_user_select_input").val("serachInputNoresult");
+                    } else {
+                        $("#cust_titket_to_user_select_input").val("");
+                    }
+                }
+            });
+
+            dsevent.bind("#view_webchat_todo", dsevent.evt.refreshWebchatToDoList, function(event , params){
+                $(this).find(".refresh").click();
+//            $("#view_webchat_todo_content").html("");
+            });
+//            handler.webchat.getIvr();
+
+            $('#imDealCount').bind('change', function () {
+                handler.webchat.updateIvrCount();
+            })
+        });
+
+        $('#workbench_report_sale_agent_datetime_picker_start').datetimepicker({
+            dateFormat: "yy-mm-dd",
+            showTimepicker: false
+        });
+        $('#workbench_report_sale_agent_datetime_picker_end').datetimepicker({
+            dateFormat: "yy-mm-dd",
+            showTimepicker: false
+        });
+    </script>
+</div>

@@ -1,0 +1,65 @@
+<div class="well" style="padding: 0 19px;">
+    <h2>_#_id#_
+        <small>月租:<span class="text-primary monthRent">_@formatTrueFee(_#monthRent#_)@_</span>元</small>
+    </h2>
+    <!--<p class="text-muted">请您在8小时内完成支付，避免被他人抢注，还剩<strong class="text-danger lock_timer"></strong></p>-->
+</div>
+
+<form class="form-horizontal" id="frm_serviceno_detail">
+    <input type="hidden" name="serviceno" value="_#_id#_">
+    <input type="hidden" name="monthRent" value="_#monthRent#_">
+    <input type="hidden" name="money" value="_#totalFee#_">
+    <input type="hidden" name="flag" value="buySn">
+    <input type="hidden" name="serviceFlag" value="">
+    <input type="hidden" name="concurrent" value="1">
+    <input type="hidden" name="balance" value="_#balance#_">
+
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            本月还剩天数
+        </label>
+        <div class="col-md-6" style="padding-left:20px;line-height: 35px;">
+            <span class="leaveDay">_#leaveDay#_</span>天
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            应付金额
+        </label>
+        <div class="col-md-6" style="padding-left:20px;line-height: 35px;">
+           <span class="fee total_fee" >_#totalFee#_</span>元
+           <span class="text-muted">&nbsp;[月租/本月总天数*本月剩余天数=应付金额]</span>
+        </div>
+    </div>
+    <div class="form-group clearfix">
+        <p>您当前可支付余额为<strong>_#balance#_</strong>元,其中实际余额为<strong>_#actualBalance#_</strong>元,透支额度为<strong>_#overdraw#_</strong>元</p>
+        <p class="balance_not_enough" style="display: none;color: red;">
+            您的账户余额不足，请立即充值
+        </p>
+        <!--<div class="alert alert-warning balance_not_enough" style="display: none;">-->
+        <!--您的账户余额不足，请立即&nbsp;<a href="#" class="ds_do_action" ds_action="zjNum.redirectOnlinePay" ds_data="_#totalFee#_">充值</a>-->
+        <!--</div>-->
+    </div>
+    <div class="alert alert-info">
+        <ul>
+            <li>首次开通的号码，当月月租按实际天数计费，以后按月扣除</li>
+            <li>每月一号自动扣除月租，余额不够扣将会停机</li>
+        </ul>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="button" class="btn btn-primary btn-small ds_form_action ds_pay" ds_action="account.confirmPayNew">立刻购买</button>
+            <!--<button style="" type="button" class="btn btn-default ds_do_action sn_reload"-->
+                    <!--ds_action="zjNum.reSelectServiceNo" ds_data="_#_id#_">重新选择</button>-->
+            <button type="button" class="btn btn-default btn-small" data-dismiss="modal">关闭</button>
+        </div>
+    </div>
+</form>
+
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+    $('#popover_concurrent').popover({
+    });
+</script>

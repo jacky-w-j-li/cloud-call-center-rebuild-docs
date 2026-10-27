@@ -1,0 +1,67 @@
+<form action="" id="module_list">
+    <div class="diction-head" style="border-bottom: 1px solid #E6E6E8;padding-top: 6px">
+        <span style="font-weight: bold;margin-right: 45px">满意度配置</span>
+        <button type="button" class="btn-add ds_do_action" style="margin: 0 1px 0 5px" id="add_modules" ds_action="config.channelDic.modulesAdd">
+            添加
+        </button>
+        <button type="button" class="ds_form_action btn-blue bg-img-none btn_active" style="margin: 0 1px 0 5px" ds_action="config.channelDic.saveWebchatCSR">保存</button>
+    </div>
+    <input type="hidden" name="_id" value="_#_id#_">
+    <input type="hidden" name="type" value="webchatCSR"/>
+    <div id="module_list_content"></div>
+</form>
+<script>
+
+    var $list = $("#module_list_content");
+    $list.sortable({
+        opacity: 0.6,
+        revert: true,
+        cursor: 'move',
+        handle: '.m_title',
+        stop: function(){
+            var models= $('#module_list .modules .module_ind');
+            for (var  i = 0; i <= models.length; i++) {
+                $(models[i]).attr('value',i);
+            }
+            $('#module_list .m_title b').each(function(){
+                var _num=$(this).closest(".modules").find('.module_ind').attr('value');
+                var px_input=$(this).closest(".module_head").find('.modules_name');
+                if(_num==0){
+                    $(this).html("一");
+                    px_input.attr('msgname','选项一')
+                }else if(_num==1){
+                    $(this).html("二");
+                    px_input.attr('msgname','选项二')
+                }else if(_num==2){
+                    $(this).html("三");
+                    px_input.attr('msgname','选项三')
+                }else if(_num==3){
+                    $(this).html("四");
+                    px_input.attr('msgname','选项四')
+                }else if(_num==4){
+                    $(this).html("五");
+                    px_input.attr('msgname','选项五')
+                }
+            })
+        }
+    });
+</script>
+<div id="add_template">
+    <fieldset class="modules" title="">
+        <input type="hidden" class="module_ind" name="index[]" value=""/>
+        <div class="module_head">
+            <div class="m_title" >选项<b num="">一</b><span class="btn-delete"></span></div>
+            <input class="modules_key" type="hidden" name="keys[]" value="">
+            <input class="modules_name" maxlength="8" type="text" name="names[]" placeholder="例如：好评" class="input-small input_text" msgName=''  required value="">
+        </div>
+        <div class="module_body clearFloat">
+            <div>标签栏</div>
+            <input class="modules_reason" type="text" name="reason[]" value="" maxlength="6" placeholder="服务很好"/>
+            <input class="modules_reason" type="text" name="reason[]" value="" maxlength="6" placeholder="业务很好"/>
+            <input class="modules_reason" type="text" name="reason[]" value="" maxlength="6" placeholder="能力很好"/>
+            <input class="modules_reason" type="text" name="reason[]" value="" maxlength="6" placeholder="很及时"/>
+            <input class="modules_reason" type="text" name="reason[]" value="" maxlength="6" placeholder="很准确"/>
+            <input class="modules_reason" type="text" name="reason[]" value="" maxlength="6" placeholder="很友好"/>
+        </div>
+    </fieldset>
+</div>

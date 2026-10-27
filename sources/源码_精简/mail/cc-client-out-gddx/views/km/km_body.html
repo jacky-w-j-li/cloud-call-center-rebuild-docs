@@ -1,0 +1,30 @@
+
+<div class="km_base">
+    <div class="row-fluid " id="km_search_container">
+        <div class="span4"><div class="muted km_card_desc" style="font-size: 23px;line-height: 35px;"></div></div>
+        <div class="span8">
+            <div class="search" style="border:1px solid #BBB; min-width:200px;margin-bottom: 15px;">
+                <input type="button" class="km_search_btn" onclick="handler.catalog.textSearch()" style="width:36px;"/>
+                <input id="km_key_word" type="text" class="km-input-text" value="请输入关键词..." onkeyup="if(event.keyCode==13){handler.catalog.textSearch();}"
+                       style="border:0;height: 14px;line-height: 14px;padding: 11px 0;margin: 0;width: 90%"/>
+            </div>
+        </div>
+    </div>
+    <div id="knowledge_layout">
+        <div class="row-fluid">
+            <!--<div style="height:10px;overflow: hidden;clear: both">&nbsp;</div>-->
+            <div id="knowledge_left" class="span4" style="overflow-x:auto;/*min-height: 350px;*/">
+                <div class="km_recently">
+                    <div class="new">
+                        <span style="padding-left:20px;"><a href="#" class="ds_do_action" ds_action="kmcontent.listRecently">最近更新</a></span>
+                    </div>
+                </div>
+                <div id="knowledge_tree">
+                </div>
+            </div>
+
+            <div id="knowledge_right_div" class="span8">
+            </div>
+        </div>
+    </div>
+</div>

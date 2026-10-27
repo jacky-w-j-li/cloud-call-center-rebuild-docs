@@ -1,0 +1,80 @@
+<div class="container">
+    <div style="width:950px;margin: 0 auto;" >
+        <div class="pull-left" style="height: 80px;line-height: 80px;">
+            <a href="./"><img alt="" src="./img/logo2.png" style="width: 200px;"></a>
+        </div>
+        <div class="pull-right text-muted" style="vertical-align: middle;margin-top: 20px;">
+            <ul style="list-style: none;">
+                <li>技术支持热线：4008-113-114</li>
+                <li>技术支持邮箱：<a class="" href="javascript:mailTo()">service@7moor.com</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="login_main" style="/*background-color:#eeeeee;*/">
+    <div style="width:350px;margin:0 auto;">
+        <h1>完善账号信息</h1>
+        <form id="frm_taobao_finish" action="./public" method="post">
+            <input type="hidden" name="_id" value="_#_id#_">
+            <div class="form-group">
+                <label>店铺名称</label>
+                <input type="text" class="form-control tb_truename"  name="companyName" value="_#companyName#_" placeholder="" autofocus required >
+            </div>
+            <div class="form-group">
+                <label>邮箱</label>
+                <input type="text" class="form-control email"  id="tb_linkManEmail" name="linkManEmail" required>
+
+            </div>
+            <div class="form-group">
+                <label>账号登录名</label>
+                <input type="text" class="form-control tb_loginName"  name="name" required >
+            </div>
+
+            <div class="form-group">
+                <label>真实姓名</label>
+                <input type="text" class="form-control tb_truename"  name="linkManName" required>
+            </div>
+            <div class="form-group">
+                <label>联系手机</label>
+                <input type="text" class="form-control mobileZH"  name="linkManPhone" required>
+            </div>
+            <div class="form-group">
+                <label>密码</label>
+                <input type="password" class="form-control tb_password" id="tb_managerPassword"  name="managerPassword" required>
+            </div>
+            <div class="form-group">
+                <label>确认密码</label>
+                <input type="password" class="form-control tb_password"  name="managerPassword2" equalTo="#tb_managerPassword" data-msg-equalTo="密码不一致" required>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-lg btn-success btn-block ds_form_action" ds_action="saveTaobao" >提 交</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<footer class="login-footer" style="">
+    <div class="container" style="width:950px;">
+        <div class="text-center"> &nbsp; &nbsp; 京ICP备14006443号-1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &copy; 2015 容联七陌</div>
+    </div>
+</footer>
+
+
+<style type="text/css">
+    .login_main{
+        border-top: 1px solid #ccc;
+        padding: 40px 0 60px;
+        background: url('../img/content_bg.png') repeat;
+    }
+    .login-footer{
+        border-top: 1px solid #e5e5e5;
+        padding-top: 20px;
+        padding-bottom: 10px;
+        color: #777;
+        text-align: center;
+
+    }
+
+</style>

@@ -1,0 +1,135 @@
+context N00000000143-10090-validate{
+    s => {
+        input="";
+    	
+      loop:
+        WaitExten(20);
+    }
+
+    _[0-9] => {
+        input=${input}${EXTEN};
+        if(${LEN(${input})} > 30){
+                Playback(sound/incorrect);
+                goto s,1;
+        }
+        goto s,loop;
+    }
+
+    * => goto s, 1;
+
+    # => {
+        if(${LEN(${input})} > 30 || ${LEN(${input})} < 0){
+                Playback(sound/incorrect);
+                goto s,1;
+        }
+        FROM_CID=${input};
+        goto N00000000143-10090-transflow, ${input}, 1;
+    }
+
+    i => {
+        Playback(sound/incorrect);
+        goto s, 1;
+    }
+
+    t => {
+        Playback(sound/timeout);
+        Hangup;
+    }
+}
+
+context N00000000143-10090-transflow {
+    _. => {
+		goto N00000000143-10158-announcement,${FROM_DID},1;
+    }
+}
+
+context N00000000143-10191-validate{
+    s => {
+        input="";
+    	BackGround(/etc/asterisk/1.1.1.101/accounts/N00000000143/sound/1d9dd9fc83415ea0798de0b272eb3bd6);
+      loop:
+        WaitExten(20);
+    }
+
+    _[0-9] => {
+        input=${input}${EXTEN};
+        if(${LEN(${input})} > 30){
+                Playback(sound/incorrect);
+                goto s,1;
+        }
+        goto s,loop;
+    }
+
+    * => goto s, 1;
+
+    # => {
+        if(${LEN(${input})} > 30 || ${LEN(${input})} < 0){
+                Playback(sound/incorrect);
+                goto s,1;
+        }
+        JOBNUM=${input};
+        goto N00000000143-10191-transflow, ${input}, 1;
+    }
+
+    i => {
+        Playback(sound/incorrect);
+        goto s, 1;
+    }
+
+    t => {
+        Playback(sound/timeout);
+        Hangup;
+    }
+}
+
+context N00000000143-10191-transflow {
+    _. => {
+		goto N00000000143-10084-assignment,s,1;
+    }
+}
+
+context N00000000143-10082-validate{
+    s => {
+        input="";
+    	BackGround(/etc/asterisk/1.1.1.101/accounts/N00000000143/sound/1d9dd9fc83415ea0798de0b272eb3bd6);
+      loop:
+        WaitExten(30);
+    }
+
+    _[0-9] => {
+        input=${input}${EXTEN};
+        if(${LEN(${input})} > 29){
+                Playback(sound/incorrect);
+                goto s,1;
+        }
+        goto s,loop;
+    }
+
+    * => goto s, 1;
+
+    # => {
+        if(${LEN(${input})} > 29 || ${LEN(${input})} < 0){
+                Playback(sound/incorrect);
+                goto s,1;
+        }
+        VAL_OF_IVR_MENU=${input};
+        goto N00000000143-10082-transflow, ${input}, 1;
+    }
+
+    i => {
+        Playback(sound/incorrect);
+        goto s, 1;
+    }
+
+    t => {
+        Playback(sound/timeout);
+        Hangup;
+    }
+}
+
+context N00000000143-10082-transflow {
+    _. => {
+		goto N00000000143-10157-ExtensionPeer, s, 1;
+    }
+}
+

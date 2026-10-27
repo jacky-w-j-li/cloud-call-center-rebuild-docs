@@ -1,0 +1,38 @@
+<style type="text/css">
+    #view_nav_dial_task .btn-group button {
+        float: left;
+        display: block;
+        -webkit-box-flex: 1;
+    }
+</style>
+<link rel="stylesheet" type="text/css" href="./stylesheets/outtask.css?1101">
+<div class="left_column">
+    <div class="model_submenu" style="padding: 5px;">
+        <div class="btn-group" style="display: -webkit-box;">
+            <button class="btn ds_do_action btn_agent_dial_task active"
+                    ds_action="customer.task.quick_subMenu_search" ds_data="dial_agent_task" style="width: 25%;">我的任务
+            </button>
+            <button class="btn ds_do_action btn_dial_task_notClosed" ds_action="customer.task.quick_subMenu_search"
+                    ds_data="dial_task_notClosed" style="width: 25%;">进行中
+            </button>
+            <button class="btn ds_do_action btn_dial_task_closed" ds_action="customer.task.quick_subMenu_search"
+                    ds_data="dial_task_closed" style="width: 25%;">已关闭
+            </button>
+            <button class="btn ds_do_action btn_dial_task_dialedNumber" ds_action="customer.task.quick_subMenu_search"
+                    ds_data="dial_task_dialedNumber" style="width: 25%;">已拨号码
+            </button>
+        </div>
+    </div>
+    <div class="list_card">
+        <div id="view_dial_task_list" class="card_pane"></div>
+        <!--<div id="view_customer_import" class="card_pane"></div>-->
+    </div>
+</div>
+<div class="right_column">
+    <div class="contact_detail" style="padding: 0;">
+        <div  class="content">
+            <div id="view_dial_task_list_content" class="content_pane call_detail"></div>
+            <!--<div id="view_customer_import_content" class="content_pane"></div>-->
+        </div>
+    </div>
+</div>

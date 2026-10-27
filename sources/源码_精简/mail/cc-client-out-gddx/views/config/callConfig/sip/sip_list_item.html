@@ -1,0 +1,22 @@
+<div class="row-fluid list-item ds_action_flow sip_list_item___id" title="点击修改">
+    <ds-get-view view="config/callConfig/sip/sip_detail" panel="sip_panel" view-data='{"Exten":"___id"}'
+                 on-complete="config.callConfig.sip.onShowDetial"/>
+    <div class="span12">
+        <div class="row-fluid ivr_list_item">
+            <div class="span3">
+                <h4 style="color:#0088CC;">__Exten</h4>
+            </div>
+            <div class="span3">
+                __Secret
+            </div>
+            <div class="span3">
+                <span class="label">_@config.callConfig.sip.getSipTypeName('_#ExtenType#_')@_</span>
+            </div>
+            <div class="span3 sip_list_item_userName">
+                _@config.callConfig.sip.getSipUserNameAndEmpNo('_#UserID#_')@_
+            </div>
+        </div>
+    </div>
+</div>
+<div style="height:1px;background-color:#EAEAEA;width:100%;margin:2px 0px 2px;">
+</div>

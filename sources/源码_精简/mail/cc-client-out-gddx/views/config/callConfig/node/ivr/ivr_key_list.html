@@ -1,0 +1,45 @@
+<div class="row-fluid">
+    <div class="span12">
+        <form class="form-horizontal ds_item_edit" action="" client-data="session.ivrMap.ivr.ivr_node_ivr"
+                on-complete="config.callConfig.node.ivr.ivrKeyListShown">
+            <div id="confirm_del_pane"></div>
+            <input type="hidden" name="_id">
+            <input type="hidden" name="Exten">
+            <div class="row-fluid">
+                <div class="span6 offset1">
+                    <i class="icon-plus"></i>修改按键菜单节点
+                </div>
+                <div class="span5 text-right pull-right">
+                    <a class="btn btn-info btn-blue ds_action_flow">
+                        <ds-form-action action="config.ivr.node.ivr.updateIvrKey" extra-data="config.callConfig.currentConfigData"
+                            on-before="config.callConfig.node.ivr.preSaveIvrKey"
+                            update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"ivr_node_ivr"}}'/>
+                        <ds-get-view view="config/callConfig/node/ivr/ivr_list" panel="ivrIvrNodePanel"/>
+                        <ds-effect-ivr/>
+                        保存
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="row-fluid">
+                <div class="span11" style="margin-left:4%">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th class="span3">按键</th>
+                                <th class="span8">流程到</th>
+                                <th class="span1">
+                                    <a href="#" class="ds-ivr-add-ivr-key"><i class="icon-plus"></i></a>
+                                </th>
+                            </tr>
+                        </tbody>
+                        <tbody id="ivrKeyListBody">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

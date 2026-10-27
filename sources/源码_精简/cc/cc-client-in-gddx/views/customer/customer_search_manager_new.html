@@ -1,0 +1,188 @@
+<!--<div style="" class="advanced_title">-->
+    <!--<h5 style="float:left;padding: 5px 10px 0;color:black;">高级查询</h5>-->
+    <!--<a href="#" class="cancel_button close ds_do_action" ds_action="customer.closeAdvanceSearch" style="float: right;margin-top: 5px;-->
+    <!--margin-right: 10px;color: #000!important;">x</a>-->
+<!--</div>-->
+<div class="advanced_body">
+    <form id="frm_customer_advanced_search" class="ds_search_form">
+        <input type="hidden" name="isAdvanceSearch" value="1">
+        <input name="menu" type="hidden"  value="_#menu#_" />
+        <fieldset>
+            <div class="row-fluid cust_query_my">
+                <div class="span4 advanced_search_item ds_search_item">
+                    <label>公海来源</label>
+                    <select name="categoryId">
+                        <option value="" selected>--请选择--</option>
+                    </select>
+                </div>
+                <!--<div class="span4 advanced_search_item ds_search_item">-->
+                    <!--<label>跟进状态</label>-->
+                    <!--<select name="sysStatus">-->
+                        <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
+                        <!--<option value="0">待跟进</option>-->
+                        <!--<option value="1">跟进中</option>-->
+                        <!--<option value="2">无效</option>-->
+                        <!--<option value="3">成单</option>-->
+                        <!--<option value="4">丢单</option>-->
+                        <!--<option value="5">无效待审</option>-->
+                        <!--<option value="6">成单待审</option>-->
+                        <!--<option value="7">丢单待审</option>-->
+                        <!--<option value="9">续费待审</option>-->
+                        <!--<option value="10">成单审核失败</option>-->
+                        <!--<option value="11">续费审核失败</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+                <div class="span4 advanced_search_item ds_search_item">
+                    <label>&nbsp;&nbsp;</label>
+                    <label class="checkbox inline" style="width: auto;padding-top: 0;">
+                        <input style="width:auto" type="checkbox" name="actionType" value="date" class=""/>
+                        <span>建立联系计划</span>
+                    </label>
+                </div>
+            </div>
+            <div class="row-fluid cust_query_all">
+                <div class="span4 advanced_search_item ds_search_item">
+                    <label>公海来源</label>
+                    <select name="categoryId">
+                        <option value="">--请选择--</option>
+                    </select>
+                </div>
+                <!--<div class="span4 advanced_search_item ds_search_item">-->
+                    <!--<label>跟进状态</label>-->
+                    <!--<select name="sysStatus" selected>-->
+                        <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
+                        <!--<option value="0">待跟进</option>-->
+                        <!--<option value="1">跟进中</option>-->
+                        <!--<option value="2">无效</option>-->
+                        <!--<option value="3">成单</option>-->
+                        <!--<option value="4">丢单</option>-->
+                        <!--<option value="5">无效待审</option>-->
+                        <!--<option value="6">成单待审</option>-->
+                        <!--<option value="7">丢单待审</option>-->
+                        <!--<option value="9">续费待审</option>-->
+                        <!--<option value="10">成单审核失败</option>-->
+                        <!--<option value="11">续费审核失败</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+                <div class="span4 advanced_search_item ds_search_item">
+                    <label>&nbsp;&nbsp;</label>
+                    <label class="checkbox inline" style="width: auto;padding-top: 0;">
+                        <input style="width:auto" type="checkbox" name="actionType" value="date" class=""/>
+                        <span>建立联系计划</span>
+                    </label>
+
+                </div>
+            </div>
+
+
+            <div class="row-fluid">
+                <div class="span4 advanced_search_item ds_search_item">
+                    <label>客户名称</label>
+                    <input  name="name" type="text" class=""/>
+                </div>
+                <div class="span4 advanced_search_item ds_search_item">
+                    <label>电话</label>
+                    <input  name="phone.tel" type="text" />
+                </div>
+                <div class="span4 advanced_search_item ds_search_item">
+                    <label>客户状态</label>
+                    <select name="status" class="">
+                        <option value="" selected>--请选择--</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row-fluid cust_query_my" style="display:none;">
+                <div class="span8 advanced_search_item ds_search_item">
+                    <label>联系时间</label>
+                    <input name="notifyTime_begin_date" class="ds_datetime" type="text" placeholder="">
+                    <label style="width: 16px">至</label>
+                    <input name="notifyTime_end_date" class="ds_datetime" type="text" placeholder="">
+                </div>
+                <div class="span4 advanced_search_item ds_search_item">
+                    <label>数据来源</label>
+                    <select name="custsource1" id="custsource1" class="" >
+                        <option value="" selected>--请选择--</option>
+                    </select>
+                </div>
+            </div>
+            <!-- <div class="row-fluid cust_query_seas" style="display:none;">
+                <div class="span8 advanced_search_item ds_search_item">
+                    <label>联系时间</label>
+                    <input name="notifyTime_begin_date" class="ds_datetime" type="text" placeholder="">
+                    <label style="width: 16px">至</label>
+                    <input name="notifyTime_end_date" class="ds_datetime" type="text" placeholder="">
+                </div>
+                <div class="span4 advanced_search_item ds_search_item">
+                    <label>数据来源</label>
+                    <select name="custsource1" id="custsource1" class="" >
+                        <option value="" selected>--请选择--</option>
+                    </select>
+                </div>
+            </div> -->
+            <div class="row-fluid cust_query_all">
+                <!--<div class="span4 advanced_search_item ds_search_item ds_owner">-->
+                    <!--<label>所属人</label>-->
+                    <!--<input name="owner" type="hidden" class="select_input" id="_#menu#__owner_select_input"  />-->
+                    <!--<div id="_#menu#__owner_select_user" class="combobox_agent"></div>-->
+                <!--</div>-->
+
+                <div class="span4 advanced_search_item ds_search_item ds_owner">
+                    <label>所属范围</label>
+                    <input name="ownercom" type="hidden" class="select_input" id="_#menu#__owner_select_input_com" />
+                    <input name="owner" type="hidden" class="select_input" id="_#menu#__owner_select_input" />
+                    <input name="ownerdep" type="hidden" class="select_input" id="_#menu#__owner_select_input_dep" />
+                    <!--<div id="_#menu#__owner_select_user" class="combobox_agent"></div>-->
+                    <div id="_#menu#__owner_select_user" class="comtabbox_agent"></div>
+                </div>
+                <div class="span4 advanced_search_item ds_search_item">
+                    <label>数据来源</label>
+                    <select name="custsource1" class="" >
+                        <option value="" selected>--请选择--</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span4 advanced_search_item ds_search_item">
+                    <label>导入批次</label>
+                    <input  name="batchNo" type="text" />
+                </div>
+                <div class="span4 advanced_search_item ds_search_item">
+                    <label>省</label>
+                    <select name="province"  class="cust_province_casecade">
+                        <option value="" selected>--请选择--</option>
+                    </select>
+                </div>
+                <div class="span4 advanced_search_item ds_search_item">
+                    <label>市</label>
+                    <select name="city" class="">
+                        <option value="" selected>--请选择--</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span8 advanced_search_item ds_search_item">
+                    <label>更新时间</label>
+                    <input name="lastUpdateTime_begin_date" class="ds_datetime" type="text" placeholder="">
+                    <label style="width: 16px">至</label>
+                    <input name="lastUpdateTime_end_date" class="ds_datetime" type="text" placeholder="">
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span8 advanced_search_item ds_search_item">
+                    <label >创建时间</label>
+                    <input name="createTime_begin_date" class="ds_datetime" type="text" placeholder="">
+                    <label style="width: 16px">至</label>
+                    <input name="createTime_end_date" class="ds_datetime" type="text" placeholder="">
+                </div>
+            </div>
+            <div class="custom_fields_pane">
+            </div>
+            <div style="padding: 10px;">
+                <button type="button" class="btn btn-small btn-primary ds_form_action  pull-right btn_advanced" ds_action="customer.searchCustomerPage" >搜索</button>
+                <button type="button" class="btn btn-small  ds_do_action  pull-right" ds_action="customer.resetForm" ds_data="_#menu#_" style="margin-right: 10px;">重置</button>
+
+            </div>
+        </fieldset>
+    </form>
+</div>

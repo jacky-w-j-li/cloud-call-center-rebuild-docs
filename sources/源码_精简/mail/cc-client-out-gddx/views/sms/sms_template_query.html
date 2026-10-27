@@ -1,0 +1,85 @@
+<div class="right_container" id="sms_template_query_panel">
+    <div style="height:98%;margin:3px 3px;" id="my_sms_query">
+        <div class="row-fluid">
+            <br/>
+            <h5><i class="icon-search"></i>短信模板查询</h5>
+            <br/>
+
+            <form id="sms_template_form" class="form-inline my_sms_query_form">
+                <div>
+                    <label for="sms_template_datetime_picker_start">
+                        创建时间
+                    </label>
+                    <input type="text" name="BEGIN_DATE" class="input-small ds_date"
+                           data-date-format="yyyy-mm-dd" id="sms_template_datetime_picker_start"
+                           placeholder="开始日期"/>
+                    <input type="text" name="BEGIN_TIME" class="input-small ds_time" placeholder="开始时间"/>
+                    至
+                    <input type="text" name="END_DATE" class="input-small ds_date" placeholder="结束日期"
+                           data-date-format="yyyy-mm-dd" id="sms_template_datetime_picker_end"/>
+                    <input type="text" name="END_TIME" class="input-small ds_time" placeholder="结束时间"/>
+                </div>
+                <div class="clear10"></div>
+                <div>
+                    <label>
+                        短信签名
+                    </label>
+                    <span id="sign_span">
+                        <select name="sign" class="sms_sign_id_selector">
+                        </select>
+                    </span>
+                </div>
+                <div class="clear10"></div>
+                <div>
+                    <a href="#" class="button ds_form_action" ds_action="sms.searchSmsTemplate"
+                       style="margin:2px 5px;" id="sms_template_query_link">查询</a>
+                    <a href="#" class="button ds_do_action" ds_action="sms.resetSms" style="margin:2px 5px;" >重置</a>
+                </div>
+
+                <div class="clear5">&nbsp;</div>
+                <br>
+
+                <div class='row-fluid account_line'></div>
+                <br/>
+
+                <div>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>名称</th>
+                            <th>内容</th>
+                            <th>变量个数</th>
+                            <th>签名</th>
+                            <th>创建时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="sms_template_table_data">
+                        </tbody>
+                    </table>
+                    <div class="row-fluid class_list">
+                        <div for="sms_template_form" ds_pagination_action="sms.searchSmsTemplate"
+                             class="pagination pagination-small" style="display:table; margin:0;width:100%;">
+                            <span style="float:left;margin-top:15px;font-size:12px;">查询结果：<span class="result_count">0</span></span>
+                            <ul style="float:right;margin-top:5px;">
+                                <li><a href="#"  value="0">&laquo;</a></li>
+                                <li><a href="#"  value="1">1</a></li>
+                                <li><a href="#"  value="2">2</a></li>
+                                <li><a href="#"  value="3">3</a></li>
+                                <li><a href="#"  value="4">4</a></li>
+                                <li><a href="#"  value="5">5</a></li>
+                                <li><a href="#"  value="6">&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<style>
+    #sms_template_query_panel label {
+        font-size:11px;
+    }
+</style>

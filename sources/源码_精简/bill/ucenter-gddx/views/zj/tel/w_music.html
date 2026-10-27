@@ -1,0 +1,38 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">变更欢迎语音</h4>
+        </div>
+        <div class="modal-body">
+            <form id="upload_w_music" accept-charset="UTF-8" action="form" enctype="multipart/form-data" method="post"
+                  target="w_upload_form">
+                <div class="modal-body">
+                    <input type="hidden" name="_id" value="___id" />
+                    <input name="sessionId" value="__session_id" style="display:none;"/>
+                    <input name="action" value="app.tel.setW" style="display:none;"/>
+                    <div>
+                        <div style="margin-bottom: 10px;">欢迎语音是客户在拨打您的公司电话时播放的内容。一般为“欢迎致电xxx公司，请拨分机号，查号请拨0”。对于客服性质的企业电话，一般为“欢迎致电xxx公司，转接中，请稍后”。</div>
+                        <span style="color: #ff5e3a">请选择大小不超过1M、wav格式的语音文件</span>
+                        <input class="file" id="w_music" name="w_music" type="file">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default music_set_cancel ds_do_action" ds_action="tel.refresh" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary ds_do_action" ds_action="tel.setW" ds_data="">保存</button>
+        </div>
+    </div>
+</div>
+<iframe src="/blank.html" class="hidden" name="w_upload_form">
+    <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+    <html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title></title>
+    </head>
+    <body>
+    </body>
+    </html>
+</iframe>

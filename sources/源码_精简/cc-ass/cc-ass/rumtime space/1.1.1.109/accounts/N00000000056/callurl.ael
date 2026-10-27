@@ -1,0 +1,11 @@
+context N00000000056-10037-callurl {
+	s => {
+		callurltimeout = 0;
+		Agi(agi://127.0.0.1:7891/agicallurl?pbx=${HOST}&servicepeer=10037);
+		if(${callurltimeout} == 1)
+			Hangup;
+		Hangup;
+	}
+}
+
+

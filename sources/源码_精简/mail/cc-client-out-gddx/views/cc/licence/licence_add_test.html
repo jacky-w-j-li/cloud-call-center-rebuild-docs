@@ -1,0 +1,67 @@
+<div class="pay_start" style="margin:10px;">
+    <div class="licence_pay">
+        <div class="alert alert-info">
+            licence可以免费试用10天
+        </div>
+        <form class="form-horizontal" id="frm_licence_update">
+            <input type="hidden" name="_id" value="">
+            <input type="hidden" name="flag" value="buyLicence">
+            <div class="form-group">
+                <label class="control-label col-md-3">
+                    类型
+                </label>
+                <div class="col-md-5">
+                    <select name="licenceType"  class="form-control input-sm licenceType" required>
+                        <option value="service">标准版</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" >
+                <label class="control-label col-md-3">
+                    节点
+                </label>
+                <div class="col-md-5">
+                    <select name="pbx"  class="form-control input-sm pbx"  id="addLicense_node_select" msgName="节点" required>
+                        _@getCCPbxOptions()@_
+                    </select>
+                </div>
+            </div>
+            <div class="form-group licencePrice_div">
+                <label class="control-label col-md-3">
+                    单价
+                </label>
+                <div class="col-md-5">
+                    <input type="text" name="licencePrice" value='' class="form-control input-sm licencePrice" style="width: 209px" readonly/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">
+                    licence数量
+                </label>
+                <div class="col-md-5">
+                    <input type="text" onkeyup="value=value.replace(/[^\d]/g,'')" name="num" value='1' class="no_shdw form-control input-sm ds_spinner_licence" dataType="Integer,Range" min="1"  msgName="licence数量" msg="只能为大于0的整数" required/>个
+                    <label for="num" class="error" style="display: none;"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-8">
+                    <button type="button" class="btn btn-primary btn-small ds_form_action" ds_action="licence.confirmTest">试用</button>
+                    <button type="button" class="btn btn-default btn-small" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+$(function (){
+    var select = $("#addLicense_node_select");
+    var options = select.find("option");
+    if(options.length ==  2){
+        $(options[1]).attr("selected","selected");
+        select.closest(".form-group").hide();
+    }
+});
+</script>
+

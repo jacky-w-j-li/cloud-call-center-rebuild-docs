@@ -1,0 +1,102 @@
+<div style="padding: 18px;" class="clearfix">
+    <div class="location_phone"></div>
+    <div style='margin-bottom: 10px;'>
+        <form class="form-inline" id="query_customer_form___id">
+            <input type='hidden' name='callId' value="__id">
+            <input type='hidden' name='popupId' value="__popupId">
+            <input type='hidden' name='phone' value="__phone">
+
+            <div class="input-prepend input-append">
+                <div class="btn-group">
+                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                        <input type='hidden' name='field' value="displayName">
+                        <span class="current_query_field">名称</span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu query_field_list">
+                        <li><a href="#" class="ds_do_action" ds_action="call.selectLocationQuery" ds_data="displayName">名称</a></li>
+                        <li><a href="#" class="ds_do_action" ds_action="call.selectLocationQuery" ds_data="phone">电话</a></li>
+                        <li><a href="#" class="ds_do_action" ds_action="call.selectLocationQuery" ds_data="email">邮箱</a></li>
+                        <li><a href="#" class="ds_do_action" ds_action="call.selectLocationQuery" ds_data="weixin">微信</a></li>
+                    </ul>
+                </div>
+                <input class="" style="width: 160px;" name="combox" type="text" >
+                <div class="btn-group">
+                    <button type="button" class="btn ds_form_action pop_cust_query" ds_action="call.queryPopupCustomer"  title="查询">
+                        <i class="icon-search"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!--<div class="input-append">-->
+                <!--<input type='text' name='displayName' style="width: 120px;" placeholder="输入客户名称搜索">-->
+                <!--<button type="button" class="btn ds_form_action pop_cust_query" ds_action="call.queryPopupCustomer"  title="查询">-->
+                    <!--<i class="icon-search"></i>-->
+                <!--</button>-->
+            <!--</div>-->
+            <a href="#" style="margin-left: 10px;" class="btn btn-small ds_do_action pop_cust_create" ds_action="call.showDialAddCust" ds_data="__phone,__id,__province,__city">新建客户</a>
+        </form>
+    </div>
+    <div style='margin-bottom: 10px;'>
+        <table class="table table-bordered table-striped table-hover table-condensed">
+            <!--<colgroup>-->
+                <!--<col width="20%"/>-->
+                <!--<col width="40%"/>-->
+                <!--<col width="40%"/>-->
+            <!--</colgroup>-->
+            <thead>
+            <tr>
+                <th>
+                </th>
+                <th>
+                    客户名称
+                </th>
+                <th>
+                    电话号码
+                </th>
+                <th>
+                    邮箱
+                </th>
+            </tr>
+            </thead>
+            <tbody id="customer_list_pane___id">
+            </tbody>
+        </table>
+        <div class="pagination pagination-small" for="query_customer_form___id" ds_pagination_action="call.queryPopupCustomer" style="width:100%;margin:0 3px;">
+            <span style="float:left;font-size:12px;margin-top:8px;">查询结果：<span class="result_count">0</span></span>
+            <ul id="agent_list_index" style="float:right;">
+                <li>
+                    <a href="#" value="0">&laquo;</a>
+                </li>
+                <li>
+                    <a href="#"  value="1">1</a>
+                </li>
+                <li>
+                    <a href="#" value="2">2</a>
+                </li>
+                <li>
+                    <a href="#" value="3">3</a>
+                </li>
+                <li>
+                    <a href="#"  value="4">4</a>
+                </li>
+                <li>
+                    <a href="#"  value="5">5</a>
+                </li>
+                <li>
+                    <a href="#"  value="6">&raquo;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<!--<div id="tmpl_popup_cust_more" style="display: none;visibility: hidden;">-->
+    <!--<tr>-->
+        <!--<td><button type='button' class='btn btn-info btn-small ds_do_action' ds_data='__id,__name,__phone,__popupId' ds_action='call.popLocateSelected'>选定</button></td>-->
+        <!--<td>__name</td>-->
+        <!--<td>__phoneList</td>-->
+        <!--<td>__emailList</td>-->
+    <!--</tr>-->
+<!--</div>-->

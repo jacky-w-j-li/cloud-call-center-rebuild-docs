@@ -1,0 +1,20 @@
+<div class="modal hide fade" id="Independent_email_box" tabindex="-1" style="overflow: hidden" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-header">
+        <button type="button" class="close ds_do_action Independent_email_close" ds_action="webchat.clearSessionKey" style="margin-top: -5px;" data-dismiss="modal" aria-hidden="true"></button>
+    </div>
+    <div class="modal-body margin_none">
+        <div id="Independent_email_form" relationEmailId="">
+            <div class="input_titile">邮箱：</div>
+            <input type="text" class="email_name email_name_input" name="email_name"/>
+            <input name="skillGroup" id="email_skillGroup_add" type="hidden" value="_#peer#_">
+
+            <label class="email_checkbox">
+                <input type="checkbox" class="weixin_radio" ds_action="config.channel.showEmailSaveBtn"/>我已在企业邮箱中设置了转发邮件到支持邮箱
+            </label>
+            <div class="email_btn">
+                <input type="button" disabled="disabled" class="have_disabled btn-blue confirm ds_do_action" ds_action="config.channel.saveIndependentEmail" value="测试转发"/>
+                <input type="button" class="btn-blue get-back ds_do_action"  ds_action="config.channel.closeIndependentBox" value="取消"/>
+            </div>
+        </div>
+    </div>
+</div>

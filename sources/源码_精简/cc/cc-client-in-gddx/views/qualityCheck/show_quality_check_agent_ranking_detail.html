@@ -1,0 +1,105 @@
+<div id="show_cdr_detail_Modal" class="modal hide fade">
+    <div class="modal-header">
+        <h3>排名</h3>
+    </div>
+    <form id="qualityCheckRankingAgent" class="form-horizontal form-inline">
+    <div class="modal-body" style="height: 500px;overflow: auto">
+        <div class="pull-left">
+            <label style="float:left;">座席&nbsp;</label>
+            <table>
+                <tr>
+                    <td>
+                        <input name="RANKING_AGENT" type="hidden" class="ds_search_item select_input" id="quality_check_list_agent_ranking_select_input" style="float:none;"/>
+                        <div id="quality_check_agent_ranking" class="combobox_agent"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="pull-left">
+            &nbsp;&nbsp;
+            <input type="checkbox" id="agent_report_checkbox" name="includeSubordinate" style="margin-top: 4px">
+            显示已选座席下级
+        </div>
+        <div class="clear10"></div>
+        <div>
+            <a href="#" class="button ds_form_action" ds_action="qualityCheck.queryQualityQueryRanking" id="callSheetQualityCheckListQueryBtn">查询</a>
+        </div>
+        <div>
+            <table class="table table-striped table-bordered table-hover">
+                <thead id="callSheetQualityCheckAgentRankingthead">
+                __HEAD
+                </thead>
+                <tbody id="callSheetQualityCheckAgentRankingtbody">
+                __BODY
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn ds_do_action" onclick="closeRanking();" id="cdrDetailCloseBtn">关闭</a>
+    </div>
+    </form>
+</div>
+<script>
+    function closeRanking(){
+        $('#show_cdr_detail_Modal').modal('hide');
+        $('#cdr_detail_pane').empty();
+    }
+    $(function(){
+        $('#show_cdr_detail_Modal').css({
+            'width': function () {
+                return ($(document).width() *.43) + 'px';
+            },
+            'margin-left': function () {
+                return -($(this).width() / 2);
+            }
+        });
+    });
+        var users = [];
+        if(session.user.scope.qc == "all" || session.user.type == "admin"){
+            users = getCache("agents");
+        }else{
+            var lowUsers = session.user.moduleUsers.qc||[];
+            var agents = getCache("agents");
+            for(var i=0 ;i<agents.length;i++){
+                for(var j=0;j<lowUsers.length;j++){
+                    if(lowUsers[j] == agents[i]._id){
+                        users.push(agents[i]);
+                    }
+                }
+            }
+        }
+        utils.loadSearchInput({ id: "quality_check_agent_ranking",
+            width: "100",
+            height: "14",
+            tip: "按姓名,拼音,工号搜索",
+            data:users,
+            searchField: ["displayName", "exten", "pinyin"],
+            pinyinField: ["displayName"],
+            listField: ["displayName", "exten"],
+            userIdField: "_id",
+            showAllList: true,
+            callbackFuc: function(object) {
+                if(Object.prototype.toString.call(object) === '[object Array]'){
+                    return;
+                }
+                var currentVals = $("#qualityCheckRankingAgent input[name='RANKING_AGENT']");
+                var ishas = currentVals.val().indexOf(','+object._id)>-1;
+                if(!ishas){
+                    $('#quality_check_agent_ranking').before("<span id="+object._id + "><span class='label label-info'>"+object.displayName+
+                            "</span><a href='#' onclick=removeRankingSpan('"+object._id+"','agent')><i class='icon-remove'></i></a>&nbsp;</span>");
+
+                    $('#quality_check_agent_ranking_input').attr("<span id="+object._id+"><span class='label label-info'>"+object.displayName+
+                            "</span><a href='#' onclick=removeRankingSpan('"+object._id+"','agent')><i class='icon-remove'></i></a>&nbsp;</span>");
+                    currentVals.val(currentVals.val() + ',' + object._id);
+                }
+            }
+        });
+        function removeRankingSpan(id,type){
+            $('#qualityCheckRankingAgent #'+id).remove();
+            var currentVals = $("#qualityCheckRankingAgent input[name='RANKING_AGENT']");
+            var oldagents = ','+id;
+            currentVals.val(currentVals.val().replace(oldagents, ''));
+        }
+
+</script>

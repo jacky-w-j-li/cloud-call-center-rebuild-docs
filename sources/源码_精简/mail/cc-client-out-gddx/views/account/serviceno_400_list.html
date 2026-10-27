@@ -1,0 +1,41 @@
+<div style="margin: 10px;">
+    <!--<div class="alert alert-info" style="line-height: 18px;">-->
+        <!--试用号码自动续费3天，赠送20分钟的外呼时长-->
+    <!--</div>-->
+    <form id="frm_serviceno_test_search" class="form-horizontal">
+        <table class="table_row_search">
+            <tbody>
+            <tr>
+                <td >号码 </td>
+                <td >
+                    <input type="text" name="_id" class="form-control input-sm"/>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-sm ds_form_action" ds_action="account.load400ServiceNoList">查询</button>
+                    <button type="button" class="btn btn-default btn-sm ds_do_action" ds_action="reset" >重置</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <form id="frm_serviceno_data">
+        <div style="margin-bottom: 10px;" id="service_normal_list">
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-md-5">查询结果：<span class="result_count" style="margin-top:3px;display: inline-block;">0</span></div>
+        <div class=" col-md-7">
+            <ul class="pagination pagination-sm pull-right" style="margin: 0;"
+                for="frm_serviceno_test_search" ds_pagination_action="account.load400ServiceNoList">
+                <li><a href="#"  value="0">&laquo;</a></li>
+                <li><a href="#"  value="1">1</a></li>
+                <li><a href="#"  value="2">2</a></li>
+                <li><a href="#"  value="3">3</a></li>
+                <li><a href="#"  value="4">4</a></li>
+                <li><a href="#"  value="5">5</a></li>
+                <li><a href="#"  value="6">&raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>

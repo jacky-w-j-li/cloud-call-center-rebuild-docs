@@ -1,0 +1,42 @@
+<tr>
+    <td>
+        _@accFee.showShortTime('_#beginTimeDisplay#_')@_
+    </td>
+    <td>
+        _#callerProvince#_-_#callerCity#_
+    </td>
+    <td>
+        _#calleeProvince#_-_#calleeCity#_
+    </td>
+    <td>
+        _#cid#_
+    </td>
+    <td>
+        _#did#_
+    </td>
+    <td>
+        _@accFee.showFieldDesc('agent.displayName','_#agentId#_')@_
+
+    </td>
+    <td>
+        _@accFee.showFieldDesc('agent.exten','_#agentId#_')@_
+    </td>
+    <td>
+        _@accFee.showFieldDesc('call_callType','_#type#_')@_
+    </td>
+    <td>
+        _@accFee.showFieldDesc('isLocal',_#isLocal#_)@_
+    </td>
+    <!--<td>-->
+        <!--_#endTimeDisplay#_-->
+    <!--</td>-->
+    <td>
+        _#minutes#_
+    </td>
+    <td>
+        _#seconds#_
+    </td>
+    <td>
+        _@formatTrueFee(_#consume#_)@_
+    </td>
+</tr>

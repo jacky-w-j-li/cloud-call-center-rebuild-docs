@@ -1,0 +1,309 @@
+<div class="left_column ds_search_pane" id="contact_list__#menu#_" ds_menu="_#menu#_" ds_index="1">
+    <div class='contacts_caption'>
+        <div class="caption-top clearfix" style="padding-bottom: 5px">
+            <form class="questionnaire_list_query_form ds_search_form" id="questionnaire_list_query_form__#menu#_">
+            <span class="refresh ds_form_action" ds_action="questionnaire.queryQuestionnaireList" ds_data="_#menu#_"
+                  id="reflush_questionnaire_button"><a
+                    href="javascript:void(0);" class="ajaxed"></a></span>
+
+
+                <div class="input-append ds_search_item" style="margin-left: 5px;">
+                    <input class="span2 " name="query" type="text" placeholder="输入名称或电话查询" style="width: 110px;border-color:rgb(204, 204, 204)">
+                    <button class="btn ds_form_action" type="button" ds_action="questionnaire.queryQuestionnaireList" ds_data="_#menu#_" title="查询">
+                        <i class="icon-search"></i>
+                    </button>
+                    <button type="button" class="btn questionnaire_list_search_dorpdown" style="height: 24px;" title="高级查询">
+                        <span class="caret"></span>
+                    </button>
+                </div>
+
+                <div class="btn-group" style="float: right; margin-right: 10px;">
+                    <button href="#" class="btn btn-small ds_do_action " id="questionnaire_assign_button__#menu#_" ds_action="questionnaire.showQuestionAssign" ds_data="_#menu#_">分配查询结果</button>
+                    <button href="#" class="btn btn-small  ds_do_action " id="questionnaire_export_button__#menu#_" ds_action="questionnaire.exportExcel" ds_data="_#menu#_">导出查询结果</button>
+
+                    <button id="questionnaire_dropdown_button__#menu#_" class="btn dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a href="#" class="ds_do_action" ds_action="questionnaire.deleteQues" style="color: red;">删除查询结果</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <!--</form>-->
+                <div id="questionnaire_list_search_query_#menu#_" class="task_query_close  questionnaire_list_search_query">
+                    <!--<form class="questionnaire_high_query_form">-->
+                    <div style="height: 40px;border-bottom: 1px solid #f0f0f0;">
+                        <div>
+                            <div>
+                                <h4 style="float:left;padding-top: 10px;padding-left:10px;color: black;">高级查询</h4>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <a href="#" class="cancel_button close"
+                                   onclick="$('#questionnaire_list_search_query_#menu#_').addClass('task_query_close')"
+                                   style="float: right;margin-top: 5px;margin-right: 10px;">x</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding:10px;padding-right:30px;">
+                        <div>
+                            <div style="margin-left: auto;margin-right: auto;">
+                                <fieldset>
+                                    <table style="margin-bottom: 5px;">
+                                        <tr>
+                                            <div class="row-fluid">
+                                                <div class="span8 advanced_search_item ds_search_item name formQue">
+                                                    <label class="search_label">创建时间</label>
+                                                    <input name="createTime_begin_date" class="ds_datetime" type="text" placeholder="">
+                                                    <label style="width: 16px">至</label>
+                                                    <input name="createTime_end_date" class="ds_datetime" type="text" placeholder="">
+                                                </div>
+                                            </div>
+                                        </tr>
+                                        <tr>
+                                            <div class="row-fluid">
+                                                <div class="span8 advanced_search_item ds_search_item name formQue">
+                                                    <label class="query_time search_label" >回访时间</label>
+                                                    <input name="lastUpdateTime_begin_date" class="ds_datetime" type="text" placeholder="">
+                                                    <label style="width: 16px">至</label>
+                                                    <input name="lastUpdateTime_end_date" class="ds_datetime" type="text" placeholder="">
+                                                </div>
+                                            </div>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="name formQue ds_search_item">
+                                                    <label class="search_label">问卷模板</label>
+                                                    <select class="quesTemp_type" name="temp_id">
+                                                        <option value="" selected>--请选择--</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="name formQue ds_search_item">
+                                                    <label class="search_label">状态</label>
+                                                    <select class="ques_result " name="result">
+                                                        <option value="" selected>--请选择--</option>
+                                                        <option value="success">成功</option>
+                                                        <option value="invalid">无效电话</option>
+                                                        <option value="noAnswer">无人接听</option>
+                                                        <option value="imparity">客户不配合</option>
+                                                        <option value="other">其他</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="name formQue ds_search_item">
+                                                    <label class="search_label">当前处理人</label>
+                                                    <select class="ques_master query_field" name="owner">
+                                                        <option value="" selected>--请选择--</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="name formQue ds_search_item">
+                                                    <label class="search_label">导入批次号</label>
+                                                    <input type="text" class="ques_batchNo" style="width: 48%;" name="batchNo"/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </fieldset>
+                            </div>
+                            <a href="#" ds_action="questionnaire.queryHighQues"
+                               style="margin-right: -25px;float: right;margin-bottom: 10px;" class="btn btn-small btn-primary ds_form_action">搜索</a>
+                            <a href="#" ds_action="questionnaire.resetQueryHighQues"
+                               style="margin-right: -25px;float: right;margin-bottom: 10px;margin-right: 20px;" class="btn btn-small  ds_form_action">重置</a>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <div class="list_container compact-view">
+        <div class="contact_list ">
+            <div class="ds_search_filter">
+            </div>
+            <div class="list-inside" id="questionnaire_list_item_pane_#menu#_">
+
+            </div>
+            <div class="row-fluid class_list">
+                <div class="pagination pagination-small" style="display:table; margin:0;width:100%;">
+                    <span style="float:left;margin-top:8px;font-size:12px;">查询结果：<span
+                            class="result_count">0</span></span>
+                    <ul style="float:right;">
+                        <li>
+                            <a href="#" ds_action="questionnaire.queryQuestionnaireListByPage"
+                               value="0">&laquo;</a>
+                        </li>
+                        <li>
+                            <a href="#" ds_action="questionnaire.queryQuestionnaireListByPage" value="1">1</a>
+                        </li>
+                        <li>
+                            <a href="#" ds_action="questionnaire.queryQuestionnaireListByPage" value="2">2</a>
+                        </li>
+                        <li>
+                            <a href="#" ds_action="questionnaire.queryQuestionnaireListByPage" value="3">3</a>
+                        </li>
+                        <li>
+                            <a href="#" ds_action="questionnaire.queryQuestionnaireListByPage" value="4">4</a>
+                        </li>
+                        <li>
+                            <a href="#" ds_action="questionnaire.queryQuestionnaireListByPage" value="5">5</a>
+                        </li>
+                        <li>
+                            <a href="#" ds_action="questionnaire.queryQuestionnaireListByPage"
+                               value="6">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="right_column">
+    <div class="contact_detail">
+        <div class="content">
+            <div class="pane_content">
+                <div class='questionnaire_detail_div_#menu#_' id="_menu"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $(".questionnaire_list_search_dorpdown").bind("click", function () {
+            $("#questionnaire_list_search_query_#menu#_").toggleClass("task_query_close");
+        });
+
+
+        var temp = "<option value='_id'>_name</option>";
+        var quesTemps = getCache("questionnaireTemp");
+        var html = "";
+        for (var i = 0; i < quesTemps.length; i++) {
+            var tempItem = quesTemps[i];
+            html += temp.replace(/_id/g, tempItem._id).replace(/_name/g, tempItem.name);
+        }
+
+
+        var typeSelect = $("#questionnaire_list_search_query_#menu#_").find("table").find(".quesTemp_type");
+        var resultSelect = $("#questionnaire_list_search_query_#menu#_").find(".ques_result");
+        var masterSelect = $("#questionnaire_list_search_query_#menu#_").find(".ques_master");
+        var batchNoInput = $("#questionnaire_list_search_query_#menu#_").find(".ques_batchNo");
+        var queryTimeInput = $("#questionnaire_list_search_query_#menu#_").find(".query_time");
+        typeSelect.append(html);
+
+
+        var agents = getCache("agents") || [];
+        masterSelect.append(temp.replace(/_id/g, "##").replace(/_name/g, "未分配"));
+        for (var i = 0; i < agents.length; i++) {
+            var agentsItem = agents[i];
+            masterSelect.append(temp.replace(/_id/g, agentsItem._id).replace(/_name/g, agentsItem.displayName));
+        }
+
+        var menu = session.currentPage.pageId;
+        if (menu == "my_questionnaire_uncomplete" || menu == 'questionnaire_uncomplete' || menu == "my_questionnaire_uncomfirm") {
+            resultSelect.closest("div").hide();
+            queryTimeInput.closest("div").hide();
+        }
+        if (menu == 'my_questionnaire_complete' || menu == "my_questionnaire_uncomplete" || menu == "my_questionnaire_uncomfirm") {
+            masterSelect.closest("div").hide();
+        }
+        if (menu == 'questionnaire_complete') {
+            var tdPanel = batchNoInput.closest("td");
+            var tablePanel = batchNoInput.closest("table");
+            var html = tdPanel.html();
+            tablePanel.append("<tr><td></td></tr>");
+            tablePanel.find("td").last().append(html);
+            tdPanel.remove();
+        }
+
+
+        $("select[name='temp_id']").change(function(){
+            var statusHtml = "";
+            $("select[name='temp_id'] option").each(function(){
+                if($(this).attr("selected")){
+                    var tempData = getCache("questionnaireTemp", $(this).attr("value"));
+                    if(tempData.qstatus){
+                        statusHtml += '<option value="">--请选择--</option>';
+                        for(var key in tempData.qstatus){
+                            statusHtml += '<option value="'+key+'">'+tempData.qstatus[key]+'</option>';
+                        }
+                    }else{
+                        statusHtml += '<option value="">--请选择--</option>';
+                        statusHtml += '<option value="success">成功</option>';
+                        statusHtml += '<option value="invalid">无效电话</option>';
+                        statusHtml += '<option value="noAnswer">无人接听</option>';
+                        statusHtml += '<option value="imparity">客户不配合</option>';
+                        statusHtml += '<option value="other">其他</option>';
+                    }
+                    return false;
+                }
+            });
+            if(statusHtml == ""){
+                statusHtml += '<option value="">--请选择--</option>';
+                statusHtml += '<option value="success">成功</option>';
+                statusHtml += '<option value="invalid">无效电话</option>';
+                statusHtml += '<option value="noAnswer">无人接听</option>';
+                statusHtml += '<option value="imparity">客户不配合</option>';
+                statusHtml += '<option value="other">其他</option>';
+            }
+            resultSelect.html(statusHtml);
+        });
+//        $("select[name='temp_id']").change();
+
+    });
+</script>
+
+
+<style type="text/css">
+    .task_query_close {
+        display: none;
+    }
+
+    .task_high_query_form .formQue label {
+        width: 75px;
+        text-align: right;
+    }
+
+    .task_high_query_form input[type='text']{
+        width: 120px;
+    }
+
+    div.formQue {
+        margin-top: 5px;
+        width: 220px;
+        float: none;
+    }
+
+    .formQue label {
+        display: inline-block;
+
+    }
+
+    .questionnaire_list_search_query {
+        margin-top: -1px;
+        border: 1px rgb(189, 188, 188) solid;
+        position: absolute;
+        width: 700px;
+        top: 75px;
+        left: 190px;
+        background-color: #ffffff;
+        padding: 0px;
+        z-index: 100;
+    }
+
+    .search_label {
+        width: 70px;
+        text-align: right;
+    }
+</style>

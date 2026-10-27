@@ -1,0 +1,107 @@
+<div class="container-fluid">
+    <form>
+        <div class="row-fluid">
+            <div class="row-fluid">
+                <div class="span7 text-left">
+                    <h4>业务步骤配置</h4>
+                </div>
+                <div class="span3 offset2 text-right pull-right">
+                    <a class="btn btn-primary do_action" appaction="config.business.updateBusinessFlowStep">保存</a>
+                </div>
+            </div>
+            <div style="height:1px;background-color:#EAEAEA;width:100%;margin:15px 0px 8px;">
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="row_item">
+                <label for="name">步骤名称</label>
+                <input id="name" name="name" value="__name" maxlength="10" type="text" required>
+            </div>
+            <div class="row_item">
+                <label>设为开始节点</label>
+                <input name="isBegin" type="checkbox" id="isBeginInput">
+            </div>
+            <div style="height:1px;background-color:#EAEAEA;width:100%;margin:15px 0px 8px;">
+            </div>
+        </div>
+        <div class="row-fluid">
+            <h5>业务字段</h5>
+
+            <div id="business_fields_pane" class="custom-fields-area">
+
+            </div>
+            <div id="add_business_field_pane">
+                <span id="add_business_field_pane_link" class="add-custom-field enabled action" appaction="config.business.showAddBusinessField" appdata="__id">添加自定义字段</span>
+
+                <div id="add_business_field_pane_content"></div>
+            </div>
+            <div style="height:1px;background-color:#EAEAEA;width:100%;margin:15px 0px 8px;">
+            </div>
+        </div>
+        <div class="row-fluid">
+            <h5>步骤处理人</h5>
+            <select name="master" id="flow_step_master_select">
+            </select>
+
+            <div style="height:1px;background-color:#EAEAEA;width:100%;margin:15px 0px 8px;">
+            </div>
+        </div>
+        <div class="row-fluid">
+            <h5>处理后流向</h5>
+            <select name="nexts" multiple="multiple" id="business_flow_step_next_select">
+            </select>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+//        是否是开始节点
+        var isBegin = __isBegin;
+        if (isBegin)
+            $('#isBeginInput').attr('checked', '');
+
+//      init nextStep
+        var currentStepId = "__id";
+        var currentStep = session.business.currentEidtFlowStep;
+        var steps = session.business.currentFlowSteps || [];
+        var temp = "<option value='_id' >_name</option>";
+        var tempSelect = "<option value='_id' selected>_name</option>";
+        var pane = $("#business_flow_step_next_select");
+        for (var i = 0; i < steps.length; i++) {
+            var step = steps[i];
+            if (step._id != currentStepId) {
+                if (isSelect(step._id, currentStep)) {
+                    var option = tempSelect.replace(/_id/g, step._id).replace(/_name/g, step.name);
+                    pane.append(option);
+                } else {
+                    var option = temp.replace(/_id/g, step._id).replace(/_name/g, step.name);
+                    pane.append(option);
+                }
+            }
+        }
+
+        // init process user
+        var master = currentStep.master;
+        var users = getCache('agents');
+        temp = "<option value='_id'>_name</option>";
+        tempSelect = "<option value='_id' selected>_name</option>";
+        var html = "<option value=null>--请选择--</option>";
+        for (var userId in users) {
+            if (userId == master)
+                html += tempSelect.replace(/_id/g, users[userId]._id).replace(/_name/g, users[userId].name);
+            else
+                html += temp.replace(/_id/g, users[userId]._id).replace(/_name/g, users[userId].name);
+        }
+        pane = $('#flow_step_master_select');
+        pane.append(html);
+    });
+    function isSelect(id, step) {
+        var ids = step.nexts || [];
+        for (var i = 0; i < ids.length; i++) {
+            if (ids[i] == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+</script>

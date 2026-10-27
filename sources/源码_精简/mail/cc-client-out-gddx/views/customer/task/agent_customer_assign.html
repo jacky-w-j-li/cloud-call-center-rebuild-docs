@@ -1,0 +1,22 @@
+<div style="" id="update_popover">
+    <form class="form-inline clearfix" role="form" id="">
+        <input type="hidden" name="taskId" value='_#taskId#_'/>
+        <input type="hidden" name="agentId" value='_#agent#_'/>
+        <div style="margin-top: 10px">
+            待分配客户数量：<span class="noAssigned" style="color: #ea5404;">_#noAssigned#_</span>个，
+            座席未拨打数量：<span class="noCall" style="color: #ea5404;">_#noCall#_</span>个
+        </div>
+        <div style="margin-top: 15px;display: none;" class="update_popover_addNum">
+            增加未拨打客户:<input size='5' type='text' name='addNum' class='input-small' value='' dataType='Number' msg='必须为数字'  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">个
+        </div>
+        <div style="margin-top: 15px;display: none;" class="update_popover_reduceNum">
+            减少未拨打客户:<input size='5' type='text' name='reduceNum' class='input-small' value='' dataType='Number' msg='必须为数字'  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">个
+        </div>
+        <div>
+            <div class="form_buttons" style="padding-top:10px;">
+                <button type="button" class="btn btn-small btn-primary ds_form_action pull-left btn_pad" ds_action="customer.task.saveAssignCustForAgent" >保存</button>
+                <button type="button" class="btn btn-small pull-left ds_do_action btn_cancel_edit" ds_action="customer.task.cancelCustAssign" >取消</button>
+            </div>
+        </div>
+    </form>
+</div>

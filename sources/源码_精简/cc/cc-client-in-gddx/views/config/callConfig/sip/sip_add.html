@@ -1,0 +1,36 @@
+<div class="row-fluid">
+    <div class="span12">
+        <form class="form-horizontal" action="">
+            <div class="row-fluid">
+                <div class="span7 offset1">
+                    <i class="icon-plus"></i>添加网关SIP号
+                </div>
+                <div class="span4 text-right pull-right">
+                    <a class="btn btn-info btn-blue ds_action_flow">
+                        <ds-form-action action="config.ivr.sip.batchAddGatewaySip" extra-data="config.callConfig.currentConfigData"/>
+                        <ds-get-view view="config/callConfig/sip/sip_list" panel="ivrSipPanel"/>
+                        保存
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+
+            <div class="control-group">
+                <label class="control-label">请填写增加的数量</label>
+                <div class="controls">
+                    <input type="text" name="Amount" required="true" value="1" datatype="Number,Range" min="1" max="100"
+                           msg="数量必须为数字，最大为100,最小为1！" msgName="添加数量必须填写，最大为100,最小为1！" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">是否连续</label>
+                <div class="controls">
+                    <label class="checkbox inline">
+                        <input type="checkbox" name="IsSeries" value="">
+                    </label>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

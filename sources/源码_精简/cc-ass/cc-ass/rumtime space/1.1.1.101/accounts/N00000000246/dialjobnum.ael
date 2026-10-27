@@ -1,0 +1,21 @@
+context N00000000246-2-dialjobnum {
+	s => {
+		goto N00000000246-10009-voicemail,s,1;
+	}
+}
+
+context N00000000246-2-dialjobnum-agentbusy {
+	s => {
+		Playback(sound/dialinbusy);
+		Hangup;
+	}
+}
+
+context N00000000246-2-dialjobnum-logoff {
+	s => {
+		Playback(sound/dialinnosignin);
+		Hangup;
+	}
+}
+
+

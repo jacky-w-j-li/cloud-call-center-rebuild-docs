@@ -1,0 +1,23 @@
+div .list-item {
+	cursor : pointer;
+}
+div .list-item :hover {
+	background-color:#ECF6FD;
+}
+div .list-item :active {
+	background-color:#ECF6FD;
+}
+.form-horizontal .control-label-left {
+    float: left;
+    width: 160px;
+    padding-top: 5px;
+    text-align: left;
+}
+
+.ivr_list_item {
+    margin-top: 10px
+}
+
+.ivr_list_item_mini_font{
+    margin-top: 3px
+}

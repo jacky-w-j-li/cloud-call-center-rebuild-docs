@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Class-Path: org.eclipse.core.commands_3.4.0.I20080509-2000.jar mail.ja
+ r commons-email-1.2.jar sip.jar org.eclipse.equinox.common_3.4.0.v200
+ 80421-2006.jar org.eclipse.jface_3.7.0.I20110522-1430.jar
+Main-Class: 
+

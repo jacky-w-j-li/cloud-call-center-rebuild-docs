@@ -1,0 +1,21 @@
+context N00000000258-route {
+	8002 => goto N00000000258-dialin,8002, 1;
+	01058010163 => goto 01058010163,${FROM_DID},1;
+	8001 => goto N00000000258-dialin,8001, 1;
+	10003 => goto N00000000258-10003-blacklist,${FROM_CID},1;
+	10002 => goto N00000000258-10002-time,${FROM_DID},1;
+	10001 => goto N00000000258-10001-announcement,${FROM_DID},1;
+	20001839 => goto N00000000258-dial,20001839, 1;
+	2 => goto N00000000258-dialin, ${JOBNUM}, 1;
+	20001838 => goto N00000000258-dial,20001838, 1;
+	20001840 => goto N00000000258-dial,20001840, 1;
+	20001837 => goto N00000000258-dial,20001837, 1;
+	8000 => goto N00000000258-dialin,8000, 1;
+	_XXXX => {
+		JOBNUM=${EXTEN};
+		goto N00000000258-dialin,${EXTEN},1;
+	}
+	_X.=> {
+		goto N00000000258-dial,${EXTEN},1;
+	}
+}

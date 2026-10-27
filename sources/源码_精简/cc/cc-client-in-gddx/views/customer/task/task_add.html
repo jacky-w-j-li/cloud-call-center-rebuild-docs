@@ -1,0 +1,94 @@
+<div class="right_content_pane" >
+    <form id="frm_customer_task_add" class="form-horizontal ">
+        <input type="hidden" name="menu" value='_#menu#_'/>
+        <div class="right_head clearfix" style="">
+            <div class="pull-left">
+                <h4 style="">添加外呼任务</h4>
+            </div>
+            <div class=" pull-right">
+                <button type="button" class="btn btn-small ds_do_action " ds_action="customer.task.cancelDeal" ds_data="frm_customer_task_add" style="margin-left: 0px;">取消</button>
+                <button type="button" class="btn btn-primary btn-small ds_form_action "  ds_action="customer.task.saveCustTask" style="margin-left: 10px;">保存</button>
+            </div>
+        </div>
+
+        <div>
+            <div class="control-group">
+                <label class="control-label">任务名称</label>
+                <div class="controls">
+                    <input name="taskName" type="text" maxlength="10" msgName='任务名称' required>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" >描述</label>
+                <div class="controls" >
+                    <textarea name="memo" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" >参与的座席</label>
+                <div class="controls">
+                    <label class="checkbox" style="width:85px;">
+                        <input type="checkbox" name="selectAllAgent" onchange="selectTaskAllAgent(this)">全选
+                    </label>
+                    <div class="cust_assgin_agent_container">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script id="tmpl_customer_task" type="text/x-jquery-tmpl">
+    <div class="span4">
+        <div class="control-group" >
+            <label class="control-label" style="width:85px;text-align: left;">
+                <input type="checkbox" fieldgroup="1" name="agents[]" value="${_id}">${displayName}[${exten}]
+            </label>
+        </div>
+    </div>
+</script>
+<style type="text/css">
+</style>
+<script type="text/javascript">
+    $(function(){
+        //初始化座席
+        _initAgentCheckbox()
+    });
+    function _initAgentCheckbox(){
+        var pane=$("#frm_customer_task_add");
+        var users = getCache("agents");
+        var _users=[];
+        for(var i=0;i<users.length;i++){
+            var u=users[i];
+            if(u.status=='enable'){
+                _users.push(u);
+            }
+        }
+        _users=handler.customer._bubbleSort(_users);
+        var html=[];
+        for(var i=0;i<_users.length;i++){
+            var u=_users[i];
+            var tmpl=$("#tmpl_customer_task").tmpl(u).get(0).outerHTML;
+            if((i+1)%3==1){
+                html.push('<div class="row-fluid">'+tmpl);
+            }else if((i+1)%3==0){
+                html.push(tmpl+'</div>');
+            }else{
+                html.push(tmpl);
+            }
+        }
+        pane.find(".cust_assgin_agent_container").html(html.join(""));
+    }
+    function selectTaskAllAgent(sel){
+        var pane = $("#frm_customer_task_add").find('.cust_assgin_agent_container');
+        var all = pane.find("input[type=checkbox]");
+        if(sel.checked==true){
+            $.each(all,function(key, item){
+                $(item).attr("checked",true);
+            })
+        }else{
+            $.each(all,function(key, item){
+                $(item).attr("checked",false);
+            })
+        }
+    }
+</script>

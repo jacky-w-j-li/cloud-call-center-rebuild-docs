@@ -1,0 +1,89 @@
+{{for(var i=0; i<items.length; i++){
+var value = items[i];
+}}
+<div class="list_item" style="position: relative;">
+
+    <div class="item_row ds_do_action contact_item item{{=value._id}}" ds_action="questionnaire.showQuestionnaireDetail" ds_data="{{=value._id}}">
+
+
+        <div class="card_row_new">
+            <div class="card_right">
+
+                <div style="height: 22px;padding-top: 8px">
+                    <span class="label flow"
+                          style="overflow: hidden;text-overflow: ellipsis;"
+                          title="{{=value.tempName}}">{{=value.displayOwner}}
+                    </span>
+                </div>
+                <div  style="height: 28px;padding-top: 2px">
+            <span class="{{=value.labelName}}"
+                  style="overflow: hidden;text-overflow: ellipsis;"
+                  title="{{=value.statusName}}">
+            {{=value.statusName}}
+    </span>
+                </div>
+
+            </div>
+            <div class="card_left label-info">
+                <span class="label label-info time" title="{{=value.tempName}}">{{=value.tempName}}</span>
+            </div>
+            <div class="card_middle">
+                <div class="custom_name_field">
+                    <span class="name">{{=value.name}}</span>
+                </div>
+                <div>
+                    <span class="desc">{{=value.phone}} </span>
+                    {{
+                    if(value.notifyTime){
+                    }}
+                        <i class="ques-revisit-icon ques-revisit" title="联系时间 {{=value.notifyTime}}"></i>
+                    {{
+                    }
+                    }}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {{
+    if(value.notifyTime){
+    }}
+    <ul class="ques-revisitTime" style="z-index: 1200" notifyTime = "{{=value.notifyTime}}">
+        <div id="ques-revisitTimer" style="padding:10px 0 0 17px;color: #fff;">联系时间 {{=value.notifyTime}}</div>
+    </ul>
+    {{
+    }
+    }}
+</div>
+<script type="text/javascript">
+    $(function () {
+        dsevent.bind(".contact_item[ds_data='{{=value._id}}']","questionnaireComplete",function(event,params){
+            if(params._id == '{{=value._id}}'){
+                $(".contact_item[ds_data='{{=value._id}}']").remove();
+                $("#view_ques_list_content").empty();
+                $("#reflush_questionnaire_button").click();
+            }
+        });
+        dsevent.bind(".contact_item[ds_data='{{=value._id}}']","questionnaireConfirm",function(event,params){
+            if(params._id == '{{=value._id}}'){
+                $(".contact_item[ds_data='{{=value._id}}']").remove();
+                $("#view_ques_list_content").empty();
+                $("#reflush_questionnaire_button").click();
+            }
+        });
+//        $('.ques-revisit-icon').on('mouseenter',function(){
+//            $(this).closest('.list_item').find('.ques-revisitTime').show();
+//        }).on('mouseleave',function(){
+//            $(this).closest('.list_item').find('.ques-revisitTime').hide();
+//        })
+    });
+    var phoneBarTipOption = {placement:'bottom',trigger:'hover',html:true};
+    phoneBarTipOption.title=$(".ques-revisit-icon").attr('title');
+    $('.ques-revisit').tooltip(phoneBarTipOption);
+</script>
+{{
+}
+}}
+
+
+

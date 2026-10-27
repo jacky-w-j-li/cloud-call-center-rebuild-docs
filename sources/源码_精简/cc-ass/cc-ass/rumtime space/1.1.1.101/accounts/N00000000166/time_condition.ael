@@ -1,0 +1,29 @@
+context N00000000166-10002-time {
+	_X. => {
+		ifTime(*|mon|*|*) {
+			goto N00000000166-10001-announcement,${FROM_DID},1;
+		}
+		ifTime(*|tue|*|*) {
+			goto N00000000166-10001-announcement,${FROM_DID},1;
+		}
+		ifTime(*|wed|*|*) {
+			goto N00000000166-10001-announcement,${FROM_DID},1;
+		}
+		ifTime(*|thu|*|*) {
+			goto N00000000166-10001-announcement,${FROM_DID},1;
+		}
+		ifTime(*|fri|*|*) {
+			goto N00000000166-10001-announcement,${FROM_DID},1;
+		}
+		ifTime(*|sat|*|*) {
+			goto N00000000166-10001-announcement,${FROM_DID},1;
+		}
+		ifTime(*|sun|*|*) {
+			goto N00000000166-10001-announcement,${FROM_DID},1;
+		}
+
+		Hangup;
+	}
+}
+
+

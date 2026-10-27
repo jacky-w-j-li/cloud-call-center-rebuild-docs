@@ -1,0 +1,26 @@
+<tr>
+    <td>
+        _#displayName#_
+    </td>
+    <td>
+        _#dailyTaskDone#_/_#dailyTask#_
+    </td>
+    <td>
+        _#called#_
+    </td>
+    <td>
+        _#linked#_
+    </td>
+    <td>
+        _@customer.task.calculateNum('linkRate','_#called#_','_#linked#_')@_
+    </td>
+    <td>
+        _@customer.task.calculateNum('finishRate','_#called#_','_#transfer#_')@_
+    </td>
+    <td>
+        _#createTime#_
+    </td>
+    <td>
+        _@customer.task.whetherToRemove('_#lastUpdateTime#_','_#status#_','_#_id#_|_#displayName#_|_#menu#_')@_
+    </td>
+</tr>

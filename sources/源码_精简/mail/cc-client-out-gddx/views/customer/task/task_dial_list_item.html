@@ -1,0 +1,28 @@
+<tr>
+    <td>
+        _#displayName#_
+    </td>
+    <td>
+        _#total#_
+    </td>
+    <td>
+        _@customer.task.calculateNum('noCall','_#total#_','_#called#_')@_
+        <span style="margin-left: 15px;"><i style="cursor: pointer;" class="icon-plus ds_do_action" ds_action="customer.task.showAssignCustForAgent" ds_data="_#_id#_|_#total#_|_#called#_" >
+        </i>&nbsp;<i style="cursor: pointer;" class="plus icon-minus ds_do_action" ds_action="customer.task.showAssignCustForAgent" ds_data="_#_id#_|_#total#_|_#called#_"></i></span>
+    </td>
+    <td>
+        _#linked#_
+    </td>
+    <td>
+        _@customer.task.calculateNum('noLink','_#called#_','_#linked#_')@_
+    </td>
+    <td>
+        _@customer.task.calculateNum('finishRate','_#total#_','_#called#_')@_
+    </td>
+    <td>
+        _@customer.task.calculateNum('linkRate','_#called#_','_#linked#_')@_
+    </td>
+    <td>
+        <a href='#' class='ds_do_action' ds_action='customer.task.removeTaskAgent' ds_data='_#_id#_|_#displayName#_|_#menu#_'>移除座席</a>
+    </td>
+</tr>

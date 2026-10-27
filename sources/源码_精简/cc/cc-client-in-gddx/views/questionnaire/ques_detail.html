@@ -1,0 +1,360 @@
+{{
+var result = result || 'success';
+var optionFlag = '';
+if(status == 'complete'){
+optionFlag = 'disabled';
+
+}
+}}
+<div class="queslist call_detail" id="ques_detail_ques" >
+    <div class="customer_container clearfix">
+        <div class="contact_summary" >
+            <div class="baseinfo cust_base">
+                <div class="base_summary user-details contact_data">
+                    <div class="contact-info">
+                        <h2 class="contact_name" style="float:left;">{{=name}}</h2>
+                        <div class="clear"></div>
+                        <div class="phone item">
+                            <div class="phone-number">{{=basePhone}}</div>
+                            <div class="skype-container">
+                                <a href="#" class="skype ds_do_action" ds_action="questionnaire.clickDial" ds_data="{{=phone}}|{{=_id}}"
+                                   title="点击呼叫"></a>
+                                {{
+                                if(notifyTime){
+                                }}
+                                <span class="green" style="font-size: 14px">
+                                    <i class="ques-revisit-icon" style="display: inline-block;width:16px;height: 16px;margin: 0 0 -2px 0;"></i>
+                                    {{=notifyTime}}</span>
+                                {{
+                                }
+                                }}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="func_tab_container clearfix">
+                    <div class="pull-left">
+                        <a href="#" class="ds_do_action func_tab active" ds_action="customer.swapFunTab" ds_data="ques" ds_attr="_#custId#_">问卷内容</a>
+                        <a href="#" class="ds_do_action func_tab" ds_action="questionnaire.swapFunTab"  ds_attr="_#custId#_">联系历史</a>
+                    </div>
+                    <div class="cust_btn btn_view_cust_detail pull-right">详细信息&lt;&lt;</div>
+                </div>
+            </div>
+            <div class="cust_detail">
+                <div class="contact-info">
+                    <div class="custom_fields item">
+                        {{
+                        if(custDetial){
+                        for(var key in custDetial){
+                        }}
+                        <div class="cust_item_col">
+                            <div class="field">{{=custDetial[key].name}}：&nbsp;&nbsp;</div>
+
+                            <div class="info" style="word-break: break-all;">
+
+                                {{=custDetial[key].value}}&nbsp;&nbsp;
+
+                            </div>
+
+                        </div>
+
+                        {{
+                        }
+                        }else{
+                        }}
+                        <div class="inline-checkbox">
+                            <label class="inline">
+                                <span>没有相关详细信息</span>
+                            </label>
+                        </div>
+                        {{
+                        }
+                        }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cust_tab_content" style="">
+        <div class="account_base active questionnaire-info" id="questionnaire-info-content">
+            <div class="row-fluid">
+                <form class="ques-info-content" id="questionnaire_submit_form_{{=menu}}">
+                    <div class="ques_title">
+                        <span>问卷内容</span>
+                    </div>
+                    <input type="hidden" name="_id" value="{{=_id}}" />
+                    {{
+                    if(tempData.qstatus){
+                    }}
+                    <div class="action_form">
+                        <div class="last_action">
+
+                            <div class="ques_item_pane ques_item_panel"></div>
+                            <div class="row-fluid ques_result_pane">
+                                <div class="inline-checkbox" style="margin: 0 6px 0 21px;color: #5eb2e8;font-weight:600;">
+                                    <label class="inline">
+                                        <span class="qstatus_result">回访结果</span>
+                                    </label>
+                                </div>
+                                <div class="check_group">
+                                    {{
+                                    for(var key in tempData.qstatus){
+                                    }}
+                                    <div class="inline-checkbox">
+                                        <label class="inline">
+                                            <input type="radio" class="result_{{=tempData.type}}" name="result" value="{{=key}}" {{=optionFlag}} {{=result==key?'checked':''}} /><span class="qstatus {{=key}}">{{=tempData.qstatus[key]}}</span>
+                                        </label>
+                                    </div>
+
+                                    {{
+                                    }
+                                    }}
+                                </div>
+                                {{ if(status != 'complete' && $getSession().user._id == owner ){ }}
+                                <div style="clear:both;margin: 35px 0 0 0;text-align: center" id="btn-select">
+                                    <div style="display: inline-block;position: relative;">
+                                        <a href="#"  class="ds_form_action" ds_action="questionnaire.showConfirmQuesCallTask">稍后回访</a>
+                                        <div class="submenu ques_submenu">
+                                            <div class="change_date">
+                                                <div id="sales_action_time" style="display:inline-block;">
+                                                    <select name="change_date_type" style="width:100px;">
+                                                        <option value="date">联系时间</option>
+                                                        <option value="half">半小时后</option>
+                                                        <option value="hour">一小时后</option>
+                                                        <option value="tomorrow">明天</option>
+                                                        <option value="aftertomorrow">后天</option>
+                                                        <option value="week">三天后</option>
+                                                        <option value="2week">2周后</option>
+                                                        <option value="month">30天后</option>
+                                                    </select>
+                                                    <input name="notifyTime_date" class="ds_date" mindate="true" type="text" placeholder="yyyy-mm-dd" style="margin-left:0;width:82px;">
+                                                    <input name="notifyTime_time" class="ds_time" type="text" placeholder="00:00" style="width:35px;"><br/>
+                                                    <div style="margin-top: 10px">
+                                                        <span class="btn-blue save_comment ds_form_action" ds_action="questionnaire.confirmQuesCallTask" style="display: inline-block;margin:10px 5px 0px 68px;">确定</span>
+                                                        <span class="get-back btn-blue ds_do_action cancelTime" ds_action="questionnaire.hideConfirmQuesCallTask" style="display: inline-block;margin-top:10px;">取消</span>
+                                                    </div>
+                                                    <!--</div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="#"  class="btn_green ds_form_action submitques" id="questionnaire_complete_button_{{=menu}}" ds_action="questionnaire.completeTask"  disabled>提交问卷</a>
+                                    <a href="#"  class="btn-reset ds_form_action" ds_action="questionnaire.resetQuesCallTask">重置</a>
+                                </div>
+                                {{ } }}
+                            </div>
+                        </div>
+                    </div>
+                    {{
+                    }else{
+                    }}
+                    <div class="action_form">
+                        <div class="last_action">
+                            <div class="ques_item_pane no_content_action_from"></div>
+                            <div class="row-fluid ques_result_pane">
+                                <div class="inline-checkbox" style="margin: 0 6px 0 21px;color: #5eb2e8;font-weight:600;">
+                                    <label class="inline">
+                                        <span class="qstatus_result">回访结果</span>
+                                    </label>
+                                </div>
+                                <div class="check_group">
+                                    <div class="inline-checkbox">
+                                        <label class="inline">
+                                            <input type="radio" class="result_{{=tempData.type}}" name="result" value="success" {{=optionFlag}} {{=result=='success'?'checked':''}}/><span>回访成功</span>
+                                        </label>
+                                    </div>
+                                    <div class="inline-checkbox">
+                                        <label class="inline">
+                                            <input type="radio" class="result_{{=tempData.type}}" name="result" value="invalid" {{=optionFlag}} {{=result=='invalid'?'checked':''}}/><span>无效电话</span>
+                                        </label>
+                                    </div>
+                                    <div class="inline-checkbox">
+                                        <label class="inline">
+                                            <input type="radio" class="result_{{=tempData.type}}" name="result" value="noAnswer" {{=optionFlag}} {{=result=='noAnswer'?'checked':''}}/><span>无人接听</span>
+                                        </label>
+                                    </div>
+                                    <div class="inline-checkbox">
+                                        <label class="inline">
+                                            <input type="radio" class="result_{{=tempData.type}}" name="result" value="imparity" {{=optionFlag}} {{=result=='imparity'?'checked':''}}/><span>客户不配合</span>
+                                        </label>
+                                    </div>
+                                    <div class="inline-checkbox">
+                                        <label class="inline">
+                                            <input type="radio" class="result_{{=tempData.type}}" name="result" value="other" {{=optionFlag}} {{=result=='other'?'checked':''}}/><span>其他</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                {{ if(status != 'complete' && $getSession().user._id == owner ){ }}
+                                <div style="clear:both;margin: 35px 0 0 0;text-align: center" id="btn-select">
+                                    <div style="display: inline-block;position: relative;">
+                                        <a href="#"  class="ds_form_action" ds_action="questionnaire.showConfirmQuesCallTask">稍后回访</a>
+                                        <div class="submenu ques_submenu">
+                                            <div class="change_date">
+                                                <div id="sales_action_time" style="display:inline-block;">
+                                                    <select name="change_date_type" style="width:100px;">
+                                                        <option value="date">联系时间</option>
+                                                        <option value="half">半小时后</option>
+                                                        <option value="hour">一小时后</option>
+                                                        <option value="tomorrow">明天</option>
+                                                        <option value="aftertomorrow">后天</option>
+                                                        <option value="week">三天后</option>
+                                                        <option value="2week">2周后</option>
+                                                        <option value="month">30天后</option>
+                                                    </select>
+                                                    <input name="notifyTime_date" class="ds_date" mindate="true" type="text" placeholder="yyyy-mm-dd" style="margin-left:0;width:82px;">
+                                                    <input name="notifyTime_time" class="ds_time" type="text" placeholder="00:00" style="width:35px;"><br/>
+                                                    <div style="margin-top: 10px">
+                                                        <span class="btn-blue save_comment ds_form_action" ds_action="questionnaire.confirmQuesCallTask" style="display: inline-block;margin:10px 5px 0px 68px;">确定</span>
+                                                        <span class="get-back btn-blue ds_do_action cancelTime" ds_action="questionnaire.hideConfirmQuesCallTask" style="display: inline-block;margin-top:10px;">取消</span>
+                                                    </div>
+                                                    <!--</div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="#"  class="btn_green ds_form_action submitques" id="questionnaire_complete_button_{{=menu}}"
+                                       ds_action="questionnaire.completeTask"  disabled>提交问卷</a>
+                                    <a href="#"  class="btn-reset ds_form_action" ds_action="questionnaire.resetQuesCallTask">重置</a>
+                                </div>
+                                {{ } }}
+                            </div>
+                        </div>
+                    </div>
+                    {{
+                    }
+                    }}
+                </form>
+                <div class="comment">
+                    <div class='row-fluid btn_comment'>
+                        <button type="button" class="btn-add add_comment_button ds_do_action" ds_action="questionnaire.showAddQuesComment"> 添加备注</button>
+                    </div>
+                    <div class='row-fluid add_questionnaire_comment'>
+                        <form style="margin-bottom: 45px";>
+                            <div class="action_form" style="background: #fff;">
+                                <div>
+                                    <input type='hidden' name='_id' value='{{=_id}}'>
+                                    <div class="row-fluid ques_commentMsg" >
+                                        <div class='row_item'>
+                                            <textarea name="comment" class="span12"  msgName='问卷备注' required></textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="action_bar">
+                                    <span class="get-back btn-blue ds_do_action" ds_action="questionnaire.cancelAddQuesComment">取消</span>
+                                    <span class="btn-blue save_comment ds_form_action" ds_action="questionnaire.saveAddQuesComment">保存</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="new_questionnaire_comments">
+                        {{
+                        var comments = comments ||[];
+                        for(var i=comments.length-1;i>=0;i--){
+                        var oneComment = comments[i];
+                        }}
+                        <div class='row-fluid'>
+                            <div class='newly-add-comments'>
+                                <div class='inside'>
+                                    <div class="timeline_data">
+                                        <span>{{=$getCache('agents',oneComment.user).displayName}}  添加备注  {{=oneComment.time}}</span>
+                                    </div>
+                                    <p class="note-content" title="_comment">{{=oneComment.comment}}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{ } }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#{{=_id}}callHistory").click();
+        var pane = $("#questionnaire_submit_form_{{=menu}}");
+        pane.find(".last_action").on("change", "input.select_answ", function (event) {
+            var src = $(event.currentTarget);
+            handler.questionnaire.proceeAnwSelect(src);
+        });
+        pane.find(".ques_result_pane").on("change","input.result_dynamic",function(event){
+            var src = $(event.currentTarget);
+            handler.questionnaire.processResultSelect(src);
+        });
+        var parent=$(".customer_container");
+        var head_h=$(".main_header").outerHeight();
+        var h=$(window).height();
+        var h1=parent.outerHeight(true)||143;
+        var _detailPane = $(".cust_detail");
+        var _basePane =  $(".btn_view_cust_detail");
+        _detailPane.css({top:(h1+head_h)+"px",height:(h-head_h-h1)+"px"});
+        _basePane.unbind("click");
+        _basePane.bind("click",function(e){
+            e.stopPropagation();
+            _detailPane.toggleClass("cust_detail_toggle");
+            if(_detailPane.hasClass("cust_detail_toggle")){
+                _detailPane.animate({right:0+'px'},'fast');
+                $(this).text("详细信息>>");
+            }else{
+                _detailPane.animate({right:-735+'px'},'fast');
+                $(this).text("详细信息<<");
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    var t = $(".ques_submenu");
+    t.find(".change_date select[name=change_date_type]").change(function() {
+        var date=t.find(".change_date input[name=notifyTime_date]");
+        var time=t.find(".change_date input[name=notifyTime_time]");
+        var cdate = new Date();
+        var currentDate = dateParse(cdate);
+        var currentTime =timeParse(cdate);
+        var defaultTime="09:00";
+        var i=$(this).val();
+        switch (i) {
+            case "date":
+                date.val("");
+                time.val("");
+                break;
+            case "half":
+                date.val(currentDate);
+                time.val(timeCompute(30));
+                break;
+            case "hour":
+                date.val(currentDate);
+                time.val(timeCompute(60));
+                break;
+            case "tomorrow":
+                date.val(dateCompute(1));
+                time.val(defaultTime);
+                break;
+            case "aftertomorrow":
+                date.val(dateCompute(2));
+                time.val(defaultTime);
+                break;
+            case "week":
+                date.val(dateCompute(3));
+                time.val(defaultTime);
+                break;
+            case "2week":
+                date.val(dateCompute(14));
+                time.val(defaultTime);
+                break;
+            case "month":
+                date.val(dateCompute(30));
+                time.val(defaultTime);
+                break;
+            default:
+                date.val(i);
+        }
+    });
+</script>
+
+
+

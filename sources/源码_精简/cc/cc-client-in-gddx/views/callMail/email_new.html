@@ -1,0 +1,91 @@
+<div class="sendbox clearfix" style="">
+    <form action="" class="form-horizontal mail_form">
+        <input type="hidden" name="rid" value="">
+        <input type="hidden" name="mailId" value="_#mailId#_">
+        <div class="head">
+            <div class="clearfix">
+                <div class="control-group">
+                    <label class="control-label control-label2">收件人：</label>
+                    <div class="controls controls2">
+                        <input type="text" name="to" value="_#to#_" placeholder="多个邮件用逗号分隔" class="input-block-level " autofocus >
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label control-label2">抄送：</label>
+                    <div class="controls controls2">
+                        <input type="text" name="cc" value="" placeholder="" class="input-block-level" >
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label control-label2">主题：</label>
+                    <div class="controls controls2">
+                        <input type="text" name="subject" value="" placeholder="" class="input-block-level" >
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div id="_#qiniuId#_-container-qiniu" class="pull-left">
+                        <a class="btn btn-default btn-small btn-link" id="_#qiniuId#_-pickfiles" href="#" >
+                            <i class="icon-plus"></i>
+                            <sapn>上传附件</sapn>
+                        </a>
+                    </div>
+
+                    <!--<div class="pull-left">-->
+                        <!--<button type="button" class="btn btn-link btn-small ds_do_action" ds_action="callMail.openUploadAttach" style="padding-left: 0;">-->
+                            <!--<i class="icon-file "></i> 上传附件</button>-->
+                        <!--<input type="file" style="display: none;visibility: hidden;" id="file_upload">-->
+                    <!--</div>-->
+                    <div class="pull-right">
+                        签名：
+                        <div class="btn-group">
+                            <a class="btn btn-link btn-small dropdown-toggle" data-toggle="dropdown" href="#">
+                                <span class="current_sign">无</span>
+                                <span class="caret"></span>
+                            </a>
+                            <!--<button class="btn btn-small btn-link dropdown-toggle" data-toggle="dropdown">无 <span class="caret"></span></button>-->
+                            <ul class="dropdown-menu pull-right sign_list">
+                                <li><a href="#">无</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">设置签名</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <table class="table table-hover text-left mail_attach_container" style="margin-top:5px;display:none;width: 450px;background-color:#fff;">
+                            <!--<thead style="display: none;">-->
+                            <!--<tr>-->
+                                <!--<th class="span6">&nbsp;</th>-->
+                                <!--<th class="span2">&nbsp;</th>-->
+                                <!--<th class="span4">&nbsp;</th>-->
+                            <!--</tr>-->
+                            <!--</thead>-->
+                            <tbody id="_#qiniuId#_-fsUploadProgress">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="inbox_content">
+            <div class="control-group">
+                <div class="">
+                    <textarea id="editor_container_2mail" name="content" ></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="pull-right">
+            <button type="button" class="btn btn-primary btn-small ds_form_action" ds_action="callMail.replayMail" style="margin-left: 10px;">发送</button>
+            <button type="button" class="btn btn-small"  data-dismiss="modal" style="margin-left: 10px;" aria-hidden="true">关闭</button>
+        </div>
+    </form>
+</div>
+
+
+<script type="text/javascript">
+    $(function(){
+
+
+    });
+</script>

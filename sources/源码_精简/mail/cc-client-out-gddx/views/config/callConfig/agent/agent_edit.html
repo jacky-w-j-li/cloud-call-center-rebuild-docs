@@ -1,0 +1,108 @@
+<div class="row-fluid">
+    <div class="span12">
+        <form class="form-horizontal ds_item_edit" action="" client-data="session.ivrMap.ivr.account_user">
+            <input type="hidden" name="status" value='enable'/>
+            <input type="hidden" name="action" value='update'/>
+            <input type="hidden" name="_id" value="___id"/>
+            <div class="row-fluid">
+                <div class="span7 offset1">
+                    <i class="icon-edit"></i>修改座席
+                </div>
+                <div class="span4 text-right pull-right">
+                    <a class=" btn btn-info btn-blue ds_action_flow" id="agentSaveBtn">
+                        <ds-form-action action="config.ivr.agent.updateAgent" extra-data="config.callConfig.currentConfigData"
+                                        update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"account_user"}}'
+                                        on-before="config.callConfig.agent.beforeUpdateAgent"
+                                        on-complete-failed="config.callConfig.agent.afterUpdateAgent"/>
+                        <ds-get-view view="config/callConfig/agent/agent_list" panel="ivrAgentPanel"/>
+                        保存
+                    </a>
+                    <a class=" btn btn-danger btn-gray ds_action_flow" id="disableAgentBtn">
+                        <ds-form-action action="config.ivr.agent.disableAgent" extra-data="config.callConfig.currentConfigData"
+                                        update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"account_user"}}'
+                                        on-before="config.callConfig.agent.beforeStopAgent"/>
+                        <ds-get-view view="config/callConfig/agent/agent_list" panel="ivrAgentPanel"/>
+                        停用
+                    </a>
+                    <a class=" btn btn-danger btn-blue ds_action_flow" id="endableAgentBtn" style="display:none">
+                        <ds-form-action action="config.ivr.agent.enableAgent" extra-data="config.callConfig.currentConfigData"
+                                        update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"account_user"}}'/>
+                        <ds-get-view view="config/callConfig/agent/agent_list" panel="ivrAgentPanel"/>
+                        启用
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+
+            <div class="control-group">
+                <label class="control-label">座席姓名</label>
+                <div class="controls">
+                    <input type="text" name="displayName" msgName="座席姓名" required/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">工号</label>
+                <div class="controls">
+                    <input type="text" name="exten" msgName="工号" datatype="NumberLen" max="4" min="4" msg="工号为4位数字!" required/>
+                </div>
+            </div>
+            <!--<div class="control-group">-->
+                <!--<label class="control-label">登录名</label>-->
+                <!--<div class="controls">-->
+                    <!--<input type="text" name="loginName" msgName="登录名" required/>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="control-group">
+                <label class="control-label">密码</label>
+                <div class="controls">
+                    <input type="text" name="password" msgName="密码" required/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">是否为管理员</label>
+                <div class="controls">
+                    <select name='type'>
+                        <option value="agent">否</option>
+                        <option value="manager">是</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">手机</label>
+                <div class="controls">
+                    <input type="text" name="mobile"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">邮箱</label>
+                <div class="controls">
+                    <input type="text" name="email" msgName="邮箱" datatype="Email" msg="邮箱格式有误！"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">透传号码</label>
+                <div class="controls agent_callerID_num_select">
+                    <input type="text" name="callerIDNum"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">后处理时长</label>
+                <div class="controls">
+                    <input type="text" name="AutoBusyTime" dataType="Number" msg="后处理时长只能为大于等于0的数字" msgName="后处理时长" />
+                </div>
+            </div>
+            <div class="control-group uversion formEdit" id="userEditEdition">
+                <label class="control-label" for="uversion" >版本</label>
+                <div class="controls">
+                    <select name="uversion" id="uversion" required msgName='版本' tabindex="20">
+                        <option value="service">标准版</option>
+                        <option value="enterprise">企业版</option>
+                        <option value="outcall">电销版</option>
+                        <option value="monitor">监控版</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

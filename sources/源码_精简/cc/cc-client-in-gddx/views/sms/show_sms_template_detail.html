@@ -1,0 +1,51 @@
+<style>
+    .cdrDetailLabel {width: 90px;}
+    .cdrDetailText {width: 150px; text-align: left}
+    #sms_detail_wrapper tr{line-height: 20px}
+</style>
+<div id="show_sms_template_detail_Modal" class="modal hide fade">
+    <div class="modal-header">
+        <h3>短信模板详细信息</h3>
+    </div>
+    <div class="modal-body" style="max-height: 500px;">
+        <div id="sms_detail_wrapper">
+            <table>
+                <tr>
+                    <td class="cdrDetailLabel">编号：</td>
+                    <td class="cdrDetailText">_#num#_</td>
+                    <td class="cdrDetailLabel">名称：</td>
+                    <td class="cdrDetailText">_#name#_</td>
+                    <td class="cdrDetailLabel">签名：</td>
+                    <td class="cdrDetailText">_@sms.getSignDisplayName('_#sign#_')@_</td>
+                </tr>
+                <tr>
+                    <td class="cdrDetailLabel">变量个数：</td>
+                    <td class="cdrDetailText">_#vars#_</td>
+                    <td class="cdrDetailLabel">创建时间：</td>
+                    <td class="cdrDetailText">_#createTime#_</td>
+                </tr>
+                <tr>
+                    <td class="cdrDetailLabel">内容：</td>
+                    <td class="cdrDetailText" colspan="5">
+                        <textarea id="sms_comments" name="content" rows="3" style="width: 500px" disabled>_#content#_</textarea>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn ds_do_action" ds_action="sms.closeSmsDetail" id="smsDetailCloseBtn">关闭</a>
+    </div>
+</div>
+<script>
+    $(function(){
+        $('#show_sms_template_detail_Modal').css({
+            'width': function () {
+                return ($(document).width() *.50) + 'px';
+            },
+            'margin-left': function () {
+                return -($(this).width() / 2);
+            }
+        });
+    });
+</script>

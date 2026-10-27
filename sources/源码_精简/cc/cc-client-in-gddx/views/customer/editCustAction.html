@@ -1,0 +1,19 @@
+<div id="show_cdr_add_memo_Modal" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>编辑备注</h3>
+    </div>
+    <form>
+        <input type="hidden" name="CALL_SHEET_ID" value="__CALL_SHEET_ID"/>
+        <input type="hidden" name="CALL_SHEET_NOT" value="notifyTime"/>
+        <input type="hidden" name="CALL_SHEET_CID" value="cId"/>
+        <div class="modal-body">
+            备注：
+            <textarea name="memo" rows="5" style="width: 450px">__CDR_MEMO</textarea>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn btn-info ds_form_action" ds_action="customer.updateCustAction2Tab">保存</a>
+            <a href="#" class="btn" onclick="$('#show_cdr_add_memo_Modal').modal('hide');">关闭</a>
+        </div>
+    </form>
+</div>

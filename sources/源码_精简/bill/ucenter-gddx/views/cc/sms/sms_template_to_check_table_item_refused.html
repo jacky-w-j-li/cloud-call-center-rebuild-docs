@@ -1,0 +1,31 @@
+<tr>
+    <td>
+        _#num#_
+    </td>
+    <td>
+        _#name#_
+    </td>
+    <td>
+        _@sms.getTemplateTypeName('_#templateType#_')@_
+    </td>
+    <td>
+        _#signToDisplay#_
+    </td>
+    <td>
+        _#createTime#_
+    </td>
+    <td>
+        _@sms.getTemplateToCheckStatusName('_#status#_')@_
+        <a href="#" class="ds_do_action" ds_action="sms.showSmsTemplateRefusedReason" ds_data="_#_id#_">[原因]</a>
+    </td>
+    <td>
+        <a href="#" class="ds_do_action" ds_action="sms.showSmsTemplateToCheckMessage" ds_data="_#_id#_">查看</a>
+    </td>
+    <td>
+        <a href="#" class="ds_do_action" ds_action="sms.cancelSmsTemplateToCheck" ds_data="_#_id#_">删除</a>
+    </td>
+    <td>
+        <a href="#" class="ds_do_action" ds_action="sms.showModifySmsTemplateToCheck" ds_data="_#_id#_">编辑</a>
+    </td>
+
+</tr>

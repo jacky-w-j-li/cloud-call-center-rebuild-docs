@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>呼叫中心-运营平台</title>
+    <script type="text/javascript" src="./javascripts/jquery.js">
+    </script>
+    <script type="text/javascript" src="./javascripts/bootstrap.js"></script>
+    <script type="text/javascript" src="./javascripts/ds_framework/dishui.js"></script>
+    <script type="text/javascript" src="javascripts/app_tmp.js"></script>
+    <script type="text/javascript" src="./javascripts/jquery.json.min.js"></script>
+    <script type="text/javascript" src="./javascripts/jquery.alertmessage.js"></script>
+    <script type="text/javascript" src="./javascripts/cc-core-handler.js"></script>
+    <script type="text/javascript" src="./javascripts/draw.js"></script>
+    <script type="text/javascript" src="./javascripts/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="./javascripts/bootstrap-datetimepicker.zh-CN.js"></script>
+    <link rel=stylesheet type=text/css href="./stylesheets/bootstrap.css">
+    <link rel=stylesheet type=text/css href="./stylesheets/cc.css">
+    <link rel=stylesheet type="text/css" href="./jqueryui/base/jquery.ui.all.css">
+    <script type="text/javascript" src="./jqueryui/ui/jquery.ui.position.js"></script>
+    <script type="text/javascript" src="./jqueryui/ui/jquery.ui.core.js"></script>
+    <script type="text/javascript" src="./jqueryui/ui/jquery.ui.widget.js"></script>
+    <script type="text/javascript" src="./jqueryui/ui/jquery.ui.tabs.js"></script>
+    <script type="text/javascript" src="./javascripts/handler/callConfig.js"></script>
+
+    <link rel=stylesheet type=text/css href="./stylesheets/datetimepicker.css">
+    <!--<link rel="stylesheet" type="text/css" href="./stylesheets/zTreeStyle/zTreeStyle.css">-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            init();
+        });
+    </script>
+</head>
+<body>
+<div class="loading_indicator" style="visibility: hidden;">
+</div>
+<span class="loading_indicator_span" style="visibility: hidden;">获取数据中...</span>
+<div class="login_panel" id="login-panel" style="margin-top:40px;">
+</div>
+
+<div id="main-panel" class="main_container" style="display:none;">
+    <div class="main_header">
+        <div class="right-header" style="width: 100%; float: inherit; margin-right: 100px;">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="left_header">
+                        <a class="logo" href="#">(logo)</a>
+                    </div>
+                    <ul class="nav" id="nav_menu">
+                    </ul>
+                    <div class="middle-header" style="float: right;">
+                        <div class="row-fluid" style="height: 20px;">
+                            <div class="span6" style="min-height: 20px;"><span class="label label-success" id="main_user_role">系统管理员</span></div>
+                            <div class="span3" style="padding-top: 3px; min-height: 20px;"><a href="#" style="float: right; " class="ds_do_action" ds_action = "changeUserInfo" disabled>修改</a></div>
+                            <div class="span3" style="padding-top: 3px; min-height: 20px;"><a href="#" style="float: right;" class="ds_do_action" ds_action="logout">退出</a></div>
+                        </div>
+                        <div class="row-fluid" style="height: 20px;">
+                            <div class="span12" >上次登陆：<span class="label label-warning" id="main_user_login_time">2013-09-12 12:12:12</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content_container">
+        <div class="left_col">
+            <div class="left-menu" id="left_menu_container">
+            </div>
+        </div>
+        <div  class="right_col" id="main_container" style="padding-top: 2px;">
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<div class="row-fluid">
+    <div class="span5 config_left">
+        <div class="contacts_caption search_and_add">
+            <div class="caption-top clearfix">
+                <div class="pull-right add_role">
+                    <button class="btn-blue btn-small ds_do_action" ds_action="config.role.showRoleAdd" ds_data="">添加角色</button>
+                </div>
+                <div class="input-append top_search_box">
+                    <form id='role_query_frm'>
+                        <input id="query_role_condition" name="display_name" type="text" style="width: auto;" placeholder="输入角色名称...">
+                        <div class="ds_form_action search_btn" type="button" ds_action="config.role.queryRoleList" >
+                            <i class="icon-search" ></i>
+                        </div>
+                    </form>
+                </div>
+                <span class="refresh ds_do_action" ds_action="config.role.queryRoleList"  ds_data="" ><a href="#" class="ajaxed">刷新</a></span>
+            </div>
+        </div>
+
+        <div class="list_container" >
+            <div class="contact_list">
+                <div class="list-inside">
+                    <table class="table table-bordered table-striped table-hover">
+                        <colgroup>
+                            <col width="20%"/>
+                            <col width="30%"/>
+                            <col width="20%"/>
+                            <col width="25%"/>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>
+                                角色名称
+                            </th>
+                            <th>
+                                描述
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="role_list_pane">
+                        </tbody>
+                    </table>
+                    <div class="pagination pagination-small config_role_count" style="display:table; margin:0;width:100%;"
+                         for="role_query_frm" ds_pagination_action="config.role.queryRoleList">
+                        <span class="result_info">查询结果：<span class="result_count">10</span></span>
+                        <ul class="role_list_page" style="float:right;">
+                            <li><a href="#"  value="0">&laquo;</a></li>
+                            <li><a href="#"  value="1">1</a></li>
+                            <li><a href="#"  value="2">2</a></li>
+                            <li><a href="#"  value="3">3</a></li>
+                            <li><a href="#"  value="4">4</a></li>
+                            <li><a href="#"  value="5">5</a></li>
+                            <li><a href="#"  value="6">&raquo;</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="span7 sub-right">
+        <div id="role_detail_pane">
+        </div>
+    </div>
+</div>
+
+
+
+
+<link rel="stylesheet" href="../../../../javascripts/ztree/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="../../../../javascripts/ztree/jquery.ztree.all-3.5.js"></script>

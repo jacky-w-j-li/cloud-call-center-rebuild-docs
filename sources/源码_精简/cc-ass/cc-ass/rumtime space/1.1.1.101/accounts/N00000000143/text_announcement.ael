@@ -1,0 +1,44 @@
+context N00000000143-10229-textannouncement {
+	s => {
+		Agi(agi://127.0.0.1:7891/agittszh?pbx=${HOST}&servicepeer=10229);
+		if("${TTSENGINE}" == "1"){
+			Playback(${FILENAME});	
+		}
+		goto N00000000143-10000235-queue,10000235,1;
+	}
+}
+
+
+context N00000000143-10228-textannouncement {
+	s => {
+		Agi(agi://127.0.0.1:7891/agittszh?pbx=${HOST}&servicepeer=10228);
+		if("${TTSENGINE}" == "1"){
+			Playback(${FILENAME});	
+		}
+		Hangup;
+	}
+}
+
+
+context N00000000143-10060-textannouncement {
+	s => {
+		Agi(agi://127.0.0.1:7891/agittszh?pbx=${HOST}&servicepeer=10060);
+		if("${TTSENGINE}" == "1"){
+			Playback(${FILENAME});	
+		}
+		goto N00000000143-10000235-queue,10000235,1;
+	}
+}
+
+
+context N00000000143-10236-textannouncement {
+	s => {
+		Agi(agi://127.0.0.1:7891/agittszh?pbx=${HOST}&servicepeer=10236);
+		if("${TTSENGINE}" == "1"){
+			Playback(${FILENAME});	
+		}
+		Hangup;
+	}
+}
+
+

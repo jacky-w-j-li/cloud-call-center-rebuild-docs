@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="//14.29.4.225/stylesheets/moor_style.css" type="text/css">
+    <script type="text/javascript" src="//14.29.4.225/javascripts/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="//14.29.4.225/javascripts/7moorSDKInit.js"></script>
+</head>
+<body>
+<div class="btn-group">
+
+</div>
+<div style="width:100px;">uuuuu</div>
+<div class="chatcontainer" style="display: none;width: 350px; height: 400px;border: 1px #19CAA6 solid; position: relative;">
+    <div class="header grey12">
+        <div class="ser-info">
+            <div class="logo" style="display: block;"><img id="logo" src=""/></div>
+            <div class="ser-company" style="display: block;" id="ser-company"></div>
+        </div>
+        <div class="corner-btn">
+            <span class="chat-close" id="chat-close"></span>
+            <span class="chat-min" id="chat-min"></span>
+            <span class="chat-voice" id="chat-voice"></span>
+        </div>
+    </div>
+    <div class="content" id="wrap">
+        <ul class="conversation">
+        </ul>
+        <div id="launch_evaluation">
+            <form action="" class="esc_form_easy" >
+            </form>
+        </div>
+        <input type="button" style="display: none" id="appraise_easy" way="out"/>
+    </div>
+    <div class="footer">
+        <div class="sys-msg" style="display: none;"></div>
+        <div class="face-con" id="face-con">
+
+        </div>
+        <div class="msg-toolbar">
+            <div id="face-btn"><img src="../images/face-icon.png" width="20px" height="20px"/></div>
+            <div id="image-btn">
+                <!--<img src="../images/image-icon.png" width="22px" height="20px"/><input style="display: none;" accept="image/jpeg,image/jpg,image/gif,image/png,image/bmp" type="file" id="picture" name="picture">-->
+            </div>
+            <div id="file-btn">
+            </div>
+            <div id="question-btn"><img src="../images/question-icon.png?0301" width="20px" height="20px"/></div>
+            <div class="manual" style="display: none;">转人工服务</div>
+        </div>
+        <div class="msg-input">
+            <div class="input-box">
+                <textarea id="chatbox_input" class="text grey" placeholder="说点什么吧～"></textarea>
+            </div>
+        </div>
+        <div class="msg-toolbar-footer grey12">
+            <span><input type="button" value="提交" id="chatmsg_submit"></span>
+            <span class="text grey quite">快捷键:Enter</span>
+        </div>
+
+    </div>
+
+    <div id="imcsr" class="isClose" style="display: none;border-top: none" style="border-top: none">
+        <div class="close_box">
+            <dl>
+                <dd>
+                    <a href="javascript:void(0);" class="chatCloseBtn">立即结束</a>
+                    <a href="javascript:void(0);" class="chatCancelBtn">取消</a>
+                </dd>
+                <dt>即将结束本次对话</dt>
+            </dl>
+            <h3>感谢您使用我们的服务,请为此次服务进行评价</h3>
+            <form id="esc_form" class='esc_form'>
+                <ol class="evaluates">
+                    <li></li>
+                </ol>
+                <div class="esc_form_reson"></div>
+                <textarea class="proposal" onfocus="if(value=='欢迎为我们的服务提建议'){value='';style.color='#000'}" rows="4"
+                          onblur="if (value ==''){value='欢迎为我们的服务提建议';style.color='#a7a7a7'}">欢迎为我们的服务提建议</textarea>
+                <input id="appraise" class="submit_evaluate" type="button" value="提交评价" way="in">
+
+            </form>
+        </div>
+        <!-- <p>结束本次对话？</p>
+
+        <div style="width:90%; margin:0 5%">
+            <a href="javascript:void(0);" class="chatCloseBtn">立即结束</a>
+            <a href="javascript:void(0);" class="chatCancelBtn">取消</a>
+        </div> -->
+    </div>
+
+    <div class="judegClose" style="display: none">
+        <p>结束本次对话？</p>
+        <div class="esc_talk" style="width:90%; margin:0 5%">
+            <a href="javascript:void(0);" class="judegCloseBtn">立即结束</a>
+            <a href="javascript:void(0);" class="judegCancelBtn">取消</a>
+        </div>
+    </div>
+
+    <div class="chattype" style="display: none;">
+        <p>请选择咨询类型</p>
+        <ul id="mtypelist" class="clearfix">
+
+        </ul>
+    </div>
+
+    <div id="allQuestion">
+        <div class="allQuestion_top">
+            <span class="title_one">编组</span>
+            <span class="title_two">常见问题</span>
+        </div>
+        <div class="allQuestion_bot">
+            <div class="question_groups">
+                <ul>
+                </ul>
+            </div>
+            <div class="question_common">
+                <input class="quest_con_id" type="hidden" name=""/>
+                <ul class="question_lis">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <audio src="../stylesheets/warning.mp3" style="display: none;" id="warning-tone">
+    </audio>
+</div>
+
+
+<div class="leave-msg-box" style="display: none;">
+    <div class="header grey12">
+        <div class="corner-btn">
+            <span class="chat-close" isleavePage="true"></span>
+            <span class="chat-min" ></span>
+        </div>
+    </div>
+    <div class="leave_body">
+        <p>
+            请留言，我们将尽快联系您!
+        </p>
+
+        <form name="leaveMsgForm">
+            <div class="row_item_input textbox">
+                <textarea class="grey" id="leavemsg_content" style="width:100%; height:140px;" placeholder="leavemsg_content">请留言～</textarea>
+            </div>
+            <div class="row_item ptext">
+                <p>请务必留下您的联系方式，方便我们联系您！</p>
+            </div>
+            <div class="row_item_input" style="display: inline-block;margin-top:5px;margin-bottom:5px;">
+                <div class="input_icon"><img src="../images/phone.png" width="25px" height="25px"/></div>
+                <div class="inputbox phone">
+                    <input class="grey" id="leavemsg_phone" type="text" placeholder="联系电话～" name="leavemsg_phone"/>
+                </div>
+            </div>
+            <div class="row_item_input" style="display: inline-block;">
+                <div class="input_icon"><img
+                        src="../images/email.png" width="25px" height="25px"/></div>
+                <div class="inputbox email">
+                    <input class="grey" id="leavemsg_email" type="text" placeholder="邮箱～" name="leavemsg_email"/>
+                </div>
+            </div>
+            <div class="row_item_input">
+                <input type="button" value="留言" class="leave_btn" style="padding-top:0px;font-size:16px;"/>
+            </div>
+        </form>
+    </div>
+    <div class="leave_footer">
+        <div class="tips" style="display: none;">
+        </div>
+    </div>
+
+</div>
+</body>
+<script>
+    var href = window.location.href;
+    var queryStr = href.substr(href.indexOf("?") + 1);
+    var qimoAccessId = queryStr; //平台提供的接入号accessId
+    var typeNoticeNum = 0;
+    console.log(qimoAccessId);
+    //先加载sdk的js
+    loadQimoSDK(qimoAccessId, function(){
+        // todo 加载sdk完毕,可以弹出点击咨询的按钮了
+        console.info("加载sdk完毕,可以弹出点击咨询的按钮了");
+        var peers = QimoSDK.getPeers();
+//        $(".btn-group").html("")
+//        for(var i=0; i<peers.length; i++){
+        $(".btn-group").append('<span class="btn"><button class="consultBtn" value="'+111+'">'+222+'</span>');
+//        }
+
+        //图片发送初始化
+        QimoSDK.initImageSendBtn({
+            "btnId": "image-btn",  //必填
+            "btnImage": "http://14.29.4.225/images/image-icon.png",  //可选，默认值：http://14.29.4.225/images/image-icon.png
+            "btnWidth": "22px", //可选，按钮宽度
+            "btnHeight": "20px", //可选，按钮高度
+
+            'uploadProgress': function(evt){
+
+            },
+
+            'uploadComplete': function(result){
+                console.log(result);
+                if(result.errcode == 0){
+                    //上传成功
+                    pageUtils.appendCustomerChatMsg({content:'<a target="_blank" href="'+result.data.imageUrl+'"><img src="'+QimoSDK.getThumbnailImg(result.data.imageUrl, 100)+'"></a>'});
+
+                }else{
+                    console.warn(result.errmsg);
+                }
+            },
+
+            'uploadFailed': function(errObj){
+                console.log(errObj.errmsg);
+            },
+
+            'uploadCanceled':function(evt){
+
+            }
+        });
+
+        QimoSDK.initFileUpload({
+            "btnId": "file-btn",  //必填
+            "btnImage": "http://14.29.4.225/images/file-icon.png",  //可选，默认值：http://14.29.4.225/images/image-icon.png
+            "btnWidth": "22px", //可选，按钮宽度
+            "btnHeight": "20px", //可选，按钮高度
+            'FilesAdded': function (up, files) {
+                files.forEach(function(file) {
+                    if (file.size > 20 * 1024 * 1024){
+                        pageUtils.showNoticeMsg("上传文件太大，超过20M", 3000);
+                        return;
+                    }
+                    console.log("添加完成");
+                    //todo
+
+                });
+            },
+            'UploadProgress': function (up, file) {
+                if(QimoSDK.chatFinish){
+                    up.stop();
+                    pageUtils.showNoticeMsg("上传中断", 3000);
+                }
+                console.log(file.percent);
+            },
+            'FileUploaded': function (result) {
+                //todo 文件消息
+                if(result.errcode == 0){
+                    //上传成功
+                    pageUtils.appendCustomerChatMsg({content:'<a target="_blank" href="'+result.data.fileUrl+'">'+result.data.fileName+'</a>'});
+                }else{
+                    console.warn(result.errmsg);
+                }
+            },
+            'Error': function (up, file, errTip) {
+                //todo
+                console.log("上传错误");
+
+            },
+        })
+
+
+            //表情初始化
+        QimoSDK.initEmojiFaceSendBtn({
+            "containerId":"face-con",  //必传，接收表情列表，回传<ul><li></li></ul>形式
+            "textareaId": "chatbox_input",   //必传
+            "faceClickFun":"" , //选填
+        }, function(data){
+            if(data.errcode == 0){
+                //todo 点击按钮，弹出containerId所在层
+                $("#face-btn").live("click", function(){
+                    $("#face-con").toggleClass("show");
+                    if($("#face-con").hasClass("show")){
+                        $(".face-con").animate({top: '-85px', opacity: '0.8', height: "85px", width: "100%"});
+                        $("#face-con").show();
+                    }else{
+                        $(".face-con").animate({top: '0px',  height: "0px"});
+                        $("#face-con").hide();
+                    }
+
+                });
+
+            }else{
+                console.info(data.errmsg);
+            }
+        });
+
+        $(".btn").show();
+
+        $(".consultBtn").live("click", function(){
+            QimoSDK.initDefaultConsultShow(function(result){
+                if(result){
+                    $(".chattype").show();
+                    $("#mtypelist").html(result);
+                    $(".chatcontainer").show();
+                }else{
+                    $(".chattype").hide();
+                    $("#mtypelist").html("");
+                    initChat();
+                }
+            });
+            // todo 初始化聊天框信息
+
+        });
+
+        $("#mtypelist li").live("click", function(){
+            $(".chattype").hide();
+            var data = $(this).attr("ds_data");
+            QimoSDK.setPeer(data);
+            initChat();
+        });
+
+        function initChat(){
+            QimoSDK.init(qimoAccessId, {fromUrl: window.location.href}, function(initData){
+                $(".chatcontainer").show();
+                //todo 初始化后的业务处理
+                if(initData.errcode == 0){
+                    console.info("连接成功");
+                    /**
+                     * 消息的监听，这个必须写在回调里头
+                     */
+                    QimoSDK.onMessage(function(data){
+                        console.log(data);
+                        if(data.errcode == 0){
+                            //todo 新消息过来的处理，数组
+                            if(data.type == "newMsg"){
+
+                                var msgArr = data.data;
+                                for(var i =0; i<msgArr.length; i++){
+                                    var msg = msgArr[i];
+                                    if(msg.contentType == "text"){
+                                        //todo 文本消息
+                                        pageUtils.appendServiceChatMsg({agentName:msg.agentName, content:msg.content});
+                                    }else if(msg.contentType == "image"){
+                                        //todo 图片消息
+                                        pageUtils.appendServiceChatMsg({agentName:msg.agentName, content:'<a target="_blank" href="'+msg.content+'"><img src="'+QimoSDK.getThumbnailImg(msg.content, 100)+'"></a>'});
+
+                                    }else if(msg.contentType == "video"){
+                                        //todo 视频消息
+
+                                    }else if(msg.contentType == "voice"){
+                                        //todo 音频消息
+                                    }else if(msg.contentType == "file"){
+                                        //todo 文件消息
+                                        var params =msg.content.split("?fileName=");
+                                        var url = params[0];
+                                        var fileName = "文件";
+                                        var fileSize = "";
+                                        if(params[1]){
+                                            var params2 = params[1].split("?fileSize=");
+                                            fileName = params2[0];
+                                            fileSize = params2[1];
+                                        }
+                                        pageUtils.appendServiceChatMsg({agentName:msg.agentName, content:'<a target="_blank" href="'+url+'">'+fileName+'</a>'});
+                                    }
+
+                                }
+
+                            }
+                            //todo 系统通知的处理
+                            else if(data.type == "systemNotice"){
+                                var notice = data.data;
+
+                                //座席在线，弹出会话框
+                                if(notice.type == "online"){
+                                    // todo 客服在线
+                                    $(".leave-msg-box").hide();
+                                    $(".chatcontainer").show();
+
+                                }
+                                //座席不在线，转留言
+                                else if(notice.type == "offline"){
+                                    // todo 客服不在线
+//                                    pageUtils.showNoticeMsg("客服不在线，请留言给我们", 3000, function(){
+//                                        $(".chatcontainer").hide();
+//                                        $(".leave-msg-box").show();
+//                                    });
+
+                                    if(QimoSDK.globalSet.isLeaveMsg == "1"){
+                                        pageUtils.showNoticeMsg("客服不在线，请留言给我们", 3000, function(){
+                                            $(".chatcontainer").hide();
+                                            $(".leave-msg-box").show();
+                                        });
+                                    }else{
+                                        pageUtils.appendServiceChatMsg({agentName:QimoSDK.companyName, content:QimoSDK.globalSet.msg || ""});
+                                        $(".footer").prepend("<div class='chat-finish'>会话结束了</div>");
+                                        QimoSDK.closeChat(function(){});
+                                    }
+
+                                }
+                                //座席响应会话
+                                else if(notice.type == "claim"){
+                                    // todo 客服 notice.kefu 受理了该会话
+                                    pageUtils.showNoticeMsg("客服"+notice.kefu+"将为您服务",  3000, function(){
+                                        QimoSDK.sendTextMsg({content: "会话来源于<a target='_blank' href='"+ window.location.href+"'>"+ window.location.href+"</a>", showHtml:true, notShow: true});
+                                    });
+                                }
+                                //会话被座席结束，前端要有个响应
+                                else if(notice.type == "finish"){
+                                    // todo 会话被系统终结
+                                    pageUtils.showNoticeMsg("会话被系统终结",  5000, function(){
+
+                                    });
+                                    QimoSDK.closeChat(function(){
+                                        $("#chatbox_input").attr("disabled", "disabled");
+                                        $("#chatmsg_submit").attr("disabled", "disabled");
+                                    });
+                                }
+                                //客服转接,即将由另外一位客服服务
+                                else if(notice.type == "redirect"){
+                                    // todo 会话转由另外一个座席处理
+                                    pageUtils.showNoticeMsg("客服"+notice.kefu+"将为您服务",  3000);
+
+                                }
+
+                                //机器人服务
+                                else if(notice.type == "robot" && notice.kefu){
+                                    // todo 机器人服务
+                                    pageUtils.showNoticeMsg(notice.kefu+"将为您服务",  3000);
+                                    $(".manual").show();
+                                }
+
+                                else if(notice.type == "queueNum" && notice.queueNum && notice.queueNum > 0 ){
+                                    //展示
+                                    pageUtils.appendGreySystemMsg("当前还有 <font color='red'>"+notice.queueNum+"</font> 人排队");
+
+                                }
+                                else if(notice.type == "typeNotice"){
+                                    //展示
+                                    var str = "客服正在输入...";
+                                    typeNoticeNum++;
+                                    if ($(".sys-msg").html() != str) {
+                                        $(".sys-msg").stop(true, true);
+                                        $(".sys-msg").hide();
+                                    }
+                                    $(".sys-msg").html(str).show(300);
+                                    setTimeout(function () {
+                                        if (typeNoticeNum-- <= 1) {
+                                            $(".sys-msg").hide(300);
+                                            $(".sys-msg").html("");
+                                        }
+                                    }, 3000)
+
+                                }
+                            }else if(data.type == "investigate"){
+                                pageUtils.appendServiceChatMsg({prepend:false, content:QimoSDK.defaultInvestigateStyle,agentName:"",sys_msg:true});
+                                $('.esc_form_easy label').each(function(){
+                                    $(this).click(function(e){
+                                        if(e.target.nodeName=="LABEL") {
+                                            return;
+                                        }else{
+                                            if(QimoSDK.getEvaluteDo()){
+                                                $('.esc_form_easy .esc_mask').show();
+                                                submitInvestigate({way:'out', key:$(this).closest('#wrap').find('.esc_form_easy').find('input:checked').attr('key'),
+                                                    value:$(this).closest('#wrap').find('.esc_form_easy').find('input:checked').attr('value')});
+                                                QimoSDK.setEvaluteDo(false);
+                                            }
+                                        }
+
+                                    })
+                                })
+                            }
+                        }else{
+                            console.info(data.errmsg);
+                        }
+                    });
+
+
+                    QimoSDK.startChat(function(chatData){
+                        //断开前提醒
+                        showWarmTip();
+
+                        // 获取初始化返回的数据{companyLogo:'xxxxxxxxxx', companyName:'xxxxxxxxxxxxxx'}
+                        var companyLogo = chatData.data.companyLogo;
+                        var companyName = chatData.data.companyName;
+
+                        //todo 开启会话，获取基本信息
+                        $("#logo").attr("src", companyLogo);
+                        $("#ser-company").html(companyName);
+                        QimoSDK.getHistoryMsg(function(data){
+                            if(data.errcode == 0){
+                                var msgs = data.data;
+                                if(!msgs){msgs = []}
+                                for(var i=0; i<msgs.length; i++){
+                                    var msg = msgs[i];
+                                    if(msg.contentType == "image"){
+                                        msg.content = '<a target="_blank" href="'+msg.content+'"><img src="'+QimoSDK.getThumbnailImg(msg.content, 100)+'"></a>';
+                                    }
+                                    //filesize
+
+                                    if(msg.contentType == "file"){
+                                        var params =msg.content.split("?fileName=");
+                                        var url = params[0];
+                                        var fileName = "文件";
+                                        var fileSize = "";
+                                        if(params[1]){
+                                            var params2 = params[1].split("?fileSize=");
+                                            fileName = params2[0];
+                                            fileSize = params2[1];
+                                        }
+                                        msg.content = '<a target="_blank" href="'+url+'">'+fileName+'</a>';
+                                    }
+                                    if(msg.type == "out"){
+                                        pageUtils.appendServiceChatMsg({agentName:companyName, content: msg.content, prepend:true});
+                                    }else if(msg.type == "in"){
+                                        pageUtils.appendCustomerChatMsg({content: msg.content, showHtml:msg.showHtml, prepend:true});
+                                    }
+                                    pageUtils.appendGreySystemMsg(pageUtils.getShowTimeVal(msg.dateTime), true);
+                                }
+                                $('#wrap').scrollTop($('#wrap').find('.conversation').height());
+                            }
+                        });
+
+
+                        //获取常见问题
+                        QimoSDK.getQaConfig(function(err, qaCatalogList){
+                            if (!err && qaCatalogList.length) {
+                                var ol_pane = $('#allQuestion').find('.question_groups').find('ul');
+                                var _quti = '';
+                                for (var i = 0; i < qaCatalogList.length; i++) {
+                                    var _question = qaCatalogList[i];
+                                    //var num=i+1;
+                                    _quti += '<li id="' + _question._id + '">' + _question.name + '</li>'
+                                }
+                                ol_pane.html(_quti);
+
+                                $('.question_groups li').each(function () {
+                                    $(this).click(function () {
+                                        var e = $(this);
+                                        $(".question_common").animate({scrollTop: 0}, 0);
+                                        var _obj = e;
+                                        var _id = '';
+                                        if(_obj){
+                                            $(_obj).addClass('active').siblings().removeClass("active");
+                                            _id = $(_obj).attr('id');
+                                        }else{
+                                            _id = $('.quest_con_id').attr('name');
+                                        }
+
+                                        var options = {cid: _id, page: 1}; //cid: 分类id, page:页数(可选,不填则没有翻页)
+                                        //请求分类的问题列表
+                                        QimoSDK.sedQuestion(options, function(questData1){
+                                            var temp = [];
+                                            if(questData1){
+                                                temp = questData1.list;
+                                                var _pane=$('.question_common').find('ul');
+                                                var _con=' ';
+                                                _pane.closest('.question_common').find('.quest_con_id').attr('name',_id);
+
+                                                for(var i=0;i<temp.length;i++){
+                                                    var _sub=temp[i];
+                                                    //var num=i+1;
+                                                    _con += '<li id="'+_sub._id+'">'+_sub.title+'</li>';
+                                                }
+                                                if(_obj){
+                                                    _pane.html(' ');
+                                                    _pane.html(_con);
+                                                }else{
+                                                    _pane.append(_con);
+                                                }
+                                                QimoSDK.questionPage+=1;
+                                                _con=' ';
+                                                QimoSDK.questionFlag = true;
+                                                $('.question_common li').each(function(){
+                                                    $(this).click(function(){
+                                                        var e=$(this);
+                                                        if($('#allQuestion:visible').length){
+                                                            var _obj = e;
+                                                            var content = "【常见问题推送】"+$(_obj).text();
+                                                            pageUtils.appendCustomerChatMsg({content: content});
+                                                            var _id=$(_obj).attr('id');
+                                                            //获取问题答案, _id:问题的id, question:问题
+                                                            QimoSDK.submitQuestion({_id:_id, question: content}, function(data){
+                                                                if(data.errcode == 0){
+                                                                    console.log("success");
+                                                                }
+                                                            });
+                                                            $(this).closest('#allQuestion').hide();
+                                                        }
+                                                    })
+                                                });
+                                            }
+                                        });
+                                    })
+                                });
+
+                                var totalheight = 0;
+                                var quest_com = $('.question_common');
+                                totalheight = parseFloat(quest_com.height()) + parseFloat(quest_com.scrollTop());
+                                quest_com.scroll(function () {
+                                    var page = 1;
+                                    totalheight = parseFloat(quest_com.height()) + parseFloat(quest_com.scrollTop());
+                                    if (totalheight >= $('.question_lis').height()) {
+                                        //questionFlag = true;
+                                        page++;
+                                        QimoSDK.sedQuestion({cid:quest_com.attr("name"),page: page}, function(qlist){
+                                            //问题列表处理
+                                        });
+                                    }
+                                });
+                            } else {
+                                $('#question-btn').hide();
+                            }
+                        })
+                    });
+
+                    var textareaId = "chatbox_input";
+                    // textareaId:输入框的id
+                    QimoSDK.initTypeNotice({textareaId: textareaId}, function(data){
+                        if(data.errcode == 0){
+                            console.info("textareaId 不能为空");
+                            pageUtils.showNoticeMsg("textareaId 不能为空", 1000)
+                        }else if(data.errcode == 1){
+                            console.info("找不到textareaId对应的输入框");
+                            pageUtils.showNoticeMsg("找不到textareaId对应的输入框", 1000)
+                        }else{
+                            console.log("聊天预知初始化成功");
+                        }
+                    });
+
+                    QimoSDK.initClipboardImgUpload({
+                        'textareaId': textareaId,
+                        'uploadProgress': function(evt){
+
+                        },
+                        'uploadComplete': function(result){
+                            if(result.errcode == 0){
+                                //上传成功
+                                pageUtils.appendCustomerChatMsg({content:'<a target="_blank" href="'+result.data.imageUrl+'"><img src="'+QimoSDK.getThumbnailImg(result.data.imageUrl, 100)+'"></a>'});
+
+                            }else{
+                                console.warn(result.errmsg);
+                            }
+                        },
+                        'uploadFailed': function(errObj){
+                            console.log(errObj.errmsg);
+                        },
+
+                        'uploadError':function(evt){
+                            console.log(errObj.errmsg);
+                        }
+
+
+                    }, function(data){
+                        if(data.errcode == 1){
+                            pageUtils.showNoticeMsg("textareaId 不能为空", 1000)
+                        }else if(data.errcode == 0){
+                            console.log("图片粘贴功能初始化成功");
+                        }
+                    });
+
+                }else if(initData.errcode == 1){
+                    console.info("连接认证失败");
+                    pageUtils.showNoticeMsg("连接认证失败", 5000);
+                }
+
+
+
+            });
+        }
+
+        /*******************************************页面点击事件***********************************************/
+        $("#question-btn").mouseout(function(){
+            $(this).css("background-color", "#7d7d7d");
+        });
+
+        $("#question-btn").mouseover(function(){
+          $(this).css("background-color", "#19CAA6");
+        });
+
+        $('#question-btn').bind("click",function(){
+            $('#allQuestion').toggle();
+        });
+
+        /**
+         * 关闭会话时的处理,包括是否展示满意度等
+         */
+        $(".chat-close").live("click", function(){
+            console.info("会话结束");
+            $("#imcsr").html(QimoSDK.defaultCloseInvestigateStyle);
+            //会话已结束,则直接关闭窗口
+            if(QimoSDK.chatFinish || $(this).attr("isleavePage") ||!QimoSDK.toPeer){
+                QimoSDK.closeChat(function(){
+                    $(".chatcontainer").hide();
+                    $(".leave-msg-box").hide();
+                });
+            }else{
+                //会话已评价过或者未设置满意度或双方未交谈,则弹出普通窗口
+                if(QimoSDK.investigatable == false ||!QimoSDK.webIMCsrDic|| !QimoSDK.chatWithKefu){
+                    $('.judegClose').show();
+                }else{
+                    //评价li的点击事件
+                    $('#imcsr .evaluates input').each(function(){
+                        $(this).click(function(){
+                            var index=$(this).attr('index');
+                            var a=parseInt(index);
+                            $('.reasons[index='+a+']').addClass('active').siblings().removeClass("active");
+                        })
+                    });
+                    var _input=$('#imcsr .evaluates input');
+                    if(_input.length>0){
+                        _input[0].click();
+                    }
+                    //原因li的点击事件
+                    $('#imcsr .reasons input').each(function(){
+                        $(this).click(function(){
+                            $(this).closest("li").addClass("active").siblings().removeClass("active");
+                        });
+                    });
+                    $('#imcsr .reasons input').each(function(){
+                        $(this).closest("li").removeClass("active");
+                    });
+                    $(".isClose").show();
+                }
+            }
+
+
+        });
+
+        $(".chatCancelBtn").live("click", function(){
+            $(".isClose").hide();
+        });
+        $(".judegCancelBtn").live("click", function(){
+            $(".judegClose").hide();
+        });
+
+        $(".chatCloseBtn").live("click", function(){
+            $(".sys-msg").stop(true, true);
+            $(".sys-msg").hide();
+            $(".sys-msg").html("");
+            $(".conversation").html("");
+            $(".isClose").hide();
+            QimoSDK.closeChat(function(){
+                $(".chatcontainer").hide();
+                $(".leave-msg-box").hide();
+            });
+        });
+        $(".judegCloseBtn").live("click", function(){
+            $(".sys-msg").stop(true, true);
+            $(".sys-msg").hide();
+            $(".sys-msg").html("");
+            $(".conversation").html("");
+            $(".judegClose").hide();
+            QimoSDK.closeChat(function(){
+                $(".chatcontainer").hide();
+                $(".leave-msg-box").hide();
+            });
+        });
+
+        $("#appraise").live("click",function () {
+            var reason = "";
+            var investigateData = {
+                way:"in",
+                key:"",
+                value:"",
+                proposal:"",
+                label:[]
+            }
+            var label = new Array();
+            var esc_form_pane=$(this).closest('#esc_form');
+            investigateData.key= esc_form_pane.find('.evaluates').find('input:checked').attr('key');
+            investigateData.value = esc_form_pane.find('.evaluates').find('input:checked').attr('value');
+            reason = esc_form_pane.find('ul.active').find('li.active').find('input').attr('value');
+            label.push(reason);//欢迎为我们的服务提建议
+            var _text = esc_form_pane.find('.proposal').text();
+            if(_text=="欢迎为我们的服务提建议"){
+                investigateData.proposal='';
+            }else{
+                investigateData.proposal=_text;
+            }
+            investigateData.label = label;
+            QimoSDK.submitInvestigate(investigateData, function(data){
+                if(data.errcode == 0){
+                    console.info("评价成功,可以关闭窗口");
+                }else{
+
+                }
+            });
+
+        });
+/////////////////////////////////关闭会话end///////////////////////////////////////
+
+
+        /**
+         * 提交文本信息
+         */
+        $("#chatmsg_submit").live("click", function(){
+            submitTextMsg();
+        });
+
+
+
+        /**
+         * 转人工
+         */
+        $(".manual").live("click", function(){
+            QimoSDK.convertToManual(function(convertData){
+                if(convertData.errcode == 0){
+                    console.info("转人工成功");
+                    $(".manual").hide();
+                }else if(convertData.errcode == 1){
+                    console.info("已转人工");
+                }else if(convertData.errcode == 2){
+                    console.info("客服不在线");
+                    if(QimoSDK.globalSet.isLeaveMsg == "1"){
+                        pageUtils.showNoticeMsg("客服不在线，请留言给我们", 3000, function(){
+                            $(".chatcontainer").hide();
+                            $(".leave-msg-box").show();
+                        });
+                    }else{
+                        pageUtils.appendServiceChatMsg({agentName:QimoSDK.companyName, content:QimoSDK.globalSet.msg || ""});
+                        $(".footer").prepend("<div class='chat-finish'>会话结束了</div>");
+                        QimoSDK.closeChat(function(){});
+                    }
+//                    $(".chatcontainer").hide();
+//                    $(".leave-msg-box").show();
+                }else if(convertData.errcode == -1){
+                    console.info("请求失败");
+                }
+            });
+        });
+
+        function submitInvestigate(investigate) {
+//            var way='',key='',value='',reason='',proposal='';
+//            var _close;//判断是否关闭窗口
+//            var label = new Array();
+//            if($(this).attr('way')=='in'){
+//                _close=true;
+//                way='in';
+//                var esc_form_pane=$(this).closest('#esc_form');
+//                key= esc_form_pane.find('.evaluates').find('input:checked').attr('key');
+//                value = esc_form_pane.find('.evaluates').find('input:checked').attr('value');
+//                reason = esc_form_pane.find('ul.active').find('li.active').find('input').attr('value');
+//                label.push(reason);//欢迎为我们的服务提建议
+//                var _text = esc_form_pane.find('.proposal').text();
+//                if(_text=="欢迎为我们的服务提建议"){
+//                    proposal='';
+//                }else{
+//                    proposal=_text;
+//                }
+//            }
+            QimoSDK.submitInvestigate(investigate, function(data){
+                if(data.errcode == 0){
+                    $('.esc_form_easy .esc_mask').show(); //遮罩评价层
+                    pageUtils.appendGreySystemMsg(data.errmsg, false);
+                }else{
+                    pageUtils.appendGreySystemMsg(data.errmsg, false);
+                }
+            });
+        }
+
+
+        $(".leave_btn").live("click", function(){
+            $(".leave_btn").attr("disabled", "disabled");
+            QimoSDK.submitLeaveMsg({content: $("#leavemsg_content").val(), phone:$("#leavemsg_phone").val(), email: $("#leavemsg_email").val()}, function(data){
+                $(".leave_btn").removeAttr("disabled");
+                if(data.errcode == 0){
+                    //todo 留言成功
+                    $(".tips").addClass("ok");
+                    $(".tips").html("留言成功").show().delay(1500).fadeOut(500);
+                }else{
+                    $(".tips").html(data.errmsg).show().delay(1500).fadeOut(1000);
+                }
+            });
+        });
+        //快捷键方式
+        $(document).keypress(function (e) {
+            if(QimoSDK.chatFinish){
+                return;
+            }
+            if (e.ctrlKey) {
+                return;
+            }
+            if (e.which == 13 || e.which == 10) {
+                e.preventDefault();
+                submitTextMsg();
+            }
+        });
+
+        $(document).keypress(function (e) {
+            if(QimoSDK.chatFinish){
+                return;
+            }
+            if (e.ctrlKey && (e.which == 13 || e.which == 10)) {
+                e.preventDefault();
+                $("#chatbox_input").val($("#chatbox_input").val() + "\r\n");
+            }
+        });
+
+
+        function submitTextMsg(){
+            var content = $("#chatbox_input").val();
+
+            if($("#face-con").hasClass("show")){
+                $("#face-btn").click();
+            }
+
+            // showHtml:是否支持html， notShow:用户端是否展示这条信息
+            QimoSDK.sendTextMsg({content: content,showHtml: false, notShow: false}, function(data){
+                if(data.errcode == 0){
+                    $("#chatbox_input").val("");
+                    pageUtils.appendCustomerChatMsg({content:data.content});
+                }else if(data.errcode == 1){
+                    console.info("消息不能为空");
+                    pageUtils.showNoticeMsg("消息不能为空", 1000)
+                }else if(data.errcode == 2){
+                    console.info("会话已被关闭，不能回复");
+                    pageUtils.showNoticeMsg("会话已被关闭，不能回复", 1000)
+                }else if(data.errcode == 3){
+                    console.info("消息发送失败");
+                    pageUtils.showNoticeMsg("消息发送失败", 1000)
+                }else if(data.errcode == -1){
+                    console.info("请求失败");
+                    pageUtils.showNoticeMsg("请求失败", 1000)
+                }
+            });
+        }
+
+    });
+
+
+    /**********************************************工具**************************************************/
+    var pageUtils = {
+        appendServiceChatMsg: function (op) {
+            if (op.prepend) {
+                $(".conversation").prepend(
+                        "<li class='chatmsg'>" +
+                        "<p class='service-name'>" + op.agentName + "</p>" +
+                        "<div class='outer-left'>" + pageUtils.getPTag() +
+                        "<div class='service'><pre>" + op.content + "</pre></div>" +
+                        "</div>" + pageUtils.getPTag() +
+                        "</li>");
+            } else {
+                if(op.sys_msg == true){
+                    $(".conversation").append(
+                            "<li class='chatmsg'>" +
+                            "<p class='service-name'>" + op.agentName + "</p>" + op.content +
+                            pageUtils.getPTag() +
+                            "</li>");
+                }else{
+                    $(".conversation").append(
+                            "<li class='chatmsg'>" +
+                            "<p class='service-name'>" + op.agentName + "</p>" +
+                            "<div class='outer-left'>" + pageUtils.getPTag() +
+                            "<div class='service'><pre>" + op.content + "</pre></div>" +
+                            "</div>" + pageUtils.getPTag() +
+                            "</li>");
+
+                }
+
+                pageUtils.scrollMsgBoxToBottom();
+
+            }
+
+        },
+
+        appendCustomerChatMsg: function (op) {
+            if (op.prefix == undefined) {
+                op.prefix = "";
+            }
+            if (op.prepend) {
+                $(".conversation").prepend(
+                        "<li class='chatmsg'>" +
+                        "<div class='outer-right'>" + pageUtils.getPTag() +
+                        "<div class='customer' style='align-content: right'>" + op.prefix + "<pre>" + op.content + "</pre></div>" +
+                        "</div>" + pageUtils.getPTag() +
+                        "</li>");
+
+            } else {
+                $(".conversation").append(
+                        "<li class='chatmsg'>" +
+                        "<div class='outer-right'>" + pageUtils.getPTag() +
+                        "<div class='customer' style='align-content: right'>" + op.prefix + "<pre>" + op.content + "</pre></div>" +
+                        "</div>" + pageUtils.getPTag() +
+                        "</li>");
+                pageUtils.scrollMsgBoxToBottom();
+            }
+
+        },
+
+
+        getPTag: function () {
+            var tag = "";
+            if ($.browser.msie && ($.browser.version == "6.0" || $.browser.version == "7.0")) {
+                tag = "<i></i>";
+            }
+            return tag;
+        },
+
+        scrollMsgBoxToBottom: function () {
+            $("#wrap").scrollTop(document.getElementById("wrap").scrollHeight);
+        },
+
+
+        showNoticeMsg: function (msg, showTime, cb) {
+            $(".sys-msg").stop(true, true);
+            $(".sys-msg").hide();
+            $(".sys-msg").html(msg).show(300).delay(showTime).hide(300, null, function () {
+                $(".sys-msg").html("");
+                if(cb){cb()}
+            });
+        },
+
+        appendGreySystemMsg: function (msg, prepend) {
+            if (prepend) {
+                $(".conversation").prepend("<li class='showtime'>" + msg + "</li>");
+            } else {
+                $(".conversation").append("<li class='showtime'>" + msg + "</li>");
+            }
+
+        },
+        getShowTimeVal: function (dateTime) {
+            if (!dateTime || dateTime == undefined || dateTime == 'undefined' || dateTime == 'Invalid date') return "";
+            var showtime = "";
+            if (chatUtils.getCurrentDate() == dateTime.split(" ")[0]) {
+                showtime = dateTime.split(" ")[1];
+            } else {
+                showtime = dateTime;
+            }
+            return showtime;
+        },
+        getCurrentDateTime: function () {
+            var date = new Date();
+            var hour = date.getHours();
+            var minutes = date.getMinutes();
+            var seconds = date.getSeconds();
+            hour = hour > 9 ? hour : '0' + hour;
+            minutes = minutes > 9 ? minutes : '0' + minutes;
+            seconds = seconds > 9 ? seconds : '0' + seconds;
+            return hour + ":" + minutes + ":" + seconds;
+        },
+    }
+
+
+    //断开前提醒
+    var showBreakTips = false;
+    var chatTimer =0;
+    window.showWarmTip = function () {
+        var nowTime = chatUtils.getTimestamp();
+        if (QimoSDK.globalSet.break_tips_len>=0 && QimoSDK.lastTimeForSendMsg && nowTime - QimoSDK.lastTimeForSendMsg > ((QimoSDK.globalSet.break_len-QimoSDK.globalSet.break_tips_len) * 60000) && QimoSDK.kefu && QimoSDK.kefu != QimoSDK.companyName) {
+            if(!showBreakTips){
+                pageUtils.appendGreySystemMsg(pageUtils.getCurrentDateTime());
+                pageUtils.appendServiceChatMsg({agentName:QimoSDK.kefu, content: QimoSDK.globalSet.break_tips || "【系统消息】由于很久没有收到您的消息，系统已自动关闭会话。如有需要，请再联系我们。"});
+                showBreakTips = true;
+            }
+            if(QimoSDK.globalSet.break_len && nowTime - QimoSDK.lastTimeForSendMsg >= (QimoSDK.globalSet.break_len*60000)){
+                QimoSDK.closeChat(function(){});
+                $(".footer").prepend("<div class='chat-finish'>会话结束了</div>");
+                QimoSDK.chatFinish = true;
+                clearTimeout(chatTimer);
+            }
+        }else{
+            showBreakTips = false;
+        }
+
+       chatTimer = setTimeout('showWarmTip()', 5000);
+    };
+
+</script>
+
+</html>

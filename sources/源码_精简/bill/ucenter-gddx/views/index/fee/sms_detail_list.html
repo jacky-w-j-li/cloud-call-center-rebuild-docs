@@ -1,0 +1,79 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form id="frm_sms_detail_search" class="form-horizontal">
+            <input type="hidden" name="monthId" value="_#_id#_">
+            <table class="table_search">
+                <tbody>
+                <tr>
+                    <td class="spanright">起止日期</td>
+                    <td colspan="2" class="spanleft">
+                        <input type="text" name="beginTime" class="form-control input-sm ds_date" style="display:inline-block;width: 100px;" readonly/> 至
+                        <input type="text" name="endTime" class="form-control input-sm ds_date" style="display:inline-block;width: 100px;" readonly/>
+                    </td>
+                    <td class="spanright">接收方号码</td>
+                    <td class="spanleft"><input type="text" name="combox" class="form-control input-sm" placeholder=""/></td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                </tbody>
+            </table>
+            <div class="form-group" style="margin-bottom:0;">
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary btn-sm  ds_form_action" ds_action="accFee.getSmsDetailList">查询</button>
+                    <button type="button" class="btn btn-primary btn-sm  ds_form_action" ds_action="accFee.exportSmsDetail">导出</button>
+                    <button type="button" class="btn btn-default btn-sm ds_do_action" ds_action="accFee.reset" >重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        [_#year#_-_#month#_]详单
+        <button type="button" class="pull-right btn btn-success btn-xs ds_do_action" ds_action="accFee.returnAccFeeList" ds_data="_#smsFlag#_"  style="margin-left: 20px;">返回</button>
+    </div>
+    <div class="panel-body">
+        <p>
+            账户编号：_#account#_&nbsp;&nbsp;
+            产品类型：_@accFee.showFieldDesc('productType','_#name#_')@_&nbsp;&nbsp;
+            实际消费： _@formatRound2Money(_#actualConsume#_)@_元&nbsp;&nbsp;
+            短信数量: _#num#_条
+        </p>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>账户编号</th>
+            <th>提交时间</th>
+            <th>接收方号码</th>
+            <th>产品类型</th>
+            <th>拆分条数</th>
+            <th>费用(元)</th>
+            <!--<th>操作</th>-->
+        </tr>
+        </thead>
+        <tbody class="sms_detail_list">
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <div class="col-md-5">查询结果：<span class="result_count" style="margin-top:3px;display: inline-block;">0</span></div>
+    <div class=" col-md-7">
+        <ul class="pagination pagination-sm pull-right" style="margin: 0;"
+            for="frm_sms_detail_search" ds_pagination_action="accFee.getSmsDetailList">
+            <li><a href="#"  value="0">&laquo;</a></li>
+            <li><a href="#"  value="1">1</a></li>
+            <li><a href="#"  value="2">2</a></li>
+            <li><a href="#"  value="3">3</a></li>
+            <li><a href="#"  value="4">4</a></li>
+            <li><a href="#"  value="5">5</a></li>
+            <li><a href="#"  value="6">&raquo;</a></li>
+        </ul>
+    </div>
+</div>
+<style type="text/css">
+    .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
+        z-index: 1;
+    }
+</style>

@@ -1,0 +1,44 @@
+context N00000000056-predialout {
+	_010X. => {
+		goto N00000000056-dialout,${EXTEN:3},1;
+	}
+	
+	_01[3458]XXXXXXXXX => {
+		isLocal=0;
+		Agi(agi://127.0.0.1:7891/AgiIsLocalNumber?calledNo=${EXTEN});
+		if(${isLocal}==1)
+			goto N00000000056-dialout,${EXTEN:1},1;
+		else
+			goto N00000000056-dialout,${EXTEN},1;
+	}
+	
+	_1[3458]XXXXXXXXX => {
+		isLocal=0;
+		Agi(agi://127.0.0.1:7891/AgiIsLocalNumber?calledNo=${EXTEN});
+		if(${isLocal}==1)
+			goto N00000000056-dialout,${EXTEN},1;
+		else
+			goto N00000000056-dialout,0${EXTEN},1;
+	}
+	_110X. => {
+		Hangup;
+	}
+	_X. => {
+		goto N00000000056-dialout,${EXTEN},1;
+	}
+}
+
+context N00000000056-dialout {
+	_X. => {
+		
+		CALLERID(num)="62100001";
+		goto dialout-gateway, N000000000561900${EXTEN}, 1;
+	}
+}
+
+context N00000000056-transferout {
+	_. => {
+		CALLERID(num)="62100001";
+		goto transfer-gateway,${EXTEN},1;
+	}
+}

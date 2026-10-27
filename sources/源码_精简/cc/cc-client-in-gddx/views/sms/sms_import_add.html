@@ -1,0 +1,63 @@
+<div class="contact_summary">
+    <input type="hidden" name="xlsHeads" value=""/>
+    <div class="row-fluid">
+        <div class="span12">
+            <div style="border-bottom: 1px solid #f0f0f0;margin-right:5px;">
+                <h4 style="float:left;padding-top: 13px;">导入人工审核群发短信 &nbsp;<i class="icon-question-sign sms_manual_tip" style="margin-top: 3px;"></i></h4>
+                <div class="form_buttons" style="padding-left:210px;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div style="margin-top: 15px;margin-left: 12%" class="offset2">
+                <a href="#" onclick="handler.sms.downloadTmpl()">下载群发短信模板 </a>
+                <!--&nbsp;&nbsp;<i class="icon-question-sign" id="sms_import_tip"></i>-->
+            </div>
+            <form  action="" method="post" encType="multipart/form-data" target="uploadIframe" id="frm_sms_import" class="form-horizontal">
+                <input type="hidden" name="action" value="importSms"/>
+                <input type="hidden" name="sessionId" value=""/>
+                <div class="control-group" style="line-height: 35px;margin-bottom: 0;">
+                    <label class="span2" style="text-align:right;width:10%;display: inline-block;margin-top: 8px;">
+                        excel文件
+                    </label>
+                    <div class="span10" style="float: left;">
+                        <input type="file" style="height: auto; line-height: normal;"  name="file"  onchange="handler.sms.importSms('frm_sms_import')">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span12 alert alert-block" style="line-height: 18px;">
+            说明：<br/>
+            1.支持后缀为xls和xlsx的excel文件导入<br/>
+            2.不需要表头，一行为一条短信，每行有三列，分别为手机号、内容、签名。一行手机号只能有一个。<br/>
+            3.导入是异步处理的,提交导入后可以立刻进行其他的导入,服务器会排队处理<br/>
+            4.点击左侧“刷新”导入任务列表,查看导入的状态  <br/>
+            5.汉字、数字、标点符号和英文都表示1个长度<br/>
+            6.短信内容超过66字后，每66字记一条<br/>
+            7.短信内容的实际长度 = 短信内容 + 签名长度<br/>
+            8.请勿提交“政治”、“非法”、“淫秽”、“欺诈”、“博彩”等违法信息<br/>
+            9.场景举例,见下图：<br/>
+            <img src="./img/sms_import_eg.png">
+        </div>
+    </div>
+</div>
+<iframe name="uploadIframe" id="uploadIframe"  style="display:none;"></iframe>
+<script type="text/javascript">
+    $("#frm_sms_import").find('input[name="sessionId"]').val(session.id);
+    $(".sms_manual_tip").tooltip({title:'您发送的内容不会直接提交至运营商.<br>我们的审核人员将按照提交顺序依次检查内容.<br>审核通过才会提交运营商.<br>所以人工审核到达速度比较慢.<br>建议报备短信模板发送.',placement:'bottom',html:true});
+    //    $(function(){
+//        var options = {
+//            trigger	:'hover',
+//            placement:"right",
+//            html:"true",
+//            title:'导入excel示例',
+//            content:'<img src="./img/sms_import_eg.png" style="">'
+//        }
+//        $("#sms_import_tip").popover(options);
+//    })
+</script>

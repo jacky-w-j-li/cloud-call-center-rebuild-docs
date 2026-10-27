@@ -1,0 +1,14 @@
+context 101-line {
+	s => {
+		CALLERID(num) = ${FROM_CID};
+		Dial(SIP/${FROM_DID}@211.151.35.107:5060);
+	}
+}
+
+context 100-line {
+	s => {
+		CALLERID(num) = ${FROM_CID};
+		Dial(SIP/${FROM_DID}@211.151.35.106:5060);
+	}
+}
+

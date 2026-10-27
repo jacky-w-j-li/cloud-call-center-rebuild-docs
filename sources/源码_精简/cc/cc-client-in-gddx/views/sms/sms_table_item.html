@@ -1,0 +1,31 @@
+<tr>
+    <td>
+        _@sms.renderSmsHidden('_#num#_')@_
+    </td>
+    <td>
+        _@cdr.getAgentName('_#createUser#_')@_
+    </td>
+    <td>
+        _#submitTime#_
+    </td>
+    <td>
+        _@sms.getSmsStatusName('_#m7Status#_')@_
+    </td>
+    <td>
+        _#splitCount#_
+    </td>
+    <td>
+        _#signDisplay#_
+    </td>
+    <td>
+        _#templateid#_
+    </td>
+    <td>
+        <span style='width: 240px;display: block;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>_#content#_</span>
+    </td>
+    <td>
+        <a href="#" class="ds_do_action" ds_action="sms.showSmsDetail" ds_data="_#_id#_">查看</a>
+        <!--&nbsp;-->
+        <!--<a href="#" class="ds_do_action" ds_action="cdr.addCdrMemo" ds_data="_#CALL_SHEET_ID#_">备注</a>-->
+    </td>
+</tr>

@@ -1,0 +1,40 @@
+<div class="right_content_pane">
+    <form id="frm_dic_casdEdit" >
+        <div class="right_head clearfix" style="">
+            <div class="pull-left">
+                <h4 style="">修改字典</h4>
+            </div>
+            <div class=" pull-right">
+                <button type="button" class="btn btn-small ds_do_action " ds_action="config.dic.cancelDeal" style="margin-left: 0px;">取消</button>
+                <button type="button" class="btn btn-primary btn-small ds_form_action "  ds_action="config.dic.updateDic" style="margin-left: 10px;">保存</button>
+            </div>
+        </div>
+
+        <div class="dic_edit" style="padding-top: 20px;">
+            <input type='hidden' class='dicId' name='_id'/>
+            <label class="" style="margin-right: 5px;display: inline-block;">字典名称：</label>
+            <input name="name" class='name' type="text" maxlength="25"  required/>
+            <div style="padding-top: 20px">
+                <label class="" style="margin-right: 5px;float:left;display: inline-block;">级联关系：</label>
+                <label class="radio inline">
+                    <input type="radio" name="cascade" id="optionsRadios1" value="1">
+                    1级
+                </label>
+                <label class="radio inline">
+                    <input type="radio" name="cascade" id="optionsRadios2" value="2">
+                    2级
+                </label>
+                <label class="radio inline">
+                    <input type="radio" name="cascade" id="optionsRadios3" value="3">
+                    3级
+                </label>
+            </div>
+        </div>
+    </form>
+</div>
+<style type='text/css'>
+    label.radio.inline{
+        width:auto;
+        padding-top: 0px;
+    }
+</style>

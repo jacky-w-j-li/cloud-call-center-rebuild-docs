@@ -1,0 +1,52 @@
+<div class="row-fluid">
+    <div class="span5">
+        <div class="row-fluid">
+            <div class="span7">
+                <div class="input-append" style="float:left;">
+                    <input id="ivr_schedule_query" name='query' type="text" placeholder="输入日程名称进行查询...">
+
+                    <!--<div class="btn-group">-->
+                        <!--<button class="btn dropdown-toggle" data-toggle="dropdown" tabindex="-1">-->
+                            <!--<span class="caret"></span>-->
+                        <!--</button>-->
+                        <!--<ul class="dropdown-menu">-->
+                            <!--<li>-->
+                                <!--<a href="#">高级查询</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <div class="span3 offset2 text-right pull-right">
+                <!--<a class="btn btn-success ds_action_flow disabled ds_ivr_effect">-->
+                    <!--<ds-do-action action="config.ivr.reloadIvr" extra-data="config.callConfig.currentConfigData" on-complete="config.callConfig.reloadComplete"/>-->
+                    <!--生效-->
+                <!--</a>-->
+                <a class="btn btn-success btn-blackishGreen ds_action_flow disabled ds_ivr_effect">
+                    <ds-do-action action="config.ivr.reloadIvr" extra-data="config.callConfig.currentConfigData" on-complete="config.callConfig.reloadComplete"/>
+                    生效
+                </a>
+            </div>
+        </div>
+
+        <div id="schedule_pannel">
+            <div class='ds-item-list accordion' id="scheduleAccordion"
+                 item-view="config/callConfig/schedule/schedule_list_item"
+                 data-source="ivr.ivr_service_no" data-pagination="false"></div>
+        </div>
+        <div class="row-fluid">
+            <div class="span2">
+                <br/>
+                <a href="#" class="ds_action_flow">
+                    <ds-do-action action="config.ivr.schedule.querySchedule" extra-data="config.callConfig.currentConfigData"
+                                  update-client-data='{"method":"config.callConfig.updateClientDataList","arg":{"type":"ivr_schedule"}}'/>
+                    <ds-get-view view="config/callConfig/schedule/schedule_list" panel="ivrSchedulePanel"/>
+                    <i class="icon-refresh"></i>刷新
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="span7 sub-right" id="schedule_detail">
+    </div>
+</div>
+

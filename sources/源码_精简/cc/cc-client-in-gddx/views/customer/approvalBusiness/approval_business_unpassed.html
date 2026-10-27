@@ -1,0 +1,40 @@
+<div class="action_form action_form_unpass">
+    <div class="action_bar">
+        <h2>审批不通过原因</h2>
+    </div>
+    <div class="process_action">
+        <form>
+            <input type='hidden' name='_id' value='__id'>
+            <input type="hidden" name="cid" value="__cid" />
+            <input type="hidden" name="apprType" value="__apprType" />
+            <input type="hidden" name="sysStatus" value="__sysStatus" />
+            <input type="hidden" name="categoryId" value="__categoryId" />
+            <input type="hidden" name="sourceOwner" value="__sourceOwner" />
+            <input type="hidden" name="oldStatus" value="__oldStatus" />
+
+            <div class="row-fluid"  style="margin-top: 10px;">
+                <div class='row_item'>
+                    <label>不通过原因</label>
+                    <textarea name="unPassReason" style="width: 78%;" required></textarea>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div style="float: right">
+                    <button class="btn btn-primary btn-small ds_form_action" ds_action="customer.approvalBusiness.unPassedBusiness">确认不通过</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+   $(function(){
+       //event  ==========
+       dsevent.bind("#_menu__id","taskExcuteAction",function(event,data){
+           if(data._id == '__id'){
+               $("#_menu__id").closest(".business_process").empty();
+           }
+       });
+   });
+</script>

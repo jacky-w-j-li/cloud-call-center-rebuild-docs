@@ -1,0 +1,58 @@
+<div class="row-fluid">
+    <div class="span12">
+        <form class="form-horizontal" action="">
+            <input type="hidden" name="_id">
+            <div class="row-fluid">
+                <div class="span7 offset1">
+                    <i class="icon-plus"></i>添加语音留言节点
+                </div>
+                <div class="span4 text-right pull-right">
+                    <a class="btn-blue ds_action_flow">
+                        <ds-form-action action="config.ivr.node.voiceMail.updateVoiceMail" extra-data="config.callConfig.currentConfigData"
+                            update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"ivr_node_voice_mail"}}'/>
+                        <ds-get-view view="config/callConfig/node/voiceMail/voice_mail_list" panel="ivrVoiceMailNodePanel"/>
+                        <ds-effect-ivr/>
+                        保存
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="row-fluid">
+                <div class="span5">
+                    <div class="control-group">
+                        <label class="control-label">
+                            节点名称
+                        </label>
+                        <div class="controls">
+                            <input type="text" msgName="节点名称" name="DisplayName" required/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            提示语音
+                        </label>
+                        <div class="controls ds_ivr_sound_select" sound-select-name="Filename">
+                            <select name="Filename">
+                                   <option value="">--请选择--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            留言后转向
+                        </label>
+                        <div class="controls">
+                            <div id="toPeerType" class="ds_ivr_to_peer_type" tag-name="ToPeerType" tag-value-key="ToPeerType">
+
+                            </div>
+                            <div id="toPeer" class="ds_ivr_to_peer" tag-value-key="ToPeer">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

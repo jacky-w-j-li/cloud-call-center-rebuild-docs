@@ -1,0 +1,57 @@
+<div class="pay_start" style="margin:10px;">
+    <div class="licence_pay">
+        <div class="alert alert-info">
+            licence可以免费试用10天
+        </div>
+        <form class="form-horizontal" id="frm_licence_add_new">
+            <input type="hidden" name="flag" value="buyLicence">
+            <div class="form-group">
+                <label class="control-label col-md-3">
+                    类型
+                </label>
+                <div class="col-md-5">
+                    <select name="licenceType"  class="form-control input-sm licenceType" required>
+                        _@getDicOptions("licenceType","","no")@_
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">
+                    节点
+                </label>
+                <div class="col-md-5">
+                    <select name="pbx"  class="form-control input-sm pbx" required>
+                        _@getCCPbxOptions()@_
+                    </select>
+                </div>
+            </div>
+            <div class="form-group licencePrice_div">
+                <label class="control-label col-md-3">
+                    单价
+                </label>
+                <div class="col-md-5">
+                    <input type="text" name="licencePrice" value='' class="form-control input-sm licencePrice" readonly/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">
+                    licence数量
+                </label>
+                <div class="col-md-5">
+                    <input type="text" onkeyup="value=value.replace(/[^\d]/g,'')" name="num" value='1' class="form-control input-sm ds_spinner_licence" required/>个
+                    <label for="num" class="error" style="display: none;"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-8">
+                    <button type="button" class="btn btn-primary btn-small ds_form_action " ds_action="licence.confirmTest">立即购买</button>
+                    <button type="button" class="btn btn-default btn-small" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+

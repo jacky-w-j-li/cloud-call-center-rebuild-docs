@@ -1,0 +1,49 @@
+<div class="right_content_pane" style="">
+    <form id="frm_cust_approval_update" class="form-horizontal">
+        <input type='hidden' name='_id'/>
+        <div class="right_head clearfix" style="">
+            <div class="pull-left">
+                <h4 style="" id="updateTitle"></h4>
+            </div>
+            <div class=" pull-right">
+                <button type="button" class="btn btn-small " onclick="$('#cust_approval_detail_pane').empty();"  style="margin-left: 0px;">取消</button>
+                <button type="button" class="btn btn-primary btn-small ds_form_action "  ds_action="config.customerApproval.updateCustApproval" style="margin-left: 10px;">保存</button>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">模板名称</label>
+            <div class="controls">
+                <input type="text" name="name" readonly/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                审核角色
+            </label>
+            <div class="controls">
+                <table>
+                    <tr>
+                        <td>
+                            <select name="roles" class="left_role" size="8"  multiple style="min-width: 100px;width: auto;">
+                            </select>
+                        </td>
+                        <td>
+                            <div style="margin:0 10px;">
+                                <p style="margin-bottom: 10px;">
+                                    <button type="button"  class="btn btn-default btn-sm left_middle">&gt;</button>
+                                </p>
+                                <p>
+                                    <button type="button"  class="btn btn-default btn-sm right_middle">&lt;</button>
+                                </p>
+                            </div>
+                        </td>
+                        <td>
+                            <select name="selectRoles" class="right_role" size="8" multiple style="min-width: 100px;width: auto;">
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>

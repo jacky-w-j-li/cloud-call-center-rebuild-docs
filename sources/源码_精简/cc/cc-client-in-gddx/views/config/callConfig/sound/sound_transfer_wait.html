@@ -1,0 +1,16 @@
+<div class="modal hide fade" id="sound_transfer_wait_modal" tabindex="-1"
+     style="height: 200px;;overflow: hidden" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-header">
+        <h4 class="modal-title" >温馨提示</h4>
+    </div>
+    <div class="modal-body">
+        <br>
+        <h4 style="text-align: center;margin-bottom: 40px">__msg</h4>
+
+        <div style="text-align: center;display: none" id="soundTransferBtnDiv">
+            <a href="#" class="btn btn-success ds_do_action" ds_action="config.callConfig.sound.uploadTransferRefresh" ds_data="" id="soundTransferTryBtn">还未提示转换成功？点我刷新，查看结果</a>
+            <a href="#" class="btn ds_do_action" ds_action="config.callConfig.sound.uploadTransferCancel"
+               id="soundTransferCloseBtn">不等了，放弃这次，重新来过</a>
+        </div>
+    </div>
+</div>

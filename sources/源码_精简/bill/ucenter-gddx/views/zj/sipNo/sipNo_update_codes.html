@@ -1,0 +1,38 @@
+<head>
+    <script language="javascript">
+        function faxClick2() {
+            if ($("#sipNo_update_isFax").attr("checked")) {
+                $("#sipNo_update_isFax").attr("checked",false);
+                $("#frm_updateSipNo_codes").find("input[fieldgroup='1']").attr("disabled", false);
+            } else {
+                $("#sipNo_update_isFax").attr("checked",true);
+                $("#frm_updateSipNo_codes").find("input[fieldgroup='1'][value ='alaw']").attr("checked", true);
+                $("#frm_updateSipNo_codes").find("input[fieldgroup='1'][value !='alaw']").attr("checked", false);
+                $("#frm_updateSipNo_codes").find("input[fieldgroup='1']").attr("disabled", true);
+            }
+        };
+
+    </script>
+</head>
+<form class="form-horizontal" id="frm_updateSipNo_codes">
+    <input type="hidden" name="_id" value="_#_id#_">
+    <div class="form-group">
+        <label class="control-label col-md-4">
+            是否为传真
+        </label>
+        <div class="col-md-5">
+            _@sipNo.getUpdateIsFax()@_
+        </div>
+    </div>
+    <div class="form-group">
+        <!--codeConfig-->
+        <label class="control-label col-md-4">
+            语音编码
+        </label>
+        <div class="col-md-5 exten_codec">
+            _@sipNo.getUpdateCodecs("code","codecs")@_
+        </div>
+    </div>
+</form>
+
+

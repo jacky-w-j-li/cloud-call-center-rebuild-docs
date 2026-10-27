@@ -1,0 +1,8 @@
+context N00000000071-10002-announcement {
+	_X. => {
+		
+		goto N00000000071-dialin,8000, 1;
+	}
+}
+
+

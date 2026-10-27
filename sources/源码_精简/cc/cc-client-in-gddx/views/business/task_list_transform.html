@@ -1,0 +1,246 @@
+<style>
+    .action_form[ds_data='__step'],.action_form + .alert-block{
+        display: none;
+    }
+    .action_form[ds_data='__step'] + .alert-block{
+        display: block;
+    }
+</style>
+<div class="action_form" ds_data="_@business.getFlowStepNameByCache('__flow','__step')@_">
+    <div class="action_bar">
+        <h2>工单信息【_@business.getFlowStepNameByCache('__flow','__step')@_】</h2>
+        <div id="_menu_task_call_info">
+            <!--接听座席:【<span title="_@business.getUserNameById('__callAgent')@_">_@business.getUserNameById('__callAgent',5)@_</span>】-->
+            <span style="display: block; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">来电时间:【__callTime】  来电号码:【__callNum】  <a class="ds_do_action" ds_action="business.listenRecord" ds_data="__recordUrl">听取录音</a></span>
+        </div>
+        <div class="allTask" style="float:right;display:none">
+            <span class="time_img"><img width="20px" height="20px" title="总体完成时间" src="../img/taskTimeAllF.png"></span>
+            <span class="time" style="color:#999" countdowntime="noTime"></span>
+        </div>
+
+        <div class="substep" style="float:right;margin-right:16px;display:none">
+            <span class="time_img"><img width="16px" height="16px" title="此步骤完成时间" src="../img/taskTimeF.png"></span>
+            <span class="time" style="color:#999" countdowntime="noTime" ds_stop="-1"></span>
+        </div>
+    </div>
+    <div class="last_action">
+        <form>
+            <div class="row-fluid" id="_menu_task_list_transform_fields_pane">
+
+            </div>
+            <div class="row-fluid">
+                <div class="span4">
+                    <div style="margin-top: 10px;float: left;">
+                        <span>_@business.getUserNameById('__lastUpdateUser')@_ 处理于 __lastUpdateTime</span>
+                    </div>
+                </div>
+                <div class='span4'>
+                    <div class='row-fluid'>
+                        <div class='field-label'>
+                            <label class='control-label'
+                                   style='margin-top: 3px;text-align: right;'>当前处理人</label>
+                        </div>
+                        <div class='field-option'>
+                            <div class='field-option-inner ds_search_item'>
+                                <select style='width: 100%; display: none;' id="_menu_task_list_transform_master_select">
+                                    <!--<option value=''>--请选择--</option>-->
+                                </select>
+                                <div id ="_menu_task_list_transform_master_type_select" class="combobox_agent"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="span4" id="_menu_operate_pane">
+                    <div style="float: right;">
+                        <a href="#" class="btn btn-danger btn-small ds_do_action"
+                           ds_action="business.showBackBusinessTask" ds_data="_menu">退回</a>
+                    </div>
+                    <div style="float: right;margin-right: 10px;">
+                        <div class="btn-group">
+                            <a class="btn btn-primary btn-small dropdown-toggle" data-toggle="dropdown" href="#">
+                                开始处理
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" id="_menu_task_list_transform_dropmenu">
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="_menu_business_print_button" style="float: right;margin-right: 10px; display: none;">
+                        <a href="#" class="btn btn-info btn-small ds_do_action" ds_data="__id" ds_action="business.showPrintBusinessTask">打印</a>
+                    </div>
+                    <!--<div style="float: right;margin-right: 10px;display: none;" id="_menu_task_list_waitforMessage_pane">-->
+                        <!--<a class="btn btn-info btn-small action" appaction="business.setWaitforMessage" appdata="__id">待跟踪</a>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="alert alert-block">工单已被删除</div>
+<script type="text/javascript">
+
+    $(function () {
+        $("#_menu_task_call_info").hide();
+        if("__linkCall" == "true"){
+            $("#_menu_task_call_info").show();
+        }
+
+        var flowId = '__flow';
+        var stepId = '__step';
+        var pane = $("#_menu_task_list_transform_fields_pane");
+        handler.business.createFlowStepCustomFields(flowId, stepId, pane, session.business.currentBusiness['_menu']);
+        pane.find(":input").attr("disabled", "true");
+        //权限判断
+        var currentBusiness = session.business.currentBusiness['_menu'];
+        var masterPane = $("#_menu_task_list_transform_master_select");
+        var masterPaneType = $("#_menu_task_list_transform_master_type_select");
+
+        if (currentBusiness.status == "complete" || currentBusiness.status == "cancel") { //已完成状态
+            $("div#_menu_operate_pane").attr("style", "display:none;");
+            masterPane.closest(".row-fluid").hide();
+        } else {
+            var step = getCache("businessFlowStep", stepId);
+            var actions = step ? step.actions : [];
+            var temp = "<li role='presentation'><a role='menuitem' tabindex='-1' href='#' class='ds_do_action' ds_action='business.showProcessBusinessTask' ds_data='_id'  menu='_menu'>_name</a></li>";
+            pane = $("#_menu_task_list_transform_dropmenu");
+            var flag = 0;
+            var role = session.user.role;
+            role.push('busCreateUser');
+            for (var i = 0; i < actions.length; i++) {
+                var actionsItem = actions[i];
+                if (arrayContainsStr(session.user.role, actionsItem.actionRole)) {
+                    flag++;
+                    pane.append(temp.replace(/_id/g, actionsItem._id).replace(/_name/g, actionsItem.name));
+                }
+            }
+            role.pop();
+            if (flag == 0 || ("__master" && "__master" != session.user._id ) || '_menu' === 'my_role_task_uncomplete') {
+                $("div#_menu_operate_pane").attr("style", "display:none;");
+            }
+//            if(!/task_/.test('_menu') || flag == 0){
+            if(flag == 0){
+                masterPane.closest(".row-fluid").hide();
+            }
+            if(flag == 1){
+                var opPane = pane.closest(".btn-group");
+                opPane.empty();
+                var actionButton = '<a class="btn btn-primary btn-small ds_do_action" ds_action="business.showProcessBusinessTask" menu="_menu" ds_data="'+actions[0]._id+'"  href="#">' + actions[0].name + '</a>';
+                opPane.append(actionButton);
+            }
+
+            var roles = handler.business.getStepRoles(stepId);
+            var agents = handler.business.getRoleAgents(roles);
+
+
+            if(roles[0]=="busCreateUser"){
+                var createUser = currentBusiness.createUser;
+                var age = getCache('agents',createUser);
+                agents= [];
+                agents.push(age);
+            }
+            masterPane.append("<option value=''>自动分配</option>");
+            var tmp = "<option value= '_id'>_name</option>";
+            for (var i = 0; i < agents.length; i++) {
+                var usersItem = agents[i];
+                masterPane.append(tmp.replace(/_id/g, usersItem._id).replace(/_name/g, usersItem.displayName));
+            }
+            if(roles[0]!='busCreateUser'){
+                agents.push({_id:"_id",displayName:"自动分配",pinyin:"zidongfenpei"});
+            }
+            masterPane.val("__master");
+            for (var i = 0; i < agents.length; i++) {//临时解决方案,底下的循环中移除,会造成选择处理人之后无效
+                if(agents[i].status && agents[i].status == "disable"){
+                    agents.splice(i, 1);
+                }
+            }
+            session.dicMap["business_transFormAgents"] = agents;
+            utils.loadSearchInput({ id: "_menu_task_list_transform_master_type_select",
+                width: "80",
+                height: "15",
+                tip: "按姓名,拼音搜索",
+                data: agents,
+                showState: true,
+                cacheData : "business_transFormAgents",
+                searchField: ["displayName"],
+                pinyinField: ["displayName"],
+                listField: ["displayName"],
+                userIdField: "_id",
+                showField: "displayName",
+                showAllList: true,
+                callbackFuc: function (object) {
+                    masterPane.val(object._id);
+                    masterPane.change();
+                },
+                onKeyChanged: function () {
+                    masterPane.val("");
+                }
+            });
+            utils.setSearchInput("_menu_task_list_transform_master_type_select", "__master" == "" ? "自动分配" : (getCache("agents", "__master") ? getCache("agents", "__master").displayName : ""));
+
+//            if('_menu' == "my_task_uncomplete" && "__businessStat" != "wait"){
+//                $("#_menu_task_list_waitforMessage_pane").show();
+//            }
+
+            masterPane.bind("change", function () {
+                var masterValue = $(this).val();
+                var data = {
+                    _id: '__id',
+                    master: masterValue
+                };
+                handler.business.changeBusinessMaster(data, function (result) {
+                    if (result.success) {
+//                        var menu = '_menu';
+                        var menu = handler.business.curSubMenu;
+                        if(menu == 'my_task_uncomplete' && masterValue != session.user._id){
+                            dsevent.publish("taskChangeMaster", data);
+                        }else if(menu == 'my_role_task_uncomplete' && masterValue != ""){
+                            dsevent.publish("taskChangeMaster", data);
+                        }else{
+                            dsevent.publish("taskChangeToMaster", data);
+                        }
+
+//                        if (!(masterValue == "" || masterValue == session.user._id)) {
+//                            dsevent.publish("taskChangeMaster", data);
+//                        }
+                    } else {
+                        if(result.errorCode == "403"){
+                            $().alertmessage('showWarning', "工单信息已经被别人改变,你无权执行此操作,请刷新!");
+                        } else {
+                            $().alertmessage('showError', "更新业务当前处理人异常，请稍后再试!");
+                        }
+                        masterPane.val("__master");
+                    }
+                });
+
+            });
+
+
+        }
+
+        //event  ==========
+        dsevent.bind("#_menu_task_list_transform_fields_pane", "taskExcuteAction", function (event, data) {
+            if (data._id == '__id') {
+                var pane = $("#_menu_task_list_transform_fields_pane").closest(".business_transform").closest("div.business-info");
+                handler.business.loadTaskInfo(pane, '_menu', data.customer, data._id);
+            }
+        });
+//        dsevent.bind("#_menu_task_list_transform_fields_pane", "taskChangeWaitFor", function (event, data) {
+//            if (data._id == '__id' && data.businessStat == "wait") {
+//               $("#_menu_task_list_waitforMessage_pane").hide();
+//            }
+//        });
+
+        // 安康至佳定制  工单打印  判断流程id 和 步骤id
+        //52b1af20-1180-11e4-9d60-5962d87a2666
+
+        if(flowId == 'c4478de0-117f-11e4-b8b0-891b0d3296aa' && stepId == '52b1af20-1180-11e4-9d60-5962d87a2666'){
+            var button = $("#_menu_business_print_button");
+            button.show();
+        }
+
+
+
+    });
+
+
+</script>

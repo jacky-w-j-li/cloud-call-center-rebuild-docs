@@ -1,0 +1,45 @@
+context N00000000246-10016-validate{
+    s => {
+        input="";
+    	BackGround(/etc/asterisk/1.1.1.101/accounts/N00000000246/sound/6f18e00162a0ae32a133a86a76cb74ce);
+      loop:
+        WaitExten(20);
+    }
+
+    _[0-9] => {
+        input=${input}${EXTEN};
+        if(${LEN(${input})} > 30){
+                Playback(sound/incorrect);
+                goto s,1;
+        }
+        goto s,loop;
+    }
+
+    * => goto s, 1;
+
+    # => {
+        if(${LEN(${input})} > 30 || ${LEN(${input})} < 0){
+                Playback(sound/incorrect);
+                goto s,1;
+        }
+        csNum=${input};
+        goto N00000000246-10016-transflow, ${input}, 1;
+    }
+
+    i => {
+        Playback(sound/incorrect);
+        goto s, 1;
+    }
+
+    t => {
+        Playback(sound/timeout);
+        Hangup;
+    }
+}
+
+context N00000000246-10016-transflow {
+    _. => {
+		goto N00000000246-10007-dynamic-route,s,1;
+    }
+}
+

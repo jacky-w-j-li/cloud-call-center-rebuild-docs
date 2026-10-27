@@ -1,0 +1,61 @@
+<div id="cdr_detail_wrapper" class="clearfix">
+    <table class="table table-striped" style="box-shadow:.5px .5px 2px rgba(0, 0, 0, 0.35)">
+        <tr>
+            <td class="cdrDetailLabel" width="15%">任务名称：</td>
+            <td class="cdrDetailText" width="35%">_#taskName#_</td>
+            <td class="cdrDetailLabel" width="15%">任务状态：</td>
+            <td class="cdrDetailText" width="35%">_#taskStatus#_</td>
+        </tr>
+        <tr>
+            <td class="cdrDetailLabel" width="15%">创建人：</td>
+            <td class="cdrDetailText" width="35%">_#createUser#_</td>
+            <td class="cdrDetailLabel" width="15%">创建时间：</td>
+            <td class="cdrDetailText" width="35%">_#createTime#_</td>
+            <!-- <td class="cdrDetailLabel">执行座席：</td>
+            <td class="cdrDetailText">_#owner#_</td> -->
+        </tr>
+        <!-- <tr>
+            <td class="cdrDetailLabel">接通时间：</td>
+            <td class="cdrDetailText">_#OFFERING_TIME#_</td>
+            <td class="cdrDetailLabel">挂机时间：</td>
+            <td class="cdrDetailText">_#BEGIN_TIME#_</td>
+            <td class="cdrDetailLabel">通话时长：</td>
+            <td class="cdrDetailText">_@cdr.getCallTimeLength('_#CALL_TIME_LENGTH#_')@_</td>
+        </tr>
+        <tr>
+            <td>通话录音：</td>
+            <td colspan="100">
+                <audio id="cdrListener" controls="" src="_#FILE_SERVER#_/_#RECORD_FILE_NAME#_" __AUDIO_AUTO_PLAY/>
+                <a class="down_audio" href="_#FILE_SERVER#_/_#RECORD_FILE_NAME#_" target="_blank" download>下载录音</a>
+            </td>
+        </tr>
+        <tr>
+            <td class="cdrDetailLabel">备注内容：</td>
+            <td class="cdrDetailText" colspan="5">
+                <textarea id="cdr_comments" name="memo" rows="2" style="width: 500px" disabled></textarea>
+            </td>
+        </tr> -->
+    </table>
+    <!-- <div class="text-mute taskDescription">
+        <span> 任务:<b class="taskInformation">_#taskName#_</b></span>
+        <span>任务状态:<b class="taskInformation"> _#taskStatus#_</b></span>
+    </div>
+    <div class="text-mute taskDescription">
+        创建人: <span>_#createUser#_</span>
+    </div>
+    <div class="text-mute taskDescription">
+        创建时间: <span>_#createTime#_</span>
+    </div> -->
+    <table class="table table-striped" style="box-shadow:.5px .5px 2px rgba(0, 0, 0, 0.35)">
+        <tr>
+            <td class="cdrDetailLabel" width="15%">任务号码：</td>
+            <td class="cdrDetailText" width="35%">_#phone#_</td>
+            <td class="cdrDetailLabel" width="15%">客户名称：</td>
+            <td class="cdrDetailText" width="35%">_#custName#_</td>
+        </tr>
+        <tr>
+            <td class="cdrDetailLabel" width="15%">描   述：</td>
+            <td class="cdrDetailText" width="85%" colspan="3">_#title#_</td>
+        </tr>
+    </table>
+</div>

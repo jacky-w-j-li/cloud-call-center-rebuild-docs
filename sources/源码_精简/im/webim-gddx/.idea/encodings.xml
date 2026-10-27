@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/app.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/javascripts/7moorCloudIm.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kefu/moor_chat.html" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/public/images/emoji.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/public/images/emojiPanel27a55f.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/public/images/logo.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/public/images/min.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/public/images/smile.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/public/images/smile.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/public/javascripts/test3.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/public/stylesheets/ie-css3.htc" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/public/stylesheets/moor_style.css" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/routes/index.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/start.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/utils/authUtils.js" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

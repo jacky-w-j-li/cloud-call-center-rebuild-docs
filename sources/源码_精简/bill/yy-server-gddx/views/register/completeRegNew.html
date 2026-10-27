@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script>
+var href = location.href;
+var url = location.href;
+var theRequest = new Object();
+if (href.indexOf("?") != -1) {
+    url = location.search;
+    var str = url.substr(1);
+    strs = str.split("&");
+    for(var i = 0; i < strs.length; i ++) {
+        theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+    }
+}else{
+    url = location.pathname;
+    var datas = url.split("/") || [];
+    var str = datas[datas.length -1];
+    theRequest['data'] = '{"key" :"'+ str+'"}';
+}
+
+var server_url = "http://115.29.14.183:3000/public";
+var command = {
+    action: 'register.findEmailByKey',
+    data: theRequest.data
+}
+$.ajax({
+    type: "GET",
+    url: server_url,
+    data: command,
+    timeout: 30000,
+    dataType: "jsonp",
+    async: true,
+    jsonp: "callback",
+    success: function (data, status) {
+        if(data.doc.status){
+            if(data.doc.status == 'submit'){
+                location.href="http://register.7moor.com/zhuce.html?email="+data.doc._id+"&s=1&key="+data.doc.key;
+            }else if(data.doc.status == 'selectAccount'){
+                location.href="http://register.7moor.com/zhuce.html?email="+data.doc._id+"&s=2&key="+data.doc.key;
+            }else if(data.doc.status == 'initAccount'){
+                location.href="http://register.7moor.com/zhuce.html?email="+data.doc._id+"&s=3&key="+data.doc.key;
+            }else if(data.doc.status == 'sendAccountInfo'){
+                location.href="http://register.7moor.com/zhuce.html?email="+data.doc._id+"&s=4&key="+data.doc.key;
+            }else{
+                location.href="http://register.7moor.com/zhuce.html?email="+data.doc._id;
+            }
+        }else{
+            location.href="http://register.7moor.com/zhuce.html?email="+data.doc._id;
+        }
+    },
+    error: function (xhr, status, error) {
+        alert('服务异常！');
+    }
+});
+</script>
+</head>
+<body>
+
+</body>
+</html>

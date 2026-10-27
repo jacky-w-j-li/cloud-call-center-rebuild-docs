@@ -1,0 +1,106 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form id="frm_invoice_get_search" class="form-horizontal">
+            <table class="table_row_search">
+                <tbody>
+                <tr>
+                    <td>快捷查询</td>
+                    <td class="quick_condition">
+                        <input type="hidden" name="flag" value="nodeal">
+                        <button type="button" class="btn btn-info ds_do_action" ds_action="invoice.quick_search" ds_data="nodeal">可开票充值单</button>
+                        <button type="button" class="btn btn-link ds_do_action" ds_action="invoice.quick_search" ds_data="deal">不可开票充值单</button>
+                    </td>
+                    <td colspan="3">
+                    </td>
+                </tr>
+                <tr>
+                    <td>充值日期</td>
+                    <td>
+                        <input type="text" name="startPayTime" class="form-control input-sm ds_date" style="display: inline-block;width: auto"/> 至
+                        <input type="text" name="endPayTime" class="form-control input-sm ds_date" style="display: inline-block;width: auto"/>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm ds_form_action ds_invoice_get_search" ds_action="invoice.queryGetList">查询</button>
+                        <button type="button" class="btn btn-default btn-sm ds_do_action" ds_action="invoice.reset">重置</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+<div class="alert alert-warning" style="margin-bottom: 10px;">
+    温馨提示：1.超过3个月的充值单据将不能开发票；此处查不到的充值单据，请您联系客服开具。
+    <div style="margin-left: 70px;">2.开票金额低于1000元，快递费20元自理，将在帐号余额中扣除。</div>
+    <div style="margin-left: 70px;">3.若需开增值税专用发票，发票金额不低于5000元才可以开具（特殊情况联系客服开具）。</div>
+</div>
+<div class="panel panel-info">
+    <div class="panel-heading invoice_get_head">
+        <div class="clearfix">
+            <div class="pull-left" style="">
+                <div>
+                    已选总金额：<span class="select_invoice" style="color:#f58300;">0</span>元
+                    <span class="text-danger" > &nbsp;&nbsp;</span>
+                </div>
+                <div>（可开票总金额：<span class="total_invoice" style="">0</span>元）</div>
+            </div>
+            <div class="pull-right" style="width: 120px;text-align:right;">
+                <button type="button" class="btn btn-primary btn-sm ds_do_action" ds_action="invoice.showGetInvoice">索取发票</button>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                <label class="checkbox-inline" style="">
+                    <input type="checkbox" name="checkAll" class="ds_do_action2 checkAll"  ds_action="invoice.checkAllPay" ds_data="" value="" >
+                </label>
+            </th>
+            <th>流水号</th>
+            <th>支付方式</th>
+            <th>充值时间</th>
+            <th>实付金额(元)</th>
+            <th>可开票金额(元)</th>
+            <th>类型</th>
+            <th>备注</th>
+        </tr>
+        <tr class="warning select_num_tr" style="display: none;">
+            <td colspan="10">已选择 <span class="select_num" style="color:red; ">0</span> 条</td>
+        </tr>
+        </thead>
+        <tbody class="content_list">
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <div class="col-md-5">查询结果：<span class="result_count" style="margin-top:3px;display: inline-block;">0</span></div>
+    <div class=" col-md-7">
+        <ul class="pagination pagination-sm pull-right" style="margin: 0;"
+            for="frm_invoice_get_search" ds_pagination_action="invoice.queryGetList">
+            <li><a href="#"  value="0">&laquo;</a></li>
+            <li><a href="#"  value="1">1</a></li>
+            <li><a href="#"  value="2">2</a></li>
+            <li><a href="#"  value="3">3</a></li>
+            <li><a href="#"  value="4">4</a></li>
+            <li><a href="#"  value="5">5</a></li>
+            <li><a href="#"  value="6">&raquo;</a></li>
+        </ul>
+    </div>
+</div>
+<style type="text/css">
+    .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
+        z-index: 1;
+    }
+    .quick_condition{
+        color: #000000;
+    }
+    .quick_condition .quick_item{
+        color: #000000;
+        /*text-decoration: none;*/
+    }
+    .quick_condition .active{
+        color: #f0ad4e;
+    }
+</style>

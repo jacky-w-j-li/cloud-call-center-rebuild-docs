@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Util
+Bundle-SymbolicName: com.m7.cc.ass.util
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.m7.cc.ass.util.Activator
+Bundle-Vendor: HOLLYCRM
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.osgi.framework;version="1.3.0"
+Export-Package: com.m7.cc.bill,
+ com.m7.cc.command,
+ com.m7.cc.config,
+ com.m7.cc.json,
+ com.m7.cc.url,
+ com.m7.cc.util,
+ com.m7.cc.util.log
+Bundle-ClassPath: .

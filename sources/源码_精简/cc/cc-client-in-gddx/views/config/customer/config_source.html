@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+        ×
+    </button>
+    <h3>定制数据来源</h3>
+</div>
+<div class="">
+    <form>
+        <div class="modal-body">
+            <div id="field_attr_pane" style="position: relative;margin: 0 60px 0 150px" class="">
+                <div class="row-select-box" style="position: relative;">
+                    <a class="plus ds_do_action" ds_action="config.customer.plusCustomField" ds_data=""></a>
+                    <input type="hidden" name="key[]" />
+                    <input class="select-box" type="text" name="choices[]"   msgName='来源' />
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button href="#" class="btn btn-small btn-primary ds_form_action" ds_action="config.customer.saveSource" template-id="__id">
+                保存
+            </button>
+            <button class="btn btn-small " data-dismiss="modal" aria-hidden="true">
+                取消
+            </button>
+        </div>
+    </form>
+</div>
+<style type="text/css">
+</style>

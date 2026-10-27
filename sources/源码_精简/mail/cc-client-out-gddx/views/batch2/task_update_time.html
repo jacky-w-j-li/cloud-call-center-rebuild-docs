@@ -1,0 +1,118 @@
+<form  action="" id="" class="form-horizontal task_form">
+    <input type="hidden" name="_id" value="_#_id#_">
+    <input type="hidden" name="taskType" value="_#taskType#_">
+    <div class="control-group">
+        <label class="control-label control-label2" >任务名称</label>
+        <div class="controls controls2">
+
+            <label style="padding-top:3px;">_#name#_</label>
+            <!--<input type="text" name="name" placeholder="" value="_#name#_">-->
+        </div>
+    </div>
+    <div class="control-group num_generate_hidden" style="display: none;">
+        <label class="control-label control-label2">录入号段</label>
+        <div class="controls controls2">
+            <label style="padding-top:3px;">_#beginNum#_-_#endNum#_</label>
+
+            <!--<input type="text" name="beginNum" placeholder="开始号码" class="task_time">--->
+            <!--<input type="text" name="endNum" placeholder="结束号码" class="task_time">-->
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label control-label2">服务号</label>
+        <div class="controls controls2">
+            <select name="serviceNo">
+                _@batch2.showFieldDesc('myServiceNos','_#serviceNo#_')@_
+            </select>
+            <!--<span class="help-block">电话呼通后会进入和服务号命名一样的技能组中，没有请先新建一个</span>-->
+        </div>
+    </div>
+<!--    <div class="control-group">
+        <label class="control-label control-label2">技能组</label>
+        <div class="controls controls2">
+            <select name="taskQueue">
+                _@batch2.showFieldDesc('mySkillGroups','_#taskQueue#_')@_
+            </select>
+        </div>
+    </div>-->
+
+    <div class="control-group">
+        <label class="control-label control-label2" >类型</label>
+        <div class="controls controls2">
+            <select name="timeType" disabled>
+                <option value="staticDate">指定日期</option>
+                <option value="everyDay">每天</option>
+            </select>
+        </div>
+    </div>
+    <div class="control-group taskDate_hidden" style="">
+        <label class="control-label control-label2" >日期</label>
+        <div class="controls controls2">
+            <input type="text" name="taskDate" placeholder="" class="ds_date" minDate="1" value="__taskDate" readonly>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label control-label2" >时间段</label>
+        <div class="controls controls2 task_item_time_area">
+
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls controls2">
+            <button type="button" class="btn btn-small btn-primary ds_form_action" ds_action="batch2.updateBdTask" style="">保存</button>
+            <button type="button" class="btn btn-small"  data-dismiss="modal" aria-hidden="true">取消</button>
+        </div>
+    </div>
+</form>
+
+<div id="tmpl_task_timeArea_minus" style="display: none;">
+    <div style="margin-bottom: 10px;" class="task_time_item">
+        <input type="text" name="beginTime[]" placeholder="开始时间" class="ds_time task_time2" value="__beginTime" readonly>-
+        <input type="text" name="endTime[]" placeholder="结束时间" class="ds_time task_time2" value="__endTime" readonly>
+        <a href="#" class="task-reduce">
+            <i class="icon-minus"></i>
+        </a>
+    </div>
+</div>
+
+<div id="tmpl_task_timeArea_plus" style="display: none;">
+    <div style="margin-bottom: 10px;" class="task_time_item">
+        <input type="text" name="beginTime[]" placeholder="开始时间" class="ds_time task_time2" value="__beginTime" readonly>-
+        <input type="text" name="endTime[]" placeholder="结束时间" class="ds_time task_time2" value="__endTime" readonly>
+        <a href="#" class="task-plus">
+            <i class="icon-plus"></i>
+        </a>
+    </div>
+</div>
+<style type="text/css">
+    .task_section {
+        width: 90%;margin: 0 auto;
+    }
+    .task_form .control-group {
+        margin-bottom: 5px!important;
+    }
+    .task_form .control-label {
+        width: 100px!important;
+        padding-top: 3px!important;
+        text-align: left!important;
+    }
+    .task_form .controls {
+        margin-left: 120px!important;
+    }
+    .task_form .control-label2{
+        width: 60px!important;
+    }
+    .task_form .controls2 {
+        margin-left: 80px!important;
+    }
+    .task_time{
+        width: 120px;
+    }
+    .task_time2{
+        width: 93px;
+    }
+</style>
+<script type="application/javascript">
+
+</script>

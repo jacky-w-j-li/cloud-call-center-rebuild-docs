@@ -1,0 +1,1768 @@
+package com.m7.cc.db.mongo;
+
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.UUID;
+
+import com.m7.cc.ass.model.cdr.impl.C5BatchDialoutRecord;
+import com.m7.cc.ass.model.cdr.impl.C5ChannelRecord;
+import com.m7.cc.ass.model.cdr.impl.C5Investigate;
+import com.m7.cc.ass.model.cdr.impl.C5PeerCallRecord;
+import com.m7.cc.ass.model.cdr.impl.C5PeerRecord;
+import com.m7.cc.asterisk.cdr.server.CdrServerConfig;
+import com.m7.cc.command.C5Action;
+import com.m7.cc.command.C5Response;
+import com.m7.cc.command.Fields;
+import com.m7.cc.hangupsms.cach.HangupSmsCach;
+import com.m7.cc.interfaces.HangupSMSSend;
+import com.m7.cc.report.IgnorReportAccountServer;
+import com.m7.cc.util.Utils;
+import com.m7.cc.util.log.IceLogger;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import com.mongodb.WriteConcern;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.UpdateOptions;
+
+public class MongoProvider {
+	private static Logger log = Logger.getLogger(MongoProvider.class.getName());
+	private static Logger log400 = null;
+	private static NumberFormat numberFormat = NumberFormat.getNumberInstance();
+
+	public static MongoProvider instance;
+
+	private boolean isConnect = false;
+	private static Map<String, String> accountDBMapper = new HashMap<String, String>();
+	private Map<String, String> waitSaveInvestigateMap = new HashMap<String, String>();
+	private static ExecutorService executor;
+	
+	private MongoProvider() {
+		instance = this;
+		log400 = IceLogger.getLogger(CdrServerConfig.getInstance().getLogDir(),
+				"cdr_400", "ALL", false);
+		log400.setUseParentHandlers(false);
+		executor = Executors.newCachedThreadPool();
+	}
+
+	public static MongoProvider getInstance() {
+		if (instance == null) {
+			new MongoProvider();
+			numberFormat.setMaximumFractionDigits(2);
+		}
+		return instance;
+	}
+
+	public boolean connect() {
+		isConnect = MongoConnect.getInstance().connect();
+		return isConnect;
+	}
+
+	public boolean isConnected() {
+		return isConnect;
+	}
+
+	public void reconnect() {
+		disconnect();
+		connect();
+	};
+
+	public void disconnect() {
+		MongoConnect.getInstance().close();
+		isConnect = false;
+	}
+
+	public void refactLoginData(String startTime) {
+	}
+
+	public synchronized void saveBatchDialoutRecord(C5BatchDialoutRecord cdr) {
+		try {
+			String accountDB = this.getAccountDatabase(cdr.getAccount());
+			if ("".equals(accountDB)) {
+				log.warning("Cound not find account database: \r\n"
+						+ cdr.getJsonString());
+				return;
+			}
+
+			BasicDBObject updateFind = new BasicDBObject();
+			updateFind.put("customer_id", cdr.getCustomerId());
+			BasicDBObject updateData = new BasicDBObject();
+			updateData.put("dialstatus", cdr.getDialState());
+			updateData.put("recent_update_time",
+					Utils.getDate("yyyy-MM-dd HH:mm:ss"));
+			this.update(accountDB, cdr.getAccount() + "_c5_customer",
+					updateFind, new BasicDBObject("$set", updateData));
+		} catch (Exception e) {
+			log.log(Level.WARNING, "", e);
+		}
+	}
+
+	public synchronized void saveChannelCDR(C5ChannelRecord cdr) {
+		try {
+			String accountDB = this.getAccountDatabase(cdr.getAccount());
+			if ("".equals(accountDB)) {
+				log.warning("Cound not find account database: \r\n"
+						+ cdr.getJsonString());
+				return;
+			}
+
+			// Date date = new Date();
+			BigDecimal bd = new BigDecimal(cdr.getTimestamp());
+			bd = bd.multiply(new BigDecimal(1000));
+			Timestamp timestamp = new Timestamp(bd.longValue());
+
+			BasicDBObject insertData = new BasicDBObject();
+			insertData.put("ACCOUNT", cdr.getAccount());
+			insertData.put("PBX", cdr.getAsterisk());
+			insertData.put("CHANNEL", cdr.getChannel());
+			insertData.put("UNIQUEID", cdr.getUniqueid());
+			insertData.put("TIMESTAMP", Utils.getDate(timestamp.getTime()));
+			insertData.put("CHANNELTYPE", cdr.getConnect_type());
+			insertData.put("LOCATION", cdr.getLocation());
+			insertData.put("LOCATION_ID", cdr.getLocationId());
+			insertData.put("LOCATION_NAME", cdr.getLocationName());
+			insertData.put("LINK", cdr.isLinked() ? 1 : 0);
+			insertData.put("SEQUENCENUM", cdr.getSequence());
+			insertData.put("FROMDID", cdr.getFromDid());
+			insertData.put("FROMCID", cdr.getFromCid());
+			this.insert(accountDB, cdr.getAccount() + "_cdr_channel",
+					insertData);
+		} catch (Exception e) {
+			log.log(Level.WARNING, "", e);
+		}
+	}
+
+	public synchronized void saveInvestigateRecord(C5Investigate cdr) {
+		try {
+			String accountDB = this.getAccountDatabase(cdr.getAccount_id());
+			if ("".equals(accountDB)) {
+				log.warning("Cound not find account database: \r\n"
+						+ cdr.getJsonString());
+				return;
+			}
+
+			BasicDBObject updateFind = new BasicDBObject();
+			updateFind.put("_id", cdr.getCall_sheet_id());
+			BasicDBObject updateData = new BasicDBObject();
+			updateData.put("INVESTIGATE", cdr.getSurver_content());
+			List<DBObject> resList = this.find(accountDB,cdr.getAccount_id() + "_c5_call_sheet", updateFind);
+			if(resList != null && resList.size() > 0){
+				this.update(accountDB, cdr.getAccount_id() + "_c5_call_sheet",
+						updateFind, new BasicDBObject("$set", updateData));
+				insertInvestigateCdrReportEvent(cdr);
+			}else{
+				this.insert("cdr_investigate_cache", new BasicDBObject("_id", cdr.getCall_sheet_id()).append("investigate", cdr.getSurver_content()));
+			}
+		} catch (Exception e) {
+			log.log(Level.WARNING, "", e);
+		}
+	}
+
+	public synchronized void savePeerRecord(C5PeerRecord cdr) {
+		try {
+			String accountDB = this.getAccountDatabase(cdr.getAccount());
+			if ("".equals(accountDB)) {
+				log.warning("Cound not find account database: \r\n"
+						+ cdr.getJsonString());
+				return;
+			}
+
+			Timestamp _begin_time = Utils.getTimestamp(cdr.getBegin_time());
+			Timestamp _end_time = Utils.getTimestamp(cdr.getEnd_time());
+			long begin_time = _begin_time == null ? -1 : _begin_time.getTime();
+			long end_time = _end_time == null ? -1 : _end_time.getTime();
+			
+			BasicDBObject insertData = new BasicDBObject();
+			insertData.put("_id", cdr.getID());
+			insertData.put("ACCOUNT_ID", cdr.getAccount());
+			insertData.put("ASTERISK", cdr.getAsterisk());
+			insertData.put("EXTEN", cdr.getExten());
+			insertData.put("EXTEN_TYPE", cdr.getExtenType());
+			insertData.put("ACTION_TYPE", cdr.getActionType());
+			insertData.put("BEGIN_TIME", Utils.getDate(begin_time));
+			insertData.put("END_TIME", Utils.getDate(end_time));
+			insertData.put("COMMENTS", cdr.getComments());
+			insertData.put("AGENT", cdr.getAgent());
+			insertData.put("BUSY_TYPE", cdr.getBusyType());
+			if (end_time > 0) {
+				int timeLength = ((int) (end_time / 1000))
+						- ((int) (begin_time / 1000));
+				timeLength = timeLength >= 0 ? timeLength : 0;
+				insertData.put("TIME_LENGTH", timeLength);
+			}
+
+			this.insert(accountDB, cdr.getAccount() + "_cdr_peer", insertData);
+		} catch (Exception e) {
+			log.log(Level.WARNING, "", e);
+		}
+	}
+
+	public synchronized void updatePeerRecord(C5PeerRecord cdr) {
+		try {
+			String accountDB = this.getAccountDatabase(cdr.getAccount());
+			if ("".equals(accountDB)) {
+				log.warning("Cound not find account database: \r\n"
+						+ cdr.getJsonString());
+				return;
+			}
+
+			Timestamp _end_time = Utils.getTimestamp(cdr.getEnd_time());
+			long end_time = _end_time == null ? -1 : _end_time.getTime();
+
+			BasicDBObject updateFind = new BasicDBObject();
+			updateFind.put("_id", cdr.getID());
+			BasicDBObject updateData = new BasicDBObject();
+			updateData.put("END_TIME", Utils.getDate(end_time));
+			updateData.put("COMMENTS", cdr.getComments());
+			if (end_time > 0) {
+				Timestamp _begin_time = Utils.getTimestamp(cdr.getBegin_time());
+				long begin_time = _begin_time == null ? -1 : _begin_time
+						.getTime();
+				int timeLength = ((int) (end_time / 1000))
+						- ((int) (begin_time / 1000));
+				timeLength = timeLength >= 0 ? timeLength : 0;
+				updateData.put("TIME_LENGTH", timeLength);
+			}
+			this.update(accountDB, cdr.getAccount() + "_cdr_peer", updateFind,
+					new BasicDBObject("$set", updateData));
+			this.insertCdrPeerReportEvent(accountDB, cdr.getAccount(), cdr.getID());
+		} catch (Exception e) {
+			log.log(Level.WARNING, "", e);
+		}
+	}
+
+	public boolean loadAccountDatabase() {
+		try {
+			BasicDBObject find = new BasicDBObject();
+			find.put("product","cc");
+			BasicDBObject returnFields = new BasicDBObject();
+			returnFields.put("account", 1);
+			returnFields.put(Fields.DataDB, 1);
+			List<DBObject> dbInfos = find(Fields.DB_NAME_BILL,Fields.DB_PLATFORM_ACCOUNT_PRODUCT, find, returnFields);
+			String accountID = "";
+			String accountDatabase = "";
+			for (DBObject dbInfo : dbInfos) {
+				accountID = dbInfo.get("account").toString();
+				if(dbInfo.get(Fields.DataDB) != null)
+					accountDatabase = dbInfo.get(Fields.DataDB).toString();
+				if (!"".equals(accountID) && !"".equals(accountDatabase)) {
+					accountDBMapper.put(accountID, accountDatabase);
+				} else {
+					System.out.println("Uncorrect account[" + accountID
+							+ "] database setting: " + accountDatabase);
+					log.warning("Uncorrect account[" + accountID
+							+ "] database setting: " + accountDatabase);
+				}
+			}
+			System.out.println("Account database setting load completed.");
+			return true;
+		} catch (Exception e) {
+			log.log(Level.WARNING, e.getMessage(), e);
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public static synchronized C5Response reloadAccountDatabase(C5Action action) {
+		C5Response response = new C5Response(action);
+		try {
+			String accountID = action.getStringValue("accountID");
+			String accountDatabase = action.getStringValue("accountDatabase");
+			if (!"".equals(accountID) && !"".equals(accountDatabase)) {
+				accountDBMapper.put(accountID, accountDatabase);
+			} else {
+				log.log(Level.WARNING, "accountID or accountDatabase is null!");
+				response.setSucceed(false);
+				return response;
+			}
+			response.setSucceed(true);
+		} catch (Exception e) {
+			log.log(Level.WARNING, e.getMessage(), e);
+			e.printStackTrace();
+			response.setSucceed(false);
+			return response;
+		}
+		return response;
+	}
+
+	private String getAccountDatabase(String accountID) {
+		if (accountID == null || "".equals(accountID)) {
+			return "";
+		}
+		String accountDB = accountDBMapper.get(accountID);
+		if (accountDB == null || "".equals(accountDB)) {
+			BasicDBObject find = new BasicDBObject();
+			find.put("account", accountID);
+			find.put("product", "cc");
+			BasicDBObject returnFields = new BasicDBObject();
+			returnFields.put(Fields.DataDB, 1);
+			List<DBObject> dbInfos = find(Fields.DB_NAME_BILL,Fields.DB_PLATFORM_ACCOUNT_PRODUCT, find, returnFields);
+			if (dbInfos != null && dbInfos.size() > 0) {
+				accountDB = dbInfos.get(0).get(Fields.DataDB).toString();
+				if (!accountDB.equals("")) {
+					accountDBMapper.put(accountID, accountDB);
+				} else {
+					log.warning("Uncorrent account[" + accountID
+							+ "] database setting which is null.");
+				}
+			}
+		}
+		return accountDB == null ? "" : accountDB;
+	}
+
+	public synchronized boolean updateRefCallCdr(C5PeerCallRecord cdr) {
+		try {
+			log.warning("excute refcall cdr update sql");
+			String accountDB = this.getAccountDatabase(cdr.getAccount());
+			if ("".equals(accountDB)) {
+				log.warning("Cound not find account database: \r\n"
+						+ cdr.getJsonString());
+				return false;
+			}
+			Timestamp _begin_time = Utils.getTimestamp(cdr.getBegin_time());
+			Timestamp _end_time = Utils.getTimestamp(cdr.getEnd_time());
+			Timestamp _queue_time = Utils.getTimestamp(cdr.getQueue_time());
+			long begin_time = _begin_time == null ? -1 : _begin_time.getTime();
+			long end_time = _end_time == null ? -1 : _end_time.getTime();
+			long queue_time = _queue_time == null ? -1 : _queue_time.getTime();
+			String queryDate = Utils.getDate("yyyy-MM-dd");
+
+			BasicDBObject updateFind = new BasicDBObject();
+			updateFind.put("OFFERING_TIME", queryDate);
+			updateFind.put("ACCOUNT_ID", cdr.getAccount());
+			updateFind.put("CALL_ID", cdr.getRefUniqueid());
+			DBObject updateData = new BasicDBObject();
+			updateData.put("STATUS", cdr.getStatus());
+			updateData.put("BEGIN_TIME", Utils.getDate(begin_time));
+			updateData.put("END_TIME", Utils.getDate(end_time));
+			updateData.put("CONNECT_TYPE", cdr.getConnect_type());
+			updateData.put("RECORD_FILE_NAME", cdr.getRecord_file_name());
+			updateData.put("DISPOSAL_AGENT", cdr.getDisposal_agent());
+			updateData.put("ERROR_MEMO", cdr.getError_memo());
+			updateData.put("LOCATION", cdr.getLocation());
+			updateData.put("ACTION_ID", cdr.getAction_id());
+			updateData.put("PBX", cdr.getPbx());
+			updateData.put("LOGIN_TYPE", cdr.getExtenType());
+			updateData.put("LOCATION_NAME", cdr.getLocationName());
+			updateData.put("LOCATION_ID", cdr.getLocationId());
+			updateData.put("QUEUE_NAME", cdr.getQueue_name());
+			updateData.put("QUEUE_TIME", Utils.getDate(queue_time));
+			updateData.put("FILE_SERVER", cdr.getFileServer());
+
+			this.update(accountDB, cdr.getAccount() + "_c5_call_sheet",
+					updateFind, new BasicDBObject("$set", updateData));
+
+		} catch (Exception e) {
+			log.log(Level.WARNING, "", e);
+		}
+		return true;
+	}
+
+	private void updateCustomerInfo(C5PeerCallRecord cdr) {
+		try {
+			String customerID = null;
+			String customerName = null;
+			int a = 0;
+
+			String phoneNumber = null;
+			if (cdr.getConnect_type().equals(Fields.transfer)
+					|| cdr.getConnect_type().equals(Fields.normal)
+					|| cdr.getConnect_type().equals(Fields.webcall)
+					|| cdr.getConnect_type().equals(Fields.leak)
+					|| cdr.getConnect_type().equals(Fields.dialTransfer))
+				phoneNumber = cdr.getCall_no();
+			else if (cdr.getConnect_type().equals(Fields.dialout))
+				phoneNumber = cdr.getCalled_no();
+
+			String accountDB = this.getAccountDatabase(cdr.getAccount());
+			List<DBObject> customers = null;
+			if (cdr.getCustomer_id() != null
+					&& !cdr.getCustomer_id().equalsIgnoreCase("")) {
+				customerID = cdr.getCustomer_id();
+			}
+			// else we need to get customer id from database
+			else if (phoneNumber != null) {
+				if (phoneNumber.startsWith("013")
+						|| phoneNumber.startsWith("014")
+						|| phoneNumber.startsWith("015")
+						|| phoneNumber.startsWith("017")
+						|| phoneNumber.startsWith("018"))
+					phoneNumber = phoneNumber.substring(1);
+				
+				BasicDBObject cdrCustRelationQuery = new BasicDBObject();
+				if(cdr.getConnect_type().equals(Fields.normal)){
+					cdrCustRelationQuery.put("_id", cdr.getCall_sheet_id());
+					customers = find("cdr_customer_relation", cdrCustRelationQuery);
+				}else if(cdr.getConnect_type().equals(Fields.dialout)){
+					cdrCustRelationQuery.put("_id", cdr.getDisposal_agent()+"_"+cdr.getCalled_no());
+					customers = find("cdr_customer_relation", cdrCustRelationQuery);
+				}
+				if(customers!= null && customers.size()>0){
+					customerID = customers.get(0).get("customerId").toString();
+					customerName = customers.get(0).get("customerName").toString();
+					a = 1;
+					remove("cdr_customer_relation", cdrCustRelationQuery);
+					if(cdr.getCdrVar() != null && !cdr.getCdrVar().equals("")){
+						if(cdr.getCdrVar().indexOf("RECALLFLAG")!=-1){
+							cdr.setCdrVar("");
+						}
+					}
+				}else{
+					BasicDBObject customerQuery = new BasicDBObject();
+					customerQuery.put("phone.tel", phoneNumber);
+//					customerQuery.put("delTag", null);
+					BasicDBObject customerReturnField = new BasicDBObject();
+					customerReturnField.put("_id", 1);
+					customerReturnField.put("name", 1);
+					customerReturnField.put("taskId", 1);
+					customerReturnField.put("taskCalled", 1);
+					customerReturnField.put("owner", 1);
+					customerReturnField.put("sysStatus", 1);
+					customers = find(accountDB,
+							cdr.getAccount() + "_customer", customerQuery, customerReturnField);
+					if (customers.size() > 0) {
+						log.warning("[Get Customer] find customer :" + cdr.getAccount() + " " + phoneNumber);
+						customerID = customers.get(0).get("_id").toString();
+						a = customers.size();
+					}else{
+						if (phoneNumber.startsWith("0")
+								&& !phoneNumber.startsWith("13")
+								&& !phoneNumber.startsWith("14")
+								&& !phoneNumber.startsWith("15")
+								&& !phoneNumber.startsWith("17")
+								&& !phoneNumber.startsWith("18")){
+							if(phoneNumber.startsWith("010")
+									||phoneNumber.startsWith("020")
+									||phoneNumber.startsWith("021")
+									||phoneNumber.startsWith("023")
+									||phoneNumber.startsWith("024")
+									||phoneNumber.startsWith("025")
+									||phoneNumber.startsWith("027")
+									||phoneNumber.startsWith("028")
+									||phoneNumber.startsWith("029")){
+								phoneNumber = phoneNumber.substring(3);
+							}else{
+								phoneNumber = phoneNumber.substring(4);
+							}
+							customerQuery.put("phone.tel", phoneNumber);
+							customers = find(accountDB,
+									cdr.getAccount() + "_customer", customerQuery, customerReturnField);
+							if (customers.size() > 0) {
+								log.warning("[Get Customer] find customer :" + cdr.getAccount() + " " + phoneNumber);
+								customerID = customers.get(0).get("_id").toString();
+								a = customers.size();
+							}
+						}
+					}
+				}
+			}
+			// get customer name from database
+			if (customerID != null) {
+				if (a > 1) {
+					customerName = "多个匹配客户";
+					customerID = "00000000000000000000";
+				} else {
+					if(customerName == null){
+						customerName = customers.get(0).get("name").toString();
+						if(cdr.getStatus().equals("dealing")){
+							String	customerowner = customers.get(0).get("owner").toString();
+							//to update customer lastContactTime
+							if(customerowner != null && cdr.getDisposal_agent() != null && customerowner.equals(cdr.getDisposal_agent())){
+								update(accountDB, cdr.getAccount() + "_customer"
+										, new BasicDBObject("_id",customerID)
+										, new BasicDBObject("$set",new BasicDBObject("lastContactTime"
+												,Utils.getDate(Long.parseLong(cdr.getEnd_time().substring(0,cdr.getEnd_time().indexOf(".")+4).replace(".", ""))))));
+									if(customers.get(0).get("sysStatus") != null && customers.get(0).get("sysStatus").toString().equals("0")){
+										String	sysStatus = "1";								                              
+										update(accountDB, cdr.getAccount() + "_customer"
+												, new BasicDBObject("_id",customerID)
+												, new BasicDBObject("$set",new BasicDBObject("sysStatus",sysStatus)));
+													BasicDBObject  cEventData = new BasicDBObject();
+													BasicDBObject  businessData  = new BasicDBObject();											
+													MongoDatabase db = null;
+													db = MongoConnect.getInstance().getReportDB();
+													MongoCollection<BasicDBObject> collection = db.getCollection(Fields.CUSTOMER_REPORT_EVENT, BasicDBObject.class);
+													businessData.put("_id",customerID);
+													businessData.put("tType", "updateSysStatus");
+													businessData.put("user", "system");
+													businessData.put("sysStatus", "1");
+													businessData.put("owner", customerowner);
+													businessData.put("content", "跟进状态变更为【跟进中】");
+													businessData.put("lastTime", System.currentTimeMillis());
+													cEventData.put("type", "updateCustContact");
+													cEventData.put("_id", UUID.randomUUID().toString());
+													cEventData.put("reportStatus", "ready");
+													cEventData.put("account", cdr.getAccount());
+													cEventData.put("reportTime",Utils.getDate("yyyy-MM-dd HH:mm:ss"));
+													cEventData.put("businessData", businessData);
+													collection.insertOne(cEventData);
+									}
+							}
+						}
+					}
+				}
+				//to update customer task
+				log.log(Level.WARNING, "进入 updatecusttask");
+				updateCustomerTask(customers, cdr);
+			} else {
+				customerID = "00000000000000000000";
+				customerName = "未知客户";
+			}
+			cdr.setCustomer_id(customerID);
+			cdr.setCustomer_name(customerName);
+			
+			log.log(Level.WARNING, "进入 upateOutCallSampleTask");
+			if(cdr.getCdrVar() != null && !cdr.getCdrVar().equals("")){
+				if(cdr.getCdrVar().indexOf("SAMPLEID")!=-1){
+					if(cdr.getCdrVar().indexOf(":")!=-1){
+						String sampleId = cdr.getCdrVar().split(":")[1];
+						upateOutCallSampleTask(sampleId, cdr);
+					}
+				}
+			}
+		} catch (Exception e) {
+			log.log(Level.WARNING, "", e);
+		}
+	}
+	
+	private void upateOutCallSampleTask(String sampleId, C5PeerCallRecord cdr){
+		String accountDB = this.getAccountDatabase(cdr.getAccount());
+		BasicDBObject find = new BasicDBObject();
+		find.put("_id", sampleId);
+		List<DBObject> sampleList =find(accountDB, cdr.getAccount()+"_customer_sample", find);
+		if(sampleList.size() > 0){
+			DBObject curSample = sampleList.get(0);
+			BasicDBObject update = new BasicDBObject();
+			BasicDBObject subUpdate = new BasicDBObject();
+			String dialStatus = "unlinked";
+			if(cdr.getStatus().equals("dealing")){
+				dialStatus = "linked";
+			}
+			subUpdate.put("dialStatus", dialStatus);
+			subUpdate.put("reason", cdr.getStatus());
+			update.put("$set", subUpdate);
+			update.put("$push", new BasicDBObject("callId", cdr.getCall_sheet_id()));
+			update(accountDB, cdr.getAccount()+"_customer_sample", find, update);
+			/**
+			if(curSample.get("owner") != null && !curSample.get("owner").equals("")){
+				String owner = curSample.get("owner").toString();
+				String taskId = curSample.get("taskId").toString();
+				BasicDBObject findTaskUser = new BasicDBObject();
+				findTaskUser.put("agent", owner);
+				findTaskUser.put("taskId", taskId);
+				BasicDBObject updateTaskUser = new BasicDBObject();
+				if(curSample.get("dialStatus").equals("NA")){
+					updateTaskUser.put("called", new BasicDBObject("$inc",1));					
+				}
+				if((curSample.get("dialStatus").equals("NA") && cdr.getStatus().equals("dealing"))
+						|| (curSample.get("dialStatus").equals("unlinked") && cdr.getStatus().equals("dealing"))){
+					updateTaskUser.put("linked", new BasicDBObject("$inc",1));					
+				}
+				update("customer_dial_task_user", findTaskUser, updateTaskUser);
+				//to update daily
+//				{
+//				    "_id" : "2c9b0690-c92f-11e3-9f02-7947337f77e5_2014-09-06",
+//				    "account" : "N00000000170",
+//				    "taskId":"", ／／任务id
+//				    "agent" : "", ／／座席id
+//				    "createTime" : "2014-09-06 00:09:45",
+//				    "date" : "2015-09-06",//当日日期
+//				    "called" : 6,／／是否拨打
+//				    "linked":6,   ／／是否接听
+//				}
+				BasicDBObject findDaily = new BasicDBObject();
+				findDaily.put("taskId", taskId);
+				findDaily.put("agent", owner);
+				findDaily.put("date", Utils.getDate("yyyy-MM-dd"));
+				List<DBObject> dailyList = find("customer_dial_task_user_daily", findDaily);
+				if(dailyList.size() > 0){
+					BasicDBObject updateDaily = new BasicDBObject();
+					if(curSample.get("dialStatus").equals("NA")){
+						updateDaily.put("called", new BasicDBObject("$inc",1));					
+					}
+					if((curSample.get("dialStatus").equals("NA") && cdr.getStatus().equals("dealing"))
+							|| (curSample.get("dialStatus").equals("unlinked") && cdr.getStatus().equals("dealing"))){
+						updateDaily.put("linked", new BasicDBObject("$inc",1));					
+					}
+					update("customer_dial_task_user_daily", findDaily, updateDaily);
+				}else{
+					BasicDBObject newDaily = new BasicDBObject();
+					newDaily.put("_id", Utils.getUniqueid());
+					newDaily.put("account", curSample.get("account"));
+					newDaily.put("taskId", taskId);
+					newDaily.put("agent", owner);
+					newDaily.put("createTime", Utils.getDate("yyyy-MM-dd HH:mm:ss"));
+					newDaily.put("date", Utils.getDate("yyyy-MM-dd"));
+					newDaily.put("called", 1);
+					if(cdr.getStatus().equals("dealing")){
+						newDaily.put("linked", 1);						
+					}
+					insert("customer_dial_task_user_daily", newDaily);
+				}
+			}**/
+		}		
+	}
+	
+	private void updateCustomerTask(List<DBObject> customers, C5PeerCallRecord cdr){
+		if(cdr.getConnect_type().equals("dialout") 
+				&& cdr.getDisposal_agent() != null 
+				&& !cdr.getDisposal_agent().equals("")
+				&& customers != null){
+			String agentId = cdr.getDisposal_agent();
+			for(int i=0 ;i<customers.size(); i++){
+				DBObject curCust = customers.get(i);
+				if(curCust.containsField("taskId") && curCust.get("owner").toString().equals(agentId)){
+					String taskId = curCust.get("taskId").toString();
+					String custId = null;
+					if(curCust.containsField("customerId")){
+						custId = curCust.get("customerId").toString();
+					}else{
+						custId = curCust.get("_id").toString();
+					}
+					boolean isCountCalled = false;
+					boolean isCountLinked = false;
+					if(!curCust.containsField("taskCalled")){
+						isCountCalled = true;
+						BasicDBObject updateCustDoc = new BasicDBObject();
+						if(cdr.getStatus().equals("dealing")){
+							updateCustDoc.put("$set", new BasicDBObject("taskCalled","1"));
+							isCountLinked = true;
+						}else{
+							updateCustDoc.put("$set", new BasicDBObject("taskCalled","0"));
+						}
+						String accountDB = this.getAccountDatabase(cdr.getAccount());
+						update(accountDB, cdr.getAccount()+"_customer", new BasicDBObject("_id", custId), updateCustDoc);
+					}else{
+						if(curCust.get("taskCalled").toString().equals("0")){
+							if(cdr.getStatus().equals("dealing")){
+								isCountLinked = true;
+								BasicDBObject updateCustDoc = new BasicDBObject();
+								updateCustDoc.put("$set", new BasicDBObject("taskCalled","1"));
+								String accountDB = this.getAccountDatabase(cdr.getAccount());
+								update(accountDB, cdr.getAccount()+"_customer", new BasicDBObject("_id", custId), updateCustDoc);
+							}	
+						}
+					}
+					if(isCountCalled || isCountLinked){
+						BasicDBObject find = new BasicDBObject("agent", agentId).append("taskId", taskId);
+						BasicDBObject updateDoc = new BasicDBObject();
+						BasicDBObject setDoc = new BasicDBObject();
+						if(isCountCalled){
+							setDoc.put("called", 1);							
+						}
+						if(isCountLinked){
+							setDoc.put("linked", 1);							
+						}
+						updateDoc.put("$inc", setDoc);
+						update("customer_task_user", find, updateDoc);
+					}
+				}
+			}
+		}
+	}
+
+	public synchronized boolean saveToCallSheet(C5PeerCallRecord cdr) {
+		this.updateCustomerInfo(cdr);
+		_saveCallCdr(cdr);
+		return true;
+	}
+	
+	private boolean _saveCallCdrNewLeak(C5PeerCallRecord cdr, DBObject data){
+		String accountDB = this.getAccountDatabase(cdr.getAccount());
+		
+		if ("".equals(accountDB)) {
+			log.warning("Cound not find account database: \r\n"
+					+ cdr.getJsonString());
+			return false;
+		}
+		BasicDBObject findOld = new BasicDBObject();
+		findOld.put("CALL_NO", cdr.getCall_no());
+		List<DBObject> oldList = this.findOne(accountDB,cdr.getAccount() + "_c5_call_sheet_leak", findOld);
+		
+		if(oldList.size()>0){
+			BasicDBObject updateDoc = new BasicDBObject();
+			BasicDBObject setDoc = new BasicDBObject();
+			setDoc.put("NEW_DISPOSAL_AGENT", cdr.getDisposal_agent());
+			setDoc.put("NEW_OFFERING_TIME", data.get("OFFERING_TIME").toString());
+			setDoc.put("NEW_CUSTOMER_ID", cdr.getCustomer_id());
+			setDoc.put("NEW_CUSTOMER_NAME", cdr.getCustomer_name());
+			setDoc.put("NEW_CALL_SHEET_ID", cdr.getCall_sheet_id());
+			setDoc.put("NEW_CALLED_NO", cdr.getCalled_no());
+			setDoc.put("NEW_ERROR_MEMO", cdr.getError_memo());
+			setDoc.put("IS_CALL_BACK", false);
+			updateDoc.put("$set", setDoc);
+			updateDoc.put("$push", new BasicDBObject("LEAK_HISTORY", data));
+			this.update(accountDB, cdr.getAccount() + "_c5_call_sheet_leak", findOld, updateDoc);
+		}else{
+			BasicDBObject newLeakCdr = new BasicDBObject();
+			newLeakCdr.put("_id",Utils.getUniqueid());
+			newLeakCdr.put("CALL_NO", cdr.getCall_no());
+			newLeakCdr.put("NEW_DISPOSAL_AGENT", cdr.getDisposal_agent());
+			newLeakCdr.put("NEW_OFFERING_TIME", data.get("OFFERING_TIME").toString());
+			newLeakCdr.put("NEW_CUSTOMER_ID", cdr.getCustomer_id());
+			newLeakCdr.put("NEW_CUSTOMER_NAME", cdr.getCustomer_name());
+			newLeakCdr.put("NEW_CALL_SHEET_ID", cdr.getCall_sheet_id());
+			newLeakCdr.put("NEW_CALLED_NO", cdr.getCalled_no());
+			newLeakCdr.put("NEW_ERROR_MEMO", cdr.getError_memo());
+			newLeakCdr.put("IS_CALL_BACK", false);
+			List<DBObject> leakHistory = new ArrayList<DBObject>();
+			leakHistory.add(data);
+			newLeakCdr.put("LEAK_HISTORY", leakHistory);
+			this.insert(accountDB, cdr.getAccount() + "_c5_call_sheet_leak", newLeakCdr);
+		}
+		return true;
+	}
+
+	private boolean _callBackCallCdrNewLeak(C5PeerCallRecord cdr, DBObject data){
+		String accountDB = this.getAccountDatabase(cdr.getAccount());
+		if ("".equals(accountDB)) {
+			log.warning("Cound not find account database: \r\n"
+					+ cdr.getJsonString());
+			return false;
+		}
+		BasicDBObject findOld = new BasicDBObject();
+		if(cdr.getConnect_type().equals(Fields.normal)){
+			findOld.put("CALL_NO", cdr.getCall_no());
+		}else if(cdr.getConnect_type().equals(Fields.dialout)){
+			findOld.put("CALL_NO", cdr.getCalled_no());
+		}else if(cdr.getConnect_type().equals(Fields.transfer)){
+			findOld.put("CALL_NO", cdr.getCall_no());
+		}else if(cdr.getConnect_type().equals(Fields.dialTransfer)){
+			findOld.put("CALL_NO", cdr.getCalled_no());
+		}
+		List<DBObject> oldList = this.findOne(accountDB,cdr.getAccount() + "_c5_call_sheet_leak", findOld);
+		if(oldList.size()>0){
+			BasicDBObject updateDoc = new BasicDBObject();
+			BasicDBObject setDoc = new BasicDBObject();
+			setDoc.put("IS_CALL_BACK", true);
+			setDoc.put("LEAK_HISTORY", new ArrayList());
+			setDoc.put("CALLBACK_AGENT", null);
+			updateDoc.put("$set", setDoc);
+//			updateDoc.put("$push", new BasicDBObject("LEAK_HISTORY", data));
+			this.update(accountDB, cdr.getAccount() + "_c5_call_sheet_leak", findOld, updateDoc);
+		}
+		return true;
+	}
+	
+	private void webSiteCdrCount(){
+		String today = Utils.getDate("yyyy-MM-dd");
+		BasicDBObject updateDoc = new BasicDBObject();
+		updateDoc.put("$inc", new BasicDBObject("callIn",1));
+		this.update(Fields.DB_NAME_BILL, "web_site_cdr_count", new BasicDBObject("_id",today), updateDoc, true);
+	}
+	
+	private void multiChannelHistory(C5PeerCallRecord cdr, String accountDB){
+//		 * _id: uuid  用callsheetId
+//		 * type: callin/callout/weixin/chat/mail/business/note
+//		 * customer: 客户id
+//		 * createTime:
+//		 * businessType: 业务类型（自定义） 先空着
+//		 * agent: 坐席
+//		 * status: 状态（不同的数据不一样，通话是通话的状态，业务是业务的步骤，其他的都用自己的状态））
+//		 * lastUpdateTime:
+//		 * comments: 备注  历史可以再页面上添加备注
+//		 * beginTime: 开始时间
+//		 * endTime: 结束时间
+//		 * dispose: 处理结果  （客户自定义）
+		//recordFile 特有字段录音文件名
+		BasicDBObject data = new BasicDBObject();
+		data.put("_id", cdr.getCall_sheet_id());
+		data.put("customer", cdr.getCustomer_id());
+		data.put("createTime",  Utils.getDate("yyyy-MM-dd HH:mm:ss"));
+		data.put("agent", cdr.getDisposal_agent());
+		data.put("status", cdr.getStatus());
+		data.put("beginTime", cdr.getBegin_time());
+		data.put("endTime", cdr.getEnd_time());
+		if(cdr.getConnect_type().equals("normal") || cdr.getConnect_type().equals("transfer")){
+			data.put("type", "callin");
+		}else{
+			data.put("type", "callout");
+		}
+		if(cdr.getStatus().equals("dealing") || cdr.getStatus().equals("voicemail")){
+			data.put("recordFile", cdr.getFileServer()+"/"+cdr.getRecord_file_name());
+		}
+		this.insert(accountDB, cdr.getAccount() + "_history", data);
+	}
+	
+	private boolean _saveCallCdr(C5PeerCallRecord cdr) {
+		try {
+			String accountDB = this.getAccountDatabase(cdr.getAccount());
+			if ("".equals(accountDB)) {
+				log.warning("Cound not find account database: \r\n"
+						+ cdr.getJsonString());
+				return false;
+			}
+
+			Timestamp _begin_time = Utils.getTimestamp(cdr.getBegin_time());
+			Timestamp _offering_time = Utils.getTimestamp(cdr
+					.getOffering_time());
+			Timestamp _end_time = Utils.getTimestamp(cdr.getEnd_time());
+			Timestamp _queue_time = Utils.getTimestamp(cdr.getQueue_time());
+			long begin_time = _begin_time == null ? -1 : _begin_time.getTime();
+			long offering_time = _offering_time == null ? -1 : _offering_time
+					.getTime();
+			long end_time = _end_time == null ? -1 : _end_time.getTime();
+			long queue_time = _queue_time == null ? -1 : _queue_time.getTime();
+
+			BasicDBObject data = new BasicDBObject();
+			data.put("_id", cdr.getCall_sheet_id());
+			data.put("CALL_SHEET_ID", cdr.getCall_sheet_id());
+			data.put("ACCOUNT_ID", cdr.getAccount());
+			data.put("CUSTOMER_ID", cdr.getCustomer_id());
+			data.put("CALL_NO", cdr.getCall_no());
+			data.put("STATUS", cdr.getStatus());
+			data.put("DISPOSAL_AGENT", cdr.getDisposal_agent());
+			data.put("BEGIN_TIME", Utils.getDate(begin_time));
+			data.put("END_TIME", Utils.getDate(end_time));
+			data.put("CALLED_NO", cdr.getCalled_no());
+			data.put("OFFERING_TIME", Utils.getDate(offering_time));
+			data.put("CONNECT_TYPE", cdr.getConnect_type());
+			data.put("RECORD_FILE_NAME", cdr.getRecord_file_name());
+			data.put("CUSTOMER_NAME", cdr.getCustomer_name());
+			data.put("ORIGIN_ID", cdr.getOrigin_id());
+			data.put("REF_CALL_SHEET_ID", cdr.getRef_call_sheet_id());
+			data.put("DIRECTION", cdr.getDirection());
+			data.put("ERROR_MEMO", cdr.getError_memo());
+			data.put("CALL_ID", cdr.getCall_id());
+			data.put("LOCATION", cdr.getLocation());
+			data.put("ACTION_ID", cdr.getAction_id());
+			data.put("PBX", cdr.getPbx());
+			data.put("LOGIN_TYPE", cdr.getExtenType());
+			data.put("LOCATION_NAME", cdr.getLocationName());
+			data.put("LOCATION_ID", cdr.getLocationId());
+			data.put("QUEUE_NAME", cdr.getQueue_name());
+			data.put("QUEUE_TIME", Utils.getDate(queue_time));
+			data.put("FILE_SERVER", cdr.getFileServer());
+			data.put("STATISTIC", cdr.getStatistic());
+			data.put("PROVINCE", cdr.getProvince());
+			data.put("PROVINCE_CODE", cdr.getProvinceCode());
+			data.put("DISTRICT", cdr.getDistrict());
+			data.put("DISTRICT_CODE", cdr.getDistrictCode());
+			if(cdr.getKeyTag()){
+				data.put("KEY_TAG", cdr.getKeyTag());
+			}
+			if(cdr.getConnect_type().equals("normal") || cdr.getConnect_type().equals("transfer")){
+				data.put("QUICK_QUERY_NUM", cdr.getCall_no());
+			}else{
+				data.put("QUICK_QUERY_NUM", cdr.getCalled_no());
+			}
+			data.put("IS_AUTO_CALL", cdr.isAutoCall());
+			log.warning("WHEN SAVE CALL CDR, CDR'S LABELS ARE " + cdr.getLabels());
+			if(cdr.getLabels() != null && cdr.getLabels().size() > 0){
+				data.put("LABELS", cdr.getLabels());
+			}
+			if(cdr.getCdrVar() != null && !cdr.getCdrVar().equals("")){
+				if(cdr.getCdrVar().indexOf(":")!=-1){
+					String key = cdr.getCdrVar().split(":")[0];
+					String value = cdr.getCdrVar().split(":")[1];
+					data.put(key, value);
+				}
+			}
+			if(cdr.getConnect_type().equalsIgnoreCase("transfer") || cdr.getConnect_type().equalsIgnoreCase("dialTransfer")){
+				String TransferMode = cdr.getTransferMode();
+				String TransferNum = cdr.getTransferNum();
+				String TransferAgent = cdr.getTransferAgent();
+				if(TransferMode!=null && !TransferMode.equals("") && TransferNum!=null && !TransferNum.equals("") &&TransferAgent!= null && !TransferAgent.equals("")){
+					data.put("TRANSFER_MODE",TransferMode);
+					data.put("TRANSFER_NUM",TransferNum);
+					data.put("TRANSFER_AGENT",TransferAgent);
+				};
+			}
+			if (end_time > 0) {
+				int callTimeLength = 0, queueTimeLength = 0;
+				long queueEndTime = end_time;
+				long ivrEndTime = end_time;
+				if (begin_time > 0) {
+					callTimeLength = ((int) (end_time / 1000))
+							- ((int) (begin_time / 1000));
+					callTimeLength = callTimeLength >= 0 ? callTimeLength : 0;
+					queueEndTime = begin_time;
+					ivrEndTime = begin_time;
+				}
+				if(cdr.getStatus().equals(Fields.dealing) && callTimeLength == 0){
+					callTimeLength = 1;
+				}
+				data.put("CALL_TIME_LENGTH", callTimeLength);
+				
+				if(cdr.getConnect_type().equalsIgnoreCase("normal")){
+					if (queue_time > 0) {
+						queueTimeLength = ((int) (queueEndTime / 1000))
+								- ((int) (queue_time / 1000));
+						queueTimeLength = queueTimeLength >= 0 ? queueTimeLength : 0;
+					}
+					data.put("QUEUE_TIME_LENGTH", queueTimeLength);
+					
+					Timestamp offerint_time = Utils
+							.getTimestamp(cdr.getOffering_time());
+					int ivrTimeLength = ((int) (ivrEndTime / 1000))
+							- ((int) (offerint_time.getTime() / 1000));
+					ivrTimeLength = ivrTimeLength >= 0 ? ivrTimeLength : 0;
+					data.put("IVR_TIME_LENGTH", ivrTimeLength);
+					
+					// check fromDID is 400 serviceNo, to insert 400 CDR if yes.
+					String serviceNoType = cdr.getServiceNoType();
+					if (serviceNoType != null && serviceNoType.equals("400")) {
+						log400.finest(cdr.getJsonString());
+						BasicDBObject insert400Data = new BasicDBObject();
+						insert400Data.put("CALL_SHEET_ID",
+								cdr.getCall_sheet_id());
+						insert400Data.put("ACCOUNT_ID", cdr.getAccount());
+						insert400Data.put("CALL_NO", cdr.getCall_no());
+						insert400Data.put("CALLED_NO", cdr.getCalled_no());
+						insert400Data.put("BEGIN_TIME", Utils.getDate(offering_time));
+						insert400Data.put("END_TIME", Utils.getDate(end_time));
+						int cdr400TimeLength = ((int) (end_time / 1000))
+								- ((int) (offerint_time.getTime() / 1000));
+						cdr400TimeLength = cdr400TimeLength >= 0 ? cdr400TimeLength : 0;
+						insert400Data.put("CALL_TIME_LENGTH", cdr400TimeLength);
+						insert400Data.put("CALLER_DISTICT_NO",
+								cdr.getDistrictCode());
+						insert400Data.put("CALLER_DISTRICT",
+								cdr.getDistrict());
+						insert400Data.put("CALLER_PROVICE",
+								cdr.getProvince());
+						insert400Data.put("ISDO", "0");
+						this.insert("call_sheet_400_bill", insert400Data);
+					}
+				}
+			}
+			BasicDBObject ivestigateFind = new BasicDBObject("_id", cdr.getCall_sheet_id());
+			List<DBObject> ivestigateDoc = this.find("cdr_investigate_cache", ivestigateFind);
+			if(ivestigateDoc != null && ivestigateDoc.size() > 0){
+				data.put("INVESTIGATE", ivestigateDoc.get(0).get("investigate"));
+				this.remove("cdr_investigate_cache", ivestigateFind);
+			}
+			this.insert(accountDB, cdr.getAccount() + "_c5_call_sheet", data);
+			this.insertCdrReportEvent(data);
+			//if autoCall num, we don't record leak.
+			if(!cdr.isAutoCall()){
+				if(cdr.getConnect_type().equals(Fields.normal)){
+					//for new call_sheet_leak
+					if(cdr.getStatus().equals(Fields.notDeal) || cdr.getStatus().equals(Fields.queueLeak) || cdr.getStatus().equals(Fields.leak)){
+						_saveCallCdrNewLeak(cdr, data);
+					}
+				}
+				if(cdr.getStatus().equals(Fields.dealing)){
+					_callBackCallCdrNewLeak(cdr, data);			
+				}
+			}
+			//for website cdr count
+			this.webSiteCdrCount();
+			if(!cdr.getCustomer_id().equals("00000000000000000000")){
+				//for multiChannelHistory
+				this.multiChannelHistory(cdr, accountDB);				
+			}
+			//for numLibrary
+//			if(cdr.getConnect_type().equals(Fields.dialout)){
+//				HashMap<String,String> libraryNumMap = new HashMap<String, String>();
+//				if(cdr.getStatus().equals(Fields.dealing)){
+//					libraryNumMap.put("canCall","true");
+//					libraryNumMap.put("status",Fields.dealing);
+//				}else if((cdr.getStatus().equals(Fields.notDeal))){
+//					libraryNumMap.put("canCall","true");
+//					libraryNumMap.put("status",Fields.notDeal);
+//				}else{
+//					libraryNumMap.put("canCall","false");
+//				}
+//				libraryNumMap.put("_id", cdr.getCalled_no());
+//				libraryNumMap.put("province", cdr.getProvince());
+//				libraryNumMap.put("district", cdr.getDistrict());
+//				libraryNumMap.put("districtCode", cdr.getDistrictCode());
+//				libraryNumMap.put("lastCallTime", Utils.getDate(offering_time));
+//				CDRLibraryHandler.processCdrLibrary(libraryNumMap);
+//			}
+			//deal hangup sms
+			String ismob_num = "";
+			String send_template="";
+			if (cdr.getConnect_type() != null && cdr.getConnect_type().equals("normal")) {
+	            ismob_num = cdr.getCall_no().toString();
+	        } else if (cdr.getConnect_type() != null && cdr.getConnect_type().equals("dialout")) {
+	            ismob_num = cdr.getCalled_no().toString();
+	        }
+	        if (Utils.isMobileNo(ismob_num)) {
+	                DBObject dbo = HangupSmsCach.getHangupsmscach(cdr.getAccount());
+	                if(dbo == null){
+	                	return true;
+	                }
+	                SimpleDateFormat dateformat = new SimpleDateFormat("HH:mm:ss");
+	                boolean issend=false;
+	                Date begin_callin_time = new Date();
+	                Date end_callin_time = new Date();
+	                String cdr_end_time_str=cdr.getEnd_time().substring(0,cdr.getEnd_time().indexOf(".")+4).replace(".", "");
+	                long cdr_end_time_s = Long.valueOf(cdr_end_time_str);
+	                Date cdr_end_time = new Date(cdr_end_time_s);
+					try {
+						cdr_end_time = dateformat.parse(dateformat.format(cdr_end_time));
+					} catch (ParseException e1) {
+						e1.printStackTrace();
+					}
+	                if(cdr.getConnect_type() != null &&cdr.getConnect_type().equals("normal")&&Boolean.valueOf(dbo.get("call_in").toString())){
+	                	send_template = dbo.get("call_in_template").toString();
+	                	if(dbo.get("choose_service") == null||(dbo.get("choose_service") != null&&dbo.get("choose_service").toString().equals("all"))){
+	                		try {
+		                		if(dbo.get("call_in_begintime") == null||dbo.get("call_in_endtime") == null){
+		    							 begin_callin_time = dateformat.parse("00:00:00");
+		    							 end_callin_time = dateformat.parse("23:59:59");
+		                		}else{
+		                				begin_callin_time = dateformat.parse(dbo.get("call_in_begintime").toString());
+		                				end_callin_time = dateformat.parse(dbo.get("call_in_endtime").toString());
+		                		}
+	                		} catch (ParseException e) {
+	                			e.printStackTrace();
+	                		}
+	                		if(dbo.get("call_in_status").toString().equals(cdr.getStatus())||dbo.get("call_in_status").toString().equals("")){
+	                			if(begin_callin_time.getTime()>end_callin_time.getTime()){
+	                				if(cdr_end_time.getTime()>begin_callin_time.getTime()||cdr_end_time.getTime()<end_callin_time.getTime()){
+	                					issend=true;
+	                				} 
+    	                		}else{
+    	                			if(cdr_end_time.getTime()>begin_callin_time.getTime()&&cdr_end_time.getTime()<end_callin_time.getTime()){
+    	                				issend=true;
+	                				}
+    	                		}
+	                		}
+	                	}else if(dbo.get("choose_service") !=null&&dbo.get("choose_service").toString().equals("single")){
+	                		List<DBObject> templates = (List<DBObject>)dbo.get("templates");
+	                		for (int i = 0; i < templates.size(); i++) {
+	                			if(templates.get(i).get("service_num").toString().equals(cdr.getCalled_no())){
+	                				try {
+										begin_callin_time = dateformat.parse(templates.get(i).get("call_in_begintime").toString());
+										end_callin_time = dateformat.parse(templates.get(i).get("call_in_endtime").toString());
+									} catch (ParseException e) {
+										e.printStackTrace();
+									}
+	                				send_template = templates.get(i).get("call_in_template").toString();
+	                				if(templates.get(i).get("call_in_status").toString().equals(cdr.getStatus())||templates.get(i).get("call_in_status").toString().equals("")){
+	    	                			if(begin_callin_time.getTime()>end_callin_time.getTime()){
+	    	                				if(cdr_end_time.getTime()>begin_callin_time.getTime()||cdr_end_time.getTime()<end_callin_time.getTime()){
+	    	                					issend=true;
+	    	        							break;
+	    	                				} 
+	        	                		}else{
+	        	                			if(cdr_end_time.getTime()>begin_callin_time.getTime()&&cdr_end_time.getTime()<end_callin_time.getTime()){
+	        	                				issend=true;
+	                							break;
+	    	                				}
+	        	                		}
+	    	                		}
+	                			}
+							}
+	                	}
+	                }else if(cdr.getConnect_type() != null&&cdr.getConnect_type().equals("dialout")&&Boolean.valueOf(dbo.get("call_out").toString())
+	                		&&(dbo.get("call_out_status") == null||(dbo.get("call_out_status").toString().equals(cdr.getStatus())||dbo.get("call_out_status").toString().equals("")))){
+	                	send_template = dbo.get("call_out_template").toString();
+	                	issend=true;
+	                }
+	                if (issend) {
+	                	executor.execute(new HangupSMSSend(cdr.getAccount(),Utils.md5(cdr.getAccount()) ,ismob_num,send_template.split("_")[1]));
+	                }
+	        }
+		} catch (Exception e) {
+			log.log(Level.WARNING, "", e);
+		}
+		return true;
+	}
+
+	public synchronized void updateToCallSheet(C5PeerCallRecord cdr) {
+		updateCallCdr(cdr);
+		updateCallLeakCdr(cdr);
+	}
+
+	private void updateCallCdr(C5PeerCallRecord cdr) {
+		String accountDB = this.getAccountDatabase(cdr.getAccount());
+		if ("".equals(accountDB)) {
+			log.warning("Cound not find account database: \r\n"
+					+ cdr.getJsonString());
+			return;
+		}
+
+		Timestamp _begin_time = Utils.getTimestamp(cdr.getBegin_time());
+		Timestamp _end_time = Utils.getTimestamp(cdr.getEnd_time());
+		Timestamp _queue_time = Utils.getTimestamp(cdr.getQueue_time());
+		long begin_time = _begin_time == null ? -1 : _begin_time.getTime();
+		long end_time = _end_time == null ? -1 : _end_time.getTime();
+		long queue_time = _queue_time == null ? -1 : _queue_time.getTime();
+		Timestamp _offering_time = Utils.getTimestamp(cdr
+				.getOffering_time());
+		long offering_time = _offering_time == null ? -1 : _offering_time
+				.getTime();
+
+		BasicDBObject find = new BasicDBObject();
+		find.put("CALL_SHEET_ID", cdr.getCall_sheet_id());
+		DBObject update = new BasicDBObject();
+		update.put("ACCOUNT_ID", cdr.getAccount());
+		update.put("CALL_NO", cdr.getCall_no());
+		update.put("STATUS", cdr.getStatus());
+		update.put("BEGIN_TIME", Utils.getDate(begin_time));
+		update.put("END_TIME", Utils.getDate(end_time));
+		update.put("OFFERING_TIME", Utils.getDate(offering_time));
+		update.put("CALLED_NO", cdr.getCalled_no());
+		update.put("CONNECT_TYPE", cdr.getConnect_type());
+		update.put("RECORD_FILE_NAME", cdr.getRecord_file_name());
+		update.put("ORIGIN_ID", cdr.getOrigin_id());
+		update.put("CALL_ID", cdr.getCall_id());
+		update.put("DISPOSAL_AGENT", cdr.getDisposal_agent());
+		update.put("ERROR_MEMO", cdr.getError_memo());
+		update.put("LOCATION", cdr.getLocation());
+		update.put("ACTION_ID", cdr.getAction_id());
+		update.put("PBX", cdr.getPbx());
+		update.put("LOGIN_TYPE", cdr.getExtenType());
+		update.put("LOCATION_NAME", cdr.getLocationName());
+		update.put("LOCATION_ID", cdr.getLocationId());
+		update.put("QUEUE_NAME", cdr.getQueue_name());
+		update.put("QUEUE_TIME", Utils.getDate(queue_time));
+		update.put("FILE_SERVER", cdr.getFileServer());
+		update.put("STATISTIC", cdr.getStatistic());
+		update.put("PROVINCE", cdr.getProvince());
+		update.put("PROVINCE_CODE", cdr.getProvinceCode());
+		update.put("DISTRICT", cdr.getDistrict());
+		update.put("DISTRICT_CODE", cdr.getDistrictCode());
+
+		if (end_time > 0) {
+			int callTimeLength = 0, queueTimeLength = 0;
+			long queueEndTime = end_time;
+			long ivrEndTime = end_time;
+			if (begin_time > 0) {
+				callTimeLength = ((int) (end_time / 1000))
+						- ((int) (begin_time / 1000));
+				callTimeLength = callTimeLength >= 0 ? callTimeLength : 0;
+				queueEndTime = begin_time;
+				ivrEndTime = begin_time;
+			}
+			update.put("CALL_TIME_LENGTH", callTimeLength);
+			
+			if(cdr.getConnect_type().equalsIgnoreCase("normal")){
+				if (queue_time > 0) {
+					queueTimeLength = ((int) (queueEndTime / 1000))
+							- ((int) (queue_time / 1000));
+					queueTimeLength = queueTimeLength >= 0 ? queueTimeLength : 0;
+				}
+				update.put("QUEUE_TIME_LENGTH", queueTimeLength);
+				
+				Timestamp offerint_time = Utils
+						.getTimestamp(cdr.getOffering_time());
+				int ivrTimeLength = ((int) (ivrEndTime / 1000))
+						- ((int) (offerint_time.getTime() / 1000));
+				ivrTimeLength = ivrTimeLength >= 0 ? ivrTimeLength : 0;
+				update.put("IVR_TIME_LENGTH", ivrTimeLength);
+				
+				// check fromDID is 400 serviceNo, to insert 400 CDR if yes.
+				String serviceNoType = cdr.getServiceNoType();
+				if (serviceNoType != null && serviceNoType.equals("400")) {
+					log400.finest(cdr.getJsonString());
+					BasicDBObject insert400Data = new BasicDBObject();
+					insert400Data.put("CALL_SHEET_ID",
+							cdr.getCall_sheet_id());
+					insert400Data.put("ACCOUNT_ID", cdr.getAccount());
+					insert400Data.put("CALL_NO", cdr.getCall_no());
+					insert400Data.put("CALLED_NO", cdr.getCalled_no());
+					insert400Data.put("BEGIN_TIME", Utils.getDate(offering_time));
+					insert400Data.put("END_TIME", Utils.getDate(end_time));
+					int cdr400TimeLength = ((int) (end_time / 1000))
+							- ((int) (offerint_time.getTime() / 1000));
+					cdr400TimeLength = cdr400TimeLength >= 0 ? cdr400TimeLength : 0;
+					insert400Data.put("CALL_TIME_LENGTH", cdr400TimeLength);
+					insert400Data.put("CALLER_DISTICT_NO",
+							cdr.getDistrictCode());
+					insert400Data.put("CALLER_DISTRICT",
+							cdr.getDistrict());
+					insert400Data.put("CALLER_PROVICE",
+							cdr.getProvince());
+					insert400Data.put("ISDO", "0");
+					this.insert("call_sheet_400_bill", insert400Data);
+				}
+			}
+		}
+
+		update(accountDB, cdr.getAccount() + "_c5_call_sheet", find,
+				new BasicDBObject("$set", update), true);
+	}
+
+	private void updateCallLeakCdr(C5PeerCallRecord cdr) {
+		try {
+			if (cdr.getConnect_type().equals("normal")) {
+				BasicDBObject deleteLeakFind = new BasicDBObject();
+				deleteLeakFind.put("ACCOUNT_ID", cdr.getAccount());
+				deleteLeakFind.put("CALL_NO", cdr.getCall_no());
+				remove("c5_call_sheet_leak", deleteLeakFind);
+
+				if (!cdr.getStatus().equals("dealing")) {
+					this.updateCustomerInfo(cdr);
+					Timestamp _offering_time = Utils.getTimestamp(cdr
+							.getOffering_time());
+					long offering_time = _offering_time == null ? -1
+							: _offering_time.getTime();
+					Timestamp _begin_time = Utils.getTimestamp(cdr
+							.getBegin_time());
+					Timestamp _end_time = Utils.getTimestamp(cdr.getEnd_time());
+					Timestamp _queue_time = Utils.getTimestamp(cdr
+							.getQueue_time());
+					long begin_time = _begin_time == null ? -1 : _begin_time
+							.getTime();
+					long end_time = _end_time == null ? -1 : _end_time
+							.getTime();
+					long queue_time = _queue_time == null ? -1 : _queue_time
+							.getTime();
+					BasicDBObject insertData = new BasicDBObject();
+					insertData.put("CALL_SHEET_ID", cdr.getCall_sheet_id());
+					insertData.put("ACCOUNT_ID", cdr.getAccount());
+					insertData.put("CUSTOMER_ID", cdr.getCustomer_id());
+					insertData.put("CALL_NO", cdr.getCall_no());
+					insertData.put("STATUS", cdr.getStatus());
+					insertData.put("DISPOSAL_AGENT", cdr.getDisposal_agent());
+					insertData.put("BEGIN_TIME", Utils.getDate(begin_time));
+					insertData.put("END_TIME", Utils.getDate(end_time));
+					insertData.put("CALLED_NO", cdr.getCalled_no());
+					insertData.put("OFFERING_TIME",
+							Utils.getDate(offering_time));
+					insertData.put("CONNECT_TYPE", cdr.getConnect_type());
+					insertData.put("RECORD_FILE_NAME",
+							cdr.getRecord_file_name());
+					insertData.put("CUSTOMER_NAME", cdr.getCustomer_name());
+					insertData.put("ORIGIN_ID", cdr.getOrigin_id());
+					insertData.put("REF_CALL_SHEET_ID",
+							cdr.getRef_call_sheet_id());
+					insertData.put("DIRECTION", cdr.getDirection());
+					insertData.put("ERROR_MEMO", cdr.getError_memo());
+					insertData.put("CALL_ID", cdr.getCall_id());
+					insertData.put("LOCATION", cdr.getLocation());
+					insertData.put("ACTION_ID", cdr.getAction_id());
+					insertData.put("PBX", cdr.getPbx());
+					insertData.put("LOGIN_TYPE", cdr.getExtenType());
+					insertData.put("LOCATION_NAME", cdr.getLocationName());
+					insertData.put("LOCATION_ID", cdr.getLocationId());
+					insertData.put("QUEUE_NAME", cdr.getQueue_name());
+					insertData.put("QUEUE_TIME", Utils.getDate(queue_time));
+					insertData.put("FILE_SERVER", cdr.getFileServer());
+					insertData.put("CALLBACK_AGENT", cdr.getDisposal_agent());
+
+					insert("c5_call_sheet_leak", insertData);
+				}
+			} else if (cdr.getConnect_type().equals("dialout")) {
+				if (cdr.getStatus().equals("dealing")) {
+					BasicDBObject deleteLeakFind = new BasicDBObject();
+					deleteLeakFind.put("ACCOUNT_ID", cdr.getAccount());
+					deleteLeakFind.put("CALL_NO", cdr.getCalled_no());
+					remove("c5_call_sheet_leak", deleteLeakFind);
+				}
+			}
+		} catch (Exception e) {
+			log.log(Level.WARNING, "", e);
+		}
+	}
+
+	public long count(String collectionName, BasicDBObject map) {
+		try {
+			MongoCollection<BasicDBObject> collection = MongoConnect.getInstance().getDB()
+					.getCollection(collectionName, BasicDBObject.class);
+			if (map == null) {
+				return collection.count();
+			} else {
+				return collection.count(map);
+			}
+		} catch (Exception e) {
+			log.log(Level.WARNING, "", e);
+		}
+		return 0;
+	}
+	
+	public long count(String databaseName, String collectionName, BasicDBObject map) {
+		try {
+			MongoDatabase db = null;
+			if (databaseName == null || "".equals(databaseName)) {
+				db = MongoConnect.getInstance().getDB();
+			} else {
+				db = MongoConnect.getInstance().getDB(databaseName);
+			}
+			MongoCollection<BasicDBObject> collection = db.getCollection(collectionName, BasicDBObject.class);
+			if (map == null) {
+				return collection.count();
+			} else {
+				return collection.count(map);
+			}
+		} catch (Exception e) {
+			log.log(Level.WARNING, "", e);
+		}
+		return 0;
+	}
+
+	public void insert(String collectionName, BasicDBObject map) {
+		this.insert(null, collectionName, map);
+	}
+
+	public void insert(String databaseName, String collectionName, BasicDBObject map) {
+		try {
+			MongoDatabase db = null;
+			if (databaseName == null || "".equals(databaseName)) {
+				db = MongoConnect.getInstance().getDB();
+			} else {
+				db = MongoConnect.getInstance().getDB(databaseName);
+			}
+			MongoCollection<BasicDBObject> collection = db.getCollection(collectionName, BasicDBObject.class);
+			collection.insertOne(map);
+		} catch (Exception e) {
+			log.log(Level.WARNING, "", e);
+		}
+	}
+	
+//	public void insert(String databaseName, String collectionName, DBObject map, WriteConcern concern) {
+//		try {
+//			MongoDatabase db = null;
+//			if (databaseName == null || "".equals(databaseName)) {
+//				db = MongoConnect.getInstance().getDB();
+//			} else {
+//				db = MongoConnect.getInstance().getDB(databaseName);
+//			}
+//			db.requestStart();
+//			MongoCollection collection = db.getCollection(collectionName);
+//			WriteResult ret = collection.insert(map);
+//			if(!ret.getLastError().ok()){
+//				log.log(Level.WARNING, "mongdb update failed! getLastError = " + ret.getLastError().getErrorMessage());				
+//			}
+//			log.log(Level.WARNING, "Collect report Callout do DB = DBisOK : "+ ret.getLastError().ok() +", reportInsert= "+ map);	
+//			db.requestDone();
+//		} catch (Exception e) {
+//			log.log(Level.WARNING, "", e);
+//		}
+//	}
+
+	public void update(String collectionName, BasicDBObject condition, BasicDBObject doc) {
+		this.update(null, collectionName, condition, doc);
+	}
+
+	public void update(String databaseName, String collectionName,
+			BasicDBObject condition, BasicDBObject doc) {
+		try {
+			MongoDatabase db = null;
+			if (databaseName == null || "".equals(databaseName)) {
+				db = MongoConnect.getInstance().getDB();
+			} else {
+				db = MongoConnect.getInstance().getDB(databaseName);
+			}
+			MongoCollection<BasicDBObject> collection = db.getCollection(collectionName, BasicDBObject.class);
+			collection.updateMany(condition, doc);
+		} catch (Exception e) {
+			log.log(Level.WARNING, "", e);
+		}
+	}
+	
+//	public void update(String collectionName,
+//			DBObject condition, DBObject doc, WriteConcern concern) {
+//		try {
+//			MongoDatabase db = null;
+//			db = MongoConnect.getInstance().getDB();
+//
+//			db.requestStart();
+//			MongoCollection collection = db.getCollection(collectionName);
+//			WriteResult ret = collection.update(condition, doc, false, true, concern);
+//			if(!ret.getLastError().ok()){
+//				log.log(Level.WARNING, "mongdb update failed! getLastError = " + ret.getLastError().getErrorMessage());				
+//			}
+//			db.requestDone();
+//		} catch (Exception e) {
+//			log.log(Level.WARNING, "", e);
+//		}
+//	}
+
+	public void update(String collectionName, BasicDBObject condition, BasicDBObject doc,
+			boolean isAdd) {
+		this.update(null, collectionName, condition, doc, isAdd);
+	}
+
+	public void update(String databaseName, String collectionName,
+			BasicDBObject condition, BasicDBObject doc, boolean isAdd ) {
+		try {
+			MongoDatabase db = null;
+			if (databaseName == null || "".equals(databaseName)) {
+				db = MongoConnect.getInstance().getDB();
+			} else {
+				db = MongoConnect.getInstance().getDB(databaseName);
+			}
+			MongoCollection<BasicDBObject> collection = db.getCollection(collectionName, BasicDBObject.class);
+			UpdateOptions uo = new UpdateOptions();
+			uo.upsert(isAdd);
+			collection.updateOne(condition, doc, uo);
+		} catch (Exception e) {
+			log.log(Level.WARNING, "", e);
+		}
+	}
+	
+    public void update(String databaseName, String collectionName, BasicDBObject condition, BasicDBObject doc, WriteConcern concern) {
+        try {
+        	MongoDatabase db = null;
+			if (databaseName == null || "".equals(databaseName)) {
+				db = MongoConnect.getInstance().getDB();
+			} else {
+				db = MongoConnect.getInstance().getDB(databaseName);
+			}
+//			db.requestStart();
+			MongoCollection<BasicDBObject> collection = db.getCollection(collectionName, BasicDBObject.class);
+			UpdateOptions uo = new UpdateOptions();
+			uo.upsert(false);
+			collection.updateMany(condition, doc, uo);
+//					(condition, doc, false, true, concern);
+//			if(!ret.getLastError().ok()){
+//				log.log(Level.WARNING, "mongdb update failed! getLastError = " + ret.getLastError().getErrorMessage());				
+//			}
+//			db.requestDone();
+        } catch (Exception e) {
+            log.log(Level.WARNING, "", e);
+        }
+    }
+    
+//    public void update(String databaseName, String collectionName, DBObject condition, DBObject doc, boolean isAdd, boolean multi
+//    		, WriteConcern concern) {
+//        try {
+//        	MongoDatabase db = null;
+//			if (databaseName == null || "".equals(databaseName)) {
+//				db = MongoConnect.getInstance().getDB();
+//			} else {
+//				db = MongoConnect.getInstance().getDB(databaseName);
+//			}
+//			db.requestStart();
+//			MongoCollection collection = db.getCollection(collectionName);
+//			WriteResult ret = collection.update(condition, doc, isAdd, multi, concern);
+//			if(!ret.getLastError().ok()){
+//				log.log(Level.WARNING, "mongdb update failed! getLastError = " + ret.getLastError().getErrorMessage());				
+//			}
+//			log.log(Level.WARNING, "Collect report Callout do DB = DBisOK : "+ ret.getLastError().ok() +", reportUpdateSet= "+ doc);	
+//			db.requestDone();
+//        } catch (Exception e) {
+//            log.log(Level.WARNING, "", e);
+//        }
+//    }
+
+	public void remove(String collectionName, BasicDBObject condition) {
+		this.remove(null, collectionName, condition);
+	}
+
+	public void remove(String databaseName, String collectionName,
+			BasicDBObject condition) {
+		try {
+			MongoDatabase db = null;
+			if (databaseName == null || "".equals(databaseName)) {
+				db = MongoConnect.getInstance().getDB();
+			} else {
+				db = MongoConnect.getInstance().getDB(databaseName);
+			}
+			MongoCollection<BasicDBObject> collection = db.getCollection(collectionName, BasicDBObject.class);
+			collection.deleteMany(condition);
+		} catch (Exception e) {
+			log.log(Level.WARNING, "", e);
+		}
+	}
+	
+//	public void remove(String databaseName, String collectionName,
+//			DBObject condition, WriteConcern concern) {
+//		try {
+//			MongoDatabase db = null;
+//			if (databaseName == null || "".equals(databaseName)) {
+//				db = MongoConnect.getInstance().getDB();
+//			} else {
+//				db = MongoConnect.getInstance().getDB(databaseName);
+//			}
+//			db.requestStart();
+//			MongoCollection collection = db.getCollection(collectionName);
+//			WriteResult ret = collection.remove(condition);
+//			if(!ret.getLastError().ok()){
+//				log.log(Level.WARNING, "mongdb update failed! getLastError = " + ret.getLastError().getErrorMessage());				
+//			}
+//			log.log(Level.WARNING, "Collect report Callout do DB = DBisOK : "+ ret.getLastError().ok() +", reportRemove= "+ condition);	
+//			db.requestDone();
+//		} catch (Exception e) {
+//			log.log(Level.WARNING, "", e);
+//		}
+//	}
+
+//	public List<DBObject> find(String collectionName) {
+//		return find(null, collectionName);
+//	}
+//
+	public List<DBObject> find(String databaseName, String collectionName) {
+		MongoDatabase db = null;
+		if (databaseName == null || "".equals(databaseName)) {
+			db = MongoConnect.getInstance().getDB();
+		} else {
+			db = MongoConnect.getInstance().getDB(databaseName);
+		}
+		List<DBObject> map = new ArrayList<DBObject>();
+		try {
+			MongoCollection<BasicDBObject> collection = db.getCollection(collectionName,BasicDBObject.class);
+			FindIterable<BasicDBObject> iterable = collection.find();
+			MongoCursor<BasicDBObject> result = iterable.iterator();
+			while (result.hasNext()) {
+				BasicDBObject ob = result.next();
+				map.add(ob);
+			}
+		} catch (Exception e) {
+			log.log(Level.WARNING, "", e);
+		}
+		return map;
+	}
+
+	public List<DBObject> find(String collectionName, BasicDBObject condition) {
+		return find(null, collectionName, condition);
+	}
+
+	public List<DBObject> find(String databaseName, String collectionName,
+			BasicDBObject condition) {
+		MongoDatabase db = null;
+		if (databaseName == null || "".equals(databaseName)) {
+			db = MongoConnect.getInstance().getDB();
+		} else {
+			db = MongoConnect.getInstance().getDB(databaseName);
+		}
+		List<DBObject> map = new ArrayList<DBObject>();
+		try {
+			MongoCollection<BasicDBObject> collection = db.getCollection(collectionName, BasicDBObject.class);
+			FindIterable<BasicDBObject> iterable = collection.find(condition);
+		    MongoCursor<BasicDBObject> cursor = iterable.iterator();
+		    while (cursor.hasNext()) {
+		    	BasicDBObject ob = cursor.next();
+				map.add(ob);
+			}
+		} catch (Exception e) {
+			log.log(Level.WARNING, ""+condition, e);
+		}
+		return map;
+	}
+
+	public List<DBObject> findOne(String databaseName, String collectionName, BasicDBObject condition){
+		MongoDatabase db = null;
+		if (databaseName == null || "".equals(databaseName)) {
+			db = MongoConnect.getInstance().getDB();
+		} else {
+			db = MongoConnect.getInstance().getDB(databaseName);
+		}
+		List<DBObject> map = new ArrayList<DBObject>();
+		try {
+			MongoCollection<BasicDBObject> collection = db.getCollection(collectionName, BasicDBObject.class);
+			FindIterable<BasicDBObject> iterable = collection.find(condition).limit(1);
+		    MongoCursor<BasicDBObject> cursor = iterable.iterator();
+		    while (cursor.hasNext()) {
+		    	BasicDBObject ob = cursor.next();
+				map.add(ob);
+			}
+		} catch (Exception e) {
+			log.log(Level.WARNING, ""+condition, e);
+		}
+		return map;
+	}
+	
+	public List<DBObject> find(String collectionName, BasicDBObject condition,
+			BasicDBObject keys) {
+		return find(null, collectionName, condition, keys);
+	}
+
+	public List<DBObject> find(String databaseName, String collectionName,
+			BasicDBObject condition, BasicDBObject keys) {
+		MongoDatabase db = null;
+		if (databaseName == null || "".equals(databaseName)) {
+			db = MongoConnect.getInstance().getDB();
+		} else {
+			db = MongoConnect.getInstance().getDB(databaseName);
+		}
+		List<DBObject> map = new ArrayList<DBObject>();
+		try {
+			MongoCollection<BasicDBObject> collection = db.getCollection(collectionName, BasicDBObject.class);
+			FindIterable<BasicDBObject> iterable = collection.find(condition).projection(keys);
+			MongoCursor<BasicDBObject> cursor = iterable.iterator();
+		    while (cursor.hasNext()) {
+		    	BasicDBObject ob = cursor.next();
+				map.add(ob);
+			}
+		} catch (Exception e) {
+			log.log(Level.WARNING, "", e);
+		}
+		return map;
+	}
+
+	public List<DBObject> findSort(String collectionName, BasicDBObject condition,
+			BasicDBObject sort) {
+		return findSort(null, collectionName, condition, sort);
+	}
+	
+	public List<DBObject> findSort(String databaseName, String collectionName, BasicDBObject condition,
+			BasicDBObject sort) {
+		MongoDatabase db = null;
+		if (databaseName == null || "".equals(databaseName)) {
+			db = MongoConnect.getInstance().getDB();
+		} else {
+			db = MongoConnect.getInstance().getDB(databaseName);
+		}
+		List<DBObject> map = new ArrayList<DBObject>();
+		try {
+			MongoCollection<BasicDBObject> collection = db.getCollection(collectionName, BasicDBObject.class);
+			FindIterable<BasicDBObject> iterable = collection.find(condition).sort(sort);
+			MongoCursor<BasicDBObject> cursor = iterable.iterator();
+		    while (cursor.hasNext()) {
+		    	BasicDBObject ob = cursor.next();
+				map.add(ob);
+			}
+		} catch (Exception e) {
+			log.log(Level.WARNING, "", e);
+		}
+		return map;
+	}
+
+	public List<DBObject> findFilter(String collectionName, BasicDBObject condition,
+			BasicDBObject sort, int num) {
+		List<DBObject> map = new ArrayList<DBObject>();
+		try {
+			MongoCollection<BasicDBObject> collection = MongoConnect.getInstance().getDB().getCollection(collectionName, BasicDBObject.class);
+			FindIterable<BasicDBObject> iterable = collection.find(condition).sort(sort).limit(num);
+			MongoCursor<BasicDBObject> cursor = iterable.iterator();
+		    while (cursor.hasNext()) {
+		    	BasicDBObject ob = cursor.next();
+				map.add(ob);
+			}
+		} catch (Exception e) {
+			log.log(Level.WARNING, "", e);
+		}
+		return map;
+	}
+
+	public List<DBObject> findFilter(String collectionName, BasicDBObject condition,
+			int num) {
+		List<DBObject> map = new ArrayList<DBObject>();
+		try {
+			MongoCollection<BasicDBObject> collection = MongoConnect.getInstance().getDB()
+					.getCollection(collectionName, BasicDBObject.class);
+			FindIterable<BasicDBObject> iterable = collection.find(condition).limit(num);
+			MongoCursor<BasicDBObject> cursor = iterable.iterator();
+		    while (cursor.hasNext()) {
+		    	BasicDBObject ob = cursor.next();
+				map.add(ob);
+			}
+		} catch (Exception e) {
+			log.log(Level.WARNING, "", e);
+		}
+		return map;
+	}
+
+	public MongoCollection<BasicDBObject> getConection(String collectionName) {
+		MongoCollection<BasicDBObject> collection = MongoConnect.getInstance().getDB()
+				.getCollection(collectionName, BasicDBObject.class);
+		return collection;
+	}
+	
+	public MongoCollection<BasicDBObject> getConection(String dbName,String collectionName) {
+		MongoCollection<BasicDBObject> collection = MongoConnect.getInstance().getDB(dbName)
+				.getCollection(collectionName, BasicDBObject.class);
+		return collection;
+	}
+
+//	public DBObject findAndModify(String collectionName, DBObject query,
+//			DBObject update) {
+//		try {
+//			MongoCollection<BasicDBObject> collection = MongoConnect.getInstance().getDB()
+//					.getCollection(collectionName);
+//			return collection.findAndModify(query, update);
+//		} catch (Exception e) {
+//			log.log(Level.WARNING, "", e);
+//		}
+//		return null;
+//	}
+
+//	public DBObject getById(String collectionName, DBObject query) {
+//		try {
+//			MongoCollection collection = MongoConnect.getInstance().getDB()
+//					.getCollection(collectionName);
+//			return collection.findOne(query);
+//		} catch (Exception e) {
+//			log.log(Level.WARNING, "", e);
+//		}
+//		return null;
+//	}
+	
+	private void insertCdrReportEvent(BasicDBObject data){
+		try {
+			if(!IgnorReportAccountServer.getInstance().ignoreReportAcc.containsKey(data.get("ACCOUNT_ID"))){
+				MongoDatabase db = null;
+				db = MongoConnect.getInstance().getReportDB();
+				MongoCollection<BasicDBObject> collection = db.getCollection(Fields.Cdr_Report_Event, BasicDBObject.class);
+				BasicDBObject event = new BasicDBObject();
+				event.put("_id", Utils.getUniqueid());
+				event.put("account", data.get("ACCOUNT_ID"));
+				event.put("reportTime", Utils.getDate("yyyy-MM-dd HH:mm:ss"));
+				event.put("type", "cdr");
+				event.put("reportStatus", "ready");
+				event.put("businessData", data);
+				log.log(Level.INFO, "===== insertCdrReportEvent" + event.toString());
+				System.out.println("===== insertCdrReportEvent" + event.toString());
+				collection.insertOne(event);	
+			}
+		} catch (Exception e) {
+			log.log(Level.WARNING, "", e);
+		}
+    }
+	
+	private void insertCdrPeerReportEvent(String dbName, String account, String id){
+		try {
+			if(!IgnorReportAccountServer.getInstance().ignoreReportAcc.containsKey(account)){
+				List<DBObject> list = this.find(dbName, account+"_cdr_peer", new BasicDBObject("_id", id));
+				if(list.size() > 0){
+					DBObject one = list.get(0);
+					
+					MongoDatabase db = null;
+					db = MongoConnect.getInstance().getReportDB();
+					MongoCollection<BasicDBObject> collection = db.getCollection(Fields.Cdr_Report_Event, BasicDBObject.class);
+					BasicDBObject event = new BasicDBObject();
+					event.put("_id", Utils.getUniqueid());
+					event.put("account", account);
+					event.put("reportTime", Utils.getDate("yyyy-MM-dd HH:mm:ss"));
+					event.put("type", "cdrPeer");
+					event.put("reportStatus", "ready");
+					event.put("businessData", one);
+					collection.insertOne(event);
+				}
+			}
+		} catch (Exception e) {
+			log.log(Level.WARNING, "", e);
+		}
+    }
+	
+	private void insertInvestigateCdrReportEvent(C5Investigate data){
+		try {
+			if(!IgnorReportAccountServer.getInstance().ignoreReportAcc.containsKey(data.getAccount_id())){
+				BasicDBObject dbData = new BasicDBObject();
+				dbData.put("ACCOUNT_ID", data.getAccount_id());
+				dbData.put("AGENT", data.getAgent_id());
+				dbData.put("CALL_SHEET_ID", data.getCall_sheet_id());
+				dbData.put("INVESTIGATE", data.getSurver_content());
+				//{"id":"4f3f6cdf-1e21-42ce-879d-bdf04c16b5eb","Command":"Event","Event":"Investigate","PBX":"1.1.1.101",
+				//"Account":"N00000000143","UserID":"dbafaa30-397f-11e4-aa01-77973ca4c7a6",
+				//"CallSheetID":"485cd261-8223-4910-a76a-bc86886e98f1","Content":"1","Timestamp":"1429526054.674393"}
+				MongoDatabase db = null;
+				db = MongoConnect.getInstance().getReportDB();
+				MongoCollection<BasicDBObject> collection = db.getCollection(Fields.Cdr_Report_Event, BasicDBObject.class);
+				BasicDBObject event = new BasicDBObject();
+				event.put("_id", Utils.getUniqueid());
+				event.put("account", data.getAccount_id());
+				event.put("reportTime", Utils.getDate("yyyy-MM-dd HH:mm:ss"));
+				event.put("type", "cdrInvestigate");
+				event.put("reportStatus", "ready");
+				event.put("businessData", dbData);
+				log.log(Level.INFO, "===== insertCdrInvestigateReportEvent" + event.toString());
+				System.out.println("===== insertCdrInvestigateReportEvent" + event.toString());
+				collection.insertOne(event);
+			}
+		} catch (Exception e) {
+			log.log(Level.WARNING, "", e);
+		}
+    }
+}

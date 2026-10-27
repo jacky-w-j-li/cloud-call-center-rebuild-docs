@@ -1,0 +1,21 @@
+  <div class="active-history-content timeline-area">
+           <div class="pull-right callBack item">
+               <span class="btn-callback ds_do_action" ds_action="cdr.callBackAndDeal" ds_data="__CALL_NO|__NEW_CUSTOMER_ID|__NEW_CUSTOMER_NAME|__NEW_CALL_SHEET_ID|__id">回电并处理</span>
+           </div><span class="to_list_count">共__count条未接记录</span>
+           <div class="clallbackAndDisposal_agent" style="margin-bottom: 20px; " >
+             <span class="to_list_count"  style="line-height: 22px;">最近一条未接的处理座席：<span class="to_list_count disposal_agent"></span></span><br>
+             <span class="to_list_count " style="line-height: 22px;">分配的回访座席：_@cdr.getAgentName('__CALLBACK_AGENT')@_</span>
+           </div>
+           <table class="table thead-border" style="margin-bottom: 0;">
+               <thead>
+                   <tr>
+                       <td width="20%">处理状态</td>
+                       <td width="20%">呼叫时间</td>
+                       <td width="20%">呼叫类型</td>
+                       <td width="40%">处理座席</td>
+                   </tr>
+               </thead>
+               <tbody class="timeLine_list_table">
+               </tbody>
+           </table>
+       </div>

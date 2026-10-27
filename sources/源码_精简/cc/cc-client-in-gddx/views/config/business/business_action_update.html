@@ -1,0 +1,65 @@
+<div class="accordion-group">
+    <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#flow_step_action" href="#collapse__id">
+            __name
+        </a>
+    </div>
+    <div id="collapse__id" class="accordion-body collapse">
+        <div class="accordion-inner">
+            <form >
+                <fieldset>
+                    <div class="row-fluid">
+                        <div class="row_item">
+                            <label for="field-name1">动作名称</label>
+                            <input id="field-name1" class="field-name" name="name" type="text" maxlength="35" value="__name" required>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="row_item">
+                            <label>动作跳转步骤</label>
+                            <select id="__id_action_jump_select" name="jumpTo" value ="__jumpTo">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="row_item">
+                            <label>角色</label>
+                            <input type="text" name='actionRole' value="__actionRole" required/>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div>
+                            <h5>动作字段</h5>
+                        </div>
+                        <div id="action_fields_pane__id" class="custom-fields-area">
+                        </div>
+                        <select style="display: none;" multiple="multiple" id="action_fields_value__id" name="actionFields">
+
+                        </select>
+                        <div id="action_field_pane__id">
+                            <span id="add_action_field_pane_link__id" class="add-custom-field enabled action" appaction="config.business.showAddActionField" appdata="__id">添加动作字段</span>
+
+                            <div id="add_action_field_pane_content__id"></div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <a class="btn btn-primary do_action" appaction="config.business.addBusinessStepAction">保存</a>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var flow = session.business.currentFlowSteps || [];
+        var temp = "<option value='_value'>_name</option>";
+        var pane = $('#__id_action_jump_select');
+        var html = "";
+        for(var i=0;i<flow.length;i++){
+            html += temp.replace(/_value/g,flow[i]._id).replace(/_name/g,flow[i].name);
+        }
+        pane.append(html);
+    });
+</script>

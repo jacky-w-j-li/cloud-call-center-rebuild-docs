@@ -1,0 +1,48 @@
+<head>
+    <script language="javascript">
+        function faxClick() {
+            if ($("#sipNo_add_isFax").attr("checked")) {
+                $("#frm_addSipNo_update").find("#sipNo_add_isFax").attr("checked",false);
+                $("#frm_addSipNo_update").find("input[fieldgroup='1']").attr("disabled", false);
+            } else {
+                $("#frm_addSipNo_update").find("#sipNo_add_isFax").attr("checked",true);
+                $("#frm_addSipNo_update").find("input[fieldgroup='1'][value ='alaw']").attr("checked", true);
+                $("#frm_addSipNo_update").find("input[fieldgroup='1'][value !='alaw']").attr("checked", false);
+                $("#frm_addSipNo_update").find("input[fieldgroup='1']").attr("disabled", true);
+            }
+        };
+
+    </script>
+</head>
+<form class="form-horizontal" id="frm_addSipNo_update">
+        <input type="hidden" name="account" value="_#account#_">
+        <input type="hidden" name="product" value="_#product#_">
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                数量
+            </label>
+            <div class="col-md-5">
+                <input type="text" name="number" value='' class="form-control input-sm" required/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-offset-4 col-md-5">
+                <input type="checkbox" name="successional" checked>是否连续
+            </label>
+            <label class="col-md-offset-4 col-md-5">
+                <!--<input type="checkbox" class="ds_do_action" id="sipNo_add_isFax" name="isFax" ds_action="sipNo.isFax">是否为传真机-->
+                <input type="checkbox" id="sipNo_add_isFax" name="isFax" onclick="faxClick()">是否为传真机
+            </label>
+        </div>
+        <div class="form-group">
+            <!--codeConfig-->
+            <label class="control-label col-md-4">
+                语音编码
+            </label>
+            <div class="col-md-5 exten_codec">
+                _@sipNo.getAddCodecs()@_
+            </div>
+        </div>
+    </form>
+
+

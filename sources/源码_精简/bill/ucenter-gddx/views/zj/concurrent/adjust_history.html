@@ -1,0 +1,78 @@
+<div>
+    <!--<div class="panel panel-default">-->
+        <!--<div class="panel-body">-->
+            <!--<form id="frm_licence_info" class="form-horizontal">-->
+                <!--<table class="table_row_search">-->
+                    <!--<tbody>-->
+                    <!--<tr>-->
+                        <!--<td >分机号 </td>-->
+                        <!--<td >-->
+                            <!--<input type="text" name="exten" class="form-control input-sm"/>-->
+                        <!--</td>-->
+                        <!--<td >姓名</td>-->
+                        <!--<td >-->
+                            <!--<input type="text" name="displayName" class="form-control input-sm"/>-->
+                        <!--</td>-->
+                        <!--<td>-->
+                            <!--<button type="button" class="btn btn-primary btn-sm agent_search ds_form_action" ds_action="licence.getLicenceList">查询</button>-->
+                            <!--<button type="button" class="btn btn-default btn-sm ds_do_action" ds_action="licence.reset" >重置</button>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+            <!--</form>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="panel panel-info">
+        <div class="panel-heading">进线数变更记录<button type="button" class="btn btn-success btn-xs ds_do_action" ds_action="licence.showAdd" style="margin-left: 20px;">新增进线数</button>
+        </div>
+        <!-- Table -->
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>类型</th>
+                <th>节点</th>
+                <th>数量</th>
+                <th>生效日期</th>
+                <th>到期日期</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody class="licence_list">
+            </tbody>
+        </table>
+
+    </div>
+    <div class="row">
+        <div class="col-md-5">查询结果：<span class="result_count" style="margin-top:3px;display: inline-block;">0</span></div>
+        <div class=" col-md-7">
+            <ul class="pagination pagination-sm pull-right" style="margin: 0;"
+                for="frm_licence_info" ds_pagination_action="licence.getLicenceList">
+                <li><a href="#"  value="0">&laquo;</a></li>
+                <li><a href="#"  value="1">1</a></li>
+                <li><a href="#"  value="2">2</a></li>
+                <li><a href="#"  value="3">3</a></li>
+                <li><a href="#"  value="4">4</a></li>
+                <li><a href="#"  value="5">5</a></li>
+                <li><a href="#"  value="6">&raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="modal fade" id="licence_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" ></h4>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary ds_form_action" ds_action=""  ds_form="#frm_licence_update">保存</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>

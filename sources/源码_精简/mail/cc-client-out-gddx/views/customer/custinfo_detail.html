@@ -1,0 +1,126 @@
+<div class="contact-info" style="margin-top:15px;">
+    <div class="custom_fields item" style="">
+        <div class="cust_item_col">
+            <div class="field">{{=phoneAlias}}</div>
+            {{
+                var _phone=phone||[];
+                if(_phone.length>0){
+            }}
+                <div class="info" style="word-break: break-all;">
+            {{
+                for(var i=0;i<_phone.length;i++){
+                var obj=_phone[i];
+                var _num=checkHideTel(obj.tel)+" "+(obj.area||"");
+                if(obj.memo){
+            }}
+                    {{=_num}}({{=obj.memo}})&nbsp;&nbsp;
+            {{
+                }else{
+            }}
+                    {{=_num}}&nbsp;&nbsp;
+            {{
+                }
+                }
+            }}
+                </div>
+            {{
+                }
+            }}
+        </div>
+        <div class="cust_item_col">
+            <div class="field">{{=emailAlias}}</div>
+            {{
+                var _email=email||[];
+                if(_email.length>0){
+            }}
+                <div class="info" style="word-break: break-all;">
+                {{
+                    for(var i=0;i<_email.length;i++){
+                        var obj=_email[i];
+                        if(obj.memo){
+                }}
+                        {{=obj.email}}({{=obj.memo}})&nbsp;&nbsp;
+                {{
+                        }else{
+                }}
+                        {{=obj.email}}&nbsp;&nbsp;
+                {{
+                        }
+                    }
+                }}
+                </div>
+            {{
+                }
+            }}
+        </div>
+
+
+
+        <div class="cust_item_col">
+            <div class="field">附件</div>
+            <div class="info">
+                <div style="" class="clearfix">
+                    {{
+                    var attachs=attachs||[];
+                    for(var i=0;i<attachs.length;i++){
+                    var attach = attachs[i];
+                    if(attach.type=='img'){
+                    }}
+                    <a href="#" class="ds_do_action" ds_action="customer.showBigAttach" ds_data="{{=attach.id}}_big{{=custShowFieldDesc('img',attach.name)}}" attachName="{{=attach.name}}">
+                        <img src="{{=custShowFieldDesc('imgUrl',attach.id)}}" title="{{=attach.name}}"  class="img-rounded"  style="margin-right:10px;margin-bottom:10px;width:50px;max-height: 50px;"/>
+                    </a>
+                    {{
+                    }
+                    }
+                    }}
+                </div>
+
+                <div class="thumbnails_customer  clearfix">
+                    {{
+                    for(var i=0;i<attachs.length;i++){
+                    var attach = attachs[i];
+                    }}
+                    <div class="fujian" style="float:left;">
+                        <div class="left ico-1"></div>
+                        <div class="left">
+                            <a href="#" class="ds_do_action" ds_action="customer.downloadAttach" ds_data="{{=attach.id}}" suffix="{{=attach.type}}" isNew="{{=attach.isNew}}">{{=attach.name}}</a>&nbsp;&nbsp;
+                        </div>
+                    </div>
+                    {{
+                    }
+                    }}
+                </div>
+            </div>
+        </div>
+
+
+
+        {{
+        var fields=fields||[];
+        for(var i=0;i<fields.length;i++){
+        var item=fields[i];
+        var t=item.t,k=item.k,v=item.v;
+        }}
+        <div class="cust_item_col">
+            <div class="field">{{=item.n}}</div>
+            {{if (t=='dropdown' || t=='radio' || t=='checkbox'){ }}
+            {{=custShowFieldDesc('field',dbType,k,v,t)}}
+            {{ }else if (k=='taskId'){ }}
+            {{=custShowFieldDesc('taskId',v)}}
+            {{ }else if (k=='taskCalled'){ }}
+            {{=custShowFieldDesc('taskCalled',v)}}
+            {{ }else if (k=='sex'){ }}
+            {{=custShowFieldDesc('sex',v)}}
+            {{ }else if (k=='province'){ }}
+            {{=custShowFieldDesc('province',v)}}
+            {{ }else if (k=='city'){ }}
+            {{=custShowFieldDesc('city',v,true,$data)}}
+            {{ }else{ }}
+            <div class="info" style="word-break: break-all;">{{=#custShowFieldDesc('html',v)}}</div>
+            {{ } }}
+        </div>
+        {{ } }}
+
+    </div>
+
+</div>

@@ -1,0 +1,33 @@
+<div>
+    <table class="table table-striped">
+        <tr>
+            <td class="cdrDetailLabel">号码：</td>
+            <td class="cdrDetailText">_#num#_</td>
+            <td class="cdrDetailLabel">发送时间</td>
+            <td class="cdrDetailText">_#submitTime#_</td>
+            <td class="cdrDetailLabel">拆分条数：</td>
+            <td class="cdrDetailText">_#splitCount#_</td>
+        </tr>
+        <tr>
+            <td class="cdrDetailLabel">处理状态：</td>
+            <td class="cdrDetailText">_@sms.getSmsStatusName('_#m7Status#_')@_</td>
+            <td class="cdrDetailLabel">发送座席：</td>
+            <td class="cdrDetailText">_@cdr.getAgentName('_#createUser#_')@_</td>
+            <td class="cdrDetailLabel">签名：</td>
+            <td class="cdrDetailText">_#signDisplay#_</td>
+        </tr>
+        <tr>
+            <td class="cdrDetailLabel">通道状态：</td>
+            <td class="cdrDetailText">_#by_errordescription#_</td>
+            <td class="" colspan="4"></td>
+        </tr>
+        <tr>
+            <td class="cdrDetailLabel">短信内容：</td>
+            <td class="cdrDetailText" colspan="5">
+                <textarea id="sms_comments" name="content" rows="3" style="width: 100%;" disabled>_#content#_</textarea>
+            </td>
+        </tr>
+
+    </table>
+</div>
+

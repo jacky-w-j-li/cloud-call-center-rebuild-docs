@@ -1,0 +1,114 @@
+<div id="assign_checked_callback_agent_Modal" tabindex="-1" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>分配未接来电</h3>
+    </div>
+    <form id="assign_checked_callback_agent_form">
+            <div class="modal-body">
+            <h4>您可以分配的未接来电共计 __notDealCount 个</h4>
+            </br>
+            <div calss="add_filter" style="margin-bottom: 20px;max-width:560px;">过滤座席：
+                <div id="checked_callback_assign_search_div" class="combobox_agent"></div><br/>
+                <span style="display: inline-block;" id="checked_callback_assign_select_agents"></span>
+                
+            </div>
+            <table class="table table-striped table-bordered table-hover" id="assign_checked_callback_agent_table">
+                __assignTable
+            </table>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn btn-info ds_form_action" ds_action="cdr.saveAssignCallBackAgent">分配</a>
+            <a href="#" class="btn btn-info ds_do_action" ds_action="cdr.autoAssignCallBackAgent" ds_data="checked">自动分配</a>
+            <a href="#" class="btn" onclick="$('#assign_checked_callback_agent_Modal').modal('hide');">关闭</a>
+        </div>
+    </form>
+</div>
+<script>
+    $(function () {
+        var pane=$("#assign_checked_callback_agent_form");
+        var users = getCache("agents");
+        var _users=[];
+        for(var i=0;i<users.length;i++){
+            var u=users[i];
+            if(u.status=='enable'){
+                _users.push(u);
+            }
+        }
+        utils.loadSearchInput({ id: "checked_callback_assign_search_div",
+            width: "120",
+            height: "14",
+            tip: "按姓名,拼音,工号搜索",
+            data: _users,
+            listField: ["displayName", "exten"],
+            userIdField: "_id",
+            searchField: ["displayName", "exten", "pinyin"],
+            pinyinField: ["displayName"],
+            showAllList: true,
+            callbackFuc: function (object) {
+                if($.isArray(object)){
+                    return;
+                }
+                var currentVals = pane.find("input[name='filterAgent']");
+                var ishas = false;
+                for (var i = 0; i < currentVals.length; i++) {
+                    if (currentVals[i].value == object._id) {
+                        ishas = true;
+                        break;
+                    }
+                }
+                if(!ishas) {
+                    $('#checked_callback_assign_select_agents').before("<span style='display:inline-block;margin: 7px 0;'><input type='hidden' name='filterAgent' value=" + object._id + ">" +
+                            "<span class='label label-info'>" + object.displayName +
+                            "</span><a href='#' onclick=customer_removeAgent(this)><i class='icon-remove'></i></a>&nbsp;</span>");
+                    filterCustAssign();
+                }
+            }
+        });
+    });
+    function customer_removeAgent(src) {
+        $(src).closest("span").remove();
+        filterCustAssign();
+    }
+    function filterCustAssign(){
+        var pane=$("#assign_checked_callback_agent_form");
+        var _agents = pane.find("input[name='filterAgent']");
+        var _filterUsers=[];
+        _agents.each(function(){
+            _filterUsers.push($(this).val());
+        });
+        var users = getCache("agents");
+        var filterUsers = [];
+        if(_filterUsers.length>0){
+            for(var i=0;i<users.length;i++){
+                var u=users[i];
+                if($.inArray(u._id,_filterUsers)!=-1){
+                    filterUsers.push(u);
+                }
+            }
+        }else{
+            for(var i=0;i<users.length;i++){
+                var u=users[i];
+                if(u.status=='enable'){
+                    filterUsers.push(u);
+                }
+            }
+        }
+        filterUsers=handler.customer._bubbleSort(filterUsers);
+        var html;
+        for(var i=0 ;i<filterUsers.length;i++){
+            var oneRow = '';
+            if(i%2 == 0){
+                oneRow = '<tr>';
+            }
+            oneRow += '<td align="right">'+filterUsers[i].displayName+'['+ filterUsers[i].exten +']'+':</td>';
+            oneRow += '<td><label style="display:none">分配未接电话个数</label><input type="text" name="'+filterUsers[i]._id+'" class="form-control input-sm number" style="display: inline-block; width: 100px;" required="" datatype="Number,Range" min="0" msg="请输入大于零或等于零的整数" value="0"></td>';
+            oneRow += '<td>个&nbsp;&nbsp;&nbsp;&nbsp;</td>';
+            if(i%2 != 0 ){
+                oneRow += '</tr>';
+            }
+            html += oneRow;
+        }
+        $('#assign_checked_callback_agent_table').empty();
+        $('#assign_checked_callback_agent_table').html(html);
+    }
+</script>

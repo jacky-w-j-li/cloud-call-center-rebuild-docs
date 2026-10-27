@@ -1,0 +1,200 @@
+<style type="text/css">
+    .scrollmargin{
+        height:10px;
+    }
+    .webchatsdk_code {
+        height: 80%;
+        margin-bottom: 20px;
+        overflow: auto;
+        display: none;
+    }
+    .text{
+        font-size: 12px;
+        margin:15px 0px 5px 0px;
+        background-color: #ccc;
+        padding: 5px;
+    }
+    .show{
+        display: block;
+    }
+
+</style>
+<div class="span12">
+
+<div style="font-size: 14px; color:rgb(42,127,178)">
+    webchat sdk UI开发API
+</div>
+<div class="text" for="webchat_sdk_code_demo_init">◆ js引入<a href="javascript:void(0)" style="float:right">[收缩]</a></div>
+
+<div id="webchat_sdk_code_demo_init" class="webchatsdk_code show">
+
+</div>
+
+<div class="text" for="webchat_sdk_code_demo_script">◆ 开发步骤，请按照以下给出的代码进行ui功能开发<a href="javascript:void(0)" style="float:right">[展开]</a></div>
+
+<div id="webchat_sdk_code_demo_script" class="webchatsdk_code">
+
+</div>
+
+<div class="scrollmargin"></div>
+
+<div class="text" for="webchat_sdk_send_msg">◆ 发送消息接口<a href="javascript:void(0)" style="float:right">[展开]</a></div>
+<div id="webchat_sdk_send_msg" class="webchatsdk_code">
+
+</div>
+
+<div class="scrollmargin"></div>
+<div class="text" for="webchat_sdk_convert_manual">◆ 转人工接口<a href="javascript:void(0)" style="float:right">[展开]</a></div>
+<div id="webchat_sdk_convert_manual" class="webchatsdk_code">
+
+</div>
+
+<div class="scrollmargin"></div>
+<div class="text" for="webchat_sdk_submit_investigate">◆ 提交满意度评价<a href="javascript:void(0)" style="float:right">[展开]</a></div>
+<div id="webchat_sdk_submit_investigate" class="webchatsdk_code">
+
+</div>
+<div class="scrollmargin"></div>
+<div class="text" for="webchat_sdk_submit_leavemsg">◆ 提交留言<a href="javascript:void(0)" style="float:right">[展开]</a></div>
+<div id="webchat_sdk_submit_leavemsg" class="webchatsdk_code">
+
+</div>
+<div class="scrollmargin"></div>
+<div class="text" for="webchat_sdk_submit_question">◆ 提交常见问题<a href="javascript:void(0)" style="float:right">[展开]</a></div>
+<div id="webchat_sdk_submit_question" class="webchatsdk_code">
+
+</div>
+<div class="scrollmargin"></div>
+<div class="text" for="webchat_sdk_show_breaktips">◆ 断开连接前提示<a href="javascript:void(0)" style="float:right">[展开]</a></div>
+<div id="webchat_sdk_show_breaktips" class="webchatsdk_code">
+
+</div>
+</div>
+<script>
+    var sdkDemoEditor2 = ace.edit("webchat_sdk_code_demo_init");
+    var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
+    sdkDemoEditor2.session.setMode(new JavaScriptMode());
+    sdkDemoEditor2.getSession().setUseWrapMode(true);
+        sdkDemoEditor2.setReadOnly(true);
+    sdkDemoEditor2.setOptions({
+        autoScrollEditorIntoView: true,
+        maxLines: 50
+    });
+    sdkDemoEditor2.renderer.setScrollMargin(0, 10, 10, 10);
+    setValue("init", "webchat_sdk_code_demo_init");
+
+    var sdkDemoEditor2 = ace.edit("webchat_sdk_code_demo_script");
+    var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
+    sdkDemoEditor2.session.setMode(new JavaScriptMode());
+    sdkDemoEditor2.getSession().setUseWrapMode(true);
+        sdkDemoEditor2.setReadOnly(true);
+    sdkDemoEditor2.setOptions({
+        autoScrollEditorIntoView: true,
+        maxLines: 30,
+        enableBasicAutocompletion:false
+    });
+    sdkDemoEditor2.renderer.setScrollMargin(0, 10, 10, 10);
+    setValue("chat_demo_script", "webchat_sdk_code_demo_script");
+
+    var sdkDemoEditor2 = ace.edit("webchat_sdk_send_msg");
+    var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
+    sdkDemoEditor2.session.setMode(new JavaScriptMode());
+    sdkDemoEditor2.getSession().setUseWrapMode(true);
+        sdkDemoEditor2.setReadOnly(true);
+    sdkDemoEditor2.setOptions({
+        autoScrollEditorIntoView: true,
+        maxLines: 50,
+        enableLiveAutocompletion:false
+    });
+    sdkDemoEditor2.renderer.setScrollMargin(0, 10, 10, 10);
+    setValue("send_msg", "webchat_sdk_send_msg");
+
+
+    var sdkDemoEditor2 = ace.edit("webchat_sdk_convert_manual");
+    var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
+    sdkDemoEditor2.session.setMode(new JavaScriptMode());
+    sdkDemoEditor2.getSession().setUseWrapMode(true);
+        sdkDemoEditor2.setReadOnly(true);
+    sdkDemoEditor2.setOptions({
+        autoScrollEditorIntoView: true,
+        maxLines: 50
+    });
+    sdkDemoEditor2.renderer.setScrollMargin(0, 10, 10, 10);
+    setValue("convert_manual", "webchat_sdk_convert_manual");
+
+
+    var sdkDemoEditor2 = ace.edit("webchat_sdk_submit_investigate");
+    var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
+    sdkDemoEditor2.session.setMode(new JavaScriptMode());
+    sdkDemoEditor2.getSession().setUseWrapMode(true);
+        sdkDemoEditor2.setReadOnly(true);
+    sdkDemoEditor2.setOptions({
+        autoScrollEditorIntoView: true,
+        maxLines: 50
+    });
+    sdkDemoEditor2.renderer.setScrollMargin(0, 10, 10, 10);
+    setValue("submit_investigate", "webchat_sdk_submit_investigate");
+
+    var sdkDemoEditor2 = ace.edit("webchat_sdk_submit_leavemsg");
+    var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
+    sdkDemoEditor2.session.setMode(new JavaScriptMode());
+    sdkDemoEditor2.getSession().setUseWrapMode(true);
+        sdkDemoEditor2.setReadOnly(true);
+    sdkDemoEditor2.setOptions({
+        autoScrollEditorIntoView: true,
+        maxLines: 50,
+        setShowPrintMargin:true
+    });
+    sdkDemoEditor2.renderer.setScrollMargin(0, 10, 10, 10);
+    setValue("send_leavemsg", "webchat_sdk_submit_leavemsg");
+
+    var sdkDemoEditor2 = ace.edit("webchat_sdk_submit_question");
+    var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
+    sdkDemoEditor2.session.setMode(new JavaScriptMode());
+    sdkDemoEditor2.getSession().setUseWrapMode(true);
+    //    sdkDemoEditor2.setReadOnly(true);
+    sdkDemoEditor2.setOptions({
+        autoScrollEditorIntoView: true,
+        maxLines: 50
+    });
+    sdkDemoEditor2.renderer.setScrollMargin(0, 10, 10, 10);
+    setValue("submit_question", "webchat_sdk_submit_question");
+
+    var sdkDemoEditor2 = ace.edit("webchat_sdk_show_breaktips");
+    var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
+    sdkDemoEditor2.session.setMode(new JavaScriptMode());
+    sdkDemoEditor2.getSession().setUseWrapMode(true);
+        sdkDemoEditor2.setReadOnly(true);
+    sdkDemoEditor2.setOptions({
+        autoScrollEditorIntoView: true,
+        maxLines: 50
+    });
+    sdkDemoEditor2.renderer.setScrollMargin(0, 10, 10, 10);
+    setValue("break_show_tips", "webchat_sdk_show_breaktips");
+
+    function setValue(value, id) {
+        DS.getView('config/channel/webchatsdk/'+value, function (view) {
+            var el = document.getElementById(id);
+            el.env.editor.setValue(view, 1);
+        });
+//        ace.require("ace/lib/net").get("./webchatsdk/"+value, function(t){
+//            var el = document.getElementById(id);
+//            el.env.editor.setValue(t, 1);
+//        });
+    }
+    $(".text a").click(function(src){
+        var a = $(src.target);
+        if(a.html() == "[展开]"){
+            a.html("[收缩]");
+        }else{
+            a.html("[展开]");
+        }
+        var forId =$(a).closest(".text").attr("for");
+        $("#"+forId).toggleClass("show");
+    });
+</script>
+
+
+</body>
+</html>
+

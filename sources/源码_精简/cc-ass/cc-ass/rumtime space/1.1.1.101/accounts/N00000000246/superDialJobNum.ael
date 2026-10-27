@@ -1,0 +1,66 @@
+context N00000000246-10019-superDialJobNum {
+	s => {
+		INPUT_RETRY_TIMES=0;
+        	input="";
+        	BackGround(/etc/asterisk/1.1.1.101/accounts/N00000000246/sound/6f18e00162a0ae32a133a86a76cb74ce);
+      		loop:
+        	WaitExten(10);
+    	}
+
+    	_[1-9] => {
+        	input=${input}${EXTEN};
+        	if(${LEN(${input})} == 4){
+			JOBNUM=${input};
+        		Agi(agi://127.0.0.1:7891/AgiSuperDialin?pbx=${HOST}&exten=${JOBNUM});
+			if(${JOBNUM_STATUS} == 1){
+				goto N00000000246-10022-textannouncement,s,1;	
+			}
+			if(${JOBNUM_STATUS} == 2){
+				goto N00000000246-10011-textannouncement,s,1;
+			}
+			if(${JOBNUM_STATUS} == 3){
+				goto N00000000246-10022-textannouncement,s,1;
+			}
+        	}
+        	goto s,loop;
+    	}
+	
+	0 => {
+		if("${input}a" == "a"){
+			goto N00000000246-10022-textannouncement,s,1;
+		}else{
+			input=${input}${EXTEN};
+                	if(${LEN(${input})} == 4){
+                        	JOBNUM=${input};
+                        	Agi(agi://127.0.0.1:7891/AgiSuperDialin?pbx=${HOST}&exten=${JOBNUM});
+                        	if(${JOBNUM_STATUS} == 1){
+                                	goto N00000000246-10022-textannouncement,s,1;
+                        	}
+                        	if(${JOBNUM_STATUS} == 2){
+                                	goto N00000000246-10011-textannouncement,s,1;
+                        	}
+                        	if(${JOBNUM_STATUS} == 3){
+                                	goto N00000000246-10022-textannouncement,s,1;
+                        	}
+                	}
+                	goto s,loop;
+		}
+	}
+	
+	t => {
+                INPUT_RETRY_TIMES=${INPUT_RETRY_TIMES} + 1;
+                if(${INPUT_RETRY_TIMES} >= 3){
+                        Playback(sound/bye);
+                        Hangup();
+                }
+                Playback(sound/timeout);
+                goto s,loop;
+        }
+	
+	i => {
+        	Playback(sound/incorrect);
+        	goto s, 1;
+    	}
+}
+
+

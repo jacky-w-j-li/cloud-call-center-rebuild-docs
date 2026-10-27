@@ -1,0 +1,508 @@
+/* created by liujing on 04/07/16
+style for webchat 
+linked by webchat/webchat_main.html
+all classnames must begin with letter '.wct_' or '#view_nav_webchat '*/
+.chat_top{
+    position: relative;
+}
+.chat_top_head{
+    padding-left: 45px;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+.chat_top_head img{
+    position: absolute;
+    left: 0;
+}
+.chat_top_head_clea,.chat_top_head_left .fmuted{
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+.chat_top_zxlx{
+    position: absolute;right: 0;
+}
+.chat_transfer{
+    position: absolute;
+    right: 0;
+}
+#view_webchat_todo .list_item .img_plate_from,#view_webchat_all .list_item .img_plate_from{
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background: url(../img/contact_history/allstate-big.png?160519) no-repeat -18px 0 #fff;
+    background-position: 1px -80px;
+    background-size: 14px auto;
+    vertical-align: middle;
+    margin: 0 1px 2px;
+    border-radius: 3px;
+}
+#view_webchat_todo .list_item .webchat_weixin,#view_webchat_all .list_item .webchat_weixin{
+    background-position: 1px -63px;
+    background-color: #14D212;
+}
+#view_webchat_todo .list_item .webchat_mobile,#view_webchat_all .list_item .webchat_mobile{
+    background-position: 3px -71px;
+    background-size: 10px auto;
+    background-color: #6C6EE8;
+}
+#view_webchat_todo .list_item .webchat_pc,#view_webchat_all .list_item .webchat_pc{
+    background-color: #40B6EB;
+}
+#view_webchat_all .caption-top{
+    padding:0 0 5px;
+}
+.webchat_remark_box{
+    margin-top: 15px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 0 4px;
+}
+#view_webchat_all_content .webchat_remark_box{
+    margin-top: 40px;
+}
+.webchat_remark_box i{
+    font-style: normal;
+}
+.dialog_region,.dialog_IPlocation,.dialog_from,.dialog_seoSource,.dialog_keywords,.dialog_beginTime,.dialog_toPeer,.invitedUser,.invitedStatus{
+    margin-bottom: 4px;
+    word-break: break-all;
+}
+.dialog_region span,.dialog_IPlocation span,.dialog_seoSource span,.dialog_keywords span,.dialog_beginTime span,.dialog_toPeer span{
+    float: right;
+    color: #222;
+    font-weight: bold;
+    margin-right: 4px;
+}
+.webchat_consult_tab{
+    position: relative;
+    margin-top: 15px;
+}
+.webchat_consult_tab ul span{
+    color: #222;
+    float: right;
+    font-weight: bold;
+    margin-right: 4px;
+}
+.webchat_time_dialog{
+    margin-top: 20px;
+}
+.cancel_webchat{
+    position: absolute;
+    z-index: 33;
+    left: 50%;
+    top:50%;
+    margin: -37px 0 0 -95px;
+}
+.imFontCon{
+    display: none;
+    position: absolute;
+    left:2px;
+    top: -125px;
+    z-index: 9;
+    width:34px;
+    background:#fff;
+    text-align:center;
+    border:1px solid #ccc;
+}
+.imFontCon li{
+    line-height:2;
+}
+/*�Ż���cc.css*/
+#view_nav_webchat .file_upload_filename{
+    width: 100%;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+#view_nav_webchat .chat_popover_upload{
+    width: 264px;
+}
+#view_nav_webchat .file_upload_percent{
+    float: left;
+    line-height: 20px;
+    margin-left: 4px;
+}
+#view_nav_webchat .progress-striped{
+    margin: 0;
+    float: left;
+    width: 200px;
+}
+#view_nav_webchat .file_upload_filename,#view_nav_webchat .file_upload_status{
+    line-height: 20px;
+}
+#view_nav_webchat .btn_time_search,#view_nav_webchat .btn_card_edit{
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin: 5px 5px 0;
+}
+#view_nav_webchat .btn_time_search,#view_nav_webchat .btn_card_edit {
+    background: url(../img/nav/do_action_icon.png?1101) no-repeat center;
+}
+#view_nav_webchat .btn_time_search{
+    background-size: 15px auto;
+    background-position: center -521px;
+}
+#view_nav_webchat .btn_card_edit{
+    background-position: center -649px;
+    background-size: 18px auto;
+}
+#view_nav_webchat .card_edit_pane{
+    width: 326px;
+    border: 1px solid #c5c5c5;
+    position: fixed;
+    top: 77px;
+    left: 66px;
+    background-color: #fff;
+    z-index: 666;
+    margin-top: -1px;
+    -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.3);
+    box-shadow: 0 0 6px rgba(0,0,0,0.3);
+    padding:20px;
+}
+#view_nav_webchat .card_edit_pane .card_edit_title{
+    text-align: center;
+    margin-bottom: 10px;
+}
+#view_nav_webchat .card_edit_pane .checkbox{
+    width: 100px;
+    box-sizing: border-box;
+    margin-left: 5px;
+    line-height: 17px;
+}
+#view_nav_webchat .card_edit_title h4{
+    color: #333;
+}
+#view_nav_webchat .time_advanced_search_item label{
+    width: auto;
+    text-align: center;
+    margin: 0;
+    font-weight: bold;
+}
+#view_nav_webchat .time_advanced_search_item .time_advanced_search{
+    display: inline-block;
+    margin: 0 6px;
+    border: 1px solid #C4C4C4;
+    width: 75px;
+    cursor: pointer;
+    text-align: center;
+    background: #fff;
+    height: 22px;
+    padding: 0;
+    box-shadow: 0 0 3px #c4c4c4;
+    border-radius: 2px;
+    position: relative;
+    color: #000;
+    font-weight: normal;
+}
+#view_nav_webchat .active.time_advanced_search{
+    border: 1px solid #5EB2E8;
+    box-shadow: 0 0 3px #5EB2E8;
+    color: #5EB2E8;
+    text-align: center;
+}
+#view_nav_webchat .active.choose-blue:after{
+    display: block;
+}
+#view_nav_webchat .choose-blue:after{
+    display: none;
+}
+#view_nav_webchat .time_advanced_search_item{
+    display: inline-block;
+    line-height: 20px;
+}
+#frm_webchat_todo_advanced_search .row-fluid{
+    margin-bottom: 10px;
+}
+#frm_webchat_todo_advanced_search .row-fluid .replay_time_box{
+    width: 39px;
+    margin:0 5px 0 120px;
+    padding: 4px 3px;
+    text-align: center;
+}
+#frm_webchat_todo_advanced_search .time_advanced_search_item .un_reply_search{
+    margin-left: 120px;
+}
+#view_nav_webchat .wct_send_status{
+    display: none;
+    margin-right: 10px;
+    height: 30px;
+    width: 30px;
+    line-height: 100%;
+    vertical-align: bottom;
+}
+#view_nav_webchat .chat_item.send .wct_send_status{
+    display: inline-block;
+    background: url(../img/webchat_send.gif?1013) no-repeat;
+}
+#view_nav_webchat .chat_item.send_failure .wct_send_status{
+    display: inline-block;
+    background: url(../img/nav/do_action_icon.png?1101) no-repeat;
+    background-size: 20px auto;
+    background-position: center -738px;
+    cursor: pointer;
+}
+#view_nav_webchat .timeStopwatch{
+    margin-top: 6px;
+    position: absolute;
+    width: 95px;
+    left: -58px;
+}
+/*#view_webchat_todo_content .chat_msg_bottom{*/
+    /*position: relative;*/
+/*}*/
+#view_nav_webchat .chart_time_stopwatch_box{
+    position: absolute;
+    left: 50%;
+    margin-left: -68px;
+    bottom: 95px;
+    z-index: 2;
+}
+#view_nav_webchat .chart_time_stopwatch{
+    margin: 0 auto;
+    background: #FDECA5;
+    height: 18px;
+    width: 130px;
+    line-height: 18px;
+    text-align: center;
+    color: #897E49;
+    border-radius: 4px;
+    margin-bottom: 4px;
+}
+#view_nav_webchat .webchat_item .card_right{
+    position: relative;
+}
+#view_nav_webchat .webchat_watch{
+    position: absolute;
+    right: 0;
+    bottom: 5px;
+    color: #C7AE1C;
+    width: 140px;
+    text-align: right;
+}
+#view_webchat_all .webchat_watch{
+    display: none;
+}
+#view_nav_webchat .cust_base_ul label{
+    margin: 0;
+    display: inline-block;
+}
+#view_nav_webchat .cust_base_ul input{
+    float: left;
+    margin: 0;
+}
+#view_nav_webchat .cust_base_ul li span{
+    display: inline-block;
+    margin: 0 35px 0 35px;
+    width: 190px;
+}
+#view_nav_webchat .exist_custom{
+    display: inline-block;
+}
+#view_nav_webchat .chat_item_preload .chat_popover.right{
+    margin-left: 5px;
+    background-color: #b6e99e;
+    border-color: #97da78;
+}
+#view_nav_webchat .chat_item_preload .chat_popover.right .arrow:after{
+    border-right-color: #b6e99e;
+}
+#view_nav_webchat .chat_item_preload .chat_popover.right .arrow{
+    border-right-color: #97da78;
+}
+#view_webchat_todo .list_item .card_row{
+    min-height: 59px;
+}
+#view_webchat_todo .card_row .badge-important{
+    margin: 0;
+    bottom: 30%;
+}
+#view_nav_webchat .reply_webchat{
+    margin-left: 10px;
+    position: absolute;
+    bottom: 5px;
+    right: 0;
+}
+#view_nav_webchat .webchat_container .textarea_autocomplete{
+    resize: none;
+    padding: 1px 5px 4px 5px;
+    margin-bottom: 25px;
+}
+#view_nav_webchat .card_row_from_title{
+    margin-right: 3px;
+}
+#existing_customers_box td{
+    max-width: 15em;
+}
+#view_nav_webchat .chat_item.out .chat_time{
+    float: right;
+    text-align: right;
+    margin: 0 5px;
+}
+#view_webchat_todo_content .information_and_quickreplay{
+    width: 100%;
+}
+#view_webchat_todo_content .information_and_quickreplay li{
+    width: 50%;
+    float: left;
+    cursor: pointer;
+    border-bottom: 2px solid;
+    padding: 0 0 5px;
+    font-weight: bold;
+    text-align: center;
+}
+#view_webchat_todo_content .information_and_quickreplay{
+    color: #7D7D7D;
+    margin-top:15px;
+    font-weight: bold;
+    text-align: center;
+}
+.webchat_quickreply_tab.hidden{
+    display: none;
+}
+#view_webchat_todo_content .system_and_user{
+    color: #37b5ed;
+    margin: 15px auto 0 auto;
+    font-weight: bold;
+    text-align: center;
+    width: 80%;
+}
+#view_webchat_todo_content .li-quickreply_webchat.active{
+    color: #fff;
+    background: #37B5ED;
+}
+#view_webchat_todo_content .li-quickreply_webchat{
+    cursor: pointer;
+    width: 50%;
+    text-align: center;
+    float: left;
+    box-sizing: border-box;
+    border: 1px solid #37B5ED;
+}
+#view_webchat_todo_content .webchat_remark_li_title{
+    color: #000;
+    margin-bottom: 6px;
+}
+#view_webchat_all_content .information_and_quickreplay{
+    display: none;
+}
+#view_nav_webchat #webchat_kmpopover{
+    box-shadow: rgba(0, 0, 0,0.3) 1px 1px 6px;
+    overflow: hidden;
+}
+#view_nav_webchat .img_action_kmsearch{
+    width:16px;height:16px;
+    float:right;
+    background-position: center -663px;
+    position: absolute;
+    right:5px;
+    bottom: 6px;
+    display: none;
+    transition: 0.2s ease;
+    opacity:0;
+}
+#view_webchat_todo_content  .chat_msg[noChatPopover="false"] .chat_popover_search:hover .img_action_kmsearch{
+     display:block;
+     animation:mymove 0.2s 0.05s forwards;
+ }
+#view_webchat_todo_content  .chat_msg[noChatPopover="false"] .img_action_kmsearch:hover{
+    display:block;
+    animation:mymove 0.2s 0.05s forwards;
+}
+@keyframes mymove
+{
+    from {opacity:0}
+    to {opacity:1}
+}
+#view_webchat_todo_content  .chat_msg[noChatPopover="false"] .chat_popover_search:hover{
+    padding-right: 21px;
+}
+#view_nav_webchat .webchat_kmpopover_close{
+    padding: 5px 8px;
+    font-family: arial, helvetica, sans-serif;
+}
+/*#view_nav_webchat .chat_popover.right:hover{*/
+    /*transition: width 1s;*/
+    /*width:-webkit-calc(100% + 25px);*/
+/*}*/
+#view_nav_webchat #webchat_kmpopover .panel-title{
+    font-size: 16px;
+    line-height: 30px;
+    text-indent: 15px;
+}
+#view_nav_webchat #webchat_kmpopover .panel-heading {
+    border-bottom: 1px solid #cdcdcd;
+}
+#view_nav_webchat #webchat_kmpopover .panel-heading:hover {
+    cursor: move;
+}
+#view_nav_webchat #webchat_kmpopover .kmsearch{
+    border:1px solid #d8d8d8;
+    border-radius: 4px;
+    height: 30px;
+    position: relative;
+}
+#view_nav_webchat #webchat_kmpopover .webchat_kmhotword_box{
+    position: absolute;
+    left: -1px;
+    top: 28px;
+    display:none;
+    background-color: white;
+    width: 100%;
+    border: 1px solid #d8d8d8;
+
+}
+#webchat_kmpopover .webchat_kmhotword_box li{
+    padding: 1px 8px;
+    color:#666;
+}
+#view_nav_webchat #webchat_kmpopover .webchat_kmdic_box {
+   overflow: auto;
+    height: 410px;
+}
+#webchat_kmpopover .webchat_kmdic_box li{
+    padding: 6px 18px;
+    font-size: 12px;
+    line-height: 18px;
+    color: #262635;
+}
+#webchat_kmpopover .webchat_kmdic_box .webchat_kmdic_detail{
+    color: #898989;
+}
+#webchat_kmpopover .webchat_kmhotword_box li:hover{
+    background-color:#e6f2fd;
+    cursor: pointer;
+}
+#webchat_kmpopover .webchat_kmdic_content li:hover{
+    background-color:#e6f2fd;
+}
+#view_nav_webchat #webchat_kmpopover .kmpopover_search_btn{
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: #fff;
+    border-radius: 4px;
+}
+#view_nav_webchat #webchat_kmpopover .kmpopover-input-text{
+    width: calc(100% - 40px);
+    height: 22px;
+    border: none;
+    line-height: 22px;
+    box-shadow: none;
+}
+#view_nav_webchat #webchat_kmpopover .search_tip{
+    color: #999;
+    padding-right: 8px;
+    margin-right: 8px;
+    border-right: 1px solid #d8d8d8;
+}
+#view_webchat_todo_content .webchat_access_li_content{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#view_webchat_todo_content .dialog_from{
+    display: none;
+}

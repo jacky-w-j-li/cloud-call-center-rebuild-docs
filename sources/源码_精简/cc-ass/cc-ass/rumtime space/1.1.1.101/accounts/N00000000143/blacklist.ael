@@ -1,0 +1,33 @@
+context N00000000143-10221-blacklist {
+	0105007 => goto N00000000143-10221-match-blacklist, 1, 1;
+	5007 => goto N00000000143-10221-match-blacklist, 1, 1;
+	_. => goto N00000000143-10220-time,${FROM_DID},1;
+	h => Hangup;
+}
+context N00000000143-10221-match-blacklist {
+	_. => Hangup;
+	h => Hangup;
+}
+
+context N00000000143-10053-blacklist {
+	0105007 => goto N00000000143-10053-match-blacklist, 1, 1;
+	5007 => goto N00000000143-10053-match-blacklist, 1, 1;
+	_. => goto N00000000143-10199-time,${FROM_DID},1;
+	h => Hangup;
+}
+context N00000000143-10053-match-blacklist {
+	_. => Hangup;
+	h => Hangup;
+}
+
+context N00000000143-10224-blacklist {
+	0105007 => goto N00000000143-10224-match-blacklist, 1, 1;
+	5007 => goto N00000000143-10224-match-blacklist, 1, 1;
+	_. => goto N00000000143-10223-time,${FROM_DID},1;
+	h => Hangup;
+}
+context N00000000143-10224-match-blacklist {
+	_. => Hangup;
+	h => Hangup;
+}
+

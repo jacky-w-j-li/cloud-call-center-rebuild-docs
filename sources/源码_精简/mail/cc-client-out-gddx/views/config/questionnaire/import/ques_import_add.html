@@ -1,0 +1,78 @@
+<div class="contact_summary">
+    <input type="hidden" name="xlsHeads" value=""/>
+    <div class="row-fluid">
+        <div class="span12">
+            <div style="border-bottom: 1px solid #f0f0f0;margin-right:5px;">
+                <h4 style="float:left;padding-top: 13px;">导入问卷 &nbsp;&nbsp;</h4>
+                <div class="form_buttons" style="padding-left:210px;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <form  action="" method="post" encType="multipart/form-data" target="" id="icc_imp_questionnaire_excelFileForm" name="excelUploadForm">
+                <div style="line-height: 35px;height: 35px;">
+                    <span style="text-align:right;width:20%;display: inline-block;">excel文件：</span>
+                    <input type="hidden" name="type" value=""/>
+                    <input type="file" fileType="xls|xlsx" id="fileToUpload" class="upload" onloaded="config.questionnaire.import.uploadSucess"
+                           onerror="config.questionnaire.import.uploadError" onprogress="" onabort="" style="height: auto; line-height: normal;"/>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row-fluid" id="cust_imp_baseinfo" style="display: none;">
+        <form>
+            <div class="span12">
+            <input type="hidden" name="fileName" value=""/>
+            <input type="hidden" name="trueName" value=""/>
+            <table cellspacing="1" cellpadding="0" border="0" width="100%">
+                <tr>
+                    <td style=" text-align:right;width:20%; ">问卷调查模板：</td>
+                    <td>
+                        <select name="dbType">
+                            <option value="" selected="selected">--选择问卷模板--</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr><td colspan="2">&nbsp;</td></tr>
+                <tr>
+                    <td style="text-align:right;">导入批次：</td>
+                    <td>
+                        <div>
+                            <input name="batchNo" type="text" style="width:105px;color:#808080" readonly="true" value="">
+                            <input  value=""  placeholder="添加批次说明" name="batchRemark" type="text" style="width:90px;border-left-style:none; color:gray;" onblur="if(this.value==''){this.value='添加批次说明';this.style.color='gray';}" onfocus="if(this.value=='添加批次说明')this.value='';this.style.color='black';" max='40' dataType="LimitBT" msg="批次说明必须填写长度小于等于40位的字符">
+                        </div>
+                    </td>
+                </tr>
+
+                <tr><td colspan="2">&nbsp;</td></tr>
+                <tr><td colspan="2"><div>
+                    <h5>选择关联关系</h5>
+                    <div id="import_question_relations_container"></div>
+                </div></td></tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <div class="form_buttons" style="padding-left:90px;padding-top:0;">
+                            <a href="#" class="accept_button button ds_form_action" ds_action="config.questionnaire.import.importQuestionData">导入</a>
+                            <!--<a href="#" class="cancel_button">取消</a>-->
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            </div>
+        </form>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span12 alert alert-block" style="line-height: 18px;">
+            说明：<br/>
+            1.支持后缀为xls和xlsx的excel文件导入<br/>
+            2.支持一个文件多个工作表,第一个工作表必须包括表头,且在第一行；其它的工作表不需要表头<br/>
+            3.导入是异步处理的,提交导入后可以立刻进行其他的导入,服务器会排队处理  <br/>
+            4.点击左侧“刷新”导入任务列表,查看导入的状态  <br/>
+        </div>
+    </div>
+</div>

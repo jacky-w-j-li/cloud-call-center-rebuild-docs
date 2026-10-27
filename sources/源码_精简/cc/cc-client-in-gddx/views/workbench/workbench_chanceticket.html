@@ -1,0 +1,56 @@
+<div class="right_container" style="padding: 5px;" id="myTitketItemPane">
+    <div class="row-fluid" style="margin-top: 5px;">
+        <div class="span12">
+            <form class="form-inline clearfix" role="form"  id="frm_cust_titket_detail_search">
+                <input type="hidden" name="status" value="0" id="my_status">
+                <input type="hidden" name="user" value="0" id="currentUser">
+                <div class="pull-left">
+                    <ul class="sub-nav">
+                        <li class="tab_tab1 common_hide active" style="display: list-item;">
+                            <span class="ds_do_action" ds_action="workbench.myTitketTab" ds_data="1" data-toggle="tab">未使用</span>
+                        </li>
+                        <li class="tab_tab2 common_hide" style="display: list-item;">
+                            <span class="ds_do_action" ds_action="workbench.myTitketTab" ds_data="2" data-toggle="tab">已使用</span>
+                        </li>
+                        <li class="tab_tab3 common_hide" style="display: list-item;">
+                            <span class="ds_do_action" ds_action="workbench.myTitketTab" ds_data="0" data-toggle="tab">已作废</span>
+                        </li>
+                        <!--<li class="tab_tab4 common_hide" style="display: list-item;">-->
+                            <!--<span class="ds_do_action" ds_action="workbench.myTitketTab" ds_data="3" data-toggle="tab">已抵消</span>-->
+                        <!--</li>-->
+                    </ul>
+                    </table>
+                </div>
+            </form>
+            <div style="margin-top: 15px;">
+                <table class="table table-bordered table-striped table-hover table-condensed">
+                    <thead>
+                    <tr>
+                        <th>类型</th>
+                        <th>获得时间</th>
+                        <th class="useTime_info">使用时间</th>
+                        <th>来源</th>
+                    </tr>
+                    </thead>
+                    <tbody id="cust_titket_detail_list"></tbody>
+                </table>
+                <div class="">
+                    <div for="frm_cust_titket_detail_search" ds_pagination_action="workbench.queryMyTitketList"
+                         class="pagination pagination-small pagination-right" style="display:table; margin:0;width:100%;">
+                        <span class="result_info">查询结果：<span class="result_count">0</span></span>
+                        <ul style="float:right;margin-top:5px;">
+                            <li><a href="#"  value="0">&laquo;</a></li>
+                            <li><a href="#"  value="1">1</a></li>
+                            <li><a href="#"  value="2">2</a></li>
+                            <li><a href="#"  value="3">3</a></li>
+                            <li><a href="#"  value="4">4</a></li>
+                            <li><a href="#"  value="5">5</a></li>
+                            <li><a href="#"  value="6">&raquo;</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

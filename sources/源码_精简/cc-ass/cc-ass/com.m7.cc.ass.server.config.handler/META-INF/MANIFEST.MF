@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Handler Plug-in
+Bundle-SymbolicName: com.m7.cc.ass.server.config.handler
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.m7.cc.ass.server.config.handler.Activator
+Bundle-Vendor: HOLLYCRM
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.osgi.framework;version="1.3.0"
+Require-Bundle: com.m7.cc.ass.util;bundle-version="1.0.0"
+Export-Package: com.m7.cc.ass.server.config.handler.core

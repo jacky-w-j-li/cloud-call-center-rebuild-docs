@@ -1,0 +1,64 @@
+<div class="right_container" style="padding: 5px;">
+    <div class="row-fluid" style="margin-top: 5px;">
+        <div class="span12">
+            <form class="form-inline clearfix" role="form" id="task_import_detail_query_form">
+                <div class="pull-left">
+                    <table class="table_row_search">
+                        <tbody>
+                        <tr>
+                            <!--<td>-->
+                                <!--<a href="#"  class="btn btn-link btn-small ds_form_action task_import_detail_refresh"  ds_action="customer.task.queryImportDetail" style="margin-left: 0px;">-->
+                                    <!--<i class="icon-refresh"></i> 刷新-->
+                                <!--</a>-->
+                            <!--</td>-->
+                            <input type="hidden" name="taskId" value="_#taskId#_">
+                            <td >批次号</td>
+                            <td >
+                                <input type="text" name="batchNo" class="input-small"/>
+                            </td>
+                            <td>
+                                <button type="button" class="btn-blue btn-small ds_form_action task_query_import_detail" ds_action="customer.task.queryImportDetail">查询</button>
+                                <button type="button" class="do_action_cancel ds_do_action" ds_action="customer.task.resetImportDetail" >重置</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+            <div style="margin-top: 15px;">
+                <table class="table table-bordered table-striped table-hover table-condensed">
+                    <thead>
+                    <tr>
+                        <th>批次号</th>
+                        <th>筛重方式</th>
+                        <th>导入进度</th>
+                        <th>导入时间</th>
+                        <th>创建人</th>
+                        <!--<th>已接听</th>-->
+                        <!--<th>未接听</th>-->
+                    </tr>
+                    </thead>
+                    <tbody class="task_import_detail_list">
+                    </tbody>
+                </table>
+                <div class="">
+                    <div for="frm_task_import_detail_search" ds_pagination_action="customer.task.queryImportDetail"
+                         class="pagination pagination-small pagination-right" style="display:table; margin:0;width:100%;">
+                        <span class="result_info">查询结果：<span class="result_count">0</span></span>
+                        <ul style="float:right;margin-top:5px;">
+                            <li><a href="#"  value="0">&laquo;</a></li>
+                            <li><a href="#"  value="1">1</a></li>
+                            <li><a href="#"  value="2">2</a></li>
+                            <li><a href="#"  value="3">3</a></li>
+                            <li><a href="#"  value="4">4</a></li>
+                            <li><a href="#"  value="5">5</a></li>
+                            <li><a href="#"  value="6">&raquo;</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

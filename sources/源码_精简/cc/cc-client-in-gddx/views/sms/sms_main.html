@@ -1,0 +1,33 @@
+<div class="right_container pd0">
+    <div class="tabbable">
+        <ul class="new-nav-tabs sms_tab">
+            <li class="active tab_my_sms common_hide">
+                <a href="#view_my_sms" class="ds_do_action" ds_action="sms.showTab" ds_data="my_sms" data-toggle="tab">我的短信</a>
+            </li>
+            <li class="tab_all_sms common_hide">
+                <a href="#view_all_sms" class="ds_do_action" ds_action="sms.showTab" ds_data="all_sms" data-toggle="tab">所有短信</a>
+            </li>
+            <li class="tab_mass_sms common_hide">
+                <a href="#view_mass_sms" class="ds_do_action" ds_action="sms.showTab" ds_data="mass_sms" data-toggle="tab">群发短信</a>
+            </li>
+            <li class="tab_import_mass_sms common_hide">
+                <a href="#view_import_mass_sms" class="ds_do_action" ds_action="sms.showTab" ds_data="import_mass_sms" data-toggle="tab">导入群发短信</a>
+            </li>
+            <li class="tab_sms_template_query common_hide">
+                <a href="#view_sms_template_query" class="ds_do_action" ds_action="sms.showTab" ds_data="sms_template_query" data-toggle="tab">短信模板查询</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="view_my_sms" class="tab-pane active"></div>
+            <div id="view_all_sms" class="tab-pane "></div>
+            <div id="view_mass_sms" class="tab-pane "></div>
+            <div id="view_import_mass_sms" class="tab-pane "></div>
+            <div id="view_sms_template_query" class="tab-pane "></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $(".sms_tab li a:first").click();
+    })
+</script>

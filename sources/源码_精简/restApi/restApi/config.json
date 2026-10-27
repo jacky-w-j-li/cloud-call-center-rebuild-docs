@@ -1,0 +1,22 @@
+{
+  "version":"1.0.0",
+  "serverPort": 4001,
+  "dbIp": "120.26.103.8",
+  "dbPort": "7210",
+  "dbName": "interAPI",
+  "dbUserName": "7moor",
+  "dbPassword": "7moorcom",
+  "dbPoolsize": 10,
+  "ccDbIp": "115.29.10.194",
+  "ccDbPort": "7211",
+  "ccDbName": "bill",
+  "ccDbUserName": "7moor",
+  "ccDbPassword": "7moorcom",
+  "ccJavaService": "http://127.0.0.1:9999/service",
+  "ccDbPoolsize": 10,
+  "redisIp":"121.40.194.97",
+  "redisPort":"6379",
+  "redisPwd":"7moorcom",
+  "runSchedule": "0",
+  "ccService":"http://127.0.0.1:8004/service"
+}

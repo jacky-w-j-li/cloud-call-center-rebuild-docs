@@ -1,0 +1,28 @@
+<div class="box box-element ui-draggable dragItem-__id">
+    <a href="#close" class="remove label label-important"><i class="icon-remove icon-white"></i>删除</a>
+    <span class="drag label"><i class="icon-move"></i>拖动</span>
+
+    <div class="preview">__name</div>
+    <div class="view">
+        <div class="dragViewItem row-fluid  action" appaction="config.business.dragItemActivePopover" fieldId="__id" itemType="number" data-trigger="manual" data-html="true"
+             data-container="body"  label="数字文本" title="数字文本配置" data-content="
+                                     <form class='form' id='popovered-form'>
+                                         <div class='controls'>
+                                            <input type='hidden' name='type' value='number'/>
+                                            <label class='control-label'>文本标签</label> <input class='input-large' type='text' name='label' id='label'>
+                                            <label class='control-label'>业务字段</label> <select name='field' ><option value=''>--请选择--</option></select>
+                                            <hr/>
+                                            <button class='btn btn-info do_action' appaction='config.business.saveDrayItemConfig'>保存</button><button class='btn btn-danger action' appaction='config.business.cancelDrayItemConfig'>取消</button>
+                                        </div>
+                                     </form>
+                                        "
+             data-placement="left">
+            <div class="span4">
+                <label class="control-label demo-label">__name</label>
+            </div>
+            <div class="span8">
+                <input type="text" style="width: 90%;" disabled/>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+context N00000000246-10004-announcement {
+	_X. => {
+		Playback(/etc/asterisk/1.1.1.101/accounts/N00000000246/sound/6f18e00162a0ae32a133a86a76cb74ce);
+		goto N00000000246-10005-textannouncement,s,1;
+	}
+}
+
+
+context N00000000246-10050-announcement {
+	_X. => {
+		
+		Hangup;
+	}
+}
+
+
+context N00000000246-10001-announcement {
+	_X. => {
+		
+		goto N00000000246-10011-textannouncement,s,1;
+	}
+}
+
+
+context N00000000246-10010-announcement {
+	_X. => {
+		Playback(/etc/asterisk/1.1.1.101/accounts/N00000000246/sound/86fa3ddb21df77c710695dbdf50ade99);
+		goto N00000000246-10022-textannouncement,s,1;
+	}
+}
+
+

@@ -1,0 +1,234 @@
+<div class="ques_distribution" style="overflow-y: auto;overflow-x: hidden;height: 100%;">
+    <form class="form-horizontal">
+        <input type="hidden" name="menu" value="_#menu#_"/>
+        <div class="row-fluid">
+            <div class="span12">
+                <div style="border-bottom: 1px solid #f0f0f0;margin-right:5px;">
+                    <h4 style="float:left;padding:13px 0 0 20px;">分配问卷 &nbsp;&nbsp;</h4>
+                    <div class="form_buttons" style="padding-left:210px;">
+                        <a href="#" class="accept_button button ds_form_action" style="float:right;" ds_action="questionnaire.saveQuestionAssign"> 保存</a>
+                        <a href="#" class="cancel_button"  style="float:right;">取消</a>
+                    </div>
+                </div>
+            </div>
+            <div class="span12">
+                <div style="height: 25px;line-height: 25px;padding-top:20px;">
+                    <span>您搜索到的问卷共计 <span class="cust_count">0</span> 个,</span>
+                    <span>此次分配 <span ><input style="width: 45px;" class="assign_count" type="text" name ="assign_count" /></span>个</span>
+                    <span class = "err_assign" style = "color:red;display:none">最多可分配 <span class ="err_assign_count"></span>个</span>
+                </div>
+                <div style="height: 25px;line-height: 25px;margin-bottom: 0px;">分配规则：<a href="#" class="ds_do_action" ds_action="questionnaire.autoAssgin">自动分配</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="#" class="ds_do_action" ds_action="questionnaire.resetAssgin">重置</a>
+                    当前未分配问卷数<span class="cust_more_count" style="color:red">0</span>个
+                    <span class = "err_assign2" style = "color:red;display:none">当前分配的总数超过了要分配的数量</span>
+                </div>
+
+                <div style="margin-bottom: 20px;">过滤座席：
+                    <span style="display: inline-block;" id="questionnaire_assign_select_agents"></span>
+                    <div id="questionnaire_assign_search_div" class="combobox_agent"></div>
+                    <td id="ques_assign_checkbox_td" style="padding-left: 12px">
+                        <input type="checkbox" id="ques_assign_checkbox"  style="margin-top: 4px" onclick=questionnaire_removeAgent(this) >
+                        显示已选座席下级
+                    </td>
+                </div>
+            </div>
+            <div class="span12 cust_assgin_container">
+            </div>
+            <div class="span12">
+                <!--<span>[注]： 必须全部分配完当前查询到的所有客户</span>-->
+                <div class="form_buttons" style="padding-top:10px;">
+                    <a href="#" class="accept_button button ds_form_action" ds_action="questionnaire.saveQuestionAssign" >保存</a>
+                    <a href="#" class="cancel_button">取消</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script id="tmpl_cust_assgin" type="text/x-jquery-tmpl">
+    <div class="span4">
+        <input type="hidden" name="owner[]" value="${_id}"/>
+        <div class="control-group" >
+            <label class="control-label" style="width:85px;">${displayName}[${exten}]：</label>
+            <input size="5" style="width:35px;float:left" type="text"  class="user_cust" name="assign[]" value="0"
+                                         onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"  />
+                                         <span style="padding-top:8px;float:left;">个客户</span>
+        </div>
+    </div>
+</script>
+<script type="application/javascript">
+    $(function () {
+        var pane=$("#view_ques_list_content");
+        var users = getCache("agents");
+        var lowerUsers = session.user.moduleUsers.question;
+        var _users=[];
+        for(var i=0;i<users.length;i++){
+            var u=users[i];
+            if(u.status=='enable'){
+                if(session.user.scope.question == "all" || session.user.isAdmin || $.inArray(u._id,lowerUsers)!=-1){
+                    _users.push(u);
+                }
+
+            }
+        }
+        utils.loadSearchInput({ id: "questionnaire_assign_search_div",
+            width: "120",
+            height: "14",
+            tip: "按姓名,拼音,工号搜索",
+            data: _users,
+            listField: ["displayName", "exten"],
+            userIdField: "_id",
+            searchField: ["displayName", "exten", "pinyin"],
+            pinyinField: ["displayName"],
+            showAllList: true,
+            callbackFuc: function (object) {
+                if($.isArray(object)){
+                    return;
+                }
+                var currentVals = pane.find("input[name='filterAgent']");
+                var ishas = false;
+                for (var i = 0; i < currentVals.length; i++) {
+                    if (currentVals[i].value == object._id) {
+                        ishas = true;
+                        break;
+                    }
+                }
+                if(!ishas) {
+                    $('#questionnaire_assign_select_agents').before("<span><input type='hidden' name='filterAgent' value=" + object._id + ">" +
+                            "<span class='label label-info'>" + object.displayName +
+                            "</span><a href='#' onclick=questionnaire_removeAgent(this)><i class='icon-remove'></i></a>&nbsp;</span>");
+                    filterQuesAssign();
+                }
+                //绑定动作
+                $(".user_cust", pane).keyup(function (event) {
+                    var e = event.keyCode;
+                    if ((e >= 48 && e <= 57) || (e >= 96 && e <= 105) || e == 8) {
+                        var len = $(".user_cust", pane).length;
+                        var sum = 0;
+                        for (var xx = 0; xx < len; xx++) {
+                            var inputval = $(".user_cust", pane).get(xx).value;
+                            if (inputval) {
+                                sum += parseInt($(".user_cust", pane).get(xx).value);
+                            }
+                        }
+                        $(".cust_more_count", pane).text(parseInt($(".cust_count", pane).text()) - sum);
+                    }
+                });
+                var len = $(".user_cust", pane).length;
+                var sum = 0;
+                for (var xx = 0; xx < len; xx++) {
+                    var inputval = $(".user_cust", pane).get(xx).value;
+                    if (inputval) {
+                        sum += parseInt($(".user_cust", pane).get(xx).value);
+                    }
+                }
+                $(".cust_more_count", pane).text(parseInt($(".cust_count", pane).text()) - sum);
+
+            }
+        });
+    })
+    function questionnaire_removeAgent(src) {
+        $(src).closest("span").remove();
+        filterQuesAssign();
+    }
+    function filterQuesAssign(){
+        var pane=$("#view_ques_list_content");
+        var _agents = pane.find("input[name='filterAgent']");
+        var _filterUsers=[];
+        _agents.each(function(){
+            _filterUsers.push($(this).val());
+        });
+        var users = getCache("agents");
+        var lowerUsers = session.user.moduleUsers.question;
+        var filterUsers = [];
+        if(_filterUsers.length>0){
+            for(var i=0;i<users.length;i++){
+                var u=users[i];
+                if($.inArray(u._id,_filterUsers)!=-1 && (session.user.scope.question == "all" || session.user.isAdmin ||  $.inArray(u._id,lowerUsers))!=-1){
+                    filterUsers.push(u);
+                }
+            }
+        }else{
+            for(var i=0;i<users.length;i++){
+                var u=users[i];
+                if(u.status=='enable'){
+                    if(session.user.scope.question == "all" || session.user.isAdmin || $.inArray(u._id,lowerUsers)!=-1){
+                        filterUsers.push(u);
+                    }
+                }
+            }
+        }
+        //是否选中 过滤座席下级的checkbox
+        var includeSubordinate = document.getElementById("ques_assign_checkbox").checked;
+        var choose_agent_ids = [];
+        var choose_agent_eles = document.getElementsByName("filterAgent");
+        for(var i =0 ;i<choose_agent_eles.length;i++){
+            choose_agent_ids.push(choose_agent_eles[i].value);
+        }
+        if(choose_agent_ids && choose_agent_ids.length>0 && includeSubordinate){
+            var agentList = users;
+            var getAgent=function(pid){
+                for (var i = 0; i < agentList.length; i++) {
+                    var obj = agentList[i];
+                    if(obj.parentId && obj.parentId==pid){
+                        if(filterUsers.indexOf(obj)<0){
+                            filterUsers.push(obj);
+                        }
+                        getAgent(obj._id);
+                    }
+                }
+            }
+            for(var i =0 ;i<choose_agent_eles.length;i++){
+                getAgent(choose_agent_ids[i]);
+            }
+        }
+        //对数据进行html拼接显示
+        filterUsers=handler.questionnaire._bubbleSort(filterUsers);
+        var html=[];
+        for(var i=0;i<filterUsers.length;i++){
+            var u=filterUsers[i];
+            if(u.status=='enable'){
+                var tmpl=pane.find("#tmpl_cust_assgin").tmpl(u).get(0).outerHTML;
+                if((i+1)%3==1){
+                    html.push('<div class="row-fluid">'+tmpl);
+                }else if((i+1)%3==0){
+                    html.push(tmpl+'</div>');
+                }else{
+                    html.push(tmpl);
+                }
+            }
+        }
+        if(filterUsers.length%3==1){
+            html.push('<div class="span8"></div></div>');
+        }else if(filterUsers.length%3==2){
+            html.push('<div class="span4"></div></div>');
+        }
+        $(".cust_assgin_container",pane).html(html.join(""));
+
+        //绑定动作
+        $(".user_cust", pane).keyup(function (event) {
+            var e = event.keyCode;
+            if ((e >= 48 && e <= 57) || (e >= 96 && e <= 105) || e == 8) {
+                var len = $(".user_cust", pane).length;
+                var sum = 0;
+                for (var xx = 0; xx < len; xx++) {
+                    var inputval = $(".user_cust", pane).get(xx).value;
+                    if (inputval) {
+                        sum += parseInt($(".user_cust", pane).get(xx).value);
+                    }
+                }
+                $(".cust_more_count", pane).text(parseInt($(".cust_count", pane).text()) - sum);
+            }
+        });
+        var len = $(".user_cust", pane).length;
+        var sum = 0;
+        for (var xx = 0; xx < len; xx++) {
+            var inputval = $(".user_cust", pane).get(xx).value;
+            if (inputval) {
+                sum += parseInt($(".user_cust", pane).get(xx).value);
+            }
+        }
+        $(".cust_more_count", pane).text(parseInt($(".cust_count", pane).text()) - sum);
+        $(".assign_count", pane).keyup();
+    }
+</script>

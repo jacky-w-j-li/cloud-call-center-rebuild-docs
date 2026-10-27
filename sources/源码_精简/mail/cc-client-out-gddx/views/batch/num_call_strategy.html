@@ -1,0 +1,23 @@
+<form  action="" id="frm_num_call_strategy" class="form-horizontal">
+    <div class="row_item">
+        <label >策略</label>
+        <select name="AutoCallStrategy" id="batch_autoCallStrategy">
+            <option value="static">固定并发</option>
+            <option value="smart">智能并发</option>
+        </select>
+    </div>
+    <div class="row_item free_agent_count" style="display: none;">
+        <label>空闲座席数的倍数</label>
+        <!-- <input type="text" style="width: 114px;"  name="SmartAutoCallCount" value="1"> -->
+        <input type="text" name="SmartAutoCallCount" class="form-control input-sm number" required="" datatype="Number3,Range" placeholder="输入范围在1~10000" min="1" value="1" max="10000" msg="您输入的范围必须在1~10000之内">
+        <!--<input type="text" style=""  name="smartAutoCallCount" dataType="Number"  msgName="空闲座席数的倍数"  msg="必须是数字"  >-->
+    </div>
+    <div class="row_item">
+        <div class="" style="padding-left: 118px;margin: 20px 0;">
+            <button type="button" class="btn btn-success  ds_form_action" ds_action="batch.updateCallStrategy" style="">保存</button>
+            <button type="button" class="btn btn-small"  data-dismiss="modal" aria-hidden="true">取消</button>
+        </div>
+    </div>
+
+</form>
+

@@ -1,0 +1,22 @@
+<div class="row-fluid list-item ds_action_flow" title="点击修改">
+    <ds-get-view view="config/callConfig/line/line_edit" panel="line_panel" view-data='{"_id":"___id"}'/>
+                 <!--on-complete="config.callConfig.line.preEditLine"/>-->
+    <div class="span12">
+        <legend>_@config.callConfig.line.getTypeName('__Dialout')@_</legend>
+        <div class="row-fluid">
+            <div class="span12">
+                <h4 style="color:#0088CC;">_@config.callConfig.line.getLineName('__Board','__Exten')@_</h4>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span6">
+                透传号：__DidNum
+            </div>
+            <div class="span6">
+                最后修改时间：__UpdateTime
+            </div>
+        </div>
+    </div>
+</div>
+<div style="height:1px;background-color:#EAEAEA;width:100%;margin-bottom:5px;">
+</div>

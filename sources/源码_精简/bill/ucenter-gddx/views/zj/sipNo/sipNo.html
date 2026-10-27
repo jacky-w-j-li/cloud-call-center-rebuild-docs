@@ -1,0 +1,88 @@
+<div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form id="frm_sipNo_search" class="form-horizontal">
+                <table class="table_row_search">
+                    <tbody>
+                    <tr>
+                        <td>sip号</td>
+                        <td>
+                            <input type="text" name="_id" class="form-control input-sm"/>
+                        </td>
+                        <td>工号</td>
+                        <td>
+                            <input type="text" name="userExten" class="form-control input-sm"/>
+                        </td>
+                        <!--<td>状态</td>-->
+                        <!--<td >-->
+                            <!--<select name="status"  class="form-control input-sm">-->
+
+                            <!--</select>-->
+                        <!--</td>-->
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm sipNo_search ds_form_action" ds_action="sipNo.getSipNoList" value="1">查询</button>
+                            <button type="button" class="btn btn-default btn-sm ds_do_action" ds_action="sipNo.reset" >重置</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">网关sip号列表
+            <button type="button" class="btn btn-success btn-xs ds_do_action" ds_action="sipNo.showAsk" style="margin-left: 20px;">申请网关sip号</button>
+            <button type="button" class="btn btn-success btn-xs ds_do_action bill_hide btn_sip_add" ds_action="sipNo.showAddSipNo" style="margin-left: 20px;">添加sip号</button>
+
+            <button type="button" class="btn btn-success btn-xs ds_do_action" ds_action="sipNo.refreshSipNoStatus" ds_data="zj" style="margin-left: 20px;float: right">刷新sip号状态</button>
+        </div>
+        <!-- Table -->
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>sip号码</th>
+                <th>密码</th>
+                <th>编码</th>
+                <th>状态</th>
+                <th>用户</th>
+                <th class="">pbx</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody class="sipNo_list">
+            </tbody>
+        </table>
+
+    </div>
+    <div class="row">
+        <div class="col-md-5">查询结果：<span class="result_count" style="margin-top:3px;display: inline-block;">0</span></div>
+        <div class=" col-md-7">
+            <ul class="pagination pagination-sm pull-right" style="margin: 0;"
+                for="frm_sipNo_search" ds_pagination_action="sipNo.getSipNoList">
+                <li><a href="#"  value="0">&laquo;</a></li>
+                <li><a href="#"  value="1">1</a></li>
+                <li><a href="#"  value="2">2</a></li>
+                <li><a href="#"  value="3">3</a></li>
+                <li><a href="#"  value="4">4</a></li>
+                <li><a href="#"  value="5">5</a></li>
+                <li><a href="#"  value="6">&raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="modal fade" id="sipNo_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" ></h4>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary ds_form_action" ds_action=""  ds_form="">保存</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>

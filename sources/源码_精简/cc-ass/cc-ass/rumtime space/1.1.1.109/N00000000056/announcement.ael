@@ -1,0 +1,56 @@
+context N00000000056-10028-announcement {
+	_X. => {
+		Playback(/development/app/workspace_ds_ali/ass/rumtime space/1.1.1.109/accounts/N00000000056/sound/4b45394f82fa021439a2aba8ead3e905);
+		Hangup;
+	}
+}
+
+
+context N00000000056-10014-announcement {
+	_X. => {
+		
+		Hangup;
+	}
+}
+
+
+context N00000000056-10025-announcement {
+	_X. => {
+		
+		goto N00000000056-10000020-queue,10000020,1;
+	}
+}
+
+
+context N00000000056-10001-announcement {
+	_X. => {
+		
+		Hangup;
+	}
+}
+
+
+context N00000000056-10012-announcement {
+	_X. => {
+		
+		Hangup;
+	}
+}
+
+
+context N00000000056-10010-announcement {
+	_X. => {
+		
+		Hangup;
+	}
+}
+
+
+context N00000000056-10021-announcement {
+	_X. => {
+		
+		Hangup;
+	}
+}
+
+

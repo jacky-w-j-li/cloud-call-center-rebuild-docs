@@ -1,0 +1,119 @@
+<div >
+    <form id="frm_customerCommon_update" class="form-horizontal ">
+        <input type="hidden" name="commonId" value='_#commonId#_'/>
+        <input type="hidden" name="category" value="_#category#_">
+        <div class="form_buttons" style="">
+            <button type="button" class="btn btn-small btn-primary ds_form_action pull-right"  ds_action="config.customerCommon.saveUpCustomerCommon" style="margin-left: 10px;">保存</button>
+                <button type="button" class="btn btn-small pull-right btn_pad btn_cancel_edit ds_do_action" ds_action="config.customerCommon.cancelModal" ds_data="frm_customerCommon_update" style="margin-left: 0px;">取消</button>
+        </div>
+
+        <div>
+            <div class="control-group">
+                <label class="control-label required">公海名称</label>
+                <div class="controls">
+                    <input style="width: 35%;" name="cName" type="text" value="" maxlength="50" msgName='公海名称'>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label required">管理员</label>
+                <div class="controls">
+                        <input name="ownercomManagers" type="hidden" class="select_input" id="managers_owner_select_input_com" />
+                        <input name="managers" type="hidden" class="select_input" id="managers_owner_select_input" />
+                        <!--<input name="ownerdepManagers" type="hidden" class="select_input" id="managers_owner_select_input_dep" />-->
+                        <!--<div id="_#menu#__owner_select_user" class="combobox_agent"></div>-->
+                        <div id="managers_owner_select_adminUser" class="comtabbox_agent"></div>
+                        <!--<div class="cust_managers_container">-->
+                        <!--</div>-->
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label required">公海成员</label>
+                <div class="controls" >
+                        <input name="ownercomMembers" type="hidden" class="select_input" id="members_owner_select_input_com" />
+                        <input name="members" type="hidden" class="select_input" id="members_owner_select_input" />
+                        <!--<input name="ownerdepMembers" type="hidden" class="select_input" id="members_owner_select_input_dep" />-->
+                        <!--<div id="_#menu#__owner_select_user" class="combobox_agent"></div>-->
+                        <div id="members_owner_select_memberUser" class="comtabbox_agent"></div>
+                        <!--<div class="cust_members_container">-->
+                        <!--</div>-->
+                    </div>
+            </div>
+            <div class = "control-group categoryCustomerCommon">
+                <label class="control-label required">公海类型</label>
+                <div class="controls" style="padding-top:5px;">
+                    <input class="ds_checked_radio" ds_action="config.customerCommon.changeUnit" ds_data="day"
+                           type="radio" name="cate" value="3" checked="checked" disabled>手动&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input class="ds_checked_radio" ds_action="config.customerCommon.changeUnit" ds_data="duration"
+                           type="radio" name="cate" value="4" disabled>自动
+                </div>
+            </div>
+            <div class="control-group invalidCustonerCommon">
+                <div class="controls">
+                    <span class="help-block muted">无效商机公海不可以主动领取，并且不自动回收。</span>
+                </div>
+            </div>
+            <div class="control-group lostCustonerCommon">
+                <div class="controls">
+                <span class="help-block muted">丢单商机公海不可以主动领取，并且不自动回收。</span>
+            </div>
+            </div>
+            <div class="control-group claimCustomer">
+                <label class="control-label">客户领取上限</label>
+                <div class="controls">
+                    <div class="row-select-box" style="position: relative;">
+                        <span>待跟进：</span>
+                        <input type="text" name="ruleNum" datatype="Number,Range" style="width:50px;height:13px" min="0" msgName='领取规则为大于0的整数'  value='50' onblur="if(this.value=='0'){this.value='50'}"  onkeyup="this.value=this.value.replace(/\D/g,'')">  <span>个</span><i></i>
+                    </div>
+                    <span class="help-block muted">默认值为50个。</span>
+                </div>
+            </div>
+            <div class="control-group recyleCustomer">
+                <label class="control-label">客户回收规则</label>
+                <div class="controls">
+                    <div id="field_backRules_pane" style="position: relative;" class="">
+                        待跟进：<input type="text" name="deNum" datatype="Number,Range" style="width:50px" onkeyup="this.value=this.value.replace(/\D/g,'')"><span
+                            class="unit">天</span>无有效的通话，自动回收到公海。
+                        <br/><br/>
+                        跟进中：<input type="text" name="foNum" datatype="Number,Range" style="width:50px" onkeyup="this.value=this.value.replace(/\D/g,'')">天无完成的联系计划或有效的通话，自动回收到公海。
+                    </div>
+                    <span class="help-block muted"><br/>默认为不自动回收。</span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function(){
+        //初始化座席
+        _initAgentCheckbox();
+    });
+    function _initAgentCheckbox(){
+        var inputIdMa="managers_owner_select_input";
+        var containerIdMa="managers_owner_select_adminUser";
+        var inputIdMe = "members_owner_select_input";
+        var containerIdMe = "members_owner_select_memberUser";
+        var editOwner="";
+        if(isHasFunc("func_not_allow_user_edit_owner")){
+            editOwner = "readonly"
+        }
+        utils.loadAgentTabBox(inputIdMa,containerIdMa,{width:"360",height:"17",maxHeight:292,hideTab:2,isRadio:false,commonTab:false},false,false);
+        utils.loadAgentTabBox(inputIdMe,containerIdMe,{width:"360",height:"17",maxHeight:292,hideTab:2,isRadio:false,commonTab:false},false,false);
+    };
+    var pane = $("[datatype='Number,Range']");
+    pane.each(function(){
+        $(this).on('blur',function(){
+            if(isNaN($(this).val())){
+                if($(this).val() != ''){
+                    if($(this).attr('name') == 'ruleNum'){
+                        alert('客户领取上限数量只能输入数字');
+                    }else if($(this).attr('name') == 'deNum'){
+                        alert('客户回收规则待跟进只能输入数字');
+                    }else if($(this).attr('name') == 'foNum'){
+                        alert('客户回收规则跟进中只能输入数字');
+                    }
+                }
+                $(this).val($(this).val().replace(/\D|^0/g,''));
+            };
+        })
+    })
+</script>

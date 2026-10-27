@@ -1,0 +1,61 @@
+<form class="form-horizontal" id="frm_identity_update" action="form" enctype="multipart/form-data" method="post" target="ds_iframe">
+    <input type="hidden" name="_id" value="_#_id#_">
+    <input type="hidden" name="sessionId" value="" />
+    <input type="hidden" name="action" value="saveIdentity" />
+    <div class="form-group">
+        <div class="alert alert-info" style="margin-bottom: 0;margin-top: 10px;">
+            温馨提示：以下上传对应项的电子版即可。
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-4">
+            企业名称
+        </label>
+        <div class="col-md-5">
+            _#companyName#_
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-4">
+            营业执照
+        </label>
+        <div class="col-md-5">
+            <input type="file" class="file form-control input-sm" name="busLicense" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-4">
+            组织机构证
+        </label>
+        <div class="col-md-5">
+            <input type="file" class="file form-control input-sm" name="orgCard" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-4">
+            税务登记证
+        </label>
+        <div class="col-md-5">
+            <input type="file" class="file form-control input-sm" name="taxCard" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-4">
+            法人身份证
+        </label>
+        <div class="col-md-5">
+            <input type="file" class="file form-control input-sm" name="legalCard" required>
+            <p class="help-block" style="color:#3a87ad;">身份证正反面放一张图片上</p>
+        </div>
+    </div>
+
+    <!--<div class="form-group">-->
+        <!--<label class="control-label col-md-4">-->
+            <!--邮箱-->
+        <!--</label>-->
+        <!--<div class="col-md-5">-->
+            <!--<input type="text" name="email" value='_#email#_' class="form-control input-sm email"/>-->
+        <!--</div>-->
+    <!--</div>-->
+</form>

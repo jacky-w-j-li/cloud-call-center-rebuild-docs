@@ -1,0 +1,16 @@
+context N00000000056-10029-textannouncement {
+	s => {
+		Agi(agi://127.0.0.1:7891/agittszh?pbx=${HOST}&servicepeer=10029);
+		Hangup;
+	}
+}
+
+
+context N00000000056-10038-textannouncement {
+	s => {
+		Agi(agi://127.0.0.1:7891/agittszh?pbx=${HOST}&servicepeer=10038);
+		Hangup;
+	}
+}
+
+

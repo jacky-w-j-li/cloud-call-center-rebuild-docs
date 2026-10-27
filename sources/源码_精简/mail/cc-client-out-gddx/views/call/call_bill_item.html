@@ -1,0 +1,23 @@
+<tr>
+    <td>
+        _@call.getCallBillType('_#dbType#_')@_
+    </td>
+    <td>
+        _#custName#_
+    </td>
+    <td>
+        _#callNo#_
+    </td>
+    <td>
+        _@call.getCallBillCustomType('_#dbType#_','_#type#_')@_
+    </td>
+    <td>
+        _#createTime#_
+    </td>
+    <td>
+        _@call.getAgentName('_#creator#_')@_
+    </td>
+    <td>
+        <a href="#" class="ds_do_action" ds_action="callRecord.loadCallRecordInfo" ds_data="_#_id#_">查看</a>
+    </td>
+</tr>

@@ -1,0 +1,88 @@
+<div class="">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="span6">
+                <div style="line-height: 25px;position: relative;margin: 10px 0;">
+                    <a href="http://www.7moor.com" class="logo" target="_blank" style="width: 330px;display: inline-block;">
+                        <img src="./img/logo2.png" alt="容联.七陌" style="width: 150px;">
+                        <span style="display: inline-block;border-left: 2px solid #ddd;margin-left: 10px;">&nbsp;</span>
+                        <span style="display: inline-block;font-size: 16px;padding-left: 15px;
+                        color: #777;position: absolute;left: 225px;bottom: 20px;font-weight: bold;">企业云联络中心</span>
+                    </a>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="contact_us_rich pull-right" style="">
+                    <ul style="list-style: none;">
+                        <li>客户服务热线：4008-113-114</li>
+                        <li>技术支持邮箱：<a class="" href="javascript:mailTo('service@7moor.com')">service@7moor.com</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="login_rich_main">
+        <div class="row-fluid">
+            <div class="span8">
+                <div  style="margin-left: 70px;padding-right: 30px;border-right: 1px solid #ddd;">
+                    <!--<img alt="" src="../img/client/rich_index2.jpg" class="img-rounded">-->
+                    <img alt="" src="../img/yuntongxun/bg.jpg" class="img-rounded">
+                </div>
+
+            </div>
+            <div class="span4 login-unit" id="login_panel" style="padding-left: 30px;padding-top: 0px;">
+                <div class="row-fluid">
+                    <form id="login-form">
+                        <input name="lastCodeKey" type="hidden" />
+                        <fieldset>
+                            <legend>
+                                云客服登录
+                                <!--<div class="" style="font-size: 14px;">-->
+                                    <!--<img src="../../img/new.png" style="width: 30px;">-->
+                                    <!--<span><a href="./views/help/new_feature.html" target="_blank" class="text-error" style="font-weight: bold;">【2015-03-22】新功能发布介绍</a></span>-->
+                                <!--</div>-->
+                            </legend>
+                            <input type="text" name="loginName" id="login_loginName" placeholder="请输入用户名" class="span12" autofocus required/>
+                            <input type="password" name="password" id="login_password" placeholder="请输入密码" class="span12" required/>
+                            <select id="login_extentype" name="extenType" style="width:110px;">
+                                <option value="Local">手机</option>
+                                <option value="gateway">语音网关</option>
+                                <option value="sip">软电话</option>
+                            </select>
+
+                            <span class="pull-right">
+                                <input id="login_busyType_switch" name="login_busyType" type="checkbox" checked="checked"/>
+                            </span>
+                            <div style="font-size: 12px;display: none;" class="login_authCode">
+                                <span style="padding-right: 10px;">邮箱验证码</span><input type="text" name="authCode"  style="width: 85px;" placeholder="输入邮箱验证码"/>
+                                <a href="#" onclick="retryMail2Authcode(this)">没收到邮件,点击重新发送</a>
+                            </div>
+                            <label class="checkbox" >
+                                <input type="checkbox" name="remember" id="login_remember"> 记住密码
+                            </label>
+                        </fieldset>
+                    </form>
+                    <button type="submit" id="login" class="btn btn-success btn-block" style="padding: 4px 12px;">登入</button>
+                    <div class="pull-left" style="font-size: 12px;"><a href="http://7xjsdj.dl1.z0.glb.clouddn.com/im_win.rar" target="_blank"><i class="icon-download"></i> 下载软电话</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bs-footer_rich">
+        <div class="container">
+            <div class="text-center" style="font-size: 14px;">呼叫中心经营许可证B2-20130264 &nbsp; &nbsp; 京ICP备14006443号-1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &copy; 2016 容联七陌</div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $("#login-form").find(":input").keydown(function(event){
+            if(event.keyCode == 13){
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                $("#login").click();
+            }
+        });
+        $("#login_busyType_switch").bootstrapSwitch({size:'small',onColor:'success',offColor:'danger',onText:'空闲',offText:'忙碌'});
+    });
+</script>

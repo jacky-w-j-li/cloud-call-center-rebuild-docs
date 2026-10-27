@@ -1,0 +1,42 @@
+<div class="row-fluid">
+    <div class="offset2">
+        <a href="#" onclick="handler.batch2.downloadImpTmpl()">下载导入模板</a>
+    </div>
+</div>
+<div class="row-fluid">
+<form  action="" method="post" encType="multipart/form-data" target="uploadIframe" id="frm_num_import" class="form-horizontal">
+    <input type="hidden" name="action" value="importTaskNum"/>
+    <input type="hidden" name="sessionId" value=""/>
+    <input type="hidden" name="taskId" value="_#taskId#_"/>
+    <input type="hidden" name="taskName" value="_#taskName#_"/>
+    <div class="control-group" style="line-height: 35px;margin-bottom: 0;">
+        <label class="span2" style="float: left;padding-top: 15px;">
+            excel文件
+        </label>
+        <div class="span10" style="float: left;">
+            <input type="file" style="margin-top: 15px; line-height: 12px;"  name="file"  onchange="handler.batch2.importNum('frm_num_import')">
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls offset2">
+            <div class="checkbox">
+                <label style="line-height: 12px;">
+                    <input type="checkbox" name="isPhone" value="check" > 过滤重复号码
+                </label>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+<div class="row-fluid">
+    <div class="span12 alert alert-block" style="line-height: 18px;">
+        说明：<br/>
+        1.支持后缀为xls和xlsx的excel文件导入<br/>
+        2.号码需放到excel的第一列，不需要表头，支持一个excel文件多个工作表导入<br/>
+        3.导入是异步处理的,提交导入后可以立刻进行其他的导入,服务器会排队处理<br/>
+    </div>
+</div>
+<iframe name="uploadIframe" id="uploadIframe"  style="display:none;"></iframe>
+<script type="text/javascript">
+    $("#frm_num_import").find('input[name="sessionId"]').val(session.id);
+</script>

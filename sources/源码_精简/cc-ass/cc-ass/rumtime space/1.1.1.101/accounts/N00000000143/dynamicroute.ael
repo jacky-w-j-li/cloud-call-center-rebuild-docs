@@ -1,0 +1,51 @@
+context N00000000143-10195-dynamic-route {
+	s => {
+		if ("${JOBNUM}"=="FROM_DID")
+				Hangup;
+
+		
+		goto N00000000143-10195-DynamicRouteNode-unmatched, s, 1;
+	}
+}
+
+context N00000000143-10195-DynamicRouteNode-unmatched {
+	s => {
+		Hangup;
+	}
+}
+
+
+context N00000000143-10059-dynamic-route {
+	s => {
+		if ("${FROM_DID:0:3}"=="111" || "${JOBNUM}"=="2" || "${JOBNUM}"=="3")
+				goto N00000000143-10000197-queue,10000197,1;
+
+		
+		goto N00000000143-10059-DynamicRouteNode-unmatched, s, 1;
+	}
+}
+
+context N00000000143-10059-DynamicRouteNode-unmatched {
+	s => {
+		goto N00000000143-10095-announcement,${FROM_DID},1;
+	}
+}
+
+
+context N00000000143-10190-dynamic-route {
+	s => {
+		if ("${JOBNUM:0:4}"=="0404")
+				goto N00000000143-10000197-queue,10000197,1;
+
+		
+		goto N00000000143-10190-DynamicRouteNode-unmatched, s, 1;
+	}
+}
+
+context N00000000143-10190-DynamicRouteNode-unmatched {
+	s => {
+		goto N00000000143-dialin, ${JOBNUM}, 1;
+	}
+}
+
+

@@ -1,0 +1,13 @@
+<div class="panel-heading" style="font-weight: bold">编辑快捷回复</div>
+<form action="" id="quick_replay_labels">
+    <input type="hidden" id="" class="quick_replay_con_id"/>
+    <textarea name="" id="quick_replay_content" cols="50" rows="7" style="resize: none;"></textarea>
+    <div class="replay_label_lis">
+        <div class="add_replay_label_box">
+            <input id="add_replay_label" type="text" name="label" class="ds_focus_action" maxlength="10" focus_action="config.channel.editQuickReplayTag" blur_action="config.channel.saveQuickReplayTag" onkeypress=" if(event.keyCode==13) {blur()}" placeholder="添加标签">
+        </div>
+    </div>
+    <div class="clearFloat" style="width: 100%;margin-top: 5px">
+        <input type="button" class="save_quick_replay btn-blue ds_do_action" ds_action="config.channel.saveEditQuickReplay" value="保存" style="height: 20px"/>
+    </div>
+</form>

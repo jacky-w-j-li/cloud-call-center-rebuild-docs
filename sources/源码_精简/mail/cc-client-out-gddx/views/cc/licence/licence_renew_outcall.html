@@ -1,0 +1,84 @@
+<div class="pay_start" style="margin:10px;">
+    <div class="licence_pay_outcall">
+        <div class="well licence_outcall_use_div" style="padding: 0 19px;">
+            <h2>续费外呼版<small>
+                licence套餐:<span class="text-primary monthRent">_#licencePrice#_</span>元套餐
+            </small></h2>
+            <p class="text-muted">当前licence数<span class="text-primary">_#num#_</span>
+                ，赠送分钟数<span class="text-primary giveMinuteOne_p">_#calloutMinute#_</span>(月/座席)</p>
+        </div>
+        <div class="well tryShow" style="padding: 0 19px;display: none">
+            <h2>续费外呼版<small>
+            </small></h2>
+            <p class="text-muted">当前licence数<span class="text-primary">_#num#_</span>
+                ，到期日期为<strong class="text-danger">_#endDate#_</strong>
+        </div>
+        <form class="form-horizontal" id="frm_licence_outcall_update">
+            <input type="hidden" name="_id" value="_#_id#_">
+            <input type="hidden" name="oldNum" value="_#num#_">
+            <input type="hidden" name="licenceType" value="_#licenceType#_">
+            <input type="hidden" name="oldLicencePriceType" value="_#licencePriceType#_">
+            <input type="hidden" name="licencePriceTypeNew" value="_#licencePriceTypeNew#_">
+            <input type="hidden" name="account" value="_#account#_">
+            <input type="hidden" name="beginDate" value="_#beginDate#_">
+            <input type="hidden" name="pbx" value="_#pbx#_">
+            <input type="hidden" name="status" value="_#status#_">
+            <input type="hidden" name="flag" value="modifyOutcallLicence">
+            <input type="hidden" name="paidNum" value="_#paidNum#_">
+            <input type="hidden" name="money" value="">
+
+            <div class="form-group" id="licence_outcall_calloutLicenceType_div" >
+                <label class="control-label col-md-3">
+                    套餐价格
+                </label>
+                <div class="col-md-5"  style="padding-left:20px;line-height: 35px;">
+                    <input type="text" name="licensePrice" value='_#licencePrice#_' class="form-control input-sm giveMinuteOne" readonly/>
+                </div>
+            </div>
+            <div class="form-group" id="licence_add_giveMinute_div" >
+                <label class="control-label col-md-3">
+                    赠送分钟数(月/座席)
+                </label>
+                <div class="col-md-5"  style="padding-left:20px;line-height: 35px;">
+                    <input type="text" onkeyup="value=value.replace(/[^\d]/g,'')"  value='_#calloutMinute#_' class="form-control input-sm giveMinuteOne" readonly/>
+                    <label for="giveMinuteOne" class="error" style="display: none;"></label>
+                </div>
+            </div>
+            <div class="form-group licenseNum_field_group">
+                <label class="control-label col-md-3">
+                    licence数量
+                </label>
+                <div class="col-md-5"  style="padding-left:20px;line-height: 35px;">
+                    <input type="text" onkeyup="value=value.replace(/[^\d]/g,'')" name="num" value='_#num#_' class="form-control input-sm ds_spinner ds_spinner_num" required>
+                    <label for="num" class="error" style="display: none;"></label>
+                </div>
+            </div>
+            <div class="alert alert-info">
+                <ul>
+                    <li>增加减少外呼版licence，立即生效</li>
+                    <!--<li>外呼版licence试用状态，按当月剩余天数计费，购买后立即转成正用状态，之后按月自动扣费</li>-->
+                    <!--<li>外呼版licence更改套餐默认当月申请，下月生效，以本月最后一次操作为准</li>-->
+                    <!--<li>外呼版licence修改数量，按照当前套餐与当月剩余天数计算费用和总赠送分钟数</li>-->
+                    <!--<li>外呼版licence增加和减少licence数量立即生效</li>-->
+                    <!--<li>修改licence数量大于已扣费的licence数量，增加的licence数量按当月剩余天数计费</li>-->
+                </ul>
+            </div>
+            <div class="clearfix outcallShow" style="margin-bottom: 20px">
+                <p>
+                    您当前可支付余额为<strong>_#balance#_</strong>元,其中实际余额为<strong>_#actualBalance#_</strong>元,透支额度为<strong>_#overdraw#_</strong>元
+                </p>
+                <p class="balance_not_enough" style="display: none;color: red;">
+                    您的账户余额不足，请立即充值
+                </p>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-8">
+                    <button type="button" class="btn btn-primary btn-small ds_form_action licence_renew_outcall" ds_action="licence.renewOutcallLicence">立刻购买</button>
+                    <button type="button" class="btn btn-default btn-small" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+

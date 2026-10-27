@@ -1,0 +1,22 @@
+<div id="add_local_num_Modal" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>提示</h3>
+    </div>
+    <div class="modal-body">
+        <form>
+            <input type="hidden" name="_id" value="__agent_id"/>
+            <div><h4>不能对没有直线号码的座席做签入操作！</h4></div>
+            <br>
+            <div class="row_item">
+                <label style="width: 160px">为 __agenName 设置直线号码</label>
+                <input value="" name="mobile" type="text" tabindex="20" required/>
+                &nbsp;&nbsp;
+                <a href="#" class="btn btn-warning ds_form_action" ds_action="config.callConfig.saveLocalNumForPhonePick">保存并签入</a>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" onclick="$('#add_local_num_Modal').modal('hide');">关闭</a>
+    </div>
+</div>

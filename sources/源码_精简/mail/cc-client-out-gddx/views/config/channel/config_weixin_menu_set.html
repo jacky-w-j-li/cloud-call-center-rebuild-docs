@@ -1,0 +1,51 @@
+<div class="single-menu _#menu_class#_" id="_#menu_id#__set">
+            <div class="weixin-menu-name">_#menu_level#_</div>
+            <div class="row_item">
+                <label class="control-label" for="wechat_menuName">菜单名称</label>
+                <span class="control-field">
+                <input type="text" class="weixin-name" ds_action="config.channel.changeWeixinMenuName" name="menu_name" value="_#menu_name#_" msgName="菜单名称" msg="不能为空" required/>
+                </span>
+            </div>
+            <div class="row_item">
+                <label class="control-label"></label>
+                <span class="control-field">_#menu_namelimet#_</span>
+            </div>
+            <div class="row_item">
+                <label class="control-label" for="wechat_menuInfo">菜单内容</label>
+                <span class="control-field menu_type">
+                    <label>
+                    <input class="weixin_radio" ds_action="config.channel.changeWeixinMenuType" type="radio" checked name="_#menu_id#_" value="0">发送消息</label>
+                    <label>
+                    <input class="weixin_radio" ds_action="config.channel.changeWeixinMenuType" type="radio" name="_#menu_id#_" value="1">跳转页面</label>
+                </span>
+            </div>
+            <div class="webchat-menudetails clearfix">
+                <div class="webchat-jump-url">
+                    订阅者点击该子菜单会跳到以下链接
+                    <div class="row_item">
+                        <label class="control-label" for="wechat_menuUrl">跳转链接</label>
+                        <span class="control-field">
+                        <input type="text" value="_#menu_url#_" name="wechat_menuUrl" msgName="跳转链接" msg="请输入正确的地址">
+                        </span>
+                    </div>
+                </div>
+                <div class="webchat-send-msg webchat_container">
+                    <div class="chat_toolbar">
+                        <div class="face_con">
+                            <ul style="list-style: none;"></ul>
+                        </div>
+                        <div class="face_arrow"></div>
+                        <span class="ds_do_action webchat_msg_emojiface" ds_action="webchat.showEmojiFaces" ds_data=""><img src="../../img/client/customer/face-icon.png" width="20px" height="20px"/></span>
+                    </div>
+                    <textarea rows="6" name="content" datatype="LimitLen" min="1" max="600" msgName="发送消息" msg="不能超过600字" required>_#menu_key#_</textarea>
+                </div>
+            </div>
+            <span>最多可输入600文字</span>
+        </div>
+
+
+<script type="text/javascript">
+    $(function(){
+        handler.webchat.initFace($("#weixin-all-menu"));
+    })
+</script>

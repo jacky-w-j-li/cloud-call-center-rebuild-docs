@@ -1,0 +1,68 @@
+context N00000000246-10017-dynamic-route {
+	s => {
+		if ("${csNum}"=="3")
+				Hangup;
+
+		
+		goto N00000000246-10017-DynamicRouteNode-unmatched, s, 1;
+	}
+}
+
+context N00000000246-10017-DynamicRouteNode-unmatched {
+	s => {
+		goto N00000000246-10020-dynamic-route,s,1;
+	}
+}
+
+
+context N00000000246-10008-dynamic-route {
+	s => {
+		if ("${csNum}"=="2")
+				goto N00000000246-10024-textannouncement,s,1;
+
+		
+		goto N00000000246-10008-DynamicRouteNode-unmatched, s, 1;
+	}
+}
+
+context N00000000246-10008-DynamicRouteNode-unmatched {
+	s => {
+		goto N00000000246-10017-dynamic-route,s,1;
+	}
+}
+
+
+context N00000000246-10020-dynamic-route {
+	s => {
+		if ("${csNum}"=="4")
+				goto N00000000246-10019-superDialJobNum,s,1;
+
+		
+		goto N00000000246-10020-DynamicRouteNode-unmatched, s, 1;
+	}
+}
+
+context N00000000246-10020-DynamicRouteNode-unmatched {
+	s => {
+		Hangup;
+	}
+}
+
+
+context N00000000246-10007-dynamic-route {
+	s => {
+		if ("${csNum}"=="1")
+				goto N00000000246-10023-textannouncement,s,1;
+
+		
+		goto N00000000246-10007-DynamicRouteNode-unmatched, s, 1;
+	}
+}
+
+context N00000000246-10007-DynamicRouteNode-unmatched {
+	s => {
+		goto N00000000246-10008-dynamic-route,s,1;
+	}
+}
+
+

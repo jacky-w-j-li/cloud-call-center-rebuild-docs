@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>测试</title>
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+    <form action="/form" enctype="multipart/form-data" method="post">
+        <input name = "sessionId" value="13dd5b60-75f8-11e3-98b0-475f572f213b" />
+        <input name = "action" value="test" />
+        <input name = "abc" value="123" />
+        <input type="file" name = "file" />
+        <button type="submit">提交</button>
+    </form>
+
+    <!--<audio src="http://localhost:3000/getFile?fileId=af8d5470-9254-11e3-be63-0bbefb8ae5ac" controls="controls"></audio>-->
+    <audio  controls>
+        <source src="http://localhost:3000/getFile?fileId=af8d5470-9254-11e3-be63-0bbefb8ae5ac" >
+    </audio>
+    <!--<audio  controls="controls">-->
+        <!--<source src="http://localhost:30000/test2.wav" type="audio/wav">-->
+    <!--</audio>-->
+</body>
+</html>

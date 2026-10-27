@@ -1,0 +1,156 @@
+<script>
+    $(function(){
+        var allAgents = getCache("agents");
+        utils.loadSearchInput({ id:"approve_survey_report_search_div",
+            width:"149",
+            height:"14",
+            tip:"按姓名,工号搜索",
+            data: allAgents,
+            showDep:true,
+            listField: ["displayName", "exten"],
+            userIdField: "_id",
+            searchField: ["displayName", "exten", "pinyin"],
+            pinyinField: ["displayName"],
+            showAllList: true,
+            multiSelect: true,
+            callbackFuc: function(object) {
+                //if object is array,no match recored
+                if(Object.prototype.toString.call(object) === '[object Array]'){
+                    return;
+                }
+                var currentVals = $("input[name='callReportApproveSurvey']");
+                var ishas = false;
+                for(var i=0;i<currentVals.length;i++){
+                    if(currentVals[i].value === object._id){
+                        ishas = true;
+                    }
+                }
+                if(!ishas){
+                    $('#approve_survey_report_select_agents').before("<span id="+object._id+"><input type='hidden' name='callReportApproveSurvey' value="+object._id+">" +
+                            "<span class='label label-info'>" + object.displayName +
+                            "</span><a href='#' onclick=removeAgentApprove('" + object._id + "')><i class='icon-remove'></i></a>&nbsp;</span>");
+                }
+                //$('#approve_survey_report_search_div_input').val('');
+                utils.setSearchInput("approve_survey_report_search_div", "");
+                countSelectAgentApprove();
+            }
+        });
+    })
+    function removeAgentApprove(id){
+        $('#'+id).remove();
+        countSelectAgentApprove();
+    }
+    function countSelectAgentApprove(){
+        var currentVals = $("input[name='callReportApproveSurvey']");
+        var ExtenStr = '';
+        for(var i=0;i<currentVals.length;i++){
+            ExtenStr += currentVals[i].value;
+            if(i != currentVals.length-1){
+                ExtenStr += ',';
+            }
+        }
+        $('#approveSurveySelectedAgentList').val(ExtenStr);
+    }
+</script>
+<!--call_report_approve_survey-->
+<div class="">
+    <div style="/*height:98%;margin:3px 3px;*/">
+        <div class="row-fluid">
+            <h5><i class="icon-user"></i>满意度调查统计查询</h5>
+            <br/>
+            <form class="form-horizontal">
+                <input type="hidden" name="AgentID" id="call_report_agent_AgentID"/>
+                <input type="hidden" name="reportType" value="call_report_approve_survey"/>
+                <input type="hidden" name="selectedAgentList" id="approveSurveySelectedAgentList">
+                <div>
+                    <label style="float:left;margin-right:3px;">
+                        &nbsp;座&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;席&nbsp;
+                    </label>
+                    <table>
+                        <tr>
+                            <td id="approve_survey_report_select_agents"></td>
+                            <td id="approve_survey_report_search_div" class="combobox_agent"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="clear10"></div>
+                <div>
+                    <label style="float:left;margin-right:3px;">呼叫类型</label>
+                    <select name="callType" class="span2" id='report_approve_survey_call_type'>
+                        <option value="normal">呼入</option>
+                        <option value="dialout">外呼</option>
+                        <option value="" selected>全部</option>
+                    </select>
+                </div>
+                <div class="clear10"></div>
+                <div id="time_type">
+                    <!--<label style="float:left;margin-right:3px;">-->
+                        <!--时间类型-->
+                    <!--</label>-->
+                    <select name="TimeType"  id="report_approve_survey_timeType" onchange="handler.report.callReport.resetDate('report_approve_survey_dateTd',this.value)">
+                        <option value="year" id="optionYear">年报</option>
+                        <option value="month" id="optionMonth">月报</option>
+                        <option value="day" id="optionDay">日报</option>
+                        <option value="other" id="optionOther">自定义</option>
+                    </select>
+                    <div id="report_approve_survey_dateTd" style="display: inline">
+                    </div>
+                    <div id="report_approve_survey_dateTd_other" style="display: none">
+                        <div class="input-append date form_datetime">
+                            <input id="report_approve_survey_datetime_picker_start" size="6" class="input-medium report_start_time" name="StartTime" type="text" value="" readonly>
+                            <span class="add-on datetimepicker-remove" style="height: 14px;line-height: 15px"><i class="icon-remove"></i></span>
+                            <span class="add-on datetimepicker-open" style="height: 14px;line-height: 15px"><i class="icon-th"></i></span>
+                        </div>
+                        <div style="padding-top: 5px;display: inline">
+                            &nbsp;&nbsp;至&nbsp;&nbsp;
+                        </div>
+                        <div class="input-append date form_datetime">
+                            <input id="report_approve_survey_datetime_picker_end" size="6" class="input-medium report_end_time" name="EndTime" type="text" value="" readonly>
+                            <span class="add-on datetimepicker-remove" style="height: 14px;line-height: 15px"><i class="icon-remove"></i></span>
+                            <span class="add-on datetimepicker-open" style="height: 14px;line-height: 15px"><i class="icon-th"></i></span>
+                        </div>
+                    </div>
+                    <div class="clear10"></div>
+                    <div id="btn-select">
+                        <input type="hidden" name="reportType" value="call_report_approve_survey">
+                        <a class="button ds_form_action" id="call_report_approve_survey_btn" ds_action="report.callReport.call_report_approve_survey">查询</a>
+                        <a class="button ds_form_action" ds_action="report.callReport.confirmExportReportPdf">导出PDF</a>
+                        <a class="button ds_form_action" ds_action="report.callReport.exportApproveSurveyExcel">导出EXCEL</a>
+                    </div>
+                </div>
+                <div class='row-fluid account_line'></div>
+
+                <div class="agent_report_data_part" span12>
+                    <div class="data_titile_part">
+                        <br>
+                        <!--座席满意度报表，需要根据呼叫类型变换表头，所以不开放配置表头功能-->
+                        <!--<a href="#" class="ds_do_action" ds_action="report.callReport.openConfigTableHeader" ds_data="call_report_approve_survey">配置显示表头</a>-->
+                    </div>
+                    <div id="report_agent_approve_survey_table" class="data_content_part">
+                        <table id="call_report_approve_survey_table_id" class="table table-striped table-bordered table-hover">
+                            <thead id="approveSurveyTableHeader">
+
+                            </thead>
+                            <tbody id="approveSurveyTableBody">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="call_report_approve_survey_config_table_header_pane"></div>
+    <div id="approve_survey_to_call_sheet_pane"></div>
+    <div id="approve_survey_call_detail_pane"></div>
+</div>
+<script type="text/javascript">
+    $('#report_approve_survey_datetime_picker_start').datetimepicker({
+        dateFormat: "yy-mm-dd",
+        showTimepicker: false
+    });
+    $('#report_approve_survey_datetime_picker_end').datetimepicker({
+        dateFormat: "yy-mm-dd",
+        showTimepicker: false
+    });
+</script>

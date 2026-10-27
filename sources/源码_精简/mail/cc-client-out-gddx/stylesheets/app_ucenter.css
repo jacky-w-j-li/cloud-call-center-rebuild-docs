@@ -1,0 +1,117 @@
+.pay_form{padding:10px;}
+.pay_form .left_label{display: inline-block;float: left;margin: 5px 10px;text-align: right;width: 65px;height:24px;line-height:24px;}
+.pay_form .pay_section{
+    padding:5px 0;
+}
+.pay_form div{
+    overflow:hidden;zoom:1;
+}
+.pay_form ul,.pay_form li{
+    list-style: none;margin: 0;padding: 0;
+}
+.bank{
+    z-index:2;
+}
+.bank li a{text-align:center; text-decoration:none;border-top:1px solid #ccc;border-left:1px solid #ccc;
+    padding: 5px 0px;font-size:14px;font-weight: bold; background:#F1F1F1;width: 108px;line-height:30px; float: left;}
+.bank li a:hover,
+.bank li a.current {
+    color: #000;
+    background: #fff;
+}
+.pay_platform, .pay_bank, .pay_bank_enterprise{
+    border:1px solid #ccc; padding:15px 10px;margin-top:-2px;
+}
+.payamount{
+    color:#f60;
+    font-size: 22px; line-height: 22px;
+}
+
+.list-bank {
+    overflow: hidden;
+    *zoom: 1;
+    *margin-bottom: 10px
+}
+
+.list-bank li {
+    border: 1px solid #ddd;
+    background-color: #fff;
+    float: left;
+    padding: 6px;
+    width: 202px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer
+}
+
+.list-bank img {
+    cursor: pointer
+}
+
+.list-bank label {
+    margin-right: 5px;
+}
+
+.list-bank .jdradio {
+    margin-left: 6px;
+    margin-right: 11px;
+    position: relative;
+    top: 8px;
+    padding: 0;
+}
+
+.font-num {
+    float: right;
+    font-weight: normal;
+    line-height: 28px
+}
+
+.list-bank .hover, .list-bank .select {
+    -webkit-box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, .15);
+    -moz-box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, .15);
+    box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, .15);
+}
+
+.list-bank .select {
+    border: 2px solid #e4393c;
+    padding: 5px
+}
+
+.jdradio {
+    float: left;
+    margin: 0
+}
+
+.link-more{border:1px dotted #ccc;color:#005EA7;display:inline-block;text-align:center;padding:1px}
+.link-more:hover{border:solid 2px #ccc;background-color:#fff;text-decoration:none;padding:0}
+.link-more:link,.link-more:visited{color:#005EA7}
+.pay-more{clear:both;width:212px}.pay-more .link-more{height:39px;line-height:39px;width:100%;}
+.icon-down01,.icon-up01{background:url(../img/bank/bg.png);width:11px;height:6px;font-size:0;line-height:0;overflow:hidden;display:inline-block;margin-left:10px;}
+.icon-up01{background-position:-20px 0}
+
+.ds_spinner,.ds_spinner2,.ds_spinner_licence{
+    margin: 0;padding: 10px;width: 100px;
+}
+.service_month{
+    width: 100px;
+}
+.table_row_search > tbody > tr > td{
+    padding: 6px;
+    line-height: 1.428571429;
+}
+.proxy_hide,.pay_hide,.table td:last-child a.bill_hide,.user_hide,.service_hide{display: none;}
+/*****validate css start******/
+label.error {
+    /* remove the next line when you have trouble in IE6 with labels in list */
+    color: red;
+    font-style: italic
+}
+div.error { display: none; }
+input.error { border: 1px dotted red; }
+/*****validate css end******/
+
+
+.total_fee{
+    font-size: 30px;
+    font-weight: bold;
+}

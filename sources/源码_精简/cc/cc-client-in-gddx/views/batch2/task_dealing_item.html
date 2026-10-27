@@ -1,0 +1,53 @@
+<div class="task_item  _#task_item_bgColor#_" >
+    <div class="row-fluid">
+        <div class="span6">
+            <div style="">
+                <span> _#name#_</span>&nbsp;&nbsp;<span>_#serviceNoDesc#_</span>
+                &nbsp;&nbsp;<span>_#groupDesc#_</span>
+            </div>
+            <div class="task_item_detail">
+                _#task_detail#_
+            </div>
+        </div>
+
+        <div class="span2">
+            <div class="task_item_control ds_do_action _#task_item_css#_ " ds_action="_#task_item_action#_" ds_data="_#_id#_|_#taskType#_" >
+            </div>
+
+        </div>
+        <div class="span4">
+            <div style="" class="clearfix">
+                <span style="display: inline-block;float: left;">完成率：</span>
+                <div class="progress progress-info" style="position: relative;" title="完成率">
+                    <div class="bar" style="width: _#calledRate#_;"></div>
+                    <span class="progress_desc"> _#calledRate#_</span>
+                </div>
+            </div>
+            <div style="" class="clearfix">
+                <span style="display: inline-block;float: left;">接听率：</span>
+                <div class="progress" style="position: relative;" title="呼通率">
+                    <div class="bar" style="width: _#dialRate#_;"></div>
+                    <span class="progress_desc"> _#dialRate#_</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid ">
+        <div class="task_item_detail span12" style="margin-top: 5px;">
+            <div>_#task_detail_time#_</div>
+            <div>
+                _#task_detail2#_
+                <div style="" class="pull-right">
+                    <a href="#" class="ds_do_action" ds_action="batch2.showUpdateTask" ds_data="_#_id#_" title="编辑">
+                        <i class="icon-pencil"></i>
+                    </a>
+                    <a href="#" class="ds_do_action" ds_action="batch2.removeBdTask" ds_data="_#_id#_" title="删除">
+                        <i class="icon-trash"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,50 @@
+<div class="action_form">
+    <div class="action_bar">
+        <h2>无效客户状态审核</h2>
+    </div>
+    <div class="last_action">
+        <form>
+            <input type="hidden" name="_id" value="___id" />
+            <input type="hidden" name="cid" value="__cid" />
+            <input type="hidden" name="categoryId" value="__categoryId" />
+            <input type="hidden" name="apprType" value="__apprType" />
+            <input type="hidden" name="sysStatus" value="__sysStatus" />
+            <input type="hidden" name="sourceOwner" value="__sourceOwner" />
+            <input type="hidden" name="oldStatus" value="__oldStatus" />
+
+            <div class="row-fluid" id="_menu_task_list_transform_fields_pane">
+                <div class="field-label"><label class="control-label" for="lose" style="margin-top: 3px;text-align: right;">原因</label></div>
+                <div class="field-option">
+                    <div class="field-option-inner">
+                    <textarea name="lose" required="" style="width: 94%;" id="lose" msgname="原因" disabled="disabled">__reason</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span4">
+                    <div style="margin-top: 10px;float: left;">
+                        <span>提交审核时间 : __createTime</span>
+                    </div>
+                </div>
+                <div class='span4'>
+                    <div style="margin-top: 10px;float: left;">
+                        <span>提交审核人 :__createUser</span>
+                    </div>
+                </div>
+                <div class="span4" id="_menu_operate_pane">
+                    <div style="float: right;">
+                        <a href="#" class="btn btn-danger btn-small ds_form_action apprUnPass"
+                           ds_action="customer.approvalBusiness.showBackBusiness">审批不通过</a>
+                    </div>
+                    <div style="float: right;margin-right: 10px;">
+                        <div class="btn-group">
+                            <a class="btn btn-primary btn-small ds_form_action apprPass" ds_action="customer.approvalBusiness.passedBusiness" href="#">
+                                审批通过
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,102 @@
+<form class="form-horizontal ds_item_edit" action="" client-data="handler.config.callConfig.currentPbx">
+    <input type="hidden" name="action" value="update"/>
+    <div class="row-fluid">
+        <div class="span12">
+            <legend>PBX基本信息</legend>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span6 offset2">
+
+            <div class="control-group">
+                <label class="control-label">
+                    PBX
+                </label>
+
+                <div class="controls" id="pbxEditSelectPanel">
+                    <select name="PBX" required="true" class="disabled">
+                        <option id='defautpbxselected' selected="selected" value="">--请选择--</option>
+                        <option value="proxy01">proxy</option>
+                        <option value="ywltest01">ywltest01</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    昵称
+                </label>
+
+                <div class="controls">
+                    <input type="text" name="NickName"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    是否有外呼接口
+                </label>
+
+                <div class="controls">
+                    <select name="IsDialoutIntegration">
+                        <option selected="selected" value="0">否</option>
+                        <option value="1">是</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    是否有转接接口
+                </label>
+
+                <div class="controls">
+                    <select name="IsTransferIntegration">
+                        <option selected="selected" value="0">否</option>
+                        <option value="1">是</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    启用通话事件重发
+                </label>
+                <div class="controls">
+                    <select name="DispatcherResend">
+                        <option selected="selected" value="false">否</option>
+                        <option value="true">是</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    通话事件推送携带账号名和ID
+                </label>
+                <div class="controls">
+                    <select name="DispatcherAccAndId">
+                        <option selected="selected" value="false">否</option>
+                        <option value="true">是</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    启用呼入通话轨迹
+                </label>
+                <div class="controls">
+                    <select name="IsRecordChannelCdr">
+                        <option selected="selected" value="false">否</option>
+                        <option value="true">是</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span2 offset5">
+            <a class="btn btn-info btn-blue ds_action_flow" href="#">
+                <ds-form-action action="config.ivr.pbx.saveAccountPbx" extra-data="config.callConfig.currentConfigData"/>
+                <ds-get-view view="config/callConfig/pbx/account_pbx_edit" panel="pbxInfoPanel"
+                             on-complete="config.callConfig.pbx.accountPbxUpdated"/>
+                保存
+            </a>
+        </div>
+    </div>
+</form>

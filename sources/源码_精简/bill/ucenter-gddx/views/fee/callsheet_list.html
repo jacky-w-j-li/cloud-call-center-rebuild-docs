@@ -1,0 +1,96 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form id="frm_fee_search" class="form-horizontal">
+            <input type="hidden" name="flag" value="3">
+            <table class="table_search">
+                <colgroup>
+                    <col width="8%" align="right"/>
+                    <col width="20%" align="left"/>
+                    <col width="12%" align="right"/>
+                    <col width="20%" align="left"/>
+                    <col width="12%" align="right"/>
+                    <col width="20%" align="left"/>
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <td class="spanright">电话号码</td>
+                        <td class="spanleft"><input type="text" name="combox" class="form-control input-sm"/></td>
+                        <td class="spanright">呼叫类型</td>
+                        <td class="spanleft">
+                            <select name="callType" class="form-control input-sm">
+                                <option value="">--请选择--</option>
+                                <option value="normal">普通来电</option>
+                                <option value="dialout">外呼去电</option>
+                            </select>
+                        </td>
+                        <td class="spanright">接听状态</td>
+                        <td class="spanleft">
+                            <select name="status" class="form-control input-sm">
+                                <option value="">--请选择--</option>
+                                <option value="Down">未呼通</option>
+                                <option value="Link">已呼通</option>
+                                <option value="Voicemail">已留言</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spanright">接听员工</td>
+                        <td class="spanleft" >
+                            <select name="agent" class="form-control input-sm callsheet_agent"></select>
+                        </td>
+                        <td class="spanright">呼叫时间</td>
+                        <td colspan="3" class="spanleft">
+                            <input type="text" name="startOfferingTime" class="form-control input-sm ds_date" style="display: inline-block;width: auto"/> 至
+                            <input type="text" name="endOfferingTime" class="form-control input-sm ds_date" style="display: inline-block;width: auto"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-group" style="margin-bottom:0;">
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary btn-sm agent_search ds_form_action" ds_action="fee.getFeeList">查询</button>
+                    <button type="button" class="btn btn-default btn-sm ds_do_action" ds_action="fee.reset" >重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="panel panel-info">
+    <!--<div class="panel-heading">充值记录</div>-->
+    <table class="table">
+        <thead>
+        <tr>
+            <th>主叫号码</th>
+            <th>被叫号码</th>
+            <th>呼叫类型</th>
+            <th>接听状态</th>
+            <th>接听员工</th>
+            <th>呼叫时间</th>
+            <th>通话时长</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody class="fee_list">
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <div class="col-md-5">查询结果：<span class="result_count" style="margin-top:3px;display: inline-block;">0</span></div>
+    <div class=" col-md-7">
+        <ul class="pagination pagination-sm pull-right" style="margin: 0;"
+            for="frm_fee_search" ds_pagination_action="fee.getFeeList">
+            <li><a href="#"  value="0">&laquo;</a></li>
+            <li><a href="#"  value="1">1</a></li>
+            <li><a href="#"  value="2">2</a></li>
+            <li><a href="#"  value="3">3</a></li>
+            <li><a href="#"  value="4">4</a></li>
+            <li><a href="#"  value="5">5</a></li>
+            <li><a href="#"  value="6">&raquo;</a></li>
+        </ul>
+    </div>
+</div>
+<style type="text/css">
+    .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
+        z-index: 1;
+    }
+</style>

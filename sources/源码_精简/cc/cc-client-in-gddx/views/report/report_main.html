@@ -1,0 +1,55 @@
+<link rel="stylesheet" type="text/css" href="stylesheets/report.css?1101"/>
+<div class="right_container pd0">
+    <div class="tabbable">
+        <ul class="new-nav-tabs report_tab" >
+            <li class="active tab_call_report common_hide">
+                <a href="#view_call_report" class="ds_do_action" ds_action="report.showTab" ds_data="call_report" data-toggle="tab">通话报表</a>
+            </li>
+            <li class="tab_im_report common_hide">
+                <a href="#view_im_report" class="ds_do_action" ds_action="report.showTab" ds_data="im_report" data-toggle="tab">在线客服报表</a>
+            </li>
+            <li class="tab_mail_report common_hide">
+                <a href="#view_mail_report" class="ds_do_action" ds_action="report.showTab" ds_data="mail_report" data-toggle="tab">邮件报表</a>
+            </li>
+            <li class="tab_customer_report common_hide">
+                <a href="#view_customer_report" class="ds_do_action" ds_action="report.showTab" ds_data="customer_report" data-toggle="tab">客户报表</a>
+            </li>
+            <li class="tab_business_report common_hide">
+                <a href="#view_business_report" class="ds_do_action" ds_action="report.showTab" ds_data="business_report" data-toggle="tab">工单报表</a>
+            </li>
+            <li class="tab_ques_report common_hide">
+                <a href="#view_questionnaire_report" class="ds_do_action" ds_action="report.showTab" ds_data="questionnaire_report" data-toggle="tab">问卷报表</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="view_call_report" class="tab-pane active"></div>
+            <div id="view_im_report" class="tab-pane"></div>
+            <div id="view_mail_report" class="tab-pane"></div>
+            <div id="view_customer_report" class="tab-pane"></div>
+            <div id="view_business_report" class="tab-pane"></div>
+            <div id="view_questionnaire_report" class="tab-pane"></div>
+            <div id="show_report_error"></div>
+        </div>
+    </div>
+</div>
+
+<script id="tmpl_report_table_header" type="text/html">
+    <th style="width:80px;height: 20px; overflow: hidden;cursor: pointer" state="init"
+        onclick="utils.sortTable('{{=reportType}}','{{=orderNum}}','{{=objectType}}',this)">{{=displayname}}
+        <span class="sort monitor_sort">&nbsp;</span></th>
+</script>
+<script id="report_time_error_temp" type="text/html">
+    <div class="modal hide fade" id="report_time_error" tabindex="-1" style="overflow: hidden" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">错误信息</h4>
+        </div>
+        <div class="modal-body" style="">
+            <div>开始时间必须小于结束时间！</div>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn  btn-small" class="close" data-dismiss="modal" aria-hidden="true">关闭</a>
+        </div>
+    </div>
+
+</script>

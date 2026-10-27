@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="./img/favicon.png">
+
+    <title>云电销</title>
+   
+    <link rel=stylesheet type=text/css href="./stylesheets/bootstrap.css">
+    <link rel=stylesheet type=text/css href="./stylesheets/bootstrap1.css">
+    <link rel=stylesheet type=text/css href="stylesheets/cc.css?2">
+   
+</head>
+<body>
+<div class="main_container">
+    <div class="loading_indicator" style="visibility: hidden;">
+    </div>
+    <span class="loading_indicator_span" style="visibility: hidden;">获取数据中...</span>
+    <div class="login_panel" id="login-panel">
+    </div>
+
+    <div id="main-panel" class="main_container" style="display:none;">
+        <!--<div class="main_header">-->
+            <!--<div class="fl top_head_left" style="">-->
+                <!--欢迎您:<span id="user_name">管理员</span>-->
+            <!--</div>-->
+            <!--<div class="fr top_head_right">-->
+                <!--&lt;!&ndash;<a href="javascript:void(0);" class="ds_do_action fl" ds_action="showEditInfo" style="text-decoration: underline">个人设置</a>&ndash;&gt;-->
+                <!--<div class="fl" style="padding-left: 10px;"><a id="logoff" href="javascript:void(0);" class='' ds_action="" style="color: #a9302a;text-decoration: underline">退出</a></div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="content_container" style="margin-top: 10px;">
+            <!--<div class="right_col" id="main_container">-->
+            <!--</div>-->
+            <div class="right_content" id="view_task_report">
+                <div class="">
+                    <ul class="nav nav-tabs" id="monitor_tab" style="margin-bottom: 5px;">
+                        <!--<li class="active">-->
+                            <!--<a href="#" class="ds_do_action" ds_action="" ds_data="1" data-toggle="tab">zq1</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="#" class="ds_do_action" ds_action="batch.showNumList" ds_data="2" data-toggle="tab">zq2</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="#" class="ds_do_action" ds_action="batch.showNumList" ds_data="3" data-toggle="tab">zq3</a>-->
+                        <!--</li>-->
+                    </ul>
+                    <div  id="monitor_tab_content" style="margin-top: 0;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="modal_panel"></div>
+ <script type="text/javascript" src="./javascripts/jquery.js"></script>
+    <script type="text/javascript" src="./javascripts/jquery.alertmessage.js"></script>
+    <script type="text/javascript" src="./javascripts/bootstrap.js"></script>
+    <script type="text/javascript" src="./javascripts/ds_framework/dishui.js"></script>
+    <script type="text/javascript" src="./javascripts/frmCheck.js"></script>
+    <script type="text/javascript" src="./javascripts/uuid.js"></script>
+
+    <script type="text/javascript" src="javascripts/draw.js?1"></script>
+    <script type="text/javascript" src="javascripts/utils.js"></script>
+    <script type="text/javascript" src="javascripts/app_monitor.js?2"></script>
+    <script type="text/javascript" src="./javascripts/jquery.json.min.js"></script>
+<script type="text/javascript" src="./javascripts/ds_framework/event.js"></script>
+ <script type="text/javascript">
+        $(function () {
+            var param=[];
+            try{
+                param=parseHref(window.location.href)||[];
+            }catch(e){}
+            $(".load_value").animate({opacity:"1"},1000);
+            init(param);
+            setTimeout(function(){
+                $(".login_panel").animate({opacity:"1"},1000);
+                $('.load_value').remove();
+            });
+        });
+    </script>
+<iframe style="border:0;width:0;height:0;position:absolute;visibility:hidden;bottom:0;right:0;" name="ds_iframe" id="ds_iframe"  src=""></iframe>
+</body>
+</html>
+<style type="text/css">
+.main_container {
+    background: "";
+}
+    #monitor_tab{
+        border-bottom:0;
+    }
+    .top_head_left {
+        font-weight: bold;
+        font-size: 13px;
+        padding-top: 13px;
+        padding-right: 15px;
+        margin-left: 5px;
+    }
+</style>

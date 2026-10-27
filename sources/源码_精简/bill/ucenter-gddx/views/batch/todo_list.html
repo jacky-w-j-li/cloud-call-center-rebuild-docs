@@ -1,0 +1,40 @@
+<div style="margin: 0px;">
+    <form id="frm_batch_search" class="form-horizontal">
+        <input type="hidden" name="flag" value="1"/>
+        <input type="hidden" name="called" value="false"/>
+    </form>
+    <p>
+        <button type="button" class="btn btn-success btn-sm ds_form_action" ds_action="batch.startDial" style="margin-left: 0px;">开始呼叫</button>
+        <button type="button" class="btn btn-success btn-sm ds_form_action" ds_action="batch.showImort" style="margin-left: 20px;">导入号码</button>
+        <button type="button" class="btn btn-danger btn-sm ds_form_action" ds_action="batch.removeTodoList" style="margin-left: 20px;">清空号码</button>
+    </p>
+    <div class="panel panel-info">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>号码</th>
+                <th>导入批次</th>
+            </tr>
+            </thead>
+            <tbody class="batch_list">
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5">查询结果：<span class="result_count" style="margin-top:3px;display: inline-block;">0</span></div>
+        <div class=" col-md-7">
+            <ul class="pagination pagination-sm pull-right" style="margin: 0;"
+                for="frm_batch_search" ds_pagination_action="batch.getBatchList">
+                <li><a href="#"  value="0">&laquo;</a></li>
+                <li><a href="#"  value="1">1</a></li>
+                <li><a href="#"  value="2">2</a></li>
+                <li><a href="#"  value="3">3</a></li>
+                <li><a href="#"  value="4">4</a></li>
+                <li><a href="#"  value="5">5</a></li>
+                <li><a href="#"  value="6">&raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>

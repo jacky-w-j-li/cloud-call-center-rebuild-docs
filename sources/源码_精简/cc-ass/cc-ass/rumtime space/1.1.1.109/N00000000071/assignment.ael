@@ -1,0 +1,10 @@
+context N00000000071-10001-assignment {
+	s => {
+		JOBNUM="${IVR_OF_KEY}${JOBNUM}";
+
+
+		Hangup;		
+	}
+}
+
+

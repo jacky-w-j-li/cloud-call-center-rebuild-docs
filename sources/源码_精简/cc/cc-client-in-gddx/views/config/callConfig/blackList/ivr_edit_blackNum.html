@@ -1,0 +1,55 @@
+<div class="row-fluid">
+	<div class="span12">		
+		<form class="form-horizontal ds_item_edit" client-data="session.ivrMap.ivrBlackList">
+            <div id="confirm_del_pane"></div>
+			<div class="row-fluid">
+	                <div class="span6 offset1">
+	                    <i class="icon-cog"></i>修改黑红名单
+	                </div>
+	                <div class="span5 text-right pull-right">
+                        <a class="btn btn-info btn-blue  ds_action_flow">
+                            <ds-form-action action="config.ivr.blacklist.saveBlackList" extra-data="config.callConfig.currentConfigData"
+                                            on-before="config.callConfig.blackList.beforeSaveBlackList"
+                                            update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"ivrBlackList"}}'/>
+                            <ds-get-view view="config/callConfig/blackList/ivr_list_black" panel="ivrBlackListPanel"/>
+                            <ds-effect-ivr/>
+                            保存
+                        </a>
+                        <a class=" btn btn-danger btn-gray ds_action_flow">
+                            <ds-form-action action="config.ivr.blacklist.delBlackNum" extra-data="config.callConfig.currentConfigData"
+                                            update-client-data='{"method":"config.callConfig.updateClientData","arg":{"operation":"del","type":"ivrBlackList"}}'/>
+                            <ds-get-view view="config/callConfig/blackList/ivr_list_black" panel="ivrBlackListPanel"/>
+                            <ds-effect-ivr/>
+                            删除
+                        </a>
+	                </div>
+	        </div>
+			<br />
+			<br />
+			<div class="control-group">
+				<label class="control-label">电话号码</label>
+				<div class="controls">
+					<input type="text" maxlength="25" id="edit_black_num" name="BlackNum" value="__BlackNum"/>
+                    <input type="hidden" name="_id" value="___id"/>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">名单类型</label>
+				<div class="controls">
+					<select id="black_type" name="Type">
+						<option selected="selected">--请选择--</option>
+						<option id="option1" value="1">呼入黑名单</option>
+						<option id="option2" value="2">外呼黑名单</option>
+						<option id="option3" value="0">红名单</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">备注</label>
+				<div class="controls">
+					<textarea name="Memo" value="__Memo" rows="3"></textarea>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,47 @@
+<div class="right_content_pane" >
+    <form id="frm_email_edit" class="form-horizontal">
+        <input type="hidden" name="_id" value="_#_id#_"/>
+        <div class="right_head clearfix" style="">
+            <div class="pull-left">
+                <h4 style="">修改微信服务号</h4>
+            </div>
+            <div class=" pull-right">
+                <button type="button" class="btn btn-small ds_do_action " ds_action="config.channel.cancelEmailDeal" style="margin-left: 0px;">取消</button>
+                <button type="button" class="btn btn-primary btn-small ds_form_action "  ds_action="config.channel.updateWeixinCfg" style="margin-left: 10px;">保存</button>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="row_item">
+                <label class="control-label" for="weixin_appid">AppID(应用ID)</label>
+                <input id="weixin_appid" type="text" name="appID" value="_#appID#_" required/>
+            </div>
+            <div class="row_item">
+                <label class="control-label" for="weixin_appSecret">AppSecret(应用密钥)</label>
+                <input id="weixin_appSecret"  type="password" name="appSecret" value="_#appSecret#_" required/>
+            </div>
+            <div class="row_item">
+                <label class="control-label" for="weixin_openID">OpenID(原始ID)</label>
+                <input id="weixin_openID"  type="text" name="openID" value="_#openID#_" disabled required/>
+            </div>
+            <div class="row_item">
+                <label class="control-label">名称</label>
+                <input  type="text" name="displayName" value="_#displayName#_" required/>
+            </div>
+            <div class="row_item">
+                <label class="control-label" for="weixin_topeer">消息分发技能组</label>
+                <select id="weixin_topeer" name="ToPeer">
+                </select>
+            </div>
+            <div class="row_item">
+                <label class="control-label" >是否默认</label>
+                <select  name="isDefault">
+                    <option value="0" >否</option>
+                    <option value="1" >是</option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+<style type="text/css">
+</style>

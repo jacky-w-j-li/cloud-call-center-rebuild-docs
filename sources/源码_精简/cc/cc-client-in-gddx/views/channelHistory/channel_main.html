@@ -1,0 +1,184 @@
+<div class="left_column list_check_pane" id="contact_list_channel"  ds_menu="channel" >
+    <!--<div class="list_nav">-->
+        <!--<ul class="nav nav-pills" id="submenu_container" style="margin-bottom:0;">-->
+            <!--<li class="active"><a href="#" class="ds_do_action " ds_action="business.quick_subMenu_search" ds_data="business">通话</a></li>-->
+            <!--<li><a href="#" class="ds_do_action" ds_action="business.quick_subMenu_search" ds_data="my_task_uncomplete">邮件</a></li>-->
+            <!--<li><a href="#" class="ds_do_action" ds_action="business.quick_subMenu_search" ds_data="my_role_task_uncomplete">微信</a></li>-->
+        <!--</ul>-->
+    <!--</div>-->
+<!--    <ul class="nav nav-tabs channel_tab" style="padding: 10px 5px 0;margin-bottom:0;">
+        <li class="active">
+            <a href="#" class="ds_do_action" ds_action="channelHistory.showTab" ds_data="call" data-toggle="tab">通话</a>
+        </li>
+        <li >
+            <a href="#" class="ds_do_action" ds_action="channelHistory.showTab" ds_data="mail" data-toggle="tab">邮件</a>
+        </li>
+        <li>
+            <a href="#" class="ds_do_action" ds_action="channelHistory.showTab" ds_data="weixin" data-toggle="tab">微信</a>
+        </li>
+    </ul>-->
+
+
+    <div class="contacts_caption">
+    </div>
+    <div id="channel_history_body"></div>
+</div>
+<div class="right_column" >
+    <div class="contact_detail">
+        <div class="content">
+            <div id="body_channel">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        var evt=dsevent.evt.customerAdd+" "+dsevent.evt.channelRefresh+" "+
+                dsevent.evt.customerUpdate+" "+dsevent.evt.callRefreshCustomer+" "+dsevent.evt.customerDelete
+                ;
+        dsevent.bind('#contact_list_channel', evt,function(event, params){
+            var parent=$("#contact_list_channel");
+            var data={};
+            if(params){
+                data=params;
+            }
+//            console.dir(data);
+            var rightPane=$("#body_channel");
+            var callId = handler.channelHistory.curShowPaneCallId;
+            var flag=handler.channelHistory.currentFlag;
+            if(flag=='relocationWeixin'){
+                callId=callId+"_"+data.accountId;
+            }
+            data.callId = callId;
+//            console.info("flag=="+flag+",callId======"+callId);
+            var t=parent.find(".item"+callId);
+            if(event.type==dsevent.evt.customerAdd){
+                if(!callId)return;
+                handler.customer.loadCustInfo(data._id, callId,flag,null,data.popupId);
+                dsevent.publish(dsevent.evt.callRefreshCustomer,data);
+            }else if(event.type==dsevent.evt.customerUpdate){
+                dsevent.publish(dsevent.evt.callRefreshCustomer,data);
+            }else if(event.type==dsevent.evt.customerDelete){
+                rightPane.empty();
+                dsevent.publish(dsevent.evt.callRefreshCustomer,data);
+                t.click();
+            }else if(event.type==dsevent.evt.callRefreshCustomer){
+                handler.channelHistory.syncChannelCustomer(data,parent);
+            }else if(event.type==dsevent.evt.channelRefresh){
+                rightPane.empty();
+                var model="call";
+                if(flag=='relocationMail'){
+                    model="mail";
+                }else if(flag=='relocationWeixin'){
+                    model="weixin";
+                }
+                handler.cancelDealToolbar(model);
+                parent.find('.refresh').click();
+            }
+        });
+
+    });
+</script>
+
+<script id="tmpl_channel_search" type="text/html">
+    <div class="cancel_edit">
+        <div class="list_check_all" style="cursor: pointer;" >
+            <b class="ico_select_checkbox ico ico_wrap" style="top:10px;left:5px;"></b>
+        </div>
+        <div style="display: inline-block;margin-left: 30px;font-weight: bold;">
+            已选
+                <span class="bottom_toolbar_selsize_num">
+                    0
+                </span>
+            项
+        </div>
+            <span class="pull-right">
+                <a href="#" class="ds_do_action" ds_action="cancelDealToolbar" ds_data="{{=model}}">取消</a>
+            </span>
+    </div>
+    <div class="caption-top clearfix" style="">
+        <div class="search_condition" style="display: none;"></div>
+        <div class="header_wrap clearfix">
+            <form id="{{=form}}">
+                <!--<input type="hidden" name="cdrExportType" value="call_sheet_advanced_query">-->
+                <span class="refresh ds_form_action" style="display: none;" ds_action="{{=action}}">
+                    <!--<i class="icon-refresh"></i>-->
+                    <!--<a href="javascript:void(0);" title="刷新" class="ajaxed"></a>-->
+                </span>
+                <div class="header_search_wrap pull-left quick_search" style="">
+                    <div class="header_search_button ds_form_action normal_search" ds_action="{{=action}}">
+                        <i class="icon-search"></i>
+                    </div>
+                    <div class="header_search_input">
+                        <div class="header_search_input_textbox">
+                            <div class="dropdown">
+                                <div class="dropdown-toggle quick_card " data-toggle="dropdown">
+                                    <span class="quick_desc ellipsis" style="">{{=desc}}</span>
+                                    <span class="caret"></span>
+                                </div>
+                                <ul class="dropdown-menu quick_menu" style="min-width: 90px;">
+                                    <!--<li><a href="#" class="ds_do_action" ds_action="channelHistory.showTab" ds_data="call">通话</a></li>-->
+                                    <li><a href="#" class="ds_do_action" ds_action="channelHistory.showTab" ds_data="mail">邮件</a></li>
+                                    <li><a href="#" class="ds_do_action" ds_action="channelHistory.showTab" ds_data="weixin">微信</a></li>
+                                    <!--<li><a href="#" class="ds_do_action" ds_action="channelHistory.showTab" ds_data="webchat">聊天</a></li>-->
+                                    <li><a href="#" class="ds_do_action" ds_action="channelHistory.showTab" ds_data="sms">短信</a></li>
+                                </ul>
+                            </div>
+                            <div class="textbox_wrap" style="">
+                                <div class="textbox_inner">
+                                    <input type="text" name="{{=quickField}}" class="textbox_input" maxlength="254" placeholder="{{=placeholder}}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text_link header_search_advanced btn_advanced_search">
+                        高级搜索
+                    </div>
+                </div>
+            </form>
+            <div class="header_func_plus pull-right">
+                <ul class="nav nav-pills" style="margin-bottom:0;">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="padding: 5px 11px;">
+                            <span class="nav_title">
+                                <b class="ico ico_middle ico_func_plus">
+                                </b>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu menu_list pull-right">
+                            <li><a href="#" class="ds_do_action" ds_action="showDealToolbar" ds_data="{{=model}}">编辑</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="ds_search_filter" style="display: none;">
+        </div>
+    </div>
+</script>
+
+<!--
+<script id="tmpl_submenu" type="text/html">
+    {{ if(children && children.length>1){ }}
+    <li class="dropdown top_menu">
+        <a class="dropdown-toggle" id="{{=id}}" role="button" data-toggle="dropdown" href="#">{{=name}} <b class="caret"></b></a>
+        <ul id="menu3" class="dropdown-menu" role="menu" aria-labelledby="drop5">
+            {{ for(var i=0;i<children.length;i++){ }}
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1"  href="javascript:void(0);" class="open_with_ajax" id="{{=children[i].id}}" apppage="{{=children[i].page}}" container="{{=children[i].container}}" refresh="" onlyexcuhandler="">{{=children[i].name}}</a>
+            </li>
+            {{ } }}
+        </ul>
+    </li>
+    {{ }else if(children.length==1){ }}
+    <li class="top_menu">
+        <a role="menuitem" tabindex="-1"  href="javascript:void(0);" class="open_with_ajax" id="{{=children[0].id}}" apppage="{{=children[0].page}}" container="{{=children[0].container}}" refresh="" onlyexcuhandler="">{{=name}}</a>
+    </li>
+    {{ }else{ }}
+
+    {{ } }}
+</script>
+-->
+

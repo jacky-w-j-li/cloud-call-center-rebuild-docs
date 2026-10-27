@@ -1,0 +1,55 @@
+/* created by liujing on 04/07/16
+style for customer 
+linked by customer/customer_main.html
+all classnames must begin with letter '.cus_' or '#view_nav_customer' */
+
+/* move from app.css start*/
+#view_customer_list .cust-owner{
+    width: 10em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display:inline-block;
+    white-space: nowrap;
+}
+/* customer merge start */
+.mergerto{
+    float: left;
+    width: 5em;
+}
+.mergeExplain{
+    margin-top: 20px;
+}
+.merge_preview ::-webkit-scrollbar {
+    width: 6px;
+    height: 0;
+}
+.input-append span[for^="mergeCustomer"]{
+    width: 60%;
+    max-width: 200px;
+    height: 22px;
+    line-height: 24px;
+    background: #ccc;
+    border: 1px solid #ddd;
+    border-right: 0;
+    cursor: not-allowed;
+    float: left;
+    color: #333;
+    font-size: 14px;
+    text-indent: 5px;
+}
+/* customer merge end */
+.btn_cust_claim{
+    float: right;
+    min-width: 30px;
+    height: 18px;
+    padding: 0 6px;
+    margin:0 0 0 10px;
+    line-height: 18px;
+}
+/* move frome app.css start*/
+#frm_customer_normal_search .header_search_input_textbox ul>li>a{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 24em;
+}   

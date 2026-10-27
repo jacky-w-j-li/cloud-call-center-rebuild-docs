@@ -1,0 +1,50 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+        ×
+    </button>
+    <h3>添加客户数据库</h3>
+</div>
+<div class="">
+    <form>
+        <div class="modal-body">
+            <div class="row_item">
+                <label for="name">客户数据库名称</label>
+                <input id="name" name="name" value="" maxlength="10" type="text" required>
+                <input id="account_customer_account" name="account" value="" type="hidden">
+            </div>
+            <div class="row_item">
+                <label for="callType">业务类型</label>
+                <select id="callType" name="callType" tabindex="3">
+                    <option value="in" selected="selected">客服型</option>
+                    <option value="out">电销型</option>
+                </select>
+                <div style="margin-left: 120px">
+                    <p>客服型</p>
+                    <span style="margin-bottom: 3px;">适合于产品咨询、售后服务、投诉热线、客户回访等呼叫中心业务</span>
+                    <p>电销型</p>
+                    <span>适合于电话销售、产品推销等主动外呼联系客户的业务</span>
+                </div>
+            </div>
+            <div class="row_item">
+                <label for="type">客户类型</label>
+                <select id="type" name="type" tabindex="5">
+                    <option value="company" selected="selected">企业客户</option>
+                    <option value="personal">个人客户</option>
+                </select>
+                <div style="margin-left: 120px">
+                    <p>企业客户和个人客户</p>
+                    <span>两种类型在字段上面会有一些区别，如企业客户可能会有多个联系人、公司网站等信息；而个人客户则会有性别、生日等信息</span>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button href="#" class="btn btn-primary ds_form_action" ds_action="config.customer.addCustomerTemplate">
+                保存
+            </button>
+            <button class="btn" data-dismiss="modal" aria-hidden="true">
+                取消
+            </button>
+        </div>
+    </form>
+</div>

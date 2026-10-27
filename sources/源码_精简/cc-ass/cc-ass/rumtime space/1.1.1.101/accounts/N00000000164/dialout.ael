@@ -1,0 +1,50 @@
+context N00000000164-predialout {
+	_010X. => {
+		goto N00000000164-dialout,${EXTEN:3},1;
+	}
+	
+	_01[3458]XXXXXXXXX => {
+		isLocal=0;
+		Agi(agi://127.0.0.1:7891/AgiIsLocalNumber?calledNo=${EXTEN});
+		if(${isLocal}==1)
+			goto N00000000164-dialout,${EXTEN:1},1;
+		else
+			goto N00000000164-dialout,${EXTEN},1;
+	}
+	
+	_1[3458]XXXXXXXXX => {
+		isLocal=0;
+		Agi(agi://127.0.0.1:7891/AgiIsLocalNumber?calledNo=${EXTEN});
+		if(${isLocal}==1)
+			goto N00000000164-dialout,${EXTEN},1;
+		else
+			goto N00000000164-dialout,0${EXTEN},1;
+	}
+	_110X. => {
+		Hangup;
+	}
+	_X. => {
+		goto N00000000164-dialout,${EXTEN},1;
+	}
+}
+
+context N00000000164-dialout {
+	_X. => {
+		
+		userCallerIDNum="";
+                Agi(agi://127.0.0.1:7891/AgiGetUserCallerIDNum?pbx=${HOST});
+                if("${userCallerIDNum}"==""){
+                        CALLERID(num)="53500114";
+                }else{
+                        CALLERID(num)="${userCallerIDNum}";
+                }
+		goto dialout-gateway, N000000001641900${EXTEN}, 1;
+	}
+}
+
+context N00000000164-transferout {
+	_. => {
+		CALLERID(num)="53500114";
+		goto transfer-gateway,${EXTEN},1;
+	}
+}

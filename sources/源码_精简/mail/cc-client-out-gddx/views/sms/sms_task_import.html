@@ -1,0 +1,84 @@
+<form id='import_query_frm'>
+    <input  name="batchNo" type="hidden" >
+</form>
+<div class="">
+    <table class="table table-bordered table-striped table-hover" style="word-break: break-all;">
+        <colgroup>
+            <col width="20%"/>
+            <col width="40%"/>
+            <col width="20%"/>
+            <col width="20%"/>
+        </colgroup>
+        <thead>
+        <tr>
+            <th>
+                手机号码
+            </th>
+            <th>
+                内容
+            </th>
+            <th>
+                签名
+            </th>
+            <th>
+                状态
+            </th>
+        </tr>
+        </thead>
+        <tbody id="task_import_list_pane">
+        </tbody>
+    </table>
+    <div class="pagination" style="display:table; margin:0;width:100%;" for="import_query_frm" ds_pagination_action="sms.loadTaskImpList">
+        <span style="float:left;margin-top:10px;font-size:12px;">查询结果：<span class="result_count">10</span></span>
+        <ul class="import_list_page" style="float:right;">
+            <li>
+                <a href="#"  value="0">«</a>
+            </li>
+            <li>
+                <a href="#"  value="1">1</a>
+            </li>
+            <li>
+                <a href="#"  value="2">2</a>
+            </li>
+            <li>
+                <a href="#"  value="3">3</a>
+            </li>
+            <li>
+                <a href="#"  value="4">4</a>
+            </li>
+            <li>
+                <a href="#"  value="5">5</a>
+            </li>
+            <li>
+                <a href="#"  value="6">»</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script id="tmpl_taskimport_item" type="text/x-jquery-tmpl">
+    <tr>
+        <td>
+            {{if num}}
+                ${num}
+            {{/if}}
+        </td>
+        <td>
+            {{if content}}
+            <span title="${content}" class="ellipsis" style="max-width: 350px;display: block;">
+                ${content}
+            </span>
+            {{/if}}
+        </td>
+        <td>
+            {{if signDisplay}}
+                ${signDisplay}
+            {{/if}}
+        </td>
+        <td>
+            {{if m7Status}}
+                ${handler.sms.getM7StatusDisplayName(m7Status)}
+            {{/if}}
+        </td>
+    </tr>
+</script>

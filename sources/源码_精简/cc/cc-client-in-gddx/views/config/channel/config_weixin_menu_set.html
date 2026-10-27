@@ -1,0 +1,98 @@
+<div class="single-menu _#menu_class#_" id="_#menu_id#__set">
+    <div class="weixin-menu-name">_#menu_level#_</div>
+    <div class="row_item">
+        <label class="control-label" for="wechat_menuName">_#menu_level#_名称</label>
+                <span class="control-field">
+                <input type="text" class="weixin-name" ds_action="config.channel.changeWeixinMenuName" name="menu_name" value="_#menu_name#_" msgName="_#menu_name#_的菜单名称" msg="不能为空" required/>
+                </span>
+    </div>
+    <div class="row_item row_item2">
+        <label class="control-label"></label>
+        <span class="control-field">_#menu_namelimet#_</span>
+    </div>
+    <div class="row_item row_item3">
+        <label class="control-label" for="wechat_menuInfo">_#menu_level#_内容</label>
+                <span class="control-field menu_type" style="display:inline-block;">
+                    <label>
+                        <input class="weixin_radio weixin_sendMs" ds_action="config.channel.changeWeixinMenuType" type="radio" checked name="_#menu_id#_" value="0" stamp="stamp">发送消息</label>
+                    <label>
+                        <input class="weixin_radio" ds_action="config.channel.changeWeixinMenuType" type="radio" name="_#menu_id#_" value="1" stamp="stamp">跳转页面</label>
+                    <label style="width:5em;"><input class="weixin_radio" ds_action="config.channel.changeWeixinMenuType" type="radio" value="2" name="_#menu_id#_" stamp="stamp">转人工</label>
+                    <label style="width:7em;"><input class="weixin_radio weixin_sat" ds_action="config.channel.changeWeixinMenuType" type="radio" name="_#menu_id#_" value="3" stamp="stamp">满意度调查</label>
+                </span>
+    </div>
+    <div class="webchat-menudetails clearfix">
+        <input class="menu_media_id" type="hidden"/>
+        <input class="img_media_id" type="hidden"/>
+        <div class="webchat-jump-url">
+            订阅者点击该子菜单会跳到以下链接
+            <div class="row_item">
+                <label class="control-label" for="wechat_menuUrl">跳转链接</label>
+                        <span class="control-field">
+                        <input type="text" value="_#menu_url#_" name="wechat_menuUrl" msgName="_#menu_name#_的跳转链接" msg="请输入正确的地址">
+                        </span>
+            </div>
+        </div>
+        <div class="webchat-jump-evaluate-url">
+            订阅者点击该子菜单会跳到以下链接
+            <div class="row_item">
+                <label class="control-label" for="wechat_evaluateUrl">跳转链接</label>
+                        <span class="control-field">
+                        <input type="text" value="_#evaluate_url#_" name="wechat_evaluateUrl" msgname="_#menu_name#_的跳转链接" msg="请输入正确的地址"  readonly>
+                        </span>
+            </div>
+        </div>
+        <div class="webchat-send-msg webchat_container">
+            <div class="tab_navs_panel">
+                <ul class="tab_nav">
+                    <li class="ds_do_action selected txtpic" ds_action="config.channel.changeSendMenuType">图文消息</li>
+                    <li class="ds_do_action ds_do_action txt" ds_action="config.channel.changeSendMenuType">文字</li>
+                    <!--<li class="ds_do_action" ds_action="config.channel.changeSendMenuType">图片</li>-->
+                </ul>
+            </div>
+            <div class="tab_panel">
+                <div class="tab_content" style="display:block;">
+                    <div class="create_access ds_do_action"  ds_action="config.channel.showWeiXinEditModal">
+                        <span class="add_img_text" data-toggle="modal"></span>
+                        <p class="newtxt">新建图文消息</p>
+                    </div>
+
+                </div>
+                <div class="tab_content" style="display:none;">
+                    <textarea rows="6" name="content" datatype="LimitLen" min="1" max="600" maxlength="600" msgName="_#menu_name#_的发送消息" msg="不能超过600字" autofocus>_#menu_key#_</textarea>
+                    <div class="chat_toolbar">
+                        <div class="face_con">
+                            <ul style="list-style: none;"></ul>
+                        </div>
+                        <div class="face_arrow"></div>
+                        <span class="ds_do_action webchat_msg_emojiface" ds_action="webchat.showEmojiFaces" ds_data=""><img src="../../img/client/customer/face-icon.png" width="20px" height="20px"/></span>
+                        <p class="editor_tip">最多可输入600文字</p>
+                    </div>
+                </div>
+                <!--<div class="tab_content" style="display:none;">-->
+                <!--<div class="create_access">-->
+                <!--<span class="add_img_text ds_do_action" data-toggle="modal"  ds_action="config.channel."></span>-->
+                <!--<p>上传图片</p>-->
+                <!--</div>-->
+                <!--</div>-->
+            </div>
+        </div>
+        <div class="webchat-send-robot-msg webchat_container">
+            <textarea rows="6" name="contentRobot" datatype="LimitLen" min="1" max="600" maxlength="600" msgName="_#menu_name#_的跳转人工" msg="不能超过600字" autofocus>_#menu_key2#_</textarea>
+            <div class="chat_toolbar">
+                <div class="face_con">
+                    <ul style="list-style: none;"></ul>
+                </div>
+                <div class="face_arrow"></div>
+                <span class="ds_do_action webchat_msg_emojiface" ds_action="webchat.showEmojiFaces" ds_data=""><img src="../../img/client/customer/face-icon.png" width="20px" height="20px"/></span>
+                <p class="editor_tip">最多可输入600文字</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        handler.webchat.initFace($("#weixin-all-menu"));
+    })
+</script>
+

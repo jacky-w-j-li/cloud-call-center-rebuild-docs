@@ -1,0 +1,18 @@
+context N00000000070-10003-blacklist {
+	_. => goto N00000000070-10002-time,${FROM_DID},1;
+	h => Hangup;
+}
+context N00000000070-10003-match-blacklist {
+	_. => Hangup;
+	h => Hangup;
+}
+
+context N00000000070-10009-blacklist {
+	_. => goto N00000000070-10008-time,${FROM_DID},1;
+	h => Hangup;
+}
+context N00000000070-10009-match-blacklist {
+	_. => Hangup;
+	h => Hangup;
+}
+

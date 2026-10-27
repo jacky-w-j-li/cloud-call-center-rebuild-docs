@@ -1,0 +1,120 @@
+<div class="row-fluid">
+    <div class="span12">
+        <form class="form-horizontal ds_item_edit" id="schedule-form" action="" client-data="session.ivrMap.ivr.ivr_schedule">
+            <input type="hidden" name="_id" value="___id"/>
+            <input type="hidden" name="AnnouncementId" value="__AnnouncementId"/>
+            <input type="hidden" name="ServiceNo" value="__Exten" id="editServiceNo"/>
+            <div class="row-fluid">
+                <div class="span6 offset1">
+                    <i class="icon-edit"></i>修改日程
+                </div>
+                <div class="span5 text-right pull-right">
+                    <a class="btn btn-info btn-blue ds_action_flow">
+                        <ds-form-action action="config.ivr.schedule.updateSchedule" extra-data="config.callConfig.currentConfigData"
+                                update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"ivr_schedule"}}'
+                                on-before="config.callConfig.schedule.judgeScheduleData"/>
+                        <ds-get-view view="config/callConfig/schedule/schedule_list" panel="ivrSchedulePanel"/>
+                        <ds-effect-ivr/>
+                        保存
+                    </a>
+                    <a class="btn btn-danger btn-gray ds_action_flow">
+                        <ds-form-action action="config.ivr.schedule.deleteSchedule" extra-data="config.callConfig.currentConfigData"
+                            update-client-data='{"method":"config.callConfig.updateClientData","arg":{"operation":"del","type":"ivr_schedule"}}'/>
+                        <ds-get-view view="config/callConfig/schedule/schedule_list" panel="ivrSchedulePanel"/>
+                        <ds-effect-ivr/>
+                        删除
+                    </a>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="control-group">
+                <label class="control-label">日程名称</label>
+                <div class="controls">
+                    <input type="text" name="DisplayName" value="__DisplayName" msgName="日程名称" msg="日程名称不能为空!" required/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">优先级</label>
+                <div class="controls">
+                    <input type="text" name="Order" value="__Order" id="scheduleOrderText" msgName="优先级" dataType="Number,Range"
+                           min="1" max="999" msg="优先级必须为1~999之间的整数" required/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">日期</label>
+                <div class="controls">
+                    <input class="span4" type="text" name="StartDate" msgName="起始日期" value="__StartDate" id="datepickerStart" required> --
+                    <input class="span4" type="text" name="EndDate" msgName="结束日期" value="__EndDate" id="datepickerEnd" required>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">时间</label>
+                <div class="controls">
+                    <input class="span3" type="text" name="StartTime" msgName="起始时间" value="__StartTime" required> --
+                    <input class="span3" type="text" name="EndTime" msgName="结束时间" value="__EndTime" required>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">星期</label>
+                <div class="controls">
+                    <label class="checkbox inline span1" style="margin-right:8px;">
+                        <input type="checkbox" id="inlineCheckbox1" name="WeekMon" value="true">一
+                    </label>
+                    <label class="checkbox inline span1" style="margin-right:8px;">
+                        <input type="checkbox" id="inlineCheckbox2" name="WeekTue" value="true">二
+                    </label>
+                    <label class="checkbox inline span1" style="margin-right:8px;">
+                        <input type="checkbox" id="inlineCheckbox3" name="WeekWed" value="true">三
+                    </label>
+                    <label class="checkbox inline span1" style="margin-right:8px;">
+                        <input type="checkbox" id="inlineCheckbox4" name="WeekThu" value="true">四
+                    </label>
+                    <label class="checkbox inline span1" style="margin-right:8px;">
+                        <input type="checkbox" id="inlineCheckbox5" name="WeekFri" value="true">五
+                    </label>
+                    <label class="checkbox inline span1" style="margin-right:8px;">
+                        <input type="checkbox" id="inlineCheckbox6" name="WeekSat" value="true">六
+                    </label>
+                    <label class="checkbox inline span1" style="margin-right:8px;">
+                        <input type="checkbox" id="inlineCheckbox7" name="WeekSun" value="true">日
+                    </label>
+                </div>
+            </div>
+            <!--<div class="control-group">-->
+                <!--<label class="control-label">欢迎语音</label>-->
+                <!--<div class="controls">-->
+                    <!--<select>-->
+                        <!--<option selected="selected">--请选择--</option>-->
+                        <!--<option>welcome.wav</option>-->
+                        <!--<option>bye.wav</option>-->
+                    <!--</select>-->
+                    <!--<a href="#">上传</a>-->
+                    <!--<a href="#">试听</a><br />-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="control-group">
+                <label class="control-label">流转到</label>
+                <div class="controls">
+                    <div id="scheduleToPeerType" class="ds_ivr_to_peer_type" tag-name="ToPeerType" tag-value-key="ToPeerType">
+
+                    </div>
+                    <div id="scheduleToPeer" class="ds_ivr_to_peer" tag-value-key="ToPeer">
+
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="alert alert-block">
+                    提示：<br>
+                    日期格式：月-日 或 *,如1-1<br>
+                    时间格式：时:分 或 *,如09:00<br>
+                    结束时间：结束时间的分钟设置为奇数,如18:59,即19点之前<br>
+                    优先级：小于999的正整数,代表日程被匹配的次序,数字越小优先级越高,优先级越高的日程优先被匹配<br>
+                </div>
+            </div>
+            <div class="ds_item_edit_param" ToPeerType="" ToPeer="" style="display:none"></div>
+            <div id="confirm_del_pane"></div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<div >
+    <form id="frm_customer_quick_search_add" class="form-horizontal ">
+        <div class="form_buttons" style="">
+                <button type="button" class="btn btn-small btn-primary ds_form_action pull-right"   ds_action="customer.saveQuickSearch">保存</button>
+                <button type="button" class="btn btn-small pull-right btn_pad btn_cancel_edit ds_do_action" ds_action="customer.cancelModel">取消</button>
+        </div>
+
+        <div>
+            <div class="control-group">
+                <label class="control-label required">菜单</label>
+                <div class="controls">
+                    <select name="menu" class="tab_menu">
+                        <option value="customer_my">我的客户</option>
+                        <option value="customer_plan">联系计划</option>
+                        <option value="customer_all">全部</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label required">名称</label>
+                <div class="controls">
+                    <input name="kName" type="text" maxlength="50" msgName='搜索名称' style="width:300px">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label required">条件</label>
+                <div class="controls">
+                    <div id="field_quickSearch_pane" style="position: relative;" class="">
+                        <div class="row-select-box">
+                            <a class="plus ds_form_action" ds_action="customer.plusQuickSearchField"></a>
+                            <select class="condition weixin-name"  name="condition[]" ds_action="customer.changeSelectedReset"  style="width:80px"></select>
+                            <select class="con" name="con[]" style="width:65px">
+                                <option value="=">等于</option>
+                            </select>
+                            <span class="changeText"  style="position:relative;">
+                                <input name="name" type="text" maxlength="50" msgName='客户名称' style="width:150px">
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(document).on("change",".condition",function(event){
+        var src = $(event.currentTarget);
+        var obj = src.get(0);
+        var value = obj.options[obj.selectedIndex].value;
+        var text = obj.options[obj.selectedIndex].text;
+        var p=src.parent("div").find(".changeText");
+        var con =src.parent("div").find(".con");
+        var tabMenu = $('#frm_customer_quick_search_add').find("select[name='menu']").val();
+        handler.customer._showQuickText(value,text,con,p,1,tabMenu);
+    });
+</script>

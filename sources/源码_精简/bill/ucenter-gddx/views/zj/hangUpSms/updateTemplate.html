@@ -1,0 +1,48 @@
+<form class="form-horizontal" id="frm_update_Template">
+    <div>
+        <input type="hidden" name="_id" value="_#_id#_">
+
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                模板名称
+            </label>
+            <div class="col-md-6">
+                <input type="text" name="title" class="form-control input-sm" value="_#title#_" required/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                短信内容
+            </label>
+            <div class="col-md-6">
+                <textarea class="templateContent form-control input-sm" style="resize:none" rows="4" name="content"
+                          onkeyup="javascript:handler.hangUpSms.changeTemplateText(this)">_#content#_</textarea>
+                <p class="templateTitle" ></p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                短信签名
+            </label>
+            <div class="col-md-5">
+                <select class="templateSign  form-control input-sm" name="sign">
+                    <option value="22051_【超孚金融】">【超孚金融】</option>
+                </select>
+            </div>
+            <span style="font-size: 15px;" id="update_template_tip" class="glyphicon glyphicon-question-sign control-label"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                默认模板
+            </label>
+            <div class="col-md-5">
+                <p class="control-label col-md-4"><input id="is_Default_true"type="radio" name="isDefault" value="true">是</p>
+                <p class="control-label col-md-4"><input id="is_Default_false" type="radio" name="isDefault" value="false">否</p>
+            </div>
+        </div>
+
+    </div>
+</form>

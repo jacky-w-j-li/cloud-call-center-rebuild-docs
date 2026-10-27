@@ -1,0 +1,51 @@
+<div class="right_container pd0">
+    <div class="tabbable">
+        <ul class="new-nav-tabs km_tab">
+            <li class="active">
+                <a href="#view_km_inner" class="ds_do_action" ds_action="km.showTab" ds_data="km_inner" data-toggle="tab">内部知识库</a>
+            </li>
+            <li class="">
+                <a href="#view_km_outer" class="ds_do_action" ds_action="km.showTab" ds_data="km_outer" data-toggle="tab">外部知识库</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="view_km_inner" class="tab-pane active"></div>
+            <div id="view_km_outer" class="tab-pane"></div>
+        </div>
+    </div>
+</div>
+
+
+<link href="../../third-lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+<link href="../../third-lib/swfupload/css/km.css" rel="stylesheet" type="text/css" />
+<link href="../../third-lib/swfupload/css/style.css" rel="stylesheet"  type="text/css"/>
+<link href="../../third-lib/swfupload/css/contact.css" rel="stylesheet"  type="text/css"/>
+
+<script src="../../third-lib/ligerUI/js/core/base.js" type="text/javascript"></script>
+<script src="../../third-lib/ligerUI/js/plugins/ligerTree.js?111" type="text/javascript"></script>
+<script src="../../third-lib/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
+<script src="../../third-lib/ligerUI/js/plugins/ligerDrag.js" type="text/javascript"></script>
+<script src="../../javascripts/knowledge/km-move.js" type="text/javascript"></script>
+
+
+<style type="text/css">
+    .km-input-text {
+        background: transparent;
+        border: 0!important;
+        outline: none!important;
+        box-shadow: none!important;
+        height: 14px;
+        line-height: 14px;
+        width: 160px;
+        padding: 11px 0;
+        font-size: 12px;
+        float:left;
+    }
+    .km_search_btn{
+        float:left;left:0;top:0;width:36px;height:36px; border:0;text-indent: -9999px;
+        background:url(../../third-lib/swfupload/images/sidemenu.png) no-repeat -1143px 8px; cursor:pointer;
+    }
+    .l-tree li .l-body{
+        white-space:nowrap;
+    }
+</style>

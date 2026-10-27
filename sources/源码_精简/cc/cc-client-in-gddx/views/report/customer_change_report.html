@@ -1,0 +1,152 @@
+<div class="row-fluid right_container">
+    <div class='row-fluid' style="padding: 5px;">
+        <h4 >座席客户变化报表</h4>
+    </div>
+    <div style="padding: 5px;" id="_#menu#__report_pane" class="customer_report_pane">
+        <div class='row-fluid'>
+            <div class='clear10'></div>
+            <div class='row-fluid'>
+                <div class='span12'>
+                    <form class="form-inline">
+                        <input type="hidden" name="dbType" value="">
+                        <div class='row-fluid'>
+                            <div class="span10">
+                                <!--<div style='float: left;'>-->
+                                    <!--<select name='type' id="_#menu#__query_type_select">-->
+                                        <!--<option value="year">年报</option>-->
+                                        <!--<option value="month">月报</option>-->
+                                        <!--<option value="custom">自定义</option>-->
+                                    <!--</select>-->
+                                <!--</div>-->
+                                <div style="">
+
+                                </div>
+                                <div style="float: left;" id="_#menu#__detail_query_pane">
+                                    <label>座席：</label>
+                                    <span style="display: inline-block;" id="report_customer_change_select_agents"></span>
+                                    <div id="report_customer_change_search_div" class="combobox_agent"></div>&nbsp;&nbsp;
+                                    <label>日期：</label>
+                                    <input name="beginDate" class="ds_date input-small" type="text">至<input name="endDate" class="ds_date input-small" type="text">&nbsp;&nbsp;
+
+                                    <div class="btn-group">
+                                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                            快速选择日期
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#" class="ds_do_action" ds_action="report.customer.setCustQueryDate" ds_data="month">本月</a></li>
+                                            <li><a href="#" class="ds_do_action" ds_action="report.customer.setCustQueryDate" ds_data="lastMonth">上个月</a></li>
+                                            <li><a href="#" class="ds_do_action" ds_action="report.customer.setCustQueryDate" ds_data="week">本周</a></li>
+                                            <li><a href="#" class="ds_do_action" ds_action="report.customer.setCustQueryDate" ds_data="lastWeek">上周</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span2">
+                                <a href="#" class="btn btn-small ds_form_action " style="float: right; margin-right: 5px;margin-left: 10px;" menu="_#menu#_" ds_action="report.customer.printReport">导出</a>
+                                <button type="button" class="btn btn-default btn-small ds_do_action" ds_action="batch2.reset" >重置</button>
+                                <a href="#" class="btn btn-small btn-info ds_form_action form_query_button" style="float: right; " menu="_#menu#_" ds_action="report.customer.getCustChanageReport">查询</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="clear10"></div>
+            <!--<div class="row-fluid chart_pane" >-->
+                <!--<div class='span6'>-->
+                    <!--<div id="_#menu#_pie_chart_container" style="width:100%; height:400px;">-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class='span6'>-->
+                    <!--<div id="_#menu#_lint_chart_container" style="width:100%; height:400px;">-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="clear10"></div>-->
+            <div class='row-fluid table_pane' >
+                <table class="table table-bordered table-striped table-hover table-condensed" style=" margin-bottom: 5px;">
+                    <thead>
+                    <tr>
+                        <th>
+                            座席
+                        </th>
+                        <th>
+                            分配数
+                        </th>
+                        <th>
+                            分配出去数
+                        </th>
+                        <th>
+                            自建数
+                        </th>
+                        <th>
+                            占用数
+                        </th>
+                        <th>
+                            放弃数
+                        </th>
+                        <th>
+                            删除数
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<script type="text/javascript">
+    $(function () {
+        var pane=$("#view_customer_change_report");
+        var users = getCache("agents");
+        var _users=[];
+        for(var i=0;i<users.length;i++){
+            var u=users[i];
+            if(u.status=='enable'){
+                _users.push(u);
+            }
+        }
+        utils.loadSearchInput({ id: "report_customer_change_search_div",
+            width: "120",
+            height: "14",
+            tip: "按姓名,拼音,工号搜索",
+            data: _users,
+            listField: ["displayName", "exten"],
+            userIdField: "_id",
+            searchField: ["displayName", "exten", "pinyin"],
+            pinyinField: ["displayName"],
+            showAllList: true,
+            callbackFuc: function (object) {
+                if($.isArray(object)){
+                    return;
+                }
+                var currentVals = pane.find("input[name='filterAgent[]']");
+                var ishas = false;
+                for (var i = 0; i < currentVals.length; i++) {
+                    if (currentVals[i].value == object._id) {
+                        ishas = true;
+                        break;
+                    }
+                }
+                if(!ishas) {
+                    pane.find('#report_customer_change_select_agents').before("<span><input type='hidden' name='filterAgent[]' value=" + object._id + ">" +
+                            "<span class='label label-info'>" + object.displayName +
+                            "</span><a href='#' onclick=report_customer_removeAgent(this)><i class='icon-remove'></i></a>&nbsp;</span>");
+//                    report_filterCustAssign();
+                }
+            }
+        });
+    });
+    function report_customer_removeAgent(src) {
+        $(src).closest("span").remove();
+        report_filterCustAssign();
+    }
+    function report_filterCustAssign(){
+
+    }
+
+</script>

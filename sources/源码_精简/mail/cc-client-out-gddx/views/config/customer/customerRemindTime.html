@@ -1,0 +1,63 @@
+<div class="customer_remind_time">
+    <form>
+        <fieldset style="">
+            <div class="global_set_li_head">联系计划提醒时间设置</div>
+            <div class="global_set_li_body">
+                <div class="chanel_item_row">
+                    <span class="chanel_item_left">联系时间提前提醒时长</span>
+                    <input type="text" name="remindLen" value="" placeholder="" class="input-small customer_remind_time_text" onblur="if(this.value=='0'){this.value='15'}" onkeyup="this.value=this.value.replace(/\D/g,'')"msgName='提前提醒时长'  dataType='Number3' value="15" msg='[联系时间提前提醒时长]必须是大于0的整数' required>分钟
+                    <span class="help_tip">默认值为15分钟</span>
+                </div>
+            </div>
+            <div style="margin-top: 15px;">
+                <button type="button" class="btn btn-small btn-primary ds_form_action" ds_action="config.customer.settingNotifyRemindTime">保存</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<style type="text/css">
+    .customer_remind_time {
+        width: 75%;
+    }
+    .customer_remind_time .chanel_item_row{
+        margin-bottom: 10px;
+    }
+    .customer_remind_time label{
+        display: inline-block;
+    }
+    .customer_remind_time .chanel_item_left{
+        display: inline-block;
+        text-align: left;
+        width: 180px;
+    }
+    .customer_remind_time .chanel_item_right{
+        text-align: left;
+    }
+    .customer_remind_time .chanel_input_text{
+        width: 50px;
+    }
+    .customer_remind_time .help_tip{
+        margin-left:183px;
+        color:#999999!important;
+        display: block;
+    }
+    .customer_remind_time .global_set_li_head {
+        font-weight: bold;
+        line-height: 16px;
+        font-size: 14px;
+        vertical-align: bottom;
+        position: relative;
+        padding-left: 10px;
+        height: 16px;
+        margin: 10px 0;
+    }
+     .customer_remind_time .global_set_li_head:before {
+        display: inline-block;
+        content: "\ ";
+        width: 3px;
+        height: 16px;
+        background-color: #37B5ED;
+        position: absolute;
+        left: 0;
+    }
+</style>

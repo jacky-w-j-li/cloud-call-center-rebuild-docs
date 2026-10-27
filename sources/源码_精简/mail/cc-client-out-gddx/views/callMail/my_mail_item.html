@@ -1,0 +1,27 @@
+<tr>
+    <td>
+        _#custName#_
+    </td>
+    <td>
+        _#from#_
+    </td>
+    <td>
+        _#toDesc#_
+    </td>
+    <td>
+        _#subject#_
+    </td>
+    <td>
+        _#receiveTime#_
+    </td>
+    <td>
+        _@callMail.showFieldDesc('agent','_#user#_')@_
+    </td>
+    <td>
+        _@callMail.showFieldDesc('status','_#status#_')@_
+    </td>
+    <td>
+        _#dealView#_
+        &nbsp;<a href="#" class="ds_do_action" ds_action="callMail.showMailReply" ds_data="_#_id#_">回复</a>
+    </td>
+</tr>

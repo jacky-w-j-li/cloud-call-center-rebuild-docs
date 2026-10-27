@@ -1,0 +1,50 @@
+<div class="my_queue_info">
+    <h6 style="" class="left_pane_head">
+        <!--<ul class="nav " style="margin-bottom: 0">-->
+            <!--<li class="dropdown">-->
+                <!--<a class="dropdown-toggle myQueue" id="drop_myQueue" role="button" data-toggle="dropdown" href="#">-->
+                    <!--<span class="myQueue_name">选技能组</span><b class="caret"></b></a>-->
+                <!--<ul id="myQueue_menu" class="dropdown-menu" role="menu" aria-labelledby="drop_myQueue">-->
+                    <!--&lt;!&ndash;<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>&ndash;&gt;-->
+                <!--</ul>-->
+            <!--</li>-->
+        <!--</ul>-->
+        <!--<select name="myQueue"style="width: 90px;" class="">-->
+        <!--</select>-->
+        <a href="#" id="queue_popover" style="padding: 0;display: inline-block;" class="" data-html="true" data-trigger="click"  data-toggle="popover" data-placement="right"
+           data-content='' data-original-title="">
+            <span class="myQueue_name">选技能组</span><b class="caret" style="margin-left: 5px;margin-top: 8px;"></b>
+        </a>
+
+        <div style="display: none;" id="myQueue_menu">
+            <ul class="myQueue_menu_ul" >
+            </ul>
+        </div>
+
+    </h6>
+    <div  id="user_queue" class="" style="border-top: 1px solid #e5e5e5;border-color: #ddd;height:50px;line-height: 20px;padding:3px 10px">
+    </div>
+</div>
+
+<style type="text/css">
+    .my_queue_info{
+        background-color: #fff;
+        margin-left: 4px;
+        margin-right: 4px;
+        border-radius: 5px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    #my_queue_info .popover-content{
+        padding: 0;
+    }
+</style>
+
+<script type="text/javascript">
+    $('#queue_popover').popover({
+    });
+    $('#queue_popover').click(function (event) {
+//        $('#queue_popover').popover('show');
+        event.stopPropagation();
+    });
+</script>

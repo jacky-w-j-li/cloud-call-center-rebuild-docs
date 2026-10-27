@@ -1,0 +1,52 @@
+<div id="knowledge_content">
+    <div class="zs_title2">
+        <div class="hf_title_font2">
+            当前位置：最近更新
+        </div>
+    </div>
+    <div class="km_body">
+        <table class="table table-bordered table-striped table-hover" style="word-break: break-all;">
+            <colgroup>
+                <col width="50%"/>
+                <col width="15%"/>
+                <col width="20%"/>
+                <col width="10%"/>
+            </colgroup>
+            <thead>
+            <tr>
+                <th>
+                    知识点标题
+                </th>
+                <th>
+                    采编员
+                </th>
+                <th>
+                    更新时间
+                </th>
+                <th>
+                    点击量
+                </th>
+            </tr>
+            </thead>
+            <tbody id="km_item_list_pane">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script id="tmpl_km_item" type="text/x-jquery-tmpl">
+    <tr>
+        <td>
+            <a href="#" class="ds_do_action" ds_action="kmcontent.viewKmInfo" ds_data="${_id}" appflag="recent">${title}</a>
+        </td>
+        <td>
+             ${handler.kmcontent.showFieldsDesc('agent',publisher)}
+        </td>
+        <td>
+            ${lastTime.substring(0,lastTime.length-3)}
+        </td>
+        <td>
+            ${hits}
+        </td>
+    </tr>
+</script>

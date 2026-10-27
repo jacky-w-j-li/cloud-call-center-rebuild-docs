@@ -1,0 +1,40 @@
+<div class="left_column" id="contact_list__#menu#_">
+    <div class="contacts_caption">
+        <div class="caption-top clearfix">
+            <div style="float: right">
+                <a href="#" class="add_button add-contact-link button ds_do_action" ds_action="customer.showCustAdd" ds_data="_#menu#_" flag="cust_action">添加客户</a>
+            </div>
+
+            <span class="refresh ds_do_action" ds_action="customer.showContacts" ds_data="_#menu#_"><a href="javascript:void(0);" class="ajaxed">刷新</a></span>
+        </div>
+    </div>
+    <div class="list_container compact-view">
+        <div class="contact_list " >
+            <div class="list-inside" id="customer_list_pane">
+            </div>
+            <div>
+                <a class="btn ds_do_action" ds_action="task.moreTask" ds_data="_#menu#_" href="#" style="width:100%;">更多...</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="right_column" id="contact_detail__#menu#_">
+    <div class="contact_detail">
+        <div class="content">
+            <div class="contact_operating_area custlist " id="customer_detail_pane">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        dsevent.bind('#contact_list__#menu#_', 'customerAdd customerNew customerUpdate action actionCancel', function(event, params){
+
+
+            var menu = '_#menu#_';
+            console.debug('1111===='+menu);
+        });
+    });
+</script>

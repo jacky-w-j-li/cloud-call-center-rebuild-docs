@@ -1,0 +1,165 @@
+<div class="chanel_global_set" style="margin: 0 auto 20px;">
+
+    <form>
+        <input name="_id" value="{{=_id}}" type="hidden">
+        <fieldset style="">
+            <!--<legend>全局设置</legend>-->
+            <div class="global_set_li_head">web访客端设置</div>
+            <div class="global_set_li_body">
+                <div class="chanel_item_row">
+                    <span class="chanel_item_left">访客无响应断开对话时长</span>
+                    {{
+                    if(!break_len){
+                        break_len = 10;
+                    }
+                    }}
+                    <input type="text" name="break_len" value="{{=break_len}}" placeholder="" class="input-small chanel_input_text" msgName='访客无响应断开对话时长'  dataType='Number3' msg='[访客无响应断开对话时长]必须是大于0的整数' required>分钟
+                    <span class="help_tip">默认值为10分钟</span>
+                </div>
+                <div class="chanel_item_row">
+                    <span class="chanel_item_left">断开前提示时长</span>
+                    {{
+                    if(!break_tips_len){
+                        break_tips_len = 3;
+                    }
+                    }}
+                    <input type="text" name="break_tips_len" value="{{=break_tips_len}}" placeholder="" class="input-small chanel_input_text" msgName='断开前提示时长'  dataType='Number3' msg='[断开前提示时长]必须是大于0的整数' required >分钟
+                    <span class="help_tip">默认值为3分钟</span>
+                </div>
+                <div class="chanel_item_row">
+                    <span class="chanel_item_left">断开前提示内容</span>
+                    <textarea name="break_tips" rows="3" required msgName='断开前提示内容'>{{=break_tips}}</textarea>
+                    <span class="help_tip">默认值为“您已经很长时间没有发送消息了，再过3分钟，系统将会自动断开对话”</span>
+                </div>
+                <div class="chanel_item_row">
+                    <span class="chanel_item_left">启用留言</span>
+                    <input type="radio" name="isLeaveMsg" id="isLeaveMsg_y" value="1" checked class="weixin_radio" ds_action="config.channel.changeIsLeaveMsg" ds_data="1"> <label for="isLeaveMsg_y" style="margin-right: 2em">是</label>
+                    <input type="radio" name="isLeaveMsg" id="isLeaveMsg_n" value="0" class="weixin_radio" ds_action="config.channel.changeIsLeaveMsg" ds_data="0"> <label for="isLeaveMsg_n">否</label>
+                </div>
+
+                <div class="chanel_item_row msg_div" style="display: none;">
+                    <span class="chanel_item_left">推送内容</span>
+                    <textarea name="msg" rows="3" placeholder="若未启用留言，可以设置一段内容推送到用户端">{{=msg}}</textarea>
+                    <span class="help_tip">默认值“客服不在线，系统将自动断开会话”</span>
+                    <!--<span class="help-block">若不留言的话，可以设置一段内容推送到用户端</span>-->
+                </div>
+
+                <div class="chanel_item_row leavemsg_div">
+                    <span class="chanel_item_left">留言框默认填写内容</span>
+                    <textarea name="leavemsgTip" rows="3" placeholder="留言时,可以引导留言框中用户需要填写的内容">{{=leavemsgTip}}</textarea>
+                    <span class="help_tip">默认值“请留言～”</span>
+                    <!--<span class="help-block">若不留言的话，可以设置一段内容推送到用户端</span>-->
+                </div>
+
+                <div class="chanel_item_row">
+                    <span class="chanel_item_left">启用排队人数提示</span>
+                    <input type="checkbox" name="queueNumSwitch">
+                </div>
+            </div>
+            <div class="global_set_li_head">系统数据统计设置</div>
+            <div class="global_set_li_body">
+                <div class="chanel_item_row">
+                    <span class="chanel_item_left">启用优劣会话自动判断</span>
+                    <input type="radio" name="chatCheck" id = "chatCheckOn" value="1" class="weixin_radio" ds_action="config.channel.changeChatCheck" ds_data = "1"> <label for="chatCheckOn" style="margin-right: 2em">是</label>
+                    <input type="radio" name="chatCheck" id="chatCheckOff" value="0" checked class="weixin_radio" ds_action="config.channel.changeChatCheck" ds_data="0"> <label for="chatCheckOff">否</label>
+                    <span class="help_tip">默认值为否,启用优劣会话自动判断,系统将自动判断会话是优质会话还是劣质会话</span>
+                </div>
+
+                <div class="chanel_item_row chat_check" style="display: none;">
+                    <span class="chanel_item_left"></span>
+                    优质会话: 访客消息数大于等于<input name="goodNum" type="text" datatype="Number3" class="input-small chanel_input_text" value="{{=goodNum}}"></br></br>
+                    <span class="chanel_item_left"></span>
+                    劣质会话: 访客消息数小于等于<input name="badNum" type="text" datatype="Number3" class="input-small chanel_input_text" value="{{=badNum}}">
+                </div>
+            </div>
+
+            <div class="global_set_li_head">微信访客端设置</div>
+            <div class="global_set_li_body">
+                <div class="chanel_item_row ">
+                    <span class="chanel_item_left">座席不在线时消息推送</span>
+                    <textarea name="weixinMsg" rows="3" placeholder="推送消息时,可以引导框中用户需要填写的内容">{{=weixinMsg}}</textarea>
+                </div>
+                <div class="chanel_item_row">
+                    <span class="chanel_item_left">开启推送提醒语</span>
+                    <input type="radio" name="setWarnMsg" class="weixin_radio" value="1" ds_action="config.channel.changeWarnMsgCheck" id="warnMsgOn" ds_data="1"/><label for="warnMsgOn" style="margin-right:2em;">是</label>
+                    <input type="radio" name="setWarnMsg" class="weixin_radio" value="0" ds_action="config.channel.changeWarnMsgCheck" id="warnMsgOff" ds_data="0"/><label for="warnMsgOff">否</label>
+                    <span class="help_tip">开启推送后，系统将在访客长时间未回复时自动向访客推送提醒语</span>
+                </div>
+                <div class="warn_msg_check">
+                    <div class="chanel_item_row">
+                        <span class="chanel_item_left">访客无响应的提醒时长设置</span>
+                        {{
+                        if(!weixinWarnLen){
+                        weixinWarnLen = 10;
+                        }
+                        }}
+                        <input type="text"  value="{{=weixinWarnLen}}" name="weixinWarnLen" placeholder="" class="input-small chanel_input_text" msgName='访客无响应断开对话时长'  dataType='Number3' msg='[访客长时间未回复]必须是大于0的整数' required>分钟
+                        <span class="help_tip">默认值为10分钟</span>
+                    </div>
+                    <div class="chanel_item_row">
+                        <span class="chanel_item_left">访客无响应的提醒语设置</span>
+                        <textarea name="weixinWarnMsg" rows="3" placeholder="例：您已经很长时间未给我们回复了，您是在思考吗？">{{=weixinWarnMsg}}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="global_set_li_head">在线咨询座席端设置</div>
+            <div class="global_set_li_body">
+                <div class="chanel_item_row">
+                    <span class="chanel_item_left">开启自动结束会话</span>
+                    <input type="radio" name="autoCloseSession" id = "autoEndSessionOn" value="1" class="weixin_radio" ds_action="config.channel.changeCloseSessionCheck" ds_data = "1"> <label for="autoEndSessionOn" style="margin-right: 2em">是</label>
+                    <input type="radio" name="autoCloseSession" id = "autoEndSessionOff" value="0" checked class="weixin_radio" ds_action="config.channel.changeCloseSessionCheck" ds_data="0"> <label for="autoEndSessionOff">否</label>
+                    <span class="help_tip">开启后可以设定对话时长和结束会话类别</span>
+                </div>
+                <div class="close_session_check" style="display: none">
+                    <div class="chanel_item_row">
+                        <span class="chanel_item_left">自动结束会话时长设定</span>
+                        {{
+                        if(!autoCloseSessionTime){
+                        autoCloseSessionTime = 10;
+                        }
+                        }}
+                        <input type="text"  value="{{=autoCloseSessionTime}}" name="autoCloseSessionTime" placeholder="" class="input-small chanel_input_text" msgName='自动结束会话时长'  dataType='Number3' msg='[自动结束会话时长]必须是大于0的整数' required>分钟后访客无消息自动结束
+                        <span class="help_tip">默认值为10分钟</span>
+                    </div>
+                    <div class="chanel_item_row">
+                        <span class="chanel_item_left">自动结束会话类别设定</span>
+                        <select name="autoCloseSessionType" id="autoCloseSessionType">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 15px;width: 630px">
+                <button type="button" class="btn pull-right btn-small btn-primary ds_form_action" ds_action="config.channel.saveGlobalSet">保存</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<style type="text/css">
+    .chanel_global_set .chanel_item_row{
+        margin-bottom: 10px;
+    }
+    .chanel_global_set label{
+        display: inline-block;
+    }
+    .chanel_global_set .chanel_item_left{
+        display: inline-block;
+        text-align: left;
+        width: 180px;
+        vertical-align: top;
+    }
+    .chanel_global_set .chanel_item_right{
+        text-align: left;
+    }
+    .chanel_global_set .chanel_input_text{
+        width: 50px;
+    }
+    .chanel_global_set .help_tip{
+        margin-left:183px;
+        color:#999999!important;
+        display: block;
+        margin-top: 2px;
+    }
+    .chanel_global_set label{
+        margin-bottom: 0;
+    }
+</style>

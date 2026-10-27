@@ -1,0 +1,125 @@
+<div>
+    <!--<div class="panel panel-default">-->
+        <!--<div class="panel-body">-->
+            <!--<form id="frm_licence_info" class="form-horizontal">-->
+                <!--<table class="table_row_search">-->
+                    <!--<tbody>-->
+                    <!--<tr>-->
+                        <!--<td >分机号 </td>-->
+                        <!--<td >-->
+                            <!--<input type="text" name="exten" class="form-control input-sm"/>-->
+                        <!--</td>-->
+                        <!--<td >姓名</td>-->
+                        <!--<td >-->
+                            <!--<input type="text" name="displayName" class="form-control input-sm"/>-->
+                        <!--</td>-->
+                        <!--<td>-->
+                            <!--<button type="button" class="btn btn-primary btn-sm agent_search ds_form_action" ds_action="licence.getLicenceList">查询</button>-->
+                            <!--<button type="button" class="btn btn-default btn-sm ds_do_action" ds_action="licence.reset" >重置</button>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+            <!--</form>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <div class="">
+        <ul  class="nav nav-tabs" role="tablist">
+            <li class="active"><a href="#cc_licence_list" role="tab" data-toggle="tab">licence列表</a></li>
+            <li class=""><a href="#cc_licence_op_record_list" class="ds_do_action" role="tab" data-toggle="tab" ds_action="licence.getLicenceOpRecordList">licence操作记录</a></li>
+            <button type="button" class="btn btn-success ds_do_action" ds_action="licence.showAdd" style="margin: 5px 0 0 1px;">
+                <span class="glyphicon glyphicon-plus"></span> 新增licence</button>
+            <!--<button type="button" class="btn btn-success btn-xs ds_do_action" ds_action="licence.showAdd" style="margin-left: 20px;">新增licence</button>-->
+        </ul>
+        <div class="tab-content">
+            <!--licence列表-->
+            <div class="tab-pane fade active in" id="cc_licence_list">
+                <!-- Table -->
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>类型</th>
+                        <th>节点</th>
+                        <th>数量</th>
+                        <th>单价</th>
+                        <th>状态</th>
+                        <th>生效日期</th>
+                        <th>到期日期</th>
+                        <th>创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="licence_list">
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-5">查询结果：<span class="result_count" style="margin-top:3px;display: inline-block;">0</span></div>
+                    <div class=" col-md-7">
+                        <ul class="pagination pagination-sm pull-right" style="margin: 0;"
+                            for="frm_licence_info" ds_pagination_action="licence.getLicenceList">
+                            <li><a href="#"  value="0">&laquo;</a></li>
+                            <li><a href="#"  value="1">1</a></li>
+                            <li><a href="#"  value="2">2</a></li>
+                            <li><a href="#"  value="3">3</a></li>
+                            <li><a href="#"  value="4">4</a></li>
+                            <li><a href="#"  value="5">5</a></li>
+                            <li><a href="#"  value="6">&raquo;</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--licence操作记录-->
+            <div class="tab-pane fade" id="cc_licence_op_record_list">
+                <!-- Table -->
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>类型</th>
+                        <th>licence创建时间</th>
+                        <th>操作</th>
+                        <th>详情</th>
+                        <th>操作人</th>
+                        <th>操作时间</th>
+                    </tr>
+                    </thead>
+                    <tbody class="licence_op_record_list">
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-5">查询结果：<span class="licence_op_record_count" style="margin-top:3px;display: inline-block;">0</span></div>
+                    <div class=" col-md-7">
+                        <ul class="pagination pagination-sm pull-right" style="margin: 0;"
+                            for="frm_licence_op_record_info" ds_pagination_action="licence.getLicenceOpRecordList">
+                            <li><a href="#"  value="0">&laquo;</a></li>
+                            <li><a href="#"  value="1">1</a></li>
+                            <li><a href="#"  value="2">2</a></li>
+                            <li><a href="#"  value="3">3</a></li>
+                            <li><a href="#"  value="4">4</a></li>
+                            <li><a href="#"  value="5">5</a></li>
+                            <li><a href="#"  value="6">&raquo;</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    <div class="modal fade" id="licence_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" ></h4>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary ds_form_action" ds_action=""  ds_form="#frm_licence_update">保存</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>

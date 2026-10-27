@@ -1,0 +1,12 @@
+{
+    "version":"1.0.0",
+    "serverPort": "5002",
+    "serverIp":"172.42.38.16",
+    "logAccessConsole":true,
+    "dispatherServiceUrl" : "http://172.42.38.24:6000/newIM",
+    "imServiceUrl":"http://172.42.38.16:4999/chat",
+    "cryptoAlgorithm":"des",
+    "cryptoKey":"abcdefghijkxyzABCDEFGHIJKXYZ",
+    "tokenKey":"wecuTerkdYefnqim"
+}
+

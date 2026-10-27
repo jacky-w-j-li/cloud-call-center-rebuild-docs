@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/image/favicon.png">
+    <script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/register.js"></script>
+    <link rel=stylesheet type=text/css href="/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/css/7moor.css">
+    <title>七陌科技-企业注册</title>
+    <script type="text/javascript">
+        $(function () {
+            writePersonalInfoPage();
+        });
+    </script>
+    <style type="text/css">
+        .reg_form {
+            margin: 20px 0 0 275px;
+        }
+        .reg_form .list_bi {
+            width: 490px;
+            margin: 20px 0 20px;
+        }
+        .list_bi li {
+            padding-bottom: 17px;
+            overflow: hidden;
+            zoom: 1;
+        }
+        .list_bi label {
+            color: #666;
+            display: block;
+            font-size: 14px;
+            line-height: 16px;
+            font-weight: 700;
+        }
+        .list_bi .input_wrap {
+            width: 270px;
+            margin-top: 5px;
+        }
+        .major {
+            background: url("http://115.29.10.194:3000/image/major.gif") repeat-y;
+            padding-left: 2px;
+        }
+        .major .input_text {
+            border-left: 0px;
+        }
+        .input_text {
+            padding: 2px;
+            border: 1px solid #c4c3c3;
+            background: url("http://115.29.10.194:3000/image/bg_x.gif") repeat-x;
+        }
+        .input_text input {
+            width: 100%;
+            border: 0;
+            outline: 0;
+            background: transparent;
+            vertical-align: top;
+            height: 21px;
+            padding: 2px 0;
+            font: 14px/21px Arial, '\5B8B\4F53', '\65B0\5B8B\4F53', sans-serif;
+            color: #aaa;
+        }
+        ul ol {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .errorinput {
+            border: 1px solid #E50B0B;
+            background: #FFF2F2;
+        }
+        .validttipwrap {
+            display: none;
+            zoom: 1;
+        }
+        .error_validttip .validttip {
+            background: url("http://115.29.10.194:3000/image/error_vadt_b.gif") no-repeat left bottom;
+        }
+        .validttip {
+            width: 235px;
+            background: url("http://115.29.10.194:3000/image/vadt_b.gif") no-repeat left bottom;
+        }
+        .error_validttip .box_validttip {
+            border-right: 1px solid #e50b0b;
+        }
+        .box_validttip {
+            border-right: 1px solid #1ba0e1;
+        }
+        .error_validttip .outer_alidttip {
+            background: url("http://115.29.10.194:3000/image/error_vadt_t.gif") no-repeat;
+        }
+        .outer_alidttip {
+            background: url("http://115.29.10.194:3000/image/vadt_top.gif") no-repeat;
+        }
+        .error_validttip .inner_alidttip {
+            padding: 8px 10px 8px 15px;
+            color: #666;
+            font: 12px/15px Verdana, '\5B8B\4F53', '\65B0\5B8B\4F53', sans-serif;
+            color: #E50B0B;
+        }
+        .inner_alidttip {
+            padding: 8px 10px 8px 15px;
+            color: #666;
+            font: 12px/15px Verdana, '\5B8B\4F53', '\65B0\5B8B\4F53', sans-serif;
+        }
+        .error_validttip .inner_alidttip em {
+            color: #E50B0B;
+            font-style: normal;
+        }
+        .inner_alidttip em {
+            color: #aaa;
+            font-style: normal;
+        }
+        .right_validttip .validttip {
+            width: 14px;
+            height: 14px;
+            background: url("http://115.29.10.194:3000/image/ico_tip.gif") no-repeat left -74px;
+        }
+        .right_validttip .box_validttip {
+            display: none;
+        }
+        .blurinput input {
+            color: #666;
+        }
+        .focusinput input {
+            color: #666;
+        }
+
+    </style>
+    <script type="text/javascript">
+        function getFormData(form) {
+            var data = {};
+            var inputs = $(form).find("input") || [];
+            for (var i = 0; i < inputs.length; i++) {
+                var input = $(inputs[i]);
+                data[input.attr("name")] = input.val();
+            }
+            return data;
+        }
+        $(function () {
+            $("#completeReg").bind("click", function () {
+                $("input").blur();
+                if ($(".errorinput").length == 0) {
+                    var data =getFormData($("#fillUserInfo"));
+                    $.ajax({
+                        url:"./public",
+                        data : {
+                            action:"register.submitRegister",
+                            data : JSON.stringify(data)
+                        },
+                        method:"GET",
+                        success : function(response){
+                            if(response.success){
+                                alert("操作成功！");
+                            } else {
+                                alert(response.message || "未知错误");
+                            }
+                        }
+
+                    });
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="navbar navbar-inverse_patch navbar-fixed-top" role="navigation" style="margin-bottom: 0px;">
+    <div class="container">
+        <div style="width:950px;margin: 0 auto;">
+            <div class="navbar-header" style="height: 75px;line-height: 75px;">
+                <a href="./"><img alt="" src="/image/logo2.png" style="width: auto;height:50px;"></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <div class="ds_nav" style="height: 75px;line-height: 75px;">
+                    <ul class="nav navbar-nav2  navbar-right">
+                        <li class="">
+                            <a href="#contact"><strong>帮助</strong></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="contenter newreg">
+    <div class="contenterwrapper">
+        <div class="regwrapper">
+            <div class="reg_form">
+                <form id="fillUserInfo">
+                    <input type="hidden" name="email" value="<%=_id%>">
+                    <ul class="list_bi">
+                        <li>
+                            <label>企业名称</label>
+
+                            <div class="input_wrap major">
+                                <div class="input_text">
+                                    <input type="text" title="" name="companyName" id="companyName"/></div>
+                            </div>
+                        </li>
+                        <li>
+                            <label>企业域名</label>
+
+                            <div class="input_wrap major">
+                                <div class="input_text">
+                                    <input type="text" title="" name="domain" id="domain"/></div>
+                            </div>
+                        </li>
+                        <li>
+                            <label>真实姓名</label>
+
+                            <div class="input_wrap major">
+                                <div class="input_text">
+                                    <input type="text" title="" name="userName" id="name"/></div>
+                            </div>
+                        </li>
+                        <li>
+                            <label>
+                                联系手机</label>
+
+                            <div class="input_wrap major">
+                                <div class="input_text">
+                                    <input type="text" title="" name="mobile" id="phone"/></div>
+                            </div>
+                        </li>
+                        <li>
+                            <label>
+                                密码</label>
+
+                            <div class="input_wrap major">
+                                <div class="input_text">
+                                    <input type="password" title="" name="password" id="password"/></div>
+                            </div>
+                        </li>
+                        <li>
+                            <label>
+                                确认密码</label>
+
+                            <div class="input_wrap major">
+                                <div class="input_text">
+                                    <input type="password" title="" name="againpassword" id="againpassword"/></div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div>
+                        <a class="btn btn btn-primary" id="completeReg" style="width: 270px;margin-left: 40px;">完成注册</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="ds-footer" style="">
+    <div class="container" style="width:950px;">
+        <p>
+            <!--<div class="pull-left">联系电话：010-59966666</div>-->
+            <!--<button type="button" class="btn btn-link pull-left" onclick="handler.showAbout()">关于我们</button>-->
+
+        <div class="text-center">七陌科技 &nbsp; &nbsp; 京ICP备13039787号 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &copy; 2013
+            七陌科技
+        </div>
+        </p>
+    </div>
+</footer>
+</body>
+</html>

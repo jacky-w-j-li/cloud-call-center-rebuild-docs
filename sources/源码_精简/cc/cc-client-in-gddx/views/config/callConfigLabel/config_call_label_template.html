@@ -1,0 +1,40 @@
+<div class="row-fluid">
+    <div class="span6 ds_search_pane" >
+        <div class="caption-wrap">
+            <div class="clearfix cfg_caption_top">
+                <div class="pull-left">
+                    <span>常用通话标签</span>
+                </div>
+                <div class="pull-right">
+                    <button type="button" class="pull-right btn-add ds_do_action" ds_action="config.callConfigLabel.addCallLabelTemplate"ds_data=""> 添加</button>
+                </div>
+            </div>
+        </div>
+        <div class="list-template">
+            <div id="config_call_label_use" class="cfg_clear_con_float">
+            </div>
+            <script id="use_on_label" type="text/html">
+                <label class="cfg_call_label"><input type="radio" name="labelUse" class="ds_change_action" ds_action="config.callConfigLabel.configCallLabelChange" ds_data="{{=_id}}" use="on" enable="{{=judge}}"/><span>{{=name}}</span></label>
+            </script>
+            <div class="cfg_call_stopUse_top cfg_clear_con_float">
+                <div class="pull-left clearbt">
+                    <span>已停用标签</span>
+                </div>
+            </div>
+            <div id="config_call_label_stopUse" class="clearbt">
+            </div>
+            <script id="use_off_label" type="text/html">
+                <label class="cfg_call_label"><input type="radio" name="labelUse" class="ds_change_action" ds_action="config.callConfigLabel.configCallLabelChange" ds_data="{{=_id}}" use="off" enable="{{=judge}}" /><span>{{=name}}</span></label>
+            </script>
+        </div>
+    </div>
+    <div class="span6 sub-right" >
+        <form id="cfg_add_lable_wrap">
+            <div class="cfg_add_lable cfg_caption_top">添加通话标签</div><input type="text" name="name" required msgname="通话标签不能为空" placeholder="请填写通话标签" class="cfg_write_label" maxlength="6"/>
+                <button type="button" class="ds_form_action btn-blue" ds_action="config.callConfigLabel.saveCallLabelTemplate">保存</button>
+                <button type="button" class="ds_form_action btn-blue cfg_label_use" ds_action="config.callConfigLabel.changeToLabelUse">启用</button>
+                <button type="button" class="ds_form_action cfg_label_stop btn-gray" ds_action="config.callConfigLabel.changeToLabelStop">停用</button>
+                <button type="button" class="ds_do_action btn-gray cfg_label_cancel" ds_action="config.callConfigLabel.cancleCallLaelTemplate">取消</button>
+        </form>
+    </div>
+</div>

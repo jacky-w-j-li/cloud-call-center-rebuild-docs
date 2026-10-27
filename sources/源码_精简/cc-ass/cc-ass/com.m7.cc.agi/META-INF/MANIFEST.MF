@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Agi Plug-in
+Bundle-SymbolicName: com.m7.cc.agi
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.m7.cc.agi.AgiActivator
+Bundle-Vendor: HOLLYCRM
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.osgi.framework;version="1.3.0"
+Require-Bundle: com.m7.cc.ass.util;bundle-version="1.0.0",
+ com.m7.cc.ass.model.core;bundle-version="1.0.0",
+ com.m7.cc.smart.server;bundle-version="1.0.0",
+ com.m7.cc.agi.handler;bundle-version="1.0.0",
+ com.m7.cc.ass.config;bundle-version="1.0.0"
+Export-Package: com.m7.cc.asterisk.fastagi

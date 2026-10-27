@@ -1,0 +1,25 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+        ×
+    </button>
+    <h3>修改可占用最大数</h3>
+</div>
+<div class="">
+    <form>
+        <input name="_id" type="hidden" value="___id"/>
+        <div class="modal-body">
+            <div  style="margin: 0 auto;width: 80%">
+                <label style="display: inline-block; margin-right: 10px;">最大数</label>
+                <input  type="text" name="maxCommon" value="__maxCommon" msgName='最大数'  dataType='Number' msg='必须为数字' required/>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button href="#" class="btn btn-small btn-primary ds_form_action" ds_action="config.customer.saveMaxCommon" >
+                保存
+            </button>
+            <button class="btn btn-small" data-dismiss="modal" aria-hidden="true">
+                取消
+            </button>
+        </div>
+    </form>
+</div>

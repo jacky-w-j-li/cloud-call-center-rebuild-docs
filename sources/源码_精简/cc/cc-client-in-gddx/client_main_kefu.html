@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="./img/favicon.png">
+    <title>云客服</title>
+    <!--<link rel=stylesheet type=text/css href="javascripts/scrollbar/jquery.mCustomScrollbar.min.css">-->
+    <link rel=stylesheet type=text/css href="./stylesheets/bootstrap.css">
+    <link rel=stylesheet type=text/css href="./stylesheets/bootstrap1.css">
+    <!--<link rel=stylesheet type=text/css href="./stylesheets/bootstrap2.css">-->
+    <link rel=stylesheet type=text/css href="stylesheets/app_ucenter.css?2">
+    <link rel=stylesheet type=text/css href="stylesheets/cc.css?2">
+    <link rel=stylesheet type=text/css href="stylesheets/business.css?2">
+    <link rel=stylesheet type=text/css href="stylesheets/cti.css?0817">
+    <!--<link rel=stylesheet type=text/css href="./stylesheets/datetimepicker.css">-->
+    <link rel=stylesheet type=text/css href="stylesheets/test_menu.css?2">
+    <link rel=stylesheet type=text/css href="./jqueryui/base/jquery-ui.css">
+    <link rel=stylesheet type=text/css href="./jqueryui/base/jquery.ui.progressbar.css">
+    <link rel=stylesheet type=text/css href="./stylesheets/jquery-ui-timepicker-addon.min.css">
+    <!--<link rel="stylesheet" type="text/css" href="./stylesheets/zTreeStyle/zTreeStyle.css">-->
+    <link rel=stylesheet type=text/css href="./stylesheets/bootstrap-switch.min.css">
+    <!--<link rel=stylesheet type=text/css href="javascripts/ueditor/themes/default/css/ueditor.css">-->
+    <link rel="stylesheet" type=text/css href="javascripts/qiniu/highlight/highlight.css">
+    <link rel="stylesheet" type="text/css" href="jPicker/css/jPicker-1.1.6.min.css" />
+    <style>
+        @keyframes animatedbg {
+            from { background-position:  0 0; }
+            to { background-position: -2851px 0; }
+        }
+        @-webkit-keyframes animatedbg{
+            from { background-position:  0 0; }
+            to { background-position: -2851px 0; }
+        }
+        @keyframes animatedbgs {
+            from { background-position:  0 bottom; }
+            to { background-position: -2000px bottom; }
+        }
+        @-webkit-keyframes animatedbgs{
+            from { background-position:  0 bottom; }
+            to { background-position: -2000px bottom; }
+        }
+        /*.animate-quick {*/
+            /*-webkit-transform: translateZ(0);*/
+            /*-moz-transform: translateZ(0);*/
+            /*-ms-transform: translateZ(0);*/
+            /*-o-transform: translateZ(0);*/
+            /*transform: translateZ(0);*/
+            /*animation: animatedbgs 25s linear infinite;*/
+            /*-webkit-animation: animatedbgs 25s linear infinite;*/
+        /*}*/
+        /*.animate-slow {*/
+            /*-webkit-transform: translateZ(0);*/
+            /*-moz-transform: translateZ(0);*/
+            /*-ms-transform: translateZ(0);*/
+            /*-o-transform: translateZ(0);*/
+            /*transform: translateZ(0);*/
+            /*animation: animatedbg 150s linear infinite;*/
+            /*-webkit-animation: animatedbg 240s linear infinite;*/
+        /*}*/
+        p,h1,h2,h3{
+            margin: 0;
+            padding: 0;
+        }
+        .main_container{
+            background: none;
+        }
+        html,body{
+            background-image: linear-gradient(to bottom, #00b3a5 20%, #90c063 100%);
+            min-height: 100%;
+        }
+        .kfbg_all{
+            width: 100%;
+            height: 90%;
+            position: absolute;
+            bottom: 0;
+            background: url("/img/kefu_img/repeat.png");
+        }
+        .kfbg_fire{
+            position: absolute;
+            left: 0;
+            bottom:15%;
+            width: 100%;
+            height: 100%;
+            z-index: 9;
+        }
+        .kfbg_top{
+            width: 100%;
+            background: url("/img/kefu_img/mountain.png") repeat-x bottom;
+            height: 70%;
+            max-height: 630px;
+            background-size: auto 100%;
+        }
+        .kfbg_bottom{
+            width: 100%;
+            position: absolute;
+            height: 30%;
+            min-height: 115px;
+            bottom: 0;
+            background: url("/img/kefu_img/road.png") repeat-x bottom;
+        }
+        .main_container{
+            background: none;
+        }
+        .kefu_sun{
+            width: 115px;
+            height: 115px;
+            background: url("/img/kefu_img/sun.png") repeat-x bottom;
+            position: absolute;
+            left: 50%;
+            bottom: 90%;
+            margin-left: -500px;
+        }
+        .pro_list{
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            margin-left: -217px;
+        }
+        .pro_list li a {
+            -webkit-filter: brightness(.5);
+            opacity: .7;
+        }
+        .pro_list li a:hover{
+            -webkit-filter: brightness(.4);
+        }
+        .log_footer{
+            color: #438a00;
+            text-shadow: 0 1px 1px #fff;
+        }
+        .log_box{margin: 0}
+        #client_main_kefu{
+            height: 100%;
+        }
+        .log_box,#client_main_kefu .log_info{
+            width: 223px;
+            height: 353px;
+            background: none;
+        }
+        .log_info h3{
+            display: none
+        }
+        .log_info{
+            padding: 190px 15px 0;
+        }
+        #login_extentype input:checked + div>p{
+            width: 200px;
+            color: #fff;
+            text-align: center;
+        }
+        #login_extentype{
+            width: 200px;
+            height: 38px;
+            left: 0;
+        }
+        #login_extentype div p{
+            left: 13px;
+        }
+        #login_extentype div,#login_extentype input{
+            float: left;
+            margin: 135px 0 0 29px;
+        }
+        #login-form .checkbox{
+            float: left;
+            clear: both;
+            color: #838893;
+        }
+        .log_box .btn-block{
+            top: 305px;
+            right: 23px;
+            -webkit-transform:scale(.6,.6);
+        }
+        #client_main_kefu .kefu_title{
+            height: 60px;
+            width:550px;
+            margin: 0 auto;
+        }
+        #client_main_kefu .kefu_title p{
+            margin:10px auto;
+            height: 60px;
+            width: 478px;
+            background: url("img/kefu_img/kefu_title.png") 0 0 no-repeat ;
+        }
+        #client_main_kefu .login .span7{
+            width:225px;
+        }
+        #client_main_kefu .main_box{
+            position: relative;
+            width: 960px;
+            height: 565px;
+            padding-top:70px;
+            margin: 0 auto;
+            background: url("img/kefu_img/kefu_container_bg516.png?0516") 0 0 no-repeat;
+        }
+        #client_main_kefu .box_bottom{
+            width: 905px;
+            margin: 146px 15px 0px 28px;
+        }
+        #client_main_kefu .login{
+            width: 223px;
+            height: 353px;
+            margin-left: 15px ;
+            margin-top: 28px;
+            float: left;
+        }
+        #client_main_kefu .activity_intro{
+            float: left;
+            width: 590px;
+            /*height: 240px;*/
+            margin-left: 50px;
+            margin-top: 30px;
+            color: #fff;
+            text-shadow: 10px 10px 10px #3fbda4;
+        }
+        #client_main_kefu  .intro{
+            height: 244px;
+            overflow-y: auto;
+
+        }
+        #client_main_kefu  .intro p{
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        #client_main_kefu  .intro h3{
+            font-size: 24px;
+            color: #ca008f;
+            margin-top: 16px;
+            margin-bottom: 16px;
+        }
+        #client_main_kefu .activity_intro h2{
+            text-align: center;
+        }
+        #client_main_kefu .activity_foot{
+            margin-top: 35px;
+            text-align: center;
+            color:#687d7b ;
+        }
+        #client_main_kefu .activity_foot p{line-height: 20px;}
+        #client_main_kefu .activity_foot a{
+            color:#687d7b ;
+            text-decoration: none;
+        }
+        #client_main_kefu .activity_foot a:hover,#client_main_kefu .activity_foot a:active{
+            text-decoration: underline;
+        }
+        #client_main_kefu .box_top_timer h3{
+            margin: 14px 19px 0px 19px;
+        }
+        #client_main_kefu .box_top_timer h3 span{
+            display: inline-block;
+            color: #fff;
+            font-size: 20px;
+            font-family: arial, helvetica, sans-serif;
+            font-weight: lighter;
+
+        }
+        #client_main_kefu .box_top_timer .showtime{
+            float: left;
+            margin-right: 20px;
+            background: url("img/kefu_img/time_bg.png") 0 0 no-repeat;
+            width: 86px;
+            height:60px ;
+            letter-spacing: 23px;
+            text-indent: 8px;
+            line-height: 60px;
+            color:#00b3a5 ;
+            font-size: 42px;
+        }
+        #client_main_kefu .box_top_timer .daojishi{
+            padding-left:18px ;
+
+        }
+        #client_main_kefu .box_top_timer .daojishi span{
+            background: url("img/kefu_img/time_bg.png") 0 0 no-repeat;
+            display: inline-block;
+            width: 40px;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            color: #00b3a5;
+            font-size: 42px;
+        }
+        .log_footer{
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+        .a_letter{
+            position: absolute;
+
+            width: 100%;
+            height: 100%;
+
+            background: rgba(0, 0, 0, 0.8);
+            left: 0;
+            top: 0;
+            z-index: 2222;
+            /*display: none;*/
+        }
+        .a_letter .letter{
+            position: relative;
+            width: 553px;
+            height:782px;
+            background: url("img/kefu_img/letter516.png?0516") 0 0 no-repeat;
+            margin:9px auto 0;
+            z-index: 9999;
+        }
+        .a_letter .delete_letter{
+            position: absolute;
+            right: 27px;
+            top: 27px;
+            background: url("img/kefu_img/delete516.png") 0 0 no-repeat;
+            width: 23px;
+            height: 23px;
+            cursor: pointer;
+        }
+        .letter_text h1{
+            color: #000;
+            font-size: 26px;
+            height: 26px;
+            line-height: 26px;
+            font-weight: bold;
+            padding-left: 50px;
+        }
+        .letter_text h2{
+            font-size: 19px;
+            height: 20px;
+            line-height: 20px;
+            padding-bottom: 30px;
+        }
+        .letter_text p{
+            color: #000;
+            font-size: 19px;
+            line-height: 24px;
+            width: 426px;
+            margin-left: 50px;
+            padding-top: 10px;
+            font-weight: bold
+        }
+        #login-panel{
+            padding: 10px 0;
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+
+<script src="javascripts/jquery.js"></script>
+
+
+<body>
+<div class="a_letter">
+    <div class="letter">
+        <div class="delete_letter"></div>
+        <div class="letter_text">
+            <h1 style="padding-top: 60px;padding-bottom: 5px">亲爱哒，</h1>
+            <h1>5.15客服日，评奖活动还在继续中呦！</h1>
+            <p style="padding-top: 30px">
+                因为5.15是周日，虽然已经收到好多好多宝贵意见，但很多客服人员都在休息，后台好多留言表示遗憾没有参与到，<span style="color: #4b11c1">所以我们果断决定--将评奖活动时间延长到5月20日。</span>
+            </p>
+            <p>
+                倾听你，是我最美丽的任务，评奖活动停止但吐槽通道不会关闭，你来，我都在。
+            </p>
+            <p>
+                最后，大喇叭广播下：星座幸运咖&吐槽评最佳大奖等你拿！5月20日前你都有机会赢取大奖哟~
+            </p>
+            <p style="color: #4b11c1">
+                P.S. 登陆页面有详细说明，要看好活动规则和参与步骤呦~
+            </p>
+            <p>
+                活动已经开展一天了，感谢大家的吐槽和建议，有童鞋反应系统页面打开太慢，小七及时采纳，机房网络已经全面升级啦！你的话，我都记在心里啦！这些问题都会逐一解决哒！
+            </p>
+            <p style="color: #4b11c1">
+                活动继续中，GO ON AND ON!
+            </p>
+        </div>
+
+    </div>
+</div>
+<div id="client_main_kefu">
+    <div class="kfbg_all">
+        <div class="kfbg_fire"><img src="img/kefu_img/fire.gif"/></div>
+        <div class="kfbg_top animate-slow">
+            <!--<div class="kefu_sun"></div>-->
+        </div>
+        <div class="kfbg_bottom animate-quick"></div>
+    </div>
+    <div class="load_value">
+        <div></div>
+    </div>
+    <div class="main_container">
+        <div class="loading_indicator" style="visibility: hidden;">
+        </div>
+        <span class="loading_indicator_span" style="visibility: hidden;"></span>
+        <div class="login_panel" id="login-panel">
+
+        </div>
+
+        <div id="main-panel" class="main_container" style="display:none;">
+            <div class="main_header" style="">
+                <div class="fl" style="">
+                    <div id="softphone-bar">
+                    </div>
+                </div>
+                <div class="fr" id="exit">
+                    <a href="javascript:void(0);" class="ds_do_action" ds_action="showLogout">
+                        <!--<div class="navbar_item nav_logoff_hover" data-original-title title="退出系统">-->
+                        <!--<div class="navbar_ico nav_logoff"></div>-->
+                        <!--</div>-->
+                        <!--<img src="img/nav/exit.png" style="width: 20px;margin: 15px 10px 0 0;">-->
+                    </a>
+                </div>
+                <div class="user_pic fr ds_do_action" ds_action="showEditInfo" title="修改个人信息" style="margin: 5px;padding-right: 5px">
+                    <a href="javascript:void(0);" id="user_pic">
+                        <img class="S_line5" src="./img/user.png" style="height: 40px;width: 40px;border-radius:20px;" alt="">
+                    </a>
+                </div>
+
+                <div class="fr top_user_info" id="top_local" style="color: aliceblue;">
+                    <div class="top_lA">
+                        <span class="icon-headphones icon-white" id="top_user_bg" style="margin-top: -3px;"></span>
+                        <a id="user_exten_type" href="#" style="text-decoration:none;">
+                            <b id="exten_type_dropdown_caret" class="caret" style="vertical-align: middle;"></b>
+                        </a>
+                        <span id="user_status" style="font-weight: normal;padding-bottom: 18px"></span>
+                        <ul id="softphone_exten_type" class="customer_db" style="display: none">
+                        </ul>
+                    </div>
+
+                </div>
+
+                    <div class="fr my_queue_email top_head_rightA phone-numA">
+                        <div>
+                            <span id="email_session_undeal_num">0</span>
+                        </div>
+                    </div>
+                <div class="fr my_queue_webchat top_head_rightA" >
+                    <div>
+                        <span id="webchat_session_undeal_num">0</span>
+                    </div>
+                </div>
+                <div class="fr my_call_stat top_head_rightA phone-numA">
+                    <div>
+                        <span id="icc_statistics_inComplete">0</span>
+                    </div>
+                </div>
+
+                <div id="my_queue_info" class="fr my_queue_stat top_head_rightA" >
+                    <div>
+                        <span id="user_queue">0</span>
+                    </div>
+                </div>
+            <div id="my_mute_info" class="fr top_head_rightA mute_control" >
+                <div class="aloud">
+                    <input checked="checked" type="checkbox" name="mute_control" class="ds_change_action" ds_action="mute_control">
+                </div>
+            </div>
+                <div style="position: absolute;left: 50%;top: 8px;margin-left:-20px;">
+                    <img src="img/main_logo.png" style="width: 40px">
+                </div>
+
+                <div id="peer_state" class="fr" style="padding-left: 10px;position: relative;">
+                </div>
+
+                <!--<div class="fl" id="menu-wrap">-->
+                <!--</div>-->
+                <div class="fr">
+                    <div class="showEditInfo"></div>
+                </div>
+
+            </div>
+            <div class="content_container clearfix">
+                <div class="left_col">
+                    <div class="navbar_top">
+                    </div>
+                    <!--<div class="navbar_center">-->
+                    <!--</div>-->
+                    <div class="navbar_bottom">
+                    </div>
+                </div>
+                <div class="right_col clearfix" id="main_container">
+                    <div class="right_content" id="view_nav_workbench">
+                    </div>
+                    <div class="right_content" id="view_nav_history">
+                    </div>
+                    <div class="right_content" id="view_nav_customer">
+                    </div>
+                    <div class="right_content" id="view_nav_business">
+                    </div>
+                    <div class="right_content" id="view_nav_monitor">
+                    </div>
+                    <div class="right_content" id="view_nav_report">
+                    </div>
+                    <div class="right_content" id="view_my_call_sheet_leak">
+                    </div>
+                    <div class="right_content" id="view_nav_km">
+                    </div>
+                    <div class="right_content" id="view_nav_config">
+                    </div>
+                    <div class="right_content" id="view_nav_sms">
+                    </div>
+                    <div class="right_content" id="view_nav_call">
+                    </div>
+                    <div class="right_content" id="view_nav_webchat">
+                    </div>
+                    <div class="right_content" id="view_nav_url_interface">
+                    </div>
+                    <div class="right_content" id="view_nav_questionnaire">
+                    </div>
+                    <div class="right_content" id="view_nav_qualityCheck">
+                    </div>
+                </div>
+                <div id="confirm_export_report_pane"></div>
+                <div id="cdr_peer_list_pane"></div>
+                <div id="cdr_listen_record_pane"></div>
+                <div id="ivr_sound_qiniu_transfer_wait_pane"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div id="icc_event"></div>
+<div id="modal_panel"></div>
+<div class="modal hide fade modal-dialog " id="batch_modal" tabindex="-1" >
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"></h4>
+    </div>
+    <div class="modal-body">
+    </div>
+</div>
+<div id="show_popup_location_cust_Modal" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" >选择客户</h4>
+    </div>
+    <div class="modal-body" style="max-height: 500px;">
+    </div>
+    <!--<div class="modal-footer">-->
+    <!--<a href="#" class="btn" class="close" data-dismiss="modal" aria-hidden="true">关闭</a>-->
+    <!--</div>-->
+</div>
+<div class="modal hide fade modal-dialog" id="showBigImgModal" tabindex="-1" style="width:60%;margin-left: -30%;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" ></h4>
+    </div>
+    <div class="modal-body">
+    </div>
+    <div class="modal-footer">
+        <!--<a href="#" class="btn">关闭</a>-->
+        <button type="button" class="btn btn-small"  data-dismiss="modal" aria-hidden="true">关闭</button>
+    </div>
+</div>
+<div id="confirm_modalBox" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">确认操作</h4>
+    </div>
+    <div class="modal-body" style="font-size:14px;min-height: 40px;line-height:20px;">
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary ds_do_action btn-small" ds_action="" ds_data="">确认</button>
+        <a href="#" class="btn  btn-small" class="close" data-dismiss="modal" aria-hidden="true">取消</a>
+    </div>
+</div>
+
+<div id="dial_popup_modal" class="modal hide fade modal-dialog" tabindex="-1" style="width: 800px;margin-left:-400px;z-index: 1048;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">外呼弹屏</h4>
+    </div>
+    <div class="modal-body" style="padding: 0;overflow-x: hidden;">
+    </div>
+    <div class="modal-footer">
+        <!--<button type="button" class="btn btn-primary ds_do_action btn-small" ds_action="customer.contiueDial" ds_data="">继续呼叫</button>-->
+        <a href="#" class="btn  btn-small" class="close" data-dismiss="modal" aria-hidden="true">取消</a>
+    </div>
+</div>
+
+<iframe style="border:0;width:0;height:0;position:absolute;visibility:hidden;bottom:0;right:0;" name="ds_iframe" id="ds_iframe"  src=""></iframe>
+<iframe name="report_export_pdf_show_print" id="report_export_pdf_show_print" src="" style="display: none;"></iframe>
+
+<div id="callRecord_detail_modal" class="modal hide fade" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+
+<div id="browser" class="layerDiv" style="display:none;">
+    <h3>很抱歉，您正在使用的浏览器无法完全支持我们的页面。</h3>
+    <div><span></span>建议您使用以下浏览器的最新版本：
+    </div>
+    <ul>
+        <li><a target="_blank" href="http://www.google.cn/intl/zh-CN/chrome/" class="ico icoChrome"
+               title="谷歌Chrome浏览器"></a></li>
+        <!--<li><a target="_blank" href="http://www.opera.com/" class="ico icoOpera" title="Opera浏览器"></a></li>-->
+        <!--<li><a target="_blank" href="http://www.firefox.com.cn/download/" class="ico icoFirefox" title="火狐浏览器"></a></li>-->
+        <!--<li>-->
+        <!--<a target="_blank" href="http://support.apple.com/downloads/#safari" class="ico icoSafar" title="Safar浏览器"></a>-->
+        <!--</li>-->
+    </ul>
+    <p>
+        <a href="javascript:hideBrowser();"  class="icoGt">知道了，但请还是打开页面</a>
+    </p>
+</div>
+<div style="display: none;">
+    <audio src="audio/im/warning.mp3" style="display: none;" id="multi-warning-tone">
+    </audio>
+    <audio src="audio/im/emailsound.mp3" style="display: none;" id="email-warning-tone">
+    </audio>
+</div>
+<div id="msg_tips_source_pane" style="display: block;"></div>
+<div id="tmpl_msg_tips_popup" style="display: none;">
+    <div class="msg_tips _#cls#_">
+        <div class="popover">
+            <h3 class="popover-title">
+                新消息
+                <button type="button" class="close pull-right" onclick="closeMsgTip(this)" style="position: relative;top:-5px;">&times;</button>
+            </h3>
+            <div class="popover-content" style="height: 60px;">
+                _#content#_
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div id="new_feature_tips_popup" style="display: none;">
+    <div class="msg_tips">
+        <div class="popover">
+            <h3 class="popover-title">
+                升级通知
+                <button type="button" class="close pull-right" onclick="closeMsgTip(this)" style="position: relative;top:-5px;">&times;</button>
+            </h3>
+            <div class="popover-content" style="height: 60px;">
+                2016年05月23日晚，云客服功能升级！<br><br><a href="http://www.7moor.com/update" target="_blank">点击查看升级公告</a>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div id="frame_mail_inbox_container" style="display: none;">
+    <iframe scrolling='auto' width='100%' frameborder='0' src='' name='frame_mail_inbox' id='frame_mail_inbox'></iframe>
+    <div class="pull-right cancel_mail" style="height: 35px;margin-right:15px; ">
+        <button type="button" class="btn btn-primary btn-small ds_do_action cancel_mail" ds_action="callMail.cancelFull" ds_data="" style="margin-left: 10px;">取消全屏</button>
+    </div>
+</div>
+<div id="pane_deal_list" style="z-index: 1002;display: none;" class="layer_wrap layer_box_shadow absolute_bottom_full bottom_toolbar_layer_wrap">
+
+</div>
+</div>
+<script>
+    $(function () {
+        $('.a_letter .delete_letter').click(function () {
+            $('.a_letter').css('display','none');
+        });
+        var main_height = $(window).height();
+        if (main_height<800) {
+            var lt_scale = main_height/800;
+            var lt_margin = (800-main_height)*lt_scale*2/5;
+            $(".a_letter .letter").css({"-webkit-transform":"scale("+lt_scale+")","height":745,"margin-top":"-"+lt_margin+"px"});
+        }else{
+            var lt_margin = (main_height-800)/2;
+            $(".a_letter .letter").css({"margin-top":lt_margin+"px"});
+        }
+    })
+
+</script>
+<!--<div class="navbar_item_img"><i class="icon-tasks"></i></div>-->
+<script id="tmpl_menu_main" type="text/html">
+    <a href="javascript:void(0);" class="open_top_menu" id="{{=id}}" apppage="{{=page}}" container="" refresh="{{=refresh}}" onlyexcuhandler="{{=onlyExcuHandler}}">
+        <div class="navbar_item {{=id}}_hover" data-original-title title="{{=name}}">
+            <div class="navbar_ico {{=id}}"></div>
+        </div>
+    </a>
+</script>
+<script id="tmpl_submenu_main" type="text/html">
+    <li><a href="javascript:void(0);" class="open_with_ajax" id="{{=id}}" apppage="{{=page}}" container="{{=container}}" refresh="{{=refresh}}" onlyexcuhandler="{{=onlyExcuHandler}}">{{=name}}</a></li>
+</script>
+<script id="tmpl_right_content" type="text/html">
+    {{if(menu=='customer_import'){ }}
+    <div id="customer_import_pane"></div>
+    {{ }else if(menu.indexOf('customer')!=-1){ }}
+    <div class="custlist" id="{{=menu}}_customer"></div>
+    {{ }else if(menu.indexOf('task')!=-1){ }}
+    <div class="pane_content">
+        <div class='business_detail_div_{{=menu}}' id="{{=menu}}"></div>
+    </div>
+    {{ }else{ }}
+
+    {{ } }}
+</script>
+
+<script id="tmpl_cust_action" type="text/html">
+    <div class="item ">
+        <span style="top:35px;"></span>
+        <div class="history-content" style="">
+            <div class="next-action-form"></div>
+        </div>
+    </div>
+</script>
+<script id="tmpl_cust_bus" type="text/html">
+    <div class="item ">
+        <span style="top:35px;"></span>
+        <div class="history-content" style="color:#666666;">
+            <div class="business-info" ds_menu="{{=menu}}">
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_customer_content_container" type="text/html">
+    <div class="custlist call_detail" id="{{=menu}}_customer" >
+        <div class="customer_container clearfix">
+        </div>
+        <div class="cust_tab_content" style="padding: 18px;overflow: auto;">
+        </div>
+    </div>
+</script>
+<script id="tmpl_customer_content_container_inner" type="text/html">
+    <div class="customer_container clearfix">
+    </div>
+    <div class="cust_tab_content" style="padding: 18px;overflow: auto;">
+    </div>
+</script>
+<script type="text/javascript" src="/javascripts/LAB.min.js"></script>
+<script type="text/javascript" src="/javascripts/system_init.js"></script>
+<script type="text/javascript" src="./javascripts/ds_framework/event.js"></script>
+
+<style type="text/css">
+    #left_knowledge:hover {
+        background-color: inherit;
+    }
+    #msg_tips_source_pane{
+        position: fixed;
+        right: 242px;bottom: 0;
+        z-index: 1000;
+    }
+    .msg_tips{
+        position: relative;
+        margin: 10px;
+    }
+    .msg_tips .popover {
+        /*position: relative;*/
+        display: block;
+        width: 240px;
+    }
+</style>
+
+
+<script id="tmpl_contact_action" type="text/x-jquery-tmpl">
+        <a class="show_on_hover edit-action" href="#" style="">编辑</a>
+        <form action="#" method="post">
+            <input type="hidden" name="lastActionId" value="">
+            <input type="hidden" name="actionId" value="${actionId}">
+            <input type="hidden" name="default_action" value="${action}">
+            <input type="hidden" name="default_action_type" value="date">
+            <input type="hidden" name="default_action_date" value="${notifyTime}">
+            <h3 class="actionlabel" style="line-height:25px;">联系计划:</h3>
+            <div class="current_name" style="display: table;">
+                <div class="cell">
+                    <a href="#" class="done_marker tooltip-icon ds_form_action" ds_action='customer.dealNote'>
+                    <span class="tip-container" style="display: none;">
+                      <span class="arrow"></span>
+                        <span class="tip-content">点击完成计划</span>
+                    </span>
+                    </a>
+                </div>
+                <div class="current_name_data" style="max-width: 463px;">
+                    <span title="${action}">${action}</span>
+                </div>
+            </div>
+            <div class="change_name" style="display: none;">
+                <input type="text" name="remark" class="note_body" value="${action}">
+                <!--<textarea class="note_description note_body" name="remark"></textarea>-->
+                <!--<span class="counter"></span>-->
+            </div>
+
+            <div class="current_date" style="display: block;">
+                <span class="${getNotifyDate(notifyTime).type}" title="${notifyTime}">${getNotifyDate(notifyTime).name}</span>
+                <!--<a class="show_on_hover" href="#" style="">Change</a>-->
+            </div>
+
+            <div class="change_date" style="display: none;margin-top:10px;">
+                <div id="sales_action_time" style="display:inline-block;">
+                    <select name="change_date_type" style="width:100px;">
+                        <option value="date">联系时间</option>
+                        <optgroup label="快速选择">
+                            <option value="half">半小时后</option>
+                            <option value="hour">一小时后</option>
+                            <option value="tomorrow">明天</option>
+                            <option value="aftertomorrow">后天</option>
+                            <option value="week">三天后</option>
+                            <option value="2week">2周后</option>
+                            <option value="month">30天后</option>
+                        </optgroup>
+                    </select>
+                    <input name="notifyTime_date" class="ds_date" minDate="true" type="text" placeholder="yyyy-mm-dd" style="margin-left:0;">
+                    <input name="notifyTime_time" class="ds_time" type="text" placeholder="00:00" style="width:35px;">
+                    <!--<input name="notifyTime_time" class="ds_search_item ds_time" type="text" placeholder="00:00" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" style="width:35px;">-->
+                    <!--<input type="text" name="notifyTime" class="date_picker" style="margin-right:5px;width:115px;" value="${notifyTime}"-->
+                           <!--readonly="true" onkeydown="readOnlyKeyDown()">-->
+                </div>
+            </div>
+
+            <div class="actions_history"></div>
+
+            <div class="buttons" style="display: none;">
+                <a href="#" class="ds_form_action button" ds_action="customer.saveCustAction" id="cust_mark_action_1">保存</a>
+                <a href="#" class="ds_form_action cancel_button" ds_action="customer.actionCancel" id="cust_mark_action_2">取消</a>
+            </div>
+        </form>
+        <div style="clear:both;"></div>
+    </script>
+
+<script id="tmpl_contact_action_channel" type="text/x-jquery-tmpl">
+        <a class="show_on_hover edit-action" href="#" style="">编辑</a>
+        <form action="#" method="post">
+            <input type="hidden" name="lastActionId" value="">
+            <input type="hidden" name="custId" value="${_id}">
+            <input type="hidden" name="actionId" value="${actionId}">
+            <input type="hidden" name="default_action" value="${action}">
+            <input type="hidden" name="default_action_type" value="date">
+            <input type="hidden" name="default_action_date" value="${notifyTime}">
+            <h3 class="actionlabel" style="line-height:25px;">联系计划:</h3>
+            <div class="current_name" style="display: table;">
+                <div class="cell">
+                    <a href="#" class="done_marker tooltip-icon ds_form_action" ds_action='customer.dealNote2Tab'>
+                    <span class="tip-container" style="display: none;">
+                      <span class="arrow"></span>
+                        <span class="tip-content">点击完成计划</span>
+                    </span>
+                    </a>
+                </div>
+                <div class="current_name_data" style="max-width: 463px;">
+                    <span title="${action}">${action}</span>
+                </div>
+            </div>
+            <div class="change_name" style="display: none;">
+                <input type="text" name="remark" class="note_body" value="${action}">
+                <!--<textarea class="note_description note_body" name="remark"></textarea>-->
+                <!--<span class="counter"></span>-->
+            </div>
+
+            <div class="current_date" style="display: block;">
+                <span class="${getNotifyDate(notifyTime).type}" title="${notifyTime}">${getNotifyDate(notifyTime).name}</span>
+                <!--<a class="show_on_hover" href="#" style="">Change</a>-->
+            </div>
+
+            <div class="change_date" style="display: none;margin-top:10px;">
+                <div id="sales_action_time" style="display:inline-block;">
+                    <select name="change_date_type" style="width:100px;">
+                        <option value="date">联系时间</option>
+                        <optgroup label="快速选择">
+                            <option value="half">半小时后</option>
+                            <option value="hour">一小时后</option>
+                            <option value="tomorrow">明天</option>
+                            <option value="aftertomorrow">后天</option>
+                            <option value="week">三天后</option>
+                            <option value="2week">2周后</option>
+                            <option value="month">30天后</option>
+                        </optgroup>
+                    </select>
+                    <input name="notifyTime_date" class="ds_date" minDate="true" type="text" placeholder="yyyy-mm-dd" style="margin-left:0;">
+                    <input name="notifyTime_time" class="ds_time" type="text" placeholder="00:00" style="width:35px;">
+                    <!--<input name="notifyTime_time" class="ds_search_item ds_time" type="text" placeholder="00:00" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" style="width:35px;">-->
+                    <!--<input type="text" name="notifyTime" class="date_picker" style="margin-right:5px;width:115px;" value="${notifyTime}"-->
+                           <!--readonly="true" onkeydown="readOnlyKeyDown()">-->
+                </div>
+            </div>
+
+            <div class="actions_history"></div>
+
+            <div class="buttons" style="display: none;">
+                <a href="#" class="ds_form_action button" ds_action="customer.saveCustAction2Tab" >保存</a>
+                <a href="#" class="ds_form_action cancel_button" ds_action="customer.actionCancel2Tab" >取消</a>
+            </div>
+        </form>
+        <div style="clear:both;"></div>
+    </script>
+
+<!--#c67605-->
+<!--<script id="tmpl_popup_one_customer" type="text/html">-->
+<!--通过{{=desc}}<span style="color:#009900;font-weight:bold;">{{=id}}</span>未定位到客户，-->
+<!--<a href="#" class="ds_do_action show_add" ds_action="call.showCustAdd" ds_data="{{=paneId}}">点击新增</a>-->
+<!--</script>-->
+
+<!--<script id="tmpl_popup_one_customer_del" type="text/html">-->
+<!--<span style="" class="text-error">通过{{=desc}}<span style="font-weight:bold;">{{=id}}</span>定位的客户已经删除！</span>-->
+<!--<a href="#" class="ds_do_action show_add" ds_action="call.showCustAdd" ds_data="{{=paneId}}">点击新增</a>-->
+<!--</script>-->
+
+
+<script id="tmpl_cdr_popup_one_customer" type="text/html">
+    <div class="contact_summary">
+        <div class="baseinfo cust_base">
+            <div class="base_summary">
+                <div style="font-size: 14px;line-height: 30px;">
+                    {{ if(isDel){ }}
+                    <span class="text-error">{{=desc}}<span style="font-weight:bold;">{{=id}}</span>定位的客户已经删除或者客户中该号码被删除！</span>
+                    {{ }else{ }}
+                    {{=desc}}<span style="color:#009900;font-weight:bold;">{{=id}}</span>未定位到客户。
+                    {{ } }}
+                    <div>
+                        您可以<a href="#" class="ds_do_action show_add" ds_action="customer.showPopAdd" ds_data="{{=flag}}">新增一个客户</a>
+                        或者 <a href="#" class="ds_do_action " ds_action="customer.showSelectOldCust" ds_data="{{=paneId}}">选择已存在客户</a>。
+                    </div>
+                </div>
+            </div>
+
+            <div class="func_tab_container clearfix">
+                <div class="pull-left">
+                    <a href="#" class="ds_do_action func_tab active" ds_action="customer.swapFunTab" ds_data="cdr" ds_attr="{{=CALL_SHEET_ID}}">通话详情</a>
+                    <a href="#" class="func_tab disabled"  ds_data="business" style="cursor: default;">工单</a>
+                    <a href="#" class="func_tab disabled"  ds_data="action" style="cursor: default;">联系计划</a>
+                    <a href="#" class="func_tab disabled"  ds_data="history" style="cursor: default;">联系历史</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_cdr_popup_more_customer" type="text/html">
+    <div class="contact_summary">
+        <div class="baseinfo cust_base">
+            <div class="base_summary">
+                <div style="font-size: 14px;line-height: 30px;">
+                    {{=desc}}<span style="color:#009900;font-weight:bold;">{{=id}}</span>定位到多个客户。
+                    <div>
+                        点击<a href="#" class="ds_do_action " ds_action="customer.showSelectMultiCust" ds_data="{{=paneId}}">选择一个客户</a>。
+                    </div>
+                </div>
+            </div>
+
+            <div class="func_tab_container clearfix">
+                <div class="pull-left">
+                    <a href="#" class="ds_do_action func_tab active" ds_action="customer.swapFunTab" ds_data="cdr" ds_attr="{{=CALL_SHEET_ID}}">通话详情</a>
+                    <a href="#" class="func_tab disabled"  ds_data="business" style="cursor: default;">工单</a>
+                    <a href="#" class="func_tab disabled"  ds_data="action" style="cursor: default;">联系计划</a>
+                    <a href="#" class="func_tab disabled"  ds_data="history" style="cursor: default;">联系历史</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+</body>
+</html>

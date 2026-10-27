@@ -1,0 +1,53 @@
+context N00000000143-predialout {
+	_010X. => {
+		goto N00000000143-dialout,${EXTEN:3},1;
+	}
+	
+	_01[3458]XXXXXXXXX => {
+		isLocal=0;
+		Agi(agi://127.0.0.1:7891/AgiIsLocalNumber?calledNo=${EXTEN});
+		if(${isLocal}==1)
+			goto N00000000143-dialout,${EXTEN:1},1;
+		else
+			goto N00000000143-dialout,${EXTEN},1;
+	}
+	
+	_1[3458]XXXXXXXXX => {
+		isLocal=0;
+		Agi(agi://127.0.0.1:7891/AgiIsLocalNumber?calledNo=${EXTEN});
+		if(${isLocal}==1)
+			goto N00000000143-dialout,${EXTEN},1;
+		else
+			goto N00000000143-dialout,0${EXTEN},1;
+	}
+	_110X. => {
+		Hangup;
+	}
+	_X. => {
+		goto N00000000143-dialout,${EXTEN},1;
+	}
+}
+
+context N00000000143-dialout {
+	_X. => {
+		Agi(agi://127.0.0.1:7891/AgiIsOutboundBlackList?pbx=${HOST}&account=${ACCOUNT}&calledNo=${EXTEN});
+		userCallerIDNum="";
+		agentId = "";
+                Agi(agi://127.0.0.1:7891/AgiGetUserCallerIDNum?pbx=${HOST});
+                if("${userCallerIDNum}"==""){
+                        CALLERID(num)="01085659293";
+                }else{
+                        CALLERID(num)="${userCallerIDNum}";
+                }
+		SIPAddHeader(7moor-agent-id:${agentId});
+		//Dial(SIP/N000000001431900${EXTEN}@127.0.0.1:5072,60,A(sound/busy));
+		goto dialout-gateway, N000000001431900${EXTEN}, 1;
+	}
+}
+
+context N00000000143-transferout {
+	_. => {
+		CALLERID(num)="01085659293";
+		goto transfer-gateway,${EXTEN},1;
+	}
+}

@@ -1,0 +1,95 @@
+<div class="">
+<div class="row-fluid">
+    <div class="span4">
+        <div class="">
+            <div class="contacts_caption" style="position:static;box-shadow: none;">
+                <div class="caption-top clearfix" >
+                    <div class="pull-right" >
+                        <button class="btn btn-small ds_do_action" ds_action="config.dic.showDicAdd" ds_data="">添加字典</button>
+                    </div>
+                    <span class="pull-left refresh ds_do_action" ds_action="config.dic.queryDicList" ds_data="">
+                        <a href="#" class="ajaxed">刷新</a>
+                    </span>
+                    <div class="input-append" style="margin-left: 10px;">
+                        <form id='dic_query_frm'>
+                            <input id="query_dic_condition" name="name" type="text" style="width: auto;" placeholder="输入字典名称...">
+                            <button class="btn btn-small ds_form_action btn_dic_search" type="button" ds_action="config.dic.queryDicList" >查询</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list_container">
+                <div class="contact_list">
+                    <div class="list-inside">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>
+                                    字典名称
+                                </th>
+                                <th style="width:5em">
+                                    级联关系
+                                </th>
+                                <th style="width:5em">
+                                    操作
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody id="dic_list_pane">
+                            </tbody>
+                        </table>
+                        <div class="pagination pagination-small config_dic_count" style="display:table; margin:0;width:100%;"
+                             for="dic_query_frm" ds_pagination_action="config.dic.queryDicList">
+                            <span class="result_info">查询结果：<span class="result_count">0</span></span>
+                            <ul class="role_list_page" style="float:right;">
+                                <li><a href="#"  value="0">&laquo;</a></li>
+                                <li><a href="#"  value="1">1</a></li>
+                                <li><a href="#"  value="2">2</a></li>
+                                <li><a href="#"  value="3">3</a></li>
+                                <li><a href="#"  value="4">4</a></li>
+                                <li><a href="#"  value="5">5</a></li>
+                                <li><a href="#"  value="6">&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="span8 sub-right">
+        <div id="dic_detail_pane">
+        </div>
+    </div>
+</div>
+</div>
+<!--<div class="right_column" >-->
+    <!--<div class="contact_detail">-->
+        <!--<div class="content">-->
+            <!--<div id="dic_detail_pane">-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<script id='tmpl_dic_list' type="text/x-jquery-tmpl">
+    <tr>
+        <td class="break_word">
+            ${name}
+        </td>
+        <td >
+            ${cascade}
+        </td>
+        <td>
+            {{if accountId == 'system'}}
+                系统字典
+            {{else name == '满意度调查选项'}}
+                <a class="ds_do_action" ds_action="config.dic.showDicConfig" ds_data="${_id}"  href="#">配置</a>
+            {{else}}
+                <a class="ds_do_action" ds_action="config.dic.showDicConfig" ds_data="${_id}"  href="#">配置</a>
+                <a class="ds_do_action" ds_action="config.dic.showDicEdit" ds_data="${_id}" href="#">修改</a>
+                <!--<a class="ds_do_action" ds_action="config.dic.delDic" ds_data="${_id}"  href="#">删除</a>-->
+            {{/if}}
+        </td>
+    </tr>
+</script>

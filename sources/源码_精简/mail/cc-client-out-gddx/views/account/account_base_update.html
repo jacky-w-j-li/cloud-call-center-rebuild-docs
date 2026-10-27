@@ -1,0 +1,15 @@
+<form id="frm_account_base_update">
+    <input type="hidden" name="_id" value="{{=_id}}">
+    <div class="row_item">
+        <label >联系人</label>
+        <input value="{{=linkManName}}" name="linkManName" type="text"  required/>
+    </div>
+    <div class="row_item">
+        <label>电话</label>
+        <input  value="{{=linkManPhone}}" name="linkManPhone" type="text" dataType="Phone" msg="电话格式输入错误" msgName="电话"   required/>
+    </div>
+    <div class="row_item">
+        <label >邮箱</label>
+        <input  value="{{=linkManEmail}}" name="linkManEmail" type="text"  dataType="Email" msg="邮箱格式输入错误" msgName="邮箱" required/>
+    </div>
+</form>

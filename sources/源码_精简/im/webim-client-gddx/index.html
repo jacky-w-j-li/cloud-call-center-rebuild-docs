@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>im</title>
+    <!--<script src="http://localhost:8011/javascripts/7moorInit.js?accessId=1263eda0-41ab-11e5-9006-9d2b127de899" type="text/javascript"></script>-->
+
+</head>
+<body style="overflow: auto">
+<style type="text/css">
+
+</style>
+<h1>Hello</h1>
+<p>Welcome to im</p>
+<div>
+    <div><span>dkkkkkkkk</span></div>
+    <input id = "vipAgent" type="text" /> <input type="button" onclick="vipAgentChange()" value="点击设置专属座席"/>
+</div>
+<div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+</div>
+<div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+</div>
+<div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+    <div><span>dkkkkkkkk</span></div>
+</div>
+<div>
+    <span><input class="btn" type="button" id="btn" onclick="qimoChatClick();" value="点击咨询"></span>
+</div>
+<script type='text/javascript'>
+    var qimoClientId = undefined;
+    function vipAgentChange(){
+        qimoClientId = {};// 自定义用户的唯一id
+        qimoClientId.agent = document.getElementById("vipAgent").value;
+    }
+</script>
+<script>
+    var href = window.location.href;
+    var queryStr = href.substr(href.indexOf("?") + 1);
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "//14.29.4.225/javascripts/7moorInit.js?accessId=" + queryStr;
+    document.body.appendChild(script);
+
+</script>
+
+</body>
+<!--<script async="async" src="http://115.29.10.194:8011/javascripts/7moorInit.js?accessId=1263eda0-41ab-11e5-9006-9d2b127de899" type="text/javascript"></script>-->
+
+</html>

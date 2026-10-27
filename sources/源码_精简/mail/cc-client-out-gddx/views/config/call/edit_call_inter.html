@@ -1,0 +1,28 @@
+<form>
+    <div class="row-fluid">
+        <div class="row-fluid" style="margin-top: 8px;">
+            <div style="float: left;margin-top: 20px; margin-bottom: 10px;">
+                <h4>编辑弹屏历史对接页面</h4>
+            </div>
+            <div style="float: right;margin-top:15px;margin-bottom: 5px;">
+                <a href="#" class="btn btn-small action" appaction="config.call.cancelDoCallInter">取消</a>
+                <a href="#" class="btn btn-small btn-primary do_action" appaction="config.call.saveEditCallInter">保存</a>
+            </div>
+            <!--<input type="hidden" name="callInterId" id="edit_call_inter_callInterId" value=""/>-->
+        </div>
+        <div class="row-fluid">
+            <div style="border:1px solid;"></div>
+        </div>
+        <div class="row-fluid">
+            <input id="edit_callInter_id" name="_id" type="hidden" value="__id" />
+            <div class="row_item">
+                <label for="edit_callInter_name">描述</label>
+                <input id="edit_callInter_name" name="callInterName" type="text" max="8" dataType="LimitLen" msg="描述不能超过8个字符" value="__callInterName" required>
+            </div>
+            <div class="row_item">
+                <label for="edit_callInter_url">对接地址</label>
+                <input id="edit_callInter_url" name="callInterUrl" type="text" value="__callInterUrl" msg="对接地址格式不正确"  required>
+            </div>
+        </div>
+    </div>
+</form>

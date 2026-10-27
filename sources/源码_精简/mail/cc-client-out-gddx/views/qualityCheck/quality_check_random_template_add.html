@@ -1,0 +1,112 @@
+<!--qulity_check_random-->
+<div style="height:98%;margin:20px 20px;">
+    <div class="row-fluid">
+    <form id="qualityCheckQueryFrm_random" class="form-horizontal form-inline">
+        <div>
+            <label>
+                模板名称
+            </label>
+            <span style="margin-right: 5px;">
+                <input type="text" style="width: 130px" name="TEMPLATE_NAME" class="input-small" maxlength="10">
+            </span>
+            <span style="margin-right: 25px;">
+                <label>
+                    随机抽取数
+                </label>
+                <span style="margin-right: 5px;">
+                    <input type="text" style="width: 50px" maxlength="4" value="10" dataType="Number" msg="随机抽取的条数只能填正整数" name="RANDOMNUM" class="input-small">
+                </span>
+            </span>
+        </div>
+        <div class="clear10"></div>
+        <div>
+            <label>
+                呼叫时间
+            </label>
+            <div class="input-append date form_datetime">
+                <input id="quality_check_random_datetime_picker_start" size="16" class="input-medium" name="BEGIN_TIME" type="text" value="" readonly style="z-index:1000;">
+                <span class="add-on datetimepicker-remove" style="height: 14px;line-height: 15px"><i class="icon-remove"></i></span>
+                <span class="add-on datetimepicker-open" style="height: 14px;line-height: 15px"><i class="icon-th"></i></span>
+            </div>
+            <div style="padding-top: 5px;display: inline">
+                至
+            </div>
+            <div class="input-append date form_datetime">
+                <input id="quality_check_random_datetime_picker_end" size="16" class="input-medium" name="END_TIME" type="text" value="" readonly style="z-index:1000;">
+                <span class="add-on datetimepicker-remove" style="height: 14px;line-height: 15px"><i class="icon-remove"></i></span>
+                <span class="add-on datetimepicker-open" style="height: 14px;line-height: 15px"><i class="icon-th"></i></span>
+            </div>
+        </div>
+        <div class="clear10"></div>
+
+        <div>
+            <label>呼叫类型</label>
+            <select name="CONNECT_TYPE" class="call_type_selector"></select>
+            <label>通话座席</label>
+            <span style="margin-right: 5px;">
+                <input name="DISPOSAL_AGENT" type="hidden" class="ds_search_item select_input" id="quality_check_random_disposal_agent_input" style="float:none;"/>
+                <span id="quality_check_random_disposal_agent_user" class="combobox_agent"></span>
+            </span>
+            <label>技能组</label>
+            <select name="ERROR_MEMO" class="queue_selector"></select>
+        </div>
+        <div class="clear10"></div>
+        <div>
+            <label for="CALL_TIME_LENGTH">通话时长</label>
+            <div class="input-append"><input type="text" style="width: 55px" name="CALL_TIME_LENGTH_BEGIN" dataType="Number" msg="时长条件只能为正整数" class="input-small"><span class="add-on" style="height: 14px;line-height: 15px">秒</span></div> 至
+            <div class="input-append"><input type="text" style="width: 55px" name="CALL_TIME_LENGTH_END"  dataType="Number" msg="时长条件只能为正整数" class="input-small"><span class="add-on" style="height: 14px;line-height: 15px">秒</span></div>
+            <label>&nbsp;&nbsp;&nbsp;满意度</label>
+            <select name="INVESTIGATE" class="investigate_selector"></select>
+        </div>
+        <div class="clear10"></div>
+        <div>
+            <a href="#" class="button ds_form_action pull-right" id="callSheetQualityCheckQueryRandomSaveBtn" ds_action="qualityCheck.add_random_template"  style="margin:2px 5px;">仅保存</a>
+            <a href="#" class="button ds_form_action pull-right" id="callSheetQualityCheckQueryRandomSaveAndSelectBtn" ds_action="qualityCheck.addAndSelect_random_template"  style="margin:2px 5px;">保存并抽取</a>
+            <a href="#" class="button ds_do_action pull-right quality_resetForm" ds_action="cdr.resetForm" ds_data = "addAndSelect_random_template" style="margin:2px 5px;" >重置</a>
+            <a href="#" class="button ds_do_action pull-right quality_close_btn" style="margin:2px 5px;" >关闭</a>
+        </div>
+        <br/>
+    </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $('#qualityCheckQueryFrm_random .quality_close_btn').click(function(){
+            $('#qualityCheckMainPanel .quality_check_random_template_add_pane_show').click();
+        });
+        $('#quality_check_random_datetime_picker_start').datetimepicker({
+//            controlType: utils.jqueryUITimepickerControl,
+            timeFormat: "HH:mm:ss",
+            dateFormat: "yy-mm-dd",
+            showSecond: true
+        });
+        $('#quality_check_random_datetime_picker_end').datetimepicker({
+//            controlType: utils.jqueryUITimepickerControl,
+            timeFormat: "HH:mm:ss",
+            dateFormat: "yy-mm-dd",
+            showSecond: true
+        });
+        utils.loadSearchInput({ id: "quality_check_random_disposal_agent_user",
+            width: "179",
+            height: "14",
+            tip: "按姓名,拼音,工号搜索",
+            data: getCache("agents"),
+            searchField: ["displayName", "exten", "pinyin"],
+            pinyinField: ["displayName"],
+            listField: ["displayName", "exten"],
+            userIdField: "_id",
+            showField: "displayName",
+            showAllList: true,
+            callbackFuc: function (object) {
+                $("#quality_check_random_disposal_agent_input").val(object._id);
+            },
+            onKeyChanged: function () {
+                if ($("#quality_check_random_disposal_agent_user_input").val() != "") {
+                    $("#quality_check_random_disposal_agent_input").val("serachInputNoresult");
+                } else {
+                    $("#quality_check_random_disposal_agent_input").val("");
+                }
+            }
+        });
+    });
+</script>

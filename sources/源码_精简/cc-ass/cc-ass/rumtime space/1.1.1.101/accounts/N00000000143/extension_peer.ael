@@ -1,0 +1,69 @@
+context N00000000143-10232-ExtensionPeer {
+s => {
+                abc="18600030392,18600030392,18600030392";
+                loop:
+                        Playtones(ring);
+                        if(${LEN(${abc})} > 11){
+                                curAbc = ${abc:0:11};
+
+                                abc=${abc:12}
+
+                                FROM_DID=${curAbc};
+                                //goto N00000000143-dial, 9${curAbc},1;
+                                CALLERID(num)="01085659293";
+                                StopMonitor();
+                                Set(RECFILENAME=${STRFTIME(${EPOCH},,%Y%m%d-%H%M%S)}_N00000000143_${CALLERID(num)}_${EXTEN}_${UNIQUEID});
+                                Monitor(wav,${RECFILENAME},b);
+                                Set(DYNAMIC_FEATURES=key_tag);
+
+                                Dial(SIP/N000000001431900${curAbc}@127.0.0.1:5072,15,r);
+                                if("${DIALSTATUS}" != "ANSWER"){
+                                        Playtones(ring);
+                                        goto s,loop;
+                                }
+                        }else{
+                                FROM_DID=${abc};
+                                CALLERID(num)="01085659293";
+                                StopMonitor();
+                                Set(RECFILENAME=${STRFTIME(${EPOCH},,%Y%m%d-%H%M%S)}_N00000000143_${CALLERID(num)}_${EXTEN}_${UNIQUEID});
+                                Monitor(wav,${RECFILENAME},b);
+                                Set(DYNAMIC_FEATURES=key_tag);
+
+                                Dial(SIP/N000000001431900${abc}@127.0.0.1:5072,15,Ttr);
+                                Hangup();
+                        }
+
+        }
+}
+context N00000000143-10087-ExtensionPeer {
+	s => {
+             //CALLERID(num)="53500303";
+             //ACCOUNT="N00000000143";
+             phoneNum = "18600030392";
+             LINK_AUTO_TO_CALL = "1";
+             FROM_DID=${phoneNum};
+             goto N00000000143-dial, 9${phoneNum},1;
+             //Dial(SIP/N000000001431900${phoneNum}@127.0.0.1:5072);
+
+	}
+}
+context N00000000143-10241-ExtensionPeer {
+	s => {
+		Agi(agi://127.0.0.1:7891/agiHangupLinkChannel?pbx=${HOST});
+                MusicOnHold();
+	}
+}
+context N00000000143-10157-ExtensionPeer {
+	s => { goto ivr-menu-end, s, 1;}
+}
+context N00000000143-10240-ExtensionPeer {
+	s => {
+		goto threewaycall, ${ORI_MEETME_NUM}, 1;
+	}
+}
+context N00000000143-10212-ExtensionPeer {
+	s => {
+                FROM_CID = ${CALLERID(num):16};
+		Hangup;
+	}
+}

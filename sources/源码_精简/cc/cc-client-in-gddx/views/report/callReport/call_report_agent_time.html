@@ -1,0 +1,94 @@
+<div class="">
+    <div style="/*height:98%;margin:3px 3px;*/">
+        <div class="row-fluid">
+            <h5><i class="icon-user"></i>单个座席工作量查询</h5>
+            <br/>
+            <form class="form-horizontal">
+                <input type="hidden" name="AgentID" id="call_report_agent_time_agentId"/>
+                <input type="hidden" name="reportType" value="call_report_agent"/>
+                <div>
+                    <label style="float:left;margin-right:3px;">时间类型</label>
+                    <select name="TimeType" class="span2" id="report_agent_time_timeType" onchange="handler.report.callReport.resetDate('report_agent_time_dateTd',this.value)">
+                        <option value="year" id="optionYear">年报</option>
+                        <option value="month" id="optionMonth">月报</option>
+                        <option value="day" id="optionDay">日报</option>
+                        <option value="other_half_hour" id="optionOther">自定义</option>
+                    </select>
+                    <div id="report_agent_time_dateTd" style="display: inline">
+                    </div>
+                    <div id="report_agent_time_dateTd_other" style="display: none">
+                        <div class="input-append date form_datetime">
+                            <input id="report_agent_time_datetime_picker_start" size="6" class="input-large report_start_time" name="StartTime" type="text" value="" readonly>
+                            <span class="add-on datetimepicker-remove" style="height: 14px;line-height: 15px"><i class="icon-remove"></i></span>
+                            <span class="add-on datetimepicker-open" style="height: 14px;line-height: 15px"><i class="icon-th"></i></span>
+                        </div>
+                        <div style="float:left;font-size: 14px;padding-top: 5px;padding-left: 5px;padding-right: 5px">
+                            &nbsp;&nbsp;至&nbsp;&nbsp;
+                        </div>
+                        <div class="input-append date form_datetime">
+                            <input id="report_agent_time_datetime_picker_end" size="6" class="input-large report_end_time" name="EndTime" type="text" value="" readonly>
+                            <span class="add-on datetimepicker-remove" style="height: 14px;line-height: 15px"><i class="icon-remove"></i></span>
+                            <span class="add-on datetimepicker-open" style="height: 14px;line-height: 15px"><i class="icon-th"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear10"></div>
+                <!--<div class="btn-group span8 offset2 text-right pull-right">-->
+                <!--<input type="hidden" name="reportType" value="call_report_agent_time">-->
+                <!--<button class="btn do_action" id="queryAgentReport_btn" appaction="report.callReport.queryAgentTimeReport">查询</button>-->
+                <!--<button class="btn do_action call_report_export_btn" appaction="report.confirmExportReportPdf">导出PDF</button>-->
+                <!--<button class="btn do_action call_report_export_btn" id="call_report_agent_time_excel_button" appaction="report.callReport.exportAgentExcel">导出Excel</button>-->
+                <!--<button class="btn do_action" appaction="report.callReport.returnPreviousAgent">返回上页</button>-->
+                <!--</div>-->
+                <div>
+                    <input type="hidden" name="reportType" value="call_report_agent_time">
+                    <a class="button ds_form_action" id="call_report_agent_time_btn"
+                       ds_action="report.callReport.queryAgentTimeReport">查询</a>
+                    <a class="button ds_form_action" ds_action="report.callReport.confirmExportReportPdf">导出PDF</a>
+                    <a class="button ds_form_action" ds_action="report.callReport.exportAgentExcel">导出EXCEL</a>
+                    <a class="button ds_form_action" ds_action="report.callReport.returnPreviousAgent">返回上页</a>
+                </div>
+            </form>
+        </div>
+        <div class='row-fluid account_line'></div>
+        <br>
+        <div class="agent_report_data_part" span12>
+            <div class="data_titile_part">
+                <i class="icon-user"></i>座席
+                <span id="call_report_agent_time_agent_name">座席3</span>
+                工作量列表
+                &nbsp;&nbsp;
+                <a href="#" class="ds_do_action" ds_action="report.callReport.openConfigTableHeader" ds_data="call_report_agent_time">配置显示表头</a>
+            </div>
+            <div id="report_agent_time_table" class="data_content_part">
+                <table id="call_report_agent_time_table_id" class="table table-bordered table-condensed table-hover">
+                    <thead id="agentTimeTableHeader">
+
+                    </thead>
+                    <tbody id="agentTimeTableBody">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</div>
+<div id="call_report_agent_time_config_table_header_pane"></div>
+
+</div>
+<script type="text/javascript">
+    $('#report_agent_time_datetime_picker_start').datetimepicker({
+        dateFormat: "yy-mm-dd",
+        timeFormat: "HH:mm:ss",
+        showSecond: false, //显示秒
+        showTimepicker: true,
+        stepMinute: 30
+    });
+    $('#report_agent_time_datetime_picker_end').datetimepicker({
+        dateFormat: "yy-mm-dd",
+        timeFormat: "HH:mm:ss",
+        showSecond: false, //显示秒
+        showTimepicker: true,
+        defaultDate:+1,
+        stepMinute: 30
+    });
+</script>

@@ -1,0 +1,88 @@
+<script>
+    $("#ivr_blacklist_query").keyup(function(){
+        if(event.keyCode == 13){
+            handler.ivr.searchBlacklist($("#ivr_blacklist_query").val());
+        }
+    });
+</script>
+<div class="row-fluid">
+    <div class="span5">
+        <div class="row-fluid">
+            <div class="span6">
+                <input id="ivr_blacklist_query" name='query' class="ivr_search"
+                       node-type="ivrBlackList" map-key="BlackNum" pagination-name="blacklistItemList"
+                       type="text" placeholder="输入号码进行条件..." style="width:80%;">
+                <!--<input id="ivr_blacklist_query" name='query' type="text" placeholder="输入电话号码进行查询...">-->
+                <!--<div class="input-append" style="float:left;">-->
+                    <!--<input id="ivr_blacklist_query" name='query' type="text" placeholder="输入电话号码进行查询...">-->
+                    <!--<div class="btn-group">-->
+                        <!--<button class="btn dropdown-toggle" data-toggle="dropdown" tabindex="-1">-->
+                            <!--<span class="caret"></span>-->
+                        <!--</button>-->
+                        <!--<ul class="dropdown-menu">-->
+                            <!--<li>-->
+                                <!--<a href="#">高级查询</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+            <div class="span5 offset1 text-right pull-right">
+                <!--<a class="add_button add-contact-link btn ds_action_flow">-->
+                    <!--<ds-get-view view="config/callConfig/blackList/ivr_add_blackNum" panel="blacklist_detail"/>-->
+                    <!--添加-->
+                <!--</a>-->
+                <!--<a class="btn btn-success ds_action_flow disabled ds_ivr_effect">-->
+                    <!--<ds-do-action action="config.ivr.reloadIvr" extra-data="config.callConfig.currentConfigData" on-complete="config.callConfig.reloadComplete"/>-->
+                    <!--生效-->
+                <!--</a>   -->
+                <a class="add_button add-contact-link btn btn-add ds_action_flow">
+                    <ds-get-view view="config/callConfig/blackList/ivr_add_blackNum" panel="blacklist_detail"/>
+                    添加
+                </a>
+                <a class="btn btn-success btn-blackishGreen ds_action_flow disabled ds_ivr_effect">
+                    <ds-do-action action="config.ivr.reloadIvr" extra-data="config.callConfig.currentConfigData" on-complete="config.callConfig.reloadComplete"/>
+                    生效
+                </a>
+            </div>
+        </div>
+        <div style="height:1px;background-color:#EAEAEA;width:100%;margin:2px 0px 2px;">
+        </div>
+        <div id="blacklistAccordion">
+            <div class='ds-item-list' id="blacklistItemList" item-view="config/callConfig/blackList/ivr_blacklist_item"
+                 data-source="ivrBlackList"></div>
+        </div>
+        <div class="row-fluid">
+            <div class="span2">
+                <br/><br/>
+                <!--<a class="action" appaction="ivr.refreshIvrCachce" appdata="manager.ivr.blacklist.queryBlackNum,ivrBlackList,notNode" herf="#"><i class="icon-refresh"></i>刷新</a>-->
+                <a href="#" class="ds_action_flow">
+                    <ds-do-action action="config.ivr.blacklist.queryBlackNum" extra-data="config.callConfig.currentConfigData"
+                                  update-client-data='{"method":"config.callConfig.updateClientDataList","arg":{"type":"ivrBlackList"}}'/>
+                    <ds-get-view view="config/callConfig/blackList/ivr_list_black" panel="ivrBlackListPanel"/>
+                    <i class="icon-refresh"></i>刷新
+                </a><br/>
+            </div>
+            <form id="blacklistFrm">
+                <input type="hidden" name="dataSource" value="ivrBlackList">
+                <input type="hidden" name="itemListID" value="blacklistItemList">
+            </form>
+            <div class="row-fluid class_list">
+                <div class="pagination" style="display:table; margin:0;width:100%;">
+                    <span class="result_info">查询结果：<span class="blacklistItemList_result_count">10</span></span>
+                    <ul id="blacklistItemList_index" style="float:right;">
+                        <li><a href="#" for="blacklistFrm" class="pagination" ds_pagination_action="config.callConfig.paginationChanged" value="0">&laquo;</a></li>
+                        <li><a href="#" for="blacklistFrm" class="pagination" ds_pagination_action="config.callConfig.paginationChanged" value="1">1</a></li>
+                        <li><a href="#" for="blacklistFrm" class="pagination" ds_pagination_action="config.callConfig.paginationChanged" value="2">2</a></li>
+                        <li><a href="#" for="blacklistFrm" class="pagination" ds_pagination_action="config.callConfig.paginationChanged" value="3">3</a></li>
+                        <li><a href="#" for="blacklistFrm" class="pagination" ds_pagination_action="config.callConfig.paginationChanged" value="4">4</a></li>
+                        <li><a href="#" for="blacklistFrm" class="pagination" ds_pagination_action="config.callConfig.paginationChanged" value="5">5</a></li>
+                        <li><a href="#" for="blacklistFrm" class="pagination" ds_pagination_action="config.callConfig.paginationChanged" value="6">&raquo;</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="span7 sub-right" id="blacklist_detail">
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="well" style="padding: 0 19px;">
+    <h2>_#_id#_<small>月租:<span class="text-primary monthRent">_@formatTrueFee(_#monthRent#_)@_</span>元
+        <!--赠送时长:<span class="text-primary dialMins">_#dialMins#_</span>分钟-->
+    </small></h2>
+    <p class="text-muted">当前并发数:<span class="text-primary concurrent">_#concurrent#_</span>,到期日期为<strong class="text-danger">_#endTime#_</strong></p>
+</div>
+
+<form class="form-horizontal" id="frm_serviceno_detail">
+    <input type="hidden" name="_id" value="_#_id#_">
+    <input type="hidden" name="monthRent" value="_#monthRent#_">
+    <input type="hidden" name="flag" value="buyConcurrent">
+    <input type="hidden" name="endTime" value="_#endTime#_">
+    <input type="hidden" name="oldConcurrent" value="_#concurrent#_">
+    <input type="hidden" name="serviceFlag" value="">
+    <input type="hidden" name="monthNum" value="_#monthNum#_">
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            新增并发数
+        </label>
+        <div class="col-md-5">
+            <input type="text" onkeyup="value=value.replace(/[^\d]/g,'')" name="concurrent" value='1' class="form-control input-sm ds_spinner service_month" required>
+            <label for="concurrent" class="error" style="display: none;"></label>
+
+            <a href="#" id="popover_concurrent" style="padding: 0;" class="btn" data-toggle="popover" data-placement="auto" data-trigger="hover focus"
+               data-content="能够同时处理的电话数量，比如您购买了3个并发，3路电话同时进来都可以接听，如果只有1个并发，其他2路电话就会等待" data-original-title="什么是并发数?">
+                <span style="font-size: 18px;" class="glyphicon glyphicon-question-sign"></span>
+            </a>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            费用
+        </label>
+        <div class="col-md-10" style="line-height: 35px;">
+            <span class="fee">_#totalFee#_</span>元
+            <span class="text-muted">&nbsp;[月租*(到期日期减去当前日期还剩的天数/30进行四舍五入得到剩余月数)*新增并发数=费用]</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="button" class="btn btn-primary ds_form_action" ds_action="account.showPay" >立刻购买</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $('#popover_concurrent').popover({
+//        container: '.modal-body'
+    });
+</script>

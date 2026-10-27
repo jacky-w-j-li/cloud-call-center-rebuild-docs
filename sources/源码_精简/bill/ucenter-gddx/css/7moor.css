@@ -1,0 +1,120 @@
+body {
+  padding-top:90px;
+  padding-bottom: 20px;
+  background-color: #f5f5f4;
+  /*position: relative;*/
+}
+/* Janky fix for preventing navbar from overlapping */
+h1[id] {
+    padding-top: 80px;
+    margin-top: -45px;
+}
+
+.ds-divider {
+    margin: 80px 0;
+}
+
+.featurette-heading {
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -1px;
+}
+.thumbnail_patch{
+    padding: 0;
+    width: 360px;
+    height: 386px;
+}
+
+.navbar-inverse_patch {
+    /*background-color: #222222;*/
+    /*border-color: #080808;*/
+    /*background-color:#348eda;*/
+    border:0;
+    background:#cecfd1;
+    background:-webkit-gradient(linear,0 0,0 bottom,from(#fdfdfd),to(#cecfd1));
+    background: -moz-linear-gradient(top,#fdfdfd,#cecfd1);
+    background: -o-linear-gradient(top,#fdfdfd,#cecfd1);
+}
+.navbar-nav2 {
+    float: left;
+    margin: 0;
+    font-size:24px;
+}
+.navbar-nav2 > li {
+    float: left;
+    width: 130px;
+
+}
+.navbar-nav2 > li > a {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.navbar-inverse_patch .navbar-nav2 > li > a {
+    color: #393939;
+}
+
+.navbar-inverse_patch .navbar-nav2 > li > a:hover,
+.navbar-inverse_patch .navbar-nav2 > li > a:focus {
+    color: #428bca;
+    background-color: transparent;
+    /*border-bottom-color: #ccc;*/
+}
+
+.navbar-inverse_patch .navbar-nav2 > .active > a,
+.navbar-inverse_patch .navbar-nav2 > .active > a:hover,
+.navbar-inverse_patch .navbar-nav2 > .active > a:focus {
+    color: #428bca;
+    background-color: transparent;
+}
+
+.navbar-inverse_patch .navbar-nav2 > .disabled > a,
+.navbar-inverse_patch .navbar-nav2 > .disabled > a:hover,
+.navbar-inverse_patch .navbar-nav2 > .disabled > a:focus {
+    color: #444444;
+    background-color: transparent;
+}
+
+.navbar-inverse_patch .navbar-nav2 > .dropdown > a:hover .caret {
+    border-top-color: #ffffff;
+    border-bottom-color: #ffffff;
+}
+
+.navbar-inverse_patch .navbar-nav2 > .dropdown > a .caret {
+    border-top-color: #999999;
+    border-bottom-color: #999999;
+}
+.ds-footer{
+    padding-top: 20px;
+    /*padding-bottom: 10px;*/
+    margin-top: 40px;
+    margin-top: 20px;
+    color: #777;
+    text-align: center;
+    border-top: 1px solid #e5e5e5;
+}
+.ds-section {
+    padding-top: 40px;
+    padding-bottom: 30px;
+    color: #777;
+}
+
+.contenter{
+    width: 960px;
+    margin: 0 auto;
+    background-color: #fff;
+    height: auto!important;
+    min-height: 580px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px 0 #bcbcbc;
+}
+.contenterwrapper {
+    padding-bottom: 50px;
+    zoom: 1;
+    float: left;
+}
+.regwrapper {
+    padding: 40px 58px 0;
+    float: left;
+}
+

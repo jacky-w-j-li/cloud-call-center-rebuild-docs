@@ -1,0 +1,47 @@
+<script type="text/javascript" src="../../../javascripts/jquery.tablednd_0_5.min.js"></script>
+<script>
+    $(function(){
+        $("#__reportType_table_header_list").tableDnD();
+        $('.dragTip').tooltip({placement:'right'});
+    });
+</script>
+<div id="__reportType_config_table_header_Modal" class="modal hide fade">
+    <form>
+        <input type="hidden" name="reportType" value="__reportType">
+        <input type="hidden" name="reportName" value="__reportName">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>__reportName 表头显示配置</h3>
+        </div>
+        <div class="modal-body">
+            <div class="row-fluid">
+                <div class="span3" style="margin-left: 30px">
+                    <table class="draft_box" id="__reportType_table_header_list">
+                        __configList
+                    </table>
+                </div>
+                <div class="span8">
+                    <dl>
+                        <dt>
+                            <h6>个性化的表头显示顺序</h6>
+                        </dt>
+                        <dd>
+                            &nbsp;&nbsp;&nbsp;&nbsp;左侧的每一个表头项可以上下拖拽，用来设定表头显示的顺序，排在上面的统计项将显示在表格的前面。
+                        </dd>
+                        <br><br>
+                        <dt>
+                            屏蔽掉您不关心的数据
+                        </dt>
+                        <dd>
+                            &nbsp;&nbsp;&nbsp;&nbsp;每一个表头项后面会有一个复选框，根据您的关注点来自由选择报表中要显示的统计项。
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn btn-info ds_form_action" ds_action="report.callReport.saveTableHeader"> 保存</a>
+            <a href="#" class="btn" onclick="$('#__reportType_config_table_header_Modal').modal('hide');"> 取消</a>
+        </div>
+    </form>
+</div>

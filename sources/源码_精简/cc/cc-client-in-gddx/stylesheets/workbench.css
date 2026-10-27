@@ -1,0 +1,162 @@
+/* created by liujing on 04/07/16
+style for workbench 
+linked by workbench/workbench_main.html
+all classnames must begin with letter '.wbh_' or '#view_nav_workbench '*/
+
+/* move from app.css start */
+#view_nav_workbench{
+    overflow-y: auto;
+}
+.chanceTicket-info{
+    display: inline-block;
+    padding-left:8px;
+    height: 28px;
+    width: 50px;
+    line-height: 28px;
+}
+.chanceTicket-icon{
+    display: inline-block;
+    height: 25px;
+    background: url("../img/nav_menu.png") no-repeat 0 -582px;
+    background-size: 20px auto;
+    margin: -9px;
+}
+#chanceTicket-modal{
+    max-height: 465px;
+}
+.chanceTicket-icon-give{
+    background-position: 0 -463px;
+    width: 42%;
+}
+.chanceTicket-icon-punish{
+    width: 20px;
+    background-position: 0 -490px;
+}
+.chanceTicket-all,.chanceTicket-give{
+    cursor: pointer;
+    color:#37b5ed;
+}
+.chanceTicket-give{
+    display: none;
+}
+.chanceTicket-all{
+    float: right;
+}
+.chanceTicket-sum{
+    width: 45%;
+    height: 19px;
+    border-radius: 7px;
+    display: inline-block;
+    text-align: center;
+    line-height: 20px;
+    color: #fff;
+    margin:0 5px 0 13px;
+}
+.chanceTicket-sum-green{
+    background: #7DE34D;
+}
+.chanceTicket-sum-brown{
+    background: #a47e3c;
+}
+.chanceTicket-toggle{
+    display:none;
+}
+.chanceTicket-Num{
+    width: 18%;
+}
+.chanceTicket-toggle label {
+    display: inline-block;
+    margin: 0 0 0 2px;
+}
+.chanceTicket-set{
+    display: inline-block;
+    width: 80%;
+    min-width: 322px;
+}
+.chanceTicket input{
+    width: 35%;
+    height: 24px;
+    padding: 0 0 0 5px;
+}
+.chanceTicket-set .donationNum{
+    margin-left: 4%;
+}
+#donationNum{
+    width: 33%;
+}
+#contact_workbench .bootstrap-switch {
+    min-width: 60px !important;
+}
+.chanceTicket-set #cust_titket_to_user_select_user{
+    width: 20%;
+}
+.chanceTicket-set #cust_titket_to_user_select_user_input{
+    width: 73% !important;
+    height: 18px !important;
+    padding: 3px;
+}
+.chanceTicket-set .btn-add{
+    display: inline-block;
+    width: 8%;
+    height: 23px;
+    padding: 0;
+    line-height: 18px;
+    background: #43B9ED;
+    color: #fff;
+    text-shadow: none;
+}.chanceTicket-set .btn-hide{
+     width: 8%;
+     background: #e9e7ec;
+     color: #000000;
+     height: 23px;
+ }
+.chanceTicket-set .btn-add:before{
+    content: none;
+}
+.chanceTicket-sum-active{
+    background-color: #C09853;
+}
+#chanceTicket_btn{
+    padding: 1px 0;
+}
+.chanceTicket-not{
+    display: none;
+    color: darkgray;
+}
+#chanceTicket-status .sub-nav{
+    padding:0;
+    margin: 0;
+    width: 555px;
+}
+#chanceTicket-status .sub-nav li{
+    width: 33.33%;
+    padding:0;
+    margin: 0;
+    text-align: center;
+    cursor: pointer;
+}
+#chanceTicket-status .sub-nav li span{
+    display: inline-block;
+    width: 100%;
+}
+#chanceTicket-status ul li a{
+    color: #999;
+}
+
+.workbench-business-analysis{
+    width: 100%;
+}
+.workbench-business-analysis ul li{
+    width: 20%;
+    margin-bottom: 6px;
+    cursor: pointer;
+}
+.workbench-succeed-analysis ul li{
+    padding-bottom: 0;
+    cursor: pointer;
+}
+.workbench-succeed-analysis ul{
+    height: 20px;
+    margin-top: 10px;
+}
+/* move from app.css end */

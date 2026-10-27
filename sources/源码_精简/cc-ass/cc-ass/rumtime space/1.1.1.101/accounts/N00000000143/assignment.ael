@@ -1,0 +1,21 @@
+context N00000000143-10084-assignment {
+	s => {
+		__TANPING=这里是附加信息;
+		JOBNUM=123工号呀;
+
+
+		goto N00000000143-10000145-queue,10000145,1;		
+	}
+}
+
+
+context N00000000143-10235-assignment {
+	s => {
+		phoneNum=18600030392;
+
+
+		goto N00000000143-10087-ExtensionPeer, s, 1;		
+	}
+}
+
+

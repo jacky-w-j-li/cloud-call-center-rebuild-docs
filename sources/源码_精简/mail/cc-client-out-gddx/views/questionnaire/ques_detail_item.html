@@ -1,0 +1,38 @@
+
+{{
+    temp = temp || {};
+    questionnaire = questionnaire || {};
+    var status = questionnaire.status ;
+    var disableFlag = "",checkedFlag = "",typeClassFlag = 'select_answ';
+    if(temp.type == 'static'){ typeClassFlag = ""; }
+
+}}
+
+<div class="row-fluid ques_display_item" id="ques{{=_id}}">
+    <div class="row-fluid item_list_item " >
+        <div style="margin-left: 3%;">
+            <label class="table_ds_word">{{=name}}:{{=context}}</label>
+        </div>
+        <div class="field-option">
+            <div class="field-option-inner" style="margin-left: 3%;">
+                {{
+                    if(status == 'complete'){ disableFlag = 'disabled'; }
+                    var anws = anws || [];
+                    for (var i = 0; i < anws.length; i++) {
+                        if(anws[i]._id == answValue){
+                            checkedFlag = 'checked';
+                        } else {
+                            checkedFlag = '';
+                        }
+                }}
+                <div class="inline-checkbox">
+                    <label class="inline">
+                        <input  type="radio" class="{{=typeClassFlag}}" name="{{=_id}}" next="{{=anws[i].next}}" value="{{=anws[i]._id}}" {{=disableFlag}} {{=checkedFlag}} />{{=anws[i].answer}}
+                    </label>
+                </div>
+                {{ } }}
+            </div>
+        </div>
+    </div>
+
+</div>

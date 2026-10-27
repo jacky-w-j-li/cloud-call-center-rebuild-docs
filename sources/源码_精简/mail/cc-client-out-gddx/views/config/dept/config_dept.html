@@ -1,0 +1,198 @@
+<div class="row-fluid">
+    <div class="span3" style="max-width:270px;">
+        <div class="pull-left">
+            <h5 style="">组织机构</h5>
+        </div>
+        <div class=" pull-right">
+            <a type="button" class="ds_do_action "  ds_action="config.dept.queryDeptUsers" ds_data="noDept" style="margin-left: 10px;">未分配部门</a>
+        </div>
+        <div class="control-group" style="clear: both;width:100%;overflow-x:auto">
+            <div>
+                <ul id="dept_tree_main" class="ztree pull-left" ></ul>
+            </div>
+        </div>
+    </div>
+    <div class="span9 config_left" id="dept_pane">
+        <div class="base_info_box">
+            <h5>员工信息</h5>
+        </div>
+        <div class="caption-top clearfix">
+            <div class="search_condition" style="display: none;">
+            </div>
+            <div class="" style="float: right">
+                <button type="button" class="btn btn-small ds_do_action" ds_action="config.dept.showBatchUpdate" ds_data="">批量修改</button>
+            </div>
+            <form id="frm_deptConfig_search" class="">
+                <input type="hidden" name="deptId" id="queryDeptID" />
+                <span class="pull-left refresh ds_form_action" ds_action="config.dept.queryDeptUsers">
+                <a href="#" class="ajaxed">刷新</a>
+                </span>
+                <div class="input-append ds_search_item" style="margin-left: 5px;">
+                    <input class="quick_search" name="combox" style="width: 110px;" type="text" placeholder="输入姓名...">
+                    <button type="button" class="btn ds_form_action dept_search " ds_action="config.dept.queryDeptUsers"  title="查询">
+                        <i class="icon-search"></i>
+                    </button>
+                    <button type="button" class="btn deptConfig_advanced_search" style="height: 24px;" title="高级查询">
+                        <span class="caret"></span>
+                    </button>
+                </div>
+            </form>
+
+            <div class="ds_search_filter" style="display:none;">
+            </div>
+        </div>
+        <div id="deptConfig_advanced_search_pane" class="advanced_search_pane hidden">
+            <!--<div style="height: 35px;border-bottom: 1px solid #f0f0f0;">-->
+            <!--<h5 style="float:left;padding: 5px 10px 0;color:black;">高级查询</h5>-->
+            <!--<a href="#" class="cancel_button close" onclick="$('#uerConfig_advanced_search_pane').hide();" style="float: right;margin-top: 5px;margin-right: 10px;">x</a>-->
+            <!--</div>-->
+            <div class="advanced_body">
+                <form id="frm_config_dept_user_advanced_search" class="ds_search_form">
+                    <input type="hidden" name="isAdvanceSearch" value="1">
+                    <fieldset>
+                        <div class="row-fluid">
+                            <div class="span4 advanced_search_item ds_search_item">
+                                <label>角色</label>
+                                <select name="role"  class="">
+                                    <option value="" selected>--请选择--</option>
+                                </select>
+                            </div>
+                            <div class="span4 advanced_search_item ds_search_item">
+                                <label>工号</label>
+                                <input  name="beginExten" type="text" class="" style="display: inline-block;width: 50px;"/>
+                                <div style="float: left;padding: 5px;">至</div>
+                                <input  name="endExten" type="text" class="" style="display: inline-block;width: 50px;"/>
+                            </div>
+                            <div class="span4 advanced_search_item ds_search_item">
+                                <label>座席姓名</label>
+                                <input class="quick_search" name="combox" style="width: 110px;" type="text" placeholder="输入姓名...">
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span4 advanced_search_item ds_owner ds_search_item">
+                                <label>上级</label>
+                                <input name="parentId" type="hidden" class="select_input" id="config_dept_user_search_owner_select_input"  />
+                                <div id="config_dept_user_search_owner_select_user" class="combobox_agent"></div>
+                            </div>
+                            <div class="span4 advanced_search_item ds_search_item">
+                                <label>座席状态</label>
+                                <select name="status">
+                                    <option value="" selected>--请选择--</option>
+                                    <option value="enable" >启用</option>
+                                    <option value="disable" >停用</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style="padding: 10px;">
+                            <button type="button" class="btn btn-small btn-primary ds_form_action  pull-right" ds_action="config.dept.queryDeptUsers" >搜索</button>
+                            <button type="button" class="btn btn-small  ds_do_action  pull-right" ds_action="resetForm" ds_data="configDept" style="margin-right: 10px;">重置</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-info">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    <th width="12%">座席姓名</th>
+                    <th width="12%">部门</th>
+                    <th width="12%">上级</th>
+                    <th width="15%">角色</th>
+                    <th width="14%">电话</th>
+                    <th width="10%">状态</th>
+                    <th width="13%">操作</th>
+                </tr>
+                </thead>
+                <tbody class="licence_list" id="dept_user_list_pane">
+                </tbody>
+            </table>
+            <div class="pagination pagination-small config_user_count" style="width:100%;margin:0 3px;"
+                 for="frm_deptConfig_search" ds_pagination_action="config.dept.queryDeptUsers">
+                <span style="float:left;margin-top:8px;font-size:12px;">查询结果：<span class="result_count">0</span></span>
+                <ul class="dept_user_list_page" style="float:right;padding-right: 6px;">
+                    <li><a href="#"  value="0">&laquo;</a></li>
+                    <li><a href="#"  value="1">1</a></li>
+                    <li><a href="#"  value="2">2</a></li>
+                    <li><a href="#"  value="3">3</a></li>
+                    <li><a href="#"  value="4">4</a></li>
+                    <li><a href="#"  value="5">5</a></li>
+                    <li><a href="#"  value="6">&raquo;</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="dept_modal" class="modal hide fade modal-dialog" tabindex="-1">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" ></h4>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal deptForm">
+            <input type="hidden" id="deptId" name="_id" >
+            <input type="hidden" id="pId" name="pId" >
+            <input type="hidden" id="treePath" name="treePath" >
+            <div class="control-group">
+                <label class="control-label required " for="deptParentName">上级部门</label>
+                <div class="controls">
+                    <input type="text" id="deptParentName" readonly>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label required" for="deptName">部门名称</label>
+                <div class="controls">
+                    <input type="text" id="deptName" name="name" autocomplete="off">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label required" for="order">排序号</label>
+                <div class="controls">
+                    <input type="text" id="order" name="order" value="0" datatype="Number,Range" min="0" msg="排序号必须为大于或等于0的整数" onkeyup="this.value=this.value.replace(/\D/g,'')" />
+                    <span class="help-block">排序号越大,部门树排名越靠上</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label ">观察者</label>
+                <div class="controls">
+                    <input name="observercomManagers" type="hidden" class="select_input" id="obse_owner_select_input_com" />
+                    <input name="observer" type="hidden" class="select_input" id="observer_owner_select_input" />
+                    <div id="observer_owner_select_user" class="comtabbox_agent"></div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="note">备注</label>
+                <div class="controls">
+                    <textarea  id="note" name="note" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label"></label>
+                <div class="controls" style="">
+                    <button type="button" class="btn btn-small btn-primary ds_form_action pull-left  btn_pad saveOrUpdate" ds_action="config.dept.addDept" style="margin-left: 10px;">保存</button>
+                    <button type="button" class="btn btn-small  pull-left  btn_cancel_edit" data-dismiss="modal" aria-hidden="true" >取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="dept_user_modal" class="modal hide fade modal-dialog" tabindex="-1">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" ></h4>
+    </div>
+    <div class="modal-body">
+
+    </div>
+</div>
+
+
+<style type="text/css">
+    .ztree li span.button.add {margin-left:2px; margin-right: -1px; background-position:-144px 0; vertical-align:top; *vertical-align:middle}
+</style>
+<link rel="stylesheet" href="../../../../javascripts/ztree/zTreeStyle.css" type="text/css">
+<link rel="stylesheet" href="../../../../stylesheets/bootstrap-multiselect.css" type="text/css">
+<script type="text/javascript" src="../../../../javascripts/ztree/jquery.ztree.all-3.5.js"></script>

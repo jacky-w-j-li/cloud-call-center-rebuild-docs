@@ -1,0 +1,116 @@
+<div class="task_add">
+    <form class="">
+        <input type="hidden" name="dbType" value='_#dbType#_'/>
+        <input type="hidden" name="cid" value='_#cid#_' />
+        <input type="hidden" name="callId" value='_#menu#_' />
+        <input type="hidden" name="custName" value='_#custName#_' />
+        <div class="action-bar"><h2>添加电话登记单:</h2>
+            <div class="form_buttons" style="padding-left:210px;">
+                <!--<a href="#" class="accept_button button ds_form_action"-->
+                   <!--style="float:right;margin-top: 4px;" ds_action="callRecord.saveCallRecord">-->
+                    <!--保存</a>-->
+                <!--<a href="#" class="cancel_button ds_do_action" ds_action="callRecord.cancelAddCallRecord" ds_data="" style="float:right;margin-top: 3px;">取消</a>-->
+            </div>
+        </div>
+        <div id="icc_callRecord_add_pane">
+
+
+        </div>
+
+        <div class="form_buttons" style="padding-left:175px;padding-top:5px;">
+            <a href="#" class="accept_button button ds_form_action"
+               ds_action="callRecord.saveCallRecord">保存</a>
+            <!--<a href="#" class="cancel_button ds_do_action" ds_action="callRecord.cancelAddCallRecord" ds_data="">取消</a>-->
+        </div>
+    </form>
+</div>
+
+
+<script id="tmpl_callRecord_add" type="text/x-jquery-tmpl">
+    <fieldset>
+        {{if (types && types.length>0) }}
+            <div class="frm_item">
+                <label  class="frm_left_label">类别</label>
+                <div class="frm_right_content">
+                    <select class="" name="type" >
+                        <option value="" selected="selected">--请选择--</option>
+                        {{each(key,name) types}}
+                        <option value="${key}">${name}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+        {{/if}}
+
+    </fieldset>
+
+    {{if custom_fields.length>0}}
+    <fieldset>
+        {{each custom_fields}}
+        {{if type=='single'}}
+        <div class="frm_item">
+            <label class="frm_left_label">${name}</label>
+            <div class="frm_right_content">
+            <input id="cust_${_id}" name="${_id}" type="text"  msgName='${name}'  ${required} />
+            </div>
+        </div>
+        {{else type=='multi'}}
+        <div class="frm_item">
+            <label class="frm_left_label">${name}</label>
+            <div class="frm_right_content">
+            <textarea  name="${_id}" rows="3" cols="" style="resize: vertical; width:300px; margin-bottom: 0px;"  msgName='${name}'  ${required}></textarea>
+            </div>
+        </div>
+        {{else type=='number'}}
+        <div class="frm_item">
+            <label class="frm_left_label">${name}</label>
+            <div class="frm_right_content">
+            <input  name="${_id}" type="text" msgName='${name}'  dataType='Number' msg='必须为数字'  ${required}/>
+            </div>
+        </div>
+        {{else type=='date'}}
+        <div class="frm_item">
+            <label class="frm_left_label">${name}</label>
+            <div class="frm_right_content">
+            <input  type="text" name="${_id}" msgName='${name}'  class="date_picker" style="width:115px;" value="" readonly="true" onkeydown="readOnlyKeyDown()" ${required}>
+            </div>
+        </div>
+
+        {{else type=='dropdown'}}
+        <div class="frm_item">
+            <label class="frm_left_label">${name}</label>
+            <div class="frm_right_content">
+            <select name="${_id}" msgName='${name}'  ${required}>
+                <option value="" selected="selected">--请选择--</option>
+                {{each(key,val) choices}}
+                <option value="${key}">${val}</option>
+                {{/each}}
+            </select>
+            </div>
+        </div>
+        {{else type=='checkbox'}}
+        <div class="frm_item">
+            <label class="frm_left_label">${name}</label>
+            <div class="frm_right_content">
+            {{each(key,val) choices}}
+            <label><input customColor="rgb(198, 216, 175)" type="checkbox" fieldgroup="1" name="${_id}[]" value="${key}" msgName='${name}'  ${required}/>&nbsp;${val}</label>
+            {{/each}}
+            </div>
+        </div>
+        {{else type=='radio'}}
+        <div class="frm_item">
+            <label class="frm_left_label">${name}</label>
+            <div class="frm_right_content">
+            {{each(key,val) choices}}
+            <label><input customColor="rgb(198, 216, 175)" type="radio" name="${_id}" value="${key}" msgName='${name}'  ${required}/>&nbsp;${val}</label>
+            {{/each}}
+            </div>
+        </div>
+        {{/if}}
+        {{/each}}
+    </fieldset>
+    {{/if}}
+</script>
+<style type="text/css">
+
+</style>

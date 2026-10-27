@@ -1,0 +1,21 @@
+<div class="weixin-config-show">
+    <p class="weixin-config-showtop"></p>
+    <ol class="weixin-config-showbottom">
+        <li class="null">
+            <span style="background:none" class="weixin-main-menu ds_do_action" ds_action="config.channel.addWeixinMenuMain"></span>
+        </li>
+    </ol>
+</div>
+<div class="weixin-config-set">
+    <form id="weixin-all-menu">
+            <div class="form-btn-center clearfix">
+                <div class="null-menu">
+                    您还没有定义任何菜单，请点击左下方的加号图标开始自定义菜单
+                </div>
+                <button type="button" class="ds_form_action btn-blue" ds_action="config.channel.createMenu">保存并发布
+                </button>
+                <span id="delete_menu" class="btn-delete ds_do_action" ds_action="config.channel.deleteWeixinMenuConfirmDialog" title="删除菜单"></span>
+            </div>
+    	<input type="hidden" name='weixin_id' value="_#weixin_id#_">
+    </form>
+</div>

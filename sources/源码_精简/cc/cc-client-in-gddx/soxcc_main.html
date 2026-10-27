@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>呼叫中心</title>
+    <script type="text/javascript" src="./javascripts/jquery.js"></script>
+    <!--<script type="text/javascript" src="./jqueryui/ui/minified/jquery.ui.core.min.js"></script>-->
+    <!--<script type="text/javascript" src="./jqueryui/ui/minified/jquery.ui.widget.min.js"></script>-->
+    <!--<script type="text/javascript" src="./jqueryui/ui/minified/jquery.ui.mouse.min.js"></script>-->
+    <!--<script type="text/javascript" src="./jqueryui/ui/minified/jquery.ui.slider.min.js"></script>-->
+    <!--<script type="text/javascript" src="./jqueryui/ui/minified/jquery.ui.effect.min.js"></script>-->
+    <!--<script type="text/javascript" src="./jqueryui/ui/minified/jquery.ui.effect-slide.min.js"></script>-->
+    <script type="text/javascript" src="./javascripts/config/business/jquery-ui.js"></script>
+    <script type="text/javascript" src="./jqueryui/ui/minified/i18n/jquery.ui.datepicker-zh-CN.min.js"></script>
+    <script type="text/javascript" src="./jqueryui/ui/minified/jquery.ui.datepicker.min.js"></script>
+    <script type="text/javascript" src="./javascripts/jquery-ui-timepicker-addon.min.js"></script>
+    <script type="text/javascript" src="./javascripts/jquery-ui-timepicker-zh-CN.js"></script>
+    <script type="text/javascript" src="./javascripts/jquery.alertmessage.js"></script>
+    <!--<script type="text/javascript" src="./javascripts/jquery-ui-sliderAccess.js"></script>-->
+    <!--<script type="text/javascript" src="./javascripts/highcharts.js"></script> 已改为动态加载次js（在callReport.js）-->
+    <script type="text/javascript" src="./javascripts/bootstrap.js"></script>
+    <script type="text/javascript" src="./javascripts/ds_framework/dishui.js"></script>
+    <script type="text/javascript" src="./javascripts/validate.js"></script>
+    <script type="text/javascript" src="./javascripts/uuid.js"></script>
+
+    <script type="text/javascript" src="javascripts/draw.js?1"></script>
+    <script type="text/javascript" src="javascripts/utils.js"></script>
+    <script type="text/javascript" src="javascripts/cti-ui.min.js"></script>
+    <script type="text/javascript" src="javascripts/cti-core-model.js"></script>
+    <script type="text/javascript" src="javascripts/cti-action-monitor.js"></script>
+    <script type="text/javascript" src="javascripts/cc.js?2"></script>
+    <script type="text/javascript" src="./javascripts/jquery.json.min.js"></script>
+    <script type="text/javascript" src="javascripts/cc-core-handler.js"></script>
+    <!--<script type="text/javascript" src="./javascripts/bootstrap-datetimepicker.js"></script>-->
+    <!--<script type="text/javascript" src="./javascripts/bootstrap-datetimepicker.zh-CN.js"></script>-->
+    <script type="text/javascript" src="./javascripts/jquery.tmpl.min.js"></script>
+    <script type="text/javascript" src="javascripts/cc-cust.js?2"></script>
+    <script type="text/javascript" src="javascripts/task.js"></script>
+    <script type="text/javascript" src="javascripts/cti-report.js"></script>
+    <script type="text/javascript" src="javascripts/callReport.js"></script>
+    <script type="text/javascript" src="javascripts/cti-cdr.js"></script>
+    <script type="text/javascript" src="javascripts/batch.js?1"></script>
+    <script type="text/javascript" src="javascripts/callRecord.js?2"></script>
+    <link rel=stylesheet type=text/css href="./stylesheets/bootstrap.css">
+    <link rel=stylesheet type=text/css href="./stylesheets/bootstrap1.css">
+    <link rel=stylesheet type=text/css href="stylesheets/cc.css?2">
+    <link rel=stylesheet type=text/css href="stylesheets/business.css?2">
+    <link rel=stylesheet type=text/css href="stylesheets/cti.css?0817">
+    <!--<link rel=stylesheet type=text/css href="./stylesheets/datetimepicker.css">-->
+    <link rel=stylesheet type=text/css href="stylesheets/test_menu.css?2">
+    <link rel=stylesheet type=text/css href="./jqueryui/base/jquery-ui.css">
+    <link rel=stylesheet type=text/css href="./stylesheets/jquery-ui-timepicker-addon.min.css">
+    <!--<link rel="stylesheet" type="text/css" href="./stylesheets/zTreeStyle/zTreeStyle.css">-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.fn.modal.Constructor.prototype.enforceFocus = function () {};
+//            var href=window.location;
+//            var param=parseHref(href);
+//            if(param.flag=='rich'){
+//                init("rich");
+//            }else{
+//                init();
+//            }
+            init('soxcc');
+        });
+    </script>
+</head>
+<body>
+<div class="main_container">
+    <div class="loading_indicator" style="visibility: hidden;">
+    </div>
+    <span class="loading_indicator_span" style="visibility: hidden;">获取数据中...</span>
+    <div class="login_panel" id="login-panel">
+    </div>
+
+    <div id="main-panel" class="main_container" style="display:none;">
+        <div class="main_header">
+            <div class="user_pic fl ds_do_action" ds_action="showEditInfo" title="修改个人信息" style="background-image: url('./img/user.png')">
+                <a href="javascript:void(0);">
+                    <img class="S_line5" src="./img/user_pic.png" style="height: 40px;" alt="">
+                </a>
+            </div>
+            <div class="fl" style="padding: 5px;min-width: 112px;">
+                <span id="user_name" style="font-weight: bold;margin-right: 3px;"></span><span>-</span>
+                <span id="user_exten"></span>
+                <div>
+                    <span class="icon-headphones" style="margin-top: -1px;"></span>
+                    <span id="user_exten_type" style="font-weight: normal;"></span>
+                    <span id="user_status" class="label label-info" style="font-weight: normal"></span>
+                </div>
+            </div>
+
+
+
+            <div id="peer_state" class="fl" style="padding-left: 10px;position: relative;">
+                <!--<div class="btn-group" id="softphonebar_peerState" style="display: none">-->
+                <!--<button class="btn btn-mini state">空闲</button>-->
+                <!--<button data-toggle="dropdown" class="btn dropdown-toggle btn-mini"><span class="caret"></span></button>-->
+                <!--<ul id="softphonebar_states" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">-->
+                <!--</ul>-->
+                <!--</div>-->
+                <!--<span id="softphonebar_callState" class="label label-warning">未连接</span>-->
+                <!--<div class="state_group">-->
+                <!--<div id="softphone_timer" class="fr state_time">00:00:00</div>-->
+                <!--<img class="fr state_line" src="./img/client/line.png" />-->
+                <!--<div id="softphone_dropdown" class="fr state_dropdown"><b id="softphone_dropdown_caret" class="caret"></b></div>-->
+                <!--<div id="softphone_phonestate" class="fr state">失效</div>-->
+                <!--</div>-->
+                <!--<ul id="softphone_otherstate" class="customer_db">-->
+                <!--</ul>-->
+            </div>
+
+            <div class="fl" id="menu-wrap">
+            </div>
+            <!--<div class="fl into_notify">-->
+            <!--<div id="info_notify"></div>-->
+            <!--</div>-->
+            <div class="fl call_pop"  style="position: fixed;left: 430px;z-index: 100;display: none;">
+                <div style="background: #FFD39B;padding: 5px;"><a href="#" class="ds_do_action" ds_action="call.gotoIncomingPage" style="color: #c00!important">您有新来电,点击查看</a></div>
+            </div>
+            <div class="fl">
+                <div class="showEditInfo"></div>
+            </div>
+            <div class="fr top_head_right">
+                <a href="javascript:void(0);" class="ds_do_action fl" ds_action="showEditInfo" style="color: #323232">个人设置</a>
+                <div class="fl" style="padding-left: 10px;"><a href="javascript:void(0);" class='ds_do_action' ds_action="showLogout" style="color: #a9302a;">退出</a></div>
+            </div>
+            <div class="fr " style="">
+                <div id="softphone-bar">
+                </div>
+            </div>
+        </div>
+        <div class="content_container">
+            <div class="left_col">
+                <div class="left-menu" id="left_menu_container">
+                    <div style="height:97px;">
+                        <div class="clear5">&nbsp;</div>
+                        <div id="my_call_info">
+                        </div>
+                    </div>
+                    <div class="left_menu_detail">
+                        <!--<ul id="nav_menu" class="nav nav-tabs" style="margin-bottom:0px;">-->
+                        <!--</ul>-->
+                        <!--<div class="clear5">&nbsp;</div>-->
+                        <!--<div class="left_menu_bar"></div>-->
+                        <!--<div class="clear5">&nbsp;</div>-->
+                        <!--<div id="my_task">-->
+                        <!--<div class="menu_title">我的业务</div>-->
+                        <!--<div class="left-link">-->
+                        <!--<a href="javascript:void(0);" class="open_with_ajax" id="my_task_uncomplete" apppage="business/task_list" refresh="true" title="我的待办业务" container="task_list" onlyexcuhandler="undefined">我的待办业务<span class="space" style="margin-left: 10px;">&nbsp;</span></a>-->
+                        <!--</div>-->
+                        <!--<div class="left-link">-->
+                        <!--<a href="javascript:void(0);" class="open_with_ajax pressed" id="my_role_task_uncomplete" apppage="business/task_list" refresh="true" title="待领取业务池" onlyexcuhandler="undefined">待领取业务池<span class="space" style="margin-left: 10px;">&nbsp;<img src="./images/child_notify_image.png" class="child_notify_image" style="display: none;"></span></a></div>-->
+                        <!--</div>-->
+                    </div>
+                    <div style="height:100px;">
+                        <div class="clear5">&nbsp;</div>
+                        <div id="my_queue_info">
+                        </div>
+                    </div>
+                    <div style="width: 100%;height:35px;">
+                        <div style="float: left;"><a class="btn btn-link" id="left_knowledge" title="知识库" href="javascript:handler.showTipInfo('left_knowledge');"><img src="./img/client/left_knowledge.png" alt="知识库" style="height: 30px;"/></a></div>
+                        <!--<div style="float: left;padding-left: 10px;"><a id="left_contact" title="通讯录" href="javascript:handler.showTipInfo('left_contact');"><img src="./images/left_contact.png" /></a></div>-->
+                        <!--<div style="float: left;padding-left: 10px;"><a id="task_search" title="撞单查询" href="javascript:handler.showTipInfo('task_search');"><img src="./images/task_search.png" /></a></div>-->
+                        <div class="clear5" style="height:3px;">&nbsp;</div>
+                    </div>
+                </div>
+                <div class="clear" style="height:3px;">&nbsp;</div>
+            </div>
+            <div class="right_col" id="main_container">
+                <div class="right_content" id="view_incoming_call">
+                </div>
+                <div class="right_content" id="view_my_call_sheet">
+                </div>
+                <div class="right_content" id="view_my_call_bill">
+                </div>
+                <div class="right_content" id="view_all_call_bill">
+                </div>
+                <div class="right_content" id="view_call_sheet">
+                </div>
+                <div class="right_content" id="view_monitor_agent_state">
+                </div>
+                <div class="right_content" id="view_monitor_report">
+                </div>
+                <div class="right_content" id="view_monitor_log_record">
+                </div>
+                <div class="right_content" id="view_callin_report">
+                </div>
+                <div class="right_content" id="view_call_report_relay_area">
+                </div>
+                <div class="right_content" id="view_callout_report">
+                </div>
+                <div class="right_content" id="view_queue_report">
+                </div>
+                <div class="right_content" id="view_call_report_agent">
+                </div>
+                <div class="right_content" id="view_customer_report">
+                </div>
+                <div class="right_content " id="view_business_report">
+                </div>
+                <div class="right_content " id="view_customer_list">
+                </div>
+                <div class="right_content" id="view_customer_customer_manage">
+                </div>
+                <div class="right_content" id="view_customer_import">
+                </div>
+                <div class="right_content" id="view_batch_list">
+                </div>
+                <div class="right_content" id="view_task_list">
+                </div>
+                <div class="right_content" id="view_call_config">
+                </div>
+                <div class="right_content" id="view_customer_config">
+                </div>
+                <div class="right_content" id="view_dic_config">
+                </div>
+                <div class="right_content" id="view_role_config">
+                </div>
+                <div class="right_content" id="view_user_config">
+                </div>
+            </div>
+            <div class="right_content" id="view_task_report">
+            </div>
+            <div id="confirm_export_report_pane"></div>
+            <div id="cdr_peer_list_pane"></div>
+
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+
+<div id="icc_event"></div>
+<div id="modal_panel"></div>
+<div class="modal hide fade modal-dialog " id="batch_modal" tabindex="-1" >
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" ></h4>
+    </div>
+    <div class="modal-body" style="">
+    </div>
+    <!--<div class="modal-footer">-->
+    <!--<a href="#" class="btn">关闭</a>-->
+    <!--<a href="#" class="btn btn-primary">Save changes</a>-->
+    <!--</div>-->
+</div>
+<script type="text/javascript" src="./javascripts/ds_framework/event.js"></script>
+<iframe style="border:0;width:0;height:0;position:absolute;visibility:hidden;bottom:0;right:0;" name="ds_iframe" id="ds_iframe"  src=""></iframe>
+<iframe name="report_export_pdf_show_print" id="report_export_pdf_show_print" src="" style="display: none"></iframe>
+<div id="callRecord_detail_modal" class="modal hide fade" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+</body>
+</html>
+<style type="text/css">
+    #left_knowledge:hover {
+        background-color: inherit;
+    }
+</style>

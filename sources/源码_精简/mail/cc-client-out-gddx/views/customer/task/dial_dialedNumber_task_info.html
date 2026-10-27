@@ -1,0 +1,355 @@
+
+<style type="text/css">
+    body{
+        /*font-family: Microsoft YaHei,"Helvetica Neue", Helvetica, Arial, sans-serif;*/
+        /*font-family: "Microsoft Yahei","微软雅黑",Tahoma,Arial,Helvetica,STHeiti;*/
+    }
+    .task_import_section{
+        padding: 5px 0;
+        margin-top: 5px;
+    }
+    .task_import_section .task_num{
+        font-size: 14px;font-weight:bold;color: #ea5404;display:inline-block;
+    }
+</style>
+
+<div class="contact_summary">
+<div class="task_import_section clearfix">
+    <div style="width: 100%;" class="clearfix">
+        <h3 class="pull-left">_#taskName#_&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-success">(创建人:_#createUser#_)</span></h3>
+        <h3>_#status#_</h3>
+        <!--<a class="pull-right">结束任务</a>-->
+    </div>
+    <div class="text-mute">
+       _#memo#_
+    </div>
+    <div class="text-mute">
+       执行座席:_#owner#_
+    </div>
+    <div class="text-mute">
+        接通时间:YY/MM/DD HH:MM:SS       挂机时间:HH:MM:SS                 通话时长:00:00:10
+    </div>
+    <div class="text-mute">
+        <span style="margin-left: 20px">
+
+            </span>
+    </div>
+</div>
+
+<div class="task_import_section" >
+    <div class="row-fluid chart_pane">
+        <div class='span6'>
+            <div id="task_pie_chart_dial" style="height:250px;">
+            </div>
+        </div>
+        <div class='span6'>
+            <div id="task_pie_chart_status" style="height:250px;">
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="task_import_section" >
+        <form class="form-inline clearfix" role="form" id="frm_task_dial_task">
+            <input type="hidden" name="menu" value='_#menu#_'/>
+            <input type="hidden" name="agents" value='_#agents#_'/>
+            <input type="hidden" name="taskId" value='_#taskId#_'/>
+            <input type="hidden" name="taskName" value="_#taskName#_">
+            <div class="pull-left">
+                <table class="table_row_search">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <!--<a href="#" class="ds_do_action refresh" ds_action="customer.task.getUserDialList">成交明细</a>-->
+                            <button type="button" style="margin-left:3px" class="btn btn-info btn-small ds_form_action" ds_action="customer.task.showTaskImportDetail">导入历史</button>
+                            <button type="button" style="margin-left:3px " class="btn btn-info btn-small ds_form_action" ds_action="customer.task.showNADataDetail">导出未拨号码</button>
+                            <button type="button" style="margin-left:3px;" class="btn btn-info btn-small ds_form_action" ds_action="">导出录音</button>
+                            <button type="button" style="margin-left:3px;" class="btn btn-info btn-small ds_form_action" ds_action="customer.task.archiveCustomer">归档</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+
+    </div>
+<!--暂时先不自动回收
+<div class="task_import_section">
+    &lt;!&ndash;<p>&ndash;&gt;
+    &lt;!&ndash;可分配座席:张三、李四、王五   <button type="button" class="btn btn-small btn-primary ds_do_action " ds_action="customer.saveCustAssign" style="margin-left: 15px;">修改</button>&ndash;&gt;
+    &lt;!&ndash;</p>&ndash;&gt;
+    <p style="margin-top: 10px;">
+        <span class="help-block">客户分配后未拨打状态达到<input type="text" name="days" style="width: 35px;">天时，系统自动回收到"待分配"池子中</span>
+    </p>
+</div>-->
+<div class="task_import_section">
+    <!--------------------------------------导入任务统计-------------------------------->
+    <div class="task_dial_task" style="display: block;">
+
+        <div style="margin-top: 15px;">
+            <table class="table table-bordered table-striped table-hover table-condensed" id="customer_task_agent_stat">
+                <thead>
+                <tr>
+                    <th onclick="utils.sortTable('customer_task_agent_stat', 0, 'string', this);" style="cursor: pointer;" state="init">参与座席<span class="sort monitor_sort">&nbsp;</span></th>
+                    <th onclick="utils.sortTable('customer_task_agent_stat', 1, 'int', this);" style="cursor: pointer;" state="init">分配数量<span class="sort monitor_sort" >&nbsp;</span></th>
+                    <th onclick="utils.sortTable('customer_task_agent_stat', 2, 'int', this);" style="cursor: pointer;" state="init">未拨打<span class="sort monitor_sort" >&nbsp;</span></th>
+                    <th onclick="utils.sortTable('customer_task_agent_stat', 3, 'int', this);" style="cursor: pointer;" state="init">已接听<span class="sort monitor_sort">&nbsp;</span></th>
+                    <th onclick="utils.sortTable('customer_task_agent_stat', 4, 'int', this);" style="cursor: pointer;" state="init">未接听<span class="sort monitor_sort">&nbsp;</span></th>
+                    <th onclick="utils.sortTable('customer_task_agent_stat', 5, 'int', this);" style="cursor: pointer;" state="init">完成率<span class="sort monitor_sort">&nbsp;</span></th>
+                    <th onclick="utils.sortTable('customer_task_agent_stat', 6, 'int', this);" style="cursor: pointer;" state="init">接听率<span class="sort monitor_sort">&nbsp;</span></th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody class="task_user_dial_list">
+                </tbody>
+            </table>
+            <!--<div class="">-->
+                <!--<div for="frm_task_user_dial_search" ds_pagination_action="customer.task.getUserDialList"-->
+                     <!--class="pagination pagination-small pagination-right" style="display:table; margin:0;width:100%;">-->
+                    <!--<span style="float:left;margin-top:15px;font-size:12px;">查询结果：<span class="result_count">0</span></span>-->
+                    <!--<ul style="float:right;margin-top:5px;">-->
+                        <!--<li><a href="#"  value="0">&laquo;</a></li>-->
+                        <!--<li><a href="#"  value="1">1</a></li>-->
+                        <!--<li><a href="#"  value="2">2</a></li>-->
+                        <!--<li><a href="#"  value="3">3</a></li>-->
+                        <!--<li><a href="#"  value="4">4</a></li>-->
+                        <!--<li><a href="#"  value="5">5</a></li>-->
+                        <!--<li><a href="#"  value="6">&raquo;</a></li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+            <!--</div>-->
+
+        </div>
+    </div>
+
+    <div class="task_status_stat" style="display: none;">
+        <form class="form-inline clearfix" role="form" id="frm_task_status_task">
+            <input type="hidden" name="taskId" value='_#taskId#_'/>
+            <!--<div class="pull-left" style="margin-bottom: 15px;">-->
+                <!--<table class="table_row_search">-->
+                    <!--<tbody>-->
+                    <!--<tr>-->
+                        <!--<td >座席</td>-->
+                        <!--<td >-->
+                            <!--<input type="text" name="displayName" class="input-small"/>-->
+                        <!--</td>-->
+                        <!--<td>-->
+                            <!--<button type="button" class="btn btn-primary btn-small ds_form_action refresh" ds_action="customer.task.getUserStatusList">查询</button>-->
+                            <!--<button type="button" class="btn btn-default btn-small ds_do_action" ds_action="customer.task.resetUserDialQuery" >重置</button>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+            <!--</div>-->
+        </form>
+
+        <table class="table table-bordered table-striped table-hover table-condensed"
+               style=" margin-bottom: 5px;" id="customer_task_status_stat">
+            <thead class="task_status_stat_thead">
+            </thead>
+            <tbody  class="task_user_status_list">
+            </tbody>
+        </table>
+        <!--<div class="">-->
+            <!--<div for="frm_task_user_status_search" ds_pagination_action="customer.task.getUserStatusList"-->
+                 <!--class="pagination pagination-small pagination-right" style="display:table; margin:0;width:100%;">-->
+                <!--<span style="float:left;margin-top:15px;font-size:12px;">查询结果：<span class="result_count">0</span></span>-->
+                <!--<ul style="float:right;margin-top:5px;">-->
+                    <!--<li><a href="#"  value="0">&laquo;</a></li>-->
+                    <!--<li><a href="#"  value="1">1</a></li>-->
+                    <!--<li><a href="#"  value="2">2</a></li>-->
+                    <!--<li><a href="#"  value="3">3</a></li>-->
+                    <!--<li><a href="#"  value="4">4</a></li>-->
+                    <!--<li><a href="#"  value="5">5</a></li>-->
+                    <!--<li><a href="#"  value="6">&raquo;</a></li>-->
+                <!--</ul>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+
+</div>
+</div>
+
+
+<script type="text/javascript">
+    function task_dialStatus_stat(data){
+        $('#task_pie_chart_dial').empty();
+        $('#task_pie_chart_dial').highcharts({
+            chart: {
+                type: 'pie'
+            },
+            title: {
+                text: '拨打统计图表'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [
+                {
+                    type: 'pie',
+                    name: '拨打统计',
+                    data: data
+                }
+            ]
+        });
+    }
+    function task_status_stat(data) {
+        var pane=$("#chart_pane");
+        $('#task_pie_chart_status').empty();
+        $('#task_pie_chart_status').highcharts({
+            chart: {
+                type: 'pie'
+            },
+            title: {
+                text: '成交统计图表'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [
+                {
+                    type: 'pie',
+                    name: '成交统计',
+                    data : data
+                }
+            ]
+        });
+    }
+    function _initListHandler(list){
+        var pane= $("#view_dial_task_list_content");
+        var dialListPane=pane.find(".task_user_dial_list");
+        var statusListPane=pane.find(".task_user_status_list");
+        if(list.length > 0){
+            var html = [];
+            var html2=[];
+            var viewTemp = ["<tr><td>_#displayName#_</td>"];
+            var agents=getCache("agents");
+            var tmls=getCache('custTmpls');
+            var status = tmls[0].status;
+            for(var i in status){
+                viewTemp.push("<td>_#"+i+"#_</td>");
+            }
+            viewTemp.push("</tr>");
+            DS.getView('customer/task/dial_task_list_item', function (view) {
+//                html.push(DS.renderMethodViewNew(view,{menu:"_#menu#_"}));
+                for (var i = 0; i < list.length; i++) {
+                    var _obj=list[i];
+                    _obj.menu = "_#menu#_";
+                    for(var j=0;j<agents.length;j++){
+                        var agent = agents[j];
+                        if(agent._id == _obj.agent){
+                            _obj.displayName = agent.displayName;
+                        }
+                    }
+                    handler.customer.task._initDialTaskUserNullFields(_obj);
+                    html.push(DS.renderMethodViewNew(view,_obj));
+                    html2.push(DS.renderMethodViewNew(viewTemp.toString(),_obj));
+                }
+                dialListPane.html(html.join(""));
+                statusListPane.html(html2.join(""));
+            });
+        } else {
+            var html='<tr><td class="text-center" colspan="10">没有记录!</td></tr>';
+            dialListPane.html(html);
+            statusListPane.html(html);
+        }
+    }
+    $(function(){
+        var status = getCache("custTmpls")[0].status;
+        var action={
+            action:"app.customer.task.statDialUserData",
+            data:{
+                taskId:"_#taskId#_"
+//                status:status
+            }
+        };
+        DS.send(action, function (response) {
+            if (response.success) {
+                var docs = response.data;
+                //初始化列表
+                _initListHandler(docs);
+                //统计数据
+                var totalStat = 0;
+                var calledStat = 0;
+                var linkedStat =0;
+                var statusCount = {};
+                for(var i in status){
+                    statusCount[i] = 0;
+                }
+                for(var i=0;i<docs.length;i++){
+                    var obj = docs[i];
+                    var total = parseInt(obj.total || 0);
+                    var called = parseInt(obj.called || 0);
+                    var linked = parseInt(obj.linked || 0);
+                    totalStat+=total;
+                    calledStat+=called;
+                    linkedStat+=linked;
+
+                    for(var j in status){
+                        var val =parseInt(obj[j] || 0);
+                        statusCount[j]+=val;
+                    }
+                }
+                //拨打图表
+                var totalStat = totalStat;
+                var calledStat = calledStat;
+                var linkedStat = linkedStat;
+                var chartData=[
+                    {name:"未接听",y:calledStat - linkedStat},
+                    {name:"已接听",y:linkedStat},
+                    {name:"未拨打",y:totalStat - calledStat}
+                ];
+                var count = 0;
+                for(var i=0;i<chartData.length;i++){
+                    var obj = chartData[i];
+                    if(obj.y==0){count++};
+                }
+                if(count == chartData.length){
+                    task_dialStatus_stat(chartData);
+                }else{
+                    $('#task_pie_chart_dial').empty();
+                    $('#task_pie_chart_dial').css("height","30px");
+                }
+                //成交统计图表
+                var chartData2=[];
+                var count2 = 0;
+                for(var i in status){
+                    var val = statusCount[i] || 0;
+                    chartData2.push({
+                        name:status[i],
+                        y:val
+                    });
+                    if(val==0 || val==null){count2++};
+                }
+                if(count2==chartData2.length){
+                    $('#task_pie_chart_status').empty();
+                    $('#task_pie_chart_status').css("height","30px");
+                }else{
+                    task_status_stat(chartData2);
+                }
+            }else{
+                $().alertmessage('showError', response.message||errMsg);
+            }
+        });
+
+    });
+</script>

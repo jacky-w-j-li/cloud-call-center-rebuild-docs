@@ -1,0 +1,20 @@
+<div class="row-fluid list-item ds_action_flow" appaction="ivr.editBlackNum" id="blacklist__id" appdata="__id" titile="点击修改">
+    <ds-get-view view="config/callConfig/blackList/ivr_edit_blackNum" panel="blacklist_detail"
+                 view-data='{"_id":"___id"}'/>
+    <div class="span12">
+        <div class="row-fluid ivr_list_item">
+            <div class="span4">
+                <h4 style="color:#0088CC;">__BlackNum</h4>
+                <input type="hidden" name="_id" value="___id"/>
+            </div>
+            <div class="span4">
+                <span class="label">_@config.callConfig.blackList.getTypeName('__Type')@_</span>
+
+                <!--<span class="label">__BlackType</span>-->
+                <input type="hidden" name="Type" value="__Type"/>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="height:1px;background-color:#EAEAEA;width:100%;margin:2px 0px 2px;">
+</div>

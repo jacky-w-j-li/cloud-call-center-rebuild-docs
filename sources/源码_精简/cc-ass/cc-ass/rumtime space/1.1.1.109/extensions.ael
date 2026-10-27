@@ -1,0 +1,178 @@
+globals {
+	HOST="1.1.1.100";
+}
+
+context default {
+	_X. => goto ${EXTEN},${EXTEN},1;
+}
+
+context dial-account {
+        _. => {
+                if(${SIP_HEADER(REFUNIQUEID)}"a" != "a"){
+                        REFUNIQUEID = ${SIP_HEADER(REFUNIQUEID)};
+                } else {
+                        Noop("Null refuniqueid");
+                }
+                C5-account=${EXTEN:0:13};
+                C5-exten=${EXTEN:13};
+                goto ${c5-account},${c5-exten},1;
+        }
+}
+
+context balance {
+        _. => {
+                 Playback(sound/balance);
+                 Hangup();
+        }
+}
+
+context no-sipuser-bind {
+        _. => {
+                Playback(sound/nosipuser);
+                Hangup();
+        }
+}
+
+context dialout-voerload {
+        _. => {
+                 Playback(sound/outboundCallOverLoad);
+                 Hangup();
+        }
+}
+
+context threewaycall {
+        _X. => {
+                Answer;
+                MeetMe(${EXTEN},dqx1MF);
+        }
+}
+
+context musiconhold {
+        s => {
+                MusicOnHold();
+        }
+}
+
+context agentbusy {
+        s => {
+                BackGround(sound/busybye);
+        }
+}
+
+context dialout-gateway {
+        _. => {
+                Dial(SIP/${EXTEN}@127.0.0.1:5072);
+		//Dial(SIP/5005);
+        }
+        h => {
+                Hangup();
+        }
+}
+
+context ivr-flow-checking {
+        s => {
+                input="";
+                Playback(sound/flowchecking);
+                loop:
+                        WaitExten(20);
+        }
+
+        _[0-9] => {
+                input=${input}${EXTEN};
+                goto s,loop;
+        }
+
+        # => {
+                if("${ACCOUNT}"==""){
+                        MusicOnHold();
+                }else{
+                        goto ${ACCOUNT},${input},1;
+                }
+        }
+
+        i => {
+                Playback(sound/incorrect);
+                goto s,loop;
+        }
+
+        t => {
+                Playback(sound/timeout);
+                goto s,1;
+        }
+}
+
+context outboundBlackList{
+        s => {
+                Playback(sound/outboundblacklist);
+                Hangup();
+        }
+}
+
+context ucpolling {
+        _X. => {
+                POLLSIPNUM = ${CUT(EXTEN|_|1)};
+                POLLLOCALNUM = ${CUT(EXTEN|_|2)};
+                POLLGATEWAYNUM = ${CUT(EXTEN|_|3)};
+
+                if(${POLLGATEWAYNUM}!=null ){
+                        Dial(SIP/${POLLGATEWAYNUM},15);
+                }
+                if(${POLLSIPNUM}!=null ){
+                        Dial(SIP/${POLLSIPNUM},15);
+                }
+                if(${POLLLOCALNUM}!=null ){
+                        Dial(SIP/${POLLLOCALNUM},30);
+                }
+                Hangup();
+        }
+        h => {
+                Hangup();
+        }
+}
+
+context transfer-gateway {
+        _. => {
+                CALLERID(num)=${CALLERID(num):17};
+                Dial(SIP/${EXTEN}@127.0.0.1:5072,30);
+                Playback(sound/transferfailed);
+                goto musiconhold,s,1;
+        }
+        h => {
+                Hangup;
+        }
+}
+
+context transfer-dialin {
+        _. => {
+                CALLERID(num)=${CALLERID(num):17};
+                Dial(SIP/${EXTEN},30);
+                Playback(sound/transferfailed);
+                goto musiconhold,s,1;
+        }
+        h => {
+                Hangup;
+        }
+}
+
+context ivr-menu-end {
+      s => {
+            MusicOnHold();
+      }
+}
+
+context ivr-menu-main-hangup {
+      s => {
+            Playback(sound/ivrmenumainhangup);
+            Hangup;
+      }
+}
+
+context ivr-menu-second-hangup {
+      s => {
+            Playback(sound/ivrmenusecondhangup);
+            Hangup;
+      }
+}
+
+#include "extensions-sip.ael"
+#include "extensions_include.ael"

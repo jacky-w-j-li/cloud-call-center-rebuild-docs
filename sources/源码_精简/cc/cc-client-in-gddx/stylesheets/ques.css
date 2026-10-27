@@ -1,0 +1,239 @@
+/* created by liujing on 04/07/16
+style for question 
+linked by questionnaire/ques_main.html
+all classnames must begin with letter '.ques_' or "#view_nav_questionnaire" */
+
+/* move from app.css start */
+#view_ques_list .item_row{
+    padding: 5px 5px 10px 10px;
+    overflow: visible;
+}
+#view_ques_list_content .active-history-content .timeLine_list>.item:before {
+    background: url(../img/client/activity_icons2.png) no-repeat -18px 0 #fff;
+    content: "";
+}
+#view_ques_list_content .comment .btn_comment{
+    margin: 10px 0;
+}
+#view_ques_list_content .comment .add_questionnaire_comment{
+    display: none;
+}
+#view_ques_list_content .comment h4{
+    font-size:14px;
+}
+#view_ques_list_content .comment .ques_commentMsg{
+    margin-top: 10px;
+}
+#view_ques_list_content .comment .ques_commentMsg textarea.span12{
+    border:1px solid #f7f9f8;
+    height:77px;
+    background:#f9f7fb;
+}
+#view_ques_list_content .comment .action_form .action_bar{
+    background:#fff;
+}
+#view_ques_list_content .comment .action_form .action_bar .get-back{
+    background:#e9e7ec;
+    color:#b3b2b4;
+    float: right;
+    margin: 3px 5px 0 0;
+}
+#view_ques_list_content .comment .action_form .action_bar .save_comment{
+    background:#5eb2e8;
+    float: right;
+    margin: 3px 10px 0 0;
+}
+#view_ques_list .card_left{
+    width: 5.5em;
+    height: 34px;
+    position: absolute;
+    left: 0;
+    top: 12px;
+    border-radius: 3px;
+    text-align: center;
+    overflow: hidden;
+    padding: 1px .25em;
+}
+#view_ques_list .card_middle{
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 19px;
+    margin:12px 0 0 85px;
+    color: #898989;
+}
+#view_ques_list .card_right .label{
+    font-weight: 400;
+    color: #898989;
+    background: none;
+    text-shadow: none;
+    padding-right: 0;
+}
+#view_ques_list .card_right span{
+    width: 80px;
+    background: none;
+    color: #67d234;
+    white-space: nowrap;
+    display: inline-block;
+}
+#view_ques_list .card_right span.label-important{
+    color: #fa6261;
+}
+#view_ques_list .card_right div{
+    float: right;
+    clear: both;
+}
+#view_ques_list .item_row .label{
+    width: 5.5em;
+    height: 28px;
+    overflow: hidden;
+    white-space: normal;
+    display: table-cell;
+    vertical-align: middle;
+    line-height:16px;
+    word-wrap: break-word;
+    word-break: break-all;
+    padding: 0;
+}
+#view_ques_list .item_row .card_left .label{
+    height: 34px;
+    line-height: 17px;
+}
+#view_nav_questionnaire .cust_detail{
+    position: fixed;
+    top: 194px;
+    right: -735px;
+    width: 735px;
+    height: 22px;
+    z-index: 99;
+    border-left: 1px solid rgb(204, 204, 204);
+    overflow-y: auto;
+    background-color: rgb(255, 255, 255);
+}
+#view_nav_questionnaire .account_base{
+    padding:0;
+}
+#view_nav_questionnaire .ques_result_pane{
+    margin: 25px 0;
+}
+/*top*/
+#view_nav_questionnaire  .table_ds_word{
+    font-weight: 700;
+}
+#view_nav_questionnaire  .contact-info .contact_name{
+    font-size: 20px;
+    color: #1b3e5b;
+}
+#view_nav_questionnaire  .phone-number{
+    color:#1b3e5b;
+}
+#view_nav_questionnaire  .contact-info .skype {
+    background: url("../img/client/customer/social_ico.png") no-repeat;
+    background-size: auto 19px;
+    width:18px;
+    height:18px;
+}
+/*top end*/
+#view_nav_questionnaire .field-option-inner div{
+    margin-right: 36px
+}
+#view_nav_questionnaire .ques_item_pane{
+    margin: 12px 12px 0 12px;
+    cursor: pointer;
+}
+#view_nav_questionnaire .ques_item_pane .item_list_item{
+    border: 1px solid #f0eff0;
+    background: #fff;
+    padding: 10px 0;
+}
+#view_nav_questionnaire .ques_display_item{
+    margin-top: 12px;
+}
+#view_nav_questionnaire .ques_item_pane .ques_item_pane{
+    margin: 12px 0 0;
+}
+#view_nav_questionnaire .other_anwser_comment{
+    width: 97%;
+    border-radius: 2px;
+    overflow: hidden;
+    word-wrap:break-word;
+    text-overflow: ellipsis;
+    display: inline-block;
+    margin: 5px 0 10px 3px;
+}
+#view_nav_questionnaire .popover-content{
+    word-wrap: break-word;
+}
+#view_nav_questionnaire #btn-select a{
+    margin-right: 10px;
+    display: inline-block;
+    box-shadow: 0 0 0 rgba(0,0,0,0);
+    text-shadow:0 0 0 rgba(0,0,0,0);
+}
+#view_nav_questionnaire #btn-select a.btn_green{
+    background: #83cf50;
+}
+#view_nav_questionnaire .ques_result_pane .check_group{
+    margin-left: 20px;
+}
+#ques_detail_ques input[type="radio"],#ques_detail_ques input[type="checkbox"]{
+    margin: 0 5px 0 0;
+}
+#view_nav_questionnaire .field-option-inner .inline-checkbox .inline input[type="text"]{
+    width: 167px;
+    height: 20px;
+    padding:0;
+    margin-left: 15px;
+}
+#view_nav_questionnaire .add_comment_button{
+    color:#898989;
+}
+#view_nav_questionnaire  .no_content_action_from {
+    border:0;
+}
+#view_nav_questionnaire .cust_tab_content{
+    padding: 15px 20px;
+    overflow: auto;
+}
+#questionnaire-info-content .ques_title{
+    border-bottom: 1px solid #f1f0f2;
+    background: #fff;
+}
+#questionnaire-info-content .ques_title span{
+    line-height: 31px;
+    padding-left: 21px;
+    color: #5eb2e8;
+    font-weight: 700;
+}
+#questionnaire-info-content .action_form{
+    background-color: #f9f7fb;
+    margin-bottom: -18px;
+}
+#questionnaire-info-content .last_action{
+    margin:0;
+    padding:0;
+}
+#questionnaire-info-content .ques-info-content{
+    border:1px solid #ececec;
+    background: #f9f7fb;
+}
+#questionnaire-info-content .btn-add,#view_nav_questionnaire #btn-select .btn-reset{
+    background: #e9e7ec;
+    color: #979797;
+    height: 22px;
+    text-shadow:0 0 0 rgba(0,0,0,0);
+}
+#questionnaire-info-content .newly-add-comments{
+    box-shadow: 0 0 0 rgba(0,0,0,0);
+}
+/* move from app.css end */
+#view_nav_questionnaire .right_column{
+    overflow-y: hidden;
+}
+#view_nav_questionnaire .form-horizontal .control-label{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+

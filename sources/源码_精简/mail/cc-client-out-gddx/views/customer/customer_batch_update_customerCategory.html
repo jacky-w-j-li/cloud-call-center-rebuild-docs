@@ -1,0 +1,31 @@
+<!--<div class="contact_summary">-->
+    <form class="form-horizontal" id="frm_batch_update_customer">
+        <input type="hidden" name="menu" value="_#menu#_"/>
+        <div class="row-fluid">
+            <!--<div class="span12">-->
+                <!--<div style="border-bottom: 1px solid #f0f0f0;line-height:30px;" class="clearfix">-->
+                    <!--<h4 style="float:left;line-height: inherit;">批量修改状态 &nbsp;&nbsp;</h4>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="alert alert-danger">
+                <b>温馨提示：</b><br>
+                可以批量转为公海或无归属客户。<br>
+                客户归属被转移为公海后，会重置每个客户的跟进状态为“待跟进”，请谨慎操作！
+            </div>
+            <div class="span12 cust_assgin_container">
+                <div style="height: 25px;line-height: 25px;">您选择的客户共计<span class="cust_count">0</span>个</div>
+
+                <select name="categoryId">
+
+                </select>
+            </div>
+            <div class="span12">
+                <div class="form_buttons" style="padding-top:10px;">
+                    <button type="button" class="btn btn-small btn-primary ds_form_action pull-left btn_pad" ds_action="customer.batchUpdateCustomerCategory" >保存</button>
+                    <!--<button type="button" class="btn btn-small pull-left  btn_cancel_edit">取消</button>-->
+                    <button type="button" class="btn btn-small pull-left" data-dismiss="modal" aria-hidden="true">取消</button>
+                </div>
+            </div>
+        </div>
+    </form>
+<!--</div>-->

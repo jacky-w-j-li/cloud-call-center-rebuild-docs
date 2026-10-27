@@ -1,0 +1,106 @@
+globals {
+	HOST="10.1.1.141";
+}
+
+context default {
+	_X. => goto ${EXTEN},${EXTEN},1;
+	_592423XX => goto ${EXTEN},${EXTEN},1;
+	_58103XXX => goto ${EXTEN},${EXTEN},1;
+	_0202223XXXX => goto ${EXTEN},${EXTEN},1;
+	_0215171XXXX => goto ${EXTEN},${EXTEN},1;
+	_300X => {
+		Dial(SIP/${EXTEN});
+	}
+	_[A-Z]X. => goto dial-account,${EXTEN},${EXTEN};
+	_. => {
+		Answer;
+		Noop("hangup this call --------------------aaaa");
+		Hangup;
+	}
+}
+
+context ucpolling {
+        _X. => {
+                POLLSIPNUM = ${CUT(EXTEN|_|1)};
+                POLLLOCALNUM = ${CUT(EXTEN|_|2)};
+                POLLGATEWAYNUM = ${CUT(EXTEN|_|3)};
+
+                if(${POLLGATEWAYNUM}!=null ){
+                        Dial(SIP/${POLLGATEWAYNUM},15);
+                }
+		if(${POLLSIPNUM}!=null ){
+                        Dial(SIP/${POLLSIPNUM},15);
+                }          
+                if(${POLLLOCALNUM}!=null ){
+                        Dial(SIP/${POLLLOCALNUM},15);
+                }
+                Hangup();
+        }
+        h => {
+                Hangup();
+        }
+}
+
+context dial-account {
+	_. => {
+		if(${SIP_HEADER(REFUNIQUEID)}"a" != "a"){
+			REFUNIQUEID = ${SIP_HEADER(REFUNIQUEID)};
+		}
+		C5-account=${EXTEN:0:14};
+		C5-exten=${EXTEN:15};
+		goto ${c5-account},1,${c5-exten};
+	}
+}
+
+context call-company {
+	s => {
+		Answer;
+		Wait(1);
+		Background(sound/inputcompanynumber);
+		__input="";
+		loop:
+		WaitExten(20);
+	}
+	_[0-9] => {
+		__input="${input}${EXTEN}";
+		goto s,loop;
+	}
+	# => {
+		goto ${input},${input},1;
+	}
+}
+
+context balance {
+	_. => {
+		Playback(sound/balance);
+		Hangup();
+	}
+}
+
+context dialout-voerload {
+	_. => {
+		Playback(sound/outboundCallOverLoad);
+		Hangup();
+	}
+}
+
+context threewaycall {
+	_X. => {
+		Answer;
+		MeetMe(${EXTEN},dqx1MF);
+	}
+}
+
+context musiconhold {
+	s => {
+		MusicOnHold();
+	}
+}
+
+context agentbusy {
+	s => {
+		BackGround(sound/busybye);
+	}
+}
+
+#include "extensions_include.ael"

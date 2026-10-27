@@ -1,0 +1,108 @@
+<div class="row-fluid">
+    <div class="span12">
+        <form class="form-horizontal ds_item_edit" action="" client-data="session.ivrMap.ivr.ivr_node_route"
+              on-complete="config.callConfig.node.route.editPageShown">
+            <div id="confirm_del_pane"></div>
+            <input type="hidden" name="_id" value="___id">
+            <input type="hidden" name="Exten" value="__Exten">
+            <div class="row-fluid">
+                <div class="span6 offset1">
+                    <i class="icon-plus"></i>修改按变量路由节点
+                </div>
+                <div class="span5 text-right pull-right">
+                    <a class="btn btn-info btn-blue ds_action_flow">
+                        <ds-form-action action="config.ivr.node.route.updateRoute" extra-data="config.callConfig.currentConfigData"
+                            update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"ivr_node_route"}}'
+                            on-before="config.callConfig.node.route.preSaveRoute"/>
+                        <ds-get-view view="config/callConfig/node/route/route_list" panel="ivrRouteNodePanel"/>
+                        <ds-effect-ivr/>
+                        保存
+                    </a>
+                    <a class="btn btn-danger btn-gray ds_action_flow">
+                        <ds-form-action action="config.ivr.node.route.deleteRoute" extra-data="config.callConfig.currentConfigData"
+                                        update-client-data='{"method":"config.callConfig.updateClientData","arg":{"operation":"del","type":"ivr_node_route"}}'/>
+                        <ds-get-view view="config/callConfig/node/route/route_list" panel="ivrRouteNodePanel"/>
+                        <ds-effect-ivr/>
+                        删除
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="row-fluid">
+                <div class="span9">
+                    <div class="ivr-report">
+                        <div class="control-group">
+                            <label class="control-label">
+                                节点名称
+                            </label>
+                            <div class="controls">
+                                <input type="text" name="DisplayName" required="true" msgName="节点名称" id="add_route_name"/>
+                            </div>
+                        </div>
+                        <div class="control-group" id="append_Rule">
+                            <label class="control-label">
+                                条件
+                            </label>
+                        </div>
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <th class="span3">变量</th>
+                                <th class="span2">条件</th>
+                                <th class="span3">值</th>
+                                <th class="span3">逻辑关系</th>
+                                <th>
+                                    <a href="#" class="ds-ivr-add-route-item"><i class="icon-plus"></i></a>
+                                </th>
+                            </tr>
+                            </tbody>
+                            <tbody id="ivrRouteListBody">
+
+                            </tbody>
+                        </table>
+                        <div class="control-group">
+                            <label class="control-label">
+                            </label>
+                            <div class="controls">
+                                <div class="alert alert-success">
+                                    <strong>温馨提示</strong> 按变量路由节点最多添加20个条件。
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">
+                                满足条件转向
+                            </label>
+                            <div class="controls">
+                                <div id="toPeerType" class="ds_ivr_to_peer_type" tag-name="ToPeerType" tag-value-key="ToPeerType">
+
+                                </div>
+                                <div id="toPeer" class="ds_ivr_to_peer" tag-value-key="ToPeer">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">
+                                不满足条件转向
+                            </label>
+                            <div class="controls">
+                                <div id="toPeerTypeUnmatched" class="ds_ivr_to_peer_type" tag-name="ToPeerTypeUnmatched" tag-value-key="ToPeerTypeUnmatched">
+
+                                </div>
+                                <div id="toPeerUnmatched" class="ds_ivr_to_peer" tag-value-key="ToPeerUnmatched">
+
+                                </div>
+                                <div class="ds_item_edit_param" ToPeerType="" ToPeer="" ToPeerTypeUnmatched="" ToPeerUnmatched=""
+                                     style="display:none"></div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

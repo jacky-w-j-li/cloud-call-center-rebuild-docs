@@ -1,0 +1,61 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form id="frm_invoice_query_search" class="form-horizontal">
+            <table class="table_row_search">
+                <tbody>
+                <tr>
+                    <td>申请日期</td>
+                    <td>
+                        <input type="text" name="startCreateTime" class="form-control input-sm ds_date" style="display: inline-block;width: auto"/> 至
+                        <input type="text" name="endCreateTime" class="form-control input-sm ds_date" style="display: inline-block;width: auto"/>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm ds_form_action ds_pay_search" ds_action="invoice.queryInvoiceList">查询</button>
+                        <button type="button" class="btn btn-default btn-sm ds_do_action" ds_action="invoice.reset">重置</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+<div class="panel panel-info">
+    <!--<div class="panel-heading">-->
+
+    <!--</div>-->
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>发票金额</th>
+            <th>申请时间</th>
+            <th>发票抬头</th>
+            <th>收取方式</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody class="content_list">
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <div class="col-md-5">查询结果：<span class="result_count" style="margin-top:3px;display: inline-block;">0</span></div>
+    <div class=" col-md-7">
+        <ul class="pagination pagination-sm pull-right" style="margin: 0;"
+            for="frm_invoice_query_search" ds_pagination_action="invoice.queryInvoiceList">
+            <li><a href="#"  value="0">&laquo;</a></li>
+            <li><a href="#"  value="1">1</a></li>
+            <li><a href="#"  value="2">2</a></li>
+            <li><a href="#"  value="3">3</a></li>
+            <li><a href="#"  value="4">4</a></li>
+            <li><a href="#"  value="5">5</a></li>
+            <li><a href="#"  value="6">&raquo;</a></li>
+        </ul>
+    </div>
+</div>
+<style type="text/css">
+    .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
+        z-index: 1;
+    }
+</style>

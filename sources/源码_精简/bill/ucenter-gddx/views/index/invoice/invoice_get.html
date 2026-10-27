@@ -1,0 +1,66 @@
+<form class="" id="" method="post" >
+<input type="hidden" name="checkAll" value="_#checkAll#_">
+<input type="hidden" name="getMoney" value="_#getMoney#_">
+<div class="alert alert-warning" style="padding: 10px;margin-bottom: 10px;">
+    <div class="row invoice_get_head2">
+        <div class="col-md-6">
+            您选取了<span class="select_num" style="color:red; ">0</span>条充值单据开具发票
+        </div>
+        <div class="col-md-6">
+            <div class="pull-right">
+                开票金额合计：<span class="select_invoice" style="color:#f58300;">0</span>元
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-info invoice_get_info">
+    <div class="panel-heading">发票信息
+        <button type="button" class="btn btn-success btn-xs ds_do_action" ds_action="invoice.showAddInfo" style="margin-left: 20px;">添加发票信息</button>（最多保存5个发票信息）
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                &nbsp;
+            </th>
+            <th>发票抬头</th>
+            <th>开具类型</th>
+            <th>发票类型</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody class="content_list">
+        </tbody>
+    </table>
+</div>
+
+
+<div class="panel panel-info invoice_get_addr">
+    <div class="panel-heading">寄送地址(将以快递（免费）方式寄送给您)
+        <button type="button" class="btn btn-success btn-xs ds_do_action" ds_action="invoice.showAdd" style="margin-left: 20px;">添加地址</button>（最多保存5个地址）
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                &nbsp;
+            </th>
+            <th>收件人姓名</th>
+            <th>手机</th>
+            <th>邮编</th>
+            <th>地址</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody class="content_list">
+        </tbody>
+    </table>
+</div>
+<div style="margin-bottom: 15px;">
+    <textarea class="form-control input-sm" name="memo" placeholder="如有特殊情况，请在备注中注明！"></textarea>
+</div>
+<div>
+    <button type="button" class="btn btn-primary btn-sm ds_form_action btn_saveInvoice" ds_action="invoice.checkFeeLimit">提交</button>
+    <button type="button" class="btn btn-default btn-sm ds_do_action" ds_action="invoice.returnGet">返回</button>
+</div>
+</form>

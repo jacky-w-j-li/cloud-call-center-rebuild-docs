@@ -1,0 +1,81 @@
+<div class="contact_summary">
+
+<form id='question_import_query_frm'>
+    <input  name="batchNo" type="hidden" >
+</form>
+<div class="">
+    <table class="table table-bordered table-striped table-hover" style="word-break: break-all;">
+        <colgroup>
+            <col width="40%"/>
+            <col width="40%"/>
+            <col width="20%"/>
+            <!--<col width="20%"/>-->
+        </colgroup>
+        <thead>
+        <tr>
+            <th>
+                客户名称
+            </th>
+            <th>
+                电话
+            </th>
+            <th>
+                状态
+            </th>
+            <!--<th>-->
+                <!---->
+            <!--</th>-->
+
+        </tr>
+        </thead>
+        <tbody id="task_import_list_pane">
+        </tbody>
+    </table>
+    <div class="pagination" style="display:table; margin:0;width:100%;" for="question_import_query_frm" ds_pagination_action="config.questionnaire.import.loadTaskImpList">
+        <span style="float:left;margin-top:10px;font-size:12px;">查询结果：<span class="result_count">0</span></span>
+        <ul class="import_list_page" style="float:right;">
+            <li>
+                <a href="#"  value="0">«</a>
+            </li>
+            <li>
+                <a href="#"  value="1">1</a>
+            </li>
+            <li>
+                <a href="#"  value="2">2</a>
+            </li>
+            <li>
+                <a href="#"  value="3">3</a>
+            </li>
+            <li>
+                <a href="#"  value="4">4</a>
+            </li>
+            <li>
+                <a href="#"  value="5">5</a>
+            </li>
+            <li>
+                <a href="#"  value="6">»</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</div>
+<script id="tmpl_taskimport_question_item" type="text/x-jquery-tmpl">
+    <tr>
+        <td>
+            {{if name}}
+            ${name}
+            {{/if}}
+        </td>
+        <td>
+            {{if phone}}
+            ${phone}
+            {{/if}}
+        </td>
+        <td>
+            {{if status}}
+            ${handler.questionnaire.showFieldDesc('status',status)}
+            {{/if}}
+        </td>
+    </tr>
+</script>

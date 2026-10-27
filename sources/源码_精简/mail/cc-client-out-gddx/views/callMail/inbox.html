@@ -1,0 +1,24 @@
+<div class="inbox clearfix">
+    <div class="head">
+        <div class="clearfix">
+            <div class="pull-left">_#fromDesc#_</div>
+            <div class="pull-right">_#createTime#_</div>
+        </div>
+        <div class="clearfix">
+            <div class="table_ds_word">收件人：_#toDesc#_</div>
+            <div class="table_ds_word" style="">抄送：_#ccDesc#_</div>
+        </div>
+        <div>_#subject#_</div>
+        <div class="attach">
+            _#attachDesc#_
+        </div>
+    </div>
+
+    <div class="inbox_content">
+        <iframe scrolling='auto' width='100%'  frameborder='0' src='' name='inbox__#_id#_' id='inbox__#_id#_'></iframe>
+    </div>
+    <div class="pull-right">
+        <button type="button" class="btn btn-primary btn-small ds_do_action" ds_action="callMail.fullscreen" ds_data="_#_id#_" ds_attr='_#escapeContent#_' style="margin-left: 10px;">全屏查看</button>
+        <button type="button" class="btn btn-info btn-small ds_do_action" ds_action="callMail.showReplyView" ds_data="_#_id#_|_#from#_|_#toDesc#_|_#ccDesc#_|_#createTime#_|_#mailId#_|_#subject#_|_#fromDesc#_" ds_attr='_#escapeContent#_' style="margin-left: 10px;">回复</button>
+    </div>
+</div>

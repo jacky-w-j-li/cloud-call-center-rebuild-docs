@@ -1,0 +1,66 @@
+<div class="row-fluid" xmlns="http://www.w3.org/1999/html">
+    <div class="span12">
+        <form class="form-horizontal" action="">
+            <input type="hidden" name="_id">
+            <div class="row-fluid">
+                <div class="span7 offset1">
+                    <i class="icon-plus"></i>添加&nbsp;<b>MD5</b>&nbsp;加密节点
+                </div>
+                <div class="span4 text-right pull-right">
+                    <a class="btn btn-info btn-blue ds_action_flow">
+                        <ds-form-action action="config.ivr.node.encryptMd5.updateEncryptMd5" extra-data="config.callConfig.currentConfigData"
+                                        update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"ivr_node_encrypt_md5"}}'/>
+                        <ds-get-view view="config/callConfig/node/encryptMd5/encrypt_md5_list" panel="encryptMd5NodePanel"/>
+                        <ds-effect-ivr/>
+                        保存
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="row-fluid">
+                <div class="span5">
+                    <div class="control-group">
+                        <label class="control-label">
+                            节点名称
+                        </label>
+                        <div class="controls">
+                            <input type="text" msgName="节点名称" name="DisplayName" required/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            加密值
+                        </label>
+                        <div class="controls">
+                            <input type="text" msgName="加密值" name="EncryptText" required/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            赋值到变量
+                        </label>
+                        <div class="controls ds_ivr_var_select" var-select-name="Variable">
+                            <select name="Variable">
+                                <option value="">--请选择--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            加密后转向
+                        </label>
+                        <div class="controls">
+                            <div id="nextPeerType" class="ds_ivr_to_peer_type" tag-name="NextPeerType" tag-value-key="NextPeerType">
+
+                            </div>
+                            <div id="nextPeer" class="ds_ivr_to_peer" tag-value-key="NextPeer">
+
+                            </div>
+                        </div><br>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

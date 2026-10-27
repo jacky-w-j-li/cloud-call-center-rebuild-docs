@@ -1,0 +1,38 @@
+<div class="">
+    <div class="row">
+        <div class="col-md-offset-2 col-md-10">
+        <a href="#" onclick="handler.batch.downloadImpTmpl()">下载导入模板</a>
+        </div>
+    </div>
+    <form  action="" method="post" encType="multipart/form-data" target="uploadIframe" id="frm_num_import" class="form-horizontal">
+        <input type="hidden" name="action" value="importNum"/>
+        <input type="hidden" name="sessionId" value=""/>
+        <div class="form-group">
+            <label class="control-label col-md-2">
+                excel文件
+            </label>
+            <div class="col-md-10">
+                <input type="file" style="margin-top: 5px;"  name="file"  onchange="handler.batch.importNum('frm_num_import')">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="isPhone" value="check" checked> 过滤重复号码
+                    </label>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<iframe name="uploadIframe" id="uploadIframe"  style="display:none;"></iframe>
+<div class="alert alert-warning" style="margin-top:25px;line-height: 18px;">
+    说明：<br/>
+    1.支持后缀为xls和xlsx的excel文件导入<br/>
+    2.号码需放到excel的第一列，不需要表头，支持一个excel文件多个工作表导入<br/>
+    3.导入是异步处理的,提交导入后可以立刻进行其他的导入,服务器会排队处理<br/>
+</div>
+<script type="text/javascript">
+    $("#frm_num_import").find('input[name="sessionId"]').val(session.id);
+</script>

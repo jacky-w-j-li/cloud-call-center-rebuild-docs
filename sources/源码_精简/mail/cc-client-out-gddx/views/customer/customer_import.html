@@ -1,0 +1,114 @@
+<div class="">
+    <div class="row-fluid" style="padding-bottom: 30px">
+        <div class="span5">
+            <div id="import_list_customer_import"  ds_menu="customer_import" ds_index="1" class="ds_search_pane">
+                <div class="contacts_caption" style="position:static;box-shadow: none;">
+                    <div class="caption-top clearfix">
+                        <div style="float:right;">
+                            <button class="btn btn-small ds_do_action" ds_action="customer.addImpTask" ds_data="_#menu#_">添加导入任务</button>
+                        </div>
+                    <span class="pull-left refresh ds_do_action" ds_action="customer.searchCustImport" ds_data="">
+                        <a href="#" class="ajaxed">刷新</a>
+                    </span>
+                        <div class="input-append" style="margin-left: 10px;">
+                            <input class="ds_search_item" name="batchNo" style="width: auto" type="text" placeholder="输入批次号查询">
+                            <button class="btn ds_do_action" type="button" ds_action="customer.searchCustImport" ds_data="_#menu#_" title="查询">
+                                <i class="icon-search"></i>
+                            </button>
+                            <button type="button" class="btn" data-toggle="collapse"
+                                    data-target="#search__#menu#_" style="height: 24px;" title="高级查询">
+                                <span class="caret"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="list_container compact-view">
+                    <div class="contact_list">
+                        <div class="search collapse" id="search__#menu#_" style="height: 0px;">
+                        </div>
+                        <div class="ds_search_filter">
+                        </div>
+                        <div class="list-inside">
+                        </div>
+                        <div style="margin-right: 8px;">
+                            <a class="btn ds_do_action ds_more" ds_action="customer.moreCustImport" ds_data="_#menu#_" href="#" style="display: none;">更多...</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="span7 sub-right">
+            <div id="customer_import_pane"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    $(function(){
+        var menu = '_#menu#_';
+        var evt=dsevent.evt.importCustomer;
+        dsevent.bind('#import_list__#menu#_', evt,function(event, params){
+            var parent=$("#import_list_"+menu);
+            var data={};
+            if(params){
+                data=params;
+            }
+//            var t=parent.find(".item"+data.batchNo);
+            if(event.type==dsevent.evt.importCustomer){
+                parent.find(".list-inside").prepend($("#tmpl_cust_import_item").tmpl(data));
+                parent.find('.item_row:first').click();
+            }
+        });
+
+        var url = 'customer/customer_import_search';
+//        var tmpls=getCache('custTmpls');
+//        if(!tmpls || tmpls.length<0){
+//            alert("请配置客户数据库");
+//            return;
+//        }
+//        var dbType=tmpls[0]._id;
+
+        DS.getView(url, function(view){
+            if(view){
+                view = view.replace(new RegExp('_#'+'menu'+'#_', 'g'), '_#menu#_');
+                $('#search__#menu#_').html(view);
+            }
+        });
+    });
+</script>
+<script id="tmpl_cust_import_item" type="text/x-jquery-tmpl">
+            <div class="list_item">
+                <div class="ds_do_action item_row item${_id}" ds_action='customer.showImportTask' ds_data='${_id}'>
+                    <input type="hidden" name="batchNo" value="${batchNo}" >
+                    <div class="contact_item">
+                        <div class="right-items status status_lead">
+                            {{if flag=='finish'}}
+                            <span class="status-name" style="color:green;" title="${getDicCacheName('impTaskStatus',flag)}">${getDicCacheName('impTaskStatus',flag)}</span>
+                            {{else}}
+                            <span class="status-name" style="color:red;" title="${getDicCacheName('impTaskStatus',flag)}">${getDicCacheName('impTaskStatus',flag)}</span>
+                            {{/if}}
+                            <br>
+                        </div>
+                        <div class="recentTime">
+                            <p>创建于${createTime.substring(0,createTime.length-3)}</p>
+                        </div>
+
+                        <div class="middle-items" style="margin-left:10px;">
+                            <div class="contact">
+                              <span class="name">
+                                <span class="major" title="${batchNo}" style="max-width: 315px;">${batchNo}</span>
+                                <span class="minor" title=""></span>
+                              </span>
+                            </div>
+                            <div class="next_action">
+                                <span style="top:8px;" class="action_date_id"></span>
+                                <span class="action_content" title=""></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</script>

@@ -1,0 +1,85 @@
+
+{{
+temp = temp || {};
+questionnaire = questionnaire || {};
+var status = questionnaire.status ;
+var disableFlag = "",checkedFlag = "",typeClassFlag = 'select_answ';
+if(temp.type == 'static'){ typeClassFlag = ""; }
+
+}}
+
+<div class="row-fluid ques_display_item" id="ques{{=_id}}">
+    <div class="row-fluid item_list_item " >
+        <div style="margin-left: 3%;">
+            <label class="table_ds_word">{{=name}}：{{=context}}</label>
+        </div>
+        <div class="field-option">
+            <div class="field-option-inner" style="margin-left: 3%;">
+                {{
+                if(status == 'complete'){ disableFlag = 'disabled'; }
+                var anws = anws || [];
+                for (var i = 0; i < anws.length; i++) {
+                var otherWord = "";
+                if(answValue && !(typeof answValue == "string")){
+                otherWord = answValue.other
+                }
+                if(answValue && typeof answValue == "string"){
+                if(anws[i]._id == answValue){
+                checkedFlag = 'checked';
+                } else {
+                checkedFlag = '';
+                }
+                }else if (answValue && typeof answValue == "object"){
+                if(answValue.aws && answValue.aws.indexOf(anws[i]._id)>-1){
+                checkedFlag = 'checked';
+                }else{
+                checkedFlag = '';
+                }
+                }else{
+                checkedFlag = '';
+                }
+                if(i==anws.length-1){
+                }}
+                <div class="inline-checkbox" style="margin-right: 36px">
+                    <label class="inline">
+                        <input  type="radio" class="{{=typeClassFlag}}" name="answer_{{=_id}}" next="{{=anws[i].next}}" value="{{=anws[i]._id}}" {{=disableFlag}} {{=checkedFlag}} />{{=anws[i].answer}}
+
+                    </label>
+                </div>
+                {{
+                if(status == 'complete'){
+                if(otherWord){
+                }}
+                    <span class = "other_anwser_comment">
+                        <span style="font-weight: 600;">备注:</span>
+                        {{=otherWord}}
+                    </span>
+                {{
+                }
+                }else{
+                }}
+                <!--<input  type="text" name="other_{{=_id}}"  {{=disableFlag}}  value="{{=otherWord}}" placeholder="备注"/>-->
+                <a href="#" class="btn btn-small ds_do_action add_comment_button cancen_remark" ds_action="questionnaire.showAddQuesComment" style="margin: -3px 0 10px 5px;float: left;">备注</a>
+                <textarea name="other_{{=_id}}" class="span12 questextarea" msgname="问卷备注"  placeholder="备注内容..." style="display: none;width: 97%"></textarea>
+                {{
+                }
+                }}
+                {{
+                }else{
+                }}
+                <div class="inline-checkbox">
+                    <label class="inline">
+                        <input  type="radio" class="{{=typeClassFlag}}" name="answer_{{=_id}}" next="{{=anws[i].next}}" value="{{=anws[i]._id}}" {{=disableFlag}} {{=checkedFlag}} />{{=anws[i].answer}}
+                    </label>
+                </div>
+                {{
+                }
+                }
+
+                }}
+
+            </div>
+        </div>
+    </div>
+
+</div>

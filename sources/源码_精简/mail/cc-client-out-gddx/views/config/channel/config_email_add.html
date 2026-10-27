@@ -1,0 +1,68 @@
+<div class="right_content_pane" >
+    <form id="frm_email_add" class="form-horizontal ">
+        <div class="right_head clearfix" style="">
+            <div class="pull-left" style="font-weight: bold">
+                添加邮箱
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="control-head width-500">
+                邮箱设置
+            </div>
+        </div>
+        <div id="control-labs-email" class="width-500">
+            <div class="row_item">
+                <label class="control-label" for="email_mailId">邮箱账户名</label>
+                    <input id="email_mailId" type="text" name="mailId" placeholder="例如：service@7moor.com"  required/>
+            </div>
+            <div class="row_item">
+                <label class="control-label" for="email_password">邮箱密码</label>
+                    <input id="email_password"  type="password" name="password" placeholder="请输入密码" required/>
+            </div>
+            <div class="row_item">
+                <label class="control-label" for="email_mailDisplayName">发件人名称</label>
+                    <input id="email_mailDisplayName"  type="text" name="mailDisplayName" required/>
+            </div>
+            <div class="row_item">
+                <label class="control-label" for="email_type">邮箱类型</label>
+                <select id="email_type" name="type" required>
+                    <option value="" selected>--请选择--</option>
+                </select>
+            </div>
+            <div class="row_item">
+                <label class="control-label" for="email_receiveServer">收件服务器地址</label>
+                    <input id="email_receiveServer"  type="text" name="receiveServer" placeholder="例如：pop3.7moor.com" required/>
+            </div>
+            <div class="row_item">
+                <label class="control-label" for="email_sendServer">发件服务器地址</label>
+                    <input id="email_sendServer"  type="text" name="sendServer" placeholder="例如：smtp.7moor.com" required/>
+            </div>
+            <div class="row_item">
+                <label class="control-label" for="email_sendServerPort">发件服务器端口</label>
+                    <input id="email_sendServerPort"  type="text" name="sendServerPort">
+            </div>
+            <div class="row_item">
+                <label class="control-label" for="email_topeer">邮件分发技能组</label>
+                <select id="email_topeer" name="ToPeer">
+                </select>
+            </div>
+            <div class="row_item">
+                <label class="control-label" >是否默认</label>
+                <select  name="isDefault">
+                    <option value="0" >否</option>
+                    <option value="1" >是</option>
+                </select>
+            </div>
+            <div class="row_item">
+                <!--<button type="button" class="btn btn-small ds_do_action " ds_action="config.channel.cancelEmailDeal" style="margin-left: 0px;">取消</button>-->
+                <button type="button" class="btn btn-primary btn-small ds_form_action img-none btn-blue"  ds_action="config.channel.saveEmail" style="margin-left: 10px;">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+<style type="text/css">
+</style>
+<script type="text/javascript">
+    $(function(){
+    });
+</script>

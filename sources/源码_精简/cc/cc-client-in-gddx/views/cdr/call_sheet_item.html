@@ -1,0 +1,46 @@
+<tr>
+    <td>
+        _@cdr.cdrLocationCust('_#CUSTOMER_NAME#_','_#CUSTOMER_ID#_','_#CALL_SHEET_ID#_')@_
+    </td>
+    <td>
+        _@cdr.dialPhone('_#CONNECT_TYPE#_','_#CALL_NO#_',false)@_
+    </td>
+    <td>
+        _@cdr.dialPhone('_#CONNECT_TYPE#_','_#CALLED_NO#_',true)@_
+    </td>
+    <td>
+        _@cdr.getCallTypeName('_#CONNECT_TYPE#_')@_
+    </td>
+    <td>
+        _@cdr.getCallStatusName('_#STATUS#_')@_
+    </td>
+    <td>
+        _@cdr.getAgentName('_#DISPOSAL_AGENT#_')@_
+    </td>
+    <td>
+        _@cdr.getQueueName('_#ERROR_MEMO#_')@_
+    </td>
+    <td>
+        _@cdr.getInvestigate('_#INVESTIGATE#_')@_
+    </td>
+    <td>
+        _#PROVINCE#_
+    </td>
+    <td>
+        _#DISTRICT#_
+    </td>
+    <td>
+        _@cdr.getKeyTag('_#KEY_TAG#_')@_
+    </td>
+    <td>
+        _#OFFERING_TIME#_
+    </td>
+    <td>
+        _@cdr.getCallTimeLength('_#CALL_TIME_LENGTH#_')@_
+    </td>
+    <td>
+        <a href="#" class="ds_do_action" ds_action="cdr.showCdrDetail" ds_data="_#CALL_SHEET_ID#_">查看</a>
+        &nbsp;
+        <a href="#" class="ds_do_action" ds_action="cdr.addCdrMemo" ds_data="_#CALL_SHEET_ID#_">备注</a>
+    </td>
+</tr>

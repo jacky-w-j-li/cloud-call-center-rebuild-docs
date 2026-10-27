@@ -1,0 +1,201 @@
+<div class="right_container" id="call_sheet_query_main_panel">
+    <div style="height:98%;margin:3px 3px;">
+        <div class="row-fluid">
+            <br/>
+            <h5><i class="icon-search"></i>通话记录查询</h5>
+            <br/>
+
+            <form id="call_sheet_query_form" class="form-inline">
+                <input type="hidden" name="cdrExportType" value="call_sheet_advanced_query">
+                <div>
+                    <label for="call_sheet_datetime_picker_start">
+                        呼叫时间
+                    </label>
+                    <input type="text" name="BEGIN_DATE" class="input-small ds_date"
+                           data-date-format="yyyy-mm-dd" id="call_sheet_datetime_picker_start"
+                            placeholder="开始日期"/>
+                    <input type="text" id="call_sheet_begin_time" name="BEGIN_TIME" class="input-small ds_time" placeholder="开始时间"/>
+                    至
+                    <input type="text" name="END_DATE" class="input-small ds_date" placeholder="结束日期"
+                           data-date-format="yyyy-mm-dd" id="call_sheet_datetime_picker_end"/>
+                    <input type="text" id="call_sheet_end_time" name="END_TIME" class="input-small ds_time" placeholder="结束时间"/>
+                </div>
+                <div class="clear10"></div>
+                <div>
+                    <!--<label for="phone_number">-->
+                        <!--电话号码-->
+                    <!--</label>-->
+                    <!--<input type="text" id="phone_number" name="NUMBER" style="margin-right: 5px;"/>-->
+                    <label>
+                        主叫
+                    </label>
+                    <input type="text" name="CALL_NO" class="input-small" style="margin-right: 5px;"/>
+                    <label >
+                        被叫
+                    </label>
+                    <input type="text" name="CALLED_NO" class="input-small" style="margin-right: 5px;"/>
+                    <label for="call_type">
+                        呼叫类型
+                    </label>
+                    <select name="CONNECT_TYPE" id="call_type" class="call_type_selector" style="margin-right: 5px;">
+                    </select>
+                    <label for="call_status">
+                        处理状态
+                    </label>
+                    <span id="status_span">
+                        <select name="STATUS" id="call_status" class="call_status_selector">
+
+                        </select>
+                    </span>
+                </div>
+                <div class="clear10"></div>
+                <div>
+                    <label for="disposal_agent_select_input">
+                        接听座席
+                    </label>
+                    <span style="margin-right: 5px;">
+                        <input name="DISPOSAL_AGENT" type="hidden" class="ds_search_item select_input" id="disposal_agent_select_input" style="float:none;"/>
+                        <span id="disposal_agent_select_user" class="combobox_agent"></span>
+                    </span>
+                    <label for="queue" style="margin-left:10px;">
+                        技能组
+                    </label>
+                    <select name="ERROR_MEMO" id="queue" class="queue_selector">
+                    </select>
+                    <label for="investigate" style="margin-left:10px;">
+                        满意度
+                    </label>
+                    <select name="INVESTIGATE" id="investigate" class="investigate_selector" style="margin-right: 5px;">
+                    </select>
+                </div>
+                <div class="clear10"></div>
+                <div>
+                    <label for="CALL_TIME_LENGTH">通话时长</label>
+                    <div class="input-append"><input type="text" style="width: 55px" name="CALL_TIME_LENGTH_BEGIN" dataType="Number" msg="时长条件只能为正整数" class="input-small"><span class="add-on" style="height: 14px;line-height: 15px">秒</span></div> 至
+                    <div class="input-append"><input type="text" style="width: 55px" name="CALL_TIME_LENGTH_END"  dataType="Number" msg="时长条件只能为正整数" class="input-small"><span class="add-on" style="height: 14px;line-height: 15px">秒</span></div>
+                    <label style="margin-left:24px;">
+                        标记
+                    </label>
+                    <select name="KEY_TAG" style="margin-right: 5px;" class="key_tag_selector">
+                        <option value>--全部--</option>
+                        <option value="true">是</option>
+                        <option value="false">否</option>
+                    </select>
+                    <label>
+                        定位客户
+                    </label>
+                    <select name="CUSTOMER_NAME" style="margin-right: 5px;" class="cdr_customer_name_selector">
+                        <option value>--全部--</option>
+                        <option value="true">已定位</option>
+                        <option value="未知客户">未知客户</option>
+                        <option value="多个匹配客户">多个匹配客户</option>
+                    </select>
+                </div>
+                <div class="clear10"></div>
+                <div>
+                    <a href="#" class="button ds_form_action" ds_action="cdr.searchAllCallSheet"
+                       style="margin:2px 5px;" id="call_sheet_query_link">查询</a>
+                    <a href="#" class="button ds_do_action" ds_action="resetForm" ds_data="resetSpan" style="margin:2px 5px;" >重置</a>
+                    <a href="#" ds_action="cdr.exportCdrExcel" class="button ds_form_action func_hide" style="margin:2px 5px;">批量清单导出</a>
+                    <a href="#" ds_action="cdr.exportCdrMonitor" class="button ds_form_action func_hide exportCdrMonitorPopover" style="margin:2px 5px;">
+                        <div style="text-align: center;float: right;" class="exportCdrMonitorPopoverHtml" data-toggle="popover"
+                             data-placement="bottom" data-html="true"
+                             data-content="一个任务最多能下载1000条录音<br>今日提交的批量导出录音任务<br>系统会在次日凌晨3时生成压缩包<br>请到【批量导出录音任务】菜单中去下载。"
+                             data-original-title="温馨提示">
+                            提交批量导出录音任务
+                        </div>
+                    </a>
+                </div>
+
+                <div class="clear5">&nbsp;</div>
+                <br>
+
+                <div class='row-fluid account_line'></div>
+                <br/>
+
+                <div>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>定位客户</th>
+                            <th>主叫号码</th>
+                            <th>被叫号码</th>
+                            <th>呼叫类型</th>
+                            <th>处理状态</th>
+                            <th>处理座席</th>
+                            <th>呼入技能组</th>
+                            <th>满意度</th>
+                            <th>省份</th>
+                            <th>城市</th>
+                            <th>标记</th>
+                            <th>呼叫时间</th>
+                            <th>通话时长</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="call_sheet_table_data">
+                        </tbody>
+                    </table>
+                    <div class="row-fluid class_list">
+                        <div id="call_sheet_query_pagination" for="call_sheet_query_form" ds_pagination_action="cdr.searchAllCallSheet"
+                             class="pagination pagination-small" style="display:table; margin:0;width:100%;">
+                            <span class="result_info">查询结果：<span class="result_count">0</span></span>
+                            <ul style="float:right;margin-top:5px;">
+                                <li><a href="#"  value="0">&laquo;</a></li>
+                                <li><a href="#"  value="1">1</a></li>
+                                <li><a href="#"  value="2">2</a></li>
+                                <li><a href="#"  value="3">3</a></li>
+                                <li><a href="#"  value="4">4</a></li>
+                                <li><a href="#"  value="5">5</a></li>
+                                <li><a href="#"  value="6">&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<style>
+    #call_sheet_query_main_panel label {
+        font-size:11px;
+    }
+</style>
+<script type="text/javascript">
+    utils.loadSearchInput({ id: "disposal_agent_select_user",
+        width: "182",
+        height: "14",
+        tip: "按姓名,拼音,工号搜索",
+        data: getCache("agents"),
+        searchField: ["displayName", "exten", "pinyin"],
+        pinyinField: ["displayName"],
+        listField: ["displayName", "exten"],
+        userIdField: "_id",
+        showField: "displayName",
+        showAllList: true,
+        callbackFuc: function (object) {
+            $("#disposal_agent_select_input").val(object._id);
+        },
+        onKeyChanged: function () {
+            if ($("#disposal_agent_select_user_input").val() != "") {
+                $("#disposal_agent_select_input").val("serachInputNoresult");
+            } else {
+                $("#disposal_agent_select_input").val("");
+            }
+        }
+    });
+    $(function () {
+        //init popover
+        var pane = $('#call_sheet_query_main_panel');
+        var targetPane = pane.find("a.exportCdrMonitorPopover");
+        targetPane.hover(
+                function(){
+                    pane.find('div.exportCdrMonitorPopoverHtml').popover('show');
+                },
+                function(){
+                    pane.find('div.exportCdrMonitorPopoverHtml').popover('hide')
+                }
+        )
+    });
+//    $('#disposal_agent_select_user').css({"height":"14px","line-height":"14px","display":"inline-block"});
+</script>

@@ -1,0 +1,60 @@
+﻿<form id='km_item_query_frm'>
+    <input  name="keyword" type="hidden" value="_#keyword#_" >
+</form>
+<div class="" id="knowledge_content">
+    <input type="hidden" id="kmPageCount" value="${kmPageCount }"/>
+    <div style="margin:20px 25px; height:28px; font-size:15px; width:95%; background:url(../../third-lib/swfupload/images/blue_bg.png) left top; color: #31589d;">
+        <div style="width:90%; float:left; margin-top:8px; margin-left:10px;">
+            当前搜索关键词：<font color="red">_#keyword#_</font>&nbsp;&nbsp;找到相关结果<font color="red">_#totalRow#_</font>个
+        </div>
+    </div>
+    <div style="padding-left: 35px;width:95%;">
+        <div class="norecord" style="display: none;">
+            <div style="font-size:15px; color:blue;">抱歉，没有找到相关的知识点</div>
+            <div style="color:grey;line-height:20px; margin-top:5px;">
+                &nbsp;公司建议您:
+                <ul>
+                    <li>1、中间使用空格的方式进行检索</li>
+                    <li>2、检查输入的文字是否有误</li>
+                    <li>3、去掉可能不必要的字词，如"的"、"什么"等</li>
+                </ul>
+            </div>
+        </div>
+        <div class="km_body"  id="sortDiv_body"></div>
+        <div class="pagination pagination-small config_role_count" style="display:table; margin:0;width:100%;"
+             for="km_item_query_frm" ds_pagination_action="catalog.searchKmListPage">
+            <span class="result_info">查询结果：<span class="result_count">0</span></span>
+            <ul class="km_item_list_page" style="float:right;">
+                <li><a href="#"  value="0">&laquo;</a></li>
+                <li><a href="#"  value="1">1</a></li>
+                <li><a href="#"  value="2">2</a></li>
+                <li><a href="#"  value="3">3</a></li>
+                <li><a href="#"  value="4">4</a></li>
+                <li><a href="#"  value="5">5</a></li>
+                <li><a href="#"  value="6">&raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script id="tmpl_km_item" type="text/x-jquery-tmpl">
+    <div>
+        <div style="width:90%; float:left;">
+            <div style="line-height:23px;">
+                <a href="#" style="font-size: 15px;" class="ds_do_action" ds_action="kmcontent.viewKmInfo" ds_data="${_id}" appflag="dic">{{html title}} </a>
+            </div>
+            <div style="line-height:20px;">
+                {{html content}}
+                <div style="color:#9a8ae6;width: 100%;">
+                    所属目录：目录浏览>${catalog}&nbsp;&nbsp;
+                    更新时间：${lastTime}
+                    <a class="ds_do_action km_manage" ds_action="kmcontent.showUpdatePage" ds_data="${_id}" appflag="dic" href="#">编辑</a>&nbsp;&nbsp;
+                    <a class="ds_do_action km_manage" ds_action="kmcontent.removeKm" ds_data="${_id}" appflag="dic" href="#">删除</a>
+                </div>
+            </div>
+        </div>
+        <!--<div style="text-align:center;color:#009900; font-size:13px;">-->
+            <!--${hits}-->
+        <!--</div>-->
+        <div style="margin-top:5px;height:15px;overflow: hidden;clear:both;background:url(../../javascripts/km/upload/images/line.gif) repeat-x 50% top">&nbsp;</div>
+    </div>
+</script>

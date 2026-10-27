@@ -1,0 +1,52 @@
+context N00000000271-predialout {
+	_010X. => {
+		goto N00000000271-dialout,${EXTEN:3},1;
+	}
+	
+	_01[3458]XXXXXXXXX => {
+		isLocal=0;
+		Agi(agi://127.0.0.1:7891/AgiIsLocalNumber?calledNo=${EXTEN});
+		if(${isLocal}==1)
+			goto N00000000271-dialout,${EXTEN:1},1;
+		else
+			goto N00000000271-dialout,${EXTEN},1;
+	}
+	
+	_1[3458]XXXXXXXXX => {
+		isLocal=0;
+		Agi(agi://127.0.0.1:7891/AgiIsLocalNumber?calledNo=${EXTEN});
+		if(${isLocal}==1)
+			goto N00000000271-dialout,${EXTEN},1;
+		else
+			goto N00000000271-dialout,0${EXTEN},1;
+	}
+	_110X. => {
+		Hangup;
+	}
+	_X. => {
+		goto N00000000271-dialout,${EXTEN},1;
+	}
+}
+
+context N00000000271-dialout {
+	_X. => {
+		
+		userCallerIDNum="";
+		agentId = "";
+                Agi(agi://127.0.0.1:7891/AgiGetUserCallerIDNum?pbx=${HOST});
+                if("${userCallerIDNum}"==""){
+                        CALLERID(num)="01056332288";
+                }else{
+                        CALLERID(num)="${userCallerIDNum}";
+                }
+		SIPAddHeader(7moor-agent-id:${agentId});
+		goto dialout-gateway, N000000002711900${EXTEN}, 1;
+	}
+}
+
+context N00000000271-transferout {
+	_. => {
+		CALLERID(num)="01056332288";
+		goto transfer-gateway,${EXTEN},1;
+	}
+}

@@ -1,0 +1,129 @@
+<a href="#addPbx" role="button" data-toggle="modal" id="addPbxLink"></a>
+<div id="addPbx" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form class="form-horizontal" action="">
+        <input type="hidden" name="action" value="add"/>
+        <input type="hidden" name="DisplayName" id="accountDisplayName"/>
+
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>
+                添加PBX
+            </h3>
+        </div>
+        <div class="modal-body" style="max-height: 280px">
+            <div class="control-group">
+                <label class="control-label">
+                    PBX机器
+                </label>
+                <div class="controls" id="pbxSelectPanel">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    PBX实例
+                </label>
+                <div class="controls" id="pbxSelectInstancePanel">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    昵称
+                </label>
+
+                <div class="controls">
+                    <input type="text" name="NickName" id="pbxNickName"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    是否有外呼接口
+                </label>
+
+                <div class="controls">
+                    <select name="IsDialoutIntegration">
+                        <option selected="selected" value="0">否</option>
+                        <option value="1">是</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    是否有转接接口
+                </label>
+
+                <div class="controls">
+                    <select name="IsTransferIntegration">
+                        <option selected="selected" value="0">否</option>
+                        <option value="1">是</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    启用通话事件重发
+                </label>
+                <div class="controls">
+                    <select name="DispatcherResend">
+                        <option selected="selected" value="false">否</option>
+                        <option value="true">是</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    通话事件推送携带账号名和ID
+                </label>
+                <div class="controls">
+                    <select name="DispatcherAccAndId">
+                        <option selected="selected" value="false">否</option>
+                        <option value="true">是</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    启用呼入通话轨迹
+                </label>
+                <div class="controls">
+                    <select name="IsRecordChannelCdr">
+                        <option selected="selected" value="false">否</option>
+                        <option value="true">是</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="alert alert-success" style="margin-left: 10px;margin-right: 10px">
+            <strong>PBX机器与PBX实例的负载情况分4个级别</strong>
+            <span class="label label-success">空闲</span><span class="label label-warning">繁忙</span><span class="label label-important">拥挤</span><span class="label label-inverse">饱和</span>
+            <!--<div>-->
+                <!--座席量 < 2000 <span class="label label-success">空闲</span>-->
+                <!--2000 <= 座席量 < 3500 <span class="label label-warning">繁忙</span>-->
+                <!--</div><div>-->
+                <!--3500 <= 座席量 < 5000 <span class="label label-important">拥挤</span>-->
+                <!--座席量 > 5000 <span class="label label-inverse">饱和</span>-->
+            <!--</div>-->
+            <!--<strong>PBX实例</strong>-->
+            <!--<div>-->
+                <!--座席量 < 200 <span class="label label-success">空闲</span>-->
+                <!--200 <= 座席量 < 350 <span class="label label-warning">繁忙</span>-->
+            <!--</div><div>-->
+                <!--350 <= 座席量 < 500 <span class="label label-important">拥挤</span>-->
+                <!--座席量 > 500 <span class="label label-inverse">饱和</span>-->
+            <!--</div>-->
+            <div>
+                建议不要添加<span class="label label-important">拥挤</span>和<span class="label label-inverse">饱和</span>状态的PBX，这样可能会对的通话产生影响。
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="btn btn-info btn-blue ds_action_flow" href="#">
+                <ds-form-action action="config.ivr.pbx.saveAccountPbx" extra-data="config.callConfig.currentConfigData"
+                    on-before="config.callConfig.pbx.preSavePbx" on-complete="config.callConfig.pbx.pbxAddSuccess"/>
+                <!--
+                <ds-get-view view="ivr/pbx/list_pbx" panel="ivrMainPanel" callback="ivr.pbx.listAccountPbx"/>
+                -->
+                保存
+            </a>
+            <a href="#" class="btn btn-gray" data-dismiss="modal">取消</a>
+        </div>
+    </form>
+</div>

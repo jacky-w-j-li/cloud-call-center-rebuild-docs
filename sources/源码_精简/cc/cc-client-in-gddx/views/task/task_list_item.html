@@ -1,0 +1,73 @@
+<div class="list_item" id="task_list_item__#taskId#_">
+    <span class="task_check ds_do_action _#completed#_" ds_action="task.completeTask" ds_data="_#taskId#_"
+          ds_complete="_#dscompleted#_" style="position: absolute;left: 5px;bottom: 7px;z-index: 2;"></span>
+    <div class="ds_do_action item_row" ds_action="task.showTask" ds_menu="_#menu#_" ds_data="_#customerId#_" ds_task="_#taskId#_">
+        <div class="contact_item">
+            <div class="right-items" style="float: right;">
+                <p class="status status_3399ff" title="Customer">
+                    <span class="status_name _#status#_">_#status_name#_</span>
+                </p>
+                <p class="prospect-amount" title="">
+                    <span class="last_update_time" title="_#lastUpdateTime_title#_">_#lastUpdateTime#_</span>
+                </p>
+                <p class="prospect-amount" title="">
+                    <span class="master" title="_#master#_">_#master#_</span>
+                </p>
+            </div>
+            <div class="left-items">
+            </div>
+            <div class="middle-items" style="margin-left: 30px;">
+                <div class="contact">
+                    <span class="name">
+                        <span class="major" title="_#name#_" style="max-width: 315px;">_#name#_</span>
+                        <span class="minor" title="_#user_title#_">_#user_title#_</span>
+                    </span>
+                </div>
+                <div class="task_title_bar _#completed#_">
+                    <div class="next_action">
+                        <span class="action_content task_title" title="_#title#_">_#title#_</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        dsevent.bind('#task_list_item__#taskId#_', dsevent.evt.customerUpdate+' '
+                + dsevent.evt.taskComplete + " " + dsevent.evt.taskCompleteCancel+' '+dsevent.evt.customerUpdateStatus
+                +' '+dsevent.evt.taskAssignedUser, function (event, params) {
+            var menu = '_#menu#_';
+            var customerId = "_#customerId#_";
+            var taskId = '_#taskId#_';
+            var pane = $('#task_list_item__#taskId#_');
+            if(params._id == taskId) {
+                if(event.type==dsevent.evt.taskComplete){
+                    handler.task.showTaskComplete(pane);
+                }else if(event.type==dsevent.evt.taskCompleteCancel){
+                    handler.task.showTaskCompleteCancel(pane);
+                } else if (event.type == dsevent.evt.taskAssignedUser) {
+                    var masterPane = pane.find('.master');
+                    masterPane.text(getCache('agents', params.master).name);
+                }
+            } else if(event.type == dsevent.evt.customerUpdate && params._id == customerId) {
+                var statusPane = pane.find('.status_name');
+                statusPane.removeClass();
+                statusPane.addClass('status_name '+params.status);
+                statusPane.attr('title', params.status);
+                statusPane.text(getCache('custTmpls',params.dbType).status[params.status]);
+
+                var namePane = pane.find('.major');
+                namePane.attr('title', params.name);
+                namePane.text(params.name);
+            } else if(event.type == dsevent.evt.customerUpdateStatus && params._id == customerId) {
+                var statusPane = pane.find('.status_name');
+                statusPane.removeClass();
+                statusPane.addClass('status_name '+params.status);
+                statusPane.attr('title', params.status);
+                statusPane.text(getCache('custTmpls',params.dbType).status[params.status]);
+            }
+        });
+    });
+</script>

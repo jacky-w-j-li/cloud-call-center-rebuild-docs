@@ -1,0 +1,25 @@
+<!--报表字段配置-->
+
+<div class="right_content_pane">
+    <form  class="form-horizontal">
+        <div class="right_head clearfix" style="">
+            <div class="pull-left">
+                <h4 style="">报表统计字段</h4>
+            </div>
+            <div class=" pull-right">
+                <button type="button" class="btn btn-small ds_do_action " ds_action="config.business.cancelReportFieldsConfig" style="margin-left: 0px;">取消</button>
+                <button type="button" class="btn btn-primary btn-small ds_do_action " ds_data="{{=_id}}"   ds_action="config.business.addReportField" style="margin-left: 10px;">添加</button>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div id="business_report_fields_config_pane">
+
+            </div>
+            <div id="business_report_fields_config_add_pane">
+
+            </div>
+        </div>
+    </form>
+</div>
+
+

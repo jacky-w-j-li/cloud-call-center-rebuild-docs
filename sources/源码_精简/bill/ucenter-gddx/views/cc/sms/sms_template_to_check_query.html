@@ -1,0 +1,63 @@
+
+<div class="panel panel-default">
+    <div class="panel-heading"><button type="button" class="btn btn-success btn-xs ds_do_action" ds_action="sms.sms_template_new" style="margin-left: 20px;">报备短信模板</button></div>
+    <div class="panel-body">
+        <form id="sms_template_to_check_query_form" class="form-horizontal">
+            <table class="table_search">
+                <tbody>
+                <tr>
+                    <td class="spanright">模板标题</td>
+                    <td><input type="text" name="name"/></td>
+                    <td class="spanright">呼叫时间</td>
+                    <td colspan="3" class="spanleft">
+                        <input type="text" name="BEGIN_TIME" class="form-control input-sm ds_date" style="display: inline-block;width: auto"/> 至
+                        <input type="text" name="END_TIME" class="form-control input-sm ds_date" style="display: inline-block;width: auto"/>
+                    </td>
+                    <td>
+                        <button id="sms_template_to_check_query_link" type="button" class="btn btn-primary btn-sm  ds_form_action" ds_action="sms.searchSmsTemplateToCheck">查询</button>
+                        <button type="button" class="btn btn-default btn-sm ds_do_action" ds_action="sms.resetSms" >重置</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+<div class="panel panel-info">
+    <!--<div class="panel-heading">充值记录</div>-->
+    <table class="table">
+        <thead>
+        <tr>
+            <th>模板编号</th>
+            <th>模板标题</th>
+            <th>模板类型</th>
+            <th>模板签名</th>
+            <th>时间</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody id="sms_template_to_check_tbody">
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <div class="col-md-5">查询结果：<span class="result_count" style="margin-top:3px;display: inline-block;">0</span></div>
+    <div class=" col-md-7">
+        <ul class="pagination pagination-sm pull-right" style="margin: 0;"
+            for="sms_template_to_check_query_form" ds_pagination_action="sms.searchSmsTemplateToCheck">
+            <li><a href="#"  value="0">&laquo;</a></li>
+            <li><a href="#"  value="1">1</a></li>
+            <li><a href="#"  value="2">2</a></li>
+            <li><a href="#"  value="3">3</a></li>
+            <li><a href="#"  value="4">4</a></li>
+            <li><a href="#"  value="5">5</a></li>
+            <li><a href="#"  value="6">&raquo;</a></li>
+        </ul>
+    </div>
+</div>
+<style type="text/css">
+    .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
+        z-index: 1;
+    }
+</style>

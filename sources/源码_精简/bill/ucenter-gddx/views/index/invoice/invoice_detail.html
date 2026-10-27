@@ -1,0 +1,63 @@
+<div class="panel panel-info invoice_base">
+    <div class="panel-heading">开票明细
+    </div>
+    <table class="table">
+        <tbody class="">
+        <tr>
+            <td class="col-md-5">发票金额：<span class="select_invoice" style="color:#f58300;">_#money#_</span>元</td>
+            <td class="col-md-7">发票抬头：_#info.invoiceTitle#_</td>
+        </tr>
+        <tr>
+            <td class="col-md-5">发票状态：_@invoice.showFieldDesc('invoiceStatus','_#status#_')@_</td>
+            <td class="col-md-7">发票编号：_#invoiceNo#_</td>
+        </tr>
+        <tr>
+            <td class="col-md-5">发票类型：_@invoice.showFieldDesc('invoiceType','_#info.invoiceType#_')@_</td>
+            <td class="col-md-7">发票内容： _#info.content#_</td>
+        </tr>
+        <tr>
+            <td class="col-md-5">申请时间： _#createTime#_</td>
+            <td class="col-md-7"></td>
+        </tr>
+        <tr>
+            <td class="col-md-5">收件人：_#addr.userName#_</td>
+            <td class="col-md-7">收取地址：_#addr.addr#_</td>
+        </tr>
+        <tr>
+            <td class="col-md-5">邮编：_#addr.post#_</td>
+            <td class="col-md-7">联系电话：_#addr.phone#_</td>
+        </tr>
+        <tr>
+            <td class="col-md-5">物流公司：_#transport#_</td>
+            <td class="col-md-7">快递编号：_#expressNo#_</td>
+        </tr>
+        <tr>
+            <td class="col-md-12" colspan="2">备注：_#memo#_</td>
+        </tr>
+        <tr class="invoice_reason" style="display: none;">
+            <td class="col-md-12" colspan="2">取消原因：_#reason#_</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="panel panel-info invoice_pay_list">
+    <div class="panel-heading">关联充值单据
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>流水号</th>
+            <th>支付方式</th>
+            <th>充值时间</th>
+            <th>金额(元)</th>
+            <th>类型</th>
+            <th>备注</th>
+        </tr>
+        </thead>
+        <tbody class="content_list">
+        </tbody>
+    </table>
+</div>
+

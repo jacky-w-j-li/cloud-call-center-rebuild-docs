@@ -1,0 +1,50 @@
+<div class="row-fluid">
+    <div class="span5">
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="input-append" style="float:left;width:100%;">
+                    <input id="ivr_system_query" name='query' class="ivr_search"
+                           node-type="ivr.ivr_node_system" map-key="DisplayName" pagination-name="systemList"
+                           type="text" placeholder="输入节点名称查询..." style="width:80%;">
+
+                    <!--<div class="btn-group">-->
+                        <!--<button class="btn dropdown-toggle" data-toggle="dropdown" tabindex="-1">-->
+                            <!--<span class="caret"></span>-->
+                        <!--</button>-->
+                        <!--<ul class="dropdown-menu">-->
+                            <!--<li>-->
+                                <!--<a href="#">高级查询</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <div class="span5 offset1 text-right pull-right">
+                <!--<a class="btn btn-success ds_action_flow disabled ds_ivr_effect">-->
+                    <!--<ds-do-action action="config.ivr.reloadIvr" extra-data="config.callConfig.currentConfigData" on-complete="config.callConfig.reloadComplete"/>-->
+                    <!--生效-->
+                <!--</a>-->
+                <a class="btn btn-success btn-blackishGreen ds_action_flow disabled ds_ivr_effect">
+                    <ds-do-action action="config.ivr.reloadIvr" extra-data="config.callConfig.currentConfigData" on-complete="config.callConfig.reloadComplete"/>
+                    生效
+                </a>
+            </div>
+        </div>
+        <div style="height:1px;background-color:#EAEAEA;width:100%;margin:15px 0px 8px;">
+        </div>
+        <div id="ivr_system_list_pane">
+            <div class="row-fluid list-item ds_action_flow" id="system_node_div" title="点击修改">
+                <div class="ds-item-list" id="systemNodeList" item-view="config/callConfig/node/system/system_list_item"
+                     data-source="ivr.ivr_node_system"></c5-itemlist>
+                </div>
+                <!--<ds-get-view view="config/callConfig/node/system/dial_jobnum_edit" panel="system_panel" view-data='{"_id":"dial_jobnum"}'/>-->
+
+            </div>
+
+            <div style="height:1px;background-color:#EAEAEA;width:100%;margin-bottom:5px;">
+            </div>
+        </div>
+    </div>
+    <div class="span7 sub-right" id="system_panel">
+    </div>
+</div>

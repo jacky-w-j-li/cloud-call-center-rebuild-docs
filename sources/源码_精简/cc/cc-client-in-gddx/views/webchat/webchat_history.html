@@ -1,0 +1,86 @@
+<div class="webchat_container" >
+    <div class="chat_msg" ds_attr="2" ds_time="">
+    </div>
+
+    <div class="clearfix">
+        <button type="button" class="btn btn-small reply_close pull-right"  data-dismiss="modal" style="margin-left: 10px;display: none;" aria-hidden="true">关闭</button>
+    </div>
+    <!---------------------------------------template------------------------------------------>
+    <div id="tmpl_webchat_msg_from" style="display: none;">
+        <div class="chat_time">_#timeDesc#_</div>
+        <div class="chat_section clearfix">
+            <!--<div class="pull-left" style="">_#UserID#_</div>-->
+            <div class="pull-left" style="margin-left: 5px;">
+                <div class="chat_popover right">
+                    <div class="arrow"></div>
+                    <div class="chat_popover-content">
+                        <pre>_#contentDesc#_</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tmpl_webchat_msg_to" style="display: none;">
+        <div class="chat_time">_#timeDesc#_</div>
+        <div class="chat_section clearfix">
+            <div class="pull-right" style="">_#uidDesc#_</div>
+            <div class="pull-right" style="margin-right: 15px;">
+                <div class="chat_popover left">
+                    <div class="arrow"></div>
+                    <div class="chat_popover-content">
+                        <pre>_#contentDesc#_</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="tmpl_webchat_msg_from_img" style="display: none;">
+        <div class="chat_time">_#timeDesc#_</div>
+        <div class="chat_section clearfix">
+            <div class="pull-left" style="margin-left: 5px;">
+                <div class="chat_popover" style="padding: 0;">
+                    _#contentDesc#_
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="tmpl_webchat_msg_from_file" style="display: none;">
+        <div class="chat_time">_#timeDesc#_</div>
+        <div class="chat_section clearfix">
+            <div class="pull-left" style="margin-left: 5px;">
+                <div class="chat_popover" style="padding: 0;">
+                    _#contentDesc#_
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="tmpl_webchat_msg_to_img" style="display: none;">
+        <div class="chat_time">_#timeDesc#_</div>
+        <div class="chat_section clearfix">
+            <div class="pull-right" style="">_#uidDesc#_</div>
+            <div class="pull-right" style="margin-right: 15px;">
+                <!--<div class="chat_popover left">-->
+                <!--<div class="arrow"></div>-->
+                <div class="chat_popover " style="padding: 0;">
+                    _#contentDesc#_
+                </div>
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+    <div id="tmpl_webchat_msg_to_file" style="display: none;">
+        <div class="chat_time">_#timeDesc#_</div>
+        <div class="chat_section clearfix">
+            <div class="pull-right" style="">_#uidDesc#_</div>
+            <div class="pull-right" style="margin-right: 15px;">
+                <!--<div class="chat_popover left">-->
+                <!--<div class="arrow"></div>-->
+                <div class="chat_popover " style="padding: 0;">
+                    _#contentDesc#_
+                </div>
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+</div>

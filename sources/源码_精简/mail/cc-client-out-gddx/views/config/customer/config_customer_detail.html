@@ -1,0 +1,149 @@
+<div class=" span7" style="padding-bottom: 20px">
+    <div class="config_row">
+        <label>
+            客户状态
+        </label>
+        <p class="statuses" style="line-height:14px;">
+            <span class="active_list config_customer_status">
+
+            </span>
+            <a href="#showEditStatusTemplateModal" data-toggle="modal" class="ds_do_action"
+               ds_action="config.customer.showEditStatus" ds_data="__id" style="margin-left:15px;">修改</a>
+
+        <div id="showEditStatusTemplateModal" class="modal hide fade" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true">
+
+        </div>
+        </p>
+    </div>
+    <div class="config_row">
+        <label>
+            数据来源
+        </label>
+
+        <p class="statuses">
+            <span class="active_list config_customer_source">
+
+            </span>
+            <a href="#showEditSourceTemplateModal" data-toggle="modal" class="ds_do_action"
+               ds_action="config.customer.showEditSource" ds_data="__id" style="margin-left:15px;">修改</a>
+
+            <div id="showEditSourceTemplateModal" class="modal hide fade" tabindex="-1" role="dialog"
+                 aria-labelledby="myModalLabel" aria-hidden="true" style=" ">
+
+            </div>
+        </p>
+    </div>
+    <div class="config_row">
+        <label>
+            客户字段
+        </label>
+
+        <p class="statuses">
+            <span class="active_list config_customer_fields">
+            </span>
+            <a href="#showEditFieldsTemplateModal" data-toggle="modal" class="ds_do_action"
+               ds_action="config.customer.showEditFields" ds_data="__id" style="margin-left:15px;">修改</a>
+
+        <div id="showEditFieldsTemplateModal" class="modal hide fade" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true" style="width:600px">
+
+        </div>
+        </p>
+    </div>
+    <div class="config_row">
+        <label>
+            竞争对手
+        </label>
+        <p class="competitors" style="line-height:14px;">
+            <span class="active_list config_customer_competitors">
+
+            </span>
+            <a href="#showEditCompetitorsTemplateModal" data-toggle="modal" class="ds_do_action"
+               ds_action="config.customer.showEditCompetitors" ds_data="__id" style="margin-left:15px;">修改</a>
+
+        <div id="showEditCompetitorsTemplateModal" class="modal hide fade" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true">
+
+        </div>
+        </p>
+        <span class="help-block">用于修改客户跟进状态为"丢单"时,提供数据源</span>
+    </div>
+    <div class="config_row">
+        <input checked="checked" id="config_customer_uniqueNum" name="switch" type="checkbox" value="enable" class="ds_do_action"
+               ds_action="config.customer.uniqueNum" ds_data="__id">
+        <label for="config_customer_uniqueNum" style="margin-top: 3px;display: inline">
+            按客户号码去重
+        </label>
+        <span class="help-block">不允许有"号码"相同的客户数据，添加或导入客户资料时会按"号码"来查重</span>
+
+    </div>
+    <div class="config_row">
+        <input checked="checked" id="config_customer_uniqueName" name="switch" type="checkbox" value="enable" class="ds_do_action"
+               ds_action="config.customer.uniqueName" ds_data="__id">
+        <label for="config_customer_uniqueName" style="margin-top: 3px;;display: inline">
+            按客户名称去重
+        </label>
+        <span class="help-block">不允许有"名称"相同的客户数据，添加或导入客户资料时会按"名称"来查重</span>
+
+    </div>
+    <!--<div class="config_row">-->
+        <!--<label>-->
+            <!--统计字段-->
+        <!--</label>-->
+
+        <!--<p class="statuses">-->
+            <!--<span class="active_list config_customer_count">-->
+            <!--</span>-->
+            <!--<a href="#showEditCountTemplateModal" data-toggle="modal" class="ds_do_action"-->
+               <!--ds_action="config.customer.showEditCount" appdata="__id" style="margin-left:15px;">修改</a>-->
+
+        <!--<div id="showEditCountTemplateModal" class="modal hide fade" tabindex="-1" role="dialog"-->
+             <!--aria-labelledby="myModalLabel" aria-hidden="true">-->
+
+        <!--</div>-->
+        <!--</p>-->
+    <!--</div>-->
+    <div class="config_row" style="display:none">
+        <input checked="checked" id="config_customer_callPop" name="switch" type="checkbox" value="enable" class="ds_do_action"
+               ds_action="config.customer.callPop" ds_data="__id">
+        <label for="config_customer_callPop" style="margin-top: 3px;;display: inline">
+            参与来电弹屏查询
+        </label>
+        <span class="help-block">座席收到客户来电时，能否从该客户数据库中查询定位客户</span>
+    </div>
+    <!--<div class="config_row">-->
+        <!--<label>-->
+            <!--座席可占用客户最大数-->
+        <!--</label>-->
+        <!--<span class="help-block">该值是座席当前拥有的“默认状态”的客户总数，默认值为“100”，用于座席占用公共客户时控制数量，不能超过此数</span>-->
+        <!--<p class="statuses">-->
+            <!--<span class="active_list config_customer_maxCommon">-->
+            <!--</span>-->
+            <!--<a href="#showEditMaxCommonTemplateModal" data-toggle="modal" class="ds_do_action"-->
+               <!--ds_action="config.customer.showEditMaxCommon" ds_data="__id" style="margin-left:15px;">修改</a>-->
+
+            <!--<div id="showEditMaxCommonTemplateModal" class="modal hide fade" tabindex="-1" role="dialog"-->
+                 <!--aria-labelledby="myModalLabel" aria-hidden="true">-->
+
+            <!--</div>-->
+        <!--</p>-->
+    <!--</div>-->
+        <!--<button id="customer_addCustomerTemplateModal" type="button" data-toggle="modal" class="pull-left btn-add ds_do_action" ds_action="config.customer.showAddCustomerTemplateItem"> 添加客户数据库</button>-->
+        <!--<div id="addCustomerTemplateModal" style="width:560px;" class="modal hide fade" tabindex="-1" role="dialog"-->
+             <!--aria-labelledby="myModalLabel" aria-hidden="true">-->
+        <!--</div>-->
+        <label>
+            <input name="autoSave" type="checkbox" value="enable" class="ds_do_action"
+                       ds_action="config.customer.setAutoSave" ds_data=""> 来电弹屏自动保存客户
+        </label>
+</div>
+<div class="custom-fields-area span5">
+    <h4 style="margin-bottom:15px;">自定义字段</h4>
+    <div id="custom_fields_pane">
+
+    </div>
+    <div id="add_customer_field_pane">
+        <button type="button" data-toggle="modal" class="btn-add ds_do_action" ds_action="config.customer.showAddCustomerField" ds_data="__id"> 添加自定义字段</button>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<tr>
+    <td>
+        __CALL_NO
+    </td>
+    <td>
+        __CALLED_NO
+    </td>
+    <td>
+        _@cdr.getAgentName('_#DISPOSAL_AGENT#_')@_
+    </td>
+    <td>
+        _@cdr.getCallTypeName('_#CONNECT_TYPE#_')@_
+    </td>
+    <td>
+        _@cdr.getQueueName('_#ERROR_MEMO#_')@_
+    </td>
+    <td>
+        _@cdr.getInvestigate('_#INVESTIGATE#_')@_
+    </td>
+    <td>
+        __OFFERING_TIME
+    </td>
+    <td>
+        __GRADE_TIME
+    </td>
+    <td>
+        _@cdr.getCallTimeLength('__CALL_TIME_LENGTH')@_
+    </td>
+    <td>
+        _@cdr.getAgentName('_#GRADE_USER#_')@_
+    </td>
+    <td>_@qualityCheck.getQualityCheckLevel('_#GRADE_AMOUNT#_')@_</td>
+    <td>__GRADE_AMOUNT</td>
+    __GRADE_ITEMS
+    <!--<td>-->
+        <!--<span style="width: 150px;display: block;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">__COMMENTS</span>-->
+    <!--</td>-->
+    <td width="50px">
+        <a style="display: inline-block;width: 50px" class="ds_do_action" ds_action="cdr.listenRecord" ds_data="_#FILE_SERVER#_/_#RECORD_FILE_NAME#_,___id">听取录音</a>
+        <a style="display: inline-block;width: 50px" target="_blank" href="_#FILE_SERVER#_/_#RECORD_FILE_NAME#_" download>下载录音</a>
+        <a style="display: inline-block;width: 50px" class="ds_do_action" ds_action="qualityCheck.showQualityComments" ds_data="___id">查看备注</a>
+        <a style="display: inline-block;width: 50px" class="ds_do_action" ds_action="qualityCheck.showListenLog" ds_data="___id">试听日志</a>
+        _AGIN_GRADE
+    </td>
+</tr>

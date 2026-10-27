@@ -1,0 +1,30 @@
+{
+    "appenders": [
+    {
+        "type": "console"
+    },
+    {
+        "type": "file",
+        "filename": "/data/logs/kefu-node-server/app_log.log",
+        "maxLogSize": 20480000,
+        "backups": 20,
+        "category": "app"
+    },
+    {
+        "type": "file",
+        "filename": "/data/logs/kefu-node-server/access_log.log",
+        "maxLogSize": 20480000,
+        "backups": 20,
+        "category": "access"
+    },
+    {
+        "type": "file",
+        "filename": "/data/logs/kefu-node-server/request_log.log",
+        "maxLogSize": 20480000,
+        "backups": 20,
+        "category": "request"
+    }
+],
+    "replaceConsole": true
+}
+

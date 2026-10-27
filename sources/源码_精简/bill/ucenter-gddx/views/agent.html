@@ -1,0 +1,85 @@
+<div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form id="frm_agent_info" class="form-horizontal">
+                <table class="table_row_search">
+                    <tbody>
+                    <tr>
+                        <td >分机号 </td>
+                        <td >
+                            <input type="text" name="exten" class="form-control input-sm"/>
+                        </td>
+                        <td >姓名</td>
+                        <td >
+                            <input type="text" name="displayName" class="form-control input-sm"/>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm agent_search ds_form_action" ds_action="agent.getAgentList">查询</button>
+                            <button type="button" class="btn btn-default btn-sm ds_do_action" ds_action="agent.reset" >重置</button>                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">员工列表<button type="button" class="btn btn-success btn-xs ds_form_action" ds_action="agent.showAdd" style="margin-left: 20px;">添加员工</button>
+            <span class="label label-danger">[温馨提示]若直线号码是非北京的手机号，请在前面加0</span>
+        </div>
+        <!-- Table -->
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>员工姓名</th>
+                <th>分机号</th>
+                <th>密码</th>
+                <th>手机</th>
+                <th>邮箱</th>
+                <th>直拨号码</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody class="agent_list">
+            <!--<tr>-->
+                <!--<td>张三<span class="label label-warning" style="margin-left: 5px;">管理员</span></td>-->
+                <!--<td>8000</td>-->
+                <!--<td>1234</td>-->
+                <!--<td>13811891031</td>-->
+                <!--<td><button type="button" class="btn btn-info btn-xs">修改</button></td>-->
+            <!--</tr>-->
+            </tbody>
+        </table>
+
+    </div>
+    <div class="row">
+        <div class="col-md-5">查询结果：<span class="result_count" style="margin-top:3px;display: inline-block;">0</span></div>
+        <div class=" col-md-7">
+            <ul class="pagination pagination-sm pull-right" style="margin: 0;"
+                for="frm_agent_info" ds_pagination_action="agent.getAgentList">
+                <li><a href="#"  value="0">&laquo;</a></li>
+                <li><a href="#"  value="1">1</a></li>
+                <li><a href="#"  value="2">2</a></li>
+                <li><a href="#"  value="3">3</a></li>
+                <li><a href="#"  value="4">4</a></li>
+                <li><a href="#"  value="5">5</a></li>
+                <li><a href="#"  value="6">&raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="modal fade" id="agent_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" >修改员工信息</h4>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary ds_form_action" ds_action="agent.updateAgent"  ds_form="#frm_agent_update">保存</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>

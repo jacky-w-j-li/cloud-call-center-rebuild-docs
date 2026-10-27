@@ -1,0 +1,61 @@
+<div class="modal hide fade" id="endsession" tabindex="-1" style="overflow: hidden" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-header" style="border:0px;padding:10px;">
+        <button type="button" class="close ds_do_action" ds_action="webchat.clearSessionKey" style="margin-top: -5px;" data-dismiss="modal" aria-hidden="true">×</button>
+        <!--<h4 class="modal-title" >个人设置</h4>-->
+    </div>
+    <div class="modal-body margin_none">
+        <div class="tabbable">
+            <ul class="nav_header">
+                <!--<li class="active"><a href="#panel_edit_info" data-toggle="tab">个人信息</a></li>-->
+                <!--<li><a href="#panel_edit_channel" data-toggle="tab" style="display: none;" class="channel_my_set">渠道设置</a></li>-->
+                <li>是否确认结束当前对话?</li>
+                <li>请选择对话分类</li>
+            </ul>
+            <ul class="tab-content" id="tab-Content">
+                <div class="dic_content row-fluid">
+                    <div class="diction-subject span4 dic_level_1">
+                        <div class="channel_dic_list">
+                        </div>
+                    </div>
+                    <div class="diction-subject span4 dic_level_2">
+                        <div class="channel_dic_list">
+                        </div>
+                    </div>
+                    <div class="diction-subject span4 dic_level_3">
+                        <div class="channel_dic_list">
+                        </div>
+                    </div>
+                </div>
+            </ul>
+            <div id="channel_dic_show" style="display: none;">
+                <div class="dic_item">
+                    <input type="hidden" name="key" value="_#key#_" ds_data="_#name#_">
+                    <div style="position: relative;">
+                        <div  class="dic_item_desc_session" style="width:171px;" title="_#name#_" level="_#lastLevel#_" tab="dic">_#name#_<b style="display:none"></b></div><b class="sub_icon"></b><!--上一级-->
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" class="session_name">
+            <ul class="btn-container">
+                <button class="btn-blue ds_do_action" ds_data ds_action="webchat.closeSession">确认</button>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){
+        $('#editInfoModal').css({
+            'width': function () {
+                return '435px';
+//                return ($(document).width() * .3) + 'px';
+            },
+            'margin-left': function () {
+                return -($(this).width() / 2);
+            },
+            'height': function () {
+                return '296px';
+//                return ($(document).height() * .38) + 'px';
+            }
+        });
+    });
+</script>

@@ -1,0 +1,53 @@
+<div class="row-fluid">
+    <div class="span7">
+        <div class="panel-heading">
+            <span class="pull-left" style="margin-right:20px;font-weight: bold">邮件快捷回复列表</span>
+        </div>
+        <div class="search_replay" >
+            <form action="" class="search_replay_form" id="quick_replay_search">
+                <div class="search_quick_replay">
+                    <input id="query_by_content" type="text" name="search" class="" maxlength="254" placeholder="输入关键字" onkeypress=" if(event.keyCode==13) {$(this).closest('.search_quick_replay').find('.replay_search_btn').click()}" style="border-color: rgb(204, 204, 204);">
+                    <span class="replay_search_btn ds_do_action" ds_action="config.channel.queryTagsByName" style="position: absolute"></span>
+                </div>
+                <div id="quick_replay_do_buttons" class="pull-right">
+                    <button id="quick_replay_add" class="pull-right btn-add ds_do_action" ds_action="config.channel.quickReplayAdd" ds_data=""> 添加</button>
+                    <button id="quick_replay_back" class="get-back pull-right btn-blue ds_do_action" ds_action="config.channel.quickReplayEmail" style="height: 21px;display: none"> 返回</button>
+                    <button id="quick_replay_import" class="pull-right get-back btn-blue ds_do_action"  ds_action="config.channel.importQuickReplay">导入</button>
+                </div>
+            </form>
+        </div>
+        <div class="content_lists_replay">
+            <ul class="replay_tags">
+                <li id="" name=""></li>
+            </ul>
+            <div class="replay_lists"></div>
+            <table class="replay_by_list table table-striped table-bordered table-hover" style="height: auto">
+                <input type="hidden" id="quick_replay_dataid" dataid=""/>
+                <tbody id="quick_replay_table" >
+                </tbody>
+            </table>
+        </div>
+        <div id="quick_replay_frm">
+        </div>
+
+    </div>
+    <div class="span5 sub-right" style="padding-left: 2.127659574468085%;">
+        <div id="config_quck_replay">
+        </div>
+    </div>
+</div>
+<script id="tmpl_quck_replay_turning" type="text/html">
+    <div class="row-fluid pagination pagination-small config_email_queue_count" style="display:table; margin:0;width:100%;"
+         for="{{=formID}}" ds_pagination_action="{{=formDO}}">
+        <span class="result_info">查询结果：<span class="result_count">0</span></span>
+        <ul class="email_queue_list_page" style="float:right;">
+            <li><a href="#" value="0">&laquo;</a></li>
+            <li><a href="#" value="1">1</a></li>
+            <li><a href="#" value="2">2</a></li>
+            <li><a href="#" value="3">3</a></li>
+            <li><a href="#" value="4">4</a></li>
+            <li><a href="#" value="5">5</a></li>
+            <li><a href="#" value="6">&raquo;</a></li>
+        </ul>
+    </div>
+</script>

@@ -1,0 +1,25 @@
+<div class="accordion-group">
+    <div class="accordion-heading">
+        <div class="row-fluid">
+            <div class="span10">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#ivrNodeAccrodion"
+                   href="#Collapse__Exten">
+                    __Exten _@config.callConfig.schedule.renderScheduleDisplayName('_#DisplayName#_')@_
+                </a>
+            </div>
+            <div class="span2">
+                <a class="accordion-toggle ds_action_flow" href="#">
+                    <ds-get-view view="config/callConfig/schedule/schedule_add" panel="schedule_detail"
+                                 view-data='{"ServiceNo":"__Exten"}' on-complete="config.callConfig.schedule.preAddSchedule"/>
+                    <i class="icon-plus"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="Collapse__Exten" class="accordion-body collapse">
+        <div class="accordion-inner">
+            <div id="__Exten" class="ds-item-list" item-view="config/callConfig/schedule/schedule_list_item_detail"
+                 data-source="ivr.ivr_schedule" data-pagination="false" data-exclude="{'ServiceNo':'__Exten'}"></div>
+        </div>
+    </div>
+</div>

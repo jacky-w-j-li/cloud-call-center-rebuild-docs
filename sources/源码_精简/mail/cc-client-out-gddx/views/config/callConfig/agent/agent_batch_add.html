@@ -1,0 +1,60 @@
+<div class="row-fluid">
+    <div class="span12">
+        <form class="form-horizontal" action="">
+            <div class="row-fluid">
+                <div class="span7 offset1">
+                    <i class="icon-plus"></i>批量添加座席
+                </div>
+                <div class="span4 text-right pull-right">
+                    <a class="btn btn-info btn-blue ds_action_flow ivr-save">
+                        <ds-form-action action="config.ivr.agent.batchAddAgent" extra-data="config.callConfig.currentConfigData"
+                            on-before="config.callConfig.agent.beforeUpdateAgent"
+                            on-complete-failed="config.callConfig.agent.afterBatchAddAgent"/>
+                        <ds-get-view view="config/callConfig/agent/agent_list" panel="ivrAgentPanel"/>
+                        保存
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+
+            <div class="control-group">
+                <label class="control-label">起始工号</label>
+                <div class="controls">
+                    <input type="text" name="exten" datatype="NumberLen" max="4" min="4" msg="工号为4位数字!" msgName="起始工号" required/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">需要增加座席</label>
+                <div class="controls">
+                    <input type="text" name="count" msgName="需要增加座席数量" datatype="NumberLen" max="3" min="1" msg="增加数量最大为999个" required/>个
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">起始透传号码</label>
+                <div class="controls">
+                    <input type="text" name="callerIDNum" datatype="Number" msg="起始透传号码必须为数字!"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">角色</label>
+                <div class="controls">
+                    <select name="batchRole" class="agentBatchAddRole">
+
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">版本</label>
+                <div class="controls">
+                    <select name="uversion">
+                        <option value="service">标准版</option>
+                        <option value="enterprise">企业版</option>
+                        <option value="outcall">电销版</option>
+                        <option value="monitor">监控版</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

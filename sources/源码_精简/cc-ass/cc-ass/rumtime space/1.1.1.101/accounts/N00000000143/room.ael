@@ -1,0 +1,15 @@
+context N00000000143-10086-room {
+	s => {
+		loop:
+		Read(roomPassword,sound/enterconfpassword,,,3,15);
+		if("${roomPassword}"!="123456"){
+			Playback(sound/confpasswordfail);
+			goto loop;
+		}
+		Playback(sound/conferencesuccess);
+		MeetMe(N0000000014310086,1dMsT);
+		Hangup();
+	}
+}
+
+

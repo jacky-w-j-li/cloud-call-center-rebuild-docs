@@ -1,0 +1,27 @@
+<div class="right_container" style="padding: 5px;">
+    <div class="well" style="padding: 10px 19px 5px;">
+        <p>
+            <!--共计搜索到<span class="num_total text-info"></span>条记录，<span class="num_todo text-error"></span>条未呼，-->
+            呼叫成功<span class="num_success text-success"></span>条，呼叫失败<span class="num_fail text-warning"></span>条
+            <a href="#" class="btn btn-link btn-small ds_do_action"  ds_action="batch.batch_list2" style="margin-left: 20px;">
+                <i class="icon-refresh"></i> 刷新</a>
+        </p>
+    </div>
+    <div class="">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#" class="ds_do_action" ds_action="batch.showNumList" ds_data="1" data-toggle="tab">未呼号码</a>
+            </li>
+            <li>
+                <a href="#" class="ds_do_action" ds_action="batch.showNumList" ds_data="2" data-toggle="tab">呼叫历史</a>
+            </li>
+            <li>
+                <a href="#" class="ds_do_action" ds_action="batch.showNumList" ds_data="3" data-toggle="tab">批次统计</a>
+            </li>
+        </ul>
+        <div id="batch_tab_content" style="margin-top: 15px;">
+
+        </div>
+    </div>
+
+</div>

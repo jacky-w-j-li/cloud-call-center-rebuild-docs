@@ -1,0 +1,107 @@
+<div class="pay_start" style="margin:10px;">
+    <div class="licence_pay">
+        <div class="well" style="padding: 0 19px;">
+            <h2>续费_@licence.showFieldDesc("licenceType","_#licenceType#_")@_<small>
+                licence单价:<span class="text-primary monthRent">_#licencePrice#_</span>元
+            </small></h2>
+            <p class="text-muted haveDate" >当前licence数<span class="text-primary">_#num#_</span>，到期日期为<strong class="text-danger">_#endDate#_</strong></p>
+            <p class="text-muted haveEffectDate" style="display: none;font-weight:bold;">
+                您减少了<span class="text-primary">_@licence.getLicenceNumNew(_#num#_,_#numNew#_)@_</span>个licence，生效时间为<span class="text-primary">_#effectDate#_</span>
+            </p>
+        </div>
+        <form class="form-horizontal" id="frm_licence_update">
+            <input type="hidden" name="_id" value="_#_id#_">
+            <input type="hidden" name="oldNum" value="_#num#_">
+            <input type="hidden" name="account" value="_#account#_">
+            <input type="hidden" name="licenceType" value="_#licenceType#_">
+            <input type="hidden" name="licencePrice" value="_#licencePrice#_">
+            <input type="hidden" name="beginDate" value="_#beginDate#_">
+            <input type="hidden" name="endDate" value="_#endDate#_">
+            <input type="hidden" name="pbx" value="_#pbx#_">
+            <input type="hidden" name="status" value="_#status#_">
+            <input type="hidden" name="flag" value="adjustLicenceNum">
+            <input type="hidden" name="balance" value="_#balance#_">
+            <div class="form-group">
+                <label class="control-label col-md-3">
+                    当前licence数
+                </label>
+                <div class="col-md-5"  style="line-height: 35px;">
+                    <input type="text" onkeyup="value=value.replace(/[^\d]/g,'')" name="num" value='_#num#_' class="no_shdw form-control input-sm ds_spinner ds_spinner_num" msgName="当前licence数" msg="当前licence数不能为0" datatype="Integer,Range" min="1" required>
+                    <label for="num" class="error" style="display: none;"></label>
+                </div>
+            </div>
+            <!--<div class="form-group enterprise_licence_show" style="display: none">-->
+                <!--<label class="control-label col-md-3">-->
+                    <!--折扣价格-->
+                <!--</label>-->
+                <!--<div class="col-md-5"  style="line-height: 35px;">-->
+                    <!--<span class="enterprise_price">0</span>元-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="form-group">
+                <label class="control-label col-md-3">
+                    增减数量
+                </label>
+                <div class="col-md-5"  style="line-height: 35px;">
+                    <span class="change_num">0</span>个
+                </div>
+            </div>
+            <!--<div class="form-group" id="licence_renew_month_div">-->
+                <!--<label class="control-label col-md-3">-->
+                    <!--时长-->
+                <!--</label>-->
+                <!--<div class="col-md-5"  style="line-height: 35px;">-->
+                    <!--<input type="text" onkeyup="value=value.replace(/[^\d]/g,'')" name="month" value='0' class="form-control input-sm ds_spinner_licence" required/>个月，-->
+                    <!--赠送<span class="presentMonth">0</span>个月-->
+                    <!--<label for="month" class="error" style="display: none;"></label>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="form-group" id="licence_renew_totalFee_div">
+                <label class="control-label col-md-3">
+                    费用
+                </label>
+                <div class="col-md-5" style="line-height: 35px;">
+                    <span class="fee">_#totalFee#_</span>元
+                    <!--<span class="text-muted">&nbsp;[单价*数量*购买时长=费用]</span>-->
+                </div>
+            </div>
+            <div class="clearfix" style="margin-bottom: 15px;">
+                <p>您当前可支付余额为:<span>_#balance#_</span>元,其中实际余额为:_#actualBalance#_,透支额度为_#overdraw#_</p>
+
+                <p class="balance_not_enough" style="display: none;color: red;">
+                    您的账户余额不足，请立即充值。
+                </p>
+            </div>
+            <div class="alert alert-info">
+                <ul>
+                    <li>增加、减少licence立即生效；减少licence不产生费用，请在即将到期的时候进行调整。</li>
+                </ul>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-8" style="position: relative;">
+                    <button type="button" class="btn btn-primary btn-small ds_form_action licence_renew" id="licence_adjustL_num" ds_action="licence.confirmPayAdjustNum">立刻购买</button>
+                    <button type="button" class="btn" id="popover_licence_adjustL_num"  style="visibility: hidden;position: absolute;top:-1px;left:55px;padding:0;margin: 0;border: 0;"></button>
+                    <button type="button" class="btn btn-small btn-default licence_close" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+<div class="pay_end" style="display: none;">
+    <p class="text-center">请您在新打开的网上银行页面进行支付，支付完成前请不要关闭该窗口</p>
+    <p class="text-center"><button type="button" class="btn btn-primary btn-small ds_do_action" ds_action="licence.finishPay" >支付完成</button></p>
+</div>
+
+
+<div style="display: none;" id="tmpl_licence_adjustL_num">
+    <div class="text-danger" style="">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;减少licence立即生效，不会退还相关费用，为减少不必要的损失，建议您即将到期的时候进行此操作，确认要继续吗？
+    </div>
+
+
+    <div class="text-center">
+        <button type="button" class="btn btn-primary btn-small ds_do_action" ds_action="licence.confirmMinusNum">确认</button>
+        <button type="button" class="btn btn-default btn-small ds_do_action" ds_action="licence.cancelMinusNum">取消</button>
+    </div>
+</div>

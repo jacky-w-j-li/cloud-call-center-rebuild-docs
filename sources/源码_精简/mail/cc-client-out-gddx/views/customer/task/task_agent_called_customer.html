@@ -1,0 +1,73 @@
+<div class="contact_summary" style="padding: 18px;">
+    <div class="">
+        <div class="edit_customer">
+            <form>
+                <input type="hidden" name="dbType" value='' id="icc_agent_called_customer_dbType"/>
+                <input type="hidden" name="popupId" value=''/>
+                <input type="hidden" name="callId" value='_#menu#_'/><!----带后缀 ------->
+                <input type="hidden" name="callTel" value='_#callNo#_'/>
+                <div class="" style="width:500px;">
+                    <div id="icc_agent_called_customer_customerAddDiv"></div>
+                    <div class="form_buttons" style="padding:5px 0 0 117px;margin-top: 30px;">
+                        <button type="button" class="btn btn-small btn-primary ds_form_action pull-left btn_pad" flag="_#dealSrc#_" ds_action="customer.task.updateCustomer">更新</button>
+                        <button type="button" class="btn btn-small pull-left  btn_cancel_edit">取消</button>
+                        <!--<a href="#" class="accept_button button ds_form_action btn_autoSave" ds_action="customer.saveCustomer" >保存</a>-->
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script id="tmpl_custmanage_agent_called" type="text/x-jquery-tmpl">
+    <fieldset>
+        <input type="hidden" name='_id' value="${data.customer._id}"/>
+        <input type="hidden" name='dbType'  value="${data.customer.dbType}"/>
+        <input type="hidden" name='owner'  value="${data.customer.owner}"/>
+        {{each(key,field) stable_fields}}
+        {{if field.name=='name'}}
+            <div class="row_item">
+                <label >${field.value}</label>
+                <input  name="${field.name}" type="text" value="${data.customer.name}" onfocus="this.select()" onmouseover="this.select()" ${field.required}/>
+            </div>
+            <div class="row_item">
+                <label  style="margin-top: 0;">客户状态</label>
+                <select class="select_status status_prospect" name="status" required >
+                    <!--<option value="" selected="selected">--请选择--</option>-->
+                    {{each(key1,name1) status}}
+                    <option value="${key1}" class="${key1}" {{if key1 == data.customer.status }} checked="checked"{{/if}}>${name1}</option>
+                    {{/each}}
+                </select>
+            </div>
+        {{else field.name=='phone'}}
+            <div class="row_item phone">
+                <label>${field.value}</label>
+                <input   name="tel[]" type="text" value="${data.customer.phone[0].tel}"   style="width:150px;" ${field.required}>
+            </div>
+        {{else field.name=='sex'}}
+            <div class="row_item">
+                <label>${field.value}</label>
+                <label for="sex1" style="float:left;width:auto;"><input type="radio" name="${field.name}" value="0" id='sex1' ${field.required} {{if 0 == data.customer.sex }} checked="checked"{{/if}} />男</label>&nbsp;
+                <label for="sex2" style="float:left;width:auto;"><input type="radio" name="${field.name}" value="1" id='sex2' ${field.required} {{if 1 == data.customer.sex }} checked="checked"{{/if}} />女</label>
+            </div>
+        {{else field.name=='note'}}
+            <div class="row_item">
+                <label  style="margin-top: 0;">${field.value}</label>
+                <textarea  name="${field.name}" rows="3" cols="" style="resize: vertical; width:300px; margin-bottom: 0px;" ${field.required} >${data.customer.note}</textarea>
+            </div>
+        {{else}}
+        {{/if}}
+        {{/each}}
+          <div class="row_item phone">
+                <label>所属人</label>
+                <input name="displayOwner" type="text" value="${displayOwner}" disabled="disabled"  style="width:150px;">
+          </div>
+    </fieldset>
+</script>
+<script id="agent_task_called_detail" type="text/x-jquery-tmpl">
+ <div class="contact-info">
+                <h2 class="contact_name" style="float:left;">
+                <span class="major">
+                    号码: ${phone[0].tel}
+                </span>
+ </div>
+</script>

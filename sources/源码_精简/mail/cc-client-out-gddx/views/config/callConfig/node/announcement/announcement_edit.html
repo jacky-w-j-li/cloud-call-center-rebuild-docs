@@ -1,0 +1,69 @@
+<div class="row-fluid">
+    <div class="span12">
+        <form class="form-horizontal ds_item_edit" action="" client-data="session.ivrMap.ivr.ivr_node_announcement">
+            <div id="confirm_del_pane"></div>
+            <input type="hidden" name="_id" value="___id">
+            <input type="hidden" name="Exten" value="__Exten">
+            <div class="row-fluid">
+                <div class="span6 offset1">
+                    <i class="icon-plus"></i>修改播放语音节点
+                </div>
+                <div class="span5 text-right pull-right">
+                    <a class="btn btn-info btn-blue ds_action_flow">
+                        <ds-form-action action="config.ivr.node.announcement.updateAnnouncement" extra-data="config.callConfig.currentConfigData"
+                                        update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"ivr_node_announcement"}}'/>
+                        <ds-get-view view="config/callConfig/node/announcement/announcement_list" panel="ivrAnnouncementNodePanel"/>
+                        <ds-effect-ivr/>
+                        保存
+                    </a>
+                    <a class="btn btn-danger btn-gray ds_action_flow">
+                        <ds-form-action action="config.ivr.node.announcement.deleteAnnouncement" extra-data="config.callConfig.currentConfigData"
+                                        update-client-data='{"method":"config.callConfig.updateClientData","arg":{"operation":"del","type":"ivr_node_announcement"}}'/>
+                        <ds-get-view view="config/callConfig/node/announcement/announcement_list" panel="ivrAnnouncementNodePanel"/>
+                        <ds-effect-ivr/>
+                        删除
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="row-fluid">
+                <div class="span5">
+                    <div class="control-group">
+                        <label class="control-label">
+                            节点名称
+                        </label>
+                        <div class="controls">
+                            <input type="text" msgName="节点名称" name="DisplayName" required/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            语音文件
+                        </label>
+                        <div class="controls ds_ivr_sound_select" sound-select-name="Filename">
+                            <select name="Filename">
+                                <option value="">--请选择--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            播放结束后转向
+                        </label>
+                        <div class="controls">
+                            <div id="toPeerType" class="ds_ivr_to_peer_type" tag-name="ToPeerType" tag-value-key="ToPeerType">
+
+                            </div>
+                            <div id="toPeer" class="ds_ivr_to_peer" tag-value-key="ToPeer">
+
+                            </div>
+                            <div class="ds_item_edit_param" ToPeerType="" ToPeer="" Filename=""
+                                 style="display:none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

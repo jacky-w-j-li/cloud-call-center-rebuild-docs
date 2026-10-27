@@ -1,0 +1,19 @@
+context N00000000056-10036-assignment {
+	s => {
+
+
+		Hangup;		
+	}
+}
+
+
+context N00000000056-10031-assignment {
+	s => {
+		JOBNUM=112;
+
+
+		Hangup;		
+	}
+}
+
+

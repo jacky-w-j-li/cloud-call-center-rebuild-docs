@@ -1,0 +1,19 @@
+<div class="row-fluid">
+    <div class="span5">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class='ds-item-list' id="lineList" item-view="config/callConfig/line/line_list_item"
+                     data-source="ivr['ivr_line']"></div>
+                <br/>
+                <a href="#" class="ds_action_flow">
+                    <ds-do-action action="config.ivr.line.queryLine" extra-data="config.callConfig.currentConfigData"
+                                  update-client-data='{"method":"config.callConfig.updateClientDataList","arg":{"type":"ivr_line"}}'/>
+                    <ds-get-view view="config/callConfig/line/line_list" panel="ivrLinePanel"/>
+                    <i class="icon-refresh"></i>刷新
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="span7 sub-right" id="line_panel">
+    </div>
+</div>

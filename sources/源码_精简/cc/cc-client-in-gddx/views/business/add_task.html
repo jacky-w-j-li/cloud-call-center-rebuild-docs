@@ -1,0 +1,228 @@
+<div class="row-fluid">
+    <div class="business_newbuild">新建工单</div>
+    <form>
+        <input type='hidden' name='customer' value='_customer'>
+        <input type='hidden' name='callId' value="_callId">
+        <div class="action_form">
+            <div class="action_bar">
+                <div style="float: right;margin: 0 0 0 -200px;width: 100%;">
+                    <div style="margin: 0 0 0  200px;">
+                        <span id="_menu_add_task_info" class="task_info" style="display:inline-block;width:auto">
+
+
+                        </span>
+                        <div class="allTask" style="float:right;display:none">
+                                <span class="time_img"><img width="20px" height="20px" src="../img/taskTimeAll.png" title="工单总时长"></span>
+                                <span class="time" style="color:#ea8010" countdowntime="noTime"></span>
+                        </div>
+                    </div>
+                </div>
+                <div style="float: left;width: 200px;">
+                    <label  class="pane_title_label">工单类型</label>
+                    <select id="_menu_add_task_taskType" name="flow" style="margin-top: 5px;width: 120px;"></select>
+                </div>
+            </div>
+            <div class="last_action">
+                <div class='row-fluid' id="_menu_add_task_business_fields">
+
+                </div>
+                <div class='row-fluid'>
+                    <div class='span6'>
+                        <div class='row-fluid'>
+                            <div class='field-label'>
+                                <label class="control-label" style='margin-top: 3px;text-align: right;'>下一步处理</label>
+                            </div>
+                            <div class='field-option'>
+                                <div class='field-option-inner ds_search_item'>
+                                    <select id="_menu_add_task_next_step_action" name='nextAction' style="width: 100%;"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='span6'>
+                        <div class='row-fluid'>
+                            <div class='field-label'>
+                                <label class="control-label" style='margin-top: 3px;text-align: right;'>处理人</label>
+                            </div>
+                            <div class='field-option'>
+                                <div class='field-option-inner ds_search_item'>
+                                    <select id="_menu_add_task_next_step_user" name="nextUser" style="width: 100%;display: none;"></select>
+                                    <div id ="_menu_add_task_next_step_user_type" class="combobox_agent" ></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='row-fluid'>
+                    <a class="btn  btn-small btn-primary ds_form_action" ds_action="business.doSaveBusiness" menu="_menu" style="float: right;margin-top: 3px;">提交</a>
+                    <a class="btn  btn-small btn-info ds_form_action" ds_action="business.doSaveTempBusiness" menu="_menu" style="float: right;margin-top: 3px;margin-right: 10px;">暂存</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var flows = getCache("businessFlow");
+        var temp = '<option value="_id">_name</option>';
+        var html = "";
+        for (var i = 0; i < flows.length; i++) {
+            var flowsItem = flows[i];
+            if(handler.business.hasAccessForFlow(flowsItem)){
+                html += temp.replace(/_id/g, flows[i]._id).replace(/_name/g, flows[i].name);
+            }
+        }
+        var pane = $('#_menu_add_task_taskType');
+        pane.append(html);
+        var selectFlow = "_selectFlow";
+        if(selectFlow && selectFlow !== "_" + "selectFlow"){
+            pane.val(selectFlow);
+        }
+        if(!html){
+            var pane = $("#_menu_add_task_business_fields").closest(".business_transform").closest("div.business-info").hide();
+        }
+
+
+
+        $('#_menu_add_task_taskType').bind('change', function () {
+            var id = $(this).val();
+            var pane = $('#_menu_add_task_business_fields');
+            pane.empty();
+            if (id) {
+                // var business = session.business.currentBusiness['_menu'];
+                var flow = getCache("businessFlow", id);
+                var tipInfo = "<i class='icon-info-sign task_info_tip' data-toggle='popover' data-trigger='hover' data-content='工单提示' data-title=_tips></i>";
+                if(!flow.tips){
+                    flow.tips = "";
+                }
+                $("#_menu_add_task_info").html(tipInfo.replace(/_tips/g,flow.tips)+flow.tips);
+                $("#_menu_add_task_info").find("i").popover({});
+
+                handler.business.createStartFlowCustomFields(pane, id, {});
+                handler.business.addBusienssSelectCascade();
+                var currentFlow = getCache("businessFlow", id);
+                var currentFlowStep = handler.business.getStartStep(currentFlow);
+                var actions = currentFlowStep.actions;
+                var html = "";
+                var actionTmp = "<option value=_id>_name</option>";
+                for (var i = 0; i < actions.length; i++) {
+                    var actionsItem = actions[i];
+                    html += actionTmp.replace(/_id/g, actionsItem._id).replace(/_name/g, actionsItem.name);
+                }
+                $("#_menu_add_task_next_step_action").empty();
+                $("#_menu_add_task_next_step_action").append(html);
+                $("#_menu_add_task_next_step_action").change();
+                if(currentFlow.ctype&&currentFlow.ctime){
+                    var allTime = handler.business.taskTimeAll(currentFlow.ctype,currentFlow.ctime);
+                    pane.closest('form').find(".allTask").show();
+                    pane.closest('form').find(".allTask").find(".time").text(allTime);
+                    pane.closest('form').find(".allTask").attr({"data-toggle": "tooltip", "data-placement":"bottom","title":"工单总时长"});
+                pane.closest('form').find(".allTask").tooltip();
+                }else{
+                    pane.closest('form').find(".allTask").hide();
+                    pane.closest('form').find(".allTask").find(".time").text("");
+                }
+            }
+        });
+
+        $('#_menu_add_task_next_step_action').bind('change', function () {
+            var actionId = $(this).val();
+            var flowId = $("#_menu_add_task_taskType").val();
+            var pane = $("#_menu_add_task_next_step_user");
+
+            pane.empty();
+            var flow = getCache("businessFlow", flowId);
+            var step = handler.business.getStartStep(flow);
+
+            var action = handler.business.getFlowAction(step._id, actionId);
+
+
+            var nextStepId = action.jumpTo;
+            var roles = handler.business.getStepRoles(nextStepId);
+            var agents = handler.business.getRoleAgents(roles);
+
+
+            if(roles[0]=='busCreateUser'){
+                var createUser = session.user._id;
+                var age = getCache('agents',createUser);
+                agents= [];
+                agents.push(age);
+            }else{
+                if(agents.length !== 1){
+                    pane.append("<option value=''>自动分配</option>");
+                }
+            }
+            var tmp = "<option value= '_id'>_name</option>";
+            for (var i = 0; i < agents.length; i++) {
+                var usersItem = agents[i];
+                pane.append(tmp.replace(/_id/g, usersItem._id).replace(/_name/g, usersItem.displayName));
+            }
+            if(roles[0]!='busCreateUser'){
+                if(agents.length !== 1){
+                    agents.push({_id:"_id",displayName:"自动分配",pinyin:"zidongfenpei"});
+                }
+            }
+            for (var i = 0; i < agents.length; i++) {//临时解决方案,底下的循环中移除,会造成选择处理人之后无效
+                if(agents[i].status && agents[i].status == "disable"){
+                    agents.splice(i, 1);
+                }
+            }
+            session.dicMap["business_addAgents"] = agents;
+            utils.loadSearchInput({ id: "_menu_add_task_next_step_user_type",
+                width: "120",
+                height: "15",
+                tip: "按姓名,拼音搜索",
+                data: agents,
+                showState: true,
+                cacheData: "business_addAgents",
+                searchField: ["displayName"],
+                pinyinField: ["displayName"],
+                listField: ["displayName"],
+                userIdField: "_id",
+                showField: "displayName",
+                showAllList: true,
+                callbackFuc: function (object) {
+                    pane.val(object._id);
+                },
+                onKeyChanged: function () {
+                    pane.val("");
+                }
+            });
+            if(agents.length == 1){
+                utils.setSearchInput("_menu_add_task_next_step_user_type", agents[0].displayName);
+            } else {
+                utils.setSearchInput("_menu_add_task_next_step_user_type", "自动分配");
+            }
+
+
+        });
+
+        $('#_menu_add_task_taskType').change();
+
+
+        //event  ==========
+        dsevent.bind("#_menu_add_task_business_fields", "taskExcuteAction", function (event, data) {
+
+            if (data._id == '__id'|| data.menu == '_menu') {
+                // $("#_menu_add_task_business_fields").closest(".business_transform").closest("div.business-info").empty();
+                var pane = $("#_menu_add_task_business_fields").closest(".business_transform").closest("div.business-info");
+                handler.business.loadTaskInfo(pane, '_menu', data.customer, data._id);
+            }
+        });
+
+        dsevent.bind("#_menu_add_task_business_fields", "taskExcuteTempAction", function (event, data) {
+            if (data._id == '__id' || data.menu == '_menu') {
+                // $("#_menu_add_task_business_fields").closest(".business_transform").closest("div.business-info").empty();
+                var pane = $("#_menu_add_task_business_fields").closest(".business_transform").closest("div.business-info");
+                handler.business.loadTaskInfo(pane, '_menu', data.customer, data._id);
+            }
+        });
+    });
+
+
+</script>
+
+<style type="text/css">
+
+</style>

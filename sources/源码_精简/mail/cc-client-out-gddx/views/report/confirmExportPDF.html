@@ -1,0 +1,16 @@
+<div id="show_confirm_export_report_pdf" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>报表导出PDF帮助</h3>
+    </div>
+    <form>
+        <input type="hidden" name="pdf_title" value="__pbf_title">
+        <div class="modal-body">
+            点击确认导出后，系统将打开打印预览窗口，请您在打印预览窗口中点击打印并保存。
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn btn-primary ds_form_action" ds_action="__pdf_method">确认导出</a>
+            <a href="#" class="btn" onclick="$('#show_confirm_export_report_pdf').modal('hide');">关闭</a>
+        </div>
+    </form>
+</div>

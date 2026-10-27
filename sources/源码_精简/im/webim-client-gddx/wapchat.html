@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>im</title>
+    <link rel="stylesheet" type="text/css" href="//14.29.4.225/stylesheets/moor_style.css">
+    <script type="text/javascript" src="//14.29.4.225/javascripts/json2.js"></script>
+    <script type="text/javascript" src="//14.29.4.225/javascripts/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="//14.29.4.225/javascripts/pinchzoom.min.js"></script>
+    <style type="text/css">
+        #allQuestion{
+            height: auto;
+            bottom: 130px;
+        }
+        .question_groups, .question_common{
+            height: 100%;
+        }
+        .allQuestion_bot{
+            position: absolute;
+            top: 50px;
+            bottom: 0;
+        }
+
+        /*pinchzoom.style*/
+        .pinch-zoom-container{
+            position: static !important;
+        }
+    </style>
+</head>
+<body>
+<div class="chatcontainer" style="display: none;">
+    <div class="header grey12">
+        <div class="ser-info">
+            <div class="logo"><img id="logo" src=""/></div>
+            <div class="ser-company" id="ser-company"></div>
+            <div class="connect-info" id="connect-info"></div>
+        </div>
+        <!--<div class="corner-btn">-->
+            <!--<span class="chat-close" id="chat-close"></span>-->
+            <!--<span class="chat-min" id="chat-min"></span>-->
+            <!--<span class="chat-voice" id="chat-voice"></span>-->
+        <!--</div>-->
+    </div>
+    <div class="content" id="wrap">
+        <ul class="conversation">
+        </ul>
+        <div id="launch_evaluation">
+            <form action="" class="esc_form_easy" >
+            </form>
+        </div>
+        <input type="button" style="display: none" id="appraise_easy" way="out"/><!--评价事件的触发按钮-->
+    </div>
+    <div class="footer">
+        <div class="sys-msg" style="display: none;"></div>
+        <div class="face-con" id="face-con">
+            <ul></ul>
+        </div>
+        <div class="msg-toolbar">
+            <div id="face-btn"><img src="../images/face-icon.png" width="20px" height="20px"/></div>
+            <div id="image-btn" style="display: none;"><img src="../images/image-icon.png" width="22px" height="20px"/><input style="display: none;" accept="image/jpeg,image/jpg,image/gif,image/png,image/bmp" type="file" id="picture" name="picture"></div>
+            <div id="file-btn" style="display: block;">
+                <img id = "file-btn-img" src="../images/file-icon.png" width="22px" height="20px"/>
+            </div>
+            <div id="question-btn"><img src="../images/question-icon.png?0301" width="20px" height="20px"/></div>
+        </div>
+        <div class="msg-input">
+            <div class="input-box">
+                <textarea id="chatbox_input" class="text grey">说点什么吧...</textarea>
+            </div>
+        </div>
+        <div class="msg-toolbar-footer grey12">
+            <span><input type="button" value="提交" id="chatmsg_submit" disabled="disabled"></span>
+            <span class="text grey quite">快捷键:Enter</span>
+        </div>
+
+    </div>
+    <div id="imcsr" class="isClose" style="display: none;border-top: none">
+        <div class="close_box">
+            <dl>
+                <dd>
+                    <a href="javascript:void(0);" class="chatCloseBtn">立即结束</a>
+                    <a href="javascript:void(0);" class="chatCancelBtn">取消</a>
+                </dd>
+                <dt>即将结束本次对话</dt>
+            </dl>
+            <h3>感谢您使用我们的服务,请为此次服务进行评价</h3>
+            <form id="esc_form" class='esc_form'>
+                <ol class="evaluates">
+                    <li></li>
+                </ol>
+                <div class="esc_form_reson"></div>
+                <textarea class="proposal" onfocus="if(value=='欢迎为我们的服务提建议'){value='';style.color='#000'}" rows="4"
+                          onblur="if (value ==''){value='欢迎为我们的服务提建议';style.color='#a7a7a7'}">欢迎为我们的服务提建议</textarea>
+                <input id="appraise" class="submit_evaluate" type="button" value="提交评价" way="in">
+
+            </form>
+        </div>
+        <!-- <p>结束本次对话？</p>
+
+        <div style="width:90%; margin:0 5%">
+            <a href="javascript:void(0);" class="chatCloseBtn">立即结束</a>
+            <a href="javascript:void(0);" class="chatCancelBtn">取消</a>
+        </div> -->
+    </div>
+    <div class="judegClose" style="display: none">
+        <p>结束本次对话？</p>
+        <div class="esc_talk" style="width:90%; margin:0 5%">
+            <a href="javascript:void(0);" class="judegCloseBtn">立即结束</a>
+            <a href="javascript:void(0);" class="judegCancelBtn">取消</a>
+        </div>
+    </div>
+    <div class="chattype" style="display: none;">
+        <p>请选择咨询类型</p>
+        <ul id="mtypelist" class="clearfix">
+
+        </ul>
+    </div>
+
+    <div id="allQuestion">
+        <div class="allQuestion_top">
+            <span class="title_one">编组</span>
+            <span class="title_two">常见问题</span>
+        </div>
+        <div class="allQuestion_bot">
+            <div class="question_groups">
+                <ul>
+                </ul>
+            </div>
+            <div class="question_common">
+                <input class="quest_con_id" type="hidden" name=""/>
+                <ul class="question_lis">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <audio src="../stylesheets/warning.mp3" style="display: none;" id="warning-tone">
+    </audio>
+</div>
+<div class="leave-msg-box" style="display: none;">
+    <div class="header grey12">
+        <div class="corner-btn">
+            <span class="chat-close" isleavePage="true"></span>
+            <span class="chat-min" ></span>
+        </div>
+    </div>
+    <div class="leave_body">
+        <p>
+            请留言，我们将尽快联系您!
+        </p>
+
+        <form name="leaveMsgForm">
+            <div class="row_item_input textbox">
+                <textarea class="grey" id="leavemsg_content" style="width:100%; height:140px;" name="leavemsg_content">请留言～</textarea>
+            </div>
+            <div class="row_item ptext">
+                <p>请务必留下您的联系方式，方便我们联系您！</p>
+            </div>
+            <div class="row_item_input" style="display: inline-block;margin-top:5px;margin-bottom:5px;">
+                <div class="input_icon"><img src="../images/phone.png" width="25px" height="25px"/></div>
+                <!--<div class="inputbox phone">-->
+                    <input class="grey inputbor" id="leavemsg_phone" type="text" value="联系电话～" name="leavemsg_phone"/>
+                <!--</div>-->
+            </div>
+            <div class="row_item_input" style="display: inline-block;">
+                <div class="input_icon"><img
+                        src="../images/email.png" width="25px" height="25px"/></div>
+                <!--<div class="inputbox email">-->
+                    <input class="grey inputbor" id="leavemsg_email" type="text" value="邮箱～" name="leavemsg_email"/>
+                <!--</div>-->
+            </div>
+            <div class="row_item_input">
+                <input type="button" value="留言" class="leave_btn" style="padding-top:0px;font-size:16px;"/>
+            </div>
+        </form>
+    </div>
+    <div class="leave_footer">
+        <div class="tips" style="display: none;">
+        </div>
+    </div>
+</div>
+<div id="imgview">
+    <b class="closeimg"></b>
+    <span class="pinch-zoom"></span>
+</div>
+<script type="text/javascript">
+    if(window.FormData){
+        $("#image-btn").show();
+    }
+    $(document).on("click", "a", function (event) {
+        var src = $(event.currentTarget);
+        if (src.find("img").length == 0){
+            return;
+        }
+        event.preventDefault();
+        var imgUrl = src.attr("href");
+        var imgObj = document.createElement("img");
+        var wHeight = $(window).height()-50;
+        imgObj.setAttribute("src",imgUrl);
+        $("#imgview").show().find("span").css("line-height",wHeight+"px").append(imgObj);
+    });
+    $(document).on("click", "#imgview", function (event) {
+        $("#imgview").hide().find("span").empty();
+    });
+    String.prototype.trim = function () {
+        var value = "";
+        return "undefined" == typeof this ? "" : (value = this.replace(/^\s*/g, ""), value.replace(/\s*$/g, ""));
+    };
+
+    function loadSocketJs(url, callback) {
+        var HEAD = document.getElementsByTagName("head").item(0) || document.documentElement;
+        var script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        script.onload = script.onreadystatechange = function () { //Attach handlers for all browsers
+            if (!/*@cc_on!@*/0 || this.readyState == "loaded" || this.readyState == "complete") {
+                this.onload = this.onreadystatechange = null;
+                this.parentNode.removeChild(this);
+                if (typeof(callback) == "function") callback();
+            }
+        };
+        script.setAttribute("src", url);
+        HEAD.appendChild(script);
+    }
+
+    function parseQuerystring() {
+        var href = window.location.href;
+        var queryStr = href.substr(href.indexOf("?") + 1);
+        if ("string" != typeof queryStr)return {};
+        var queryStr = queryStr.trim();
+        if ("" === queryStr)return {};
+
+        var json = {};
+        try {
+            for (var pairs = queryStr.split("&"), i = 0; i < pairs.length; i++) {
+                var kv = pairs[i].split("=");
+                kv[0] && kv[1] && (json[kv[0]] = decodeURIComponent(kv[1]))
+            }
+        } catch (e) {
+
+        }
+        return json;
+    }
+
+    function initChatStyle(styleColor, newwin) {
+        if (styleColor && styleColor != undefined && styleColor != "undefined") {
+            $(".header").css("background-color", "#" + styleColor);
+            $(".msg-toolbar-footer input").css("background-color", "#" + styleColor);
+            // $(".clearfix").css("background-color", "#" + styleColor);
+
+            $('head').append("<style>.judegCloseBtn,.customer,.submit_evaluate{background-color: #" + styleColor + ";}" +
+                    ".outer-right:before, .outer-right p{border-color:transparent transparent transparent #" + styleColor + " ;}" +
+                    "#show-more,.sendmsg,.close_box dd a:link,.close_box dd a:hover,.close_box dd a:active,.close_box dd a:visited,"+
+                    ".esc_talk dd a:link,.esc_talk dd a:hover,.esc_talk dd a:active,.esc_talk dd a:visited{color:#" + styleColor + "}" +
+                    ".judegClose,.isClose,#mtypelist li:hover{border-color:#" + styleColor + "} .manual,.question_groups li.active{color:#" + styleColor + "} .leave_btn,.reasons li.active{background-color:#" + styleColor + "} .input_icon{background-color:#" + styleColor + "}</style>");
+        }
+
+        if (serviceStates == 1) {
+            $(".chatcontainer").css("display", "block");
+            $(".leave-msg-box").css("display", "none");
+        } else {
+            $(".leave-msg-box").css("display", "block");
+            $(".chatcontainer").css("display", "none");
+        }
+        if (newwin) {
+            $("#chat-min").remove(), $("#chat-close").remove();
+            $("#chat-voice").remove();
+        }
+    }
+
+
+    var querys = parseQuerystring();
+    var accessId = querys.accessId;
+    var newwin = false;
+    var serviceStates = 1;
+    var styleColor = "19CAA6";
+    var fromUrl = querys.fromUrl || "wap嵌入页";
+    var urlTitle = querys.urlTitle || "wap嵌入页";
+    var clientId = querys.clientId;
+    var otherParams = querys.otherParams;
+    var version = "20160106";
+    var wapPage = true;
+    var selectPeer = undefined;
+    var peers = undefined;
+    var msg_config = {
+        chatCK: "QIMO_CHAT_SID_",
+        proxyMsgUrl: "//14.29.4.225",
+        accessId: accessId,
+        socketUrl: "//14.29.4.225",
+        seoKeywords:'',
+        seoSource:""
+    };
+
+    $.getJSON(msg_config.proxyMsgUrl + "/online?action=getOnlineStates&accessId=" + accessId, function(data){
+        version = data.version;
+        peers = data.peers;
+        querys.companyName = data.companyName;
+        styleColor = data.cssStyle.styleColor || styleColor;
+        //样式初始化
+        initChatStyle(styleColor, newwin);
+
+        //解决加载完后才弹出点击咨询的按钮来
+        loadSocketJs(msg_config.proxyMsgUrl + "/javascripts/socket.io.js", function () {
+            var script = document.createElement("script");
+            script.setAttribute("type", "text/javascript");
+            script.onload = script.onreadystatechange = function () { //Attach handlers for all browsers
+                if (!/*@cc_on!@*/0 || this.readyState == "loaded" || this.readyState == "complete") {
+                    this.onload = this.onreadystatechange = null;
+                    this.parentNode.removeChild(this);
+                    window.parent && window.parent.postMessage && (window.parent.postMessage("loadSocketJs", "*"));
+                }
+            };
+            script.setAttribute("src", msg_config.proxyMsgUrl + "/javascripts/7moorChat.js?v="+version);
+            document.body.appendChild(script);
+        });
+    });
+
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('.pinch-zoom').each(function () {
+            new RTP.PinchZoom($(this), {});
+        });
+    })
+</script>
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+<li style="display: list-item;">
+    <span class="set_name" id="queue_agent__#agentID#_" title="_#agentName#_">_#agentName#_</span>
+    <input type="text" onkeyup="value=value.replace(/[^\d]/g,'')" name="priority" id="_#agentID#_priority" class="form-control input-sm number" value=0 style="display: inline-block;width: 33px;text-align: center;" required="" datatype="Number,Range" min="0" msg="您输入的优先级有误">
+    <label ds_action="config.channel.deleteAgentAssign" style= "margin-top:3px;" name="_#agentID#__show">
+        <input type="checkbox" name="_#agentId#__assignment" id="_#agentID#__assignment" checked="checked">
+    </label>
+</li>

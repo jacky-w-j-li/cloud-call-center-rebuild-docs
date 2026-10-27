@@ -1,0 +1,103 @@
+<script>
+    function changeCheckAllProvince(sel){
+        var proArr = $(".IvrTools_check");
+        if(sel.checked==true){
+            $.each(proArr,function(i,item){
+                item.checked=true;
+            })
+        }else{
+            $.each(proArr,function(i,item){
+                item.checked=false;
+            })
+        }
+    }
+</script>
+<style>
+    .query_ivrTools_node_type_table td {
+        width: 150px;
+        padding-right: 5px;
+    }
+</style>
+<div class="row-fluid">
+    <div class="contentpart" style="padding: 5px;margin: 10px;">
+        <form class="form-horizontal">
+            <div class="querypart span12">
+                <div class="titlepart">
+                    <div class="span2">
+                        <i class="icon-wrench"></i>IVR配置生成工具
+                    </div>
+                    <div class="btn-group span8 offset2 text-right pull-right">
+                        <button class="btn action" style="display: none" appaction="ivr.ivrToolsSave" appdata="all">保存所有账户</button>
+                        <button class="btn action" style="display: none" appaction="ivr.ivrToolsSaveAndReload" appdata="all">保存所有账户并生效</button>
+                        <button class="btn do_action" style="display: none" appaction="">返回</button>
+                    </div>
+                </div>
+                <div class="query_condition_part">
+                    <div class="control-group">
+                        <label class="control-label">节点<br><input type="checkbox" id="checkAllProvince" onchange="changeCheckAllProvince(this)">全选</label>
+                        <div class="controls">
+                            <table class="query_ivrTools_node_type_table">
+                                <tr class="search-table-tr">
+                                    <td><input type="checkbox" class="IvrTools_check" value="ivr_account" >账户</td>
+                                    <td><input type="checkbox" class="IvrTools_check" value="ivr_account_user" >座席</td>
+                                    <td><input type="checkbox" class="IvrTools_check" value="ivr_service_no" >服务号</td>
+                                    <td><input type="checkbox" class="IvrTools_check" value="ivr_schedule" >日程节点</td>
+                                    <td><input type="checkbox" class="IvrTools_check" value="ivr_node_announcement" >播放语音节点</td>
+                                    <td><input type="checkbox" class="IvrTools_check" value="ivr_node_text_announcement" >播放文本语音节点</td>
+                                    <td><input type="checkbox" class="IvrTools_check" value="ivr_node_ivr" >按键菜单节点</td>
+                                    <td><input type="checkbox" class="IvrTools_check" value="ivr_node_validation" >采集输入节点</td>
+                                </tr>
+                                <tr class="search-table-tr">
+                                    <td><input type="checkbox" class="IvrTools_check" value="ivr_node_assignment" >赋值节点</td>
+                                    <td><input type="checkbox" class="IvrTools_check" value="ivr_node_callurl" >URL节点</td>
+                                    <td><input type="checkbox" class="IvrTools_check" value="ivr_node_room" >会议室节点</td>
+                                    <td><input type="checkbox" class="IvrTools_check" value="ivr_node_extension_peer" >自定义节点</td>
+                                    <td><input type="checkbox" class="IvrTools_check" value="ivr_node_satisfaction" >自定义满意度调查节点</td>
+                                    <td><input type="checkbox" class="IvrTools_check" value="satisfaction_options" >自定义满意度选项</td>
+                                    <td><input type="checkbox" class="IvrTools_check" value="system" >内置功能节点</td>
+                                    <td><input type="checkbox" class="IvrTools_check" value="ivr_blacklist" >呼入黑、呼出黑、红 名单</td>
+                                </tr>
+                                <tr class="search-table-tr">
+                                    <!--<td><input type="checkbox" class="IvrTools_check" value="ivr_node_encrypt_md5" >MD5加密节点</td>-->
+                                    <td><input type="checkbox" class="IvrTools_check" value="ivr_node_voicemail" >语音留言节点</td>
+                                    <td><input type="checkbox" class="IvrTools_check" value="ivr_node_route" >按变量路由节点</td>
+                                    <td><input type="checkbox" class="IvrTools_check" value="ivr_node_superDialJobNum" >采集工号并拨打节点</td>
+                                    <td><input type="checkbox" class="IvrTools_check" value="ivr_node_queue" >技能组</td>
+                                    <td><input type="checkbox" class="IvrTools_check" value="c5_extension_config" >SIP号</td>
+                                    <td><input type="checkbox" class="IvrTools_check" value="ivr_phonebar_config" >电话条配置</td>
+                                    <td><input type="checkbox" class="IvrTools_check" value="dial_line" >外呼线路</td>
+                                    <td><input type="checkbox" class="IvrTools_check" value="xfer_line" >呼转线路</td>
+                                </tr>
+                                <tr class="search-table-tr" >
+                                    <td><input type="checkbox" class="IvrTools_check" value="ivr_node_ivr_menu" >转IVR菜单节点</td>
+                                    <td><input type="checkbox" class="IvrTools_check" value="ivr_node_encrypt_md5" >MD5加密节点</td>
+                                    <td><input type="checkbox" class="IvrTools_check" value="ivr_call_event" >通话事件对接</td>
+                                    <td colspan="100"><input type="checkbox" class="IvrTools_check" value="ivr_sound" >语音</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="agent_report_data_part" span12>
+                <div class="data_content_part" id="report_dialout_area_table">
+                    <table id="call_report_dialout_area_table_id" class="table table-bordered table-condensed table-hover">
+                        <thead>
+                            <tr>
+                                <td>账户ID</td>
+                                <td>账户名称</td>
+                                <td>公司名称</td>
+                                <td>账户状态</td>
+                                <td>操作</td>
+                            </tr>
+                        </thead>
+                        <tbody id="ivrToolsTableBody">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

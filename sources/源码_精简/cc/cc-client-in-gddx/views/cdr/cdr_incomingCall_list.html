@@ -1,0 +1,13 @@
+<div class="left_column" id="call_list__#menu#_">
+    <div class="list-inside" style="/*margin-top: 2px;*/">
+        <div class="no_call muted">此处显示弹屏的卡片，点击卡片可查看详细信息。</div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        dsevent.bind('#call_list__#menu#_', 'callItemAdd searchCustomerError callAddCustomer customerAdd callRefreshCustomer customerUpdate callItemRinged customerAddCancelPop', function(event, params){
+            eval("handler.call."+event.type+"(params)");
+        });
+    });
+</script>

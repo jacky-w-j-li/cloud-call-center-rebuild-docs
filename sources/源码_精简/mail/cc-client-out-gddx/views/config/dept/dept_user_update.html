@@ -1,0 +1,150 @@
+<div class="right_content_pane" style="">
+    <form id="frm_dept_user_update" class="form-horizontal">
+        <input type='hidden' name='_id'/>
+        <div class="right_head clearfix" style="">
+            <div class=" pull-right">
+                <button type="button" class="btn btn-small" data-dismiss="modal" aria-hidden="true">取消</button>
+                <button type="button" class="btn btn-primary btn-small ds_form_action "  ds_action="config.dept.updateUser" style="margin-left: 10px;">保存</button>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">姓名</label>
+            <div class="controls">
+                <input type="text" name="displayName" readonly/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="deptSelect">所属部门</label>
+            <div class="controls">
+                <select name="deptId" id="deptSelect">
+                </select>
+            </div>
+        </div>
+        <div class="control-group ds_owner">
+            <label class="control-label">上级</label>
+            <div class="controls">
+                <input name="parentId" type="hidden" class="select_input" id="config_dept_user_owner_select_input"  />
+                <div id="config_dept_user_owner_select_user" class="combobox_agent"></div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                角色
+            </label>
+            <div class="controls">
+                <table>
+                    <tr>
+                        <td>
+                            <select name="roles" class="left_role" size="8"  multiple style="min-width: 100px;width: auto;">
+                            </select>
+                        </td>
+                        <td>
+                            <div style="margin:0 10px;">
+                                <p style="margin-bottom: 10px;">
+                                    <button type="button"  class="btn btn-default btn-sm left_middle">&gt;</button>
+                                </p>
+                                <p>
+                                    <button type="button"  class="btn btn-default btn-sm right_middle">&lt;</button>
+                                </p>
+                            </div>
+                        </td>
+                        <td>
+                            <select name="selectRoles" class="right_role" size="8" multiple style="min-width: 100px;width: auto;">
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">座席最小能同时接待会话数</label>
+            <div class="controls">
+                <select name="minImDealCount" class="span2" id="minImDealCount"></select>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">座席最大能同时接待会话数</label>
+            <div class="controls">
+                <select name="maxImDealCount" class="span2" id="maxImDealCount"></select>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">修改座席详细资料</label>
+            <div class="controls">
+                <input type="checkbox" name="updateIvrInfo" onchange="handler.config.dept.changeUserUpdateIvrInfo()">
+            </div>
+        </div>
+        <div class="user_update_ivr_info_div">
+            <div class="control-group">
+                <label class="control-label">姓名</label>
+                <div class="controls">
+                    <input type="text" name="displayName" msgname="座席姓名" required readonly/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">工号</label>
+                <div class="controls">
+                    <input type="text" name="exten" msgname="工号" datatype="NumberLen" max="4" min="4" msg="工号为4位数字!" readonly required>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">修改密码</label>
+                <div class="controls">
+                    <input type="password" name="password" readonly/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">手机</label>
+                <div class="controls">
+                    <input type="text" name="mobile" readonly/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">邮箱</label>
+                <div class="controls">
+                    <input type="text" name="email" readonly/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">后处理时长</label>
+                <div class="controls">
+                    <span class="input-append">
+                        <input style="width: 173px" name="AutoBusyTime"
+                               type="text" tabindex="20" dataType="Number" msg="后处理时长只能为大于等于0的数字" msgName="" readonly/>
+                        <span class="add-on" style="height: 14px;line-height: 15px">秒</span>
+                    </span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">是否为监控座席</label>
+                <div class="controls">
+                    <select name="type" disabled>
+                        <option value="agent">否</option>
+                        <option value="manager">是</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label"></label>
+                <div class="controls">
+                    <button type="button" class="btn btn-small" data-dismiss="modal" aria-hidden="true">取消</button>
+                    <button type="button" class="btn btn-primary btn-small ds_form_action "  ds_action="config.dept.updateUser" style="margin-left: 10px;">保存</button>
+                </div>
+            </div>
+            <div class="alert alert-success">
+                <strong>温馨提示</strong> 如果该座席设置的角色中拥有“平台监控”权限，请将“是否为监控座席”设置为“是”。否则该座席将无法正常查看平台监控。
+            </div>
+        </div>
+    </form>
+</div>
+<style type="text/css">
+#dept_user_modal .form-horizontal .controls{
+    width: 400px;
+    margin-left: 50px;
+}
+#dept_user_modal .form-horizontal .control-label{
+    padding-right: 10px;
+}
+</style>
+<link rel="stylesheet" href="../../../../stylesheets/bootstrap-multiselect.css" type="text/css">
+<script type="text/javascript" src="../../../../javascripts/bootstrap-multiselect.js"></script>

@@ -1,0 +1,45 @@
+context N00000000184-10047-validate{
+    s => {
+        input="";
+    	
+      loop:
+        WaitExten(20);
+    }
+
+    _[0-9] => {
+        input=${input}${EXTEN};
+        if(${LEN(${input})} > 26){
+                Playback(sound/incorrect);
+                goto s,1;
+        }
+        goto s,loop;
+    }
+
+    * => goto s, 1;
+
+    # => {
+        if(${LEN(${input})} > 26 || ${LEN(${input})} < 1){
+                Playback(sound/incorrect);
+                goto s,1;
+        }
+        VAL_OF_IVR_MENU=${input};
+        goto N00000000184-10047-transflow, ${input}, 1;
+    }
+
+    i => {
+        Playback(sound/incorrect);
+        goto s, 1;
+    }
+
+    t => {
+        Playback(sound/timeout);
+        Hangup;
+    }
+}
+
+context N00000000184-10047-transflow {
+    _. => {
+		goto N00000000184-10049-ExtensionPeer, s, 1;
+    }
+}
+

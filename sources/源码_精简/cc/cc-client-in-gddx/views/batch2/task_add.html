@@ -1,0 +1,154 @@
+<form  action="" id="" class="form-horizontal task_form">
+    <div class="section_num_type task_section" style="" >
+        <h5>第一步：选择录入号码方式</h5>
+        <label class="radio">
+            <input type="radio" name="numType"  value="import" checked>
+            号码导入
+        </label>
+        <span class="help-block">用于非连续的号码导入，可以导入多次</span>
+
+
+        <div class="control-group" style="margin-top: 5px;">
+            <div class="">
+                <button type="button" class="btn btn-small btn-primary  ds_do_action " ds_action="batch2.showAddNext" ds_data="2" style="">下一步</button>
+                <button type="button" class="btn btn-small"  data-dismiss="modal" aria-hidden="true">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="section_task_type task_section" style="display: none;" >
+        <h5>第二步：选择任务的控制方式</h5>
+
+        <label class="radio">
+            <input type="radio" name="taskType"  value="normal" checked>
+            手动
+        </label>
+        <span class="help-block">人工控制呼叫开始、暂停、继续</span>
+
+        <label class="radio">
+            <input type="radio" name="taskType"  value="time">
+            定时
+        </label>
+        <span class="help-block">系统按设置的时间段，到时自动呼叫</span>
+
+        <div style="display: none;margin-top: 5px;" class="section_task_hidden">
+            <div class="control-group">
+                <label class="control-label control-label2" >类型</label>
+                <div class="controls controls2">
+                    <select name="timeType">
+                        <option value="staticDate">指定日期</option>
+                        <option value="everyDay">每天</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group taskDate_hidden" style="">
+                <label class="control-label control-label2" >日期</label>
+                <div class="controls controls2">
+                    <input type="text" name="taskDate" placeholder="" class="ds_date" minDate="1" readonly>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label control-label2" >时间段</label>
+                <div class="controls controls2">
+                    <div style="margin-bottom: 10px;" class="task_time_item">
+                        <input type="text" name="beginTime[]" placeholder="开始时间" class="ds_time task_time2" readonly>-
+                        <input type="text" name="endTime[]" placeholder="结束时间" class="ds_time task_time2" readonly>
+                        <a href="#" class="task-plus">
+                            <i class="icon-plus"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="control-group" style="margin-top: 5px;">
+            <div class="">
+                <button type="button" class="btn btn-small btn-success  ds_do_action" ds_action="batch2.showAddPrev" ds_data="1" style="">上一步</button>
+                <button type="button" class="btn btn-small btn-primary  ds_do_action" ds_action="batch2.showAddNext" ds_data="3" style="">下一步</button>
+                <button type="button" class="btn btn-small"  data-dismiss="modal" aria-hidden="true">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="section_base task_section" style="display: none;" >
+        <h5>第三步：选择服务号码</h5>
+        <div class="control-group">
+            <label class="control-label control-label2" >任务名称</label>
+            <div class="controls controls2">
+                <input type="text" name="name" placeholder="">
+            </div>
+        </div>
+        <!--<div class="control-group">-->
+            <!--<label class="control-label" >呼叫策略</label>-->
+            <!--<div class="controls">-->
+                <!--<select name="autoCallStrategy" >-->
+                    <!--<option value="static">固定并发</option>-->
+                    <!--<option value="smart">智能并发</option>-->
+                <!--</select>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="control-group">-->
+            <!--<label class="control-label concurrent_num">并发数</label>-->
+            <!--<div class="controls">-->
+                <!--<input type="text" name="concurrent" value="1">-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="control-group">
+            <label class="control-label control-label2">服务号</label>
+            <div class="controls controls2">
+                <select name="serviceNo">
+                    _#serviceNoList#_
+                </select>
+                <!--<span class="help-block">电话呼通后会进入和服务号命名一样的技能组中，没有请先新建一个</span>-->
+            </div>
+        </div>
+        <div class="control-group task_queue" style="display: none;">
+            <label class="control-label control-label2">技能组</label>
+            <div class="controls controls2">
+                <select name="taskQueue">
+                    _#queueList#_
+                </select>
+                <span class="help-block">此技能组只是用来获取智能并发的空闲座席数</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls controls2">
+                <button type="button" class="btn btn-small btn-success  ds_do_action" ds_action="batch2.showAddPrev" ds_data="2" style="">上一步</button>
+                <button type="button" class="btn btn-small btn-primary  ds_form_action" ds_action="batch2.saveBdTask" style="">保存</button>
+                <button type="button" class="btn btn-small"  data-dismiss="modal" aria-hidden="true">取消</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<script type="application/javascript">
+    $('#batch_modal').find('input[name="numType"]').click(function(){
+        var val=$(this).val();
+        var _pane=$('#batch_modal').find(".section_num_hidden");
+        if(val=='generate'){
+            _pane.show();
+        }else{
+            _pane.hide();
+        }
+    });
+    $('#batch_modal').find('input[name="taskType"]').click(function(){
+        var val=$(this).val();
+        var _pane=$('#batch_modal').find(".section_task_hidden");
+        if(val=='time'){
+            _pane.show();
+        }else{
+            _pane.hide();
+        }
+    });
+    $('#batch_modal').find('select[name="timeType"]').change(function(){
+        var val=$(this).val();
+        var _pane=$('#batch_modal').find(".taskDate_hidden");
+        if(val=='staticDate'){
+            _pane.show();
+        }else{
+            _pane.hide();
+        }
+    });
+
+</script>

@@ -1,0 +1,43 @@
+<div class="row-fluid">
+    <div class="span12">
+        <form class="form-horizontal" action="">
+            <input type="hidden" name="_id">
+            <div class="row-fluid">
+                <div class="span7 offset1">
+                    <i class="icon-plus"></i>添加会议室节点
+                </div>
+                <div class="span4 text-right pull-right">
+                    <a class="btn btn-info btn-blue ds_action_flow">
+                        <ds-form-action action="config.ivr.node.room.updateRoom" extra-data="config.callConfig.currentConfigData"
+                            update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"ivr_node_room"}}'/>
+                        <ds-get-view view="config/callConfig/node/room/room_list" panel="ivrRoomNodePanel"/>
+                        <ds-effect-ivr/>
+                        保存
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="row-fluid">
+                <div class="span5">
+                    <div class="control-group">
+                        <label class="control-label">
+                            会议室名称
+                        </label>
+                        <div class="controls">
+                            <input type="text" msgName="会议室名称" name="DisplayName" required/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            会议室密码
+                        </label>
+                        <div class="controls">
+                            <input type="text" msgName="会议室密码" name="RoomPassword"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

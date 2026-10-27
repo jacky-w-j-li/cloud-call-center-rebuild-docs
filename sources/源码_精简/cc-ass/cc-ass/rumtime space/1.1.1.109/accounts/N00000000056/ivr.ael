@@ -1,0 +1,41 @@
+context N00000000056-10039-ivr {
+	_X. => {
+		FROM_CONTEXT="${CONTEXT}";
+		if("${FROM_IVR}a" == "a")
+            FROM_IVR="";
+		goto N00000000056-10039-ivr-input,s,1;
+	}
+}
+
+context N00000000056-10039-ivr-input {
+	s => {
+		INPUT_RETRY_TIMES=0;
+		loop:
+		BackGround(/development/app/workspace_ds_ali/ass/rumtime space/1.1.1);
+		WaitExten(10);
+	}
+
+
+
+	i => {
+		INPUT_RETRY_TIMES=${INPUT_RETRY_TIMES} + 1;
+		if(${INPUT_RETRY_TIMES} >= 3){
+			Playback(sound/bye);
+			Hangup();
+		}
+		Playback(sound/incorrect);
+		goto s,loop;
+	}
+	
+	t => {
+		INPUT_RETRY_TIMES=${INPUT_RETRY_TIMES} + 1;
+		if(${INPUT_RETRY_TIMES} >= 3){
+			Playback(sound/bye);
+			Hangup();
+		}
+		Playback(sound/timeout);
+		goto s,loop;
+	}
+}
+
+

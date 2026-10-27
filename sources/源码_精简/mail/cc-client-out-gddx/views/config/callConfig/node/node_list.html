@@ -1,0 +1,309 @@
+<script>
+    $("#ivr_node_query").keyup(function () {
+        if (event.keyCode == 13) {
+            handler.ivr.searchNode($("#ivr_node_query").val());
+        }
+    });
+</script>
+<div class="row-fluid">
+<div class="span5">
+<div class="row-fluid">
+    <div class="span7">
+        <div class="input-append">
+            <input id="ivr_node_query" name='query' type="text" placeholder="输入条件进行查询...">
+
+            <div class="btn-group">
+                <button class="btn dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#">高级查询</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="span2 offset3">
+        <a class="btn btn-success btn-blackishGreen ds_action_flow disabled ds_ivr_effect">
+            <ds-do-action action="config.ivr.reloadIvr" extra-data="config.callConfig.currentConfigData"
+                          on-complete="config.callConfig.reloadComplete"/>
+            生效
+        </a>
+    </div>
+</div>
+<div class="accordion" id="ivrNodeAccrodion">
+<div class="accordion-group">
+    <div class="accordion-heading">
+        <div class="row-fluid">
+            <div class="span9">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#ivrNodeAccrodion"
+                   href="#announcementCollapse">
+                    播放语音节点
+                </a>
+            </div>
+            <div class="span3">
+                <div class="row-fluid">
+                    <a class="accordion-toggle span1 ds_action_flow">
+                        <ds-get-view view="config/callConfig/node/announcement/announcement_add" panel="node_detail"/>
+                        <i class="icon-plus"></i>
+                    </a>
+                    <a class="accordion-toggle span1 action" appaction="ivr.refreshIvrCachce"
+                       appdata="config.ivr.node.queryAnnouncement,ivrAnnouncement,announcement" herf="#">
+                        <i class="icon-refresh"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="announcementCollapse" class="accordion-body collapse">
+        <div class="accordion-inner">
+            <div class="ds-item-list" id="announcementList" item-view="config/callConfig/node/announcement/announcement_list_item"
+                 data-source="ivr.ivr_node_announcement" data-exclude="{ServiceNo:'NotNull'}"></div>
+            <form id="announcementFrm">
+                <input type="hidden" name="dataSource" value="ivr.ivr_node_announcement">
+                <input type="hidden" name="itemTabId" value="announcementList">
+            </form>
+            <div class="row-fluid class_list">
+                <div class="pagination" style="display:table; margin:0;width:100%;">
+                    <span class="result_info">查询结果：<span
+                            class="announcementList_result_count">10</span></span>
+                    <ul id="announcementList_index" style="float:right;">
+                        <li><a href="#announcementFrm" appaction="ivr.paginationToChange" value="0">&laquo;</a></li>
+                        <li><a href="#announcementFrm" appaction="ivr.paginationToChange" value="1">1</a></li>
+                        <li><a href="#announcementFrm" appaction="ivr.paginationToChange" value="2">2</a></li>
+                        <li><a href="#announcementFrm" appaction="ivr.paginationToChange" value="3">3</a></li>
+                        <li><a href="#announcementFrm" appaction="ivr.paginationToChange" value="4">4</a></li>
+                        <li><a href="#announcementFrm" appaction="ivr.paginationToChange" value="5">5</a></li>
+                        <li><a href="#announcementFrm" appaction="ivr.paginationToChange" value="6">&raquo;</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion-group">
+    <div class="accordion-heading">
+        <div class="row-fluid">
+            <div class="span9">
+                <a id="ivr_node_ivr" class="accordion-toggle" data-toggle="collapse" data-parent="#ivrNodeAccrodion"
+                   href="#ivrCollapse">
+                    按键菜单节点
+                </a>
+            </div>
+            <div class="span3">
+                <div class="row-fluid">
+                    <a class="accordion-toggle span1 ds_action_flow">
+                        <ds-get-view view="config/callConfig/node/ivr/ivr_add" panel="node_detail"/>
+                        <i class="icon-plus"></i>
+                    </a>
+                    <a class="accordion-toggle span1 action" appaction="ivr.refreshIvrCachce"
+                       appdata="config.ivr.node.queryIvrNode,ivrNodeIvr,ivr" herf="#">
+                        <i class="icon-refresh"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="ivrCollapse" class="accordion-body collapse">
+        <div class="accordion-inner">
+            <c5-itemlist id=config/callConfig/tem-view="config/ivr/node/ivr/ivr_list_item"
+                         data-source="ivr.ivr_node_ivr"></c5-itemlist>
+            <form id="ivrFrm">
+                <input type="hidden" name="dataSource" value="ivr.ivr_node_ivr">
+                <input type="hidden" name="itemTabId" value="ivrList">
+            </form>
+            <div class="row-fluid class_list">
+                <div class="pagination" style="display:table; margin:0;width:100%;">
+                    <span class="result_info">查询结果：<span
+                            class="ivrList_result_count">10</span></span>
+                    <ul id="ivrList_index" style="float:right;">
+                        <li><a href="#ivrFrm" appaction="ivr.paginationToChange" value="0">&laquo;</a></li>
+                        <li><a href="#ivrFrm" appaction="ivr.paginationToChange" value="1">1</a></li>
+                        <li><a href="#ivrFrm" appaction="ivr.paginationToChange" value="2">2</a></li>
+                        <li><a href="#ivrFrm" appaction="ivr.paginationToChange" value="3">3</a></li>
+                        <li><a href="#ivrFrm" appaction="ivr.paginationToChange" value="4">4</a></li>
+                        <li><a href="#ivrFrm" appaction="ivr.paginationToChange" value="5">5</a></li>
+                        <li><a href="#ivrFrm" appaction="ivr.paginationToChange" value="6">&raquo;</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion-group">
+    <div class="accordion-heading">
+        <div class="row-fluid">
+            <div class="span9">
+                <a id="ivr_node_validation" class="accordion-toggle" data-toggle="collapse"
+                   data-parent="#ivrNodeAccrodion" href="#validationCollapse">
+                    采集输入节点
+                </a>
+            </div>
+            <div class="span3">
+                <div class="row-fluid">
+                    <a class="accordion-toggle span1 action" appaction="ivr.node.addValidation" appdata="">
+                        <i class="icon-plus"></i>
+                    </a>
+                    <a class="accordion-toggle span1 action" appaction="ivr.refreshIvrCachce"
+                       appdata="config.ivr.node.queryValidation,ivrValidation,validation" herf="#">
+                        <i class="icon-refresh"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="validationCollapse" class="accordion-body collapse">
+        <div class="accordion-inner">
+            <c5-itemlist id="validationList" item-view="ivr/node/list_validation"
+                         data-source="ivr.ivr_node_validation"></c5-itemlist>
+            <form id="validationFrm">
+                <input type="hidden" name="dataSource" value="ivr.ivr_node_validation">
+                <input type="hidden" name="itemTabId" value="validationList">
+            </form>
+            <div class="row-fluid class_list">
+                <div class="pagination" style="display:table; margin:0;width:100%;">
+                    <span class="result_info">查询结果：<span
+                            class="validationList_result_count">10</span></span>
+                    <ul id="validationList_index" style="float:right;">
+                        <li><a href="#validationFrm" appaction="ivr.paginationToChange" value="0">&laquo;</a></li>
+                        <li><a href="#validationFrm" appaction="ivr.paginationToChange" value="1">1</a></li>
+                        <li><a href="#validationFrm" appaction="ivr.paginationToChange" value="2">2</a></li>
+                        <li><a href="#validationFrm" appaction="ivr.paginationToChange" value="3">3</a></li>
+                        <li><a href="#validationFrm" appaction="ivr.paginationToChange" value="4">4</a></li>
+                        <li><a href="#validationFrm" appaction="ivr.paginationToChange" value="5">5</a></li>
+                        <li><a href="#validationFrm" appaction="ivr.paginationToChange" value="6">&raquo;</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion-group">
+    <div class="accordion-heading">
+        <div class="row-fluid">
+            <div class="span9">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#ivrNodeAccrodion"
+                   href="#routeCollapse">
+                    变量路由节点
+                </a>
+            </div>
+            <div class="span3">
+                <div class="row-fluid">
+                    <a class="accordion-toggle span1 action" appaction="ivr.node.addRoute" appdata="">
+                        <i class="icon-plus"></i>
+                    </a>
+                    <a class="accordion-toggle span1 action" appaction="ivr.refreshIvrCachce"
+                       appdata="config.ivr.node.queryRoute,ivrRoute,route" herf="#">
+                        <i class="icon-refresh"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="routeCollapse" class="accordion-body collapse">
+        <div class="accordion-inner">
+            <c5-itemlist id="routeList" item-view="ivr/node/list_route"
+                         data-source="ivr.ivr_node_route"></c5-itemlist>
+            <form id="routeFrm">
+                <input type="hidden" name="dataSource" value="ivr.ivr_node_route">
+                <input type="hidden" name="itemTabId" value="routeList">
+            </form>
+            <div class="row-fluid class_list">
+                <div class="pagination" style="display:table; margin:0;width:100%;">
+                    <span class="result_info">查询结果：<span class="routeList_result_count">10</span></span>
+                    <ul id="routeList_index" style="float:right;">
+                        <li><a href="#assignmentFrm" appaction="ivr.paginationToChange" value="0">&laquo;</a></li>
+                        <li><a href="#assignmentFrm" appaction="ivr.paginationToChange" value="1">1</a></li>
+                        <li><a href="#assignmentFrm" appaction="ivr.paginationToChange" value="2">2</a></li>
+                        <li><a href="#assignmentFrm" appaction="ivr.paginationToChange" value="3">3</a></li>
+                        <li><a href="#assignmentFrm" appaction="ivr.paginationToChange" value="4">4</a></li>
+                        <li><a href="#assignmentFrm" appaction="ivr.paginationToChange" value="5">5</a></li>
+                        <li><a href="#assignmentFrm" appaction="ivr.paginationToChange" value="6">&raquo;</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion-group">
+    <div class="accordion-heading">
+        <div class="row-fluid">
+            <div class="span9">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#ivrNodeAccrodion"
+                   href="#assignmentCollapse">
+                    赋值节点
+                </a>
+            </div>
+            <div class="span3">
+                <div class="row-fluid">
+                    <a class="accordion-toggle span1 action" appaction="ivr.node.addAssignment" appdata="">
+                        <i class="icon-plus"></i>
+                    </a>
+                    <a class="accordion-toggle span1 action" appaction="ivr.refreshIvrCachce"
+                       appdata="config.ivr.node.queryAssignment,ivrAssignment,assignment" herf="#">
+                        <i class="icon-refresh"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="assignmentCollapse" class="accordion-body collapse">
+        <div class="accordion-inner">
+            <c5-itemlist id="assignmentList" item-view="ivr/node/list_assignment"
+                         data-source="ivr.ivr_node_assignment"></c5-itemlist>
+            <form id="assignmentFrm">
+                <input type="hidden" name="dataSource" value="ivr.ivr_node_assignment">
+                <input type="hidden" name="itemTabId" value="assignmentList">
+            </form>
+            <div class="row-fluid class_list">
+                <div class="pagination" style="display:table; margin:0;width:100%;">
+                    <span class="result_info">查询结果：<span
+                            class="assignmentList_result_count">10</span></span>
+                    <ul id="assignmentList_index" style="float:right;">
+                        <li><a href="#assignmentFrm" appaction="ivr.paginationToChange" value="0">&laquo;</a></li>
+                        <li><a href="#assignmentFrm" appaction="ivr.paginationToChange" value="1">1</a></li>
+                        <li><a href="#assignmentFrm" appaction="ivr.paginationToChange" value="2">2</a></li>
+                        <li><a href="#assignmentFrm" appaction="ivr.paginationToChange" value="3">3</a></li>
+                        <li><a href="#assignmentFrm" appaction="ivr.paginationToChange" value="4">4</a></li>
+                        <li><a href="#assignmentFrm" appaction="ivr.paginationToChange" value="5">5</a></li>
+                        <li><a href="#assignmentFrm" appaction="ivr.paginationToChange" value="6">&raquo;</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion-group">
+    <div class="accordion-heading">
+        <div class="row-fluid">
+            <div class="span10">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#ivrNodeAccrodion"
+                   href="#systemCollapse">
+                    内置功能节点
+                </a>
+            </div>
+            <div class="span2">
+                <div class="row-fluid">
+                    <a class="accordion-toggle span1 offset1 action" appaction="ivr.refreshIvrCachce"
+                       appdata="config.ivr.node.querySystem,ivrSystem,system" herf="#">
+                        <i class="icon-refresh"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="systemCollapse" class="accordion-body collapse">
+        <div class="accordion-inner">
+            <c5-itemlist id="systemList" item-view="ivr/node/list_system"
+                         data-source="ivr.system"></c5-itemlist>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<div class="span7">
+    <div id="node_detail">
+    </div>
+</div>
+</div>

@@ -1,0 +1,22 @@
+<div class="contact_summary">
+    <div style="line-height: 35px;" class="clearfix">
+        <div class="pull-left">
+            批次号：<strong style="font-size: 14px;">_#batchNo#_</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+            _@customer.showImpStatusDesc('_#flag#_')@_
+        </div>
+        <div class="pull-right">
+            <button type="button" class="btn btn-small btn-danger ds_do_action btn_del_impNo" ds_action="customer.showDelImportTask" ds_data="_#_id#_" style="display: none;">删除</button>
+        </div>
+    </div>
+
+    <ul class="nav nav-tabs" id="customer_task_tab">
+        <li class="active">
+            <a href="#" class="ds_do_action" ds_action="customer.loadTaskImpList" data-toggle="tab" ds_data="_#batchNo#_">导入数据</a>
+        </li>
+        <li>
+            <a href="#" class="ds_do_action" ds_action="customer.loadTaskRepeatList" data-toggle="tab" ds_data="_#batchNo#_">重复数据</a>
+        </li>
+    </ul>
+    <div id="customer_task_tab_content">
+    </div>
+</div>

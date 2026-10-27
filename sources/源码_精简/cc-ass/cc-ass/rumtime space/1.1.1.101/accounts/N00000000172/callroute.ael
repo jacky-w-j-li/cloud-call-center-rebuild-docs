@@ -1,0 +1,21 @@
+context N00000000172-route {
+	10023 => goto N00000000172-10023-encryptmd5,s,1;
+	10022 => Hangup;
+	10019 => goto N00000000172-10019-announcement,${FROM_DID},1;
+	10021 => goto N00000000172-10021-blacklist,${FROM_CID},1;
+	10020 => goto N00000000172-10020-time,${FROM_DID},1;
+	4000 => goto N00000000172-dialin,4000, 1;
+	20001581 => goto N00000000172-dial,20001581, 1;
+	2 => goto N00000000172-dialin, ${JOBNUM}, 1;
+	10025 => goto N00000000172-10025-announcement,${FROM_DID},1;
+	10000209 => goto N00000000172-10000209-queue,10000209,1;
+	01058010125 => goto 01058010125,${FROM_DID},1;
+	10024 => goto N00000000172-10024-encryptmd5,s,1;
+	_XXXX => {
+		JOBNUM=${EXTEN};
+		goto N00000000172-dialin,${EXTEN},1;
+	}
+	_X.=> {
+		goto N00000000172-dial,${EXTEN},1;
+	}
+}

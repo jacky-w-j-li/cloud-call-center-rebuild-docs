@@ -1,0 +1,125 @@
+<form class="form-horizontal"  method="post">
+    <input type="hidden" name="_id" value="{{}}">
+    <div class="form-group">
+        <label class="control-label col-md-4">
+            开具类型
+        </label>
+        <div class="col-md-5">
+            <span class="form-control clearBoder">企业</span>
+        </div>
+    </div>
+    <div class="invoice_info_base">
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                发票抬头
+            </label>
+            <div class="col-md-5">
+                <span class="form-control clearBoder">{{invoiceTitle}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                发票类型
+            </label>
+            <div class="col-md-5">
+                <span class="form-control clearBoder">增值税专用发票</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                发票内容
+            </label>
+            <div class="col-md-5">
+                <span class="form-control clearBoder">技术服务费</span>
+            </div>
+        </div>
+    </div>
+    <div class="invoice_info_professional">
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                税务登记证号
+            </label>
+            <div class="col-md-5">
+                <span class="form-control clearBoder">{{registerNo}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                基本开户银行名称
+            </label>
+            <div class="col-md-5">
+                <span class="form-control clearBoder">{{bank}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                基本开户账号
+            </label>
+            <div class="col-md-5">
+                <span class="form-control clearBoder">{{bankNo}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                注册场所地址
+            </label>
+            <div class="col-md-5">
+                <span class="form-control clearBoder">{{registerAddr}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4" >
+                注册固定电话
+            </label>
+            <div class="col-md-5">
+                <span class="form-control clearBoder">{{registerTel}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                营业执照复印件
+            </label>
+            <div class="col-md-5 " >
+                <a href="http://7xj0za.com1.z0.glb.clouddn.com/{{busLicense}}" target="_blank">
+                    <img src="http://7xj0za.com1.z0.glb.clouddn.com/{{busLicense}}?imageView2/1/w/50" class="img-rounded" style="width:50px;max-height: 50px;">
+                </a>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                税务登记复印件
+            </label>
+            <div class="col-md-5 " >
+                <a href="http://7xj0za.com1.z0.glb.clouddn.com/{{taxCard}}" target="_blank">
+                    <img src="http://7xj0za.com1.z0.glb.clouddn.com/{{taxCard}}?imageView2/1/w/50" class="img-rounded" style="width:50px;max-height: 50px;">
+                </a>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                一般纳税人资格认证复印件
+            </label>
+            <div class="col-md-5 " >
+                <a href="http://7xj0za.com1.z0.glb.clouddn.com/{{taxpayerIdentify}}" target="_blank">
+                    <img src="http://7xj0za.com1.z0.glb.clouddn.com/{{taxpayerIdentify}}?imageView2/1/w/50" class="img-rounded" style="width:50px;max-height: 50px;">
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <div class="form-group">
+        <label class="col-md-offset-4 col-md-5">
+            {{if isDefault==true}}
+            默认发票
+            {{else}}
+            {{/if}}
+        </label>
+    </div>
+</form>
+
+
+
+
+
+
+

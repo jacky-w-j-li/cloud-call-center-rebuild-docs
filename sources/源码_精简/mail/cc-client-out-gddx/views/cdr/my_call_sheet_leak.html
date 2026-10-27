@@ -1,0 +1,219 @@
+<div class="left_column" id="call_sheet_list__#menu#_">
+    <div class='contacts_caption'>
+        <div class="caption-top clearfix">
+
+            <span class="refresh ds_do_action" ds_action="cdr.my_call_sheet_leak" ds_data="_#menu#_"
+                  id="reflush_my_call_sheet_leak_button"><a href="javascript:void(0);" class="ajaxed"></a></span>
+
+            <form class="call_sheet_leak_list_query_form">
+                <div class="input-append" style="margin-left: 10px;">
+                    <input class="span2 ds_search_item" name="query"  type="text"
+                           placeholder="输入电话号码查询">
+                    <button class="btn ds_do_action" type="button" ds_action="cdr.my_call_sheet_leak"
+                            ds_data="_#menu#_" title="查询">
+                        <i class="icon-search"></i>
+                    </button>
+                    <button type="button" class="btn my_call_sheet_leak_search_dorpdown" style="height: 24px;" title="高级查询">
+                        <span class="caret"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div id="my_call_sheet_leak_search_query" class="my_call_sheet_leak_query_close">
+            <form class="my_call_sheet_leak_high_query_form">
+                <div style="height: 40px;border-bottom: 1px solid #f0f0f0;">
+                    <div>
+                        <div>
+                            <h4 style="float:left;padding-top: 10px;padding-left:10px;color: black;">高级查询</h4>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <a href="#" class="cancel_button close"
+                               onclick="$('#my_call_sheet_leak_search_query').addClass('my_call_sheet_leak_query_close')"
+                               style="float: right;margin-top: 5px;margin-right: 10px;">x</a>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding:10px;padding-right:30px;">
+                    <div>
+                        <div style="margin-left: auto;margin-right: auto;">
+                            <fieldset>
+                                <table style="margin-bottom: 5px;">
+                                    <tr>
+                                        <td>
+                                            <div class="name formQue">
+                                                <label>回访座席:</label>
+                                                <span style="margin-right: 5px;">
+                                                    <input name="CALLBACK_AGENT" type="hidden" class="ds_search_item select_input" id="call_sheet_leak_callback_agent_select_input" style="float:none;"/>
+                                                    <span id="call_back_agent_select_user" class="combobox_agent" style="position: absolute"></span>
+                                                </span>
+                                            </div>
+                                        </td>
+                                     </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="name formQue">
+                                                <label>处理座席:</label>
+                                                <span style="margin-right: 5px;">
+                                                    <input name="NEW_DISPOSAL_AGENT" type="hidden" class="ds_search_item select_input" id="call_sheet_leak_disposal_agent_select_input" style="float:none;"/>
+                                                    <span id="my_call_leak_disposal_agent_select_user" class="combobox_agent" style="position: absolute"></span>
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <div class="name formQue" style="width: 100%;">
+                                                <label style="float: left;">最近未接时间:</label>
+                                                <input type="text" name="BEGIN_TIME" class="query_field ds_datetime"/>
+                                                至
+                                                <input type="text" name="END_TIME" class="query_field ds_datetime"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="business_fields"></div>
+                            </fieldset>
+                        </div>
+                        <a href="#" ds_action="cdr.queryMyCallSheetLeakHigh"
+                           style="margin-right: -25px;float: right;margin-bottom: 10px;" class="btn ds_form_action">搜索</a>
+                        <a href="#" ds_action="cdr.resetMyCallSheetLeakForm"
+                           style="margin-right: -25px;float: right;margin-bottom: 10px;margin-right: 20px;" class="btn ds_form_action">重置</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="list_container compact-view">
+        <div class="contact_list ">
+            <div class="list-inside" id="call_sheet_leak_list_item_pane">
+
+            </div>
+            <div class="row-fluid class_list" style="margin-top: 20px;">
+                <div class="pagination" style="display:table; margin:0;width:100%;">
+                    <span class="result_info">查询结果：<span
+                            class="result_count">0</span></span>
+                    <ul style="float:right;">
+                        <li><a href="#" ds_action="cdr.my_call_sheet_leak" value="0">&laquo;</a></li>
+                        <li><a href="#" ds_action="cdr.my_call_sheet_leak" value="1">1</a></li>
+                        <li><a href="#" ds_action="cdr.my_call_sheet_leak" value="2">2</a></li>
+                        <li><a href="#" ds_action="cdr.my_call_sheet_leak" value="3">3</a></li>
+                        <li><a href="#" ds_action="cdr.my_call_sheet_leak" value="4">4</a></li>
+                        <li><a href="#" ds_action="cdr.my_call_sheet_leak" value="5">5</a></li>
+                        <li><a href="#" ds_action="cdr.my_call_sheet_leak" value="6">&raquo;</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="right_column" id="call_sheet_detail__#menu#_">
+    <div class="contact_detail">
+        <div class="content">
+            <div class="pane_content">
+                <div class='call_sheet_leak_detail_div' id="_#menu#__customerLeak">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    utils.loadSearchInput({ id: "call_back_agent_select_user",
+        width: "179",
+        height: "14",
+        tip: "按姓名,拼音,工号搜索",
+        data: getCache("agents"),
+        searchField: ["displayName", "exten", "pinyin"],
+        pinyinField: ["displayName"],
+        listField: ["displayName", "exten"],
+        userIdField: "_id",
+        showField: "displayName",
+        showAllList: true,
+        callbackFuc: function (object) {
+            $("#call_sheet_leak_callback_agent_select_input").val(object._id);
+        },
+        onKeyChanged: function () {
+            if ($("#call_back_agent_select_user_input").val() != "") {
+                $("#call_sheet_leak_callback_agent_select_input").val("serachInputNoresult");
+            } else {
+                $("#call_sheet_leak_callback_agent_select_input").val("");
+            }
+        }
+    });
+    utils.loadSearchInput({ id: "my_call_leak_disposal_agent_select_user",
+        width: "179",
+        height: "14",
+        tip: "按姓名,拼音,工号搜索",
+        data: getCache("agents"),
+        searchField: ["displayName", "exten", "pinyin"],
+        pinyinField: ["displayName"],
+        listField: ["displayName", "exten"],
+        userIdField: "_id",
+        showField: "displayName",
+        showAllList: true,
+        callbackFuc: function (object) {
+            $("#call_sheet_leak_disposal_agent_select_input").val(object._id);
+        },
+        onKeyChanged: function () {
+            if ($("#my_call_leak_disposal_agent_select_user_input").val() != "") {
+                $("#call_sheet_leak_disposal_agent_select_input").val("serachInputNoresult");
+            } else {
+                $("#call_sheet_leak_disposal_agent_select_input").val("");
+            }
+        }
+    });
+    $(function () {
+        $(".my_call_sheet_leak_search_dorpdown").bind("click", function () {
+            $("#my_call_sheet_leak_search_query").toggleClass("my_call_sheet_leak_query_close");
+        });
+        $(".call_sheet_leak_list_query_form").keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                handler.cdr.my_call_sheet_leak("my_call_sheet_leak");
+            }
+        });
+    })
+</script>
+
+<style>
+    .my_call_sheet_leak_query_close {
+        display: none;
+    }
+
+    form.my_call_sheet_leak_high_query_form .formQue label {
+        width: 85px;
+        text-align: right;
+    }
+
+    form.my_call_sheet_leak_high_query_form input[type='text'] {
+        width: 120px;
+    }
+
+    form.my_call_sheet_leak_high_query_form select  {
+        width: 120px;
+    }
+
+    div.formQue {
+        margin-top: 5px;
+        width: 220px;
+        float: none;
+    }
+
+    .formQue label {
+        display: inline-block;
+
+    }
+
+    #my_call_sheet_leak_search_query {
+        border: 1px rgb(189, 188, 188) solid;
+        position: absolute;
+        width: 500px;
+        background-color: #ffffff;
+        padding: 0px;
+        z-index: 100;
+    }
+</style>

@@ -1,0 +1,582 @@
+<div class="webchat_container">
+    <div class="row-fluid ">
+        <div class="span9"style="position: relative">
+            <input type="hidden" name="copy_sessionId" value="_#_id#_">
+            <input type="hidden" name="copy_accessId" value="_#accessId#_">
+            <div class="chat_top clearfix" style="margin-bottom: 6px;height: 34px;">
+                <div class="chat_top_head pull-left clearfix">
+                    <img src="./img/client/customer/_#platformPic#_" style="width: 35px;float: left;margin-right: 10px;"/>
+                    <div class="chat_top_head_left" style="">
+                        <div style="font-weight:bold;" class="chat_top_head_clea pull-left customer_name_#sid#_" cust_id="_#custId#_">
+                            _#sName#_
+                            <span class="chat_top_head_type webchat_user_id" ds_data="_#sid#_">(_#fromSource#_)</span>
+                        </div>
+                        <div class="fmuted"  style="width: 100%;margin-top: 5px;display: inline-block">_#createTime#_</div>
+                    </div>
+                </div>
+                <div class="pull-right chat_transfer">
+                    <input id="combobox_webchat_owner" type="text"  style="display:none;width:125px;vertical-align:bottom;margin-right:5px;padding:3px 6px;float: left" placeholder="按姓名,拼音,工号搜索">
+                    <span class="img_action_turn" id="combobox_webchat_owner_desc" uid="_#user#_">转接</span>
+                    <input id="combobox_webchat_change_group" type="text"  style="display:none;width:125px;vertical-align:bottom;margin-right:5px;padding:3px 6px;float: left" placeholder="按技能组搜索">
+                    <span class="img_action_turn" id="combobox_webchat_change_group_desc" uid="_#user#_">技能组转接</span>
+                    <input id="combobox_webchat_invite_owner"  type="text"  style="display:none;width:125px;vertical-align:bottom;margin-right:5px;padding:3px 6px;float: left" placeholder="按姓名,拼音,工号搜索">
+                    <span class="img_action_invite img_action_turn" id="combobox_webchat_invite_owner_desc"  uid="_#user#_">邀请座席</span>
+                    <span class="img_action_turn ds_do_action kick_invite"  ds_action="webchat.kickInvite" ds_data="_#_id#_">踢出协作座席</span>
+                    <span class="img_action_stop stop_session ds_do_action" data-toggle="dropdown" ds_action="webchat.endSession">结束会话</span>
+                </div>
+                <div class = "chat_grab">
+                    <form>
+                        <input type="hidden" name="_id" value="_#_id#_">
+                        <input type="hidden" name="sid" value="_#sid#_">
+                        <input type="hidden" name="currUser" value="_#user#_">
+                        <span type = "button" class="ds_form_action img_action_grab" data-toggle="dropdown" ds_action="webchat.webchatGrab">抢接会话</span>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="chat_msg chat_msg_bottom setImFonts clearbt" ds_attr="2" ds_time="" noChatPopover="false">
+                <div class="msg_inner"></div>
+                <div class="cancel_webchat" style = "display:none" id = "cancel_webchat_#_id#_">
+                    <p>正在邀请<span class= "invited_name"></span>加入该会话</p>
+                    <span class="chat_action_cancel ds_do_action" ds_action="webchat.cancelInvite" ds_data="_#_id#_">取消</span>
+                </div>
+            </div>
+            <div class="chart_time_stopwatch_box">
+                <div class="chart_time_stopwatch chattime_item_#_id#_ hidden">
+                    访客已等待 <span class="ts_minute">00</span>:<span class="ts_second">00</span>
+                </div>
+            </div>
+            <div class="chat_toolbar">
+                <ul name="imFontCon" class="imFontCon">
+                    <li class="ds_do_action" ds_action="webchat.changeImFontSize" font="12">12</li>
+                    <li class="ds_do_action" ds_action="webchat.changeImFontSize" font="14">14</li>
+                    <li class="ds_do_action" ds_action="webchat.changeImFontSize" font="16">16</li>
+                    <li class="ds_do_action" ds_action="webchat.changeImFontSize" font="18">18</li>
+                    <li class="ds_do_action" ds_action="webchat.changeImFontSize" font="20">20</li>
+                </ul>
+                <div class="face_con" id="face_con">
+                    <ul style="list-style: none;"></ul>
+                </div>
+                <div class="face_arrow"></div>
+                <span class="ds_do_action webchat_msg_emojiface set_im_font" ds_action="webchat.showFontSize">
+                   <img src="../../img/client/customer/font-icon.png?160222" width="20px" height="20px"/>
+                </span>
+                <span class="ds_do_action webchat_msg_emojiface" ds_action="webchat.showEmojiFaces" ds_data="">
+                    <img src="../../img/client/customer/face-icon.png?160222" width="20px" height="20px"/>
+                </span>
+                <span class="webchat_msg_emojiface" style="width:20px; height:20px;z-index:0;">
+                    <img id="webchat_msg_image_btn__#sid#_" src="../../img/client/customer/image-icon.png?160222" />
+                </span>
+                <span class="webchat_msg_emojiface"  id = "file_upload" style="width:20px; height:20px;z-index:0;">
+                    <img id="webchat_msg_file_btn__#_id#_" src="../../img/client/customer/files-icon.png?160720" />
+                </span>
+                <span class="initiate_appraise webchat_msg_emojiface ds_do_action" data-toggle="popover" data-placement="top" data-trigger="hover focus" data-content="请求评价" ds_action="webchat.pushImCSRInfo">
+                    <img id="" src="../../img/client/customer/flower_icon.png?160222" width="20px" height="20px"/>
+                </span>
+                <span class="webchat_msg_emojiface ds_do_action" data-toggle="popover" data-placement="top" data-trigger="hover focus" data-content="知识库搜索" ds_action="webchat.showKmPopover" ds_data="_#_id#_" id = "webchat_km_search" style="width:23px; height:20px;z-index:0;" >
+                    <img id="webchat_msg_km_btn__#_id#_" src="../../img/client/customer/kmsearch-icon.png" />
+                </span>
+                <script>$(function () { $("[data-toggle='popover']").popover(); });</script>
+
+                <!--<img src="./img/client/customer/webchat_ico.png " style="width: 25px;"/>-->
+            </div>
+
+
+            <div class="chat_deal clearfix">
+                <form action="">
+                    <!--<input type="hidden" name="accessId" value="_#accessId#_">-->
+                    <input type="hidden" name="sid" value="_#sid#_">
+                    <input type="hidden" name="sessionId" value="_#_id#_">
+                    <input type="hidden" name="contentType" value="text">
+                    <input type="hidden" name="platform" value="_#platform#_">
+                    <input type="hidden" name="accessId" value="_#accessId#_">
+                    <input type="hidden" name="agentFirstReplyTime" value="_#agentFirstReplyTime#_">
+                    <input type="hidden" name="manualTime" value="_#manualTime#_">
+                    <input type="hidden" name="status" value="_#status#_">
+                    <input type="hidden" name="lastRedirectTime" value="_#lastRedirectTime#_">
+                    <input type="hidden" name="lastRedirectUserTime" value="_#lastRedirectUserTime#_">
+                    <input type="hidden" name="lastClaimTime" value="_#lastClaimTime#_">
+                    <div class="row-fluid" style="position:relative">
+                        <textarea rows="2"  class="span12  ds_selectItem_action textarea_autocomplete setImFonts" keyup_selectitem_action="webchat.selectItem" name="content"></textarea>
+                        <div class="suggest search-suggest" ds_index="-1" style="display:none">
+                             <ul>
+                            </ul>
+                         </div>
+                        <button type="button" class="btn bg-img-none btn-blue btn-small ds_form_action pull-right reply_webchat" ds_action="webchat.replyChat" ds_data="">发送</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="span3" style="overflow-y: auto">
+            <ul class="information_and_quickreplay clearFloat">
+                <li class="li-quickreply ds_do_action active" ds_action="webchat.showChatDetails">信息</li>
+                <li class="li-quickreply ds_do_action" ds_action="webchat.showQuickReplyContent">快捷回复</li>
+            </ul>
+            <div class="webchat_remark_box" style="color: #7D7D7D;">
+                <div class="webchat_remark_li_title"><b>基本信息</b></div>
+                <div class="webchat_dialog_info clearFloat"></div>
+                <div style="color: #7D7D7D;padding: 0 0 5px;font-weight: bold;position: relative;height: 46px">
+                    <span style="position: absolute">备注:</span>
+                    <textarea rows="3" name="remark" class="dialog_remark ds_focus_action" focus_action="webchat.editWebChatRemark" blur_action="webchat.saveSessionRemark" style="resize: none" placeholder="点击输入文字......">_#remark#_</textarea>
+                </div>
+                <div class="webchat_access_infomation"></div>
+                <div class="webchat_consult_tab" style="color: #7D7D7D;">
+                </div>
+            </div>
+
+            <div class="webchat_quickreply_tab clearfix hidden">
+                <ul class="system_and_user clearFloat">
+                    <li class="li-quickreply_webchat ds_do_action active" ds_action="webchat.showReplyCustom" style="border-radius: 5px 0 0 5px;">自定义</li>
+                    <li class="li-quickreply_webchat ds_do_action" ds_action="webchat.showReplySystm" style="border-radius: 0 5px 5px 0;">系统公用</li>
+                </ul>
+                <div class="webchat_quickreply_tab_system"></div>
+                <div class="system_quickreply_lists"></div>
+            </div>
+        </div>
+        <script>
+
+        </script>
+    </div>
+
+
+    <!---------------------------------------template------------------------------------------>
+    <script id="tmpl_webchat_quickreply_list" type="text/html">
+
+        <div class="webchat_quickreply_container" style="overflow: auto;">
+            <div class="btn_edit_quickreply"><span class="webchat_quickreply ds_do_action" ds_action="webchat.editQuickReply">编辑</span></div>
+            <div class="muted webchat_quickreply_list" style=" line-height:20px;">
+                {{
+                if (quickreplys.length > 0){
+                }}
+                <ol style="list-style-type: disc; color:#0088cc;">
+                    {{
+                    var quickreplys = quickreplys||[];
+                    for(var i=0; i <quickreplys.length ; i++){
+                    }}
+                    <li class="webchat_reply_li" title="{{=quickreplys[i]}}">
+                        <div class="webchat_reply_li_con">{{=quickreplys[i]}}</div>
+                        <span class="webchat_reply_li_span">
+                            <i class="webchat_reply_li_send ds_do_action" ds_action="webchat.sendQuickReply" ds_data="{{=quickreplys[i]}}"></i>
+                            <i class="webchat_reply_li_edit ds_do_action" ds_action="webchat.editSystemQuickReply"></i>
+                        </span>
+                    </li>
+                    {{
+                    }
+                    }}
+                </ol>
+                {{
+                } else {
+                }}
+                您还没有设置快捷回复，赶快点击上方编辑图标“<img width="15px" height="15px" src="./img/client/customer/cust_edit.png"/>”添加属于您的快捷回复吧！
+                {{
+                }
+                }}
+
+            </div>
+            <div class="muted webchat_quickreply_edit" style="display: none;">
+                <form>
+                    <fieldset>
+                        <div style="width:100%" class="webchat_quickreply_edit_container">
+                            <div style="margin-bottom:10px;text-align:left">
+                                <a href="#" class="quickreplyDic-plus ds_do_action" ds_action="webchat.addQuickReply">
+                                    <i class="icon-plus"></i>
+                                </a>
+                            </div>
+                            {{
+                            var quickreplys = quickreplys||[];
+                            for(var i=0; i<quickreplys.length ; i++){
+                            }}
+                            <div class="quickreply_item" style="margin-bottom:10px;">
+                                <input type="text" style="width:80%;" name="quickreplys[]" placeholder=""
+                                       class="input_text row_first" msgname="快捷回复项" required=""
+                                       value="{{=quickreplys[i]}}">
+                                <a href="#" class="quickreplyDic-minus ds_do_action"
+                                   ds_action="webchat.removeQuickReply">
+                                    <i class="icon-minus"></i>
+                                </a>
+                            </div>
+                            {{
+                            }
+                            if(quickreplys.length<=0){
+                            }}
+                            <div class="quickreply_item" style="margin-bottom:10px;">
+                                <input type="text" style="width:80%;" name="quickreplys[]" placeholder=""
+                                       class="input_text row_first" msgname="快捷回复项" required="">
+                                <a href="#" class="quickreplyDic-minus ds_do_action"
+                                   ds_action="webchat.removeQuickReply">
+                                    <i class="icon-minus"></i>
+                                </a>
+                            </div>
+                            {{
+                            }
+                            }}
+                        </div>
+                        <button class="btn btn-small btn-primary ds_form_action" ds_action="webchat.saveQuickReply">保存
+                        </button>
+                        <button class="btn btn-small ds_do_action" ds_action="webchat.cancelEditQuickReply">
+                            取消
+                        </button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </script>
+
+    <script id="tmpl_webchat_quickreply_edit" type="text/html">
+        <div class="quickreply_item" style="margin-bottom:10px;">
+            <input type="text" style="width:80%;"  name="quickreplys[]" placeholder="" class="input_text row_first" msgname="快捷回复项" required="" value="{{=content}}">
+            <a href="#" class="quickreplyDic-minus ds_do_action" ds_action="webchat.removeQuickReply">
+                <i class="icon-minus"></i>
+            </a>
+        </div>
+    </script>
+
+    <script id="tmpl_webchat_msg_from" type="text/html">
+        <div class="chat_item in" ds_data="{{=when}}">
+            <input type="hidden" name="time" value="{{=dateTime}}">
+            <div class="chat_time {{=cls}}">{{=timeDesc}}</div>
+            <div class="chat_section clearfix">
+                <!--<div class="pull-left" style="">_#UserID#_</div>-->
+                <div class="pull-left" >
+                    <div class="chat_popover right chat_popover_search">
+                        <div class="arrow"></div>
+                        <div class="chat_popover-content">
+                            <pre>{{=#contentDesc}}</pre><span class="img_action_kmsearch ds_do_action"  ds_action="webchat.showKmPopover"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script id="tmpl_webchat_msg_from_system" type="text/html">
+        <div class="chat_item sys_prompt in"  ds_data="{{=when}}">
+            <input type="hidden" name="time" value="{{=dateTime}}">
+            <!--<div class="chat_time {{=cls}}">{{=timeDesc}}</div>-->
+            <div class="chat_section clearfix">
+                <!--<div class="pull-left" style="">_#UserID#_</div>-->
+                <div class="pull-left" >
+                    <div class="chat_popover right">
+                        <div class="arrow"></div>
+                        <div class="chat_popover-content">
+                            <pre>{{=#contentDesc}}</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script id="tmpl_webchat_msg_to" type="text/html">
+        <div class="chat_item out to_{{=timeStamp}} send"  ds_data="{{=when}}">
+            <input type="hidden" name="time" value="{{=dateTime}}">
+            <div class="chat_section clearfix">
+                <div class="service_name clearfix" style="">
+                    <div class="pull-right uid-desc" style="text-align: center">
+                        {{=uidDesc}}
+                    </div>
+                    <div class="chat_time {{=cls}}">{{=timeDesc}}</div>
+                </div>
+                <div class="pull-right" style="margin-right: 5px;">
+                    {{
+                    if(timeStamp){
+                    }}
+                    <span class="wct_send_status" title="消息发送中"></span>
+                    {{
+                    }
+                    }}
+                    <div class="chat_popover left">
+                        <div class="arrow"></div>
+                        <div class="chat_popover-content">
+                            <pre>{{=#contentDesc}}</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script id="tmpl_webchat_msg_from_img" type="text/html">
+        <div class="chat_item in"  ds_data="{{=when}}">
+            <input type="hidden" name="time" value="{{=dateTime}}">
+            <div class="chat_time {{=cls}}">{{=timeDesc}}</div>
+            <div class="chat_section clearfix">
+                <div class="pull-left" style="margin-left: 0px;">
+                    <div class="chat_popover" style="padding: 0;">
+                        {{=#contentDesc}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script id="tmpl_webchat_msg_from_file" type="text/html">
+        <div class="chat_item in" ds_data="{{=when}}">
+            <input type="hidden" name="time" value="{{=dateTime}}">
+            <div class="chat_time {{=cls}}">{{=timeDesc}}</div>
+            <div class="chat_section clearfix">
+                <!--<div class="pull-left" style="">_#UserID#_</div>-->
+                <div class="pull-left" >
+                    <div class="chat_popover right chat_popover_search">
+                        <div class="arrow"></div>
+                        <div class="chat_popover-content">
+                            <pre>{{=#contentDesc}}</pre><span class="img_action_kmsearch ds_do_action"  ds_action="webchat.showKmPopover"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script id="tmpl_webchat_msg_from_preload" type="text/html">
+        <div class="chat_item_preload in" ds_data="{{=TimeStamp}}" style="margin: 1em 5px;">
+            <div class="chat_section clearfix">
+                <div class="pull-left" >
+                    <div class="chat_popover right">
+                        <div class="arrow"></div>
+                        <div class="chat_popover-content">
+                            <pre><span class="typing_status">访客正在输入</span>：{{=Content}}</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script id="tmpl_webchat_msg_to_img" type="text/html">
+        <div class="chat_item out"  ds_data="{{=when}}">
+            <input type="hidden" name="time" value="{{=dateTime}}" >
+            <div class="chat_section clearfix">
+                <div class="service_name clearfix" style="">
+                    <div class="pull-right uid-desc" style="text-align: center">{{=uidDesc}}</div>
+                    <div class="chat_time {{=cls}}">{{=timeDesc}}</div>
+                </div>
+                <div class="pull-right" style="margin-right: 15px;">
+                    <div class="chat_popover" style="padding: 0;">
+                        {{=#contentDesc}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script id="tmpl_webchat_msg_to_file" type="text/html">
+        <div class="chat_item out"  ds_data="{{=when}}">
+            <input type="hidden" name="time" value="{{=dateTime}}">
+            <div class="chat_section clearfix">
+                <div class="service_name clearfix" style="">
+                    <div class="pull-right uid-desc" style="text-align: center">
+                        {{=uidDesc}}
+                    </div>
+                    <div class="chat_time {{=cls}}">{{=timeDesc}}</div>
+                </div>
+                <div class="pull-right" style="margin-right: 5px;">
+                    <div class="chat_popover left">
+                        <div class="arrow"></div>
+                        <div class="chat_popover-content">
+                            <pre>{{=#contentDesc}}</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script id="tmpl_webchat_msg_to_uploading_img" type="text/html">
+        <div class="chat_item out" id="{{=timestamp}}">
+            <input type="hidden" name="time" value="{{=dateTime}}">
+            <div class="chat_section clearfix">
+                <div class="service_name clearfix" style="">
+                    <div class="pull-right uid-desc" style="text-align: center">{{=uidDesc}}</div>
+                    <div class="chat_time {{=cls}}">{{=timeDesc}}</div>
+                </div>
+                <div class="pull-right" style="margin-right: 15px;">
+                    <div class="chat_popover" style="padding: 0;">
+                        <img src="img/client/customer/uploading.gif">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script id="tmpl_webchat_msg_to_uploading_file" type="text/html">
+        <div class="chat_item out" id="{{=timestamp}}">
+            <input type="hidden" name="time" value="{{=dateTime}}">
+            <div class="chat_section clearfix">
+                <div class="service_name clearfix" style="">
+                    <div class="pull-right" style="">我</div>
+                    <div class="chat_time {{=cls}}">{{=timeDesc}}</div>
+                </div>
+                <div class="pull-right" style="margin-right: 15px;">
+                    <div class="chat_popover" style="padding: 5px 10px;">
+                        <div class="chat_popover_upload">
+                            <div class="file_upload_filename">{{=fileName}}</div>
+                            <div class = "file_upload_status">正在上传</div>
+                            <div class="clearfix" style="margin-bottom: 5px;">
+                                <div class="progress attach progress-striped" style="width: 200px;">
+                                    <div class="bar" style="width: 0;"></div>
+                                </div>
+                                <div class = "file_upload_percent">0%</div>
+                            </div>
+                        </div>
+                        <!--<div class="progress attach progress-striped" style="margin-left: 90px; width: 200px; ">-->
+                            <!--<div class="bar" style="width: 0;"></div>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script id="tmpl_webchat_msg_from_voice" type="text/html">
+        <div class="chat_item in"  ds_data="{{=when}}">
+            <input type="hidden" name="time" value="{{=dateTime}}">
+            <div class="chat_time {{=cls}}">{{=timeDesc}}</div>
+            <div class="chat_section clearfix">
+                <!--<div class="pull-left" style="">_#UserID#_</div>-->
+                <div class="pull-left" style="margin-left: 0px;">
+                    <div class="chat_popover voice right">
+                        <div class="arrow"></div>
+                        <div class="chat_popover-content" style="cursor:pointer;width:50px;">
+                            <audio class="audio_item" src="{{=contentDesc}}" preload="auto" >您的浏览器不支持此播放器</audio>
+                            <div class="audio_play" style="display: none;">
+                                <img src="./img/client/voice.gif" class="audio_img"><span class="audio_len muted"></span>
+                            </div>
+                            <div class="audio_default" >
+                                <img src="./img/client/voice.png" class="audio_img"><span class="audio_len muted"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script id="tmpl_webchat_msg_to_voice" type="text/html">
+        <div class="chat_item voice{{=_id}} out" ds_data="{{=when}}">
+            <input type="hidden" name="time" value="{{=dateTime}}">
+            <div class="chat_section clearfix">
+                <div class="service_name clearfix" style="">
+                    <div class="pull-right" style="">{{=uidDesc}}</div>
+                    <div class="chat_time {{=cls}}">{{=timeDesc}}</div>
+                </div>
+                <div class="pull-right" style="margin-right: 15px;">
+                    <div class="chat_popover voice left">
+                        <div class="arrow"></div>
+                        <div class="chat_popover-content" style="cursor:pointer;width:50px;">
+                            <audio class="audio_item" src="{{=contentDesc}}" preload="auto" >您的浏览器不支持此播放器</audio>
+                            <div class="audio_play" style="display: none;">
+                                <img src="./img/client/voice.gif" class="audio_img"><span class="audio_len muted"></span>
+                            </div>
+                            <div class="audio_default" >
+                                <img src="./img/client/voice.png" class="audio_img"><span class="audio_len muted"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+</div>
+<script>
+$(document).on("click",function(e){
+    if($(e.target).closest(".set_im_font").length == 0){
+        $(".imFontCon").hide();
+        e.stopPropagation();
+
+    }
+})
+
+</script>
+
+<script id="tmpl_webchat_quickreply_systm" type="text/html">
+    <div class="system_quickreply_by_li" num="{{=numi}}">
+        <div id="{{=_id}}" class="system_quickreply_click clearFloat ds_do_action" ds_action="webchat.quickReplayShow">
+            <i class="system_quickreply_arrow"></i>
+            <span>{{=name}}</span>
+            <span class="system_quickreply_num">{{=count}}</span>
+        </div>
+        <ul class="system_quickreply_ul">
+            <input type="hidden" id=""/>
+        </ul>
+    </div>
+</script>
+<script id="tmpl_webchat_dialog_info" type="text/html">
+    {{
+        var urlTitleShow = urlTitle || fromUrl;
+    }}
+    <div class="invitedUser clearFloat"><i>协作座席：</i><span>{{=invitedUserName}}</span></div>
+    <div class="invitedStatus clearFloat"><i>邀请状态：</i><span>{{=inviteUserStatus}}</span></div>
+    <div class="dialog_region clearFloat"><i>地域：</i><span>{{=area}}</span></div>
+    <div class="dialog_IPlocation clearFloat"><i>IP地址：</i><span>{{=ip}}</span></div>
+    <div class="dialog_from clearFloat" style="word-break: break-all;max-height: 30px;overflow: hidden"><span>咨询页面：</span><a href="{{=fromUrl}}" target="_blank">{{=urlTitleShow}}</a></div>
+    <div class="dialog_seoSource clearFloat"><i>搜索来源：</i><span>{{=seoSource}}</span></div>
+    <div class="dialog_keywords clearFloat"><i>关键字：</i><span>{{=seoKeywords}}</span></div>
+    <div class="dialog_toPeer clearFloat"><i>所属技能组：</i><span>{{=DisplayName}}</span></div>
+</script>
+<script id="tmpl_webchat_all_dialog_info" type="text/html">
+    <ul class="webchat_consult_explain">
+        <li class="web_new_lis clearFloat"><i>消息条数：</i><span>{{=totalMsgCount}}</span></li>
+        <li class="web_end_type clearFloat"><i>结束类型：</i><span>{{=finishReason}}</span></li>
+        <li class="web_evalute clearFloat"><i>评价：</i><span class="assess_detailed" onmouseenter="$(this).closest('.webchat_consult_tab').find('.web_evalute_detailed').show()" style="color: #37B5ED">{{=investigate}}</span></li>
+        <li class="web_skill clearFloat"><i>所属技能组：</i><span>{{=DisplayName}}</span></li>
+        <li class="web_custom clearFloat"><i>所属客服：</i><span>{{=agentName}}</span></li>
+        <li class="web_evalute_detailed"></li>
+    </ul>
+    <ul class="webchat_time_dialog">
+        <li class="web_dialog_time clearFloat"><i>对话日期：</i><span>{{=beginDate}}</span></li>
+        <li class="web_dialog_start clearFloat"><i>人工开始时间：</i><span>{{=manualTime}}</span></li>
+        <li class="web_dialog_first clearFloat"><i>初次响应时间：</i><span>{{=firstReplyTime}}</span></li>
+        <li class="web_dialog_end clearFloat" ><i>对话结束时间：</i><span>{{=endTime}}</span></li>
+        <li class="web_dialog_duration clearFloat"><i>对话时长：</i><span>{{=duration}}</span></li>
+    </ul>
+    <ul class="web_evalute_detailed" onmouseleave="$(this).hide()">
+        <li class="web_evalute clearFloat"><i>评价：</i><span>{{=evalution}}</span></li>
+        <li class="web_tag clearFloat"><i>标签：</i><span>{{=label}}</span></li>
+        <li class="detailed_web_evalute clearFloat"><i>评价详细：</i><span style="float: none">{{=content}}</span></li>
+    </ul>
+</script>
+<script id="tmpl_webchat_access_infomation" type="text/html">
+    <div class="webchat_access_title" style="margin-bottom: 6px"><b>访问信息：{{=historyList.length}}次沟通</b></div>
+    {{
+    for(var i=0;i<historyList.length;i++){
+        }}
+            <div style="margin: 4px 0">
+                <div><span style="margin-right: 8px">{{=historyList[i].time}}</span></div>
+                <div class="webchat_access_li_content">
+                    <span>咨询页面：</span>
+                    {{
+                    var name = '';
+                    if(historyList[i].platform == 'pc'){
+                        name = '网页咨询';
+                    }else if(historyList[i].platform == 'wap'){
+                        name = 'wap咨询';
+                    }else if(historyList[i].platform == 'sdk'){
+                        name = 'app咨询';
+                    }else if(historyList[i].platform == 'weixin'){
+                        name = '微信咨询';
+                    }else {
+                        name = '未知';
+                    }
+
+                    if(historyList[i].fromUrl){
+                        if(historyList[i].urlTitle){
+                        }}
+                        <span>
+                            <a href="{{=historyList[i].fromUrl}}" target="_blank">{{=historyList[i].urlTitle}}</a>
+                        </span>
+                        {{
+                        }else{
+                        }}
+                        <span>
+                            <a href="{{=historyList[i].fromUrl}}" target="_blank">{{=name}}</a>
+                        </span>
+                        {{
+                        }
+                    }else{
+                    }}
+                    <span>
+                        <span>{{=name}}</span>
+                    </span>
+                    {{
+                    }
+                    }}
+                </div>
+            </div>
+        {{
+    }
+    }}
+
+</script>

@@ -1,0 +1,144 @@
+<script type="text/javascript">
+    $(function(){
+        var users = [];
+        if(session.user.scope.qc == "all" || session.user.type == "admin"){
+            users = getCache("agents");
+        }else{
+            var lowUsers = session.user.moduleUsers.qc||[];
+            var agents = getCache("agents");
+            for(var i=0 ;i<agents.length;i++){
+                for(var j=0;j<lowUsers.length;j++){
+                    if(lowUsers[j] == agents[i]._id){
+                        users.push(agents[i]);
+                    }
+                }
+            }
+        }
+        utils.loadSearchInput({ id:"quality_check_agent_reports_search_div",
+            width:"193",
+            height:"14",
+            tip:"按姓名,拼音,工号搜索",
+            data: users,
+            listField: ["displayName", "exten"],
+            userIdField: "_id",
+            searchField: ["displayName","exten","pinyin"],
+            pinyinField: ["displayName"],
+            showAllList: true,
+            callbackFuc: function(object) {
+                //if object is array,no match recored
+                if(Object.prototype.toString.call(object) === '[object Array]'){
+                    return;
+                }
+                var currentVals = $("#qualityCheckAgentQueryFrm_Cycle input[name='selectedAgent']");
+                var ishas = currentVals.val().indexOf(','+object._id)>-1;
+                if(!ishas){
+                    $('#quality_check_reports_select_agents').before("<span id="+object._id + "><span class='label label-info'>"+object.displayName+
+                            "</span><a href='#' onclick=removePeriodAgent('"+object._id+"')><i class='icon-remove'></i></a>&nbsp;</span>");
+
+                    $('#quality_check_agent_reports_search_div_input').attr("<span id="+object._id+"><span class='label label-info'>"+object.displayName+
+                            "</span><a href='#' onclick=removePeriodAgent('"+object._id+"')><i class='icon-remove'></i></a>&nbsp;</span>");
+                    currentVals.val(currentVals.val() + ',' + object._id);
+                }
+            }
+        });
+//        $("#quality_check_agent_report_search_div_search_dropdown").trigger('click');
+//        $('body').trigger('click');
+    })
+    function removePeriodAgent(id){
+        $('#qualityCheckAgentQueryFrm_Cycle #'+id).remove();
+        var currentVals = $("#qualityCheckAgentQueryFrm_Cycle input[name='selectedAgent']");
+        var oldagents = ','+id;
+        currentVals.val(currentVals.val().replace(oldagents, ''));
+    }
+</script>
+<style type="text/css">
+    #qualityCheckAgentQueryFrm_Cycle .table td{border:solid #ffffff; border-width:0px 2px 2px 0px; text-align:center;}
+    #qualityCheckAgentQueryFrm_Cycle .table{border:solid #ffffff; border-width:2px 0px 0px 2px;}
+</style>
+<div id="qualityTaskPeriodPanel">
+    <div style="height:98%;margin:3px 3px;">
+        <div class="row-fluid">
+            <br/>
+            <h5><i class="icon-search"></i>质检周期查询</h5>
+            <br/>
+            <form id="qualityCheckAgentQueryFrm_Cycle" class="form-horizontal form-inline">
+                <div>
+                    <input type="hidden" name="QA_SPECIALIST" id="qa_selected_agent"/>
+                    <label style="float: left;margin-right:3px;">周&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;期</label>
+                    <select name="qualityChecked_cycle" id="qualityChecked_cycle" class="call_status_selector">
+                        <option value="">---请选择---</option>
+                    </select>
+                </div>
+                <div id="clearhid" class="clear10"style="display:none;"></div>
+                <div id="qualityChecked_start" class="pull-left" style="display:none;">
+                    <label style="float:left;margin-right:3px;">开始周期</label>
+                        <select  name="qualityChecked_start_cycle" id="qualityChecked_start_cycle" class="call_status_selector">
+                        </select>
+                </div>
+                <div id="qualityChecked_end" class="pull-left" style="margin-left: 5px;display:none;">
+                    <label style="float:left;margin-right:3px;">结束周期</label>
+                        <select name="qualityChecked_end_cycle" id="qualityChecked_end_cycle" class="call_status_selector">
+                        </select>
+                </div>
+                <div class="clear10"></div>
+                <div>
+                    <label style="float:left;margin-right:3px;">质检模板</label>
+                    <select name="qualityChecked_table" id="qualityChecked_table" class="call_status_selector">
+                        <option value="">---请选择---</option>
+                    </select>
+                </div>
+                <div class="clear10"></div>
+                <div>
+                    <input type="hidden" name="selectedAgent"/>
+                    <label style="float:left;margin-right:3px;">座&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;席</label>
+                    <table id="multiSelectAgentTable">
+                        <tr>
+                            <td id="quality_check_reports_select_agents"></td>
+                            <td id="quality_check_agent_reports_search_div" class="combobox_agent"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="clear10"></div>
+                <div>
+                    <label style="float:left;margin-right:3px;">质检层数</label>
+                    <select name="qualityChecked_floors" id="qualityChecked_floors" class="call_status_selector">
+                    </select>
+                </div>
+                <div class="clear10"></div>
+                <div>
+                    <a href="#" ds_action="qualityCheck.queryGradeBycycle" class="button ds_form_action">查询</a>
+                </div>
+                <div class="clear5">&nbsp;</div>
+                <div class="alert alert-block" style="padding: 5px 10px;line-height:1.5">
+                    <h12>
+                        <a class="alert_a" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo0">点击展开或折叠“说明”</a>
+                    </h12>
+                    <div id="collapseTwo0" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            说明：<br/>
+                            1.非关键错误准确率=通过的第二级非致命项个数/（通过+不通过的非致命项个数）*100%<br/>
+                            2.关键错误准确率=（总录音质检数-关键错误未通过录音质检数）/总录音质检数*100%<br/>
+                            3.准确率=非关键错误准确率*非关键错误比例+关键错误准确率*（100%-非关键错误比例）<br/>
+                        </div>
+                    </div>
+                </div>
+                <div class='row-fluid account_line'></div>
+                <br/>
+                <div id="quality_check_query_period_highcharts_container"></div>
+                <div class="query-period-table-wrap">
+                    <table class="table">
+                        <thead>
+                            <tr id="quality_checked_query_period_table_header">
+                            </tr>
+                        </thead>
+
+                        <tbody id="quality_check_query_period_table_data">
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

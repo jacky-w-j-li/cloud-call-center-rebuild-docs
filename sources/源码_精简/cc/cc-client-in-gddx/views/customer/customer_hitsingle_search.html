@@ -1,0 +1,58 @@
+<div class="right_container" id="customer_hitSingle_search_query_panel">
+    <div id="customer_hitSingle_search_list_panel">
+        <div class="row-fluid">
+            <h4>撞单查询列表</h4>
+            <br/>
+            <form id="customer_hitSingle_search_form" class="form-horizontal">
+                <div class="header_search_wrap pull-left quick_search" style="margin:5px 10px 10px 0px">
+                    <div class="header_search_button ds_form_action customer_normal_search normal_search" ds_action="customer.queryHitsingleSearch">
+                        <i class="icon-search"></i>
+                    </div>
+                    <div class="header_search_input">
+                        <div class="header_search_input_textbox">
+                            <div class="dropdown">
+                                <div class="textbox_wrap textbox_wrap_sty">
+                                    <div class="textbox_inner">
+                                        <input type="text" name="combox" class="textbox_input inpt_sty" maxlength="254" placeholder="输入名称或号码查询">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<button type="button" class="button ds_form_action" ds_action="config.customerCommon.queryMareLiberum" style="margin-left: 0px;">查询</button>-->
+                    <!--<button type="button" class="btn-blue btn-small ds_do_action"  ds_action="customer.showAddQuickSearch"  ds_data="_#menu#_">增加</button>-->
+                    <!--<button type="button" class="button ds_form_action"  ds_action="config.mareLiberum.upMareLiBeRum" style="margin-left: 10px;">修改</button>-->
+                </div>
+                <div>
+                    <table class="table table-striped table-bordered table-hover table_ds_word">
+                        <thead>
+                        <tr>
+                            <th width="40%">客户名称</th>
+                            <th width="60%">所属人</th>
+                        </tr>
+                        </thead>
+                        <tbody class="customer_hitSingle_search_list">
+                            <tr><td colspan="2">请输入条件查询!</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="row-fluid class_list">
+                        <div for="customer_hitSingle_search_form" ds_pagination_action="customer.queryHitsingleSearch"
+                             class="pagination pagination-small" style="display:table; margin:0;width:100%;">
+                            <span class="result_info">查询结果：<span class="result_count">0</span></span>
+                            <ul style="float:right;margin-top:5px;">
+                                <li><a href="#"  value="0">&laquo;</a></li>
+                                <li><a href="#"  value="1">1</a></li>
+                                <li><a href="#"  value="2">2</a></li>
+                                <li><a href="#"  value="3">3</a></li>
+                                <li><a href="#"  value="4">4</a></li>
+                                <li><a href="#"  value="5">5</a></li>
+                                <li><a href="#"  value="6">&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

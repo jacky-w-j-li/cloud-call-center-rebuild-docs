@@ -1,0 +1,62 @@
+<div class="well" style="padding: 0 19px;">
+    <h2>_#_id#_<small>月租:<span class="text-primary monthRent">_#monthRent#_</span>元
+        <!--赠送时长:<span class="text-primary dialMins">_#dialMins#_</span>分钟-->
+    </small></h2>
+    <p class="text-muted">请您在8小时内完成支付，避免被他人抢注，还剩<strong class="text-danger lock_timer"></strong></p>
+</div>
+
+<form class="form-horizontal" id="frm_serviceno_detail">
+    <input type="hidden" name="_id" value="_#_id#_">
+    <input type="hidden" name="monthRent" value="_#monthRent#_">
+    <input type="hidden" name="flag" value="buySn">
+    <input type="hidden" name="serviceFlag" value="">
+
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            并发数
+        </label>
+        <div class="col-md-5">
+            <input type="text" style="display: inline-block;" onkeyup="value=value.replace(/[^\d]/g,'')" name="concurrent" value='1' class="form-control input-sm ds_spinner service_month" required />
+            <label for="concurrent" class="error" style="display: none;"></label>
+
+            <a href="#" id="popover_concurrent" style="padding: 0;" class="btn" data-toggle="popover" data-placement="auto" data-trigger="hover focus"
+               data-content="能够同时处理的电话数量，比如您购买了3个并发，3路电话同时进来都可以接听，如果只有1个并发，其他2路电话就会等待" data-original-title="什么是并发数?">
+                <span style="font-size: 18px;" class="glyphicon glyphicon-question-sign"></span>
+            </a>
+        </div>
+
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            购买时长
+        </label>
+        <div class="col-md-5">
+            <!--<input type="text" name="endTime" value='' class="form-control input-sm ds_date"/>-->
+            <!--<div class="ds_slider"></div>-->
+            <input type="text" onkeyup="value=value.replace(/[^\d]/g,'')" name="month" value='1' class="form-control input-sm ds_spinner2 service_month" required/>个月
+            <label for="month" class="error" style="display: none;"></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            费用
+        </label>
+        <div class="col-md-5" style="line-height: 35px;">
+           <span class="fee">_#totalFee#_</span>元
+           <span class="text-muted">&nbsp;[月租*购买时长*并发数=费用]</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="button" class="btn btn-primary ds_form_action" ds_action="account.showPay">立刻购买</button>
+            <button style="" type="button" class="btn btn-default ds_do_action sn_reload"
+                    ds_action="account.reSelectServiceNo" ds_data="_#_id#_">重新选择</button>
+        </div>
+    </div>
+</form>
+<style type="text/css">
+</style>
+<script type="text/javascript">
+    $('#popover_concurrent').popover({
+    });
+</script>

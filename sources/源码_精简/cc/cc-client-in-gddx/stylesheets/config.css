@@ -1,0 +1,589 @@
+/* created by liujing on 04/07/16
+style for config 
+linked by config/config_main.html
+all classnames must begin with letter '.cfg_' or their own ID */
+
+/* move from app.css start */
+#view_dept_config .ztree li a span+span{
+    display: inline-block;
+    max-width: 10em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#view_customer_titket_titketManager td, #view_customer_titket_titketManager th {
+    text-align: center;
+}
+.table td:last-child a{
+    display: inline-block;
+}
+#view_config_quality_check_template .left_column{
+    margin-right:34px;
+}
+#view_config_quality_check_template .sub-right,#view_questionnaire_config .sub-right{
+    padding:0 0 12px 34px;
+}
+#view_config_quality_check_template .right_column .contact_detail{
+    padding: 0;
+}
+#frm_dept_user_update .multiselect-container input[type=radio], #frm_user_batch_dept .multiselect-container input[type=radio] {
+    display: none;
+}
+#agent_im_autoclaim .controls input, #agent_im_autoclaim .controls label{
+    display: inline-block;
+}
+#agent_im_autoclaim .controls label{
+    display: inline-block;
+}
+#agent_im_autoclaim .controls label{
+    display: inline-block;
+}
+#popover_convert_words{
+    cursor: pointer;
+    display: inline-block;
+    position: absolute;
+    left: 75px;
+    top: 4px;
+    text-align: center;
+}
+#popover_convert_words:hover,#popover_convert_words:focus{
+    text-decoration: none;
+}
+#popover_convert_words .glyphicon-question-sign{
+    color: white;
+    line-height: 12px;
+    text-align: center;
+    width: 12px;
+    height: 12px;
+}
+#popover_convert_words .glyphicon-question-sign:before,#popover_convert_words{
+    content: "\?";
+}
+#weixin_config_details_box .row_item label{
+    line-height: 20px;
+}
+#agent_im_autoclaim .controls label{
+    display: inline-block;
+}
+#popover_convert_words{
+    cursor: pointer;
+    display: inline-block;
+    position: absolute;
+    left: 75px;
+    top: 4px;
+    float: left;
+    border-radius: 50%;
+    background: #37b5ed;
+    width: 12px;
+    height: 12px;
+    color: white;
+}
+#popover_convert_words:hover,#popover_convert_words:focus{
+    text-decoration: none;
+}
+#popover_convert_words .glyphicon-question-sign{
+    color: white;
+    line-height: 12px;
+    text-align: center;
+    width: 12px;
+    height: 12px;
+}
+#popover_convert_words:before{
+    content: "\?";
+}
+#weixin_config_details_box .row_item label{
+    line-height: 20px;
+}
+.cfg_noCrux{
+    width:140px;
+    height:56px;
+    float:left;
+    text-align:center;
+    line-height:56px;
+}
+.cfg_pitch_crux {
+    position: absolute;
+    float: left;
+    margin: 22px 0 0 116px !important;
+}
+#table0{
+    background: url(../img/dot_gray.png?0516) 0 0;
+    width: 1409px;/*ֻ�ܶ�������Ȼ�Ų���*/
+    min-height: 1142px;
+    position: relative;
+    border-top: 1px solid #e6e6e6;
+}
+#table0 li .cfg_pitch_crux+span .quality-name{
+    max-width: 9em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+#table0 > li{
+    float: left;
+    clear: both;
+    border-left: 0;
+}
+#table0 li{
+    min-width: 140px;
+    clear:both;
+    border-bottom: 1px solid #e6e6e6;
+}
+#table0 li.active > span{
+    width: 100%;
+    background: #ccc;
+}
+#table0 li.active ul > li{
+    display: inline-block;
+}
+#table0 li > ul{
+    display: none;
+    margin-left: 1px;
+    position: absolute;
+    top: 0;
+}
+#table0 li.active >ul,#table0 li ul li{
+    display: inline-block;
+    float: left;
+    white-space: nowrap;
+}
+#table0 li input.active,#table0 li ul li input.active{
+    background: #ccc;
+}
+#table0 li input.live,#table0 li ul li input.live{
+    width:134px;
+    background: #ccc;
+}
+#field_name,#table0 li input,#table0 li ul li input{
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.ds-config-quality-check-addChildren-config-two,.ds-config-quality-check-remove-config-two,.ds-config-quality-check-removeChildren-config-two{
+    width:20px;
+    margin-left:20px;
+}
+.table-wrap{
+    clear: both;
+    border:1px solid #e6e6e6;
+    overflow: auto;
+}
+.table-wrap>ul>li input{
+    width:62px;
+    height:50px;
+    border:0;
+}
+.table-wrap>ul>li .quality-name{
+    width:140px;
+    height:50px;
+    border:0;
+    text-align:center;
+    line-height:56px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display:inline-block;
+    overflow:hidden;
+}
+.add-new-layer{
+    width:140px;
+    height:50px;
+    border-right:1px solid #e6e6e6;
+    border-bottom: 0;
+    line-height:50px;
+    text-align:center
+}
+
+.table-wrap>ul>li>span>a{
+    margin-left: 15px;
+}
+.table-wrap>ul>li input[type=checkbox]{
+    width: auto;
+    height: auto;
+}
+#table0 li.active ul>li.quality-fatal-num{
+    position: absolute;
+    top: -52px;
+    height: 51px;
+    border-right: 1px solid #e6e6e6;
+    /* display: none;*/
+}
+#table0>li.showNum ul>li.quality-fatal-num{
+    display: inline-block;
+}
+.quality-fatal-con{
+    width: 100%;
+    height: 100%;
+    line-height: 50px;
+}
+.quality-fatal-con>.input{
+    height: 100%;
+    padding: 0;
+}
+.quality-fatal-text{
+    width: 40px;
+    display: inline-block;
+    height: 16px;
+    border-right: 1px solid #37B5ED;
+    line-height: 16px;
+    vertical-align: middle;
+    text-align: center;
+    color: #37B5ED;
+    overflow:hidden;
+}
+.quality-fatal-con .input{
+    width: 65px;
+    height: 20px;
+    display: none;
+    padding-left: 3px;
+    margin-left: 3px;
+}
+#table0 .checkbox-quality-check-fatal{
+    position: absolute;
+    float: left;
+    margin: 22px 0 0 60px;
+}
+#table0>li>span{
+    width: 100%;
+}
+/* move from app.css end *//* move from app.css end *//* move from app.css end */
+
+/*add new css*/
+.cfg_label_left{
+    overflow:scroll;
+}
+.cfg_call_caption{
+    margin-bottom:30px;
+}
+.cfg_call_stopUse_top{
+    padding:50px 0 22px;
+    border-bottom: 1px solid #E6E6E6;
+}
+.cfg_call_stopUse_top .pull-left span{
+    font-weight:bold;
+}
+#config_call_label_stopUse{
+    padding-top:16px;
+}
+.cfg_clear_con_float:after{
+    content:"";
+    clear:both;
+    display:block;
+}
+.cfg_write_label{
+    width:160px;
+    margin-right:20px;
+}
+#cfg_add_lable_wrap{
+    display:none;
+}
+.cfg_add_lable{
+    font-size:14px;
+    font-weight:bold;
+    margin-top:4px;
+}
+.cfg_label_use,.cfg_label_stop{
+    display:none;
+}
+.cfg_caption_top{
+    padding-bottom: 22px;
+    border-bottom: 1px solid #E6E6E6;
+    margin-bottom:18px;
+}
+#view_call_config_label .sub-right{
+    padding:0 0 12px 30px;
+}
+#view_nav_config .tab-pane{
+    clear: both;
+}
+#view_advanced_config ul.sub-nav li{
+    margin-left: 5px;
+}
+#config_weixin_custom .row_item label{
+    width:88px;
+}
+.cfg_webchatCustomName{
+    cursor:pointer;
+}
+#config_weixin_custom .show_result ul li{
+    width:14%;
+}
+#config_weixin_custom .show_result .set_name{
+    max-width: 76%;
+}
+@media all and (min-width:1440px) {
+    #config_weixin_custom .show_result ul li{
+        width: 12%;
+    }
+}
+#panel_email_insert_form .dredge_email_addtess_title{
+    text-align: left;
+    line-height: 16px;
+    word-break: break-all;
+}
+#panel_email_insert_form .dredge_email_addtess_title b{
+    font-size: 14px;
+}
+#panel_email_insert_form .dredge_email_addtess_title span{
+    color: #999;
+}
+
+#view_call_config .nav-tabs{
+    float:left;
+}
+#view_call_config .tabbable .nav.nav-tabs{
+    border-bottom:0;
+}
+#view_call_config .nav-tabs li{
+    float:none;
+}
+#view_call_config .nav-tabs > .active > a, .nav-tabs > .active > a:hover{
+    border:0;
+    color:#37b5ed;
+    background:#fff;
+}
+#view_call_config .nav-tabs>li>a{
+    color:#555555;
+    background: #F6F6F6;
+    border-radius:0;
+    -webkit-border-radius:0;
+}
+.form-horizontal.ds_item_edit .btn.btn-warning.btn-blackishGreen:hover{
+    background:#84BC25;
+}
+#ivrAssignmentListBody select{
+    width:100%;
+}
+#view_call_config .nav.nav-tabs+.tab-content{
+    padding:20px 0 0 20px;
+}
+#pbx_btn_group .btn.dropdown-toggle{
+    background-image:none;
+    background-color:#fff;
+    box-shadow:none;
+}
+#queueInfoPanel.queue_toggle_panel{
+    border:0;
+}
+#view_call_config .dropdown>.dropdown-menu{
+    position: absolute;
+    left: 110px;
+    border: none;
+    top: -136px;
+}
+#view_call_config .dropdown>.dropdown-menu:before{
+    content:"";
+    width:16px;
+    height:16px;
+    border-left: 1px solid transparent;
+    border-top: 1px solid transparent;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    transform:rotate(-45deg);
+    -webkit-transform:rotate(-45deg);
+    background-color:#fff;
+    position:absolute;
+    top: 144px;
+    left: 50%;
+    margin-left: -87px;
+    box-shadow: -1px -1px rgba(0,0,0,.1);
+}
+/*remove callConfig btnStyle begin*/
+#view_call_config .add-contact-link.add_button{
+    padding: 0 6px;
+    margin-right: 5px;
+    border: 0;
+    border-radius: 2px;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: -.5px -.5px .5px rgba(0,0,0,0.15) inset;
+    text-decoration: none;
+    cursor: pointer;
+    vertical-align: middle;
+    line-height: 22px;
+}
+#view_call_config .btn.disabled, .btn[disabled]{
+    opacity:1;
+}
+#view_call_config .btn-info,#view_call_config .btn-danger{
+    background-image:none;
+}
+#view_call_config .add_button, #view_call_config a.add_button{
+    background:#37b5ed;
+    margin:0;
+    float:none;
+    height:22px;
+    font-weight:normal;
+}
+#view_call_config .btn-gray.btn-danger:hover, #view_call_config .btn-gray.btn-danger:focus, #view_call_config .btn-gray.btn-danger:active, #view_call_config .btn-gray.btn-danger.active, #view_call_config .btn-gray.btn-danger.disabled,#view_call_config .btn-gray.btn-danger[disabled]{
+    background-color:#e6e6e6;
+}
+#view_call_config .btn-blue.btn-danger:hover, #view_call_config .btn-blue.btn-danger:focus, #view_call_config .btn-blue.btn-danger:active, #view_call_config .btn-blue.btn-danger.active, #view_call_config .btn-blue.btn-danger.disabled,#view_call_config .btn-blue.btn-danger[disabled]{
+    background-color:#37b5ed;
+}
+#view_call_config .btn-success:hover,#view_call_config .btn-success:focus, #view_call_config .btn-success:active,#view_call_config .btn-success.active,#view_call_config .btn-success.disabled,#view_call_config .btn-success[disabled]{
+    background-color:#84BC25;
+}
+#view_call_config .btn{
+    background-image:none;
+}
+#view_call_config .add_button:before, #view_call_config a.add_button:before{
+    background:none;
+     width: auto;
+     height: auto;
+     display: inline-block;
+     position: static;
+     content: "\2b";
+     left: 0px;
+     top: 0px;
+}
+/*remove callConfig btnStyle end*/
+#accountPbxInfoPanel h3{
+    margin-top:9px;
+}
+#view_call_config .dropdown-menu > li > a:hover,#view_call_config .dropdown-menu > li > a:focus,#view_call_config .dropdown-menu > li.active>a{
+    background:#fff;
+    color:#56CDB4;
+}
+#view_call_config .nav .dropdown-toggle .caret{
+    border-top-color: #7B7B7B;
+    border-bottom-color: #7B7B7B;
+}
+#view_call_config .span4.text-right a.ds_action_flow:last-child,#view_call_config .span5.text-right a.ds_action_flow:last-child,#view_call_config .span6.text-right a.ds_action_flow:last-child{
+    margin-right:16px;
+}
+#view_call_config .btn-blackishGreen.ds_action_flow.disabled{
+    background:#8EC38E
+}
+#view_call_config .ds_action_flow.disabled.btn-blackishGreen:hover{
+    -webkit-filter: none;
+}
+#agentAssignTableLeft td:nth-child(1),#agentAssignTableRight td:nth-child(1){
+    max-width: 6em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+#isBeginInput{
+    margin:4px 0 0;
+}
+#ctime{
+    width:80px;
+    height: 14px;
+}
+#stepCtype{
+    width:92px;
+}
+select[name="ctype"]{
+    width:92px;
+}
+#name{
+    width:209px;
+}
+.Independent_email_li{
+    height: 26px;
+    width: 100%;
+    line-height: 26px;
+    box-sizing: border-box;
+    position: relative;
+    padding-right: 450px;
+}
+.Independent_email_li.verifyPass .independent_success{
+    display: block;
+}
+.Independent_email_li.verifyPass{
+    color: #42B9EE;
+}
+.Independent_email_li:last-child{
+    margin-bottom: 15px;
+}
+.Independent_email_li i{
+    font-style: normal;
+    display: inline-block;
+    line-height: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+}
+.Independent_email_li .span_Independent{
+    position: absolute;
+    display: flex;
+    width: auto;
+    height: 24px;
+    margin-left: 0;
+    vertical-align: top;
+    line-height: 24px;
+    color: #000;
+    right: 0;
+    top: 0;
+}
+.Independent_email_li span b{
+    font-style: normal;
+    width: 20px;
+    height: 100%;
+    margin-left: 2px;
+    background: url(../img/operation_icon.png?1107) no-repeat center;
+    background-size: 14px auto;
+    cursor: pointer;
+    background-position: center -83px;
+    float: left;
+}
+.Independent_email_li span .refresh_independent{
+    background-position: center -66px;
+}
+.Independent_email_li span .delete_independent{
+    background-position: center -28px;
+}
+.Independent_email_li span .setup_independent_btn{
+    background-position: center -239px;
+    background-size: 16px auto;
+ }
+.span_Independent span{
+    display: inline-block;
+    height: 20px;
+    width:88px;
+}
+#email_setup_independent{
+    margin-left: 12px;
+    padding: 0 12px;
+}
+#email_setup_independent .setup_independent_head{
+    font-size: 16px;
+    height: 20px;
+    font-weight: bold;
+}
+#modal_email_setup_box .email_satisfy_condition{
+    background: #F9F7FB;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #E3E3E3;
+    overflow: auto;
+    max-height: 260px;
+}
+#modal_email_setup_box .email_satisfy_condition li{
+    white-space: nowrap;
+    margin-bottom: 10px;
+}
+#modal_email_setup_box .email_modal_btn{
+    text-align: center;
+    margin-top: 15px;
+}
+#modal_email_setup_box .modal_body{
+    padding: 10px 15px 15px;
+}
+#modal_email_setup_box .email_rule_set_box{
+    margin-top: 6px;
+}
+#modal_email_setup_box .email_rule_title{
+    height: 24px;
+    line-height: 24px;
+}
+#modal_email_setup_box .email_rule_title select{
+    width: 70px;
+    height: 20px;
+    vertical-align: initial;
+}
+#modal_email_setup_box .icon-minus,#modal_email_setup_box .icon-plus{
+    cursor: pointer;
+}
+#view_channel_global_set.hidden{
+    display: none;
+}

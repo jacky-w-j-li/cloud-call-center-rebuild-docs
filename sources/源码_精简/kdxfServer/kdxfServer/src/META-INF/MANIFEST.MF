@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: lib/json-jena-1.0.jar lib/Msc.jar . libmsc64.so
+Main-Class: com.dishui.manager.service.AppServiceStartup
+

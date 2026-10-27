@@ -1,0 +1,125 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form id="frm_zj_detail_search" class="form-horizontal">
+            <input type="hidden" name="monthId" value="_#_id#_">
+            <table class="table_search">
+                <colgroup>
+                    <col width="10%" align="right"/>
+                    <col width="24%" align="left"/>
+                    <col width="10%" align="right"/>
+                    <col width="23%" align="left"/>
+                    <col width="10%" align="right"/>
+                    <col width="23%" align="left"/>
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <td class="spanright">起止日期</td>
+                        <td  class="spanleft">
+                            <input type="text" name="beginTime" class="form-control input-sm ds_date" style="display:inline-block;width: 90px;" readonly/> 至
+                            <input type="text" name="endTime" class="form-control input-sm ds_date" style="display:inline-block;width: 90px;" readonly/>
+                        </td>
+                        <td class="spanright">呼叫类型</td>
+                        <td class="spanleft">
+                            <select name="dialType" class="form-control input-sm">
+                                <option value="">--请选择--</option>
+                                <option value="dialout">外呼去电</option>
+                                <option value="transfer">转接来电</option>
+                            </select>
+                        </td>
+                        <td class="spanright">座席人员</td>
+                        <td class="spanleft" >
+                            <select name="agentId" class="form-control input-sm callsheet_agent"></select>
+                        </td>
+                        <td>
+                            <a href="#" id="popover_account_pay_cc" style="padding: 0;" class="btn" data-toggle="popover" data-placement="auto" data-trigger="hover focus"
+                               data-content="座席字段是从7月13日开始增加的，以前的数据不会有；而且目前只有外呼的才能记录座席" data-original-title="座席人员">
+                                <span style="font-size: 18px;" class="glyphicon glyphicon-question-sign"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spanright">主叫号码</td>
+                        <td class="spanleft"><input type="text" name="cid" class="form-control input-sm" placeholder=""/></td>
+                        <td class="spanright">被叫号码</td>
+                        <td class="spanleft"><input type="text" name="did" class="form-control input-sm" placeholder=""/></td>
+                        <td class="spanright">国际长途</td>
+                        <td class="spanleft">
+                            <input name='isIntl' type="checkbox" class="checkbox"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-group" style="margin-bottom:0;">
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary btn-sm  ds_form_action" ds_action="accFee.getDetailList">查询</button>
+                    <button type="button" class="btn btn-primary btn-sm  ds_form_action" ds_action="accFee.exportDetail">导出</button>
+                    <button type="button" class="btn btn-default btn-sm ds_do_action" ds_action="accFee.reset" >重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        [_#year#_-_#month#_]详单
+        <button type="button" class="pull-right btn btn-success btn-xs ds_do_action" ds_action="accFee.returnAccFeeList" ds_data="_#name#_" style="margin-left: 20px;">返回</button>
+    </div>
+    <div class="panel-body">
+        <p>
+            余额：_@formatRound2Money(_#balance#_)@_元      &nbsp;&nbsp;
+            月租：_@formatRound2Money(_#monthRent#_)@_元&nbsp;&nbsp;
+            最终费用：_@formatRound2Money(_#finalConsume#_)@_元&nbsp;&nbsp;
+        </p>
+        <p>
+            本地时长：_#localMinutes#_分钟     &nbsp;&nbsp;
+            长途时长：_#remoteMinutes#_分钟&nbsp;&nbsp;
+        </p>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>开始时间</th>
+            <th>主叫地</th>
+            <th>被叫地</th>
+            <th>主叫号码</th>
+            <th>被叫号码</th>
+            <th>座席名称</th>
+            <th>座席工号</th>
+            <th>呼叫类型</th>
+            <th>通信类型</th>
+            <!--<th>结束时间</th>-->
+            <th>时长(分钟)</th>
+            <th>时长(秒)</th>
+            <th>费用(元)</th>
+            <!--<th>操作</th>-->
+        </tr>
+        </thead>
+        <tbody class="zj_detail_list">
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <div class="col-md-5">查询结果：<span class="result_count" style="margin-top:3px;display: inline-block;">0</span></div>
+    <div class=" col-md-7">
+        <ul class="pagination pagination-sm pull-right" style="margin: 0;"
+            for="frm_zj_detail_search" ds_pagination_action="accFee.getDetailList">
+            <li><a href="#"  value="0">&laquo;</a></li>
+            <li><a href="#"  value="1">1</a></li>
+            <li><a href="#"  value="2">2</a></li>
+            <li><a href="#"  value="3">3</a></li>
+            <li><a href="#"  value="4">4</a></li>
+            <li><a href="#"  value="5">5</a></li>
+            <li><a href="#"  value="6">&raquo;</a></li>
+        </ul>
+    </div>
+</div>
+<style type="text/css">
+    .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
+        z-index: 1;
+    }
+</style>
+<script>
+    $(function () {
+      $("#popover_account_pay_cc").popover();
+    });
+</script>

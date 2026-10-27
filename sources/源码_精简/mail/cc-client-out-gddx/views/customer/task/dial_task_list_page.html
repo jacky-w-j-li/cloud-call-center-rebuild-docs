@@ -1,0 +1,148 @@
+<div id="import_list__#menu#_"  ds_menu="_#menu#_" class="list_check_pane">
+    <div class="contacts_caption" style="">
+        <div class="cancel_edit" style="">
+            <div class="list_check_all" style="cursor: pointer;" >
+                <b class="ico_select_checkbox ico ico_wrap" style="top:10px;left:5px;"></b>
+            </div>
+            <div style="display: inline-block;margin-left: 30px;font-weight: bold;">
+                已选
+                <span class="bottom_toolbar_selsize_num">
+                    0
+                </span>
+                项
+            </div>
+            <span class="pull-right">
+                <a href="#" class="ds_do_action" ds_action="cancelDealToolbar" ds_data="customer" ds_attr="_#menu#_">取消</a>
+            </span>
+        </div>
+        <div class="caption-top clearfix">
+            <div class="search_condition" style="display:none;"></div>
+            <div class="header_wrap clearfix">
+                <form id="frm_customer_advanced_search">
+                    <input name="dbType" type="hidden"  value="" />
+                    <input name="menu" type="hidden"  value="_#menu#_" />
+                    <input name="status" type="hidden"  value="" />
+                    <span class="refresh ds_form_action" style="display: none;" ds_action="customer.task.queryDialTaskList"></span>
+                    <div class="header_search_wrap pull-left quick_search" style="">
+                        <div class="header_search_button ds_form_action dial_task_normal_search normal_search" ds_action="customer.task.queryDialTaskList">
+                            <i class="icon-search"></i>
+                        </div>
+                        <div class="header_search_input">
+                            <div class="header_search_input_textbox">
+                                <div class="dropdown">
+
+                                    <ul class="dropdown-menu quick_menu" style="min-width: 90px;">
+                                    </ul>
+                                    <div class="textbox_wrap textbox_wrap_sty">
+                                        <div class="textbox_inner">
+                                            <input type="text" name="taskName" class="textbox_input inpt_sty" maxlength="254" placeholder="输入任务名称查询">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- <div class="text_link header_search_advanced customer_advanced_search">
+                            高级搜索
+                        </div> -->
+                    </div>
+                </form>
+                <div class="header_func_plus pull-right ico ico_middle ico_func_plus ds_do_action" ds_action="customer.task.showTaskAdd" ds_data="_#menu#_" style="margin:6px 11px 0 0;cursor:pointer">
+                    <!-- <ul class="nav nav-pills" style="margin-bottom:0;">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="padding: 5px 11px;">
+                            <span class="nav_title">
+                                <b class="ico ico_middle ico_func_plus">
+                                </b>
+                            </span>
+                            </a>
+                            <ul class="dropdown-menu menu_list pull-right">
+                                <li><a href="#" class="ds_do_action" ds_action="showDealToolbar" ds_data="customerTask" ds_attr="_#menu#_">编辑</a></li>
+                                <li><a href="#" class="ds_do_action" ds_action="customer.task.showTaskAdd" ds_data="_#menu#_">增加</a></li>
+                            </ul>
+                        </li>
+                    </ul> -->
+                </div>
+                <!--<div class="header_func_plus pull-right"><i class="icon-plus"></i></div>-->
+            </div>
+            <div class="ds_search_filter" style="display: none;">
+            </div>
+        </div>
+
+    </div>
+    <div tabindex="-1" id="customer_advanced_search_pane" class="advanced_search_pane hidden">
+    </div>
+    <div class="list_container">
+        <div class="list-inside">
+        </div>
+        <div class="list-footer">
+            <div class="pagination pagination-small" for="frm_customer_advanced_search__#menu#_" ds_pagination_action="customer.task.queryDialTaskList">
+                <span style="float:left;">查询结果：<span class="result_count">0</span></span>
+                <ul class="" style="float:right;padding-right: 6px;">
+                    <li>
+                        <a href="#"  value="0">«</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="1">1</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="2">2</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="3">3</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="4">4</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="5">5</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="6">»</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script id="customer_task_page_item" type="text/x-jquery-tmpl">
+    <div class="list_item">
+        <div class="ds_do_action item_row item${_id}" ds_action="customer.task.showDialTaskInfo" ds_data="_#menu#_">
+            <input type="hidden" name="_id" value="${_id}">
+            <div class="card_row_new">
+                <div class="card_right">
+                    {{if (status== '进行') }}
+                        <span class="label-success">
+                        {{else}}
+                        <span class="label-important">
+                    {{/if}}
+                    ${status}</span>
+                </div>
+                <div class="card_middle">
+                    <span class="card_row_title">${taskName}</span>
+                </div>
+                <div class="card_right">
+                    <span class="muted">${total}</span>
+                </div>
+                <div class="card_middle">
+                    <span class="muted">号码总数</span>
+                </div>
+                <div class="card_right">
+                    <span class="muted">${agentsNum}</span>
+                </div>
+                <div class="card_middle">
+                    <span class="muted">参与座席</span>
+                </div>
+                <div class="card_right">
+                    <span class="ellipsis muted">${createTime}</span>
+                </div>
+                <div class="card_middle">
+                    <span class="muted">创建日期</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+

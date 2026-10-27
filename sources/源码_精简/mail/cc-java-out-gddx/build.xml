@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<project name="cc-java-in" default="jar" basedir=".">
+    <property name="src" location="src"></property>
+    <property name="lib" location="lib"></property>
+    <property name="build" location="build"></property>
+    <property name="bak" location="bak"></property>
+    <property name="jarFile" value="cc-java-in.jar"></property>
+    <property name="mainClass" value="com.dishui.manager.service.AppServiceStartup"></property>
+    <path id="lib_classpath"> <fileset dir="${lib}">
+        <include name="**/*.jar"/> </fileset>
+    </path>
+    <target name="begin_message" >
+        <echo message="start ant build ....."></echo>
+    </target>
+    <target name="init" depends="begin_message">
+        <echo message="start init build environment"></echo>
+
+        <mkdir dir="${bak}"></mkdir>
+        <delete dir="${build}"></delete>
+        <mkdir dir="${build}"></mkdir>
+    </target>
+    <available file="${jarFile}" property="jar.exist"></available>
+    <target name="bak" depends="init" if="jar.exist">
+        <tstamp>
+            <format property="time_str" pattern="yyyyMMdd_hhmmaa"></format>
+        </tstamp>
+        <copy tofile="${bak}/${jarFile}_${time_str}" file="${jarFile}"></copy>
+    </target>
+    <target name="compile" depends="bak" >
+        <javac srcdir="${src}" destdir="${build}" debug="true" debuglevel="lines,vars,source" classpathref="lib_classpath" encoding="UTF-8">
+        </javac>
+    </target>
+    <target name="jar" depends="compile">
+        <copy todir="${build}/lib">
+            <fileset dir="${lib}"></fileset>
+        </copy>
+        <pathconvert property="mf.classpath" pathsep=" ">
+            <mapper>
+                <chainedmapper>
+                    <flattenmapper/>
+                    <globmapper from="*" to="lib/*"></globmapper>
+                </chainedmapper>
+            </mapper>
+            <path refid="lib_classpath"/>
+        </pathconvert>
+        <jar jarfile="${jarFile}" basedir="${build}">
+            <manifest>
+                <attribute name="Main-class" value="${mainClass}"/>
+                <attribute name="Class-Path" value="${mf.classpath}"/>
+            </manifest>
+        </jar>
+    </target>
+    <target name="clean" description="clean up">
+        <delete dir="${bak}"></delete>
+        <delete dir="${build}"></delete>
+    </target>
+</project>

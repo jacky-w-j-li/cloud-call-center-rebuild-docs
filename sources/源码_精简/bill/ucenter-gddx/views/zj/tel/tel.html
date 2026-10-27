@@ -1,0 +1,27 @@
+<div class="">
+    <div style="margin-bottom: 15px;">
+        <button type="button" class="btn btn-success btn-sm ds_do_action" ds_action="tel.showFreeServiceNo" style="">
+            <span class="glyphicon glyphicon-plus"></span>指定服务号</button>
+    </div>
+    <ul class="nav nav-tabs" role="tablist" id="ivr_tab">
+    </ul>
+    <div id="ivr_tab_content" style="margin-top: 15px;">
+    </div>
+</div>
+
+<div class="modal fade" id="tel_ivr_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" ></h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary ds_form_action" ds_action="tel.bindServiceNo"  ds_form="#frm_serviceno_free_data">保存</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

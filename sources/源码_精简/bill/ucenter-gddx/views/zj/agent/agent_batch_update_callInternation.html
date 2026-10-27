@@ -1,0 +1,21 @@
+<form class="form-horizontal" id="frm_agent_batch_update_callInternation">
+    <div class="form-group">
+        <label class="control-label col-md-4">
+            分机号
+        </label>
+        <div class="col-md-5">
+            <input type="text" name="startExten" value='' class="form-control input-sm digits"  required style="display: inline-block;width: 75px;" placeholder="8000"/>
+            至
+            <input type="text" name="endExten" value='' class="form-control input-sm digits"  required style="display: inline-block;width: 75px;" placeholder="8002"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-4">是否开启国际长途服务 </label>
+        <div class="col-md-5">
+            <select name="batch_callinternation" class="form-control input-sm">
+                <option value=true>是</option>
+                <option value=false>否</option>
+            </select>
+        </div>
+    </div>
+</form>

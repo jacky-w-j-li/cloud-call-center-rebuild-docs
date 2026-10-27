@@ -1,0 +1,41 @@
+<div class="row-fluid">
+    <div class="span12">
+        <form class="form-horizontal" action="">
+            <input type="hidden" name="Type" value="normal"/>
+            <div class="row-fluid">
+                <div class="span7 offset1">
+                    <i class="icon-plus"></i>添加服务号
+                </div>
+                <div class="span4 text-right pull-right">
+                    <a class=" btn btn-info btn-blue ds_action_flow">
+                        <ds-form-action action="config.ivr.serviceNo.saveServiceNo" extra-data="config.callConfig.currentConfigData"
+                            update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"ivr_service_no"}}'
+                            on-complete="config.callConfig.serviceNo.afterSaveServiceNo"/>
+                        <ds-get-view view="config/callConfig/serviceNO/service_no_list" panel="ivrServiceNoPanel"/>
+                        <ds-effect-ivr/>
+                        保存
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="control-group">
+                <label class="control-label aa">服务号</label>
+                <div class="controls">
+                    <!--<input type="text" name="Exten" required/>-->
+                    <select name="Exten" required msgName="服务号" id="serviceNoAddSelect">
+
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    别名
+                </label>
+                <div class="controls">
+                    <input type="text" name="DisplayName"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

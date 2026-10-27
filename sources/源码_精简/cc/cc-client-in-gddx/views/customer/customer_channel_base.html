@@ -1,0 +1,161 @@
+<input type="hidden" name='customerId' value="{{=_id}}" />
+<input type="hidden" name='dbType'  value="{{=dbType}}" />
+<input type="hidden" name='categoryId' value="{{=categoryId}}" />
+<input type="hidden" name='status' value="{{=status}}" />
+<input type="hidden" name='sysStatus'  value="{{=sysStatus}}" />
+<input type="hidden" name='sourceOwner'  value="{{=owner}}" />
+
+<div class="contact-info" style="margin-left:0;position: relative;">
+    <div class="cust_info_left">
+        <div class="cust_desc clearfix" style="margin-bottom: 5px;">
+            <h2 class="contact_name " style="max-width:380px;float: left;">
+                <span class="major ellipsis" style="white-space:nowrap;" title="{{=name}}">
+                   {{=name}}
+                </span>
+            </h2>
+            <div class="tags_and_status" style="float: left;margin-top:7px;" >
+                <small style="float: left;" class="muted">{{=areaDesc}}</small>
+                <div class="edit_status">
+                    {{if(status){
+                        var status_text = $getCache('custTmpls',dbType).status[status]||"该状态已被删除";
+                        }}
+                    <a class="submenu_trigger label2  contact_status {{=status}}" title="{{=status_text}}" href="#">
+                        {{=status_text}}
+                    </a>
+                    {{ }else{ }}
+                    <a class="submenu_trigger label2  contact_status" title="无状态" href="#">
+                        无状态
+                    </a>
+                    {{ } }}
+                    <ul class="submenu submenu_content">
+                    </ul>
+                </div>
+                <div class="edit_source">
+                    {{
+                    if(custsource1){
+                        var source_text = custShowFieldDesc('source',custsource1)||"该来源已被删除";
+                    }}
+                    <a class="submenu_trigger label2 " title="{{=source_text}}" href="#">
+                        {{=source_text}}
+                    </a>
+                    {{ }else{ }}
+                    <a class="submenu_trigger label2 " title="无来源" href="#">
+                        无来源
+                    </a>
+                    {{ } }}
+                    <ul class="submenu">
+                    </ul>
+                </div>
+
+                <!--<div class="edit_sysStatus edit_repair">-->
+                    <!--<a class="submenu_trigger label2 sysStatusBtn" id="sysStatusBtn" title="系统状态" href="#">-->
+                        <!--{{=custShowFieldDesc('sysStatus',sysStatus)}}-->
+                    <!--</a>-->
+                    <!--<ul class="submenu submenu_content clientSystem-settings">-->
+                    <!--</ul>-->
+                <!--</div>-->
+
+            </div>
+        </div>
+
+        <div class="social_pane" style="height: 25px;">
+            {{
+                var _phone=phone||[];
+                if(_phone.length>0){
+            }}
+            <div class="cust_social view_cust_phone" >
+                <a href="#" class="submenu_trigger"><span class="ico_social ico_social_call"></span></a>
+                <ul class="submenu">
+                </ul>
+            </div>
+            {{
+                }else{
+            }}
+            <span class="ico_social ico_social_call_disable"></span>
+            {{
+                }
+            }}
+
+            {{
+                var _email=email||[];
+                if(_email.length>0){
+            }}
+            <div class="cust_social view_cust_mail" >
+                <a href="#" class="submenu_trigger"><span class="ico_social ico_social_mail"></span></a>
+                <ul class="submenu">
+                </ul>
+            </div>
+            {{
+                }else{
+            }}
+            <span class="ico_social ico_social_mail_disable"></span>
+            {{
+                }
+            }}
+
+            {{
+                var _weixin=weixin||[];
+                if(_weixin.length>0){
+            }}
+            <!--<div class="cust_social view_cust_weixin" >-->
+                <!--<a href="#" class="submenu_trigger"><span class="ico_social ico_social_weixin"></span></a>-->
+                <!--<ul class="submenu">-->
+                <!--</ul>-->
+            <!--</div>-->
+            {{
+                }else{
+            }}
+            <!--<span class="ico_social ico_social_weixin_disable"></span>-->
+            {{
+                }
+            }}
+            {{ var hasSms = isHasFunc('func_sort_phone_bar_send_sms')}}
+            {{ if(phone.length >0 && hasSms){ }}
+            <div class="cust_social view_cust_sms" >
+                <a href="#" class="submenu_trigger"><span class="ico_social ico_social_sms"></span></a>
+                <ul class="submenu">
+                </ul>
+            </div>
+                {{}}
+            {{ }else{ }}
+                <span class="ico_social ico_social_sms_disable"></span>
+            {{ } }}
+            <!--<span class="ico_social ico_social_qq_disable"></span>-->
+        </div>
+
+        <div style="width: 80%;border-bottom: 1px solid #898989;margin: 5px 0;margin-right:150px;"></div>
+        <h2 class="contact_name" style="clear: both;margin-top:5px;">
+            <span class="minor">
+                {{=title}}
+                &nbsp;
+            </span>
+        </h2>
+    </div>
+    <div class="cust_info_right" >
+        <div class="cust_info_right_todo clearfix">
+            <div class="tags_and_status " style="display: inline-block">
+                <div class="edit_status" style="width:auto; position: relative">
+                <div class="cust_categoryId" style="float: left;display: none;margin-right: 10px;"></div>
+                    <span class="guishuicon guishuicon1" style="margin: -6px 3px 0 0!important;"></span>
+                    <span id="combobox_cust_owner_desc" class="label2" uid="{{=owner}}"></span>
+                    <input id="combobox_cust_owner" type="text"  style="display:none;width:125px;margin-top:-4px" placeholder="按姓名,拼音,工号搜索">
+                </div>
+            </div>
+            <span class="ds_do_action btn_cust_edit" href="#" ds_action="customer.showPopUpdate" ds_data="_#flag#_" title="更新客户"></span>
+            {{
+            if(temp_flag == "popupWebchat"){
+            }}
+            <span href="javascript:;" class="btn_cust_disconnect ds_do_action" ds_action="webchat.deleteCustomerImRelation" title="断开客户关联" ds_data="{{=_id}}"></span>
+            {{
+            }else if(temp_flag == "popupEmail"){
+            }}
+            <span href="javascript:;" class="btn_cust_disconnect ds_do_action" ds_action="email.deleteCustomerImRelation" title="断开客户关联" ds_data="{{=_id}}"></span>
+            {{
+            }
+            }}
+        </div>
+
+<!--        <div style="position: absolute;right: 0;top:35px;">
+        </div>-->
+    </div>
+</div>

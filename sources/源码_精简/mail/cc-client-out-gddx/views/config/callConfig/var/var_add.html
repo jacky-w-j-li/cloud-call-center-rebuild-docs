@@ -1,0 +1,40 @@
+<div class="row-fluid">
+    <div class="span12">
+        <form class="form-horizontal" action="">
+            <div class="row-fluid">
+                <div class="span7 offset1">
+                    <i class="icon-plus"></i>添加变量
+                </div>
+                <div class="span4 text-right pull-right">
+                    <a class="btn-blue ds_action_flow">
+                        <ds-form-action action="config.ivr.vars.updateVar" extra-data="config.callConfig.currentConfigData"
+                            update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"vars"}}'/>
+                        <ds-get-view view="config/callConfig/var/var_list" panel="ivrVarPanel"/>
+                        保存
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+
+            <div class="control-group">
+                <label class="control-label">变量名</label>
+                <div class="controls">
+                    <input type="text" name="VarName" required="true"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">描述</label>
+                <div class="controls">
+                    <input type="text" name="Memo"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">是否弹屏变量</label>
+                <div class="controls">
+                    <input type="checkbox" name="PopVar"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

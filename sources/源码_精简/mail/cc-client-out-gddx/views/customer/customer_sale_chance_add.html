@@ -1,0 +1,71 @@
+<div id="customer_sale_chance_add">
+    <form id="frm_sal_chance_add" class="form-horizontal ">
+        <div class="form_buttons" style="border-bottom: 0px solid #f0f0f0;line-height:30px;">
+            <button type="button" class="btn btn-small btn-primary ds_form_action pull-right"  ds_action="customer.saveSaleChance" style="margin-left: 10px;">保存</button>
+            <button type="button" class="btn btn-small pull-right btn_pad btn_cancel_edit ds_do_action" ds_action="customer.cancelModel" ds_data="frm_sale_chance_add" style="margin-left: 0px;">取消</button>
+        </div>
+
+        <div>
+            <div class="control-group">
+                <label class="control-label required">商机池名称</label>
+                <div class="controls">
+                    <input style="width:35%;" name="cName" type="text" maxlength="50" msgName='商机池名称'>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label required">管理员</label>
+                <div class="controls">
+                    <input name="ownercomManagers" type="hidden" class="select_input" id="managers_owner_select_input_com" />
+                    <input name="managers" type="hidden" class="select_input" id="managers_owner_select_addInput" />
+                    <!--<input name="ownerdepManagers" type="hidden" class="select_input" id="managers_owner_select_input_dep" />-->
+                    <!--<div id="_#menu#__owner_select_user" class="combobox_agent"></div>-->
+                    <div id="managers_owner_select_addUser" class="comtabbox_agent"></div>
+                    <!--<div class="cust_managers_container">-->
+                    <!--</div>-->
+                </div>
+
+            </div>
+            <div class="control-group">
+                <label class="control-label required">成员</label>
+                <div class="controls">
+                    <input name="ownercomMembers" type="hidden" class="select_input" id="members_owner_select_input_com" />
+                    <input name="members" type="hidden" class="select_input" id="members_owner_select_addInput" />
+                    <!--<input name="ownerdepMembers" type="hidden" class="select_input" id="members_owner_select_input_dep" />-->
+                    <!--<div id="_#menu#__owner_select_user" class="combobox_agent"></div>-->
+                    <div id="members_owner_select_addUser" class="comtabbox_agent"></div>
+                    <!--<div class="cust_members_container">-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label required">客户回收规则</label>
+                <div class="controls">
+                    <div id="field_recycle_pane" style="position: relative;" class="">
+                        默认状态：<input type="text" name="deNum" style="width:50px">分钟 无有效电话则系统自动回收。
+                        <br/><br/>
+                        跟进中：无联系计划或联系计划过期，超过<input type="text" name="foNum" style="width:50px">分钟，系统自动回收。
+                    </div>
+                    <span class="help-block muted"><br/>默认为不自动回收。</span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function(){
+        //初始化座席
+        _initAgentCheckbox();
+    });
+    function _initAgentCheckbox(){
+        var inputIdMa="managers_owner_select_addInput";
+        var containerIdMa="managers_owner_select_addUser";
+        var inputIdMe = "members_owner_select_addInput";
+        var containerIdMe = "members_owner_select_addUser";
+        var editOwner="";
+        if(isHasFunc("func_not_allow_user_edit_owner")){
+            editOwner = "readonly"
+        }
+        utils.loadAgentTabBox(inputIdMa,containerIdMa,{width:"360",height:"17",maxHeight:292,hideTab:0,isRadio:false,commonTab:false},false,false);
+        utils.loadAgentTabBox(inputIdMe,containerIdMe,{width:"360",height:"17",maxHeight:292,hideTab:0,isRadio:false,commonTab:false},false,false);
+    }
+</script>

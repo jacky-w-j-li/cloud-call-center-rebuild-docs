@@ -1,0 +1,33 @@
+<div class="right_content_pane">
+    <form >
+        <div class="panel-heading clearfix" ></div>
+        <div class="weixin_dock_right">
+            <div class="control-head weixin_dock_head"><span style="font-weight: bold;">接入号设置</span></div>
+            <div class="row-fluid">
+                <div class="row_item row_item1">
+                    <label class="control-label" for="nick_name">公众号名称</label>      <!--class="control-label"-->
+                    <input id="nick_name" class="input_with" keyup_action="" type="text" name="nick_name" value="" placeholder="例如: XX科技有限公司" msg="不能为空" required/>
+                </div>
+                <div class="row_item row_item1">
+                    <label class="control-label" for="authorizer_appid">APP ID</label>      <!--class="control-label"-->
+                    <input id="authorizer_appid" class="input_with" keyup_action="" type="text" name="authorizer_appid" value="" placeholder="例如: wx666888a30f361322" msg="不能为空" required/>
+                </div>
+                <div class="row_item row_item1">
+                    <label class="control-label" for="sendUrl">接受消息地址</label>      <!--class="control-label"-->
+                    <input id="sendUrl" class="input_with" keyup_action="" type="text" name="sendUrl" value="" placeholder="消息接口：第三方接收座席回复消息的接口地址
+" msg="不能为空" required/>
+                </div>
+                <div class="row_item row_item1">
+                    <label class="control-label" for="to_peer">消息分发技能组</label>      <!--class="control-label"-->
+                    <!--<input id="weixin_group" class="ds_key_action input_with" keyup_action="" type="text" name="weixinGroup" placeholder="" required/>-->
+                    <select id="to_peer" class="ds_key_action select_width" name="to_peer" required>
+                    </select>
+                </div>
+                <div class="row_item row_item1 btn-center">
+                    <button type="button" class="btn btn-primary btn-small ds_form_action img-none btn-blue"  ds_action="config.channel.saveWeixinDock" style="margin-left: 10px;">保存</button>
+                </div>
+                <div style="height: 10px;width: 100%;"></div>
+            </div>
+        </div>
+    </form>
+</div>

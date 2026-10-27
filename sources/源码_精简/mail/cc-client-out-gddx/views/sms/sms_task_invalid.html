@@ -1,0 +1,84 @@
+<form id='invalid_query_frm'>
+    <input  name="batchNo" type="hidden" >
+</form>
+<div class="">
+    <table class="table table-bordered table-striped table-hover" style="word-break: break-all;">
+        <colgroup>
+            <col width="20%"/>
+            <col width="40%"/>
+            <col width="20%"/>
+            <col width="20%"/>
+        </colgroup>
+        <thead>
+        <tr>
+            <th>
+                手机号码
+            </th>
+            <th>
+                内容
+            </th>
+            <th>
+                签名
+            </th>
+            <th>
+                错误原因
+            </th>
+        </tr>
+        </thead>
+        <tbody id="task_repeat_list_pane">
+        </tbody>
+    </table>
+    <div class="pagination task_repeat_count" style="display:table; margin:0;width:100%;" for="invalid_query_frm" ds_pagination_action="sms.loadTaskInvalidList">
+        <span style="float:left;margin-top:10px;font-size:12px;">查询结果：<span class="result_count">10</span></span>
+        <ul class="repeat_list_page" style="float:right;">
+            <li>
+                <a href="#"  value="0">«</a>
+            </li>
+            <li>
+                <a href="#"  value="1">1</a>
+            </li>
+            <li>
+                <a href="#"  value="2">2</a>
+            </li>
+            <li>
+                <a href="#"  value="3">3</a>
+            </li>
+            <li>
+                <a href="#"  value="4">4</a>
+            </li>
+            <li>
+                <a href="#"  value="5">5</a>
+            </li>
+            <li>
+                <a href="#"  value="6">»</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script id="tmpl_taskimport_item" type="text/x-jquery-tmpl">
+<tr>
+    <td>
+        {{if num}}
+            ${num}
+        {{/if}}
+    </td>
+    {{if content}}
+        <td style="width: 350px;display: block;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">
+            ${content}
+        </td>
+    {{else}}
+        <td></td>
+    {{/if}}
+    <td>
+        {{if signDisplay}}
+            ${signDisplay}
+        {{/if}}
+    </td>
+    <td>
+        {{if reason}}
+            ${reason}
+        {{/if}}
+    </td>
+</tr>
+</script>

@@ -1,0 +1,57 @@
+
+<!--<div class="alert alert-warning fl">
+    <strong>注意:</strong>
+    <br>
+    <p>
+    <div style="margin: 15px 0px 15px 0px;">1.变量请用{1},{2},{3}....{n}的形式,例如:您的验证码是{1}。</div>
+    <div style="margin: 15px 0px 15px 0px;">2.您可以使用已有的短信签名或输入新的短信签名。</div>
+    <div style="margin: 15px 0px 15px 0px;">3.请勿提交“政治”、“非法”、“淫秽”、“欺诈”、“博彩”等违法信息。</div>
+    </p>
+</div>-->
+<div>
+    <form class="form-horizontal" id="sms_template_to_check_new_form">
+        <div class="form-group">
+            <label class="control-label col-md-3">
+                模板标题
+            </label>
+            <div class="col-md-5">
+                <input type="text" id="sms_template_new_name" name="name" value='' class="form-control input-sm"/>
+            </div>
+        </div>
+        <div class="form-group" >
+            <label class="control-label col-md-3">
+                模板内容
+            </label>
+            <div class="col-md-5">
+                <textarea style="width:100%" id="sms_template_new_content" name="content"></textarea>
+            </div>
+        </div>
+        <div class="form-group licencePrice_div">
+            <label class="control-label col-md-3">
+                模板签名
+            </label>
+            <div class="col-md-5">
+                <input type="text" id="sms_template_new_sign" name="signToCheck" class="form-control input-sm"/>
+            </div>
+        </div>
+        <div class="form-group licencePrice_div">
+            <label class="control-label col-md-3">
+                模板类型
+            </label>
+            <div class="col-md-5">
+                _smsTemplateTypeToReplace_
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-8">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary ds_form_action" ds_action="sms.postSmsTemplate">确定</button>
+            <div/>
+        </div>
+    </form>
+</div>
+
+
+
+
+

@@ -1,0 +1,330 @@
+/* created by liujing on 13/07/16
+style for out task 
+linked by customer/task/task_main.html
+all classnames must begin with letter '.otk_' or '#view_nav_dial_task' */
+
+/* move from app.css start*/
+/* out_task start*/
+.controls{
+    width: 420px;
+}
+
+.ch_agents{
+    width: auto;
+    height: 300px;
+    clear: both;
+    margin-top: 15px;
+}
+
+input[name='dailyTask[]'], input[name=dailyTaskAllAgent], input[name='assign[]'], input[name='effective'] {
+    width: 3em;
+    text-align: center;
+    display: inline-block;
+}
+#frm_customer_task_add input[type=checkbox],#frm_task_select_user input[type=checkbox]{
+    float: none;
+    margin: 1px 3px 0 0;
+}
+.cust_assgin_agent_container .span6{
+    float: left;
+    width: 33%;
+    box-sizing: border-box;
+    margin-left: 0;
+}
+.daily_task{
+    padding: 8px 0 4px;
+    white-space: nowrap;
+}
+
+.daily_task input.ds_checked_radio {
+    margin: 0 3px;
+}
+span.obtask_info{
+    display: inline-block;
+    padding-left: 14px;
+    color: #898989;
+    font-size: 12px;
+}
+.task_import_section{
+    padding: 0 18px;
+}
+.brdb{
+    border-bottom: 1px solid #898989;
+}
+
+#view_nav_dial_task .text-mute, #agent_called_task_info .text-mute, #task_cing .text-mute {
+    max-height: 3em;
+    padding: 3px 0 7px;
+    overflow: hidden;
+    color: #898989;
+}
+#agent_save_or_update_info .cust_tab_content,#agent_called_task_info .cust_tab_content,#agent_called_task_info #cdr_detail_wrapper{
+    padding: 18px;
+}
+#agent_called_task_info .cust_tab_content #cdr_detail_wrapper{
+    padding: 0;
+}
+.task_cust_assgin_container .span4 {
+    margin-left: 0;
+}
+#view_nav_dial_task .label-success, #view_nav_agent_dial_task .label-success {
+    color: #67d234;
+    background: none;
+}
+
+#view_nav_dial_task .label-important, #view_nav_agent_dial_task .label-important {
+    color: #e86b64;
+    background: none;
+}
+.task_import_section{
+    /*padding: 5px 0;*/
+    margin-top: 20px;
+    position: relative;
+}
+#frm_task_dial_task{
+    /*position: absolute;*/
+    float: right;
+    margin: 2px 20px;
+}
+.task_head_title{
+    height: 40px;
+    width: 100%;
+    margin-top: 10px;
+}
+.task_head_title i{
+    display: inline-block;
+    font-weight: bold;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    font-style: normal;
+    margin-left: 20px;
+}
+#agent_sample_info {
+    position: relative;
+}
+.task_intrbg {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background: url("../img/task_intrbg.png?0419") no-repeat 50% 50%;
+}
+#import_list_dial_task_dialedNumber .list_container .list_item .card_right,#import_list_dial_task_dialedNumber .list_container .list_item .card_middle,#agent_called_list_pane .card_right,#agent_called_list_pane .card_middle {
+    color: #999;
+    padding-bottom:5px;
+}
+#import_list_dial_task_dialedNumber .list_container .card_row_title,#agent_called_list_pane .card_row_title{
+    color:#333;
+    font-size:15px;
+}
+.shortTime{
+    display:block;
+    height:auto;
+}
+.text-mute .taskInformation{
+    color:#163955;
+    padding-left:3px;
+    padding-right:18px;
+}
+.baseinfo .taskDescription{
+    margin-bottom:20px;
+}
+#cdr_detail_wrapper #cdrListener{
+    float: left;
+    margin-right: 10px;
+}
+#cdr_detail_wrapper .down_audio{
+    line-height: 30px;
+}
+.frm_city{
+    font-size:18px;
+    color:#163955;
+}
+.frm_where{
+    font-size:12px;
+    color: #898989;
+}
+.text-mute .taskInformation,.called_save_button,.frm_city,.frm_where{
+    font-weight:bold;
+}
+
+#agent_task_detail_pane {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    z-index: 98;
+}
+#agent_task_detail_pane .cust_base{
+    min-height: 90px;
+    border: 0;
+    border-top: 2px solid #e0e0e0;
+    background: #f8f7fc;
+}
+.chart_bing{
+    padding-top: 6px;
+    line-height: 25px;
+    color: #8e8a87;
+}
+.daily_chart span{
+    display: block;
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    border-radius: 18px;
+    background: #f9f7fb;
+    color: #37b5ed;
+    text-align: center;
+    line-height: 36px;
+}
+.daily_chart {
+    float: right;
+    overflow: hidden;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+}
+
+.daily_chart div {
+    float: right;
+    position: relative;
+}
+
+.daily_chart canvas {
+    -webkit-transform: scale(.46, .46);
+}
+
+.daily_chart span{
+    display: block;
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    border-radius: 18px;
+    background: #f9f7fb;
+    color: #37b5ed;
+    text-align: center;
+    line-height: 36px;
+}
+
+.daily_chart button {
+    display: none;
+    float: left;
+    width: 50px;
+    height: 30px;
+    margin-top: 35px;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 3px;
+    -webkit-appearance: none;
+    padding: 0;
+    border: 0;
+}
+
+.daily_chart button.call_start {
+    background: #67d234;
+    display: block;
+}
+
+.daily_chart button.call_next {
+    background: #37b5ed;
+}
+
+.daily_chart button.call_mark {
+    background: #fa5f5f;
+}
+
+.daily_chart button.call_mark {
+    background: #fa5f5f;
+}
+
+.daily_chart button.call_end {
+    background: #f99f38;
+}
+
+.mark_list li {
+    width: 80px;
+    height: 22px;
+    margin: 10px auto 0;
+    line-height: 22px;
+    color: #fff;
+    background: #37b6ed;
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.mark_list li input {
+    display: none;
+}
+#tips_m {
+    display: inline-block;
+    border-radius: 2px;
+    margin: 0 10px;
+    padding: 0 3px;
+    color: #fff;
+    line-height: 16px;
+    font-size: 12px;
+}
+
+.mark-un {
+    background: #b4b4b4;
+}
+
+.mark-success {
+    background: #67d234;
+}
+
+.recall {
+    font-size: 12px;
+    color: #37b5ed;
+    text-decoration: underline;
+}
+
+#task_status_pop .modal-header {
+    padding-top: 0;
+}
+
+#task_status_pop dt {
+    width: 60px;
+    height: 77px;
+    margin: 0 auto;
+    background: url('../img/task_pop.png') no-repeat 0 0;
+    background-size: 60px auto;
+}
+
+#task_status_pop dl.nono dt {
+    background-position: 0 -78px;
+}
+
+#task_status_pop dd {
+    color: #454545;
+    font-size: 14px;
+    text-align: center;
+    line-height: 50px;
+}
+
+#task_status_pop button.close {
+    background: #37b5ed;
+    margin: 0 auto;
+    float: none;
+    display: block;
+    padding: 3px 14px;
+    font-size: 14px;
+    opacity: 1;
+    text-shadow: 0 1px 0 #2fa2d5;
+    border-radius: 2px;
+    color: #fff;
+}
+#dttotal{
+    display: none;
+}
+.hlig {
+    color: #37b5ed;
+}
+
+/* out_task end*/
+/* move from app.css end*/

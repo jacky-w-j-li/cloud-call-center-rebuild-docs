@@ -1,0 +1,48 @@
+<form class="form-horizontal deptForm">
+    <input type="hidden" id="cid" name="cid" >
+    <input type="hidden" id="cname" name="cname" >
+    <input type="hidden" id="categoryId" name="categoryId" >
+    <input type="hidden" id="custSource" name="custSource" >
+    <input type="hidden" id="sysStatus" name="sysStatus" >
+    <input type="hidden" id="sourceOwner" name="sourceOwner" >
+    <input type="hidden" id="apprType" name="apprType" value="4">
+    <input type="hidden" id="custTmplsId" name="custTmplsId">
+    <input type="hidden" id="status" name="status" >
+
+    <div class="alert alert-block">
+        <b>温馨提示：</b><br><br>
+        客户跟进状态变更为“丢单”，需提交进行审核。审核通过后客户被回收到丢单商机公海；不通过后会回到原来的公海池中，被其他人领取或分配，若客户没有公海来源，则回到“无归属”客户中等待被分配。
+    </div>
+    <div class="control-group" style="margin-left:-50px">
+        <label class="control-label required" for="reason">丢单原因</label>
+        <div class="controls">
+            <textarea  id="reason" name="reason"  style="width:280px;height:80px"/>
+        </div>
+    </div>
+    <div class="control-group" style="margin-left:-50px">
+        <label class="control-label" for="competitors">竞争对手</label>
+        <div class="span3" id="competitorsDiv">
+            <select name="competitors" id="competitors" style="width:210px;height:30px;overflow:scroll">
+                <option value="">--请选择--</option>
+            </select>
+        </div >
+        <div style="margin-top: 10px;"><a href="#" id="customCompetitors">新增</a></div>
+    </div>
+    <div class="control-group">
+        <label class="control-label"></label>
+        <div class="controls" style="">
+            <button type="button" class="btn btn-small btn-primary ds_form_action pull-left  btn_pad saveOrUpdate" ds_action="customer.approvalBusiness.addCustApprovalBusiness" style="margin-left: 10px;">提交</button>
+            <button type="button" class="btn btn-small  pull-left  btn_cancel_edit" data-dismiss="modal" aria-hidden="true" >取消</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+
+    $(function(){
+        $("#customCompetitors").click(function(event){
+            var input = '<input type="text" id="competitors" name="competitors">';
+            $("#customCompetitors").remove();
+            $("#competitorsDiv").empty().append(input);
+        });
+    });
+</script>

@@ -1,0 +1,33 @@
+<div class="comment">
+    <div class='row-fluid '>
+        <a href="#" class="btn btn-small ds_do_action add_comment_button" ds_action="business.showAddBusinessBackInfo" style="margin-bottom: 10px;">添加备注</a>
+    </div>
+    <div class='row-fluid add_business_comment' style="display: none;">
+        <form>
+            <div class="action_form">
+                <div class="action_bar">
+                    <h2>业务备注</h2>
+                    <a class="btn  btn-small btn-danger ds_do_action" ds_action="business.cancelBusinessBackInfo" style="float: right;margin-top: 3px;margin-right: 5px;">取消</a>
+                    <a class="btn  btn-small btn-primary ds_form_action" ds_action="business.saveBusinessBackInfo" style="float: right;margin-top: 3px;margin-right: 10px;">保存</a>
+                </div>
+                <div class="process_action">
+
+                    <input type='hidden' name='_id' value='__id'>
+
+                    <div class="row-fluid" style="margin-top: 10px;">
+                        <div class='row_item'>
+                            <textarea name="backInfo" style="width: 100%;" msgName='业务备注' required></textarea>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="new_business_comments">
+
+    </div>
+</div>
+
+<script type="text/javascript">
+</script>

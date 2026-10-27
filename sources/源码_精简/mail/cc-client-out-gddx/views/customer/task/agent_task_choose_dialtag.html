@@ -1,0 +1,18 @@
+<form>
+    <ul class='mark_list'>
+        <li class="ds_do_action" ds_action="customer.task.markCallNo"><label>有效号码<input type="radio" name="dialTag"
+                                                                                        id="optionsRadios4"
+                                                                                        value="dealing"></label></li>
+        <li class="ds_do_action" ds_action="customer.task.markCallNo"><label>拒接<input type="radio" name="dialTag"
+                                                                                      id="optionsRadios2"
+                                                                                      value="outOfService"></label></li>
+        <li class="ds_do_action" ds_action="customer.task.markCallNo"><label>空号<input type="radio" name="dialTag"
+                                                                                      id="optionsRadios1"
+                                                                                      value="emptyNumber"></label></li>
+        <li class="ds_do_action" ds_action="customer.task.markCallNo" ds_data="true">占线</li>
+    </ul>
+    <div class=" pull-right" style="display:none">
+    <button type="button" class="btn-blue btn-small ds_form_action"  ds_action="customer.task.saveDialInfo" style="margin-left: 10px;">保存</button>
+    <button type="button" class="do_action_cancel ds_do_action" data-dismiss="modal"  aria-hidden="true">取消</button>
+</div>
+</form>

@@ -1,0 +1,34 @@
+<form class="form-horizontal deptForm">
+    <input type="hidden" id="cid" name="cid" >
+    <input type="hidden" id="cname" name="cname" >
+    <input type="hidden" id="categoryId" name="categoryId" >
+    <input type="hidden" id="custSource" name="custSource" >
+    <input type="hidden" id="sysStatus" name="sysStatus" >
+    <input type="hidden" id="sourceOwner" name="sourceOwner" >
+    <input type="hidden" id="apprType" name="apprType" value="3">
+    <input type="hidden" id="status" name="status" >
+
+    <div class="alert alert-block">
+        <b>温馨提示：</b><br><br>
+        客户跟进状态变更为“成单”，需提交进行审核。审核通过后变为成单；不通过标记为失败，可重新提交；成单的客户可进行续费操作。
+    </div>
+    <div class="control-group" style="margin-left:-50px">
+        <label class="control-label required" for="money">成单金额</label>
+        <div class="controls">
+            <input type="text" id="money" name="money" style="width:280px" autocomplete="off">
+        </div>
+    </div>
+    <div class="control-group" style="margin-left:-50px">
+        <label class="control-label" for="memo">成单备注</label>
+        <div class="controls">
+            <textarea  id="memo" name="memo"  style="width:280px;height:80px"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label"></label>
+        <div class="controls" style="">
+            <button type="button" class="btn btn-small btn-primary ds_form_action pull-left  btn_pad saveOrUpdate" ds_action="customer.approvalBusiness.addCustApprovalBusiness" style="margin-left: 10px;">提交</button>
+            <button type="button" class="btn btn-small  pull-left  btn_cancel_edit" data-dismiss="modal" aria-hidden="true" >取消</button>
+        </div>
+    </div>
+</form>

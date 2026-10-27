@@ -1,0 +1,67 @@
+<div class="">
+    <form class="form-horizontal">
+        <input type="hidden" name="menu" value="_#menu#_"/>
+        <input type="hidden" name="taskId" value="_#taskId#_"/>
+        <div class="row-fluid">
+            <!--<div class="span12">-->
+                <!--<div style="border-bottom: 1px solid #f0f0f0;line-height:30px;">-->
+                    <!--<h4 style="float:left;line-height: inherit;">分配客户 &nbsp;&nbsp;</h4>-->
+                    <!--<div class="form_buttons">-->
+                        <!--<button type="button" class="btn btn-small btn-primary ds_form_action pull-right " ds_action="customer.saveCustAssign" >保存</button>-->
+                        <!--<button type="button" class="btn btn-small pull-right btn_pad btn_cancel_edit">取消</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="span12">
+                <div style="height: 25px;line-height: 25px;">您搜索到的客户共计<span class="cust_count">0</span>个</div>
+                <div style="height: 25px;line-height: 25px;margin-bottom: 0px;">分配规则：<a href="#" class="ds_do_action" ds_action="customer.task.autoAssgin">自动分配</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="#" class="ds_do_action" ds_action="customer.task.resetAssgin">重置</a>
+                    当前未分配客户数<span class="cust_more_count" style="color:red">0</span>个 </div>
+                <!--<div style="margin-bottom: 20px;">过滤座席：-->
+                    <!--<span style="display: inline-block;" id="customer_assign_select_agents"></span>-->
+                    <!--<div id="customer_assign_search_div" class="combobox_agent"></div>-->
+                <!--</div>-->
+            </div>
+            <div class="span12 task_cust_assgin_container">
+                <div class="row-fluid">
+                    <!--<div class="span4">-->
+                        <!--<input type="hidden" name="owner[]" value="f8c30590-52bb-11e4-8390-b5160764c2dd">-->
+                        <!--<div class="control-group">-->
+                            <!--<label class="control-label" style="width:85px;">-->
+                                <!--<i class="icon-remove"></i>张三[6000]：-->
+                            <!--</label>-->
+                            <!--<input size="5" style="width:35px;float:left" type="text" class="user_cust"-->
+                                   <!--name="assign[]" value="0" onkeyup="this.value=this.value.replace(/\D/g,'')"-->
+                                   <!--onafterpaste="this.value=this.value.replace(/\D/g,'')">-->
+                            <!--<span style="padding-top:8px;float:left;">-->
+                                <!--个客户-->
+                            <!--</span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <div class="span12">
+                <!--<span>[注]： 必须全部分配完当前查询到的所有客户</span>-->
+                <div class="form_buttons" style="padding-top:10px;">
+                    <button type="button" class="btn btn-small btn-primary ds_form_action pull-left btn_pad" ds_action="customer.task.saveCustAssign" >保存</button>
+                    <button type="button" class="btn btn-small pull-left  ds_do_action " ds_action="customer.task.cancelCustAssign">取消</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script id="tmpl_task_cust_assign" type="text/x-jquery-tmpl">
+    <div class="span4">
+        <input type="hidden" name="owner[]" value="${_id}"/>
+        <div class="control-group" >
+            <label class="control-label" style="width:85px;">${displayName}[${exten}]：</label>
+            <input size="5" style="width:35px;float:left" type="text"  class="user_cust" name="assign[]" value="0"
+                                          dataType='Number' msg='必须为数字'  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"  />
+                                         <span style="padding-top:8px;float:left;">个客户</span>
+        </div>
+    </div>
+</script>
+<script type="application/javascript">
+
+</script>

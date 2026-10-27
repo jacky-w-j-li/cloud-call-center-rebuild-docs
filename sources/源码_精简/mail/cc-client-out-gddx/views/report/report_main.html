@@ -1,0 +1,30 @@
+<div class="right_container pd0">
+    <div class="tabbable">
+        <ul class="new-nav-tabs report_tab" >
+            <li class="active tab_call_report common_hide">
+                <a href="#view_call_report" class="ds_do_action" ds_action="report.showTab" ds_data="call_report" data-toggle="tab">通话报表</a>
+            </li>
+            <li class="tab_im_report common_hide">
+                <a href="#view_im_report" class="ds_do_action" ds_action="report.showTab" ds_data="im_report" data-toggle="tab">在线客服报表</a>
+            </li>
+            <li class="tab_customer_report common_hide">
+                <a href="#view_customer_report" class="ds_do_action" ds_action="report.showTab" ds_data="customer_report" data-toggle="tab">客户报表</a>
+            </li>
+            <li class="tab_business_report common_hide">
+                <a href="#view_business_report" class="ds_do_action" ds_action="report.showTab" ds_data="business_report" data-toggle="tab">工单报表</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="view_call_report" class="tab-pane active"></div>
+            <div id="view_im_report" class="tab-pane"></div>
+            <div id="view_customer_report" class="tab-pane"></div>
+            <div id="view_business_report" class="tab-pane"></div>
+        </div>
+    </div>
+</div>
+
+<script id="tmpl_report_table_header" type="text/html">
+    <th style="width:80px;height: 20px; overflow: hidden;cursor: pointer" state="init"
+        onclick="utils.sortTable('{{=reportType}}','{{=orderNum}}','{{=objectType}}',this)">{{=displayname}}
+        <span class="sort monitor_sort">&nbsp;</span></th>
+</script>

@@ -1,0 +1,175 @@
+<script>
+    $(function () {
+        var allAgents = getCache("agents");
+        utils.loadSearchInput({ id: "agent_report_search_div",
+            width: "149",
+            height: "14",
+            tip: "按姓名,拼音,工号搜索",
+            data: allAgents,
+            listField: ["displayName", "exten"],
+            userIdField: "_id",
+            searchField: ["displayName", "exten", "pinyin"],
+            pinyinField: ["displayName"],
+            showAllList: true,
+            callbackFuc: function (object) {
+                if($.isArray(object)){
+                    return;
+                }
+                var currentVals = $("input[name='selectedAgent']");
+
+                var ishas = false;
+                for (var i = 0; i < currentVals.length; i++) {
+                    if (currentVals[i].value === object._id) {
+                        ishas = true;
+                    }
+                }
+                if (!ishas) {
+                    $('#agent_report_select_agents').before("<span id=" + object._id + "><input type='hidden' name='selectedAgent' value=" + object._id + ">" +
+                            "<span class='label label-info'>" + object.displayName +
+                            "</span><a href='#' onclick=removeAgent('" + object._id + "')><i class='icon-remove'></i></a>&nbsp;</span>");
+                }
+                countSelectAgent();
+            }
+        });
+    })
+    function removeAgent(id) {
+        $('#' + id).remove();
+        countSelectAgent();
+    }
+    function countSelectAgent() {
+        var currentVals = $("input[name='selectedAgent']");
+        var ExtenStr = '';
+        for (var i = 0; i < currentVals.length; i++) {
+            ExtenStr += currentVals[i].value;
+            if (i != currentVals.length - 1) {
+                ExtenStr += ',';
+            }
+        }
+        $('#selectedAgentList').val(ExtenStr);
+    }
+</script>
+<div class="">
+    <div style="/*height:98%;margin:3px 3px;*/">
+        <div class="row-fluid">
+            <h5><i class="icon-user"></i>座席工作量查询</h5>
+            <br/>
+
+            <form class="form-horizontal">
+                <a class="ds_form_action" id="call_report_agent_doDrill" ds_action="report.callReport.drillToAgentTime"></a>
+                <input type="hidden" name="AgentID" id="call_report_agent_AgentID"/>
+
+                <div>
+                    <label for="agentTb" style="float:left;margin-right:3px;">
+                        &nbsp;座&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;席&nbsp;
+                    </label>
+                    <table id="agentTb">
+                        <tr>
+                            <td id="agent_report_select_agents"></td>
+                            <td id="agent_report_search_div" class="combobox_agent"></td>
+                            <td id="agent_report_checkbox_td"  style="padding-left: 12px">
+                                <input type="checkbox" id="agent_report_checkbox" name="includeSubordinate" style="margin-top: 4px">
+                                显示已选座席下级
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="clear10"></div>
+                <div id="time_type">
+                    <!--<label style="float:left;margin-right:3px;">-->
+                        <!--时间类型-->
+                    <!--</label>-->
+                    <select name="TimeType" id="report_agent_timeType"
+                            onchange="handler.report.callReport.resetDate('report_agent_dateTd',this.value)">
+                        <option value="year" id="optionYear">年报</option>
+                        <option value="month" id="optionMonth">月报</option>
+                        <option value="day" id="optionDay">日报</option>
+                        <option value="other_half_hour" id="optionOther">自定义</option>
+                    </select>
+                    <div id="report_agent_dateTd" style="display: inline">
+                    </div>
+                    <div id="report_agent_dateTd_other" style="display: none">
+                        <div class="input-append date form_datetime">
+                            <input id="report_agent_datetime_picker_start" size="6" class="input-medium report_start_time" name="StartTime" type="text" value="" readonly>
+                            <span class="add-on datetimepicker-remove" style="height: 14px;line-height: 15px"><i class="icon-remove"></i></span>
+                            <span class="add-on datetimepicker-open" style="height: 14px;line-height: 15px"><i class="icon-th"></i></span>
+                        </div>
+                        <div style="padding-top: 5px;display: inline">
+                            至
+                        </div>
+                        <div class="input-append date form_datetime">
+                            <input id="report_agent_datetime_picker_end" size="6" class="input-medium report_end_time" name="EndTime" type="text" value="" readonly>
+                            <span class="add-on datetimepicker-remove" style="height: 14px;line-height: 15px"><i class="icon-remove"></i></span>
+                            <span class="add-on datetimepicker-open" style="height: 14px;line-height: 15px"><i class="icon-th"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear10"></div>
+                <div id="btn-select">
+                    <input type="hidden" name="reportType" value="call_report_agent">
+                    <input type="hidden" name="selectedAgentList" id="selectedAgentList">
+                    <a class="button ds_form_action" id="call_report_agent_btn"
+                       ds_action="report.callReport.call_report_agent">查询</a>
+                    <a class="button ds_form_action" ds_action="report.callReport.confirmExportReportPdf">导出PDF</a>
+                    <a class="button ds_form_action" ds_action="report.callReport.exportAgentExcel">导出EXCEL</a>
+                </div>
+            </form>
+            <div class='row-fluid account_line'></div>
+
+            <div id="call_report_agent_highcharts_container"
+                 style="min-width: 310px; height: 300px; margin: 0 auto"></div>
+            <br/>
+            <br/>
+
+            <div class="agent_report_data_part">
+                <div class="data_titile_part">
+                    <a href="#" class="ds_do_action" ds_action="report.callReport.openConfigTableHeader" ds_data="call_report_agent">配置显示表头</a>
+
+                </div>
+                <div class="alert alert-block" style="padding: 5px 10px;line-height:1.5">
+                    <h12>
+                        <a class="alert_a" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo2">点击展开或折叠“说明”</a>
+                    </h12>
+                    <div id="collapseTwo2" class="panel-collapse collapse ">
+                        <div class="panel-body">
+                            说明：<br>
+                            1.员工利用率=(呼入接通总时长 + 外呼接通总时长 + 系统置忙时长即后处理时长) / (总在线时长 - 所有自定义状态时长的总和)  注意："所有自定义状态时长的总和"不包含"忙碌"<br>
+                            2.系统置忙时长=后处理时长<br>
+                        </div>
+                    </div>
+                </div>
+                <div class="data_content_part" id="report_agent_table">
+                    <table id="call_report_agent_table_id" class="table table-striped table-bordered table-hover">
+                        <thead class="hearTd" id="agentWorkTableHeader">
+
+                        </thead>
+                        <tbody id="agentWorkTableBody">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="contentpart" style="padding: 5px;margin: 10px;">
+
+            </div>
+            <div id="call_report_agent_config_table_header_pane"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#report_agent_datetime_picker_start').datetimepicker({
+        dateFormat: "yy-mm-dd",
+        timeFormat: "HH:mm:ss",
+        showSecond: false, //显示秒
+        showTimepicker: true,
+        stepMinute: 30
+
+    });
+    $('#report_agent_datetime_picker_end').datetimepicker({
+        dateFormat: "yy-mm-dd",
+        timeFormat: "HH:mm:ss",
+        showSecond: false, //显示秒
+        showTimepicker: true,
+        defaultDate:+1,
+        stepMinute: 30
+    });
+</script>

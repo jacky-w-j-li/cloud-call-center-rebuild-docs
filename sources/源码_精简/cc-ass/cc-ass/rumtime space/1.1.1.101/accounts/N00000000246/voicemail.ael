@@ -1,0 +1,61 @@
+context N00000000246-10009-voicemail {
+	s => {
+		Answer;
+		Playback(/etc/asterisk/1.1.1.101/accounts/N00000000246/sound/86fa3ddb21df77c710695dbdf50ade99);
+		loop:
+		Set(RECFILENAME=${STRFTIME(${EPOCH},,%Y%m%d-%H%M%S)}_N00000000246_${CALLERID(num)}_${EXTEN}_${UNIQUEID});
+		Playback(sound/vmstart);
+		Playback(sound/du);
+		goto N00000000246-10009-voicemail-start,s,1;
+	}
+}
+
+context N00000000246-10009-voicemail-start {
+	s => {
+		Set(RECORD_FILENAME="${RECFILENAME}-vm");
+		Record(${RECORD_FILENAME}.wav);
+		ivrloop:
+		BackGround(sound/vmend);
+		WaitExten(20);
+	}
+	
+	* => {
+		System(/bin/rm /var/lib/asterisk/sounds/${RECORD_FILENAME}.wav);
+		goto ${FROM_CONTEXT},${FROM_DID},1;
+    }
+	
+	1 => {
+		goto N00000000246-10009-voicemail-end,s,1;
+	}
+	
+	2 => {
+		System(/bin/rm /var/lib/asterisk/sounds/${RECORD_FILENAME}.wav);
+		goto N00000000246-10009-voicemail,s,loop;
+	}
+	
+	i => {
+        BackGround(sound/incorrect);
+		goto s,ivrloop;
+    }
+    
+    h => {
+    	System(/bin/rm /var/lib/asterisk/sounds/${RECORD_FILENAME}.wav);
+    }
+    
+    t => {
+    	System(/bin/rm /var/lib/asterisk/sounds/${RECORD_FILENAME}.wav);
+    	Playback(sound/timeout);
+        Playback(sound/bye);
+        Hangup();
+    }
+}
+
+context N00000000246-10009-voicemail-end {
+	s => {
+		System(/bin/cp /var/lib/asterisk/sounds/${RECORD_FILENAME}.wav /var/spool/asterisk/1.1.1.101/monitor/${RECORD_FILENAME}.wav);
+		Playback(sound/recordsucess);
+		System(/bin/rm /var/lib/asterisk/sounds/${RECORD_FILENAME}.wav);
+		Hangup;
+	}
+}
+

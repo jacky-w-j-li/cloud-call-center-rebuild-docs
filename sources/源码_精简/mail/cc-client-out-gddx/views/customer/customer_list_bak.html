@@ -1,0 +1,182 @@
+<div class="left_column ds_search_pane" id="contact_list__#menu#_"  ds_menu="_#menu#_" ds_index="1" >
+    <div class="contacts_caption">
+        <div class="caption-top clearfix">
+            <div class="btn-mycustomer" style="float: right">
+                <button class="btn btn-small ds_do_action" ds_action="customer.showCustAdd" ds_data="_#menu#_">添加客户</button>
+                <!--<a href="#" class="add_button add-contact-link button ds_do_action" ds_action="customer.showCustAdd" ds_data="_#menu#_">添加客户</a>-->
+            </div>
+            <div class="btn-customermanage btn-group" style="float:right;overflow: visible;margin-right: 10px;display: none;">
+                <button class="btn ds_do_action" ds_action="customer.exportCustomer">导出查询结果</button>
+                <button class="btn dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu pull-right">
+                    <li><a href="#" ds_action="customer.showCustAssign" ds_data="_#menu#_" class="ds_do_action">分配查询结果</a></li>
+                    <li><a href="#" ds_action="customer.delCustOwner" ds_data="_#menu#_" class="ds_do_action">清空所属人</a></li>
+                    <li><a href="#" ds_action="customer.delCustQuery" ds_data="_#menu#_" class="ds_do_action">删除查询结果</a></li>
+                    <li><a href="#" ds_action="customer.showBatchStatus" ds_data="_#menu#_" class="ds_do_action">批量修改状态</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#" ds_action="customer.showCustAdd" ds_data="_#menu#_" class="ds_do_action">添加客户</a></li>
+                </ul>
+            </div>
+
+            <span class="refresh ds_do_action" style="" ds_action="customer.searchCustomer" ds_data="_#menu#_">
+                <a href="javascript:void(0);" title="刷新" class="ajaxed"></a>
+            </span>
+
+            <div class="input-append" style="margin-left: 5px;">
+                <input class="span2 ds_search_item" name="combox" style="width: 110px;" type="text" placeholder="输入名称或号码查询">
+                <button class="btn ds_do_action" type="button" ds_action="customer.searchCustomer" ds_data="_#menu#_" title="查询">
+                    <i class="icon-search"></i>
+                </button>
+                <button type="button" class="btn" data-toggle="collapse"
+                        data-target="#search__#menu#_" style="height: 24px;" title="高级查询">
+                    <span class="caret"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="list_container compact-view">
+        <div class="contact_list " >
+            <div class="search collapse" id="search__#menu#_" style="height: 0px;">
+            </div>
+            <div class="ds_search_filter">
+            </div>
+            <div class="list-inside" id="customer_list_pane">
+            </div>
+            <div style="margin-right: 8px;">
+                <a class="btn ds_do_action ds_more" ds_action="customer.moreCustomer" ds_data="_#menu#_" href="#" style="display: none;">更多...</a>
+            </div>
+        </div>
+    </div>
+    <script id="tmpl_contacts_item" type="text/x-jquery-tmpl">
+        <div class="list_item">
+            <div class="ds_do_action item_row item${_id}" ds_action='customer.showCustInfo' ds_data="_#menu#_">
+                <div class="contact_item">
+                    <div class="right-items status status_lead">
+                        <span class="status-name ${status}" title="${getCache('custTmpls', dbType).status[status]}">${getCache('custTmpls',dbType).status[status]}</span>
+                        <br>
+
+                    </div>
+                    <!--div class="recentTime">
+                        <p>更新于${recentTime}</p>
+                    </div-->
+                    <div class="left-items">
+                    <span class="bulk">
+                      <input class="summary_id hiddenCheckbox" type="checkbox" name="customerId" value="${_id}" >
+                    </span>
+                    </div>
+                    <div class="middle-items">
+                        <div class="contact">
+                          <span class="name">
+                             <span class="major" title="${name}" style="max-width: 315px;">${name}</span>
+                             <span class="minor" title="${name}">${title}</span>
+                          </span>
+                        </div>
+                        <div class="next_action">
+                            {{if notifyTime}}
+                            <span style="top:8px;" class="action_date_id action_date ${getNotifyDate(notifyTime).type}" title="${notifyTime}">${getNotifyDate(notifyTime).name}</span>
+                            {{else}}
+                            <span style="top:8px;" class="action_date_id"></span>
+                            {{/if}}
+                            <span class="action_content" title="${action}">${action}
+                                {{if notifyTime}}
+                                    (${getNotifyDate(notifyTime).displayName})
+                                {{/if}}
+                                &nbsp;
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </script>
+</div>
+<div class="right_column" >
+    <div class="contact_detail">
+        <div  class="content">
+            <div class="contact_operating_area custlist " id="_#menu#__customer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        var menu = '_#menu#_';
+        var evt=dsevent.evt.customerAdd+" "+dsevent.evt.customerAddCancel+" "+dsevent.evt.customerNew+" "+
+                dsevent.evt.customerUpdate+" "+dsevent.evt.action+" "+dsevent.evt.customerUpdateStatus+" "
+                +dsevent.evt.customerBatchDel+" "+dsevent.evt.customerDelete+" "+dsevent.evt.customerRefresh;
+        dsevent.bind('#contact_list__#menu#_', evt,function(event, params){
+            var parent=$("#contact_list_"+menu);
+            var data={};
+            if(params){
+                data=params;
+            }
+            var t=parent.find(".item"+data._id);
+            var rightPane=$("#"+menu+"_customer");
+            if(event.type==dsevent.evt.customerAdd){
+               parent.find(".list-inside").prepend(parent.find("#tmpl_contacts_item").tmpl(data));
+               parent.find(".list-inside .item_row:first").click();
+            }else if(event.type==dsevent.evt.customerAddCancel){
+                var t1=parent.find(".item_row.expanded");
+                if(t1.length>0){
+                    t1.click();
+                }
+            }else if(event.type==dsevent.evt.customerUpdate){
+                handler.customer.syncCustItem(data,t,0);
+            }else if(event.type==dsevent.evt.action){
+                handler.customer.syncCustItem(data,t,1);
+            }else if(event.type==dsevent.evt.customerUpdateStatus){
+                handler.customer.syncCustItem(data,t,2);
+            }else if(event.type==dsevent.evt.customerBatchDel){
+                rightPane.empty();
+                parent.find('.refresh').click();
+            }else if(event.type==dsevent.evt.customerDelete){
+                rightPane.empty();
+                t.parent().remove();
+            }else if(event.type==dsevent.evt.customerRefresh){
+                rightPane.empty();
+                parent.find('.refresh').click();
+            }
+        });
+
+        var url = '';
+        var tmpls=getCache('custTmpls');
+        if(!tmpls || tmpls.length<=0){
+            $().alertmessage('showError', "请配置客户数据库");
+            return;
+        }
+        var dbType=tmpls[0]._id;
+        var searchPane = $('#contact_list__#menu#_');
+        var my_customer = ['my_action', 'my_new_customer', 'my_all_customer'];
+        if($.inArray(menu, my_customer)!=-1) {
+            url = 'customer/customer_search_mycustomer';
+            searchPane.find(".btn-mycustomer").show();
+            searchPane.find(".btn-customermanage").hide();
+        } else if (menu == 'query_customer') {
+            url = 'customer/customer_search_manager';
+            searchPane.find(".btn-mycustomer").hide();
+            searchPane.find(".btn-customermanage").show();
+        } else if (menu == 'our_share_customer') {
+            url = 'customer/customer_search_mycustomer';
+            searchPane.find(".btn-mycustomer").hide();
+            searchPane.find(".btn-customermanage").hide();
+
+        }
+        DS.getView(url, function(view){
+            if(view){
+                view = view.replace(new RegExp('_#'+'menu'+'#_', 'g'), '_#menu#_').replace(/_#dbType#_/g,dbType);
+                $('#search__#menu#_').html(view);
+                var s1=$('#search__#menu#_').find("select[name='status']").get(0);
+                var s2=$('#search__#menu#_').find("select[name='custsource1']").get(0);
+
+                handler.customer.getOptionDic(dbType,'status',s1);
+                handler.customer.showSourceOption(dbType,s2,null,1);
+            }
+        });
+
+    });
+</script>

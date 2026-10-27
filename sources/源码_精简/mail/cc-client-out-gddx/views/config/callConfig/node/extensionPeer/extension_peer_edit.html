@@ -1,0 +1,54 @@
+<div class="row-fluid">
+    <div class="span12">
+        <form class="form-horizontal ds_item_edit" action="" client-data="session.ivrMap.ivr.ivr_node_extension_peer">
+            <div id="confirm_del_pane"></div>
+            <input type="hidden" name="_id" value="___id">
+            <input type="hidden" name="Exten" value="__Exten">
+            <div class="row-fluid">
+                <div class="span6 offset1">
+                    <i class="icon-plus"></i>修改自定义节点
+                </div>
+                <div class="span5 text-right pull-right">
+                    <a class="btn btn-info btn-blue ds_action_flow">
+                        <ds-form-action action="config.ivr.node.extensionPeer.updateExtensionPeer" extra-data="config.callConfig.currentConfigData"
+                                        update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"ivr_node_extension_peer"}}'/>
+                        <ds-get-view view="config/callConfig/node/extensionPeer/extension_peer_list" panel="ivrExtensionPeerNodePanel"/>
+                        <ds-effect-ivr/>
+                        保存
+                    </a>
+                    <a class="btn btn-danger btn-gray ds_action_flow">
+                        <ds-form-action action="config.ivr.node.extensionPeer.deleteExtensionPeer" extra-data="config.callConfig.currentConfigData"
+                                        update-client-data='{"method":"config.callConfig.updateClientData","arg":{"operation":"del","type":"ivr_node_extension_peer"}}'/>
+                        <ds-get-view view="config/callConfig/node/extensionPeer/extension_peer_list" panel="ivrExtensionPeerNodePanel"/>
+                        <ds-effect-ivr/>
+                        删除
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="row-fluid">
+                <div class="span5">
+                    <div class="control-group">
+                        <label class="control-label">
+                            节点名称
+                        </label>
+                        <div class="controls">
+                            <input type="text" msgName="节点名称" name="DisplayName" required/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            上下文
+                        </label>
+                        <div class="controls">
+                            <textarea rows="10" id="dialPlan" name="DialPlan" style="width:300px;">
+
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

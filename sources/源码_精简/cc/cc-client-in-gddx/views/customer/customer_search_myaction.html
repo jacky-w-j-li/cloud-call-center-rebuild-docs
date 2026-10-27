@@ -1,0 +1,76 @@
+<div style="height: 35px;border-bottom: 1px solid #f0f0f0;">
+    <h5 style="float:left;padding: 5px 10px 0;color:black;">高级查询</h5>
+    <a href="#" class="cancel_button close ds_do_action" ds_action="customer.closeAdvanceSearch" style="float: right;margin-top: 5px;margin-right: 10px;">x</a>
+</div>
+<div style="padding:10px 10px 30px;">
+    <fieldset>
+    <div class="row-fluid">
+        <div class="span8 advanced_search_item ds_search_item">
+            <label>联系时间</label>
+            <input name="notifyTime_begin_date" class="ds_datetime" type="text" placeholder="">
+            <label style="width: 16px">至</label>
+            <input name="notifyTime_end_date" class="ds_datetime" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span4 advanced_search_item ds_search_item ds_owner">
+            <label>所属人</label>
+            <input name="owner" type="hidden" class="select_input" id="_#menu#__owner_select_input"  />
+            <div id="_#menu#__owner_select_user" class="combobox_agent"></div>
+        </div>
+        <div class="span4 advanced_search_item ds_search_item">
+            <label>客户状态</label>
+            <select name="status" class="">
+                <option value="" selected>--请选择--</option>
+            </select>
+        </div>
+        <div class="span4 advanced_search_item ds_search_item">
+            <label>数据来源</label>
+            <select name="custsource1" id="custsource1" class="" >
+                <option value="" selected>--请选择--</option>
+            </select>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span4 advanced_search_item ds_search_item">
+            <label>导入批次</label>
+            <input  name="batchNo" type="text" />
+        </div>
+        <div class="span4 advanced_search_item ds_search_item">
+            <label>省</label>
+            <select name="province"  class="cust_province_casecade">
+                <option value="" selected>--请选择--</option>
+            </select>
+        </div>
+        <div class="span4 advanced_search_item ds_search_item">
+            <label>市</label>
+            <select name="city" class="">
+                <option value="" selected>--请选择--</option>
+            </select>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span8 advanced_search_item ds_search_item">
+            <label>更新时间</label>
+            <input name="lastUpdateTime_begin_date" class="ds_datetime" type="text" placeholder="">
+            <label style="width: 16px">至</label>
+            <input name="lastUpdateTime_end_date" class="ds_datetime" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span8 advanced_search_item ds_search_item">
+            <label >创建时间</label>
+            <input name="createTime_begin_date" class="ds_datetime" type="text" placeholder="">
+            <label style="width: 16px">至</label>
+            <input name="createTime_end_date" class="ds_datetime" type="text" placeholder="">
+        </div>
+    </div>
+    <div class="custom_fields_pane">
+    </div>
+    <div style="padding: 10px;">
+        <button type="button" class="btn btn-small btn-primary ds_form_action  pull-right" ds_action="customer.searchCustomerPage" >搜索</button>
+        <button type="button" class="btn btn-small  ds_do_action  pull-right" ds_action="customer.resetForm" ds_data="_#menu#_" style="margin-right: 10px;">重置</button>
+    </div>
+    </fieldset>
+</div>
+

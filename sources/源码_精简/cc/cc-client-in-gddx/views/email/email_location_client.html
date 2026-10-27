@@ -1,0 +1,78 @@
+<div class="modal hide fade" id="email_location_client_modal" tabindex="-1" style="overflow: hidden" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-header" style="border:0px;padding: 20px;border-bottom: 1px solid #cdcdcd;">
+        <button type="button" class="close" style="margin-top: -5px;" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" >选定客户</h4>
+    </div>
+    <div class="modal-body margin_none">
+        <div style='margin-bottom: 10px;'>
+            <form class="form-inline" id="">
+                <input type='hidden' name='callId' value="">
+                <input type='hidden' name='callTel' value="">
+                <div class="input-append">
+                    <input type='text' name='displayName' style="width: 120px;" placeholder="输入名称或号码搜索">
+                    <button type="button" class="btn ds_form_action pop_cust_query" ds_action=""  title="查询">
+                        <i class="icon-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div style='margin-bottom: 10px;'>
+            <table class="table table-bordered table-striped table-hover table-condensed">
+                <colgroup>
+                    <col width="15%"/>
+                    <col width="25%"/>
+                    <col width="35%"/>
+                    <col width="25%"/>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>
+                    </th>
+                    <th>
+                        客户名称
+                    </th>
+                    <th>
+                        电话号码
+                    </th>
+                    <th>
+                        所属人
+                    </th>
+                </tr>
+                </thead>
+                <tbody id="">
+                <!--<tr><td colspan="4" style="text-align: center;" class="text-info">请输入名称进行搜索</td></tr>-->
+                <tr><td><button type="button" class="btn btn-info btn-small ds_do_action" ds_attr="" ds_data="" ds_action="">选定</button></td><td>王小一</td><td>01056888833 4008888333 </td><td> service@333.com </td>
+                </tr>
+                <tr><td><button type="button" class="btn btn-info btn-small ds_do_action" ds_attr="" ds_data="" ds_action="">选定</button></td><td>王小一</td><td>01056888833 </td><td> service@333.com </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="pagination pagination-small" for="" ds_pagination_action="" style="width:100%;margin:0 3px;">
+                <span style="float:left;font-size:12px;margin-top:8px;">查询结果：<span class="result_count">0</span></span>
+                <ul id="" style="float:right;">
+                    <li>
+                        <a href="#" value="0">&laquo;</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="1">1</a>
+                    </li>
+                    <li>
+                        <a href="#" value="2">2</a>
+                    </li>
+                    <li>
+                        <a href="#" value="3">3</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="4">4</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="5">5</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="6">&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

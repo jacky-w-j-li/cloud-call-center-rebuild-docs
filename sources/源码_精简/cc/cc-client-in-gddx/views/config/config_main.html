@@ -1,0 +1,62 @@
+<link rel="stylesheet" type="text/css" href="./stylesheets/config.css?1101">
+<div class="right_container pd0">
+    <div class="tabbable">
+        <ul class="new-nav-tabs config_tab">
+            <li class="common_hide tab_company_identity active">
+                <a href="#view_company_identity" class="ds_do_action" ds_action="config.showTab" ds_data="company_identity" data-toggle="tab">账户信息</a>
+            </li>
+            <li class="common_hide tab_config_channel">
+                <a href="#view_config_channel" class="ds_do_action" ds_action="config.showTab" ds_data="config_channel" data-toggle="tab">渠道接入配置</a>
+            </li>
+            <li class="common_hide tab_dept_config">
+                <a href="#view_dept_config" class="ds_do_action" ds_action="config.showTab" ds_data="dept_config" data-toggle="tab">部门座席配置</a>
+            </li>
+            <!--<li class="common_hide tab_user_config">-->
+                <!--<a href="#view_user_config" class="ds_do_action" ds_action="config.showTab" ds_data="user_config" data-toggle="tab">座席配置</a>-->
+            <!--</li>-->
+            <li class="common_hide tab_customer_config">
+                <a href="#view_customer_main" class="ds_do_action" ds_action="config.showTab" ds_data="customer_main" data-toggle="tab">客户配置</a>
+            </li>
+            <li class="common_hide tab_task_config">
+                <a href="#view_task_config" class="ds_do_action" ds_action="config.showTab" ds_data="task_config" data-toggle="tab">业务配置</a>
+            </li>
+            <li class="common_hide tab_advanced_config">
+                <a href="#view_advanced_config" class="ds_do_action" ds_action="config.showTab" ds_data="advanced_config" data-toggle="tab">高级功能</a>
+            </li>
+            <li class="common_hide role_config" >
+                <a href="#view_role_config" class="ds_do_action" ds_action="config.showTab" ds_data="role_config" data-toggle="tab" >角色配置</a>
+            </li>
+            <li class="common_hide tab_call_sheet_leak" style="display: list-item">
+                <a href="#view_call_sheet_leak" class="ds_do_action" ds_action="cdr.showTab" ds_data="call_sheet_leak" data-toggle="tab" >分配未接来电</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="view_company_identity" class="tab-pane active"></div>
+            <div id="view_customer_main" class="tab-pane"></div>
+            <div id="view_task_config" class="tab-pane account_base"></div>
+            <div id="view_dept_config" class="tab-pane account_base"></div>
+            <!--<div id="view_user_config" class="tab-pane account_base"></div>-->
+            <div id="view_config_channel" class="tab-pane"></div>
+            <div id="view_mail_sign" class="tab-pane"></div>
+            <div id="view_advanced_config" class="tab-pane"></div>
+            <div id="view_role_config" class="tab-pane account_base"></div>
+            <div id="view_call_sheet_leak" class="tab-pane cdr_base"></div>
+        </div>
+    </div>
+</div>
+<script type='text/javascript'>
+    $(".common_hide").on('click',function(){
+        var pane = $('#import_list_questionnaire_import');
+        var list = pane.find('.list-inside');
+        var toolbarPane=$("#pane_deal_list");
+        list.removeClass("list_check_edit");
+        list.find(".item_row").removeClass("item_check_toggle").addClass("item_check ds_do_action");
+        list.find(".ico_select_checkbox").hide();
+        list.find(".list_item_check").removeClass("select_on");
+        pane.find(".cancel_edit").hide();
+        pane.find(".caption-top").show();
+        toolbarPane.hide();
+        pane.find(".cancel_edit .list_check_all").removeClass("select_on select_half");
+        toolbarPane.find(".list_check_all").removeClass("select_on select_half");
+    })
+</script>

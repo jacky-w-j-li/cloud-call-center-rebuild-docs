@@ -1,0 +1,70 @@
+<div class="row-fluid">
+    <h3>问卷模板配置</h3>
+</div>
+<div class="row-fluid">
+    <div class="row-fluid">
+        <div style="border:1px solid ;"></div>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span6">
+        <div class="row-fluid">
+            <form >
+                <div class="span2 text-left ">
+                    <div style="margin-top: 30px;">
+                        <i class="icon-refresh"></i>
+                        <a href="#" class=" option ds_form_action"
+                           ds_action="config.questionnaire.showConfigQuestionnaireDetail">刷新</a>
+                    </div>
+                </div>
+                <div class="span8">
+                    <div class="input-append" style="float:left; margin-top: 25px;">
+                        <!--<input name='query' type="text" placeholder="输入问题名称进行查询...">-->
+                        <input type='hidden' name='temp_id' value='__temp_id'>
+
+                        <!--<div class="btn-group">-->
+                            <!--<a href="#" class="btn ds_form_action"-->
+                               <!--ds_action="config.business.queryBusinessFlowField">查询</a>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+                <div class="span2" style="margin-top: 25px;">
+                    <a href="#" class="btn btn-primary ds_do_action"
+                       ds_action="config.questionnaire.showAddQuestion" ds_data="__temp_id">添加</a>
+                </div>
+            </form>
+        </div>
+        <div class="row-fluid item_list_container" id="config_questionnaire_ques_list">
+            <div class="row-fluid">
+                <h5>问题列表</h5>
+            </div>
+
+        </div>
+    </div>
+    <div class="span6" id="config_question_detail">
+
+    </div>
+</div>
+
+<style type="text/css">
+    .item_list_container {
+        background: #e3e3e3;
+        border-radius: 3px;;
+    }
+    .item_list_item{
+        padding: 6px 8px 4px;
+        background-color: #fff;
+        border-bottom: 1px solid #ccc;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-bottom: 5px;
+        width: 90%;
+        margin-left: 3%;
+        word-wrap: break-word;
+        word-break: break-all;
+    }
+    .item_list_item:hover{
+        background-color: #F0F0F0;
+        border-bottom-color: #cccccc;
+    }
+</style>

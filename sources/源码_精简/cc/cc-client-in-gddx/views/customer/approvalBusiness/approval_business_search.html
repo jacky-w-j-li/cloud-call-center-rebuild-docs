@@ -1,0 +1,81 @@
+<div class="advanced_body">
+    <form id="approval_business_list_advanced_form" class="ds_search_form">
+        <input type="hidden" name="isAdvanceSearch" value="1">
+        <fieldset>
+            <div class="row-fluid first_row">
+                <div class="span4 advanced_search_item ds_search_item">
+                    <label>客户名称</label>
+                    <input type="text" name="cname" class="query_field"/>
+                </div>
+                <div class="span4 advanced_search_item ds_search_item">
+                    <label>处理座席</label>
+                    <input name="owner" type="hidden" class="ds_search_item select_input" id="approval_agent_owner_select_input"  />
+                    <div id="approval_agent_owner_select_user" class="combobox_agent"></div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span4 advanced_search_item ds_search_item">
+                    <label>审核类型</label>
+                    <select class="business_type" name="apprType">
+                        <option value="" selected>--请选择--</option>
+                        <option value="2" >无效</option>
+                        <option value="4" >丢单</option>
+                        <option value="3" >成单</option>
+                        <option value="8" >续费</option>
+                    </select>
+                </div>
+                <div class="span4 advanced_search_item ds_search_item">
+                    <label>处理结果</label>
+                    <select class="business_status" name="status">
+                        <option value="" selected>--请选择--</option>
+                        <option value="0" >待审</option>
+                        <option value="1" >通过</option>
+                        <option value="2" >不通过</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span8 advanced_search_item ds_search_item">
+                    <label>创建时间</label>
+                    <input type="text" name="beginTime" class="query_field ds_datetime"/>
+                    <label style="width: 16px">至</label>
+                    <input type="text" name="endTime" class="query_field ds_datetime"/>
+                </div>
+            </div>
+            <div class="business_fields">
+            </div>
+            <div style="padding: 10px;">
+                <button type="button" class="btn btn-small btn-primary ds_form_action pull-right btn_advanced" ds_action="customer.approvalBusiness.approvalAdvancedSearch" >搜索</button>
+                <button type="button" class="btn btn-small  ds_do_action  pull-right" ds_action="customer.resetForm"  style="margin-right: 10px;">重置</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<script type="text/javascript">
+    var agents=getCache("agents");
+    var emptyAgents=[{_id:"empty",displayName:"无所属人",pinyin:"wusuoshuren",exten:''}];
+    emptyAgents=emptyAgents.concat(agents);
+    utils.loadSearchInput({ id: "approval_agent_owner_select_user",
+        width: "110",
+        height: "17",
+        tip: "按姓名、拼音搜索",
+        data: emptyAgents,
+        searchField: ["displayName","exten"],
+        pinyinField: ["displayName"],
+        listField: ["displayName"],
+        userIdField: "_id",
+        showField: "displayName",
+        showAllList: true,
+        callbackFuc: function (object) {
+            $("#approval_agent_owner_select_input").val(object._id);
+        },
+        onKeyChanged: function () {
+            if ($("#approval_agent_owner_select_user_input").val() != "") {
+                $("#approval_agent_owner_select_input").val("serachInputNoresult");
+            } else {
+                $("#approval_agent_owner_select_input").val("");
+            }
+        }
+    });
+</script>

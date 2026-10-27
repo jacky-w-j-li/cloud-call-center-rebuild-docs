@@ -1,0 +1,232 @@
+context N00000000143-10220-time {
+	_X. => {
+		ifTime(*|mon|*|*) {
+			goto N00000000143-10219-announcement,${FROM_DID},1;
+		}
+		ifTime(*|tue|*|*) {
+			goto N00000000143-10219-announcement,${FROM_DID},1;
+		}
+		ifTime(*|wed|*|*) {
+			goto N00000000143-10219-announcement,${FROM_DID},1;
+		}
+		ifTime(*|thu|*|*) {
+			goto N00000000143-10219-announcement,${FROM_DID},1;
+		}
+		ifTime(*|fri|*|*) {
+			goto N00000000143-10219-announcement,${FROM_DID},1;
+		}
+		ifTime(*|sat|*|*) {
+			goto N00000000143-10219-announcement,${FROM_DID},1;
+		}
+		ifTime(*|sun|*|*) {
+			goto N00000000143-10219-announcement,${FROM_DID},1;
+		}
+
+		Hangup;
+	}
+}
+
+
+context N00000000143-10207-time {
+	_X. => {
+		ifTime(*|mon|*|*) {
+			goto N00000000143-10206-announcement,${FROM_DID},1;
+		}
+		ifTime(*|tue|*|*) {
+			goto N00000000143-10206-announcement,${FROM_DID},1;
+		}
+		ifTime(*|wed|*|*) {
+			goto N00000000143-10206-announcement,${FROM_DID},1;
+		}
+		ifTime(*|thu|*|*) {
+			goto N00000000143-10206-announcement,${FROM_DID},1;
+		}
+		ifTime(*|fri|*|*) {
+			goto N00000000143-10206-announcement,${FROM_DID},1;
+		}
+		ifTime(*|sat|*|*) {
+			goto N00000000143-10206-announcement,${FROM_DID},1;
+		}
+		ifTime(*|sun|*|*) {
+			goto N00000000143-10206-announcement,${FROM_DID},1;
+		}
+
+		goto N00000000143-10052-time,${FROM_DID},1;
+	}
+}
+
+
+context N00000000143-10052-time {
+	_X. => {
+		ifTime(*|mon|*|*) {
+			goto N00000000143-10051-announcement,${FROM_DID},1;
+		}
+		ifTime(*|tue|*|*) {
+			goto N00000000143-10051-announcement,${FROM_DID},1;
+		}
+		ifTime(*|wed|*|*) {
+			goto N00000000143-10051-announcement,${FROM_DID},1;
+		}
+		ifTime(*|thu|*|*) {
+			goto N00000000143-10051-announcement,${FROM_DID},1;
+		}
+		ifTime(*|fri|*|*) {
+			goto N00000000143-10051-announcement,${FROM_DID},1;
+		}
+		ifTime(*|sat|*|*) {
+			goto N00000000143-10051-announcement,${FROM_DID},1;
+		}
+		ifTime(*|sun|*|*) {
+			goto N00000000143-10051-announcement,${FROM_DID},1;
+		}
+
+		Hangup;
+	}
+}
+
+
+context N00000000143-10205-time {
+	_X. => {
+		ifTime(*|mon|*|*) {
+			goto N00000000143-10204-announcement,${FROM_DID},1;
+		}
+		ifTime(*|tue|*|*) {
+			goto N00000000143-10204-announcement,${FROM_DID},1;
+		}
+		ifTime(*|wed|*|*) {
+			goto N00000000143-10204-announcement,${FROM_DID},1;
+		}
+		ifTime(*|thu|*|*) {
+			goto N00000000143-10204-announcement,${FROM_DID},1;
+		}
+		ifTime(*|fri|*|*) {
+			goto N00000000143-10204-announcement,${FROM_DID},1;
+		}
+		ifTime(*|sat|*|*) {
+			goto N00000000143-10204-announcement,${FROM_DID},1;
+		}
+		ifTime(*|sun|*|*) {
+			goto N00000000143-10204-announcement,${FROM_DID},1;
+		}
+
+		goto N00000000143-10207-time,${FROM_DID},1;
+	}
+}
+
+
+context N00000000143-10203-time {
+	_X. => {
+		ifTime(*|mon|*|*) {
+			goto N00000000143-10202-announcement,${FROM_DID},1;
+		}
+		ifTime(*|tue|*|*) {
+			goto N00000000143-10202-announcement,${FROM_DID},1;
+		}
+		ifTime(*|wed|*|*) {
+			goto N00000000143-10202-announcement,${FROM_DID},1;
+		}
+		ifTime(*|thu|*|*) {
+			goto N00000000143-10202-announcement,${FROM_DID},1;
+		}
+		ifTime(*|fri|*|*) {
+			goto N00000000143-10202-announcement,${FROM_DID},1;
+		}
+		ifTime(*|sat|*|*) {
+			goto N00000000143-10202-announcement,${FROM_DID},1;
+		}
+		ifTime(*|sun|*|*) {
+			goto N00000000143-10202-announcement,${FROM_DID},1;
+		}
+
+		goto N00000000143-10205-time,${FROM_DID},1;
+	}
+}
+
+
+context N00000000143-10201-time {
+	_X. => {
+		ifTime(*|mon|*|*) {
+			goto N00000000143-10200-announcement,${FROM_DID},1;
+		}
+		ifTime(*|tue|*|*) {
+			goto N00000000143-10200-announcement,${FROM_DID},1;
+		}
+		ifTime(*|wed|*|*) {
+			goto N00000000143-10200-announcement,${FROM_DID},1;
+		}
+		ifTime(*|thu|*|*) {
+			goto N00000000143-10200-announcement,${FROM_DID},1;
+		}
+		ifTime(*|fri|*|*) {
+			goto N00000000143-10200-announcement,${FROM_DID},1;
+		}
+		ifTime(*|sat|*|*) {
+			goto N00000000143-10200-announcement,${FROM_DID},1;
+		}
+		ifTime(*|sun|*|*) {
+			goto N00000000143-10200-announcement,${FROM_DID},1;
+		}
+
+		goto N00000000143-10203-time,${FROM_DID},1;
+	}
+}
+
+
+context N00000000143-10223-time {
+	_X. => {
+		ifTime(*|mon|*|*) {
+			goto N00000000143-10222-announcement,${FROM_DID},1;
+		}
+		ifTime(*|tue|*|*) {
+			goto N00000000143-10222-announcement,${FROM_DID},1;
+		}
+		ifTime(*|wed|*|*) {
+			goto N00000000143-10222-announcement,${FROM_DID},1;
+		}
+		ifTime(*|thu|*|*) {
+			goto N00000000143-10222-announcement,${FROM_DID},1;
+		}
+		ifTime(*|fri|*|*) {
+			goto N00000000143-10222-announcement,${FROM_DID},1;
+		}
+		ifTime(*|sat|*|*) {
+			goto N00000000143-10222-announcement,${FROM_DID},1;
+		}
+		ifTime(*|sun|*|*) {
+			goto N00000000143-10222-announcement,${FROM_DID},1;
+		}
+
+		Hangup;
+	}
+}
+
+
+context N00000000143-10199-time {
+	_X. => {
+		ifTime(*|mon|*|*) {
+			goto N00000000143-10198-announcement,${FROM_DID},1;
+		}
+		ifTime(*|tue|*|*) {
+			goto N00000000143-10198-announcement,${FROM_DID},1;
+		}
+		ifTime(*|wed|*|*) {
+			goto N00000000143-10198-announcement,${FROM_DID},1;
+		}
+		ifTime(*|thu|*|*) {
+			goto N00000000143-10198-announcement,${FROM_DID},1;
+		}
+		ifTime(*|fri|*|*) {
+			goto N00000000143-10198-announcement,${FROM_DID},1;
+		}
+		ifTime(*|sat|*|*) {
+			goto N00000000143-10198-announcement,${FROM_DID},1;
+		}
+		ifTime(*|sun|*|*) {
+			goto N00000000143-10198-announcement,${FROM_DID},1;
+		}
+
+		goto N00000000143-10201-time,${FROM_DID},1;
+	}
+}
+
+

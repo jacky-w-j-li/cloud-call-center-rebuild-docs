@@ -1,0 +1,11 @@
+context N00000000172-10021-blacklist {
+	18600030398 => goto N00000000172-10021-match-blacklist, 1, 1;
+	018600030398 => goto N00000000172-10021-match-blacklist, 1, 1;
+	_. => goto N00000000172-10020-time,${FROM_DID},1;
+	h => Hangup;
+}
+context N00000000172-10021-match-blacklist {
+	_. => Hangup;
+	h => Hangup;
+}
+

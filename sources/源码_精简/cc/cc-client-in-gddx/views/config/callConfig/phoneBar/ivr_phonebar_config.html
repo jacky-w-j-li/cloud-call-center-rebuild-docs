@@ -1,0 +1,58 @@
+<script>
+    $("#ivr_phonebar_query").keyup(function(){
+        if(event.keyCode == 13){
+            handler.ivr.searchPhonebar($("#ivr_phonebar_query").val());
+        }
+    });
+</script>
+<div class="row-fluid">
+		<div class="span5">
+			<!--<div class="row-fluid">-->
+		        <!--<div class="span7">-->
+                    <!--<input id="ivr_phonebar_query" name='query' type="text" placeholder="输入名称查询...">-->
+		        <!--</div>-->
+		    <!--</div>-->
+			<div style="height:1px;background-color:#EAEAEA;width:100%;margin:2px 0px 2px;">
+			</div>
+            <div id="phoneBarAccordion">
+                <!--<c5-itemlist id="phoneBarItemList" item-view="ivr/phoneBar/ivr_phonebar_item"-->
+                             <!--data-source="ivrPhoneBarConfig"></c5-itemlist>-->
+                <div class='ds-item-list' id="phoneBarItemList" item-view="config/callConfig/phoneBar/ivr_phonebar_item"
+                     data-source="ivrPhoneBarConfig"></div>
+            </div>
+			<div class="row-fluid">
+			    <div class="span2">
+			    	<br/><br/>
+                    <a class="action" appaction="ivr.refreshIvrCachce" appdata="manager.ivr.phoneBarConfig.queryPhoneBarConfig,ivrPhoneBarConfig,notNode" herf="#">
+                        <i class="icon-refresh"></i>刷新</a>
+			    </div>
+                <form id="phoneBarFrm">
+                    <input type="hidden" name="dataSource" value="ivrPhoneBarConfig">
+                    <input type="hidden" name="itemListID" value="phoneBarItemList">
+                </form>
+                <div class="row-fluid class_list">
+                    <div class="pagination" style="display:table; margin:0;width:100%;">
+                        <span class="result_info">查询结果：<span class="phoneBarItemList_result_count">10</span></span>
+                        <ul id="phoneBarItemList_index" style="float:right;">
+                            <!--<li><a href="#phoneBarFrm" appaction="ivr.paginationToChange" value="0">&laquo;</a></li>-->
+                            <!--<li><a href="#phoneBarFrm" appaction="ivr.paginationToChange" value="1">1</a></li>-->
+                            <!--<li><a href="#phoneBarFrm" appaction="ivr.paginationToChange" value="2">2</a></li>-->
+                            <!--<li><a href="#phoneBarFrm" appaction="ivr.paginationToChange" value="3">3</a></li>-->
+                            <!--<li><a href="#phoneBarFrm" appaction="ivr.paginationToChange" value="4">4</a></li>-->
+                            <!--<li><a href="#phoneBarFrm" appaction="ivr.paginationToChange" value="5">5</a></li>-->
+                            <!--<li><a href="#phoneBarFrm" appaction="ivr.paginationToChange" value="6">&raquo;</a></li>-->
+                            <li><a href="#" for="phoneBarFrm" class="pagination" ds_pagination_action="config.callConfig.paginationChanged" value="0">&raquo;</a></li>
+                            <li><a href="#" for="phoneBarFrm" class="pagination" ds_pagination_action="config.callConfig.paginationChanged" value="1">1</a></li>
+                            <li><a href="#" for="phoneBarFrm" class="pagination" ds_pagination_action="config.callConfig.paginationChanged" value="2">2</a></li>
+                            <li><a href="#" for="phoneBarFrm" class="pagination" ds_pagination_action="config.callConfig.paginationChanged" value="3">3</a></li>
+                            <li><a href="#" for="phoneBarFrm" class="pagination" ds_pagination_action="config.callConfig.paginationChanged" value="4">4</a></li>
+                            <li><a href="#" for="phoneBarFrm" class="pagination" ds_pagination_action="config.callConfig.paginationChanged" value="5">5</a></li>
+                            <li><a href="#" for="phoneBarFrm" class="pagination" ds_pagination_action="config.callConfig.paginationChanged" value="6">&raquo;</a></li>
+                        </ul>
+                    </div>
+                </div>
+			</div>
+		</div>
+		<div class="span7 sub-right" id="phoneBarConfig_detail">
+		</div>
+</div>

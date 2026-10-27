@@ -1,0 +1,53 @@
+<div>
+    <div class="alert alert-danger" style="display: none;"></div>
+    <div style="margin-bottom: 15px;">
+        <div>外呼余额：<span class="dialBalance"></span>元
+            <button type="button" class="btn btn-success btn-xs ds_do_action pay_telFee" ds_action="account.showDialBalance" ds_data="" style="margin-left: 15px;">充话费</button>
+        </div>
+        <div class="tel_fee"></div>
+    </div>
+    <div class="">
+        <ul  class="nav nav-tabs" role="tablist">
+            <li class="active"><a href="#sn_normal" role="tab" data-toggle="tab">服务号</a></li>
+            <li class=""><a href="#sn_400" role="tab" data-toggle="tab">400</a></li>
+            <button type="button" class="btn btn-success btn-sm ds_do_action" ds_action="account.selectServiceNo" style="margin: 5px 0 0 1px;">
+                <span class="glyphicon glyphicon-plus"></span> 选号</button>
+        </ul>
+        <div  class="tab-content">
+            <div class="tab-pane fade active in" id="sn_normal">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>号码</th>
+                        <th>类型</th>
+                        <th>单价</th>
+                        <th>状态</th>
+                        <!--<th>并发数</th>-->
+                        <th>到期时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="sn_normal_list">
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="sn_400">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>号码</th>
+                        <!--<th>绑定服务号</th>-->
+                        <th>月最低消费</th>
+                        <th>呼入资费</th>
+                        <th>余额</th>
+                        <!--<th>到期时间</th>-->
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="sn_400_list">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

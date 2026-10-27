@@ -1,0 +1,121 @@
+<script>
+    $("input[name='menuType']").each(function() {
+//        alert(this.id);
+        $(this).click(function(){
+            // alert($(this).attr("id"));
+            var this_id = $(this).attr("id");
+            if(this_id.indexOf('inner') != -1){
+                /*console.log('===');*/
+                $("#div_inner").attr('style','display: ');
+                $("#div_outer").attr('style','display: none');
+            }else{
+                $("#div_inner").attr('style','display: none');
+                $("#div_outer").attr('style','display: ');
+                $("#div_outer  input").attr("required","required");
+            }
+        });
+    });
+</script>
+<div class="row-fluid">
+    <div class="span12">
+        <form class="form-horizontal ds_item_edit" action="" client-data="session.ivrMap.ivr.ivr_node_ivr_menu"
+              on-complete="config.callConfig.node.ivrMenu.ivrMenuShowEdit">
+            <div id="confirm_del_pane"></div>
+            <input type="hidden" name="_id" value="___id">
+            <input type="hidden" name="Exten" value="__Exten">
+            <div class="row-fluid">
+                <div class="span6 offset1">
+                    <i class="icon-plus"></i>修改<b>IVR</b>菜单节点
+                </div>
+                <div class="span5 text-right pull-right">
+                    <a class="btn btn-info btn-blue ds_action_flow">
+                        <ds-form-action action="config.ivr.node.ivrMenu.updateIvrMenu" extra-data="config.callConfig.currentConfigData"
+                                        update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"ivr_node_ivr_menu"}}'/>
+                        <ds-get-view view="config/callConfig/node/ivrMenu/ivr_menu_list" panel="ivrMenuNodePanel"/>
+                        <ds-effect-ivr/>
+                        保存
+                    </a>
+                    <a class="btn btn-danger btn-gray ds_action_flow">
+                        <ds-form-action action="config.ivr.node.ivrMenu.deleteIvrMenu" extra-data="config.callConfig.currentConfigData"
+                                        update-client-data='{"method":"config.callConfig.updateClientData","arg":{"operation":"del","type":"ivr_node_ivr_menu"}}'/>
+                        <ds-get-view view="config/callConfig/node/ivrMenu/ivr_menu_list" panel="ivrMenuNodePanel"/>
+                        <ds-effect-ivr/>
+                        删除
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="row-fluid">
+                <div class="span8">
+                    <div class="control-group">
+                        <label class="control-label">
+                            菜单节点名称
+                        </label>
+                        <div class="controls">
+                            <input type="text" msgName="菜单节点名称" name="DisplayName" required/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            菜单节点类型
+                        </label>
+                        <div class="controls ds_ivr_menu_type" id="menuType">
+                            <input type="radio" name="menuType" id="radio_inner" value="inner"/> 转内部&nbsp;<b>IVR</b><br>
+                            <input type="radio" name="menuType" id="radio_outer" value="out"/> 转外部&nbsp;<b>IVR</b>
+                        </div>
+                    </div>
+                    <div class="control-group" id="div_inner">
+                        <label class="control-label">
+                            IVR转向
+                        </label>
+                        <div class="controls">
+                            <div id="nextPeerType" class="ds_ivr_to_peer_type" tag-name="NextPeerType" tag-value-key="NextPeerType">
+
+                            </div>
+                            <div id="nextPeer" class="ds_ivr_to_peer" tag-value-key="NextPeer">
+
+                            </div>
+                            <div class="ds_item_edit_param" NextPeerType="" NextPeer="" style="display:none">
+
+                            </div>
+                        </div><br>
+                        <div style="width:500px;">
+                            <label class="control-group">
+                                <b>注意事项:</b>
+                            </label>
+                            <h6 style="color:#0088CC;">
+                                转内部 <b>IVR</b> 验证，
+                                不会把来电与第三方系统接通，但是需要采集来电的输入信息，通过 <b>URL</b> 节点来调用第三方系统的接口。
+                                并且把采集的信息传递过去，然后把接口返回的结果显示给座席。<br>
+                                <br><b>配制方法:</b><br>
+                                1.&nbsp;&nbsp;&nbsp;在验证过程的这一系列节点中，必须有一个是为 “<b>URL</b> 节点”，
+                                在 <b>URL</b> 节点中取得的值赋给系统变量 “<b>VAL_OF_IVR_MENU</b>”，这样座席才能收到验证效果。<br>
+                                2.&nbsp;&nbsp;&nbsp;在这一系列节点的最后一定要配置一个自定义节点（作为最后一个节点），
+                                自定义节点的内容为：<b> s => { goto ivr-menu-end, s, 1; }</b>
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="control-group" id="div_outer">
+                        <label class="control-label">
+                            外部号码
+                        </label>
+                        <div class="controls">
+                            <input type="text" name="MenuOutNum"/>
+                        </div><br><br>
+                    <div style="width:500px;">
+                        <label class="control-group">
+                            <b>注意事项:</b><br>
+                        </label>
+                        <h6 style="color:#0088CC;">
+                            转外部 <b>IVR</b> 验证，会把来电与第三方系统接通。
+                            座席听音乐等待验证，当第三方系统挂机，将来电转回与座席继续通话。
+                            转外部 <b>IVR</b> 菜单，验证结束后不会返回给座席验证的结果。
+                        </h6>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

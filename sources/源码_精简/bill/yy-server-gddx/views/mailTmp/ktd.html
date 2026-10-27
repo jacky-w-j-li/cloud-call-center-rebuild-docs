@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>账号开通单</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<body>
+<table style="width:100%;max-width:800px;min-width:500px;margin: 20px auto 40px;padding: 0;font-family: 'Heiti SC Light','Heiti SC Medium','Microsoft YaHei', Helvetica, Arial, sans-serif;font-size: 12px;color:#818181" cellspacing="0" cellpadding="0" border="0">
+    <tbody cellpadding="20">
+    <tr>
+        <td colspan="3">
+            <img src="http://pic.kuaizhan.com/g2/M00/DD/DE/CgpQVFd12WOAKf8BAABrbiajuCE9923284" style="width:100%;">
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3" align="center">
+                    <span style="border:1px solid #CFF2D9;display:inline-block;width:80%;margin:20px auto 0;">
+                          <img src="http://pic.kuaizhan.com/g2/M00/DF/7F/wKjmqld10i6AeQHgAAARnLqq27U0790671" alt="" style="width:100px;margin-top:20px;"/>
+                         <h3 style="padding: 20px 0;text-align: center;font-size: 15px;">恭喜您已成功注册容联七陌帐号，下面是您的账号开通单：</h3>
+                    </span>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3" style="text-align:left;padding:20px 0;color:#48A791">
+            尊敬的 <span id="step3_company">#{companyName}</span> 您好
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3" style="text-align:left; color:#818181;padding-bottom:20px;line-height:1.8;">
+            感谢您使用容联七陌通信服务平台，您的满足是我们前进的最大动力，以下是您的云联络中心账号开通信息，如有其他问题请您联系您的客户经理或致电客服热线：<a style="color:#48A791;text-decoration:none" href="tel:4008-113-114">4008-113-114</a>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3" style="background:#E2FAF2;color:#475965;line-height: 30px;height: 30px;margin-bottom:12px;border-radius:2px;text-align:left;padding-left:10px;">
+            <i style="font-weight:bolder;">1.</i>账号及登录信息
+        </td>
+    </tr>
+    <tr style="text-align:left;line-height:2;">
+        <td style="font-weight: 600;padding:10px 0 0 1em">
+            登录用户名:
+        </td>
+        <td style="color:#48A791;padding-top:10px">
+            #{manager.user}
+        </td>
+        <td style="color:#48A791;padding-top:10px">
+            #{agents.user}
+        </td>
+    </tr>
+    <tr style="color:#818181;text-align:left;line-height:2;">
+        <td style="font-weight: 600;padding-left: 1em;">
+            密码:
+        </td>
+        <td>
+            #{manager.passWd}
+        </td>
+        <td>
+            #{agents.passWd}
+        </td>
+    </tr>
+    <tr style="color:#818181;text-align:left;line-height:2;">
+        <td style="font-weight: 600;padding-left: 1em;">
+            角色及权限:
+        </td>
+        <td>
+            管理员
+        </td>
+        <td>
+            普通座席
+        </td>
+    </tr>
+    <tr style="text-align:left;line-height:2;">
+        <td style="font-weight: 600;padding-left: 1em;">
+            客户名称:
+        </td>
+        <td colspan="2" style="color:#818181;">
+            #{companyName}
+        </td>
+    </tr>
+    <tr style="text-align:left;line-height:2;">
+        <td style="font-weight: 600;padding-left: 1em;">
+            系统接入服务号:
+        </td>
+        <td colspan="2" style="color:#818181;">
+            #{servcieNo}
+        </td>
+    </tr>
+    <tr style="text-align:left;line-height:2;">
+        <td style="font-weight: 600;padding:0 0 10px 1em">
+            账号登陆地址:
+        </td>
+        <td colspan="2" style="padding-bottom:10px">
+            <a href="#{loginUrl}" style="color:#48A791;">#{loginUrl}</a>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3" style="background:#E2FAF2;color:#475965;height:30px;line-height:30px;margin:20px 0;border-radius:2px;text-align:left;padding-left:10px;">
+            <i style="font-weight:bolder;">2.</i>权限说明
+        </td>
+    </tr>
+    <tr style="text-align:left;line-height:2;">
+        <td style="font-weight: 600;padding:10px 0 0 1em">
+            管理员座席权限:
+        </td>
+        <td colspan="2" style="color:#818181;padding-top:10px">
+            报表、监控、所有通话、所有客户、所有业务、多渠道接入
+        </td>
+    </tr>
+    <tr style="text-align:left;line-height:2;">
+        <td style="font-weight: 600;padding-left: 1em;">
+            普通座席权限:
+        </td>
+        <td colspan="2" style="color:#818181;">
+            我的客户资料、我的通话记录、我参与的业务流程、多渠道接入
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3">
+            <hr style="margin-top:30px;">
+        </td>
+    </tr>
+    <tr>
+        <td width="33%">
+            <a style="display:block;margin:30px auto 0px;font-size:1.4em;text-align:center;color:#797979;text-decoration:none" target="_blank" href="http://www.7moor.com/cloudservicer"><img src="http://pic.kuaizhan.com/g2/M00/DF/50/wKjmqld1yrOAcl1LAAAO7A8X2qM7464599"
+                                                                                                                                                                                              style="width:100px;margin-bottom:10px;"/><br>
+                云客服</a>
+        </td>
+        <td width="33%">
+            <a style="display:block;margin:30px auto 0px;font-size:1.4em;text-align:center;color:#797979;text-decoration:none" target="_blank" href="http://www.7moor.com/dianxiao"><img src="http://pic.kuaizhan.com/g2/M01/DD/9B/CgpQVFd1yrOAOZUcAAAP1-CAr6w2961783"
+                                                                                                                                                                                         style="width:100px;margin-bottom:10px;"/><br>
+                云电销</a>
+        </td>
+        <td width="34%">
+            <a style="display:block;margin:30px auto 0px;font-size:1.4em;text-align:center;color:#797979;text-decoration:none" target="_blank" href="http://www.7moor.com/ability"><img src="http://pic.kuaizhan.com/g2/M00/DD/9B/CgpQVFd1yrSAJT14AAAPGqxRaCw8543946"
+                                                                                                                                                                                        style="width:100px;margin-bottom:10px"/><br>
+                智能通讯</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

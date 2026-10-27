@@ -1,0 +1,348 @@
+<div class="email_container">
+    <div class="row-fluid">
+        <div class="span9">
+            <div class="email_chat_top clearfix" style="height: 34px;">
+                <div class="pull-right email_chat_transfer">
+                    <div class="email_chat_sort">
+                        <div class="ds_do_action img_action_turn email_sort unrequest" ds_action="email.showEmailMarkOptions" ds_data="_#_id#_" email="_#toemail#_">
+                            <span class="email_sort_text">未分类</span><span class="under_small_arrow"></span>
+                        </div>
+                        <ul class="email_sort_options"></ul>
+                    </div>
+                    <div class="email_chat_mark">
+                        <div class="ds_do_action img_action_turn email_mark" ds_action="email.showEmailMarkOptions"><span>标记为...</span><span class="under_small_arrow"></span></div>
+                        <ul class="email_mark_options">
+                            <li class="email_mark_first">
+                                <div class="email_mark_opt ds_do_action" ds_action="email.setEmailReadMark" ds_data="_#_id#_" mark="unread">未读邮件</div>
+                            </li>
+                            <li class="email_mark_opt ds_do_action" ds_action="email.setEmailStarMark" ds_data="_#_id#_" mark="mark">星标邮件</li>
+                            <li class="email_mark_opt ds_do_action" ds_action="email.setEmailStarMark" ds_data="_#_id#_" mark="unmark">取消星标</li>
+                        </ul>
+                    </div>
+                    <input id="combobox_email_owner" type="text"  style="float:left;display:none;width:125px;vertical-align:bottom;margin-right:5px;padding:3px 6px;" placeholder="按姓名,拼音,工号搜索">
+                    <span class="img_action_turn" id="combobox_email_owner_desc" uid="_#_id#_">转接</span>
+                    <button class="img_action_email_resolve ds_do_action" ds_action="email.resolveEmail" ds_data="_#_id#_">完成</button>
+                    <ul class="dropdown-menu">
+                    </ul>
+                </div>
+            </div>
+            <div class="email_chat_msg chat_msg_bottom" ds_attr="2" ds_time="">
+                <div class="msg_inner" id="email_msg_inner">
+
+                </div>
+            </div>
+            <form name="email_reply_form">
+                <div class="email_reply_form_data">
+                    <input type="hidden" name="sessionId" value="_#_id#_">
+                    <input type="hidden" name="shortId" value="_#shortId#_">
+                    <input type="hidden" name="to" value="__from.addr">
+                    <input type="hidden" name="toName" value="__from.name">
+                    <input type="hidden" name="from" value="__to.addr">
+                    <input type="hidden" name="fromName" value="__to.name">
+                    <input type="hidden" name="subject" value="_#subject#_">
+                    <input type="hidden" name="supportEmail" value="_#supportEmail#_">
+                    <input type="hidden" name="ccString" value="">
+                    <input type="hidden" name="lastMailId" value="">
+                    <input type="hidden" name="firstReplyTime" value="_#firstReplyTime#_">
+                    <input type="hidden" name="agentFirstReplyTime" value="_#agentFirstReplyTime#_">
+                </div>
+            <div class="email_chat_deal clearfix">
+                <div style="margin-bottom: 4px">
+                    <a href="javascript:;" class="ds_do_action btn_email_send_copy" ds_action="email.addEmailCopy" >添加抄送</a>
+                </div>
+                <div class="email_send_copy_box">
+                    <div class="email_custom_send_copy_box"></div>
+                    <input type="text" name="label" class="ds_focus_action email_send_copy ui-autocomplete-input" maxlength="30" focus_action="email.editEmailCopy" blur_action="email.saveEmailCopy" onkeypress=" if(event.keyCode==13) {blur()}" placeholder="填写抄送" autocomplete="off">
+                </div>
+
+                <textarea id="email_send_content" rows="2" class="span12" style="background: #fff;;resize: none; padding:1px 5px 4px 5px" name="content"></textarea>
+                <div class="progress_box clearfix">
+                    <!--<div class="progress attach progress-striped" style="width:200px;display: none;">-->
+                        <!--<div class="bar" style="width: 0%;"></div>-->
+                    <!--</div>-->
+                </div>
+
+                <div id="attachment_box" class="hidden clearfix">
+                </div>
+                <div class="clearfix" style="padding-top: 5px;">
+                    <a href="javascript:;" class=" pull-left" id="email_upload_attach_btn">添加附件</a>
+                    <div class="agent_information" title="座席姓名和工号将跟随邮件发送">
+                        <input class="" id="carry_agent_info" type="checkbox" checked="checked" name="carryAgentInfo"/>
+                        <label for="carry_agent_info" style="display: inline-block">座席信息</label>
+                    </div>
+                    <button type="button" class="btn-blue ds_form_action pull-right reply_email" ds_action="email.replyEmail" ds_data="" style="margin-left: 10px;">发送</button>
+                </div>
+
+            </div>
+            </form>
+        </div>
+        <div class="span3" style="overflow-y: auto;padding-right: 15px">
+            <div class="email_remark_box" style="padding: 10px 0 5px;">
+                <h5 class="email_detailed_work email_remark_info" title="_#subject#_">_#subject#_</h5>
+                <div class="email_detailed_name email_remark_info">客户：__from.name&lt__from.addr&gt</div>
+                <div class="email_consult_tab email_remark_info">
+                    <ul class="webchat_consult_explain">
+                        <li class="web_new_lis clearFloat custom_company_email"><i>所属企业客服邮箱：</i><span>__to.addr</span></li>
+                        <li class="web_new_lis clearFloat"><i>来往邮件数：</i><span>_#totalEmailNum#_</span></li>
+                        <li class="web_end_type clearFloat"><i>结束类型：</i><span>_#finishReason#_</span></li>
+                    </ul>
+                    <ul class="webchat_time_dialog">
+                        <li class="web_dialog_time clearFloat"><i>开始时间：</i><span>_#formatCreateTime#_</span></li>
+                        <li class="web_dialog_first clearFloat"><i>座席首次回复时间：</i><span>_#formatFirstReplyTime#_</span></li>
+                        <li class="web_dialog_end clearFloat" ><i>完成时间：</i><span>_#formatFinishTime#_</span></li>
+                        <li class="web_dialog_duration clearFloat"><i>持续时长：</i><span>_#formatEmailTimeLength#_</span></li>
+                    </ul>
+                </div>
+                <div class="email_remark_tit email_remark_info"><b>备注:</b><span class="ds_do_action" ds_action="email.editEmailComment" title="点击编辑备注"></span></div>
+                <div class="email_remark_text">_#remark#_</div>
+                <textarea rows="4" name="remark" class="emil_remark ds_focus_action" ds_data="_#_id#_"  blur_action="email.saveSessionRemark" style="resize: none;line-height:14px"></textarea>
+            </div>
+            <div class="email_detailed_box" style="overflow-y: auto;display: none">
+                <div class="email_quickreply_tab">
+                    <ul class="email_system_and_user clearFloat">
+                        <li class="li-quickreply ds_do_action active" ds_action="email.showReplyCustom" style="position: relative">自定义</li>
+                        <li class="li-quickreply ds_do_action" ds_action="email.showReplySystm">系统公用</li>
+                    </ul>
+                    <div class="email_quickreply_tab_system"></div>
+                    <div class="email_system_quickreply_lists"></div>
+                </div>
+            </div>
+
+        </div>
+        <script type="text/javascript">
+            $(function(){
+                var sid=session.id;
+                handler.email.emailEditor = null;
+                handler.email.emailEditor = KindEditor.create('#email_send_content', {
+                    width : '100%',
+                    height: '60px',
+                    wellFormatMode:false,
+                    basePath:"./third-lib/kindeditor/",
+                    resizeType : 1,
+                    allowPreviewEmoticons : false,
+                    allowImageUpload : true,
+//                    allowFileManager:true,
+                    zIndex : 809999,//作为一个标志
+                    uploadJson : './richUpload?action=uploadRichImage&sessionId='+sid+"&type=email_qiniu",
+//                fileManagerJson : '../js/kindeditor/jsp/file_manager_json.jsp',
+                    items : [
+                        'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                        '|', 'justifyleft', 'justifycenter', 'justifyright', '|','link', 'unlink','table','image','|', 'undo', 'redo','|', 'source','preview', 'fullscreen'],
+                    afterBlur: function(){this.sync()}
+                });
+            });
+        </script>
+    </div>
+</div>
+
+
+<script id="tmpl_email_msg_from" type="text/html">
+    <div class="email_from">
+        <div class="email_con_tit">
+            <span class="email_con_name">{{=sender}}</span>
+            <span class="email_con_time">{{=shortTime}}</span>
+        </div>
+        <div class="email_con_text">
+            <div class="email_content">
+                <span class="email_content_primary">{{=contentText}}</span>
+
+            </div>
+            <div class="email_content_hidden" style="display: none;">
+             {{=json}}
+            </div>
+            <div class="email_more_btn" style="text-align: right;">
+                {{
+                if(attachSize > 0){
+                }}
+                <div class="email_attachment_icon dropdown-toggle" data-toggle="dropdown">
+                    <span>附件: {{=attachSize}}</span>
+                </div>
+                <ul class="email_attachment_uls dropdown-menu">
+                    {{
+                    for(var i=0; i<attachment.length; i++){
+                    }}
+                    <li class="email_attachment_li"  title="{{=attachment[i].name}}"><a target="_blank" href="{{=attachment[i].url}}">{{=attachment[i].name}}</a></li>
+                    {{
+                    }
+                    }}
+
+                </ul>
+                {{
+                }
+                }}
+                <a href="javascript:;" class="email_more_btn ds_do_action" ds_action="email.showMoreText" forwarding="true">[详情]</a>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_email_msg_to" type="text/html">
+    <div class="email_send" ds_data = "{{=_id}}">
+        <div class="email_con_tit">
+            <span class="email_con_name">{{=sender}}</span>
+            <span class="email_con_time">{{=shortTime}}</span>
+        </div>
+        <div class="email_con_text">
+            <div class="email_content">
+                <span class="email_content_primary">{{=contentText}}</span>
+            </div>
+            <div class="email_content_hidden" style="display: none;">
+                {{=json}}
+            </div>
+            <div class="email_more_btn" style="text-align: right;">
+                {{
+                if(attachSize > 0){
+                }}
+                <div class="email_attachment_icon dropdown-toggle" data-toggle="dropdown">
+                    <span>附件: {{=attachSize}}</span>
+                </div>
+                <ul class="email_attachment_uls dropdown-menu">
+                    {{
+                    for(var i=0; i<attachment.length; i++){
+                    }}
+                    <li class="email_attachment_li"  title="{{=attachment[i].name}}"><a target="_blank" href="{{=attachment[i].url}}">{{=attachment[i].name}}</a></li>
+                    {{
+                    }
+                    }}
+                </ul>
+                {{
+                }
+                }}
+                <a href="javascript:;" class="email_more_btn ds_do_action" ds_action="email.showMoreText">[详情]</a>
+            </div>
+            <div class="mail_sending_state_outer hidden{{=status}}">
+                <div class="mail_sending_state {{=status}}">{{=statusDesc}}</div>
+            </div>
+
+        </div>
+    </div>
+</script>
+
+
+<script id="tmpl_km_attach" type="text/x-jquery-tmpl">
+    <div class="fujian pull-left clearfix" style="position:relative;padding: 0 6px 0 16px;;">
+        <div class="pull-left">
+            <a href="#" target="_blank" class="attachitem" ds_data="${fileId}" fileName="${trueName}">${trueName}</a>
+        </div>
+        <div class="pull-left ico-2 ds_do_action" style="cursor: pointer" ds_action="email.delFile" ds_data="${fileId}">
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_email_quickreply_list" type="text/html">
+    <div class="email_quickreply_container" style="overflow: auto;margin-top: 5px">
+        <div class="btn_edit_quickreply"><span class="webchat_quickreply ds_do_action" ds_action="email.editQuickReply">编辑</span></div>
+        <div class="muted email_quickreply_list" style=" line-height:20px;">
+            {{
+            if (quickreplys.length > 0){
+            }}
+            <ol style="list-style-type: disc; color:#0088cc;">
+                {{
+                var quickreplys = quickreplys||[];
+                for(var i=0; i <quickreplys.length ; i++){
+                                                   }}
+                <li class="webchat_reply_li" title="{{=quickreplys[i]}}">
+                    <div class="webchat_reply_li_con">{{=quickreplys[i]}}</div>
+                        <span class="webchat_reply_li_span">
+                            <i class="webchat_reply_li_send ds_do_action" ds_action="email.sendQuickReply" ds_data="{{=quickreplys[i]}}"></i>
+                            <i class="webchat_reply_li_edit ds_do_action" ds_action="email.editSystemQuickReply"></i>
+                        </span>
+                </li>
+                {{
+                }
+                }}
+            </ol>
+            {{
+            } else {
+            }}
+            您还没有设置快捷回复，赶快点击上方编辑图标“<img width="15px" height="15px" src="./img/client/customer/cust_edit.png"/>”添加属于您的快捷回复吧！
+            {{
+            }
+            }}
+
+        </div>
+        <div class="muted email_quickreply_edit" style="display: none;">
+            <form>
+                <fieldset>
+                    <div style="width:100%" class="email_quickreply_edit_container">
+                        <div style="margin-bottom:10px;text-align:left">
+                            <a href="#" class="quickreplyDic-plus ds_do_action" ds_action="email.addQuickReply">
+                                <i class="icon-plus"></i>
+                            </a>
+                        </div>
+                        {{
+                        var quickreplys = quickreplys||[];
+                        for(var i=0; i<quickreplys.length ; i++){
+                                                          }}
+                        <div class="quickreply_item" style="margin-bottom:10px;">
+                            <input type="text" style="width:80%;" name="quickreplys[]" placeholder=""
+                                   class="input_text row_first" msgname="快捷回复项" required=""
+                                   value="{{=quickreplys[i]}}">
+                            <a href="#" class="quickreplyDic-minus ds_do_action"
+                               ds_action="email.removeQuickReply">
+                                <i class="icon-minus"></i>
+                            </a>
+                        </div>
+                        {{
+                        }
+                        if(quickreplys.length<=0){
+                        }}
+                        <div class="quickreply_item" style="margin-bottom:10px;">
+                            <input type="text" style="width:80%;" name="quickreplys[]" placeholder=""
+                                   class="input_text row_first" msgname="快捷回复项" required="">
+                            <a href="#" class="quickreplyDic-minus ds_do_action"
+                               ds_action="email.removeQuickReply">
+                                <i class="icon-minus"></i>
+                            </a>
+                        </div>
+                        {{
+                        }
+                        }}
+                    </div>
+                    <button class="btn btn-small btn-primary ds_form_action" ds_action="email.saveQuickReply">保存
+                    </button>
+                    <button class="btn btn-small ds_do_action" ds_action="email.cancelEditQuickReply">
+                        取消
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_email_quickreply_edit" type="text/html">
+    <div class="quickreply_item" style="margin-bottom:10px;">
+        <input type="text" style="width:80%;"  name="quickreplys[]" placeholder="" class="input_text row_first" msgname="快捷回复项" required="" value="{{=content}}">
+        <a href="#" class="quickreplyDic-minus ds_do_action" ds_action="email.removeQuickReply">
+            <i class="icon-minus"></i>
+        </a>
+    </div>
+</script>
+
+<script id="tmpl_email_quickreply_systm" type="text/html">
+    <div class="system_quickreply_by_li" num="{{=numi}}">
+        <div id="{{=_id}}" class="system_quickreply_click clearFloat ds_do_action" ds_action="email.quickReplayShow">
+            <i class="system_quickreply_arrow"></i>
+            <span>{{=name}}</span>
+            <span class="system_quickreply_num">{{=count}}</span>
+        </div>
+        <ul class="system_quickreply_ul">
+            <input type="hidden" id=""/>
+        </ul>
+    </div>
+</script>
+
+<script>
+    $(document).click(function(e){
+        $('.email_mark_options').hide();
+        $('.email_sort_options').hide();
+    })
+    $(document).on("click", ".email_chat_mark", function (event) {
+        event.stopPropagation();
+        $('.email_sort_options').hide();
+    });
+    $(document).on("click", ".email_chat_sort", function (event) {
+        event.stopPropagation();
+        $('.email_mark_options').hide();
+    });
+</script>

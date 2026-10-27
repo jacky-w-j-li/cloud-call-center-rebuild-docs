@@ -1,0 +1,53 @@
+context N00000000056-route {
+	20000119 => goto N00000000056-dial,20000119, 1;
+	20000118 => goto N00000000056-dial,20000118, 1;
+	20000117 => goto N00000000056-dial,20000117, 1;
+	20000116 => goto N00000000056-dial,20000116, 1;
+	8005 => goto N00000000056-dialin,8005, 1;
+	20000115 => goto N00000000056-dial,20000115, 1;
+	20000114 => goto N00000000056-dial,20000114, 1;
+	8001 => goto N00000000056-dialin,8001, 1;
+	10014 => goto N00000000056-10014-announcement,${FROM_DID},1;
+	8007 => goto N00000000056-dialin,8007, 1;
+	10012 => goto N00000000056-10012-announcement,${FROM_DID},1;
+	10044 => goto N00000000056-10044-ExtensionPeer, s, 1;
+	10043 => goto N00000000056-10043-room,s,1;
+	10010 => goto N00000000056-10010-announcement,${FROM_DID},1;
+	10042 => goto N00000000056-10042-voicemail,s,1;
+	10041 => goto N00000000056-10041-dynamic-route,s,1;
+	10040 => goto N00000000056-10040-validate,s,1;
+	8004 => goto N00000000056-dialin,8004, 1;
+	01010004115 => goto 01010004115,${FROM_DID},1;
+	8002 => goto N00000000056-dialin,8002, 1;
+	2 => goto N00000000056-dialin, ${JOBNUM}, 1;
+	10039 => goto N00000000056-10039-ivr,${FROM_DID},1;
+	10038 => goto N00000000056-10038-textannouncement,s,1;
+	10037 => goto N00000000056-10037-callurl,s,1;
+	10036 => goto N00000000056-10036-assignment,s,1;
+	10003 => goto N00000000056-10003-blacklist,${FROM_CID},1;
+	10035 => goto N00000000056-10035-announcement,${FROM_DID},1;
+	10002 => goto N00000000056-10002-time,${FROM_DID},1;
+	10034 => goto N00000000056-10034-time,${FROM_DID},1;
+	10001 => goto N00000000056-10001-announcement,${FROM_DID},1;
+	10033 => goto N00000000056-10033-announcement,${FROM_DID},1;
+	10032 => goto N00000000056-10032-voicemail,s,1;
+	10031 => goto N00000000056-10031-assignment,s,1;
+	10030 => goto N00000000056-10030-validate,s,1;
+	10029 => goto N00000000056-10029-textannouncement,s,1;
+	10028 => goto N00000000056-10028-announcement,${FROM_DID},1;
+	10026 => goto N00000000056-10026-time,${FROM_DID},1;
+	10025 => goto N00000000056-10025-announcement,${FROM_DID},1;
+	20000121 => goto N00000000056-dial,20000121, 1;
+	20000120 => goto N00000000056-dial,20000120, 1;
+	10021 => goto N00000000056-10021-announcement,${FROM_DID},1;
+	10000020 => goto N00000000056-10000020-queue,10000020,1;
+	8003 => goto N00000000056-dialin,8003, 1;
+	8006 => goto N00000000056-dialin,8006, 1;
+	_XXXX => {
+		JOBNUM=${EXTEN};
+		goto N00000000056-dialin,${EXTEN},1;
+	}
+	_X.=> {
+		goto N00000000056-dial,${EXTEN},1;
+	}
+}

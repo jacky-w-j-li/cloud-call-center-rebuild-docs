@@ -1,0 +1,220 @@
+context N00000000143-10000145-queue {
+	_X. => {
+		if (${QUEUE_MEMBER_COUNT(10000145)} == 0){
+			Wait(1);
+			goto N00000000143-10000145-queue-empty-transfer, s, 1;
+		}
+		
+	    empty-loop:			
+		StopMonitor();
+		Set(RECFILENAME=${STRFTIME(${EPOCH},,%Y%m%d-%H%M%S)}_N00000000143_10000145_${FROM_CID}_${FROM_DID}_${EXTEN}_${UNIQUEID});
+		Set(MONITOR_FILENAME=${RECFILENAME});
+		Playback(sound/queue);
+		Set(DYNAMIC_FEATURES=key_tag);
+		Queue(10000145,t,,,120);
+		goto agentbusy,s,1;
+	}
+	
+	h => {
+		goto N00000000143-10000145-queue-hangup-transfer, s, 1;
+	}
+}
+
+context N00000000143-10000145-queue-hangup-transfer {
+	s => {
+		RETRY_TIME=0;
+		Wait(3);
+		Hangup;
+	}
+}
+
+context N00000000143-10000145-queue-empty-transfer {
+	s => {
+		goto agentbusy,s,1;
+	}	
+}
+
+context N00000000143-10000145-queue-wait-transfer{
+	_X => {
+		Hangup;
+	}
+}
+
+context N00000000143-10000235-queue {
+	_X. => {
+		if (${QUEUE_MEMBER_COUNT(10000235)} == 0){
+			Wait(1);
+			goto N00000000143-10000235-queue-empty-transfer, s, 1;
+		}
+		
+	    empty-loop:			
+		StopMonitor();
+		Set(RECFILENAME=${STRFTIME(${EPOCH},,%Y%m%d-%H%M%S)}_N00000000143_10000235_${FROM_CID}_${FROM_DID}_${EXTEN}_${UNIQUEID});
+		Set(MONITOR_FILENAME=${RECFILENAME});
+		Playback(sound/queue);
+		Set(DYNAMIC_FEATURES=key_tag);
+		Queue(10000235,t,,,120);
+		goto agentbusy,s,1;
+	}
+	
+	h => {
+		goto N00000000143-10000235-queue-hangup-transfer, s, 1;
+	}
+}
+
+context N00000000143-10000235-queue-hangup-transfer {
+	s => {
+		RETRY_TIME=0;
+		Wait(3);
+		goto N00000000143-10064-satisfaction,s,1;
+	}
+}
+
+context N00000000143-10000235-queue-empty-transfer {
+	s => {
+		goto agentbusy,s,1;
+	}	
+}
+
+context N00000000143-10000235-queue-wait-transfer{
+	_X => {
+		Hangup;
+	}
+}
+
+context N00000000143-10000151-queue {
+	_X. => {
+		if (${QUEUE_MEMBER_COUNT(10000151)} == 0){
+			Wait(1);
+			goto N00000000143-10000151-queue-empty-transfer, s, 1;
+		}
+		queueAssignable=1;
+		Agi(agi://127.0.0.1:7891/AgiCheckQueueAssignable?pbx=${HOST}&exten=10000151);
+		if(${queueAssignable}==0){
+			Wait(1);
+			goto N00000000143-10237-ivr,${FROM_DID},1;
+		}
+	    empty-loop:			
+		StopMonitor();
+		Set(RECFILENAME=${STRFTIME(${EPOCH},,%Y%m%d-%H%M%S)}_N00000000143_10000151_${FROM_CID}_${FROM_DID}_${EXTEN}_${UNIQUEID});
+		Set(MONITOR_FILENAME=${RECFILENAME});
+		Playback(sound/queue);
+		Set(DYNAMIC_FEATURES=key_tag);
+		Queue(10000151,t,,,120);
+		goto N00000000143-10237-ivr,${FROM_DID},1;
+	}
+	
+	h => {
+		goto N00000000143-10000151-queue-hangup-transfer, s, 1;
+	}
+}
+
+context N00000000143-10000151-queue-hangup-transfer {
+	s => {
+		RETRY_TIME=0;
+		Wait(3);
+		goto N00000000143-10237-ivr,${FROM_DID},1;
+	}
+}
+
+context N00000000143-10000151-queue-empty-transfer {
+	s => {
+		goto N00000000143-10237-ivr,${FROM_DID},1;
+	}	
+}
+
+context N00000000143-10000151-queue-wait-transfer{
+	_X => {
+		Hangup;
+	}
+}
+
+context N00000000143-10000124-queue {
+	_X. => {
+		if (${QUEUE_MEMBER_COUNT(10000124)} == 0){
+			Wait(1);
+			goto N00000000143-10000124-queue-empty-transfer, s, 1;
+		}
+		
+	    empty-loop:			
+		StopMonitor();
+		Set(RECFILENAME=${STRFTIME(${EPOCH},,%Y%m%d-%H%M%S)}_N00000000143_10000124_${FROM_CID}_${FROM_DID}_${EXTEN}_${UNIQUEID});
+		Set(MONITOR_FILENAME=${RECFILENAME});
+		Playback(sound/queue);
+		Set(DYNAMIC_FEATURES=key_tag);
+		Queue(10000124,t,,,120);
+		goto agentbusy,s,1;
+	}
+	
+	h => {
+		goto N00000000143-10000124-queue-hangup-transfer, s, 1;
+	}
+}
+
+context N00000000143-10000124-queue-hangup-transfer {
+	s => {
+		RETRY_TIME=0;
+		Wait(3);
+		goto N00000000143-investigate,s,1;
+	}
+}
+
+context N00000000143-10000124-queue-empty-transfer {
+	s => {
+		goto N00000000143-10087-ExtensionPeer, s, 1;
+	}	
+}
+
+context N00000000143-10000124-queue-wait-transfer{
+	_X => {
+		Hangup;
+	}
+}
+
+context N00000000143-10000197-queue {
+	_X. => {
+		if (${QUEUE_MEMBER_COUNT(10000197)} == 0){
+			Wait(1);
+			goto N00000000143-10000197-queue-empty-transfer, s, 1;
+		}
+		queueAssignable=1;
+		Agi(agi://127.0.0.1:7891/AgiCheckQueueAssignable?pbx=${HOST}&exten=10000197);
+		if(${queueAssignable}==0){
+			Wait(1);
+			goto N00000000143-10000235-queue,10000235,1;
+		}
+	    empty-loop:			
+		StopMonitor();
+		Set(RECFILENAME=${STRFTIME(${EPOCH},,%Y%m%d-%H%M%S)}_N00000000143_10000197_${FROM_CID}_${FROM_DID}_${EXTEN}_${UNIQUEID});
+		Set(MONITOR_FILENAME=${RECFILENAME});
+		Playback(sound/queue);
+		Set(DYNAMIC_FEATURES=key_tag);
+		Queue(10000197,t,,,35,agi://127.0.0.1:7891/agisayexten?pbx=${HOST});
+		goto N00000000143-10000235-queue,10000235,1;
+	}
+	
+	h => {
+		goto N00000000143-10000197-queue-hangup-transfer, s, 1;
+	}
+}
+
+context N00000000143-10000197-queue-hangup-transfer {
+	s => {
+		RETRY_TIME=0;
+		Wait(3);
+		goto N00000000143-investigate,s,1;
+	}
+}
+
+context N00000000143-10000197-queue-empty-transfer {
+	s => {
+		goto N00000000143-10000235-queue,10000235,1;
+	}	
+}
+
+context N00000000143-10000197-queue-wait-transfer{
+	_X => {
+		Hangup;
+	}
+}
+

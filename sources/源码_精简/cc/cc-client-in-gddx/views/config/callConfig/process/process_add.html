@@ -1,0 +1,216 @@
+<div class="row-fluid">
+    <div class="span5">
+        <div class="span12">
+            <form  id="frm_ivrProcess_add" class="form-horizontal">
+                <div class="row-fluid">
+                    <div class="span5">
+                        <i class="icon-plus"></i>添加IVR流程
+                    </div>
+                    <div class="pull-right">
+                        <a  class="btn btn-info btn-blue ds_form_action" ds_action="config.ivrProcess.saveIvrProcess">保存</a>
+                        <div class="btn-group">
+                            <a class="btn btn-info btn-blue dropdown-toggle" data-toggle="dropdown">
+                                新增节点
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="ds_action_flow">
+                                        <ds-get-view view="config/callConfig/node/announcement/announcement_add" source="ivrProcessAdd" panel="node_panel"/>
+                                        播放语音节点
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="ds_action_flow">
+                                        <ds-get-view view="config/callConfig/node/textAnnouncement/text_announcement_add" source="ivrProcessAdd" panel="node_panel"/>
+                                        播放文本节点
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="ds_action_flow">
+                                        <ds-get-view view="config/callConfig/node/ivr/ivr_add" source="ivrProcessAdd" panel="node_panel"/>
+                                        按键菜单节点
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="ds_action_flow">
+                                        <ds-get-view view="config/callConfig/node/validation/validation_add" source="ivrProcessAdd" panel="node_panel"/>
+                                        采集输入节点
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="ds_action_flow">
+                                        <ds-get-view view="config/callConfig/node/assignment/assignment_add" source="ivrProcessAdd" panel="node_panel"/>
+                                        赋值节点
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="ds_action_flow">
+                                        <ds-get-view view="config/callConfig/node/encryptMd5/encrypt_md5_add" source="ivrProcessAdd" panel="node_panel"/>
+                                        MD5加密节点
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="ds_action_flow">
+                                        <ds-get-view view="config/callConfig/node/route/route_add" source="ivrProcessAdd" panel="node_panel"/>
+                                        按变量路由节点
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="ds_action_flow">
+                                        <ds-get-view view="config/callConfig/node/callUrl/call_url_add" source="ivrProcessAdd" panel="node_panel"/>
+                                        CallUrl节点
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="ds_action_flow">
+                                        <ds-get-view view="config/callConfig/node/voiceMail/voice_mail_add" source="ivrProcessAdd" panel="node_panel"/>
+                                        留言节点
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="ds_action_flow">
+                                        <ds-get-view view="config/callConfig/node/room/room_add" source="ivrProcessAdd" panel="node_panel"/>
+                                        会议室节点
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="ds_action_flow">
+                                        <ds-get-view view="config/callConfig/node/satisfaction/satisfaction_add" source="ivrProcessAdd" panel="node_panel"/>
+                                        自定义满意度节点
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="ds_action_flow">
+                                        <ds-get-view view="config/callConfig/node/extensionPeer/extension_peer_add" source="ivrProcessAdd" panel="node_panel"/>
+                                        自定义节点
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="ds_action_flow">
+                                        <ds-get-view view="config/callConfig/node/superDialJobNum/superDialJobNum_add" source="ivrProcessAdd" panel="node_panel"/>
+                                        采集工号并拨打节点
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="ds_action_flow">
+                                        <ds-get-view view="config/callConfig/node/ivrMenu/ivr_menu_add" source="ivrProcessAdd" panel="node_panel"/>
+                                        转IVR菜单节点
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="btn btn-info btn-blue ds_do_action" ds_action="config.ivrProcess.clearFlowChart">放大</a>
+                        <a class="btn btn-info btn-blue ds_do_action" ds_action="config.ivrProcess.returnIvrProcessList">返回</a>
+                    </div>
+                </div>
+                <br/>
+                <br/>
+                <div class="row-fluid">
+                    <div class="control-group">
+                        <label class="control-label">
+                            流程名称
+                        </label>
+                        <div class="controls">
+                            <input type="text" msgName="流程名称" name="DisplayName" required/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            开始节点
+                        </label>
+                        <div class="controls">
+                            <div id="firstNodeType" class="ds_ivr_to_peer_type" tag-name="FirstNodeType" tag-value-key="FirstNodeType">
+
+                            </div>
+                            <div id="firstNode" class="ds_ivr_to_peer ds_change_action" tag-value-key="FirstNode" ds_action="config.ivrProcess.renderFlowChart">
+
+                            </div>
+                            <div class="ds_item_edit_param" firstNodeType="" firstNode="" style="display:none"></div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="mermaidholder" class="span12"></div>
+<!--
+        <div id="flowChartCode" style="display: none"></div>
+-->
+        <div id="virtualClick" style="display: none"></div>
+        <div class="alert alert-block span12" style="margin-top: 20px;">
+            <i class="fa fa-volume-up" aria-hidden="true"></i>：播放语音节点&nbsp;
+            <i class="fa fa-file-audio-o" aria-hidden="true"></i>：播放文本节点&nbsp;
+            <i class="fa fa-building-o" aria-hidden="true"></i>：按键菜单节点&nbsp;
+            <i class="fa fa-retweet" aria-hidden="true"></i>：采集输入节点&nbsp;<br/>
+            <i class="fa fa-files-o" aria-hidden="true"></i>：赋值节点&nbsp;
+            <i class="fa fa-shield" aria-hidden="true"></i>：MD5加密节点&nbsp;
+            <i class="fa fa-random" aria-hidden="true"></i>：按变量路由节点&nbsp;
+            <i class="fa fa-volume-control-phone" aria-hidden="true"></i>：CallUrl节点&nbsp;<br/>
+            <i class="fa fa-envelope-o" aria-hidden="true"></i>：留言节点&nbsp;
+            <i class="fa fa-home" aria-hidden="true"></i>：会议室节点&nbsp;
+            <i class="fa fa-heartbeat" aria-hidden="true"></i>：自定义满意度节点&nbsp;
+            <i class="fa fa-tags" aria-hidden="true"></i>：自定义节点&nbsp;<br/>
+            <i class="fa fa-phone" aria-hidden="true"></i>：采集工号并拨打节点&nbsp;
+            <i class="fa fa-deaf" aria-hidden="true"></i>：转IVR菜单节点&nbsp;
+            <i class="fa fa-lock" aria-hidden="true"></i>：系统节点-挂机&nbsp;<br/>
+            <i class="fa fa-heart" aria-hidden="true"></i>：系统节点-满意度调查&nbsp;
+            <i class="fa fa-phone" aria-hidden="true"></i>：系统节点-拨打工号&nbsp;
+            <i class="fa fa-users" aria-hidden="true"></i>：技能组&nbsp;
+            <i class="fa fa-user" aria-hidden="true"></i>：座席&nbsp;
+        </div>
+    </div>
+    <div class="span7 sub-right" id="node_panel">
+    </div>
+</div>
+<div id="process_modal"></div>
+<style type="text/css">
+    .label-important,
+.badge-important {
+  background-color: #b94a48;
+}
+
+.label-important[href],
+.badge-important[href] {
+  background-color: #953b39;
+}
+
+.label-warning,
+.badge-warning {
+  background-color: #f89406;
+}
+
+.label-warning[href],
+.badge-warning[href] {
+  background-color: #c67605;
+}
+
+.label-success,
+.badge-success {
+  background-color: #468847;
+}
+
+.label-success[href],
+.badge-success[href] {
+  background-color: #356635;
+}
+
+.label-info,
+.badge-info {
+  background-color: #3a87ad;
+}
+
+.label-info[href],
+.badge-info[href] {
+  background-color: #2d6987;
+}
+
+.label-inverse,
+.badge-inverse {
+  background-color: #333333;
+}
+
+.label-inverse[href],
+.badge-inverse[href] {
+  background-color: #1a1a1a;
+}
+</style>

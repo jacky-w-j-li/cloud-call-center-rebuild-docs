@@ -1,0 +1,5 @@
+context N00000000056-10044-ExtensionPeer {
+	s => {
+		Hangup;
+	}
+}

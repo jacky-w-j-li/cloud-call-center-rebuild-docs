@@ -1,0 +1,79 @@
+    <form class="form-horizontal" id="frm_agent_update">
+        <input type="hidden" name="_id" value="_#_id#_">
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                姓名
+            </label>
+            <div class="col-md-5">
+                <input type="text" name="displayName" value='_#displayName#_' class="form-control input-sm" required/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                分机号
+            </label>
+            <div class="col-md-5">
+                <input type="text" name="exten" value='_#exten#_' class="form-control input-sm digits" required/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                密码
+            </label>
+            <div class="col-md-5">
+                <input type="text" name="password" value='_#password#_' class="form-control input-sm" required/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                直线号码
+            </label>
+            <div class="col-md-5">
+                <input type="text" name="mobile" value='_#mobile#_' class="form-control input-sm phone"/>
+                <!--<span class="label label-danger">[温馨提示]若直线号码是非北京的手机号，请在前面加0</span>-->
+                <p class="help-block" style="color:#d9534f;">若直线号码是非北京的手机号，请在前面加0</p>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                外显号码
+            </label>
+            <div class="col-md-5">
+                <select name="callerIDNum" class="form-control input-sm callerIDNum">
+                </select>
+                <p class="help-block" style="">去电时客户看到的号码</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                邮箱
+            </label>
+            <div class="col-md-5">
+                <input type="text" name="email" value='_#email#_' class="form-control input-sm email"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                是否管理员
+            </label>
+            <div class="col-md-5">
+                <select name="isAdmin" class="form-control input-sm">
+                    <option value="false">否</option>
+                    <option value="true">是</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group" id="isopenrecord">
+            <label class="control-label col-md-4">
+                是否开启录音
+            </label>
+            <div class="col-md-5">
+                <select name="isRecord" class="form-control input-sm">
+                    <option value="false">否</option>
+                    <option value="true">是</option>
+                </select>
+            </div>
+        </div>
+    </form>

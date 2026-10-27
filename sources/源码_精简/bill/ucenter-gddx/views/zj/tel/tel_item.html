@@ -1,0 +1,143 @@
+<div class="" style="margin: 10px 15px;">
+    <input type="hidden" name="_id" value=""/>
+    <div class="row">
+        <span>客服热线号码：</span><h4 id="tel_service_no_label" style="display: inline"></h4>
+        <!--<button type="button" class="btn btn-info btn-xs ds_do_action" ds_action="tel.show400" style="margin-left: 10px;">申请400号码</button>-->
+    </div>
+    <div class="row" style="margin-top:10px;">
+        <span>上班时间：</span><span>星期</span>
+        <span id="tel_week">
+        </span>
+        <span style="margin-left: 20px;">时间：</span><span id="tel_startTime" style="font-weight: bold">09:00</span>
+        <span> - </span><span id="tel_endTime" style="font-weight: bold">18:00</span>
+        <a class="btn btn-link ds_do_action" ds_action="tel.showEditTimeModal" ds_data="" style="color: #aaaaaa;" data-toggle="modal" data-target="#tel_timeModal">修改</a>
+        <div class="modal fade" id="tel_timeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">设置上班时间</h4>
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary ds_do_action" ds_action="tel.editTime" ds_data="">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top:10px;">
+        <span>欢迎语音：</span><label id="w_music_name">默认语音</label>
+        <button ds_action="tel.playW"  type="button" class="btn btn-default ds_do_action">
+            <span class="glyphicon glyphicon glyphicon-play"></span>
+        </button>
+        <div class="modal fade" id="play_w" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">欢迎语音</h4>
+                    </div>
+                    <div id="w_audio_control" class="modal-body">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#uploadWModal" data-toggle="modal" ds_action="tel.editWMusic" class="ds_do_action" ds_data="">变更语音</a>
+        <a href="#" data-toggle="modal" ds_action="tel.downLoadWMusic" class="ds_do_action" ds_data="">下载语音</a>
+        <div id="uploadWModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+        </div>
+    </div>
+    <div class="row" style="margin-top:10px;">
+        <span>下班语音：</span><label id="ow_music_name">默认语音</label>
+        <button ds_action="tel.playOW" type="button" class="btn btn-default ds_do_action">
+            <span class="glyphicon glyphicon glyphicon-play"></span>
+        </button>
+        <div class="modal fade" id="play_ow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">欢迎语音</h4>
+                    </div>
+                    <div id="ow_audio_control" class="modal-body">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#uploadOWModal" data-toggle="modal" ds_action="tel.editOWMusic" class="ds_do_action" ds_data="">变更语音</a>
+        <a href="#" data-toggle="modal" ds_action="tel.downLoadOWMusic" class="ds_do_action" ds_data="">下载语音</a>
+        <div id="uploadOWModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+        </div>
+    </div>
+    <div class="row" style="margin-top:10px;">
+        <span>上班期间电话流程：</span>
+        <select id="tel_ivr" type="text" style="width:110px;">
+            <option value="0">企业总机</option>
+            <option value="1">客服热线</option>
+        </select>
+    </div>
+    <div id="tel_agent_set_div" class="row hide" style="margin-top:10px;">
+        <span>前台：</span>
+        <span id="tel_agent_span"></span>
+        <a class="btn btn-link ds_do_action" ds_data="" ds_action="tel.showAgentModal" style="color: #aaaaaa;" data-toggle="modal" data-target="#tel_agentModal">修改</a>
+        <div class="modal fade" id="tel_agentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">选择前台</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="tel_agentForm">
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary ds_do_action" ds_action="tel.setAgent" ds_data="">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="tel_serviceAgent_set_div" class="row hide" style="margin-top:10px;">
+        <span>客服：</span>
+        <span id="tel_serviceAgent_span"></span>
+        <a class="btn btn-link ds_do_action" ds_action="tel.showServiceAgentModal" ds_data="" style="color: #aaaaaa;" data-toggle="modal" data-target="#tel_serviceAgentModal">修改</a>
+        <div class="modal fade" id="tel_serviceAgentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">选择客服人员</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="tel_serviceAgentForm">
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary ds_do_action" ds_action="tel.setServiceAgent" ds_data="">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#tel_ivr').change(function(e){
+            handler.tel.changeIvr();
+        });
+    });
+</script>

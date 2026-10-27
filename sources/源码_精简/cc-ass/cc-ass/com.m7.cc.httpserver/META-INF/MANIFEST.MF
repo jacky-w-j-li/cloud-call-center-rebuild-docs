@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Httpserver Plug-in
+Bundle-SymbolicName: com.m7.cc.httpserver
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.m7.cc.httpserver.Activator
+Bundle-Vendor: HOLLYCRM
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.osgi.framework;version="1.3.0"
+Export-Package: cc.net.httpserver,
+ com.cc.net.httpserver,
+ com.cc.net.httpserver.spi

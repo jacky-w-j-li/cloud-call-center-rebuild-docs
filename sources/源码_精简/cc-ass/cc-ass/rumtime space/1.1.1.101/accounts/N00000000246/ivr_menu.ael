@@ -1,0 +1,7 @@
+context N00000000246-10013-ivr-menu {
+	s => {
+		goto N00000000246-dialin, ${JOBNUM}, 1;
+	}
+}
+
+

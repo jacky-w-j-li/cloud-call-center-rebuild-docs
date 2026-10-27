@@ -1,0 +1,47 @@
+context N00000000252-10000141-queue {
+	_X. => {
+		if (${QUEUE_MEMBER_COUNT(10000141)} == 0){
+			Wait(1);
+			goto N00000000252-10000141-queue-empty-transfer, s, 1;
+		}
+		queueAssignable=1;
+		Agi(agi://127.0.0.1:7891/AgiCheckQueueAssignable?pbx=${HOST}&exten=10000141);
+		if(${queueAssignable}==0){
+			Wait(1);
+			goto agentbusy,s,1;
+		}
+	    empty-loop:			
+		StopMonitor();
+		Set(RECFILENAME=${STRFTIME(${EPOCH},,%Y%m%d-%H%M%S)}_N00000000252_10000141_${FROM_CID}_${FROM_DID}_${EXTEN}_${UNIQUEID});
+		Set(MONITOR_FILENAME=${RECFILENAME});
+		Playback(sound/queue);
+		Set(DYNAMIC_FEATURES=key_tag);
+		Queue(10000141,t,,,120,agi://127.0.0.1:7891/agisayexten?pbx=${HOST});
+		goto agentbusy,s,1;
+	}
+	
+	h => {
+		goto N00000000252-10000141-queue-hangup-transfer, s, 1;
+	}
+}
+
+context N00000000252-10000141-queue-hangup-transfer {
+	s => {
+		RETRY_TIME=0;
+		Wait(3);
+		Hangup;
+	}
+}
+
+context N00000000252-10000141-queue-empty-transfer {
+	s => {
+		goto agentbusy,s,1;
+	}	
+}
+
+context N00000000252-10000141-queue-wait-transfer{
+	_X => {
+		Hangup;
+	}
+}
+

@@ -1,0 +1,42 @@
+context N00000000243-10000134-queue {
+	_X. => {
+		if (${QUEUE_MEMBER_COUNT(10000134)} == 0){
+			Wait(1);
+			goto N00000000243-10000134-queue-empty-transfer, s, 1;
+		}
+		
+	    empty-loop:			
+		StopMonitor();
+		Set(RECFILENAME=${STRFTIME(${EPOCH},,%Y%m%d-%H%M%S)}_N00000000243_10000134_${FROM_CID}_${FROM_DID}_${EXTEN}_${UNIQUEID});
+		Set(MONITOR_FILENAME=${RECFILENAME});
+		Playback(sound/queue);
+		Set(DYNAMIC_FEATURES=key_tag);
+		Queue(10000134,t,,,120);
+		goto agentbusy,s,1;
+	}
+	
+	h => {
+		goto N00000000243-10000134-queue-hangup-transfer, s, 1;
+	}
+}
+
+context N00000000243-10000134-queue-hangup-transfer {
+	s => {
+		RETRY_TIME=0;
+		Wait(3);
+		Hangup;
+	}
+}
+
+context N00000000243-10000134-queue-empty-transfer {
+	s => {
+		goto agentbusy,s,1;
+	}	
+}
+
+context N00000000243-10000134-queue-wait-transfer{
+	_X => {
+		Hangup;
+	}
+}
+

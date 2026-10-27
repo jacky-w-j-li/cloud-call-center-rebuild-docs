@@ -1,0 +1,47 @@
+<form class="form-inline">
+    <div>
+        <input class="smsInput" type="text" name="num" placeholder="输入号码">
+        <input class="smsInput_hidden" type="hidden" name="hiddenNum">
+        <input class="smsSendType" type="hidden" name="sendType" value="template">
+        <input class="templateSign" type="hidden" name="templateSign">
+        <div class="clear10"></div>
+        <div class="tabbable">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#smsSendTemplatePane" data-toggle="tab" onclick="handler.sms.choiceSendType('template')">模板发送</a>
+                <!--<li><a href="#smsSendManualPane" data-toggle="tab" onclick="handler.sms.choiceSendType('manual')">人工审核&nbsp;<i class="icon-question-sign sms_manual_tip"></i></a></li>-->
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="smsSendTemplatePane">
+                    <select class="smsTemplate" name="template" onchange="handler.sms.changeSmsTemplate(this.value)">
+                    </select>
+                    <div>
+                        <div id="smsContentPane">
+                        </div>
+                        <div id="smsVarsListPane">
+                        </div>
+                        <div id="smsTemplateSign"></div>
+                        <p class="smsTemplateTitle" style="text-align: right"></p>
+                    </div>
+                </div>
+                <!--<div class="tab-pane" id="smsSendManualPane">-->
+                    <!--<label>内容</label>-->
+                    <!--<textarea class="smsContent" style="resize:none" rows="4" name="content" onkeyup="javascript:handler.sms.changeSmsText(this)"></textarea>-->
+                    <!--<p class="smsTitle" style="text-align: right"></p>-->
+                    <!--<div class="clear10"></div>-->
+                    <!--<select class="smsSign" name="sign">-->
+                    <!--</select>-->
+                <!--</div>-->
+            </div>
+        </div>
+        <div class="clear10"></div>
+        <span style="display:block;text-align:right">
+            <label>发送后关闭窗口</label>
+            <input type="checkbox" class="smsAfterClose" name="smsAfterClose" onchange="handler.sms.changeSmsAfterClose(this)">
+        </span>
+        <div>
+            <a href="#" class="button ds_form_action" ds_action="sms.sendSms">发送</a>
+            <a href="#" class="button ds_do_action" ds_action="sms.resetSms" ds_data="send">重置</a>
+            <a href="#" class="button ds_do_action" ds_action="sms.closeSms">关闭</a>
+        </div>
+    </div>
+</form>

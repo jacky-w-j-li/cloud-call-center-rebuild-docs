@@ -1,0 +1,13 @@
+context N00000000267-route {
+	2 => goto N00000000267-dialin, ${JOBNUM}, 1;
+	8000 => goto N00000000267-dialin,8000, 1;
+	20001864 => goto N00000000267-dial,20001864, 1;
+	20001863 => goto N00000000267-dial,20001863, 1;
+	_XXXX => {
+		JOBNUM=${EXTEN};
+		goto N00000000267-dialin,${EXTEN},1;
+	}
+	_X.=> {
+		goto N00000000267-dial,${EXTEN},1;
+	}
+}

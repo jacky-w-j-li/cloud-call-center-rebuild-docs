@@ -1,0 +1,10 @@
+context N00000000056-10043-room {
+	s => {
+		
+		Playback(sound/conferencesuccess);
+		MeetMe(N0000000005610043,1dMsT);
+		Hangup();
+	}
+}
+
+

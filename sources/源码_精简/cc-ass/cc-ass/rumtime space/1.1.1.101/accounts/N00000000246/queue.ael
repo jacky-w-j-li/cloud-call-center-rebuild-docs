@@ -1,0 +1,126 @@
+context N00000000246-10000147-queue {
+	_X. => {
+		if (${QUEUE_MEMBER_COUNT(10000147)} == 0){
+			Wait(1);
+			goto N00000000246-10000147-queue-empty-transfer, s, 1;
+		}
+		
+	    empty-loop:			
+		StopMonitor();
+		Set(RECFILENAME=${STRFTIME(${EPOCH},,%Y%m%d-%H%M%S)}_N00000000246_10000147_${FROM_CID}_${FROM_DID}_${EXTEN}_${UNIQUEID});
+		Set(MONITOR_FILENAME=${RECFILENAME});
+		Playback(sound/queue);
+		Set(DYNAMIC_FEATURES=key_tag);
+		Queue(10000147,t,,,120);
+		goto agentbusy,s,1;
+	}
+	
+	h => {
+		goto N00000000246-10000147-queue-hangup-transfer, s, 1;
+	}
+}
+
+context N00000000246-10000147-queue-hangup-transfer {
+	s => {
+		RETRY_TIME=0;
+		Wait(3);
+		Hangup;
+	}
+}
+
+context N00000000246-10000147-queue-empty-transfer {
+	s => {
+		goto agentbusy,s,1;
+	}	
+}
+
+context N00000000246-10000147-queue-wait-transfer{
+	_X => {
+		Hangup;
+	}
+}
+
+context N00000000246-10000137-queue {
+	_X. => {
+		if (${QUEUE_MEMBER_COUNT(10000137)} == 0){
+			Wait(1);
+			goto N00000000246-10000137-queue-empty-transfer, s, 1;
+		}
+		
+	    empty-loop:			
+		StopMonitor();
+		Set(RECFILENAME=${STRFTIME(${EPOCH},,%Y%m%d-%H%M%S)}_N00000000246_10000137_${FROM_CID}_${FROM_DID}_${EXTEN}_${UNIQUEID});
+		Set(MONITOR_FILENAME=${RECFILENAME});
+		Playback(sound/queue);
+		Set(DYNAMIC_FEATURES=key_tag);
+		Queue(10000137,t,,,120,agi://127.0.0.1:7891/agisayexten?pbx=${HOST});
+		goto agentbusy,s,1;
+	}
+	
+	h => {
+		goto N00000000246-10000137-queue-hangup-transfer, s, 1;
+	}
+}
+
+context N00000000246-10000137-queue-hangup-transfer {
+	s => {
+		RETRY_TIME=0;
+		Wait(3);
+		goto N00000000246-10021-satisfaction,s,1;
+	}
+}
+
+context N00000000246-10000137-queue-empty-transfer {
+	s => {
+		goto N00000000246-10009-voicemail,s,1;
+	}	
+}
+
+context N00000000246-10000137-queue-wait-transfer{
+	_X => {
+		goto N00000000246-10004-announcement,${FROM_DID},1;
+	}
+}
+
+context N00000000246-10000148-queue {
+	_X. => {
+		if (${QUEUE_MEMBER_COUNT(10000148)} == 0){
+			Wait(1);
+			goto N00000000246-10000148-queue-empty-transfer, s, 1;
+		}
+		
+	    empty-loop:			
+		StopMonitor();
+		Set(RECFILENAME=${STRFTIME(${EPOCH},,%Y%m%d-%H%M%S)}_N00000000246_10000148_${FROM_CID}_${FROM_DID}_${EXTEN}_${UNIQUEID});
+		Set(MONITOR_FILENAME=${RECFILENAME});
+		Playback(sound/queue);
+		Set(DYNAMIC_FEATURES=key_tag);
+		Queue(10000148,t,,,120);
+		goto agentbusy,s,1;
+	}
+	
+	h => {
+		goto N00000000246-10000148-queue-hangup-transfer, s, 1;
+	}
+}
+
+context N00000000246-10000148-queue-hangup-transfer {
+	s => {
+		RETRY_TIME=0;
+		Wait(3);
+		Hangup;
+	}
+}
+
+context N00000000246-10000148-queue-empty-transfer {
+	s => {
+		goto agentbusy,s,1;
+	}	
+}
+
+context N00000000246-10000148-queue-wait-transfer{
+	_X => {
+		Hangup;
+	}
+}
+

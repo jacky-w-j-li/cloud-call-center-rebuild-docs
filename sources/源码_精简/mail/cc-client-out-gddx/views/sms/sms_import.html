@@ -1,0 +1,210 @@
+<div class="left_column  list_check_pane"  id="contact_list_sms" ds_menu="_#menu#_" >
+    <div class='contacts_caption'>
+        <div class="cancel_edit" style="">
+            <div class="list_check_all" style="cursor: pointer;" >
+                <b class="ico_select_checkbox ico ico_wrap" style="top:10px;left:5px;"></b>
+            </div>
+            <div style="display: inline-block;margin-left: 30px;font-weight: bold;">
+                已选
+                    <span class="bottom_toolbar_selsize_num">
+                        0
+                    </span>
+                项
+            </div>
+        <span class="pull-right">
+            <a href="#" class="ds_do_action" ds_action="cancelDealToolbar" ds_data="sms">取消</a>
+        </span>
+        </div>
+        <div class="caption-top clearfix">
+            <div class="search_condition" style="display:none;"></div>
+            <div class="header_wrap clearfix">
+                <form id="frm_sms_normal_search">
+                    <span class="refresh ds_form_action" style="display: none;" ds_action="sms.searchSmsCard"></span>
+                    <div class="header_search_wrap pull-left quick_search" style="width: 88%;">
+                        <div class="header_search_button ds_form_action  normal_search" ds_action="sms.searchSmsCard" ds_data="_#menu#_">
+                            <i class="icon-search"></i>
+                        </div>
+                        <div class="header_search_input">
+                            <div class="header_search_input_textbox">
+                                <div class="textbox_wrap" style="margin-left: 0;">
+                                    <div class="textbox_inner">
+                                        <input type="text" name="num" class="textbox_input" maxlength="254" placeholder="输入号码查询">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text_link header_search_advanced btn_advanced_search">
+                            高级搜索
+                        </div>
+                    </div>
+                </form>
+                <div class="header_func_plus pull-right">
+                    <ul class="nav nav-pills" style="margin-bottom:0;">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="padding: 5px 11px;">
+                                <span class="nav_title">
+                                    <b class="ico ico_middle ico_func_plus">
+                                    </b>
+                                </span>
+                            </a>
+
+                            <ul class="dropdown-menu menu_list pull-right">
+                                <li><a href="#" class="ds_do_action" ds_action="sms.showSendGroup" ds_data="">群发</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ds_search_filter" style="display: none;">
+            </div>
+        </div>
+
+    </div>
+    <div tabindex="-1" class="advanced_search_pane hidden" >
+        <div class="advanced_body">
+            <form id="frm_sms_advanced_search" class="ds_search_form">
+                <input type="hidden" name="isAdvanceSearch" value="1">
+                <fieldset>
+                    <div class="row-fluid">
+                        <div class="span4 advanced_search_item ds_search_item">
+                            <label>发送号码</label>
+                            <input  name="num" type="text" class=""/>
+                        </div>
+                        <div class="span4 advanced_search_item ds_search_item">
+                            <label>状态</label>
+                            <select name="m7Status" class="">
+                                <option value="" selected>--请选择--</option>
+                            </select>
+                        </div>
+                        <div class="span4 advanced_search_item ds_search_item">
+                            <label>短信签名</label>
+                            <select name="sign" class="">
+                                <option value="" selected>--请选择--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span4 advanced_search_item ds_search_item ds_owner">
+                            <label>发送座席</label>
+                            <input name="createUser" type="hidden" class="select_input" id="create_user_select_input"  />
+                            <div id="create_user_select_user" class="combobox_agent"></div>
+                        </div>
+                        <div class="span8 advanced_search_item ds_search_item">
+                            <label>发送时间</label>
+                            <input name="submitTime_begin_date" class="ds_datetime" type="text" placeholder="">
+                            <label style="width: 16px">至</label>
+                            <input name="submitTime_end_date" class="ds_datetime" type="text" placeholder="">
+                        </div>
+                    </div>
+                    <div style="padding: 10px;">
+                        <button type="button" class="btn btn-small btn-primary ds_form_action  pull-right btn_advanced" ds_action="sms.searchSmsCard" >搜索</button>
+                        <button type="button" class="btn btn-small  ds_do_action  pull-right" ds_action="sms.resetSms" ds_data="_#menu#_" style="margin-right: 10px;">重置</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="list_container">
+        <div class="list-inside" >
+        </div>
+        <div class="list-footer">
+            <div class="pagination pagination-small" for="frm_sms_normal_search" ds_pagination_action="sms.searchSmsCard">
+                <span style="float:left;">查询结果：<span class="result_count">0</span></span>
+                <ul class="" style="float:right;padding-right: 6px;">
+                    <li>
+                        <a href="#"  value="0">«</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="1">1</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="2">2</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="3">3</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="4">4</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="5">5</a>
+                    </li>
+                    <li>
+                        <a href="#"  value="6">»</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="right_column">
+    <div class="contact_detail">
+        <div  class="content">
+            <div id="body_sms">
+                <div class="" style="padding: 30px 50px 50px;">
+                    <div class="alert alert-block">
+                        <h4>温馨提示</h4>
+                        <p>
+                            短信提交成功后5分钟之内送达。超过66字(含签名)后每66字记一条。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="tmpl_sms_item" type="text/html">
+    <div class="list_item ">
+        <div class="ds_do_action item_row item{{=_id}} item_check" ds_action="sms.showSmsDetail" ds_data="{{=_id}}" style="padding: 5px;">
+            <div class="card_row">
+                <input type="hidden" name="pk" value="{{=_id}}" >
+                <div class="card_right">
+                    <div title="{{=submitTime}}">{{=shortTime}}</div>
+                    <div style="position: absolute;bottom: 8px;right:0;"><span class="label {{=statusClass}}">{{=statusDesc}}</span></div>
+                </div>
+                <div class="card_left">
+                    <div style="">
+                        <b class="ico_select_checkbox ico ico_wrap ico_item_checkbox "></b>
+                    </div>
+                    <div style="position: absolute;bottom: 8px;left:0;"><span class="label" title="拆分条数">{{=splitCount}}</span></div>
+                </div>
+                <div class="card_middle">
+                    <div>{{=num}} <span title="签名">{{=signDisplay}}</span></div>
+                    <div class="">
+                        <span title="处理座席">{{=agentDesc}}</span>
+                    </div>
+                    <div class="ellipsis">{{=content}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/javascript">
+    var smsAgentsArr = getCache("agents");
+    smsAgentsArr.unshift({_id:'interface',displayName:'接口调用',exten:'interface',pinyin:'interface'})
+    utils.loadSearchInput({ id: "create_user_select_user",
+        width: "110",
+        height: "14",
+        tip: "按姓名,拼音,工号搜索",
+        data: smsAgentsArr,
+        searchField: ["displayName", "exten", "pinyin"],
+        pinyinField: ["displayName"],
+        listField: ["displayName", "exten"],
+        userIdField: "_id",
+        showField: "displayName",
+        showAllList: true,
+        callbackFuc: function (object) {
+            $("#create_user_select_input").val(object._id);
+        },
+        onKeyChanged: function () {
+            if ($("#create_user_select_user_input").val() != "") {
+                $("#create_user_select_input").val("serachInputNoresult");
+            } else {
+                $("#create_user_select_input").val("");
+            }
+        }
+    });
+</script>

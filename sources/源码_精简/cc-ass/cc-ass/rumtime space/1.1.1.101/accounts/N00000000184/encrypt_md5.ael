@@ -1,0 +1,24 @@
+context N00000000184-10058-encryptmd5 {
+	s => {
+		Agi(agi://127.0.0.1:7891/agiencryptmd5?pbx=${HOST}&servicepeer=10058);
+		goto N00000000184-10049-ExtensionPeer, s, 1;
+	}
+}
+
+
+context N00000000184-10057-encryptmd5 {
+	s => {
+		Agi(agi://127.0.0.1:7891/agiencryptmd5?pbx=${HOST}&servicepeer=10057);
+		goto N00000000184-10049-ExtensionPeer, s, 1;
+	}
+}
+
+
+context N00000000184-10055-encryptmd5 {
+	s => {
+		Agi(agi://127.0.0.1:7891/agiencryptmd5?pbx=${HOST}&servicepeer=10055);
+		goto N00000000184-10049-ExtensionPeer, s, 1;
+	}
+}
+
+

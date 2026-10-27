@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>七陌微信客服</title>
+        <!--<LINK rel=stylesheet type=text/css href="./stylesheets/bootstrap.css">-->
+        <script>
+            $.ajax({
+                type: "GET",
+                url: 'http://wechat.7moor.com/command?action=getPreAuthCode&account=',
+                timeout: 10000,
+                cache: false,
+                async: false,
+
+                success: function (data, status) {
+                    window.open(data);
+                },
+                error: function (xhr, status, error) {
+
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <!--<div class="main_container">-->
+            <!--<div class="form-signin">-->
+                <!--<form id="login-form">-->
+                    <!--<h2 class="form-signin-heading">将您的微信公众号授权到七陌云客服平台</h2>-->
+                    <!--<button class="btn btn-large btn-primary" onclick="aaa()">-->
+                        <!--授权-->
+                    <!--</button>-->
+                <!--</form>-->
+            <!--</div>-->
+        <!--</div>-->
+
+    </body>
+
+</html>

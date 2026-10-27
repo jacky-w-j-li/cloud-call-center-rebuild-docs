@@ -1,0 +1,37 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">变更下班语音</h4>
+        </div>
+        <div class="modal-body">
+            <form id="upload_ow_music" accept-charset="UTF-8" action="form" enctype="multipart/form-data" method="post"
+                  target="ow_upload_form">
+                <div class="modal-body">
+                    <input name="sessionId" value="__session_id" style="display:none;"/>
+                    <input name="action" value="app.tel.setOW" style="display:none;"/>
+                    <div>
+                        <div style="margin-bottom: 10px;">下班语音是在下班以后，客户打电话进来是播放的语音。一般为“欢迎致电xxx，现在是我们的下班时间，请于xxx至xxx拨打本公司电话”。</div>
+                        <span style="color: #ff5e3a">请选择大小不超过1M、wav格式的语音文件</span>
+                        <input class="file" id="ow_music" name="ow_music" type="file">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default music_set_cancel ds_do_action" ds_action="tel.refresh" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary ds_do_action" ds_action="tel.setOW" ds_data="">保存</button>
+        </div>
+    </div>
+</div>
+<iframe src="/blank.html" class="hidden" name="ow_upload_form">
+    <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+    <html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title></title>
+    </head>
+    <body>
+    </body>
+    </html>
+</iframe>

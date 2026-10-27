@@ -1,0 +1,300 @@
+<div class="container-fluid">
+    <div>
+        <div name="option_header" class="row-fluid cus_history_option_header">
+            <div class="span4" style="margin-top:10px;color: #9d9a93;font-size: 14px;">
+                共有<span class="hist_total">{{==count}}</span>条沟通记录
+            </div>
+            <div class="span8" >
+                <form id="frm_cust_his_quick_search">
+                    <input type="hidden" name="customer" value="{{=custId}}"/>
+                    <input type="hidden" name="date" value=""/>
+                    <input type="hidden" name="type" value=""/>
+                    <input type="hidden" name="businessType" value=""/>
+                    <div class="row-fluid" >
+                        <div style="float:right;/*width: 335px;*/">
+                        <span class="pull-right" style="margin:3px 0 0 6px">
+                            <input class="show_note_preview"  style="margin-top: 3px;" type="checkbox" checked="checked">&nbsp;<span>备注预览</span>
+                        </span>
+                            <div style="float:left;margin-top: 5px;margin-right: 3px;color: #9d9a93;">筛选: </div>
+                            <div class="btn-group">
+                                <button class="btn btn-mini btn-date" onclick="return false;"><span style="color: #9D9A93">--日期--</span></button>
+                                <button class="btn dropdown-toggle" data-toggle="dropdown" >
+                                    <span class="caret" ></span>
+                                </button>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonHistory" ds_data="date" ds_attr="week">最近7天</a></li>
+                                    <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonHistory" ds_data="date" ds_attr="month">最近1个月</a></li>
+                                    <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonHistory" ds_data="date" ds_attr="month3">最近3个月</a></li>
+                                    <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonHistory" ds_data="date" ds_attr="">全部</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="btn-group">
+                                <button class="btn btn-mini btn-type" onclick="return false;"><span style="color: #9D9A93">--类型--</span></button>
+                                <button class="btn dropdown-toggle" data-toggle="dropdown" >
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonHistory" ds_data="type" ds_attr="business">工单</a></li>
+                                    <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonHistory" ds_data="type" ds_attr="note">联系计划</a></li>
+                                    <!--<li><a href="#" class="ds_do_action" ds_action="customer.queryCommonHistory" ds_data="type" ds_attr="chat">在线咨询</a></li>-->
+                                    <!--<li><a href="#">邮件</a></li>-->
+                                    <!--<li><a href="#">微信</a></li>-->
+                                    <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonHistory" ds_data="type" ds_attr="callin">呼入</a></li>
+                                    <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonHistory" ds_data="type" ds_attr="callout">呼出</a></li>
+                                    <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonHistory" ds_data="type" ds_attr="approval">跟进状态审核</a></li>
+                                    <li><a href="#" class="ds_do_action" ds_action="customer.queryCommonHistory" ds_data="type" ds_attr="">全部</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row-fluid" style="clear:both">
+            <div class="table_header row-fluid"  style="border-bottom: 1px solid #9D9A93;">
+                <div class="span2 table_header_content">
+                    <span style="color: #9D9A93;">类型</span>
+                </div>
+                <div class="span2 table_header_content">
+                    <span style="color: #9D9A93;">创建时间</span>
+
+                </div>
+                <div class="span2 table_header_content">
+                    <span style="color: #9D9A93;">业务类型</span>
+
+                </div>
+                <div class="span2 table_header_content">
+                    <span style="color: #9D9A93;">处理座席</span>
+
+                </div>
+                <div class="span2 table_header_content">
+                    <span style="color: #9D9A93;">备注</span>
+
+                </div>
+                <div class="span2 table_header_content">
+                    <span style="color: #9D9A93;">处理结果</span>
+
+                </div>
+            </div>
+            <div  class="table_content row-fluid">
+                <div class="history_list">
+                    {{
+                    for(var i=0 ; i < list.length ; i++){
+                    var item = list[i];
+                    var image = "";
+                    var typeName = "";
+                    var wordColor = "#2f6f9f";
+                    if(item.type == 'chat') continue;
+                    }}
+                    <div class="history_item row-fluid">
+                        <div class="history_item_head row-fluid">
+                            <div class="span2">
+                                {{
+                                if(item.type == 'callin'){
+                                item.businessTypeName = "普通来电";
+                                typeName = "";
+                                if(item.status == 'dealing' || item.voicemail){
+                                typeName = item.recordFile;
+                                image = "callin_e";
+                                } else {
+                                image = "callin_d";
+                                }
+                                } else if(item.type == 'callout'){
+                                item.businessTypeName = "外呼去电";
+                                typeName = "";
+                                if(item.status == 'dealing'){
+                                typeName = item.recordFile;
+                                image = "callout_e";
+                                } else {
+                                image = "callout_d";
+                                }
+                                } else if(item.type == 'chat'){
+                                if(item.platform == 'weixin'){
+                                if(item.status == 'chating'){
+                                image = "wx_e";
+                                } else {
+                                image = "wx_d";
+                                }
+                                typeName = "微信咨询";
+                                }
+                                else if(item.platform == 'pc'  || item.platform == 'wap'){
+                                if(item.status == 'chating'){
+                                image = "web_e";
+                                } else {
+                                image = "web_d";
+                                }
+                                typeName = "网页咨询";
+                                }
+                                else if(item.platform == 'sdk'){
+                                if(item.status == 'chating'){
+                                image = "mobile_e";
+                                } else {
+                                image = "mobile_d";
+                                }
+                                typeName = "手机咨询";
+                                }
+                                } else if(item.type == 'note'){
+                                if(item.status == 'create'){
+                                image = "note_e";
+                                } else if(item.status =='cancel'){
+                                image = "note_d";
+                                wordColor="#9d9a93";
+                                }else {
+                                image = "note_d";
+                                }
+                                typeName = "联系计划";
+                                } else if(item.type == 'business'){
+                                if(item.dispose == 'complete'){
+                                image = "business_d";
+                                } else {
+                                image = "business_e";
+                                }
+                                typeName = "工单";
+                                } else if(item.type == 'approval'){
+                                if(item.status == 'pass'){
+                                image = "approval_e";
+                                } else {
+                                image = "approval_d";
+                                }
+                                typeName = item.businessTypeName;
+                                }
+                                }}
+                                <div class="history_item_head_icon {{=image}}"></div>
+                                <div class="history_item_head_name">
+                                    {{ if(item.type == 'business'){ }}
+                                    <span style="color: #2f6f9f;font-weight:bold;">
+                                        <a href="#" class="ds_do_action" ds_action="customer.showBusDetail" ds_data="{{=item._id}}">{{=typeName}}</a>
+                                    </span>
+                                    {{ }else if(item.type == 'callin' || item.type == 'callout'){ }}
+                                    <span style="margin:-1px;color: #2f6f9f;font-weight:bold;position: absolute;{{=item.showPlayBtn}}">
+                                        <a class="ds_do_action call_sheet_listen_file" href="#" style="" ds_action="customer.showRecord" ds_data="{{=typeName}}"><i class="icon-play-circle"></i></a>
+                                    </span>
+                                    {{ }else if(item.type == 'chat'){ }}
+                                    <span style="margin:-1px;color: #2f6f9f;font-weight:bold;position: absolute;{{=item.showPlayBtn}}">
+                                        <a class="ds_do_action" href="#" style="" ds_action="customer.showChatDetail" ds_data="{{=item._id}}">{{=typeName}}</a>
+                                    </span>
+                                    {{ }else if(item.type == 'approval'){ }}
+                                    <span style="margin:-1px;color: #2f6f9f;font-weight:bold;position: absolute;{{=item.showPlayBtn}}">
+                                        <a class="ds_do_action" href="#" style="" ds_action="customer.showApprBusDetail" ds_data="{{=item._id}},{{=item.apprId}}">{{=typeName}}</a>
+                                    </span>
+                                    {{ }else{ }}
+                                    <span style="color:{{=wordColor}};font-weight:bold;position: absolute" class="{{=item.jmp3Tag}}">{{=typeName}}</span>
+                                    {{ } }}
+                                </div>
+                            </div>
+                            <div class="span2 history_item_head_data">
+                                <span>{{=item.createTimeDisplay}}</span>
+                            </div>
+                            <div class="span2 history_item_head_data">
+                                {{  item.businessType = item.businessType || ""; }}
+                                <span>{{=item.businessTypeName}}</span>
+                            </div>
+                            <div class="span2 history_item_head_data">
+                                <span>{{=item.agentName}}</span>
+                            </div>
+                            <div class="span2 history_item_head_data bubble_popover">
+                                <div style="">
+                                    {{
+                                    if(item.comments && (item.type == "callin" || item.type == 'callout')){
+                                    }}
+                                    <span class="his_note_ishide" style="display: none">{{=item.comments}}</span>
+                                    <a href="#" class="his_comment ds_do_action"  data-toggle="popover" ds_action="cdr.editCdrMemo" ds_data="{{=item._id}}" data-placement="top" data-content="{{=item.comments}}" data-original-title="">
+                                        <img src="../../img/contact_history/comment_e.png" width="13"/>
+
+                                    </a>
+                                    {{
+                                    }else if (item.comments && item.type == "note"){
+                                        if (item.status == "create") {
+                                    }}
+                                     <span class="his_note_ishide" style="display: none">{{=item.comments}}</span>
+                                    <a href="#" class="his_comment ds_do_action"  data-toggle="popover" ds_action="customer.editCustAction2Tab" ds_data="{{=item._id}}" data-placement="top" data-content="{{=item.comments}}" data-original-title="">
+                                        <img src="../../img/contact_history/comment_e.png" width="13"/>
+
+                                    </a>
+                                    {{
+                                        }else{
+                                    }}
+                                    <span class="his_note_ishide" style="display: none">{{=item.comments}}</span>
+                                    <a href="#" class="his_comment" data-toggle="popover" data-placement="top" data-content="{{=item.comments}}" data-original-title="">
+                                        <img src="../../img/contact_history/comment_f.png" width="13"/>
+                                    </a>
+                                    {{
+                                    }
+                                    }}
+                                    {{
+                                    }else if (item.comments){
+                                    }}
+                                    <span class="his_note_ishide" style="display: none">{{=item.comments}}</span>
+                                    <a href="#" class="his_comment"  data-toggle="popover" data-placement="top" data-content="{{=item.comments}}" data-original-title="">
+                                        <img src="../../img/contact_history/comment_e.png" width="13"/>
+                                    </a>
+                                    {{
+                                    }else if (!item.comments && (item.type == "callin" || item.type == 'callout')){
+                                    }}
+                                    <a href="#" class="his_comment ds_do_action"  data-toggle="popover" ds_action="cdr.editCdrMemo" ds_data="{{=item._id}}" data-placement="top" data-content="{{=item.comments}}" data-original-title="">
+                                        <img src="../../img/contact_history/comment_d.png" width="13"/>
+                                    </a>
+                                    {{
+                                    }else if (!item.comments && item.type == "note"){
+                                    }}
+                                    <a href="#" class="his_comment ds_do_action"  data-toggle="popover" ds_action="customer.editCustAction2Tab" ds_data="{{=item._id}}" data-placement="top" data-content="{{=item.comments}}" data-original-title="">
+                                        <img src="../../img/contact_history/comment_d.png" width="13"/>
+                                    </a>
+                                    {{
+                                    }else{
+                                    }}
+                                    <img src="../../img/contact_history/comment_f.png" width="13"/>
+                                    {{
+                                    }
+                                    }}
+                                </div>
+                            </div>
+                            <div class="span2 history_item_head_data">
+                                {{ item.disposeDisplay = item.disposeDisplay || ""; }}
+                                <span>{{=item.disposeDisplay}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {{ } }}
+                </div>
+
+            </div>
+            <div style="margin-right: 8px;margin-top:8px;text-align:center" class="cust_operater_more">
+                <button class="img_action_more ds_do_action ds_more" ds_action="customer.queryCommonHistoryMore" ds_data="{{=custId}}" href="#" ds_attr="2" style="display: none;">点击查看更多</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function() {
+        var state = DS.getCookie("his_note_ishide");
+        if (state) {
+            $('.show_note_preview').attr("checked","checked");
+             $('.his_note_ishide').show();
+        } else {
+            $('.show_note_preview').removeAttr("checked");
+            $('.his_note_ishide').attr("style","display:none");
+        }
+        $('.show_note_preview').change(function(event) {
+            var value = $(this).is(':checked')?$(this).is(':checked'):'';
+            DS.setCookie("his_note_ishide", value, 30);
+            if(value){
+                $('.his_note_ishide').show();
+                $('.show_note_preview').attr("checked","checked");
+            }else{
+                $('.his_note_ishide').attr("style","display:none");
+                $('.show_note_preview').removeAttr("checked");
+            }
+        });
+        //禁止联系历史备注编辑
+        if(session.user.isAdmin || isHasFunc("func_not_edit_remark_field")){
+            $(".his_comment").removeClass("ds_do_action");
+        }
+        //录音的试听权限控制
+        if(isHasFunc("func_user_call_sheet_listen_file")){
+            $(".call_sheet_listen_file").attr("style", "display:none");
+        }
+    });
+</script>

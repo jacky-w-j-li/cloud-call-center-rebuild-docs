@@ -1,0 +1,124 @@
+<div id="cdr_detail_wrapper">
+    <table class="table table-striped" style="margin-bottom:0;">
+        <tr>
+            <!--<td class="cdrDetailLabel">定位客户：</td>-->
+            <!--<td class="cdrDetailText">_#CUSTOMER_NAME#_</td>-->
+            <td class="cdrDetailLabel" style="width:5em;">呼叫类型：</td>
+            <td class="cdrDetailText">_@cdr.getCallTypeName('_#CONNECT_TYPE#_')@_</td>
+            <td class="cdrDetailLabel">主叫：</td>
+            <td class="cdrDetailText">_#bgCallNo#_
+                <a class="add_BlackNum ds_do_action" ds_action="cdr.addCdrBlackList" ds_data="_#CALL_NO#_">
+                    <i class="icon-ban-circle" style="margin-top: 0px"></i></a>
+            </td>
+            <td class="cdrDetailLabel">被叫：</td>
+            <td class="cdrDetailText">_#bgCalledNo#_
+                <a class="add_BlackNum ds_do_action" ds_action="cdr.addCdrBlackList" ds_data="_#CALLED_NO#_">
+                    <i class="icon-ban-circle" style="margin-top: 0px"></i></a>
+            </td>
+        </tr>
+        <tr>
+            <td class="cdrDetailLabel">省份：</td>
+            <td class="cdrDetailText">_#PROVINCE#_</td>
+            <td class="cdrDetailLabel">城市：</td>
+            <td class="cdrDetailText">_#DISTRICT#_</td>
+            <td class="cdrDetailLabel">满意度：</td>
+            <td class="cdrDetailText">_@cdr.getInvestigate('_#INVESTIGATE#_')@_</td>
+            <!--<td colspan="2">&nbsp;</td>-->
+            <!--<td class="cdrDetailLabel">标记：</td>-->
+            <!--<td class="cdrDetailText">_@cdr.getKeyTag('_#KEY_TAG#_')@_-->
+                <!--<a class="remove_key_tag ds_do_action" ds_action="cdr.removeKeyTag" ds_data="_#CALL_SHEET_ID#_" style="display: none">-->
+                    <!--<i class="icon-remove" style="margin-top: 0px"></i></a>-->
+            <!--</td>-->
+        </tr>
+        <tr>
+            <td class="cdrDetailLabel">呼叫时间：</td>
+            <td class="cdrDetailText">_#OFFERING_TIME#_</td>
+            <td class="cdrDetailLabel">摘机时间：</td>
+            <td class="cdrDetailText">_#BEGIN_TIME#_</td>
+            <td class="cdrDetailLabel">通话时长：</td>
+            <td class="cdrDetailText">_@cdr.getCallTimeLength('_#CALL_TIME_LENGTH#_')@_</td>
+        </tr>
+        <tr>
+            <td class="cdrDetailLabel">处理状态：</td>
+            <td class="cdrDetailText">_@cdr.getCallStatusName('_#STATUS#_')@_</td>
+            <td class="cdrDetailLabel">处理座席：</td>
+            <td class="cdrDetailText">_@cdr.getAgentName('_#DISPOSAL_AGENT#_')@_</td>
+            <td class="cdrDetailLabel">呼入技能组：</td>
+            <td class="cdrDetailText">_@cdr.getQueueName('_#ERROR_MEMO#_')@_</td>
+        </tr>
+        <tr>
+            <td class="cdrDetailLabel">排队时长：</td>
+            <td class="cdrDetailText">_@cdr.getCallTimeLength('_#QUEUE_TIME_LENGTH#_')@_</td>
+            <td class="cdrDetailLabel">标记：</td>
+            <td class="cdrDetailText">_@cdr.getKeyTag('_#KEY_TAG#_')@_
+                <a class="remove_key_tag ds_do_action" ds_action="cdr.removeKeyTag" ds_data="_#CALL_SHEET_ID#_" style="display: none">
+                    <i class="icon-remove" style="margin-top: 0px"></i></a></td>
+        </tr>
+        <tr>
+            <td class="cdrDetailLabel call_sheet_listen_file" hidden>通话录音：</td>
+            <td class="cdrDetailText call_sheet_listen_file" hidden colspan="100">
+                <audio id="cdrListener" controls="" src="_#FILE_SERVER#_/_#RECORD_FILE_NAME#_" __AUDIO_AUTO_PLAY/>&nbsp;
+                <a class="call_sheet_download_file" href="_#FILE_SERVER#_/_#RECORD_FILE_NAME#_" target="_blank" download hidden>下载录音</a>
+            </td>
+        </tr>
+        <tr>
+            <td class="cdrDetailLabel">备注内容：</td>
+            <td class="cdrDetailText" colspan="5">
+                <textarea id="cdr_comments" name="memo" rows="2" style="width: 500px" disabled></textarea>
+            </td>
+        </tr>
+        <tr class="cdrPremediaTr" style="display: none">
+            <td class="cdrPremediaLabel">前媒体识别:</td>
+            <td class="cdrPremediaText" colspan="5"></td>
+        </tr>
+        <tr class="cdr_use_label_wrap">
+            <td style="background:#fff;">通话标签：</td>
+            <td colspan="5" style="background:#fff;" class="cdr-all-use-label"></td>
+        </tr>
+    </table>
+    <script id="showUseLabelDetal" type="text/html">
+        <label class="cfg_call_label show-label-use"><input type="checkbox" class="ds_change_action" ds_action="cdr.cdrCallLabelChange" use="on" ds_data="{{=_id}}"/><span class="">{{=name}}</span></label>
+    </script>
+    <div id="callSheetOtherInfoPanel" class="callSheetOtherInfoPanel" style="display: none">
+        <hr>
+        __callSheetOtherInfo
+    </div>
+</div>
+<script>
+    $(function(){
+        if (isHasFunc("func_not_allow_add_blacklist")){
+            $('.add_BlackNum').hide();
+        }
+        var comments = '_#COMMENTS#_';
+        if(!utils.startWith(comments,'_#')){
+            $('#cdr_comments').text(comments);
+        }
+        var isTag = '_#KEY_TAG#_';
+        if(isTag == 'true'){
+            $(".remove_key_tag").show();
+            $(".remove_key_tag").tooltip({title:'取消对该通话的标记.',placement:'left',html:true});
+        }
+		//录音的试听和下载的权限控制
+        if(session.user.isAdmin || !isHasFunc("func_user_call_sheet_listen_file")){
+            $(".call_sheet_listen_file").show();
+            if(session.user.isAdmin || !isHasFunc("func_user_call_sheet_download_file")){
+                $(".call_sheet_download_file").show();
+            }
+        }
+        var premdiaText = '_#PREMEDIA_KEY#_';
+        if(!utils.startWith(premdiaText,'_#')){
+            $(".cdrPremediaTr").show();
+            $('.cdrPremediaText').text(premdiaText);
+        }else{
+            $(".cdrPremediaTr").hide();
+        }
+        //录音的试听和下载的权限控制
+        if(session.user.isAdmin || !isHasFunc("func_user_call_sheet_listen_file")){
+            $(".call_sheet_listen_file").show();
+            if(session.user.isAdmin || !isHasFunc("func_user_call_sheet_download_file")){
+                $(".call_sheet_download_file").show();
+            }
+        }
+    });
+</script>
+

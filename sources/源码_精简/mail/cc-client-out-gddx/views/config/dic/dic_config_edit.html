@@ -1,0 +1,105 @@
+<div class="right_content_pane">
+    <form id="frm_dic_edit" class="form-horizontal">
+        <div class="right_head clearfix" style="">
+            <div class="pull-left">
+                <h4 style="">字典配置</h4>
+            </div>
+            <div class=" pull-right">
+                <button type="button" class="btn btn-small ds_do_action " ds_action="config.dic.cancelDeal" style="margin-left: 0px;">取消</button>
+                <button type="button" class="btn btn-primary btn-small ds_form_action "  ds_action="config.dic.updateDicConfig" style="margin-left: 10px;">保存</button>
+            </div>
+        </div>
+
+        <div class="dic_edit_pane" style="padding-top: 20px;">
+
+        </div>
+    </form>
+</div>
+
+<script id='tmpl_dic_edit' type="text/x-jquery-tmpl">
+    <input type='hidden' class='messDicInp' name='_id' value='${_id}' cascade='${cascade}'>
+    <div class='dicEverTop'>
+        <div class='DicHeader' ><input name='header' required type="text" msgName="字典名称"/></div>
+        <div class="dicDiv1 dicSpan" sign='1'>
+            <ul class='pressed'>
+                <div ds_data='sign0' class='ds_do_action show' ds_action='config.dic.addNextDic'>
+                <input name='dic[]' state='2'  type="text" placeholder="字典项" style="width:80px;" required msgName="字典项"/>
+                </div>
+            </ul>
+        </div>
+        <div class='EverTopADiv'><a href='#' class='btn btn-success dicplus'>+</a> <a href='#' class='btn btn-danger dicreduce'>-</a></div>
+    </div>
+    <div class='dicEverTop sys_dic_2'>
+        <div class='DicHeader' ><input name='header' required type="text" msgName="字典名称"/></div>
+        <div class='dicDiv2 dicSpan' sign='2'>
+            <ul class='sign0 pressed'>
+            <div ds_data='sign0_0' class='ds_do_action show' ds_action='config.dic.addNextDic'>
+                <input name='dic[]'state='2' type="text" placeholder="字典项" style="width:80px;" required msgName="字典项"/>
+            </div>
+            </ul>
+        </div>
+        <div class='EverTopADiv'><a href='#' class='btn btn-success dicplus'>+</a> <a href='#' class='btn btn-danger dicreduce'>-</a></div>
+    </div>
+    <div class='dicEverTop sys_dic_3'>
+        <div class='DicHeader' ><input name='header' required type="text" msgName="字典名称"/></div>
+        <div class='dicDiv3 dicSpan' sign='3'>
+            <ul class='sign0_0 pressed'>
+            <div ds_data='sign0_0_0' class='ds_do_action show' ds_action='config.dic.addNextDic'>
+                <input name='dic[]' state='2' type="text" placeholder="字典项" style="width:100px;" required msgName="字典项"/>
+            </div>
+            </ul>
+        </div>
+        <div class='EverTopADiv'><a href='#' class='btn btn-success dicplus'>+</a> <a href='#' class='btn btn-danger dicreduce'>-</a></div>
+    </div>
+</script>
+
+<style type="text/css">
+    .dicEverTop{
+        float: left;
+        width: 27%;
+        margin-left: 10px;
+        text-align: center;
+    }
+    .dicEverTop .EverTopADiv{
+        height:20px;
+    }
+    .dicDiv1,.dicDiv2,.dicDiv3{
+        height: 200px;
+        border: 1px #ccc solid;
+        min-height: 150px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    .dic_edit_pane ul div{
+        position: relative;
+        min-height: 30px;
+        padding:5px 10px;
+    }
+    .dic_edit_pane a{
+        margin: 2px 20px;
+        font-size: 30px;
+    }
+    .dicEverTop ul.pressed{
+        display: block;
+    }
+    .dicEverTop ul{
+        display: none;
+    }
+    .dicSpan .ds_do_action.show,.dicSpan .actionforcheckbox.show{
+        background-color: #f5f5f5;
+        /*background-color: rgb(255, 236, 236);*/
+    }
+    .dicSpan .actionforcheckbox{
+        background-color: white;
+    }
+    .dicSpan .ds_do_action{
+        background-color: white;
+    }
+    .dicEverTop .DicHeader{
+        height:40px;
+    }
+    .dicEverTop .DicHeader input{
+        width:80%;
+    }
+
+</style>

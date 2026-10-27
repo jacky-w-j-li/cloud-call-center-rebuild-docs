@@ -1,0 +1,89 @@
+<div class="left_column">
+    <div class="contacts_caption">
+        <div class="caption-top clearfix">
+            <div class="pull-right" >
+                <button class="btn btn-small ds_do_action" ds_action="config.business.showReportAdd" ds_data="">添加报表</button>
+            </div>
+            <form id='business_report_query_frm'>
+                <span class="refresh ds_do_action" ds_action="config.business.queryBusinessReport"  ds_data="" ><a href="#" class="ajaxed">刷新</a></span>
+                <div class="input-append" style="margin-left: 10px;">
+                        <input id="query_business_report_condition" name="name" type="text" style="width: auto;" placeholder="输入报表名称查询">
+                        <button class="btn btn-small ds_form_action btn_dic_search" type="button" ds_action="config.business.queryBusinessReport" >查询</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="list-container">
+        <div class="contact_list">
+            <div class="list-inside">
+                <table class="table table-bordered table-striped table-hover">
+                    <colgroup>
+                        <col width="35%"/>
+                        <col width="25%"/>
+                        <col width="40%"/>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>
+                            报表名称
+                        </th>
+                        <th>
+                            所属流程
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody id="business_report_list_pane">
+                    </tbody>
+                </table>
+                <div class="pagination pagination-small business_config_report_count" style="display:table; margin:0;width:100%;"
+                     for="business_report_query_frm" ds_pagination_action="config.business.queryBusinessReport">
+                    <span class="result_info">查询结果：<span class="result_count">10</span></span>
+                    <ul class="role_list_page" style="float:right;">
+                        <li><a href="#"  value="0">&laquo;</a></li>
+                        <li><a href="#"  value="1">1</a></li>
+                        <li><a href="#"  value="2">2</a></li>
+                        <li><a href="#"  value="3">3</a></li>
+                        <li><a href="#"  value="4">4</a></li>
+                        <li><a href="#"  value="5">5</a></li>
+                        <li><a href="#"  value="6">&raquo;</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="right_column" >
+    <div class="contact_detail">
+        <div class="content">
+            <div id="business_report_detail_pane">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="business_report_list_item" type="text/html">
+    {{
+        for(var i=0;i<list.length;i++){
+            var obj = list[i];
+    }}
+    <tr>
+        <td>
+            {{=obj.name}}
+        </td>
+        <td >
+            {{=$getCache('businessFlow',obj.flow).name }}
+        </td>
+        <td>
+            <a class="ds_do_action" ds_action="config.business.showReportInfoConfig" ds_data="{{=obj._id}}"  href="#">修改</a>
+            &nbsp;&nbsp;
+            <a class="ds_do_action" ds_action="config.business.showReportFieldsConfig" ds_data="{{=obj._id}}"  href="#">字段</a>
+            &nbsp;&nbsp;
+            <a class="ds_do_action" ds_action="config.business.showReportDimConfig" ds_data="{{=obj._id}}" href="#">维度</a>
+        </td>
+    </tr>
+    {{ } }}
+</script>

@@ -1,0 +1,15 @@
+context N00000000164-10006-blacklist {
+	13790000000 => goto N00000000164-10006-match-blacklist, 1, 1;
+	013790000000 => goto N00000000164-10006-match-blacklist, 1, 1;
+	13690000000 => goto N00000000164-10006-match-blacklist, 1, 1;
+	013690000000 => goto N00000000164-10006-match-blacklist, 1, 1;
+	14718097774 => goto N00000000164-10006-match-blacklist, 1, 1;
+	014718097774 => goto N00000000164-10006-match-blacklist, 1, 1;
+	_. => goto N00000000164-10005-time,${FROM_DID},1;
+	h => Hangup;
+}
+context N00000000164-10006-match-blacklist {
+	_. => Hangup;
+	h => Hangup;
+}
+

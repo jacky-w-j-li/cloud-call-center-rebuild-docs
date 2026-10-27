@@ -1,0 +1,205 @@
+<div id="customer_titket_view">
+    <div class="row-fluid config_left">
+        <div class="caption-top clearfix">
+            <div class="search_condition" style="display: none;"></div>
+            <div class="" style="float: none;display: inline-block;margin-bottom:10px;">
+                <button type="button" class="btn-blue btn-small ds_form_action" ds_action="customer.titket.showAddPop">增加</button>
+            </div>
+            <form id="frm_customer_titket_search" class="frm_customer_titket_search" style="display: inline-block;">
+                <div class="panel-heading">
+                    <span class="pull-left refresh ds_form_action" ds_action="customer.titket.queryCustTitketList" style="margin-top: 2px;">
+                    <a href="#" class="ajaxed">刷新</a>
+                </span>
+                    <div class="input-append ds_search_item" style="margin:0 0 1px 5px;">
+                        <input class="quick_search" name="combox" style="width: 110px;" type="text" placeholder="输入姓名...">
+                        <button type="button" class="btn ds_form_action dept_search " ds_action="customer.titket.queryCustTitketList"  title="查询">
+                            <i class="icon-search"></i>
+                        </button>
+                        <button type="button" class="btn customer_titket_advanced_search" style="height: 24px;" title="高级查询">
+                            <span class="caret"></span>
+                        </button>
+                    </div>
+                    <a href="#" id="popover_titket_cust" class="btn" data-toggle="popover" data-placement="bottom" data-trigger="hover focus"
+                       data-content="<h5>奖罚券使用:<br></h5>
+                                  a.奖券使用触发条件：在线成员中存在有奖券和没奖券两种座席，并且是首次通过自动公海分配的客户。<br>
+                                    有奖券的座席优先获得商机，消耗一个奖券；<br>
+                                  b.罚券使用触发条件：首次通过自动公海分配的客户，且同一个客户只会消耗一个罚券。<br>
+                                    有罚券的轮到获取商机的时候，跳过他，消耗一个罚券。<br>" data-original-title="">
+                        <span class="glyphicon-question-sign"></span>
+                    </a>
+                </div>
+            </form>
+            <div class="ds_search_filter">
+            </div>
+        </div>
+        <div id="customer_titket_advanced_search_pane" class="advanced_search_pane hidden">
+            <!--<div style="height: 35px;border-bottom: 1px solid #f0f0f0;">-->
+            <!--<h5 style="float:left;padding: 5px 10px 0;color:black;">高级查询</h5>-->
+            <!--<a href="#" class="cancel_button close" onclick="$('#uerConfig_advanced_search_pane').hide();" style="float: right;margin-top: 5px;margin-right: 10px;">x</a>-->
+            <!--</div>-->
+            <div class="advanced_body">
+                <form id="frm_customer_titket_advanced_search" class="ds_search_form">
+                    <input type="hidden" name="isAdvanceSearch" value="1">
+                    <fieldset>
+                        <div class="row-fluid">
+                            <div class="span4 advanced_search_item ds_search_item">
+                                <label>状态</label>
+                                <select name="status"  class="">
+                                    <option value="" selected>--请选择--</option>
+                                    <option value="0" >已作废</option>
+                                    <option value="1" >未使用</option>
+                                    <option value="2" >已使用</option>
+                                    <option value="3" >已抵消</option>
+                                </select>
+                            </div>
+                            <div class="span4 advanced_search_item ds_search_item">
+                                <label>类型</label>
+                                <select name="type"  class="">
+                                    <option value="" selected>--请选择--</option>
+                                    <option value="1" >奖券</option>
+                                    <option value="0" >罚券</option>
+                                </select>
+                            </div>
+                             <div class="span4 advanced_search_item ds_search_item">
+                                <label>座席姓名</label>
+                                <input class="quick_search" name="combox" style="width: 110px;" type="text" placeholder="输入姓名...">
+                            </div>
+                        </div>
+                        <div style="padding: 10px;">
+                            <button type="button" class="btn btn-small btn-primary ds_form_action  pull-right" ds_action="customer.titket.queryCustTitketList" >搜索</button>
+                            <button type="button" class="btn btn-small  ds_do_action  pull-right" ds_action="resetForm" ds_data="customerTitket" style="margin-right: 10px;">重置</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="panel">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    <th width="10%">类型</th>
+                    <th width="10%">座席</th>
+                    <th width="10%">来源</th>
+                    <th width="10%">状态</th>
+                    <th width="15%">发放时间</th>
+                    <th width="15%">使用时间</th>
+                    <th width="20%">使用客户</th>
+                    <th width="10%">操作</th>
+                </tr>
+                </thead>
+                <tbody class="licence_list" id="customer_titket_list_pane">
+                </tbody>
+            </table>
+            <div class="pagination pagination-small config_user_count" style="width:100%;margin:0 3px;"
+                 for="frm_customer_titket_search" ds_pagination_action="customer.titket.queryCustTitketList">
+                <span style="float:left;margin-top:8px;font-size:12px;">查询结果：<span class="result_count">0</span></span>
+                <ul class="dept_user_list_page" style="float:right;padding-right: 6px;">
+                    <li><a href="#"  value="0">&laquo;</a></li>
+                    <li><a href="#"  value="1">1</a></li>
+                    <li><a href="#"  value="2">2</a></li>
+                    <li><a href="#"  value="3">3</a></li>
+                    <li><a href="#"  value="4">4</a></li>
+                    <li><a href="#"  value="5">5</a></li>
+                    <li><a href="#"  value="6">&raquo;</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="customer_titket_modal" class="modal hide fade modal-dialog" tabindex="-1">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" ></h4>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal custTitketForm">
+            <input type="hidden" id="custTitketId" name="_id" >
+            <div class="control-group">
+                <label class="control-label required " >类型</label>
+                <div class="controls">
+                    <label class="radio inline">
+                        <input type="radio"  class="titketType" name="type" value="1" checked >奖
+                    </label>
+                    <label class="radio inline">
+                        <input type="radio" class="titketType" name="type"  value="0">罚
+                    </label>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label required" for="num">数量</label>
+                <div class="controls">
+                    <select name="num" class="span1" id="num">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group ">
+                <label class="control-label required">座席</label>
+                <div class="controls">
+                        <input name="user" type="hidden" class="select_input" id="cust_titket_user_input"  />
+                        <div id="cust_titket_user_div" class="combobox_agent"></div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="memo">描述</label>
+                <div class="controls">
+                    <textarea  id="memo" name="memo" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label"></label>
+                <div class="controls" style="">
+                    <button type="button" class="btn btn-small btn-primary ds_form_action pull-left  btn_pad saveOrUpdate" ds_action="customer.titket.addTitket" style="margin-left: 10px;">保存</button>
+                    <button type="button" class="btn btn-small  pull-left ds_form_action"  ds_action="customer.titket.resetForm" data-dismiss="modal" aria-hidden="true" >取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="customer_titket_batch_update_modal" class="modal hide fade modal-dialog" tabindex="-1">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" ></h4>
+    </div>
+    <div class="modal-body">
+        <div style="height: 25px;line-height: 25px;">您搜索到的奖罚券共计<span class="titket_count">0</span>个</div>
+        <form class="form-horizontal custTitketForm">
+            <div class="control-group">
+                <label class="control-label required " >操作</label>
+                <div class="controls">
+                    <label class="radio inline">
+                        <input type="radio"  name="status" value="1" checked >启用
+                    </label>
+                    <label class="radio inline">
+                        <input type="radio" name="status"  value="0">作废
+                    </label>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label"></label>
+                <div class="controls" style="">
+                    <button type="button" class="btn btn-small btn-primary ds_form_action pull-left  btn_pad saveOrUpdate" ds_action="customer.titket.batchUpdate" style="margin-left: 10px;">保存</button>
+                    <button type="button" class="btn btn-small  pull-left " data-dismiss="modal" aria-hidden="true" >取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#customer_titket_view").on("mouseover", ".frm_customer_titket_search", function(){
+            $(".panel-heading a.btn").popover({html : true });
+        });
+    });
+</script>

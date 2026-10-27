@@ -1,0 +1,10 @@
+{
+    "version":"1.0.0",
+    "serverPort": 7700,
+    "dbIp": "172.42.38.43",
+    "dbPort": "7221",
+    "dbName": "cc",
+    "dbUserName": "root",
+    "dbPassword": "7moorcom",
+    "logAccessConsole":true
+}

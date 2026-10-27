@@ -1,0 +1,53 @@
+<form class="form-horizontal" id="frm_invoice_info_update"  method="post">
+    <input type="hidden" name="_id" value="_#_id#_">
+    <div class="form-group">
+        <label class="control-label col-md-4">
+            开具类型
+        </label>
+        <div class="col-md-5">
+            <label class="radio-inline" style="margin-left: 5px;">
+                <input type="radio" name="customerType" class="ds_do_action2"  ds_action="invoice._showInfoBase" ds_data="person"  value="person" checked="checked">个人</label>
+            <label class="radio-inline" style="margin-left: 5px;">
+                <input type="radio" name="customerType" class="ds_do_action2"  ds_action="invoice._showInfoBase" ds_data="company" value="company" >企业</label>
+        </div>
+    </div>
+    <div class="invoice_info_base">
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                发票抬头
+            </label>
+            <div class="col-md-5">
+                <span class="form-control clearBoder">个人</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                发票类型
+            </label>
+            <div class="col-md-5">
+                <span class="form-control clearBoder">增值税普通发票</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">
+                发票内容
+            </label>
+            <div class="col-md-5">
+                <span class="form-control clearBoder">技术服务费</span>
+            </div>
+        </div>
+    </div>
+    <div class="invoice_info_professional"></div>
+    <div class="form-group">
+        <label class="col-md-offset-4 col-md-5">
+            <input type="checkbox" name="isDefault" >设为默认
+        </label>
+    </div>
+</form>
+
+
+
+
+
+
+

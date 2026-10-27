@@ -1,0 +1,96 @@
+<div class="row-fluid">
+    <p class="span12">
+        <span style="margin-left: 0px;">呼叫策略&nbsp;<span class="label label-info batch_strategy">固定并发</span></span>
+        <span class="label_acc_concurrent" style="margin-left: 20px;">当前并发&nbsp;<span class="label label-info acc_concurrent"></span></span>
+        <span class="label_batch_autoCallCount" style="margin-left: 20px;display: none;">空闲座席数的倍数&nbsp;<span class="label label-info batch_autoCallCount"></span></span>
+        <button type="button" class="btn btn-success btn-small ds_do_action" ds_action="batch2.showCallStrategy" style="margin-left: 20px;">修改策略</button>
+        <button type="button" class="btn btn-primary btn-small ds_do_action" ds_action="batch2.showAddTask" style="margin-left: 20px;">新建任务</button>
+
+        <a href="#"  class="btn btn-link btn-small ds_form_action batch_task_refresh"  ds_action="batch2.getBdTaskList" style="margin-left: 20px;"><i class="icon-refresh"></i> 刷新</a>
+        <br>
+        <span class="span5 alert alert-error" style="line-height: 18px;float: left;width: 800px;margin-top: 10px">
+            <strong>重要通知</strong>&nbsp;&nbsp;尊敬的管理员您好，我们现将批量外呼任务上的【呼通率】改为了【接听率】，所体现的涵义有所变化。下面详细说明下:<br>
+            原来【呼通率】的涵义：被叫振铃数(包含接起的和未接的) / 外呼发起数<br>
+            现在【接听率】的涵义：被叫接起数 / 外呼发起数
+        </span>
+    </p>
+</div>
+<div class="row-fluid task_dealing">
+    <div class="span6 task_container" style="">
+        <div class="task_header"><h5>普通任务 <small>手工控制呼叫、暂停，删除正在运行的任务会终止呼叫剩余的号码</small></h5></div>
+        <div class="task_normal_main">
+
+        </div>
+    </div>
+
+    <div class="span6 task_container">
+        <div class="task_header"><h5>定时任务 <small>到点自动呼叫，删除正在运行的任务会终止呼叫剩余的号码，定时任务只能使用“固定并发”的策略</small></h5></div>
+        <div class="task_time_main">
+
+        </div>
+    </div>
+</div>
+<div class="row-fluid" style="margin-top: 20px;">
+    <div class="span5 alert alert-block" style="line-height: 18px;">
+        温馨提示：<br/>
+        1.所有号码呼完后任务自动结束。<br/>
+        2.所有的呼叫任务只能在上午9:00-晚上9:00之间进行呼叫，其他时间不能呼叫<br/>
+    </div>
+</div>
+<div id="tmpl_task_timeArea" style="display: none;">
+    <div style="margin-bottom: 10px;" class="task_time_item">
+        <input type="text" name="beginTime[]" placeholder="开始时间" class="ds_time task_time2" readonly>-
+        <input type="text" name="endTime[]" placeholder="结束时间" class="ds_time task_time2" readonly>
+        <a href="#" class="task-reduce">
+            <i class="icon-minus"></i>
+        </a>
+    </div>
+</div>
+<style type="text/css">
+    .task_dealing {
+        line-height: 25px;
+    }
+    .task_dealing .progress{
+        margin-bottom: 0!important;
+    }
+    .task_item{
+        border: 1px solid #e3e3e3;padding: 10px 8px;
+        /*background-color: #f5f5f5;*/
+        background-color: #FFFFFF;
+        border-radius:4px;margin-bottom: 10px;
+    }
+    .task_item .progress_desc{
+        display: inline-block;position: absolute;left: 40%;top:0;
+    }
+    .task_control{
+        cursor: pointer;
+        height: 50px;
+        width: 50px;
+        background: url(../../img/task_control.png) no-repeat  -50px 0 ;
+    }
+    .task_control_pause{
+        cursor: pointer;
+        height: 50px;
+        width: 50px;
+        background: url(../../img/task_control.png) no-repeat  0 0 ;
+    }
+    .task_control_clock{
+        cursor: pointer;
+        height: 50px;
+        width: 50px;
+        background: url(../../img/blueclock.png) no-repeat  0 0 ;
+    }
+    .task_item_bgColor{
+        /*background-color:#a9dba9;*/
+        background-image: linear-gradient(to bottom, #FEF9ED, #FFD39B);
+    }
+    .task_container{
+        background-color:#eee;padding:15px 25px;border-radius:6px;
+    }
+    .task_header{
+        padding-bottom:9px;
+        border-bottom:1px solid #ccc;
+        margin-bottom: 10px;
+    }
+
+</style>

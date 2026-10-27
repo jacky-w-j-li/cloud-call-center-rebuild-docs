@@ -1,0 +1,61 @@
+<div class="modal hide fade" id="cdr_peer_busy_detail_modal" data-backdrop="static">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4>座席状态详细信息</h4>
+    </div>
+    <form id="cdrPeerBusyDetailFrm">
+        <input type="hidden" id="cdr_peer_busy_detail_begin_time" name="BEGIN_TIME"/>
+        <input type="hidden" id="cdr_peer_busy_detail_end_time" name="END_TIME"/>
+        <input type="hidden" id="cdr_peer_busy_detail_agent" name="AGENT"/>
+        <div class="modal-body">
+            <table class="table table-bordered table-hover">
+                <thead id="cdr_peer_busy_detail_table_header">
+                <tr>
+                    <th>座席</th>
+                    <th>登录方式</th>
+                    <th>开始时间</th>
+                    <th>结束时间</th>
+                    <th>忙碌时长</th>
+                    <th>状态</th>
+                </tr>
+                </thead>
+                <tbody id="cdr_peer_busy_detail_table_content">
+
+                </tbody>
+            </table>
+            <div class="alert">
+                <strong>温馨提示：</strong> [系统置忙] 时长 = [通话] 时长 + [后处理] 时长
+            </div>
+            <div class="row-fluid class_list">
+                <div class="pagination pagination-small"  for="cdrPeerBusyDetailFrm" ds_pagination_action="cdr.paginationCdrPeerBusyDetail"
+                     style="display:table; margin:0;width:100%;">
+                    <span class="result_info">查询结果：<span class="cdr_peer_busy_detail_result_count">10</span></span>
+                    <ul id="cdrPeerBusyDetail_index" style="float:right;">
+                        <li><a href="#"  value="0">&laquo;</a></li>
+                        <li><a href="#"  value="1">1</a></li>
+                        <li><a href="#"  value="2">2</a></li>
+                        <li><a href="#"  value="3">3</a></li>
+                        <li><a href="#"  value="4">4</a></li>
+                        <li><a href="#"  value="5">5</a></li>
+                        <li><a href="#"  value="6">&raquo;</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal">关闭</button>
+    </div>
+</div>
+<!--<script>-->
+    <!--$(function(){-->
+        <!--$('#approve_survey_call_sheet_modal').css({-->
+            <!--'width': function () {-->
+                <!--return ($(document).width() * .6) + 'px';-->
+            <!--},-->
+            <!--'margin-left': function () {-->
+                <!--return -($(this).width() / 2);-->
+            <!--}-->
+        <!--});-->
+    <!--});-->
+<!--</script>-->

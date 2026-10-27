@@ -1,0 +1,82 @@
+<div class="row-fluid">
+    <div class="span12">
+        <form class="form-horizontal ds_item_edit" action="" client-data="session.ivrMap.ivr.ivr_node_system">
+            <div id="confirm_del_pane"></div>
+            <input type="hidden" name="_id" value="___id">
+            <input type="hidden" name="Exten" value="2">
+            <div class="row-fluid">
+                <div class="span6 offset1">
+                    <i class="icon-plus"></i>修改拨打工号节点
+                </div>
+                <div class="span5 text-right pull-right">
+                    <a class="btn btn-info btn-blue ds_action_flow">
+                        <ds-form-action action="config.ivr.node.system.updateSystem" extra-data="config.callConfig.currentConfigData"
+                                        update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"ivr_node_system"}}'/>
+                        <ds-get-view view="config/callConfig/node/system/system_list" panel="ivrSystemNodePanel"/>
+                        <ds-effect-ivr/>
+                        保存
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="row-fluid">
+                <div class="span8">
+                    <div class="control-group">
+                        <label class="control-label">
+                            节点名称
+                        </label>
+                        <div class="controls">
+                            拨打工号
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            工号不存在转向
+                        </label>
+                        <div class="controls">
+                            <div id="toPeerTypeWhenEmpnoNotExist" class="ds_ivr_to_peer_type" tag-name="ToPeerTypeWhenEmpnoNotExist"
+                                 tag-value-key="ToPeerTypeWhenEmpnoNotExist">
+
+                            </div>
+                            <div id="toPeerWhenEmpnoNotExist" class="ds_ivr_to_peer" tag-value-key="ToPeerWhenEmpnoNotExist">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            座席忙转向
+                        </label>
+                        <div class="controls">
+                            <div id="toPeerTypeWhenEmpnoAgentBusy" class="ds_ivr_to_peer_type" tag-name="ToPeerTypeWhenEmpnoAgentBusy"
+                                 tag-value-key="ToPeerTypeWhenEmpnoAgentBusy">
+
+                            </div>
+                            <div id="toPeerWhenEmpnoAgentBusy" class="ds_ivr_to_peer" tag-value-key="ToPeerWhenEmpnoAgentBusy">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            座席未登陆转向
+                        </label>
+                        <div class="controls">
+                            <div id="toPeerTypeWhenEmpnoLogoff" class="ds_ivr_to_peer_type" tag-name="ToPeerTypeWhenEmpnoLogoff"
+                                 tag-value-key="ToPeerTypeWhenEmpnoLogoff">
+
+                            </div>
+                            <div id="toPeerWhenEmpnoLogoff" class="ds_ivr_to_peer" tag-value-key="ToPeerWhenEmpnoLogoff">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ds_item_edit_param" ToPeerTypeWhenEmpnoNotExist="" ToPeerWhenEmpnoNotExist=""
+                         ToPeerTypeWhenEmpnoAgentBusy="" ToPeerWhenEmpnoAgentBusy="" ToPeerTypeWhenEmpnoLogoff=""
+                         ToPeerWhenEmpnoLogoff="" style="display:none"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

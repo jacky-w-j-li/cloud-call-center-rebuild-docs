@@ -1,0 +1,187 @@
+<div class="left_column" id="contact_list_cdr">
+    <div class="model_submenu" style="padding: 5px;">
+        <div class="btn-group">
+            <button class="btn ds_do_action btn_cdr_call active" style="width: 114px" ds_action="cdr.quick_subMenu_search" ds_data="cdr_call">来电 <span class="badge badge-important"></span></button>
+            <button class="btn ds_do_action btn_cdr_my" style="width: 114px" ds_action="cdr.quick_subMenu_search" ds_data="cdr_my">我的通话 <span class="badge badge-important"></span></button>
+            <button class="btn ds_do_action btn_cdr_all" style="width: 114px" ds_action="cdr.quick_subMenu_search" ds_data="cdr_all">所有通话</button>
+        </div>
+    </div>
+    <div class="list_card">
+        <div id="view_cdr_call" class="card_pane"></div>
+        <div id="view_cdr_my" class="card_pane"></div>
+        <div id="view_cdr_all" class="card_pane"></div>
+    </div>
+</div>
+
+<div class="right_column">
+    <div class="contact_detail" style="padding: 0;">
+        <div class="content" style="overflow: hidden;">
+            <div id="view_cdr_my_content" class="content_pane full_height"></div>
+            <div id="view_cdr_all_content" class="content_pane full_height"></div>
+            <div id="view_cdr_call_content" class="content_pane full_height">
+                <div class="right_column full_height" id="contact_detail_cdr_call">
+                    <div class="contact_detail pd0">
+                        <div class="content" style="overflow-y: auto;">
+                            <div class="" style="padding: 30px 50px 50px;">
+                                <div class="alert alert-block">
+                                    <!--<button type="button" class="close" data-dismiss="alert">&times;</button>-->
+                                    <h4>来电弹屏的卡片限制</h4>
+                                    <p>
+                                        来电弹屏最多弹出20个卡片，如未处理则旧的会被剔除掉。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script id="tmpl_callsheet_item" type="text/html">
+    <div class="list_item list_item_check">
+        <div class="ds_do_action item_row item{{=_id}} item_check" ds_action="cdr.showCdrDetail" ds_data="{{=_id}}" style="">
+            <div class="card_row">
+                <input type="hidden" name="pk" value="{{=_id}}" >
+                <div class="card_right">
+                    <div class="muted" title="{{=OFFERING_TIME}}">{{=shortTime}}</div>
+                    <div class="muted" style="line-height: 25px" title="通话时长{{=shortCallTimeLength}}" >{{=shortCallTimeLength}}</div>
+                    <div style="position: absolute;bottom: 5px;right:0;"><span class="label {{=statusClass}}">{{=statusDesc}}</span></div>
+                </div>
+                <div class="card_left">
+                    <div style="">
+                        <b class="ico_select_checkbox ico ico_wrap ico_item_checkbox cdr_item"></b>
+                    </div>
+                    <div style="position: absolute;bottom: 5px;left:0;">{{=#dialTypeDesc}}</div>
+                </div>
+                <div class="card_middle" style="margin-right:40px;">
+                    <div class="card_row_title"><span style="color:#000" >{{=callNoDesc}}</span>
+                        <span class="cdr-call-customer icon-call-customer"onclick="softphonebar_dialout('{{=callNo}}')" style="display:none;"></span>
+                        &nbsp;<i class="icon-tag" style="{{=showTag}}" title="标记"></i>
+                        &nbsp;<a href="#" class="ds_do_action cdr_add_memo_pencil" style="display: none;" ds_action="cdr.addCdrMemo" ds_data="{{=CALL_SHEET_ID}}"><i class="icon-pencil" title="备注"></i></a>
+                    </div>
+                    <div class="customer customer_mini ellipsis">{{=CUSTOMER_NAME}}</div>
+                    <div class="ellipsis muted">
+                        <span title="处理座席">{{=agentDesc}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span title="呼入技能组" class="listen_to_the_tape">{{=queueDesc}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="ds_do_action " href="#" style="{{=showPlayBtn}}" ds_action="customer.showRecord" ds_data="{{=monitorFile}}"><i class="icon-play-circle"></i></a>
+                        <!--<span class="{{=jmp3Tag}}" style="position: absolute">{{=monitorFile}}</span>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script id="tmpl_callsheet_item_no_listen" type="text/html">
+    <div class="list_item list_item_check">
+        <div class="ds_do_action item_row item{{=_id}} item_check" ds_action="cdr.showCdrDetail" ds_data="{{=_id}}" style="">
+            <div class="card_row">
+                <input type="hidden" name="pk" value="{{=_id}}" >
+                <div class="card_right">
+                    <div class="muted" title="{{=OFFERING_TIME}}">{{=shortTime}}</div>
+                    <div class="muted" style="line-height: 25px" title="通话时长{{=shortCallTimeLength}}" >{{=shortCallTimeLength}}</div>
+                    <div style="position: absolute;bottom: 5px;right:0;"><span class="label {{=statusClass}}">{{=statusDesc}}</span></div>
+                </div>
+                <div class="card_left">
+                    <div style="">
+                        <b class="ico_select_checkbox ico ico_wrap ico_item_checkbox cdr_item"></b>
+                    </div>
+                    <div style="position: absolute;bottom: 5px;left:0;">{{=#dialTypeDesc}}</div>
+                </div>
+                <div class="card_middle">
+                    <div class="card_row_title"><a href="#" style="color:#000" onclick="softphonebar_dialout('{{=callNo}}')">{{=callNoDesc}}</a>
+                        &nbsp;<i class="icon-tag" style="{{=showTag}}" title="标记"></i>
+                        &nbsp;<a href="#" class="ds_do_action cdr_add_memo_pencil" style="display: none;" ds_action="cdr.addCdrMemo" ds_data="{{=CALL_SHEET_ID}}"><i class="icon-pencil" title="备注"></i></a>
+                    </div>
+                    <div class="customer customer_mini ellipsis">{{=CUSTOMER_NAME}}</div>
+                    <div class="ellipsis muted">
+                        <span title="处理座席">{{=agentDesc}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span title="呼入技能组">{{=queueDesc}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <!--<span class="{{=jmp3Tag}}" style="position: absolute">{{=monitorFile}}</span>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script id="tmpl_callsheet_item_no_all" type="text/html">
+    <div class="list_item list_item_check">
+        <div class="ds_do_action item_row item{{=_id}} item_check" ds_action="cdr.showCdrDetail" ds_data="{{=_id}}" style="">
+            <div class="card_row">
+                <input type="hidden" name="pk" value="{{=_id}}" >
+                <div class="card_right">
+                    <div class="muted" title="{{=OFFERING_TIME}}">{{=shortTime}}</div>
+                    <div class="muted" style="line-height: 25px" title="通话时长{{=shortCallTimeLength}}" >{{=shortCallTimeLength}}</div>
+                    <div style="position: absolute;bottom: 5px;right:0;"><span class="label {{=statusClass}}">{{=statusDesc}}</span></div>
+                </div>
+                <div class="card_left">
+                    <div style="">
+                        <b class="ico_select_checkbox ico ico_wrap ico_item_checkbox cdr_item"></b>
+                    </div>
+                    <div style="position: absolute;bottom: 5px;left:0;">{{=#dialTypeDesc}}</div>
+                </div>
+                <div class="card_middle">
+                    <div class="card_row_title"><a href="#" style="color:#000" onclick="softphonebar_dialout('{{=callNo}}')">{{=callNoDesc}}</a>
+                        &nbsp;<i class="icon-tag" style="{{=showTag}}" title="标记"></i>
+                        &nbsp;
+                    </div>
+                    <div class="customer customer_mini ellipsis">{{=CUSTOMER_NAME}}</div>
+                    <div class="ellipsis muted">
+                        <span title="处理座席">{{=agentDesc}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span title="呼入技能组">{{=queueDesc}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <!--<span class="{{=jmp3Tag}}" style="position: absolute">{{=monitorFile}}</span>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script><script id="tmpl_callsheet_item_no_change" type="text/html">
+    <div class="list_item list_item_check">
+        <div class="ds_do_action item_row item{{=_id}} item_check" ds_action="cdr.showCdrDetail" ds_data="{{=_id}}" style="">
+            <div class="card_row">
+                <input type="hidden" name="pk" value="{{=_id}}" >
+                <div class="card_right">
+                    <div class="muted" title="{{=OFFERING_TIME}}">{{=shortTime}}</div>
+                    <div class="muted" style="line-height: 25px" title="通话时长{{=shortCallTimeLength}}" >{{=shortCallTimeLength}}</div>
+                    <div style="position: absolute;bottom: 5px;right:0;"><span class="label {{=statusClass}}">{{=statusDesc}}</span></div>
+                </div>
+                <div class="card_left">
+                    <div style="">
+                        <b class="ico_select_checkbox ico ico_wrap ico_item_checkbox cdr_item"></b>
+                    </div>
+                    <div style="position: absolute;bottom: 5px;left:0;">{{=#dialTypeDesc}}</div>
+                </div>
+                <div class="card_middle">
+                    <div class="card_row_title"><a href="#" style="color:#000" onclick="softphonebar_dialout('{{=callNo}}')">{{=callNoDesc}}</a>
+                        &nbsp;<i class="icon-tag" style="{{=showTag}}" title="标记"></i>
+                        &nbsp;
+                    </div>
+                    <div class="customer customer_mini ellipsis">{{=CUSTOMER_NAME}}</div>
+                    <div class="ellipsis muted">
+                        <span title="处理座席">{{=agentDesc}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span title="呼入技能组">{{=queueDesc}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="ds_do_action " href="#" style="{{=showPlayBtn}}" ds_action="customer.showRecord" ds_data="{{=monitorFile}}"><i class="icon-play-circle"></i></a>
+                        <!--<span class="{{=jmp3Tag}}" style="position: absolute">{{=monitorFile}}</span>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script>
+    $('#contact_list_cdr').on('change', "select[name='STATUS']", function(event){
+        event.preventDefault();
+        var src = $(event.currentTarget);
+        handler.cdr.changeQuickSearchCdrStauts(src);
+    });
+    $('#contact_list_cdr').on('click', ".reset_adv_search", function(event){
+        event.preventDefault();
+        var src = $(event.currentTarget);
+        src.closest('.list_check_pane').find(".quickSearchCdrStauts_current").html("全部");
+    });
+</script>
+
+

@@ -1,0 +1,24 @@
+<div class="well" style="padding: 0 19px;">
+    <h2>试用号码:_#_id#_<small>月租:<span class="text-primary monthRent">_@formatTrueFee(_#monthRent#_)@_</span>元
+    </small></h2>
+    <p class="text-muted">到期日期为<strong class="text-danger">_#endTime#_</strong></p>
+</div>
+<form class="form-horizontal" id="frm_serviceno_detail">
+    <input type="hidden" name="_id" value="_#_id#_">
+    <input type="hidden" name="product" value="_#product#_">
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            重置到期时间
+        </label>
+        <div class="col-md-5 ">
+            <input type="text" name="resetTime" class="form-control input-sm ds_date " style="display: inline-block;width: auto"/>
+            <label for="resetTime" class="error" style="display: none;"></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="button" class="btn btn-primary ds_form_action" ds_action="account.resetTime" >确认</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+    </div>
+</form>

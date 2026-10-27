@@ -1,0 +1,71 @@
+<div class="row-fluid">
+    <div class="span12">
+        <form class="form-horizontal" action="">
+            <input type="hidden" name="SoundFilePath" id="ivrSoundFilePath"/>
+            <input type="hidden" name="OldSoundFilePath" id="oldIvrSoundFilePath"/>
+            <input type="hidden" name="IsQiniuMusic"/>
+            <input type="hidden" name="QiniuMusicUrl"/>
+            <div class="row-fluid">
+                <div class="span7 offset1">
+                    <i class="icon-plus"></i>添加语音
+                </div>
+                <div class="span4 text-right pull-right">
+                    <a class="btn btn-info btn-blue ds_action_flow">
+                        <ds-form-action action="config.ivr.sound.updateSound"
+                                        extra-data="config.callConfig.currentConfigData"
+                                        update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"ivr_sound"}}'/>
+                        <ds-get-view view="config/callConfig/sound/sound_list" panel="ivrSoundPanel"/>
+                        保存
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+
+            <div class="control-group">
+                <label class="control-label aa">语音文件类型</label>
+
+                <div class="controls">
+                    <select name="SoundType">
+                        <option value="normal">普通</option>
+                        <option value="hold">队列等待语音</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    语音文件名称
+                </label>
+
+                <div class="controls">
+                    <input type="text" name="DisplayName" msgName="语音文件名称" required/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    语音文件
+                </label>
+
+                <div class="controls">
+                    <input type="file" id="fileToUpload" class="ds_upload"
+                           onloaded="config.callConfig.sound.uploaded" onerror="config.callConfig.sound.uploadError"
+                           onprogress="config.callConfig.sound.uploadProgressing"/>
+
+                    <p class="text-success" id="uploadMess" style="display:none;">文件已上传</p>
+                </div>
+            </div>
+            <div class="alert" style="width: 260px;margin-left: 90px">
+                <strong>注意</strong> <br>上传的语音文件，推荐为wav格式！如果非wav格式，将为您自动转码，转码后音质可能有损失！
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    语音文件说明
+                </label>
+
+                <div class="controls">
+                    <input type="text" name="Memo" maxlength="50"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+<div class="right_container" id="batch_send_sms_main_panel">
+    <div style="height:98%;margin:3px 3px;" id="my_sms_query">
+        <div class="row-fluid ">
+            <br/>
+            <h5><i class="icon-list-alt"></i>&nbsp;群发短信</h5>
+            <br/>
+            <form id="my_sms_form" class="form-inline batch_send_sms_query_form">
+                <div style="/*float:left; border-right:1px solid #CDCDCD;padding-right: 20px;padding-left: 10px;height: 100%*/">
+                    <div class="span12">
+                        <div class="clear10"></div>
+                        <div>
+                            <label>手机号码:</label>
+                            <textarea name="nums" style="height: 180px;width: 500px;"></textarea>
+                            <input class="batchSmsSendType" type="hidden" name="sendType" value="template">
+                            <input class="batchTemplateSign" type="hidden" name="batchTemplateSign">
+                        </div>
+                        <div class="clear10"></div>
+                        <div class="tabbable">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#batchSmsSendTemplatePane" data-toggle="tab" onclick="handler.sms.choiceBatchSendType('template')">模板发送</a>
+                                <!--<li><a href="#batchSmsSendManualPane" data-toggle="tab" onclick="handler.sms.choiceBatchSendType('manual')">人工审核&nbsp;<i class="icon-question-sign sms_manual_tip"></i></a></li>-->
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="batchSmsSendTemplatePane">
+                                    <select class="batchSmsTemplate" name="template" onchange="handler.sms.changeBatchSmsTemplate(this.value)">
+                                    </select>
+                                    <div class="alert alert-white" style="max-width: 600px;margin-top:10px;">
+                                        <div id="batchSmsContentPane">
+                                        </div>
+                                        <div id="batchSmsVarsListPane">
+                                        </div>
+                                        <div id="batchSmsTemplateSign"></div>
+                                        <p class="batchSmsTemplateTitle"></p>
+                                    </div>
+                                </div>
+                                <!--<div class="tab-pane" id="batchSmsSendManualPane">-->
+                                    <!--<div>-->
+                                        <!--<label>短信内容:</label>-->
+                                <!--<textarea class="smsContent" name="content" style="resize:none;height: 90px;width: 500px"-->
+                                          <!--onkeyup="javascript:handler.sms.changeBatchSmsText(this)"></textarea>-->
+                                    <!--</div>-->
+                                    <!--<p class="batchSmsTitle" style="margin-left: 55px"></p>-->
+                                    <!--<div class="clear10"></div>-->
+                                    <!--<div>-->
+                                        <!--<label>短信签名:</label>-->
+                                        <!--<select class="batchSmsSign" name="sign">-->
+                                        <!--</select>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            </div>
+                        </div>
+                        <!--<div>-->
+                            <!--<label>短信内容:</label>-->
+                            <!--<textarea class="smsContent" name="content" style="resize:none;height: 90px;width: 500px"-->
+                                      <!--onkeyup="javascript:handler.sms.changeBatchSmsText(this)"></textarea>-->
+                        <!--</div>-->
+                        <!--<p class="batchSmsTitle" style="margin-left: 55px"></p>-->
+                        <!--<div class="clear10"></div>-->
+                        <!--<div>-->
+                            <!--<label>短信签名:</label>-->
+                            <!--<select class="batchSmsSign" name="sign">-->
+                            <!--</select>-->
+                        <!--</div>-->
+                    </div>
+                    <!--<div class="clear10"></div>-->
+                    <!--<div class="clear10"></div>-->
+                    <div class="span12">
+                        <div class="form_buttons" style="padding-top:10px;">
+                            <button type="button" class="btn btn-small btn-primary ds_form_action pull-right " ds_action="sms.sendBatchSms" style="margin-right: 20px;">发送</button>
+                            <button type="button" class="btn btn-small btn-info ds_do_action pull-right btn_pad" ds_action="sms.resetSms" ds_data="batch">重置</button>
+                        </div>
+                    </div>
+                    <!--<div>-->
+                        <!--<a href="#" class="button ds_do_action" ds_action="sms.resetSms" style="margin:2px 5px;float: right;" >重置</a>-->
+                        <!--<a href="#" class="button ds_form_action" ds_action="sms.sendBatchSms" style="margin:2px 5px;float: right;">发送</a>-->
+                    <!--</div>-->
+                </div>
+            </form>
+        </div>
+
+        <div style="margin-top: 15px;" class="alert alert-warning fl">
+            <strong>注意:</strong>
+            <br>
+            <p>
+            <div style="margin: 15px 0px 15px 0px;">1.单次发送建议手机号码数量不超过3000个。</div>
+            <div style="margin: 15px 0px 15px 0px;">2.手机号码之间请使用英文逗号或者回车分隔。</div>
+            <div style="margin: 15px 0px 15px 0px;">3.汉字、数字、标点符号和英文都表示1个长度。</div>
+            <div style="margin: 15px 0px 15px 0px;">4.短信内容超过66字后，每66字记一条。</div>
+            <div style="margin: 15px 0px 15px 0px;">5.短信内容的实际长度 = 短信内容 + 签名长度。</div>
+            <div style="margin: 15px 0px 15px 0px;">6.请勿提交“政治”、“非法”、“淫秽”、“欺诈”、“博彩”等违法信息。</div>
+            </p>
+        </div>
+    </div>
+</div>
+<style>
+    #batch_send_sms_main_panel label {
+        font-size:12px;
+    }
+</style>

@@ -1,0 +1,15 @@
+context N00000000056-10041-dynamic-route {
+	s => {
+
+		
+		goto N00000000056-10041-DynamicRouteNode-unmatched, s, 1;
+	}
+}
+
+context N00000000056-10041-DynamicRouteNode-unmatched {
+	s => {
+		Hangup;
+	}
+}
+
+

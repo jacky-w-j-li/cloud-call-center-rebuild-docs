@@ -1,0 +1,72 @@
+context N00000000143-10213-superDialJobNum {
+	s => {
+		INPUT_RETRY_TIMES=0;
+        	input="";
+        	BackGround(/etc/asterisk/1.1.1);
+      		loop:
+        	WaitExten(10);
+    	}
+
+    	_[1-9] => {
+        	input=${input}${EXTEN};
+        	if(${LEN(${input})} == 4){
+			JOBNUM=${input};
+        		Agi(agi://127.0.0.1:7891/AgiSuperDialin?pbx=${HOST}&exten=${JOBNUM});
+			if(${JOBNUM_STATUS} == 1){
+				Playback(sound/dialinnoexist);
+		Hangup;	
+			}
+			if(${JOBNUM_STATUS} == 2){
+				Playback(sound/dialinnosignin);
+		Hangup;
+			}
+			if(${JOBNUM_STATUS} == 3){
+				Playback(sound/dialinbusy);
+		Hangup;
+			}
+        	}
+        	goto s,loop;
+    	}
+	
+	0 => {
+		if("${input}a" == "a"){
+			Hangup;
+		}else{
+			input=${input}${EXTEN};
+                	if(${LEN(${input})} == 4){
+                        	JOBNUM=${input};
+                        	Agi(agi://127.0.0.1:7891/AgiSuperDialin?pbx=${HOST}&exten=${JOBNUM});
+                        	if(${JOBNUM_STATUS} == 1){
+                                	Playback(sound/dialinnoexist);
+		Hangup;
+                        	}
+                        	if(${JOBNUM_STATUS} == 2){
+                                	Playback(sound/dialinnosignin);
+		Hangup;
+                        	}
+                        	if(${JOBNUM_STATUS} == 3){
+                                	Playback(sound/dialinbusy);
+		Hangup;
+                        	}
+                	}
+                	goto s,loop;
+		}
+	}
+	
+	t => {
+                INPUT_RETRY_TIMES=${INPUT_RETRY_TIMES} + 1;
+                if(${INPUT_RETRY_TIMES} >= 3){
+                        Playback(sound/bye);
+                        Hangup();
+                }
+                Playback(sound/timeout);
+                goto s,loop;
+        }
+	
+	i => {
+        	Playback(sound/incorrect);
+        	goto s, 1;
+    	}
+}
+
+

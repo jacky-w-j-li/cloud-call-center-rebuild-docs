@@ -1,0 +1,85 @@
+<div class="row-fluid">
+    <div class="span12">
+        <form class="form-horizontal ds_item_edit" action="" client-data="session.ivrMap.ivr.ivr_line"
+              on-complete="config.callConfig.line.preEditLine">
+            <input type="hidden" name="_id" value="___id"/>
+            <input type="hidden" name="Dialout" value="___Dialout"/>
+            <div class="row-fluid">
+                <div class="span7 offset1">
+                    <i class="icon-edit"></i>修改线路
+                </div>
+                <div class="span4 text-right pull-right">
+                    <a class="btn btn-info btn-blue ds_action_flow">
+                        <ds-form-action action="config.ivr.line.updateLine" extra-data="config.callConfig.currentConfigData"
+                                        update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"ivr_line"}}'
+                                on-before="config.callConfig.line.lineBeforeUpdated"
+                                on-complete="config.callConfig.line.lineUpdated"/>
+                        <ds-get-view view="config/callConfig/line/line_list" panel="ivrLinePanel"/>
+                        保存
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+
+            <div class="control-group">
+                <label class="control-label">机柜</label>
+                <div class="controls" id="boardSelectPanel">
+                    <select name="Board">
+                        <option value="">--请选择--</option>
+                    </select>
+                </div>
+                <input type="hidden" id="line_edit_old_board" name="Board">
+            </div>
+            <div class="control-group">
+                <label class="control-label">外呼路由</label>
+                <div class="controls" id="lineSelectPanel">
+                    <select name="Exten">
+                        <option value="">--请选择--</option>
+                    </select>
+                </div>
+                <input type="hidden" id="line_edit_old_exten" name="Exten">
+            </div>
+            <div class="control-group">
+                <label class="control-label">透传号码</label>
+                <div class="controls">
+                    <input type="text" name="DidNum" required/>
+                </div>
+            </div>
+            <hr>
+            <div class="control-group multiDidNum_div">
+                <label class="control-label">是否启用多透传号码</label>
+                <div class="controls">
+                    <input type="radio" name="MultiDidEnable" value="true" required/>启用
+                    <input type="radio" name="MultiDidEnable" value="false" checked required/>不启用
+                </div>
+            </div>
+            <div class="control-group multiDidNum_div">
+                <label class="control-label">多透传号应用范围</label>
+                <div class="controls">
+                    <input type="radio" name="MultiDidScope" value="all" checked required/>全部
+                    <input type="radio" name="MultiDidScope" value="hand" required/>手拨外呼
+                    <input type="radio" name="MultiDidScope" value="auto" required/>批量外呼
+                </div>
+            </div>
+            <div class="control-group multiDidNum_div">
+                <label class="control-label">透传策略</label>
+                <div class="controls">
+                    <input type="radio" name="MultiDidStrategy" value="order" checked required/>配置顺序
+                    <input type="radio" name="MultiDidStrategy" value="random" required/>随机顺序
+                </div>
+            </div>
+            <div class="control-group multiDidNum_div">
+                <label class="control-label">多透传号码内容</label>
+                <div class="controls">
+                    <textarea name="MultiDidNum" class="multiDidNum_content"></textarea>
+                </div>
+            </div>
+            <br>
+            <div class="alert alert-success multiDidNum_div">
+                <strong>温馨提示</strong> 多透传号码可以配置多个单独号码和号码段以英文逗号分割，号码段以中划线分割。
+                <br>例如：01053500303,01053500000-01053509999,01053770101
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,201 @@
+<!--<script type="text/javascript" src="javascripts/config/business/jquery-ui.js"></script>-->
+<script type="text/javascript" src="javascripts/config/business/jquery.ui.touch-punch.min.js"></script>
+<script type="text/javascript" src="javascripts/config/business/jquery.htmlClean.js"></script>
+<script type="text/javascript" src="javascripts/config/business/config.js"></script>
+<script type="text/javascript" src="javascripts/config/business/scripts.js"></script>
+<LINK href="stylesheets/layoutit.css?1101" type="text/css" rel="stylesheet">
+
+<div class="row-fluid">
+    <div style="float: left;">
+        <h4>步骤动作配置</h4>
+    </div>
+    <div style="float: right">
+        <button href="#stopBusinessStepActionModal" data-toggle="modal" class="btn btn-danger ds_do_action" ds_action="config.business.showDeleteBusinessStepAction" ds_data="__id">删除动作</button>
+        <div id="stopBusinessStepActionModal" class="modal hide fade" tabindex="-1" role="dialog"
+             aria-hidden="true">
+
+        </div>
+    </div>
+    <div style="float: right;margin-right: 10px;">
+        <button class="btn btn-primary ds_do_action" ds_action="config.business.saveBusinessStepAction">保存配置</button>
+    </div>
+</div>
+<div class="row-fluid">
+    <div style="float: left;">
+        <span>基本信息</span>
+    </div>
+    <div style="width: 100%;height: 1px;background-color:deepskyblue;float: left;margin-top: 8px; "></div>
+</div>
+<div class="row-fluid">
+    <form id="config_business_step_action_info_form">
+        <div class="row_item">
+            <label for="name">动作名称</label>
+            <input id="name" name="name" maxlength="10" type="text" value="__name" msgName="动作名称" required=""/>
+        </div>
+        <div class="row_item">
+            <label for="__id_jumpTo">执行动作后转入</label>
+            <select name="jumpTo" id="__id_jumpTo" selectValue="__jumpTo">
+                <option value="">--请选择--</option>
+            </select>
+        </div>
+        <div class="row_item">
+            <label for="__id_actionRole">动作角色</label>
+            <select name="actionRole" id="__id_actionRole" data="__actionRole">
+                <!--<option value="">--请选择--</option>-->
+            </select>
+        </div>
+    </form>
+</div>
+<div class="row-fluid">
+    <div style="float: left;">
+        <span>动作字段</span>
+    </div>
+    <div style="width: 100%;height: 1px;background-color:deepskyblue;float: left;margin-top: 8px; "></div>
+</div>
+<div class="row-fluid">
+
+    <div class="container-fluid" style="padding-left: 0px;">
+        <div class="row-fluid">
+            <div class="span2" style="margin-top: 10px;">
+                <div class="sidebar-nav" id="config-business-action-sidebar">
+                    <ul class="nav nav-list accordion-group">
+                        <li class="nav-header">
+                            <div class="pull-right popover-info"><i class="icon-question-sign"></i>
+
+                                <div class="popover fade right">
+                                    <div class="arrow"></div>
+                                    <h3 class="popover-title">帮助</h3>
+
+                                    <div class="popover-content">
+                                        在这里设置你界面的栅格布局,有3种布局可选，分别为：一列、两列和三列。只有设置布局后，才可以拖放你定义的字段。
+                                    </div>
+                                </div>
+                            </div>
+                            <i class="icon-plus icon-white"></i> 布局设置
+                        </li>
+                        <li style="display: list-item;" class="rows" id="estRows">
+                            <div class="lyrow dragrow-col1">
+                                <a href="#close" class="remove label label-important"><i class="icon-remove icon-white"></i>删除</a> <span class="drag label"><i
+                                    class="icon-move"></i>拖动</span>
+
+                                <div class="preview">
+                                    <input value="单列" type="text" style="width: 40%;" disabled>
+                                </div>
+                                <div class="view">
+                                    <div class="row-fluid clearfix drag-row">
+                                        <div class="span12 column" layout-data="1-1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lyrow dragrow-col2">
+                                <a href="#close" class="remove label label-important"><i class="icon-remove icon-white"></i>删除</a>
+                                <span class="drag label"><i class="icon-move"></i>拖动</span>
+
+                                <div class="preview">
+                                    <input value="双列" type="text" style="width: 40%;" disabled>
+                                </div>
+                                <div class="view">
+                                    <div class="row-fluid clearfix drag-row">
+                                        <div class="span6 column" layout-data="2-1"></div>
+                                        <div class="span6 column" layout-data="2-1"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="lyrow dragrow-col3">
+                                <a href="#close" class="remove label label-important"><i class="icon-remove icon-white"></i>删除</a>
+                                <span class="drag label"><i class="icon-move"></i>拖动</span>
+
+                                <div class="preview">
+                                    <input value="三列" type="text" style="width: 40%;" disabled>
+                                </div>
+                                <div class="view">
+                                    <div class="row-fluid clearfix drag-row">
+                                        <div class="span4 column" layout-data="3-1"></div>
+                                        <div class="span4 column" layout-data="3-2"></div>
+                                        <div class="span4 column" layout-data="3-3"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul class="nav nav-list accordion-group">
+                        <li class="nav-header">
+                            <i class="icon-plus icon-white"></i>
+                            业务字段
+                            <div class="pull-right popover-info">
+                                <i class="icon-question-sign "></i>
+
+                                <div class="popover fade right">
+                                    <div class="arrow"></div>
+                                    <h3 class="popover-title">帮助</h3>
+
+                                    <div class="popover-content">拖动左边您已经定义的字段，放到右边的布局中即可。必须先拖放布局。</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li style="display: none;" class="boxes" id="config_busienss_flow_action_pane">
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="span10">
+                <div class="row-fluid">
+                    <div style="min-height: 200px;" class="demo ui-sortable business-demo" id="business_step_actions_demo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function config_business_step_action_detail() {
+        $(".apppopover").popover();
+
+        var step = session.business.currentBusinessFlowStep;
+        var currentStepId = step._id;
+        var steps = session.business.currentFlowSteps || [];
+        var tmp = "<option value='_id'>_name</option>";
+        var selectTmp = "<option value='_id' selected>_name</option>";
+        var jumpPane = $("#__id_jumpTo");
+        var jumpValue = jumpPane.attr("selectValue");
+        jumpPane.empty();
+        for (var i = 0; i < steps.length; i++) {
+            if (steps[i]._id == jumpValue) {
+                jumpPane.append(selectTmp.replace(/_id/g, steps[i]._id).replace(/_name/g, steps[i].name));
+            } else if(steps[i]._id != currentStepId){
+                jumpPane.append(tmp.replace(/_id/g, steps[i]._id).replace(/_name/g, steps[i].name));
+            }
+        }
+
+        var roles = getCache("roles") || [];
+        var tmp = "<option value='_id'>_name</option>";
+        var html = "";
+        for (var i = 0; i < roles.length; i++) {
+            var rolesItem = roles[i];
+            html += tmp.replace(/_id/g, rolesItem._id).replace(/_name/g, rolesItem.display_name);
+        }
+        //增加一个动态角色,工单创建人
+        html += tmp.replace(/_id/g, "busCreateUser").replace(/_name/g, "工单创建人");
+        $("#__id_actionRole").append(html);
+        $("#__id_actionRole").val($("#__id_actionRole").attr("data"));
+
+    }
+
+</script>
+
+<style type="text/css">
+    .demo-label {
+        margin-top: 3px;
+    }
+
+    .inline-checkbox {
+        float: left;
+        margin-left: 5px;
+    }
+</style>

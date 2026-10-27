@@ -1,0 +1,295 @@
+context N00000000143-10233-ivr {
+	_X. => {
+		FROM_CONTEXT="${CONTEXT}";
+		if("${FROM_IVR}a" == "a")
+            FROM_IVR="";
+		goto N00000000143-10233-ivr-input,s,1;
+	}
+}
+
+context N00000000143-10233-ivr-input {
+	s => {
+		INPUT_RETRY_TIMES=0;
+		loop:
+		BackGround(/etc/asterisk/1.1.1);
+		WaitExten(10);
+	}
+
+	1 => {
+		KEY_OF_IVR=${EXTEN};
+		if("${FROM_IVR}foo" == "foo")
+			FROM_IVR=10233@${EXTEN};
+		else 
+			FROM_IVR="${FROM_IVR}-10233@1";	
+		Set(__IVRKEY=${FROM_IVR});
+		goto N00000000143-10000197-queue,10000197,1;
+	}
+
+	2 => {
+		KEY_OF_IVR=${EXTEN};
+		if("${FROM_IVR}foo" == "foo")
+			FROM_IVR=10233@${EXTEN};
+		else 
+			FROM_IVR="${FROM_IVR}-10233@2";	
+		Set(__IVRKEY=${FROM_IVR});
+		goto N00000000143-10000197-queue,10000197,1;
+	}
+
+
+
+	i => {
+		INPUT_RETRY_TIMES=${INPUT_RETRY_TIMES} + 1;
+		if(${INPUT_RETRY_TIMES} >= 3){
+			Playback(sound/bye);
+			Hangup();
+		}
+		Playback(sound/incorrect);
+		goto s,loop;
+	}
+	
+	t => {
+		INPUT_RETRY_TIMES=${INPUT_RETRY_TIMES} + 1;
+		if(${INPUT_RETRY_TIMES} >= 3){
+			Playback(sound/bye);
+			Hangup();
+		}
+		Playback(sound/timeout);
+		goto s,loop;
+	}
+}
+
+
+context N00000000143-10063-ivr {
+	_X. => {
+		FROM_CONTEXT="${CONTEXT}";
+		if("${FROM_IVR}a" == "a")
+            FROM_IVR="";
+		goto N00000000143-10063-ivr-input,s,1;
+	}
+}
+
+context N00000000143-10063-ivr-input {
+	s => {
+		INPUT_RETRY_TIMES=0;
+		loop:
+		BackGround(/etc/asterisk/1.1.1.101/accounts/N00000000143/sound/1d9dd9fc83415ea0798de0b272eb3bd6);
+		WaitExten(10);
+	}
+
+	1 => {
+		KEY_OF_IVR=${EXTEN};
+		if("${FROM_IVR}foo" == "foo")
+			FROM_IVR=10063@${EXTEN};
+		else 
+			FROM_IVR="${FROM_IVR}-10063@1";	
+		Set(__IVRKEY=${FROM_IVR});
+		goto N00000000143-10139-ivr,${FROM_DID},1;
+	}
+
+	2 => {
+		KEY_OF_IVR=${EXTEN};
+		if("${FROM_IVR}foo" == "foo")
+			FROM_IVR=10063@${EXTEN};
+		else 
+			FROM_IVR="${FROM_IVR}-10063@2";	
+		Set(__IVRKEY=${FROM_IVR});
+		goto N00000000143-10084-assignment,s,1;
+	}
+
+
+
+	i => {
+		INPUT_RETRY_TIMES=${INPUT_RETRY_TIMES} + 1;
+		if(${INPUT_RETRY_TIMES} >= 3){
+			Playback(sound/bye);
+			Hangup();
+		}
+		Playback(sound/incorrect);
+		goto s,loop;
+	}
+	
+	t => {
+		INPUT_RETRY_TIMES=${INPUT_RETRY_TIMES} + 1;
+		if(${INPUT_RETRY_TIMES} >= 3){
+			Playback(sound/bye);
+			Hangup();
+		}
+		Playback(sound/timeout);
+		goto s,loop;
+	}
+}
+
+
+context N00000000143-10238-ivr {
+	_X. => {
+		FROM_CONTEXT="${CONTEXT}";
+		if("${FROM_IVR}a" == "a")
+            FROM_IVR="";
+		goto N00000000143-10238-ivr-input,s,1;
+	}
+}
+
+context N00000000143-10238-ivr-input {
+	s => {
+		INPUT_RETRY_TIMES=0;
+		loop:
+		BackGround(/etc/asterisk/1.1.1);
+		WaitExten(10);
+	}
+
+	1 => {
+		KEY_OF_IVR=${EXTEN};
+		if("${FROM_IVR}foo" == "foo")
+			FROM_IVR=10238@${EXTEN};
+		else 
+			FROM_IVR="${FROM_IVR}-10238@1";	
+		Set(__IVRKEY=${FROM_IVR});
+		goto N00000000143-10239-callurl,s,1;
+	}
+
+	2 => {
+		KEY_OF_IVR=${EXTEN};
+		if("${FROM_IVR}foo" == "foo")
+			FROM_IVR=10238@${EXTEN};
+		else 
+			FROM_IVR="${FROM_IVR}-10238@2";	
+		Set(__IVRKEY=${FROM_IVR});
+		goto N00000000143-10241-ExtensionPeer, s, 1;
+	}
+
+
+
+	i => {
+		INPUT_RETRY_TIMES=${INPUT_RETRY_TIMES} + 1;
+		if(${INPUT_RETRY_TIMES} >= 3){
+			Playback(sound/bye);
+			Hangup();
+		}
+		Playback(sound/incorrect);
+		goto s,loop;
+	}
+	
+	t => {
+		INPUT_RETRY_TIMES=${INPUT_RETRY_TIMES} + 1;
+		if(${INPUT_RETRY_TIMES} >= 3){
+			Playback(sound/bye);
+			Hangup();
+		}
+		Playback(sound/timeout);
+		goto s,loop;
+	}
+}
+
+
+context N00000000143-10237-ivr {
+	_X. => {
+		FROM_CONTEXT="${CONTEXT}";
+		if("${FROM_IVR}a" == "a")
+            FROM_IVR="";
+		goto N00000000143-10237-ivr-input,s,1;
+	}
+}
+
+context N00000000143-10237-ivr-input {
+	s => {
+		INPUT_RETRY_TIMES=0;
+		loop:
+		BackGround(/etc/asterisk/1.1.1.101/accounts/N00000000143/sound/1d9dd9fc83415ea0798de0b272eb3bd6);
+		WaitExten(10);
+	}
+
+	1 => {
+		KEY_OF_IVR=${EXTEN};
+		if("${FROM_IVR}foo" == "foo")
+			FROM_IVR=10237@${EXTEN};
+		else 
+			FROM_IVR="${FROM_IVR}-10237@1";	
+		Set(__IVRKEY=${FROM_IVR});
+		goto N00000000143-10087-ExtensionPeer, s, 1;
+	}
+
+
+
+	i => {
+		INPUT_RETRY_TIMES=${INPUT_RETRY_TIMES} + 1;
+		if(${INPUT_RETRY_TIMES} >= 3){
+			Playback(sound/bye);
+			Hangup();
+		}
+		Playback(sound/incorrect);
+		goto s,loop;
+	}
+	
+	t => {
+		INPUT_RETRY_TIMES=${INPUT_RETRY_TIMES} + 1;
+		if(${INPUT_RETRY_TIMES} >= 3){
+			Playback(sound/bye);
+			Hangup();
+		}
+		Playback(sound/timeout);
+		goto s,loop;
+	}
+}
+
+
+context N00000000143-10139-ivr {
+	_X. => {
+		FROM_CONTEXT="${CONTEXT}";
+		if("${FROM_IVR}a" == "a")
+            FROM_IVR="";
+		goto N00000000143-10139-ivr-input,s,1;
+	}
+}
+
+context N00000000143-10139-ivr-input {
+	s => {
+		INPUT_RETRY_TIMES=0;
+		loop:
+		BackGround(/etc/asterisk/1.1.1.101/accounts/N00000000143/sound/130573d3f5989f57c7205217943d1099);
+		WaitExten(15);
+	}
+
+	5 => {
+		KEY_OF_IVR=${EXTEN};
+		if("${FROM_IVR}foo" == "foo")
+			FROM_IVR=10139@${EXTEN};
+		else 
+			FROM_IVR="${FROM_IVR}-10139@5";	
+		Set(__IVRKEY=${FROM_IVR});
+		goto N00000000143-10094-announcement,${FROM_DID},1;
+	}
+
+	0 => {
+		KEY_OF_IVR=${EXTEN};
+		if("${FROM_IVR}foo" == "foo")
+			FROM_IVR=10139@${EXTEN};
+		else 
+			FROM_IVR="${FROM_IVR}-10139@0";	
+		Set(__IVRKEY=${FROM_IVR});
+		goto N00000000143-10000197-queue,10000197,1;
+	}
+
+
+
+	i => {
+		INPUT_RETRY_TIMES=${INPUT_RETRY_TIMES} + 1;
+		if(${INPUT_RETRY_TIMES} >= 3){
+			Playback(sound/bye);
+			Hangup();
+		}
+		Playback(sound/incorrect);
+		goto s,loop;
+	}
+	
+	t => {
+		INPUT_RETRY_TIMES=${INPUT_RETRY_TIMES} + 1;
+		if(${INPUT_RETRY_TIMES} >= 3){
+			Playback(sound/bye);
+			Hangup();
+		}
+		Playback(sound/timeout);
+		goto s,loop;
+	}
+}
+
+

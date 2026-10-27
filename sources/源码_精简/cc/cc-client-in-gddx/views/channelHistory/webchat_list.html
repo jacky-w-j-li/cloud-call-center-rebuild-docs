@@ -1,0 +1,82 @@
+<div tabindex="-1" class="advanced_search_pane hidden">
+    <div class="advanced_body">
+        <form id="frm_channel_webchat_advanced_search" class="ds_search_form">
+            <input type="hidden" name="isAdvanceSearch" value="1">
+            <fieldset>
+                <div class="row-fluid">
+                    <div class="span4 advanced_search_item ds_search_item ds_owner">
+                        <label>客户名称</label>
+                        <input type="text" name="custName">
+                    </div>
+
+                    <div class="span4 advanced_search_item ds_search_item">
+                        <label>状态</label>
+                        <select name="status">
+                            <option value="" selected>--请选择--</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="padding: 10px;">
+                    <button type="button" class="btn btn-small btn-primary ds_form_action  pull-right" ds_action="channelHistory.searchWebchatCard">搜索</button>
+                    <button type="button" class="btn btn-small  reset_adv_search  pull-right" style="margin-right: 10px;">重置</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<div class="list_container">
+    <div class="list-inside">
+    </div>
+    <div class="list-footer">
+        <div class="pagination pagination-small" for="frm_channel_webchat_normal_search" ds_pagination_action="channelHistory.searchWebchatCard">
+            <span style="float:left;">查询结果: <span class="result_count">0</span></span>
+            <ul class="pull-right" style="padding-right: 2px;">
+                <li>
+                    <a href="#"  value="0">«</a>
+                </li>
+                <li>
+                    <a href="#"  value="1">1</a>
+                </li>
+                <li>
+                    <a href="#"  value="2">2</a>
+                </li>
+                <li>
+                    <a href="#"  value="3">3</a>
+                </li>
+                <li>
+                    <a href="#"  value="4">4</a>
+                </li>
+                <li>
+                    <a href="#"  value="5">5</a>
+                </li>
+                <li>
+                    <a href="#"  value="6">»</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<script id="tmpl_webchat_item" type="text/html">
+    <div class="list_item ">
+        <div class="ds_do_action item_row item{{=_id}} item_check webchat_item" ds_action="channelHistory.showWebchatDetail" ds_data="{{=_id}}" ds_attr="{{=status}}"  style="">
+            <div class="card_row">
+                <input type="hidden" name="pk" value="{{=_id}}" >
+                <div class="card_right">
+                    <div style="position: absolute;bottom: 5px;right:0;"><span class="label label_status {{=statusClass}}" status="{{=status}}">{{=statusDesc}}</span></div>
+                </div>
+                <div class="card_left">
+                    <div style="">
+                        <b class="ico_select_checkbox ico ico_wrap ico_item_checkbox webchat_item"></b>
+                    </div>
+                    <span class="badge badge-important">{{=msgNum}}</span>
+                </div>
+                <div class="card_middle">
+                    <div class="card_row_title">webchat会话</div>
+                    <div class="customer customer_mini ellipsis">{{=custName}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

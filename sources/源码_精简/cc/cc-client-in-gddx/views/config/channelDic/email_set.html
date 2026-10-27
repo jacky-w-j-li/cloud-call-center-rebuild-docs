@@ -1,0 +1,57 @@
+<div class="channel_dic_container" id="channel_dic_#_id#_" style="">
+    <form>
+        <input type="hidden" name="_id" value="_#_id#_">
+        <input type="hidden" name="type" value="email">
+        <fieldset style="" class="email_success_edit">
+            <div class="diction-head" style="border-bottom: 1px solid #E6E6E8;">
+                <span style="font-weight: bold;margin-right: 45px">邮件——结束会话类别配置</span>
+            </div>
+            <div class="dic_content row-fluid">
+                <div class="diction-subject span4 dic_level_1">
+                    <div class="channel_dic_list">
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <button type="button" class="btn-add channelDic-plus" tab="email" style="margin: 0 1px 0 5px">添加</button>
+                    </div>
+                </div>
+                <div class="diction-subject span4 dic_level_2">
+                    <div class="channel_dic_list">
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <button type="button" class="btn-add channelDic-plus" tab="email" style="margin: 0 1px 0 5px;display: none;">添加</button>
+                    </div>
+                </div>
+                <div class="diction-subject span4 dic_level_3">
+                    <div class="channel_dic_list">
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <button type="button" class="btn-add channelDic-plus" tab="email" style="margin: 0 1px 0 5px;display: none;">添加</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </fieldset>
+    </form>
+    <!--<div class="alert alert-block" style="line-height: 18px;margin-top: 30px;">-->
+    <!--</div>-->
+</div>
+
+<div id="tmpl_channel_email_set" style="display: none;">
+    <div class="dic_item row-fluid">
+        <input type="hidden" name="key" value="_#key#_">
+        <input type="hidden" name="lastLevel" value="_#lastLevel#_">
+        <input type="hidden" name="level" value="_#level#_"><!--当前级-->
+        <input type="text" name="name" maxlength=30 placeholder="输入字数请限制在30个字之内" class="input-small channel_dic_input_text span12 channel_focus_action"
+               blur_action="config.channelDic.blurDicItem" value="_#name#_" tab="email">
+    </div>
+</div>
+
+<div id="tmpl_channel_email_set_2" style="display: none;">
+    <input type="hidden" name="key" value="_#key#_">
+    <input type="hidden" name="lastLevel" value="_#lastLevel#_">
+    <input type="hidden" name="level" value="_#level#_"><!--当前级-->
+    <input type="text" name="name" placeholder="输入字数请限制在30个字之内" maxlength=30 class="input-small channel_dic_input_text span12 channel_focus_action"
+           blur_action="config.channelDic.blurDicItem" value="_#name#_" tab="email">
+</div>
+

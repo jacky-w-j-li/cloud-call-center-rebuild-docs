@@ -1,0 +1,51 @@
+<div class="pay_start" style="margin:10px;">
+    <div class="licence_pay">
+        <div class="well" style="padding: 0 19px;">
+            <h2>增加_@licence.showFieldDesc("licenceType","_#licenceType#_")@_<small>
+                licence单价:<span class="text-primary monthRent">_#licencePrice#_</span>元
+            </small></h2>
+            <p class="text-muted">当前licence数<span class="text-primary">_#num#_</span>,到期日期为<strong class="text-danger">_#endDate#_</strong></p>
+            <p class="text-muted">注意：增加的licence到期时间与已购买的licence保持一致，费用是增加的licence从今天至到期时间的费用</p>
+        </div>
+        <form class="form-horizontal" id="frm_licence_update">
+            <input type="hidden" name="_id" value="_#_id#_">
+            <input type="hidden" name="num" value="_#num#_">
+            <input type="hidden" name="licenceType" value="_#licenceType#_">
+            <input type="hidden" name="licencePrice" value="_#licencePrice#_">
+            <input type="hidden" name="beginDate" value="_#beginDate#_">
+            <input type="hidden" name="endDate" value="_#endDate#_">
+            <input type="hidden" name="pbx" value="_#pbx#_">
+            <input type="hidden" name="flag" value="addUseLicence">
+            <div class="form-group">
+                <label class="control-label col-md-3">
+                    增加数量
+                </label>
+                <div class="col-md-5">
+                    <input type="text" onkeyup="value=value.replace(/[^\d]/g,'')" name="num" value='1' class="form-control input-sm ds_spinner_licence" required/>个
+                    <label for="num" class="error" style="display: none;"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">
+                    费用
+                </label>
+                <div class="col-md-8" style="line-height: 35px;">
+                    <span class="fee">_#totalFee#_</span>元
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-8">
+                    <button type="button" class="btn btn-primary ds_form_action licence_addUse" ds_action="licence.showPayAddUseLicence">立刻购买</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+<div class="pay_end" style="display: none;">
+    <p class="text-center">请您在新打开的网上银行页面进行支付，支付完成前请不要关闭该窗口</p>
+    <p class="text-center"><button type="button" class="btn btn-primary ds_do_action" ds_action="licence.finishPay" >支付完成</button></p>
+</div>
+
+

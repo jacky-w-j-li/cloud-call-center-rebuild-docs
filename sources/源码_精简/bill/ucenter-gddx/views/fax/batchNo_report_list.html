@@ -1,0 +1,43 @@
+<div>
+    <!--<p class="">-->
+        <form class="form-inline clearfix" role="form" id="frm_fax_search">
+            <!--<div class="pull-right" style="line-height: 40px;">-->
+                <!--<button type="button" class="btn btn-primary btn-sm ds_form_action" ds_action="batch.exportNum" >导出</button>-->
+            <!--</div>-->
+        </form>
+    <!--</p>-->
+    <div class="panel panel-info">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>批次</th>
+                <th>总数</th>
+                <th>已发送</th>
+                <th>发送失败</th>
+                <th>发送成功</th>
+                <th>成功率</th>
+                <th>平均发送时长(秒)</th>
+                <th>完成比例</th>
+            </tr>
+            </thead>
+            <tbody class="batch_list">
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5">查询结果：<span class="result_count" style="margin-top:3px;display: inline-block;">0</span></div>
+        <div class=" col-md-7">
+            <ul class="pagination pagination-sm pull-right" style="margin: 0;"
+                for="frm_fax_search" ds_pagination_action="fax.getBatchNoReport">
+                <li><a href="#"  value="0">&laquo;</a></li>
+                <li><a href="#"  value="1">1</a></li>
+                <li><a href="#"  value="2">2</a></li>
+                <li><a href="#"  value="3">3</a></li>
+                <li><a href="#"  value="4">4</a></li>
+                <li><a href="#"  value="5">5</a></li>
+                <li><a href="#"  value="6">&raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+<div class="right_content_pane" style="height:100%;overflow:hidden">
+    <div class="panel-heading" style="font-weight: bold">
+        修改技能组
+    </div>
+    <p class="asth">_#DisplayName#_</p>
+    <form id="frm_email_add" class="form-horizontal set_details">
+        <div class="row_item" id="agentAssignPanel">
+            <div class="clearfix">
+                <div class="pull-left">
+                    <label for="email_queue_displayname">技能组名</label>
+                        <input class="sizem" id="email_queue_displayname" type="text" name="DisplayName" value="_#DisplayName#_" required/>
+                </div>
+                <div class="pull-right">
+                    <button type="button" class="btn-blue mr20 ds_form_action"
+                            ds_action="config.channel.saveEmailQueue">保存</button>
+                    <input type="hidden" name="id" value="_#_id#_">
+                </div>
+            </div>
+            <div class="show_result" id="agentAssignResult">
+                    <ul></ul>
+                </div>
+        </div>
+        <div class="row-fluid">
+            <div class="row_item" style="display: none">
+                <label class="control-label" for="email_queue_exten">技能组号</label>
+                    <input id="email_queue_exten" type="text" name="Exten" value="_#Exten#_" readonly/>
+            </div>
+            <div class="row_item" style="display: none">
+                <label class="control-label" for="email_queue_timeout">邮件/微信 提醒时长</label>
+                <span class="input-append">
+                    <input id="email_queue_timeout" style="width: 173px" maxlength="5" dataType="Number,Range" min="1"
+                           type="text" name="Timeout" value="_#Timeout#_" required/>
+                    <span class="add-on" style="height: 15px;line-height: 15px">秒</span>
+                </span>
+            </div>
+            <div class="row_item" style="display: none">
+                <label class="control-label" for="email_queue_waitCount">邮件 最大分配次数</label>
+                    <input id="email_queue_waitCount" type="text" name="WaitCount" value="_#WaitCount#_"
+                           maxlength="2" dataType="Number,Range" min="1" max="99" required/>
+            </div>
+            <div class="row_item" style="display: none">
+                <label class="control-label">技能组为空时，是否立即流转</label>
+                    <input type="radio" name="Joinempty" value="yes" checked>是
+                    <input type="radio" name="Joinempty" value="no">否
+            </div>
+            <div class="row_item" style="display: none">
+                <label class="control-label" for="email_queue_strategy">分配策略</label>
+                    <select id="email_queue_strategy" name="Strategy">
+                        <option selected="selected" value="rrmemory">轮流</option>
+                    </select>
+            </div>
+            <div class="row_item" style="display: none">
+                <label class="control-label" for="email_sendServerPort">技能组为空流向</label>
+                    <input id="email_sendServerPort" type="text" name="ToPeerWhenQueueEmpty" value="_#ToPeerWhenQueueEmpty#_">
+            </div>
+        </div>
+    </form>
+    <div class="queue_toggle_panel">
+        <input type="text" class="sizem img_action_search" placeholder="输入座席姓名或工号" data-provide="typeahead" id="agentAssignAutoComplete" autocomplete="off">
+        <a href="#" id="locationAgentHref" style="display: none">a</a>
+        <!-- <span onchange="selectAllQueueAgent(this)">全选</span> -->
+        <div class="set_result" id="agentAssignTable">
+            <ul></ul>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+</style>
+<script type="text/javascript">
+    $(function(){
+        var fullHeight = $(".right_content_pane").height();
+        var titleHeight = $(".asth").height();
+        var lessHeight = fullHeight - titleHeight - 155;//边线及各种间距
+        $(".show_result").css("max-height",lessHeight*3/10);
+        $(".set_result").css("max-height",lessHeight*7/10);
+    });
+    function selectAllQueueAgent(sel){
+        var allList = $("#agentAssignTable").find("input[type=checkbox]");
+        if(sel.checked==true){
+            $.each(allList,function(key, item){
+                $(item).attr("checked",true);
+            })
+            $.each(allList,function(key, item){
+                $(item).attr("checked",true);
+            })
+        }
+    }
+</script>

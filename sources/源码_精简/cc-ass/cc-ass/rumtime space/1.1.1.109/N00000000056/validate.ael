@@ -1,0 +1,45 @@
+context N00000000056-10030-validate{
+    s => {
+        input="";
+    	BackGround(/development/app/workspace_ds_ali/ass/rumtime space/1.1.1);
+      loop:
+        WaitExten(20);
+    }
+
+    _[0-9] => {
+        input=${input}${EXTEN};
+        if(${LEN(${input})} > 30){
+                Playback(sound/incorrect);
+                goto s,1;
+        }
+        goto s,loop;
+    }
+
+    * => goto s, 1;
+
+    # => {
+        if(${LEN(${input})} > 30 || ${LEN(${input})} < 0){
+                Playback(sound/incorrect);
+                goto s,1;
+        }
+        myvar=${input};
+        goto N00000000056-10030-transflow, ${input}, 1;
+    }
+
+    i => {
+        Playback(sound/incorrect);
+        goto s, 1;
+    }
+
+    t => {
+        Playback(sound/timeout);
+        Hangup;
+    }
+}
+
+context N00000000056-10030-transflow {
+    _. => {
+		Hangup;
+    }
+}
+

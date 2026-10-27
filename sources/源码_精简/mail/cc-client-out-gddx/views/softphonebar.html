@@ -1,0 +1,43 @@
+<div class="phoneBar" style="padding-left: 5px;">
+    <input id="dialout_input" type="text" class="fl" style="float: left;width: 130px;height: 15px;" onkeydown="if(event.keyCode==13){softphonebar_dialout($('#dialout_input').val());}" />
+    <div class="fl" style="width: 5px">&nbsp;</div>
+    <button id="dialoutEnable" class="btn btn-small btn-success fl" style="display: none" type="button" onclick="softphonebar_dialout($('#dialout_input').val());">呼叫</button>
+    <button id="dialoutDisable" class="btn btn-small fl" type="button" disabled>呼叫</button>
+    <button id="hangupEnable" class="btn btn-small btn-danger fl" style="display: none" type="button" onclick="phone_hangup();">挂机</button>
+    <div class="clear10">&nbsp;</div>
+    <button id="transferEnable" class="btn btn-small btn-info fl" style="width:58px;display: none" type="button" data-toggle="modal" data-target="#softphone_transfer">转接</button>
+    <button id="transferDisable" class="btn btn-small fl" style="width:58px;" type="button" disabled>转接</button>
+    <div class="fl" style="width: 11px">&nbsp;</div>
+    <button id="holdEnable" class="btn btn-small btn-info fl" style="width:58px;display: none;" type="button" onclick="phone_hold();">保持</button>
+    <button id="holdDisable" class="btn btn-small fl" style="width:58px;" type="button" disabled>保持</button>
+    <button id="recoverEnable" class="btn btn-small btn-info fl" style="width:58px;display: none" type="button" onclick="phone_unhold();">恢复</button>
+    <div class="fl" style="width: 11px">&nbsp;</div>
+    <button id="threewayEnable" class="btn btn-small btn-info fl" style="width:58px;display: none" type="button" data-toggle="modal" data-target="#softphone_threewaycall">三方</button>
+    <button id="threewayDisable" class="btn btn-small fl" style="width:58px;" type="button" disabled>三方</button>
+</div>
+
+<div id="softphone_transfer" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" style="color: #000;height: 400px; overflow-y: auto">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>转接通话</h3>
+    </div>
+    <div class="modal-body" style="height:300px;" >
+        <input type="text" id="softphone_transfer_div_input" value="请输入工号或手机号" onfocus="if(this.value=='请输入工号或手机号'){this.value='';this.style.color='#000'}"
+               onblur="if(this.value==''){this.value='请输入工号或手机号';this.style.color='#938c8c'}"
+               style="float: left" />
+        <button style="float: left;margin-left: 5px;margin-top: 3px;" onclick="softphonebar_transfer($('#softphone_transfer_div_input').val())">转接</button>
+    </div>
+</div>
+
+<div id="softphone_threewaycall" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" style="color: #000;height: 400px; overflow-y: auto">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>三方通话</h3>
+    </div>
+    <div class="modal-body" style="height:300px;" >
+        <input type="text" id="softphone_threewaycall_div_input" value="请输入工号或手机号" onfocus="if(this.value=='请输入工号或手机号'){this.value='';this.style.color='#000'}"
+               onblur="if(this.value==''){this.value='请输入工号或手机号';this.style.color='#938c8c'}"
+               style="float: left" />
+        <button style="float: left;margin-left: 5px;margin-top: 3px;" onclick="softphonebar_threewaycall($('#softphone_threewaycall_div_input').val())">三方</button>
+    </div>
+</div>

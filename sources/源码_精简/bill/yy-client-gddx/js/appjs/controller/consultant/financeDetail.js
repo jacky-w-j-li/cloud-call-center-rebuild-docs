@@ -1,0 +1,101 @@
+/// add by kivi 2016-09-27 ///
+Ext.define('App.controller.consultant.financeDetail', {
+    extend : 'Ext.app.Controller',
+    views : [],
+    models : [],
+    initFlag : false,
+    refs : [
+        {
+            ref: 'consultantFinanceDetailQueryPanel',
+            selector: 'consultantFinanceDetailQueryPanel'
+        },
+        {
+            ref: 'consultantFinanceDetailGrid',
+            selector: 'consultantFinanceDetailQueryPanel > grid[class="query"]'
+        }
+
+    ],
+    init : function() {
+        this.control({
+            'consultantFinanceDetailQueryPanel': {
+                afterrender: this.initAll
+            },
+
+            'consultantFinanceDetailQueryPanel button#btn_finance_all_query':{
+                click : this.queryAllGrid
+            },
+
+            'consultantFinanceDetailQueryPanel > grid[class="query"]': {
+                selectionchange: this.enableDockItems,
+                itemdblclick: this.showFinanceDetail
+            },
+            'consultantFinanceDetailQueryPanel button#btn_proxy_finance_detail':{
+                click : this.showFinanceDetail
+            },
+            'consultantFinanceDetailQueryPanel button#btn_export_finance_cust':{
+                click:this.exportFinanceCust
+            }
+
+        });
+        this.initFlag = true;
+    },
+    initAll: function (obj) {
+        var panel=this.getConsultantFinanceDetailQueryPanel();
+        App.util.AppUtil.request('bill.consultant.queryFinanceState', {}, function (data, self) {
+            if (data.success) {
+                panel.data=data.stat;
+                panel.down("displayfield[id='consultant_finance_all_in']").setValue(panel.getIncome());
+                panel.down("displayfield[id='consultant_finance_all_out']").setValue(panel.getOutlay());
+            } else {
+                App.util.AppUtil.msg(data.message);
+            }
+        }, this);
+    },
+    queryAllGrid: function (obj) {
+        console.log("show ....")
+        var panel=this.getConsultantFinanceDetailQueryPanel();
+        var form = obj.up("form");
+        if (form.form.isValid()) {
+            var fieldSet = form.down("fieldset[class='query']");
+            var param = App.util.AppUtil.getFormParam(fieldSet);
+
+            App.util.AppUtil.request('bill.consultant.queryFinanceState',param, function (data, self) {
+                if (data.success) {
+                    panel.data=data.stat;
+                    panel.down("displayfield[id='consultant_finance_all_in']").setValue(panel.getIncome());
+                    panel.down("displayfield[id='consultant_finance_all_out']").setValue(panel.getOutlay());
+                    var grid = form.up("panel").down("grid[class='query']");
+                    grid.store.proxy.extraParams.data = Ext.JSON.encode(param);
+                    grid.store.loadPage(1);
+                } else {
+                    App.util.AppUtil.msg(data.message);
+                }
+            }, this);
+        }
+    },
+    showFinanceDetail: function (obj) {
+        var selection = this.getConsultantFinanceDetailGrid().getSelectionModel().getSelection()[0];
+        var win = Ext.create('App.view.consultant.showFinanceDetail', {
+            data: selection.raw,
+            animateTarget: obj
+        });
+        win.setTitle(selection.get('_id') + '---->' + '收支详情');
+        win.show();
+    },
+    enableDockItems: function (selModel, selections) {
+        var grid = this.getConsultantFinanceDetailGrid();
+        var toolbar = grid.child('toolbar[class="dock"]');
+        var items = toolbar.items.items;
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].needSelect) {
+                items[i].setDisabled(selections.length === 0);
+            }
+        }
+    },
+
+
+    //收支明细excel导出的方法
+    exportFinanceCust : function(obj){
+
+    }
+})

@@ -1,0 +1,44 @@
+<div class="right_content_pane">
+    <form id="quality_check_template_pane_form_two" class="form-horizontal">
+        <input type="hidden" name="_id"/>
+        <input type="hidden" name="enable">
+        <div class="right_head clearfix" style="">
+            <div class="pull-left">
+                <h4>pass质检模板</h4>
+            </div>
+            <div class=" pull-right">
+                <a href="#" class="btn ds_do_action"
+                   ds_action="config.qualityCheck.cancelQualityCheckTemplateTwo">返回</a>
+            </div>
+        </div>
+        <div>
+            <div class="control-group">
+                <label class="label-style" for="field_name">质检模板名称</label>
+                <div>
+                    <input id="field_name" name="name" type="text" required msgName="质检模板名称" autocomplete="off" disabled titlr maxlength="20">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="label-style" for="uncurx_ratio">非关键错误比例</label>
+                <div>
+                    <input id="uncurx_ratio" name="uncurxratio" type="text" required msgName="非关键错误比例" autocomplete="off" maxlength="2">%
+                </div>
+            </div>
+        </div>
+        <div class="table-wrap">
+            <ul id="table0" class="clearfix">
+            </ul>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function(){
+        var aHeight = $(window).height();
+        $(".table-wrap").height(aHeight-280);
+        $("#field_name").on("blur",function(){
+            var value= $(this).val();
+            $(this).attr("title",value);
+        })
+
+    })
+</script>

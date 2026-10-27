@@ -1,0 +1,108 @@
+<div class="row-fluid">
+    <div class="span12">
+        <form class="form-horizontal" action="">
+            <input type="hidden" name="_id">
+            <div class="row-fluid">
+                <div class="span7 offset1">
+                    <i class="icon-plus"></i>添加自定义满意度节点
+                </div>
+                <div class="span4 text-right pull-right">
+                    <a class="btn btn-info btn-blue ds_action_flow">
+                        <ds-form-action action="config.ivr.node.satisfaction.updateSatisfaction" extra-data="config.callConfig.currentConfigData"
+                            update-client-data='{"method":"config.callConfig.updateClientData","arg":{"type":"ivr_node_satisfaction"}}'/>
+                        <ds-get-view view="config/callConfig/node/satisfaction/satisfaction_list" panel="ivrSatisfactionNodePanel"/>
+                        <ds-effect-ivr/>
+                        保存
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="row-fluid">
+                <div class="span5">
+                    <div class="control-group">
+                        <label class="control-label">
+                            节点名称
+                        </label>
+                        <div class="controls">
+                            <input type="text" msgName="节点名称" name="DisplayName" required id="add_satisfaction_name"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            欢迎词语音文件
+                        </label>
+                        <div class="controls ds_ivr_sound_select" sound-select-name="Welfilename">
+                            <select name="Welfilename">
+                                <option value="">--请选择--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            无效输入语音文件
+                        </label>
+                        <div class="controls ds_ivr_sound_select" sound-select-name="Invalidfilename">
+                            <select name="Invalidfilename">
+                                <option value="">--请选择--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            输入超时语音文件
+                        </label>
+                        <div class="controls ds_ivr_sound_select" sound-select-name="Timeoutfilename">
+                            <select name="Timeoutfilename">
+                                <option value="">--请选择--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            错误结束语音文件
+                        </label>
+                        <div class="controls ds_ivr_sound_select" sound-select-name="Byefilename">
+                            <select name="Byefilename">
+                                <option value="">--请选择--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            评价结束语音文件
+                        </label>
+                        <div class="controls ds_ivr_sound_select" sound-select-name="Endfilename">
+                            <select name="Endfilename">
+                                <option value="">--请选择--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            验证变量名
+                        </label>
+                        <div class="controls ds_ivr_var_select" var-select-name="Data">
+                            <select name="Data">
+                                <option value="">--请选择--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            正确完成评价后转向
+                        </label>
+                        <div class="controls">
+                            <div id="toPeerType" class="ds_ivr_to_peer_type" tag-name="NextPeerType" tag-value-key="NextPeerType">
+
+                            </div>
+                            <div id="toPeer" class="ds_ivr_to_peer" tag-name="NextPeer" tag-value-key="NextPeer">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,112 @@
+<div class="right_container" id="call_sheet_message_template_query_panel" style="padding:0">
+    <div style="height:98%;margin:3px 3px;" id="my_call_sheet_query">
+        <div class="row-fluid">
+
+            <form id="message_form">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td> <input id="call_in" name="call_in" type="checkbox"></td>
+                            <td class="call_in_txt">呼入</td>
+                            <td><input id="all_num" type="radio" name="choose_service"value="all">所有号</td>
+                            <td><input id="single_num" type="radio" name="choose_service"value="single">指定号</td>
+                            <td><a href="#"  class="btn btn-link btn-small ds_form_action"  ds_action="cdr.refresh_sheet_message_template" style="margin-left: 20px;"><i class="icon-refresh"></i> 刷新</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="all_num_config">
+                    <table>
+                        <tr>
+                            <td>呼入挂机短信模板:</td>
+                            <td>
+                                <select name="call_in_template" id="call_in_message" class="call_status_selector" ></select>
+                            </td>
+                            <td>呼入短信适用范围:</td>
+                            <td>
+                                <select name="call_in_status" id="call_in_status" class="call_status_selector">
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>发送时间:</td>
+                            <td>
+                            <div class="input-append date form_datetime">
+                                <input class="hangup_sms_date_input" size="16" name="begin_time" id="hangup_smsBeginTime" type="text" value="00:00:00" style="width: 80px;z-index: 9" readonly >
+                                <span class="add-on start-datetimepicker-remove" style="height: 14px;line-height: 15px"><i class="icon-repeat"></i></span>
+                                <span class="add-on datetimepicker-open" style="height: 14px;line-height: 15px"><i class="icon-th"></i></span>
+                            </div>
+                            至
+                            <div class="input-append date form_datetime">
+                                <input class="hangup_sms_date_input" size="16" name="end_time" id="hangup_smsEndTime" type="text" value="23:59:59" style="width: 80px;z-index: 9" readonly>
+                                <span class="add-on end-datetimepicker-remove" style="height: 14px;line-height: 15px"><i class="icon-repeat"></i></span>
+                                <span class="add-on datetimepicker-open" style="height: 14px;line-height: 15px"><i class="icon-th"></i></span>
+                            </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="single_num_config" style="width: 97%;">
+                    <table class="table table-hover table-condensed table-bordered">
+                        <tbody id="serviceno_table">
+                        <tr id="serviceno_table_title">
+                            <th style="width:15%;">服务号</th>
+                            <th style="width:25%;">呼入挂机短信模板</th>
+                            <th style="width:15%;">呼入短信适用范围</th>
+                            <th>发送时间</th>
+                            <th style="width:5%;"><a href="#" class="ds-sms-add-service-num"><i class="icon-plus"></i></a> <input type="hidden" id="single_indexof" name ="single_indexof" ></th>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br/>
+                <table>
+                        <tr>
+                            <td><input id="call_out" name="call_out"type="checkbox"></td>
+                            <td class="call_in_txt">呼出</td>
+                            <td>呼出挂机短信模板:</td>
+                            <td>
+                                <select name="call_out_template" id="call_out_template" class="call_status_selector"></select>
+                            </td>
+                            <td>呼出短信适用范围:</td>
+                            <td>
+                                <select name="call_out_status" id="call_out_status" class="call_status_selector">
+                                    <option value="">全部</option>
+                                    <option value="notDeal">振铃未接听</option>
+                                    <option value="dealing">已接听</option>
+                                    <option value="leak">IVR</option>
+                                </select>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                </table>
+                 <button class="btn-blue ds_form_action saveMessage" ds_action="sms.saveMessageTemplate">保存</button>
+            </form>
+            <div class="notice_container alert alert-box">
+                挂机短信说明：<br/>
+                1.通话结束后，系统将自动向客户方发送短信。勾选呼入呼出，即在呼入或呼出时向客户发送短信。不勾选，即不发送。并选取适合的挂机短信模板及适用范围完成挂机短信模板配置。<br/>
+                2.呼入短信适用范围=处理呼入电话的类型，例：已接通的电话和全部状态。<br/>
+                3.挂机短信发送时间为通话结束时间<br/>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $(document).on("click", ".start-datetimepicker-remove", function (event) {
+            var src = $(event.currentTarget);
+            src.siblings("input").val('00:00:00');
+        });
+        $(document).on("click", ".end-datetimepicker-remove", function (event) {
+            var src = $(event.currentTarget);
+            src.siblings("input").val('23:59:59');
+        });
+        $('#hangup_smsBeginTime').timepicker({
+            timeFormat: "HH:mm:ss",
+        });
+        $('#hangup_smsEndTime').timepicker({
+            timeFormat: "HH:mm:ss",
+        });
+    });
+</script>
+

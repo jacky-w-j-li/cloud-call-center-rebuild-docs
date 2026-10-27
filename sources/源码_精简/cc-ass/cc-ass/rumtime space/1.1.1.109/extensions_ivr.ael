@@ -1,0 +1,672 @@
+
+context 58103119  {
+       58103119  => {
+          __IVRESCAPE_URL = "http://www.7x24cc.com";
+
+       
+        __FROM_CID=${CALLERID(num)};
+        __FROM_DID=${EXTEN};
+	SERVICE_NO=${EXTEN};
+        CALLERID(name)=${CALLERID(num)};
+        CALLERID(num)=${EXTEN};
+	        __ORIGIN_CALL_ID="${UNIQUEID}";
+        __QTIMES=0;
+        __CONNECT_TYPE=normal;
+	INPUT_RETRY_TIMES=0;
+                ifTime (*|*|*|*){Goto(ivr-welcome,s,1);};
+            }
+}
+
+context ivr-welcome {
+
+		s => {
+                        __REINPUT_EXTEN_TIMER = 0;
+                        __REINPUT_EMP_TIMER = 0;
+                        
+                        __WEL_TIMER = 0;
+                        __HASFINISH_PHONE_NO = 0; 
+	                __HASFINISH_EXTEN_NO = 0;
+                        __HASFINISH_EMP_NO = 0; 
+			Answer;
+			BackGround(welcome); //welcome pelease input extention
+                        BackGround(presayphonenum);
+                        SayDigits(${FROM_CID});
+                    //    BackGround(confirm);
+                     //   BackGround(waitinput);
+                      __HASFINISH_PHONE_NO = 1;
+                     goto  ivr-input-extenNo,s,1;  
+
+        	
+                }
+                re-input =>{
+                 
+                    BackGround(confirm);
+                   BackGround(waitinput);
+                   WaitExten(1);    
+                }
+
+                              
+               i => {
+
+                   goto  ivr-input-extenNo,s,1;
+
+                 __WEL_TIMER = ${WEL_TIMER} + 1;
+                if(${WEL_TIMER} > 2)
+                { 
+                   Playback(bye);
+
+                   Hangup();
+                }
+                 Playback(incurret); 
+                 goto re-input,1;
+               }
+               t => {
+                      goto  ivr-input-extenNo,s,1;
+
+
+                      __WEL_TIMER = ${WEL_TIMER} + 1;
+                     if(${WEL_TIMER} > 2)
+                     {
+   
+                            Playback(bye);
+                  
+                              Hangup();
+                     }
+                    Playback(timeout);
+                  goto re-input,1;
+               }
+
+
+}
+
+
+context ivr-input-phoneNum {
+
+                 s => {
+                      
+                        BackGround(waitinput);
+        	}
+
+                        
+		_X => {
+			__NUM = ${EXTEN};
+			__NUMS = ${NUMS}${NUM};
+
+			goto wait-input,1;                      
+
+			BackGround(waitinput);
+			//waitinput, for finish
+		}
+
+                # => {
+                  __NUM = ${EXTEN};
+                   goto wait-input,1;                      
+ 
+                }
+                
+                i => { 
+			 __NUMS = ${NUM:0:0};
+		        __HASFINISH_PHONE_NO = 0;
+                        Playback(incurrect);
+                        BackGround(waitinput);
+												//waitinput, for finish
+     
+                                        
+                }
+                wait-input =>{
+               
+                 if(${HASFINISH_PHONE_NO}== 0)
+                 {   
+                     goto wait-input-phoneNo,1;
+                 } 
+                 else
+                 {
+                      goto ivr-finish-input-phoneNum,s,1;	
+                 }
+
+                }
+
+		wait-input-phoneNo =>{
+			
+	                if ("${NUM}" == '#' )
+			{
+				__CUR_LEN  = ${LEN(${NUMS})};
+				__CUR_LEN  = ${CUR_LEN} ;
+				__PHONE_NO = ${NUMS:0:${CUR_LEN}};
+				__NUMS = ${NUM:0:0};
+				__HASFINISH_PHONE_NO = 1;    
+
+			        goto ivr-finish-input-phoneNum,s,1;	
+			}
+                        else
+                        {
+                           BackGround(waitinput);
+													 //wait input
+                        }
+
+		}
+
+               t => {
+                        Playback(timeout);
+                        Hangup();
+               }
+}
+
+context ivr-finish-input-phoneNum {
+                s => {
+                        BackGround(presayphonenum);
+                        SayDigits(${PHONE_NO});
+                        BackGround(confirm);
+                        BackGround(waitinput);
+
+                }
+                
+                re-input => {
+                   BackGround(confirm);
+                        BackGround(waitinput);
+                }
+                1 => {
+                 __FROM_CID = ${PHONE_NO};
+                 __HASFINISH_PHONE_NO =1;
+                  goto ivr-input-extenNo,s,1;
+
+                }
+
+
+
+                2 => {
+                  __HASFINISH_PHONE_NO = 0; 
+                  goto ivr-input-phoneNum,s,1;
+                
+                 }
+
+                  
+                i => {
+                 Playback(incurret);
+                 goto re-input,1;
+       
+                } 
+                t => {
+                        Playback(timeout);
+                        Hangup();
+               }
+
+
+
+}
+
+context ivr-input-extenNo {
+		s => { 
+                         __INPUT_EXTEM_LESS_TIMER = 0;
+                         __INPUT_EXTEN_TIMER = 0; 
+                         BackGround(exteninput);                     
+                         BackGround(waitinput);
+                         WaitExten(1);
+        	}
+                re-input => {
+                      BackGround(waitinput);
+                      WaitExten(1);
+                }
+                        
+		_X => {
+                        __INPUT_EXTEN_TIMER = 0;
+			__NUM = ${EXTEN};
+			__NUMS = ${NUMS}${NUM};
+
+			goto wait-input,1;                      
+
+			BackGround(waitinput);//waitinput, for finish
+                        WaitExten(1);
+		}
+
+                # => {
+                  __INPUT_EXTEN_TIMER = 0;
+                  __NUM = ${EXTEN};
+                   goto wait-input,1;                      
+ 
+                }
+                
+                i => { 
+                       __INPUT_EXTEN_TIMER = ${INPUT_EXTEN_TIMER} +1;
+                        
+                        if(${INPUT_EXTEN_TIMER} > 2 )
+                        {
+                          Playback(bye);
+
+                            Hangup();
+                         }
+                        __NUMS = ${NUM:0:0};
+		        __HASFINISH_EXTEN_NO = 0;
+                  	Playback(incurrect);
+                        BackGround(waitinput);//waitinput, for finish
+                        WaitExten(1);
+     
+                                        
+                }
+                wait-input =>{
+               
+                 if(${HASFINISH_EXTEN_NO}== 0)
+                 {   
+                     goto wait-input-extenNo,1;
+                 } 
+                 else
+                 {
+                      goto ivr-finish-input-extenNo,s,1;	
+                 }
+
+                }
+
+		wait-input-extenNo =>{
+			
+			if( ${LEN(${NUMS})} >=  8) {
+
+				__EXTEN_NO = ${NUMS:0:8};
+				__NUMS = ${NUM:0:0};
+				__HASFINISH_EXTEN_NO = 1;    
+
+			        goto ivr-finish-input-extenNo,s,1;	
+			}
+			else if ("${NUM}" == '#')
+			{
+				__CUR_LEN  = ${LEN(${NUMS})};
+				__CUR_LEN  = ${CUR_LEN} ;
+				__EXTEN_NO = ${NUMS:0:${CUR_LEN}};
+				__NUMS = ${NUM:0:0};
+				__HASFINISH_EXTEN_NO = 1;    
+
+				if( ${CUR_LEN}< 8)
+				{     
+                                    __INPUT_EXTEN_LESS_TIMER =  ${INPUT_EXTEN_LESS_TIMER} + 1;
+                                    if( ${INPUT_EXTEN_LESS_TIMER} > 2 )
+                                    {
+                                        Playback(bye);
+                                        Hangup();
+                                     }
+                                     
+					__HASFINISH_EXTEN_NO = 0;
+					BackGround(exteninputless);
+					BackGround(waitinput);
+                                        WaitExten(1);
+
+				}
+				else
+				{
+			           goto ivr-finish-input-extenNo,s,1;	
+				}
+			}
+                        else
+                        {
+                           BackGround(waitinput);//wait input
+                           WaitExten(1);
+                         }
+
+		}
+                
+                 t => {
+                        __INPUT_EXTEN_TIMER = ${INPUT_EXTEN_TIMER} +1;
+                        
+                        if(${INPUT_EXTEN_TIMER} > 2 )
+                        {
+                         Playback(bye);
+
+                           Hangup();
+                        }
+                        Playback(timeout);
+                        goto re-input,1;
+               }
+
+
+}
+
+context ivr-finish-input-extenNo {
+                s => {
+                        __FINISH_INPUT_EXTEN_TIMER = 0;
+                        BackGround(extenfinish);
+                        BackGround(presaynum);
+                        SayDigits(${EXTEN_NO});
+                        BackGround(confirm);
+                        BackGround(waitinput);
+                        WaitExten(1);
+
+                   
+                }
+
+                # => {
+
+                        __FINISH_INPUT_EXTEN_TIMER = 0;
+                        BackGround(extenfinish);
+                        BackGround(presaynum);
+                        SayDigits(${EXTEN_NO});
+                        BackGround(confirm);
+                        BackGround(waitinput);
+                        WaitExten(1);
+
+
+
+								}
+
+                1 => {
+                  __FINISH_INPUT_EXTEN_TIMER = 0;
+                 __HASFINISH_EXTEN_NO =1;
+                 if(${HASFINISH_EMP_NO} == 1 )
+                 {
+                   goto ivr-enter-signal-system,s,1;
+                  }
+                   else
+                   {
+                   goto ivr-input-empNo,s,1;
+                   }
+
+                }
+
+
+
+                2 => {
+                   __FINISH_INPUT_EXTEN_TIMER = 0;
+                  __HASFINISH_EXTEN_NO = 0; 
+                  goto ivr-input-extenNo,s,1;
+                
+                 }
+
+		re-input => {
+			BackGround(confirm);
+			BackGround(waitinput);
+                        WaitExten(1);
+
+
+		}
+
+		i => {
+			__FINISH_INPUT_EXTEN_TIMER = ${FINISH_INPUT_EXTEN_TIMER} + 1;
+			if(${FINISH_INPUT_EXTEN_TIMER} > 2 )
+			{ 
+				Playback(bye);
+
+				Hangup();
+			}
+			Playback(incurret);
+			goto re-input,1;
+
+		} 
+
+		t => {
+			__FINISH_INPUT_EXTEN_TIMER = ${FINISH_INPUT_EXTEN_TIMER} + 1;
+			if(${FINISH_INPUT_EXTEN_TIMER} > 2 )
+			{
+				Playback(bye);
+
+				Hangup();
+			}
+			Playback(timeout);
+			goto re-input,1;
+		}
+
+
+}
+
+context ivr-input-empno {
+		s => {
+                        __input_emp_timer = 0; 
+                        background(empinput); 
+                        background(waitinput);
+                         waitexten(1);
+        	}
+                re-input => {
+                      background(waitinput);
+                     waitexten(1);
+
+                }
+                        
+		_x => {
+                         __input_emp_timer = 0;
+			__num = ${exten};
+			__nums = ${nums}${num};
+
+			goto wait-input,1;                      
+
+			background(waitinput);//waitinput, for finish\
+                        waitexten(1);
+		}
+
+                # => {
+                  __input_emp_timer = 0;
+                  __num = ${exten};
+                   goto wait-input,1;                      
+ 
+                }
+                
+                i => { 
+                       __input_emp_timer = ${input_emp_timer} + 1;
+                       if(${input_emp_timer} > 2 )
+                       {
+                             playback(bye);
+
+                             hangup();
+                        }
+			__nums = ${num:0:0};
+                        __hasfinish_emp_no = 0; 
+                        playback(incurrect);
+                        background(waitinput);//waitinput, for finish
+                        waitexten(1);
+     
+                                        
+                }
+                wait-input =>{
+               
+                 if(${hasfinish_emp_no}== 0)
+                 {   
+                     goto wait-input-empno,1;
+                 } 
+                 else
+                 {
+                      goto ivr-finish-input-empno,s,1;	
+                 }
+
+                }
+
+		wait-input-empno =>{
+			
+			if( ${len(${nums})} >=  4) {
+
+				__emp_no = ${nums:0:4};
+				__nums = ${num:0:0};
+				__hasfinish_emp_no = 1;    
+
+			        goto ivr-finish-input-empno,s,1;	
+			}
+			else if ("${num}" == '#')
+			{
+				__cur_len  = ${len(${nums})};
+				__cur_len  = ${cur_len} ;
+				__emp_no = ${nums:0:${cur_len}};
+				__nums = ${num:0:0};
+				__hasfinish_emp_no = 1;    
+
+				if( ${cur_len}< 4)
+				{      
+				      //	__hasfinish_emp_no = 0;
+				    //	background(empinputless);
+				   //	background(waitinput);
+                                   goto ivr-finish-input-empno,s,1;
+
+				}
+				else
+				{
+			           goto ivr-finish-input-empno,s,1;	
+				}
+			}
+                        else
+                        {
+                           background(waitinput);//wait input
+                           waitexten(1);
+                         }
+
+		}
+
+		t => {
+                        __input_emp_timer = ${input_emp_timer} + 1;
+                       if(${input_emp_timer} > 2 )
+                       {
+                        playback(bye);
+
+                           hangup();
+                        }
+                        playback(timeout);
+                       goto re-input,1;
+		}
+
+}
+
+context ivr-finish-input-empno {
+
+                s => {  __finish_input_emp_timer = 0;
+                        background(empfinish);
+                        background(presaynum);
+                        saydigits(${emp_no});
+                        background(confirm);
+                        background(waitinput);
+                       waitexten(1);
+                }
+                # => {
+                        __finish_input_emp_timer = 0;
+                        background(empfinish);
+                        background(presaynum);
+                        saydigits(${emp_no});
+                        background(confirm);
+                        background(waitinput);
+                       waitexten(1);
+   
+
+
+								}
+
+								1 => {
+                 __finish_input_emp_timer = 0;
+                 __hasfinish_emp_no =1;
+                  goto ivr-enter-signal-system,s,1;
+
+                }
+
+
+
+                2 => {
+                  __finish_input_emp_timer = 0;
+                  __hasfinish_emp_no = 0; 
+                  goto ivr-input-empno,s,1;
+                
+                 }
+
+ 		re-input => {
+			background(confirm);
+			background(waitinput);
+                        waitexten(1);
+		}
+
+		i => {
+                       __finish_input_emp_timer = ${finish_input_emp_timer} + 1;
+                       if(${finish_input_emp_timer} > 2)
+                       {
+                        playback(bye);
+
+                           hangup();
+
+                       }
+                        playback(incurret);
+			goto re-input,1;
+
+		} 
+
+		t => {
+                       __finish_input_emp_timer = ${finish_input_emp_timer} + 1;
+                       if(${finish_input_emp_timer} > 2)
+                       {
+                        playback(bye);
+		
+			hangup();
+                       }
+                       	playback(timeout);
+                      goto re-input,1;
+		}
+
+
+}
+context ivr-enter-signal-system {
+                        
+	         s =>{
+                 agi(process_ivr_signal.agi);
+                 goto failure-finish,1;                
+                }
+                
+               process-respose =>{
+
+                   goto success-finish,1;
+
+               }
+
+                wait-processing =>{
+
+                   background(waitinput);//waitinput
+                    waitexten(1);
+                }
+
+		success-finish =>{
+                        playback(success);   
+			hangup();
+		}
+                failure-finish =>{
+                       playback(failure);
+                        hangup();
+                }
+                
+		service-cannt-process-req => {
+			playback(servicebusy);
+		         goto failure-finish,1;
+		}
+
+		process-res-unkown-error => {
+			playback(servicebusy); 
+			 goto failure-finish,1;
+		}
+
+		process-res-empno-error => {
+
+			__reinput_emp_timer = ${reinput_emp_timer} +1;
+			if(${reinput_emp_timer} > 2 )
+			{
+				playback(bye);
+				hangup();
+
+			}
+			playback(empnoerror);
+			__hasfinish_emp_no = 0; 
+			__nums = ${num:0:0};
+
+			goto ivr-input-empno,re-input,1;
+		}
+
+		process-res-extenno-error => {
+
+			__reinput_exten_timer = ${reinput_exten_timer} +1;
+			if(${reinput_exten_timer} > 2 )
+			{
+				playback(bye);
+				hangup();
+
+			}
+
+			playback(extennoerror);
+			__hasfinish_exten_no = 0;
+			__nums = ${num:0:0};
+
+			goto ivr-input-extenno,re-input,1;           
+		}       
+
+		t => {
+			playback(timeout);
+			hangup();
+		}
+
+  
+}
+
+

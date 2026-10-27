@@ -1,0 +1,32 @@
+<tr>
+    <td>
+        _@report.customer.getUserName('_#user#_')@_
+    </td>
+    <td>
+        _#total#_
+    </td>
+    <td>
+        _#deal#_
+    </td>
+    <td>
+        _#lost#_
+    </td>
+    <td>
+        _#invalid#_
+    </td>
+    <td>
+        _#recycle#_
+    </td>
+    <td>
+        _#money#_
+    </td>
+    <td>
+        _@report.customer.calculateNum('dealRate','_#total#_','_#deal#_',"_#lost#_","_#invalid#_","agent")@_
+    </td>
+    <td>
+        _@report.customer.calculateNum('lostRate','_#total#_','_#lost#_',"_#lost#_","_#invalid#_","agent")@_
+    </td>
+    <td>
+        _@report.customer.calculateNum('invalidRate','_#total#_','_#invalid#_',"_#lost#_","_#invalid#_","agent")@_
+    </td>
+</tr>

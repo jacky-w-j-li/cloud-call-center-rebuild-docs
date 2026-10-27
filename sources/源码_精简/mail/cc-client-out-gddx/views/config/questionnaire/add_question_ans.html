@@ -1,0 +1,26 @@
+{{ if(type == 'dynamic'){ }}
+<div class="row_item">
+    <label>答案：</label>
+    <input type="hidden" name="_id{{=index}}" value=""/>
+    <input type="text" name="answer{{=index}}" value="{{=answer}}" style="width: 100px;"/> 流向
+    <select name="next{{=index}}">
+        <option value="">--请选择--</option>
+        {{
+            ques = ques || [];
+            for(var i = 0; i < ques.length; i++){
+        }}
+            <option value="{{=ques[i]._id}}">{{=ques[i].name}}</option>
+        {{ } }}
+    </select>
+    <a class="ds_do_action delete_icon"
+       ds_action="config.questionnaire.reduceQuesAns" ds_data=""></a>
+</div>
+{{ }else{ }}
+<div class="row_item">
+    <label>答案：</label>
+    <input type="hidden" name="_id{{=index}}" value=""/>
+    <input type="text" name="answer{{=index}}" value="{{=answer}}" style="width: 100px;"/>
+    <a class="ds_do_action delete_icon"
+       ds_action="config.questionnaire.reduceQuesAns" ds_data=""></a>
+</div>
+{{ } }}

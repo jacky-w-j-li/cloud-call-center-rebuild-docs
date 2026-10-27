@@ -1,0 +1,41 @@
+<div>
+    <form class="form-inline clearfix" role="form" id="frm_batch_search">
+    </form>
+    <div style="margin-top: 15px;">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>批次</th>
+                <th>总数</th>
+                <th>已拨打</th>
+                <th>未接通</th>
+                <th>振铃未接听</th>
+                <th>已接通</th>
+                <th>已按键</th>
+                <th>接听率</th>
+                <th>呼通率</th>
+                <th>平均通话时长(秒)</th>
+                <th>完成比例</th>
+            </tr>
+            </thead>
+            <tbody class="batch_list">
+            </tbody>
+        </table>
+    </div>
+    <div class="row-fluid">
+        <div for="frm_batch_search" ds_pagination_action="batch.getBatchNoReport"
+             class="pagination pagination-small pagination-right" style="display:table; margin:0;width:100%;">
+            <span class="result_info">查询结果：<span class="result_count">0</span></span>
+            <ul style="float:right;margin-top:5px;">
+                <li><a href="#"  value="0">&laquo;</a></li>
+                <li><a href="#"  value="1">1</a></li>
+                <li><a href="#"  value="2">2</a></li>
+                <li><a href="#"  value="3">3</a></li>
+                <li><a href="#"  value="4">4</a></li>
+                <li><a href="#"  value="5">5</a></li>
+                <li><a href="#"  value="6">&raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>

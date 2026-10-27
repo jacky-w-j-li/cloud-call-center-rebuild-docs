@@ -1,0 +1,185 @@
+<div class="contact_summary">
+    <div class="baseinfo top"></div>
+    <!--<div class="next-action-form"></div>-->
+    <!--<div class="business-info" ds_menu="_#menu#_">-->
+    <!--</div>-->
+    <div class="active-history" ds_menu="_#menu#_"></div>
+
+
+    <script id="tmpl_contact_baseinfo" type="text/x-jquery-tmpl">
+        <a class="edit-contact edit ds_do_action edit_customer_base" href="#" ds_action="customer.showCustUpdate" ds_data="_#menu#_">编辑</a>
+        <a class="ds_do_action edit-contact edit customer_owner_use func_hide" href="#" ds_action="customer.updateCustomerOwner" ds_data="_#menu#_" style="display:none;">占用</a>
+        <a class="ds_do_action edit-contact edit customer_owner_giveup func_hide" href="#" ds_action="customer.freeCustomerOwner" ds_data="_#menu#_" style="display:none;">放弃</a>
+        <input type="hidden" name='customerId' value="${_id}"/>
+        <input type="hidden" name='dbType'  value="${dbType}"/>
+        <input type="hidden" name='category' value="${category}"/>
+        <input type="hidden" name='categoryId' value="${categoryId}"/>
+        <input type="hidden" name='sysStatus'  value="${sysStatus}"/>
+        <input type="hidden" name='sourceOwner'  value="${owner}"/>
+        <div class="user-details contact_data">
+            <div class="contact-info">
+                <h2 class="contact_name" style="float:left;">
+                <span class="major">
+                    ${name}
+                </span>
+                </h2>
+                <div class="tags_and_status " style="float:left;margin-left:28px;" >
+                    <div class="edit_status" >
+                        {{if status}}
+                        <a class="submenu_trigger label2 form_closed contact_status ${status}" title="${getCache('custTmpls',dbType).status[status]}" href="#">
+                            ${getCache('custTmpls',dbType).status[status]}
+                        </a>
+                        {{else}}
+                        <a class="submenu_trigger label2 form_closed contact_status " title="无状态" href="#">
+                            无状态
+                        </a>
+                        {{/if}}
+                        <ul class="submenu submenu_content">
+                        </ul>
+                    </div><!-- /.edit_status -->
+
+                    <div class="edit_status">
+                        <span id="combobox_cust_owner_desc" class="label2" uid="${owner}">${handler.customer.getOwnerName(owner)}</span>
+                        <input id="combobox_cust_owner" type="text"  style="display:none;width:125px;" placeholder="按姓名,拼音,工号搜索">
+                    </div>
+                </div><!-- /.tags_and_status /.contact-info-->
+
+
+                <h2 class="contact_name" style="clear: both;">
+                <span class="minor">
+                    {{if title}}
+                        ${title}
+                    {{/if}}
+                </span><!-- /.minor -->
+                </h2><!-- /.contact_name -->
+
+                <div class="clear"></div>
+                {{if phone}}
+                {{each phone}}
+                <div class="phone item">
+                    <div class="phone-number">
+                    <span class="number">${checkHideTel(tel)}
+                    {{if memo}}
+                        (${memo})
+                    {{/if}}
+                    </span>
+                    </div>
+                    <div class="skype-container">
+                        {{if tel}}
+                        <a href="#" class="skype ds_do_action" ds_action="customer.dialCust" ds_data="${tel}" ds_param1="${_id}" ds_param2="${name}" title="点击呼叫" ></a>
+                        <a href="#" class="addBlackNum ds_do_action" ds_action="cdr.addCdrBlackList" ds_data="${tel}" title="加黑名单" ></a>
+                        {{/if}}
+                    </div>
+                </div><!-- /.phone -->
+                {{/each}}
+                {{/if}}
+
+                {{if email}}
+                <div class="email item">
+                {{each email}}
+                    {{if email}}
+                        {{html handler.customer.showMailInfo(email)}}
+                        {{if memo}}
+                            (${memo})
+                        {{/if}}
+                        &nbsp;
+                    {{/if}}
+                {{/each}}
+                </div><!-- /.email -->
+                {{/if}}
+                {{if weixin}}
+                <div class="weixin item">
+                {{each weixin}}
+                    {{if num}}
+                        {{if memo}}
+                            {{html handler.customer.showWeixinInfo(num,memo)}}
+                        {{/if}}
+                        &nbsp;
+                    {{/if}}
+                {{/each}}
+                </div>
+                {{/if}}
+
+                <div style="" class="clearfix">
+                  {{each attachs}}
+                    {{if type=='img'}}
+                        <a href="#" class="ds_do_action" ds_action="customer.showBigAttach" ds_data="${id}_big${handler.customer.getImgSuffix(name)}" attachName="${name}">
+                            <img src="${qiniu7moorDomain}${id}?imageView2/1/w/50" title="${name}"  class="img-rounded"  style="margin-right:10px;margin-bottom:10px;width:50px;max-height: 50px;"/>
+                        </a>
+                    {{/if}}
+                  {{/each}}
+                </div>
+
+                <div class="thumbnails_customer item clearfix">
+                  {{each attachs}}
+                        <div class="fujian" style="float:left;">
+                            <div class="left ico-1" style=""></div>
+                            <div class="left">
+                            <a href="#" class="ds_do_action" ds_action="customer.downloadAttach" ds_data="${id}" suffix="${type}" isNew="${isNew}">${name}</a>&nbsp;&nbsp;
+                            </div>
+                        </div>
+                  {{/each}}
+                </div>
+
+
+                <div class="more-info">
+                    <a href="#">
+                        <span class="more">展开</span>
+                        <span class="less hidden2">收起</span>
+                        <span class="small-note">详细信息</span>
+                    </a>
+                </div> <!-- /.more-info -->
+
+                <div class="address expandable item" style="display: none;">
+                </div>
+
+            </div><!-- /.contact-info -->
+            <div class="contact-info">
+                <div class="custom_fields expandable item" style="display: none;">
+                    {{each fields}}
+                    <p>
+                        <span class="label3">${n}</span>
+                        {{if t=='dropdown' || t=='radio' || t=='checkbox'}}
+                            ${handler.customer.getCustomFieldDicName(dbType,k,v,t)}
+                        {{else k=='taskId'}}
+                            ${handler.customer.task.getTaskName(v)}
+                        {{else k=='taskCalled'}}
+                            ${handler.customer.task.getDialStatus(v)}
+                        {{else k==='sex'}}
+                            ${handler.customer.getSexName(v)}
+                        {{else k==='province'}}
+                            ${handler.customer.getCCName(v)}
+                        {{else k==='city'}}
+                            ${handler.customer.getCCName(v,true,$data)}
+                        {{else}}
+                            <span style="word-break: break-all;">{{html replaceUrl(v)}}</span>
+                        {{/if}}
+                    </p>
+                    {{/each}}
+                </div>
+            </div><!-- /.contact-info -->
+            <p class="border"></p>
+
+        </div><!-- /.user-details -->
+    </script>
+</div>
+
+
+<style type="text/css">
+        /*body a{outline:none;blr:expression(this.onFocus=this.blur());}*/
+    .ui-autocomplete {
+        max-height: 150px;
+        overflow-y: auto;
+        /* prevent horizontal scrollbar */
+        overflow-x: hidden;
+        /*font-size: 14px;*/
+        z-index: 999999;
+    }
+        /* IE 6 doesn't support max-height
+         * we use height instead, but this forces the menu to always be this tall
+         */
+    * html .ui-autocomplete {
+        height: 150px;
+    }
+
+</style>

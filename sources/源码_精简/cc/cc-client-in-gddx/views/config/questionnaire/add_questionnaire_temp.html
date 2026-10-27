@@ -1,0 +1,31 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+        ×
+    </button>
+    <h3>添加问卷模板</h3>
+</div>
+<div class="">
+    <form>
+        <div class="modal-body">
+            <div class="row_item">
+                <label for="name">问卷模板名称</label>
+                <input id="name" name="name" value="" maxlength="10" type="text" required>
+            </div>
+            <div class="row_item">
+                <label for="questionnaire_type">类型</label>
+                <select id="questionnaire_type" name="type">
+                    <option value="dynamic">动态</option>
+                    <option value="static">静态</option>
+                </select>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button href="#" class="btn btn-primary ds_form_action" ds_action="config.questionnaire.addQuestionnaireTemp">
+                保存
+            </button>
+            <button class="btn" data-dismiss="modal" aria-hidden="true">
+                取消
+            </button>
+        </div>
+    </form>
+</div>

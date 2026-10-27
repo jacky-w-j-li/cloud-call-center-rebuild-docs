@@ -1,0 +1,127 @@
+<div class="ds_search_pane list_check_pane" id="contact_list__#menu#_" ds_menu="_#menu#_" ds_index="1">
+    <div class='contacts_caption'>
+        <div class="cancel_edit" style="">
+            <div class="list_check_all" style="cursor: pointer;" >
+                <b class="ico_select_checkbox ico ico_wrap" style="top:10px;left:5px;"></b>
+            </div>
+            <div style="display: inline-block;margin-left: 30px;font-weight: bold;">
+                已选
+                <span class="bottom_toolbar_selsize_num">
+                    0
+                </span>
+                项
+            </div>
+    <span class="pull-right">
+        <a href="#" class="ds_do_action" ds_action="cancelDealToolbar" ds_data="email_todo">取消</a>
+    </span>
+        </div>
+        <div class="header_wrap clearfix caption-top" style="padding-bottom: 5px">
+            <form id="email_list_query_form__#menu#_">
+                <input type="hidden" name="emailType" value="_#menu#_">
+                <span class="refresh ds_form_action" ds_action="email.queryEmailList" ds_data="_#menu#_"
+                      id="reflush_email_button" style="display:none;"></span>
+                <!--<div class="header_search_wrap pull-left quick_search" style="width:215px; min-width:200px;margin-left: 5px">-->
+                    <!--<div class="header_search_button ds_form_action ques_normal_search normal_search" ds_action="email.queryEmailList">-->
+                        <!--<i class="icon-search"></i>-->
+                    <!--</div>-->
+                    <!--<div class="header_search_input">-->
+                        <!--<div class="header_search_input_textbox" style="padding: 0px 5px 0px 5px;">-->
+                            <!--<div class="textbox_wrap textbox_wrap_sty" style="display: inline-block;">-->
+                                <!--<div class="textbox_inner" >-->
+                                    <!--<input type="text" name="query" class="textbox_input inpt_sty" maxlength="254" placeholder="输入客户邮箱地址查询" style="border-color: rgb(204, 204, 204);">-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <span class="pull-right">
+                      领取：<input id="email_autoclaim_switch" name="email_autoclaim_switch" type="checkbox">
+                </span>
+                <div class="refresh-email pull-right" style="margin-top:7px;display:none">
+                    <span style="cursor: pointer;" class="ds_form_action" ds_action="email.queryEmailList" title="刷新">
+                        <i class="icon-refresh"></i>
+                    </span>
+                </div>
+            </form>
+        </div>
+        <!--<div class="search_condition" style="display: none">-->
+
+        <!--</div>-->
+        <!--<div class="ds_search_filter" style="display: none;">-->
+        <!--</div>-->
+    </div>
+    <!--<div tabindex="-1" id="email_advanced_search_pane" class="advanced_search_pane hidden">-->
+
+    <!--</div>-->
+    <div class="list_container">
+        <div class="list-inside">
+        </div>
+    </div>
+</div>
+
+
+
+<style type="text/css">
+    .task_query_close {
+        display: none;
+    }
+
+    .task_high_query_form .formQue label {
+        width: 75px;
+        text-align: right;
+    }
+
+    .task_high_query_form input[type='text']{
+        width: 120px;
+    }
+
+    div.formQue {
+        margin-top: 5px;
+        width: 220px;
+        float: none;
+    }
+
+    .formQue label {
+        display: inline-block;
+
+    }
+
+    .email_list_search_query {
+        margin-top: -1px;
+        border: 1px rgb(189, 188, 188) solid;
+        position: absolute;
+        width: 700px;
+        top: 75px;
+        left: 190px;
+        background-color: #ffffff;
+        padding: 0px;
+        z-index: 100;
+    }
+
+    .search_label {
+        width: 70px;
+        text-align: right;
+    }
+</style>
+<script type="text/javascript">
+    $("#email_autoclaim_switch").bootstrapSwitch({size:'small',onColor:'success',offColor:'warning',onText:'开',offText:'关'});
+    //        $("#login_panel").find(".bootstrap-switch-success").css({backgroundColor:'#5d87af!important',backgroundImage:"linear-gradient(to bottom,#5d87af,#5d87af)"});
+//    $("#email_autoclaim_switch").bootstrapSwitch('toggleState');
+//    $('#email_autoclaim_switch').bootstrapSwitch('setState', false);
+
+    $('#email_autoclaim_switch').on('switchChange.bootstrapSwitch', function(event, state) {
+        if(state){
+            handler.email.autoClaim = true;
+            handler.email.updateAutoClaimEmailSessionStatus("open");
+            handler.email.claimNewEmailSession();
+        }else{
+            handler.email.autoClaim = false;
+            handler.email.updateAutoClaimEmailSessionStatus("close");
+        }
+    });
+
+    dsevent.bind("#view_email_todo", dsevent.evt.refreshEmailToDoList, function(event , params){
+        $(this).find(".refresh").click();
+    });
+</script>

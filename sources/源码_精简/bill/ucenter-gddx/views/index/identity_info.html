@@ -1,0 +1,44 @@
+<div class="page-header" style="margin-top:0;">
+    <h2>_#companyName#_</h2>
+</div>
+
+<div class="indentitySection">
+    <p class="text-primary">
+        营业执照
+    </p>
+    <img src="/getFile?fileId=_#busLicense.fileId#_"  alt="" class="img-responsive" >
+</div>
+<div class="indentitySection">
+    <p class="text-primary">
+        组织机构证
+    </p>
+    <img src="/getFile?fileId=_#orgCard.fileId#_"  alt="" class="img-responsive" >
+</div>
+<div class="indentitySection">
+    <p class="text-primary">
+        税务登记证
+    </p>
+    <img src="/getFile?fileId=_#taxCard.fileId#_"  alt="" class="img-responsive" >
+</div>
+<div class="indentitySection">
+    <p class="text-primary">
+        法人身份证
+    </p>
+    <img src="/getFile?fileId=_#legalCard.fileId#_"  alt="" class="img-responsive" >
+</div>
+
+<div class="indentitySection failure_section">
+    <form class="form-horizontal" id="frm_identity_audit" >
+        <p class="text-primary">
+            失败原因
+        </p>
+        <div>
+            <textarea rows="2" name="auditMemo" class="form-control"></textarea>
+        </div>
+    </form>
+</div>
+<style type="text/css">
+    .indentitySection{
+        margin-bottom: 5px;
+    }
+</style>

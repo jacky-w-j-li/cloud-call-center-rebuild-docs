@@ -1,0 +1,48 @@
+<div class="right_container" id="customer_quick_search_query_panel">
+    <div id="customer_quick_search_list_panel">
+        <div class="row-fluid">
+            <h4>自定义快捷搜索</h4>
+            <br/>
+            <form id="customer_quick_search_form" class="form-horizontal">
+                <div class="pull-left" style="margin:5px 10px 10px 0px">
+                    <span class="refresh ds_form_action" style="display: none;" ds_action="customer.queryQuickSearch"></span>
+                    <!--<button type="button" class="button ds_form_action" ds_action="config.customerCommon.queryMareLiberum" style="margin-left: 0px;">查询</button>-->
+                    <button type="button" class="btn-blue btn-small ds_do_action"  ds_action="customer.showAddQuickSearch"  ds_data="_#menu#_">增加</button>
+                    <!--<button type="button" class="button ds_form_action"  ds_action="config.mareLiberum.upMareLiBeRum" style="margin-left: 10px;">修改</button>-->
+                </div>
+
+                <div>
+                    <table class="table table-striped table-bordered table-hover table_ds_word">
+                        <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th width="15%">创建人</th>
+                            <th style="width: 10em;">创建时间</th>
+                            <th width="10%">菜单</th>
+                            <th style="width:6em">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="customer_quick_search_list">
+                        </tbody>
+                    </table>
+                    <div class="row-fluid class_list">
+                        <div for="customer_quick_search_form" ds_pagination_action="customer.queryQuickSearch"
+                             class="pagination pagination-small" style="display:table; margin:0;width:100%;">
+                            <span class="result_info">查询结果：<span class="result_count">0</span></span>
+                            <ul style="float:right;margin-top:5px;">
+                                <li><a href="#"  value="0">&laquo;</a></li>
+                                <li><a href="#"  value="1">1</a></li>
+                                <li><a href="#"  value="2">2</a></li>
+                                <li><a href="#"  value="3">3</a></li>
+                                <li><a href="#"  value="4">4</a></li>
+                                <li><a href="#"  value="5">5</a></li>
+                                <li><a href="#"  value="6">&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

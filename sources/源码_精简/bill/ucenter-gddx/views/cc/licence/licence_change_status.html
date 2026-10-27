@@ -1,0 +1,34 @@
+<div class="well" style="padding: 0 19px;">
+    <h2>变更licence状态   _@licence.showFieldDesc("licenceType","_#licenceType#_")@_<small>
+        licence单价:<span class="text-primary monthRent">_#licencePrice#_</span>元
+    </small></h2>
+    <p class="text-muted">当前licence数<span class="text-primary">_#num#_</span>,到期日期为<strong class="text-danger">_#endDate#_</strong></p>
+</div>
+<form class="form-horizontal" id="frm_licence_change_status">
+    <input type="hidden" name="_id" value="_#_id#_">
+    <input type="hidden" name="account" value="_#account#_">
+    <input type="hidden" name="licenceType" value="_#licenceType#_">
+    <input type="hidden" name="flag" value="changeStatus">
+    <input type="hidden" name="createTime" value="_#createTime#_">
+
+    <div class="form-group">
+        <label class="control-label col-md-2">
+            变更状态为:
+        </label>
+        <div class="col-md-5">
+            <select name="changeStatus" class="form-control input-sm" style="display: inline-block;width: auto" required>
+                <option value="">--请选择--</option>
+                <option value="use">在用</option>
+                <option value="try">试用</option>
+                <option value="present">赠送</option>
+            </select>
+            <label for="changeStatus" class="error" style="display: none;"></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="button" class="btn btn-primary ds_form_action" ds_action="licence.changeStatus" >确认</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+    </div>
+</form>
